@@ -59,8 +59,7 @@ Return ONLY valid JSON, no markdown code blocks.`;
     },
   ];
 
-  // Use Claude for wiki generation as it's good at structured output
-  const response = await collectStream(streamClaude(msgs, apiKey));
+  const response = await collectStream(getAIStream(model, msgs, apiKey));
 
   try {
     const jsonMatch = response.match(/\{[\s\S]*\}/);

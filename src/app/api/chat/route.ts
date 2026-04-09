@@ -2,7 +2,8 @@ import { NextRequest } from 'next/server';
 import { auth } from '@/lib/auth';
 import { getAIStream } from '@/lib/ai/provider';
 import { resolveApiKeyForUser } from '@/lib/ai/resolve-key';
-import type { AIModel, Message } from '@/types';
+import { parseJsonBody, chatRequestSchema } from '@/lib/validation';
+import { checkRateLimit, getClientId, rateLimited } from '@/lib/rate-limit';
 
 export async function POST(req: NextRequest) {
   const session = await auth();
@@ -10,14 +11,19 @@ export async function POST(req: NextRequest) {
     return new Response('Unauthorized', { status: 401 });
   }
 
+  // Rate limit: 20 chat messages per minute per user
+  const rl = checkRateLimit({
+    key: `chat:${getClientId(req, session.user.id)}`,
+    max: 20,
+    windowSec: 60,
+  });
+  if (!rl.ok) return rateLimited(rl);
+
+  const parsed = await parseJsonBody(req, chatRequestSchema);
+  if (parsed.error) return parsed.error;
+  const { messages, model } = parsed.data;
+
   try {
-    const body = await req.json();
-    const { messages, model } = body as { messages: Message[]; model: AIModel };
-
-    if (!messages || !model) {
-      return new Response('Missing messages or model', { status: 400 });
-    }
-
     const { apiKey, needsConfig } = await resolveApiKeyForUser(model, session.user.id!);
 
     if (needsConfig) {
