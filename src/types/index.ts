@@ -81,6 +81,19 @@ export interface UserProfile {
   wikisCount: number;
   createdAt: number;
   apiKeys?: UserApiKeys;
+  // Denormalised counters maintained by the follow API. Showing a count
+  // per profile is cheaper than loading the whole follows collection.
+  followersCount?: number;
+  followingCount?: number;
+  // Opt out of email notifications. Defaults to "send".
+  emailNotificationsDisabled?: boolean;
+}
+
+export interface Follow {
+  id: string;          // `${followerId}_${followeeId}`
+  followerId: string;
+  followeeId: string;
+  createdAt: number;
 }
 
 export interface ChatRequest {

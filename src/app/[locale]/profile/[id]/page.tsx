@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import { User, Calendar, BookOpen, Loader2, ArrowLeft } from 'lucide-react';
 import WikiCard from '@/components/wiki/WikiCard';
 import ApiKeyManager from '@/components/profile/ApiKeyManager';
+import FollowButton from '@/components/profile/FollowButton';
 import { useI18n } from '@/lib/i18n/context';
 import { timeAgo } from '@/lib/utils';
 import type { Wiki, UserProfile } from '@/types';
@@ -96,7 +97,10 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
 
           {/* User info */}
           <div className="flex-1 text-center sm:text-left">
-            <h1 className="text-2xl font-bold text-gray-900">{user.name}</h1>
+            <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:justify-between">
+              <h1 className="text-2xl font-bold text-gray-900">{user.name}</h1>
+              <FollowButton userId={user.id} initialFollowersCount={user.followersCount ?? 0} />
+            </div>
 
             <div className="mt-3 flex flex-wrap justify-center sm:justify-start gap-4 text-sm text-gray-500">
               <span className="flex items-center gap-1.5">
@@ -107,6 +111,11 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
                 <BookOpen className="h-4 w-4" />
                 {t('profile.wikisCount', { n: user.wikisCount })}
               </span>
+              {(user.followingCount ?? 0) > 0 && (
+                <span className="text-gray-500">
+                  Following {user.followingCount}
+                </span>
+              )}
             </div>
           </div>
         </div>

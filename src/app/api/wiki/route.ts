@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import { createWiki, getRecentWikis, getUserWikis } from '@/lib/search';
+import { createWiki, getRecentWikis, getUserWikis, getWikiById, getUserProfile } from '@/lib/search';
 import { generateWikiContent } from '@/lib/ai/provider';
 import { resolveApiKeyForUser } from '@/lib/ai/resolve-key';
+import { notifyFollowersOfNewWiki } from '@/lib/notifications';
 import {
   parseJsonBody,
   parseSearchParams,
@@ -64,6 +65,20 @@ export async function POST(req: NextRequest) {
       authorName: session.user.name || 'Anonymous',
       authorImage: session.user.image || undefined,
     });
+
+    // Fire-and-forget follower notification. Wrapped so a Resend hiccup
+    // never bubbles up and breaks the publish flow for the author.
+    (async () => {
+      try {
+        const [wiki, author] = await Promise.all([
+          getWikiById(id),
+          getUserProfile(session.user!.id!),
+        ]);
+        if (wiki && author) await notifyFollowersOfNewWiki(author, wiki);
+      } catch (e) {
+        console.error('Follower notification failed:', e);
+      }
+    })();
 
     return NextResponse.json({ id });
   } catch (error) {
