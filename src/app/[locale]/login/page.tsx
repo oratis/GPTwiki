@@ -1,25 +1,113 @@
 'use client';
 
+import { Suspense, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Mail, CheckCircle, Loader2 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
 
 export default function LoginPage() {
-  const { t } = useI18n();
+  return (
+    <Suspense fallback={null}>
+      <LoginInner />
+    </Suspense>
+  );
+}
+
+function LoginInner() {
+  const { t, locale } = useI18n();
+  const searchParams = useSearchParams();
+  const check = searchParams.get('check') === '1';
+
+  const [email, setEmail] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const callbackUrl = `/${locale}/chat`;
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSubmitting(true);
+    try {
+      const res = await signIn('resend', { email, redirect: false, callbackUrl });
+      if (res?.error) {
+        setError(res.error);
+      } else {
+        setSent(true);
+      }
+    } catch {
+      setError('Failed to send email. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // After redirect from NextAuth "check your email" flow.
+  if (check || sent) {
+    return (
+      <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4">
+        <div className="w-full max-w-sm rounded-2xl border border-gray-200 bg-white p-8 text-center">
+          <CheckCircle className="mx-auto mb-4 h-12 w-12 text-green-500" />
+          <h1 className="mb-2 text-xl font-semibold text-gray-900">
+            {t('login.checkInbox')}
+          </h1>
+          <p className="text-sm text-gray-500">{t('login.checkInboxMsg')}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="mb-8 text-center">
           <BookOpen className="mx-auto mb-4 h-12 w-12 text-blue-600" />
           <h1 className="mb-2 text-2xl font-bold text-gray-900">{t('login.title')}</h1>
-          <p className="text-sm text-gray-500">
-            {t('login.subtitle')}
-</p>
+          <p className="text-sm text-gray-500">{t('login.subtitle')}</p>
+        </div>
+
+        <form onSubmit={handleEmailSubmit} className="mb-4 space-y-2">
+          <label htmlFor="email" className="sr-only">
+            {t('login.emailLabel')}
+          </label>
+          <input
+            id="email"
+            type="email"
+            required
+            autoComplete="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder={t('login.emailPlaceholder')}
+            className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+          <button
+            type="submit"
+            disabled={submitting || !email}
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
+          >
+            {submitting ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Mail className="h-4 w-4" />
+            )}
+            {t('login.sendMagicLink')}
+          </button>
+          {error && (
+            <p className="text-center text-xs text-red-500">{error}</p>
+          )}
+        </form>
+
+        <div className="mb-4 flex items-center gap-3 text-xs text-gray-400">
+          <span className="h-px flex-1 bg-gray-200" />
+          {t('login.or')}
+          <span className="h-px flex-1 bg-gray-200" />
         </div>
 
         <div className="space-y-3">
           <button
-            onClick={() => signIn('google', { callbackUrl: '/chat' })}
+            onClick={() => signIn('google', { callbackUrl })}
             className="flex w-full items-center justify-center gap-3 rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 transition-colors"
           >
             <svg className="h-5 w-5" viewBox="0 0 24 24">
@@ -44,7 +132,7 @@ export default function LoginPage() {
           </button>
 
           <button
-            onClick={() => signIn('github', { callbackUrl: '/chat' })}
+            onClick={() => signIn('github', { callbackUrl })}
             className="flex w-full items-center justify-center gap-3 rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 transition-colors"
           >
             <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">

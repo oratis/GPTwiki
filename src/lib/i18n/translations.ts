@@ -84,6 +84,12 @@ const translations: Record<Locale, Record<string, string>> = {
     'login.google': 'Continue with Google',
     'login.github': 'Continue with GitHub',
     'login.agreement': 'By signing in, you agree to share your wiki articles with the community.',
+    'login.emailLabel': 'Email address',
+    'login.emailPlaceholder': 'you@example.com',
+    'login.sendMagicLink': 'Email me a sign-in link',
+    'login.or': 'or',
+    'login.checkInbox': 'Check your inbox',
+    'login.checkInboxMsg': 'We sent you a sign-in link. Click it from your email to finish signing in.',
 
     // Footer
     'footer.description': 'AI-powered collaborative knowledge base. Ask questions, create wikis, share knowledge.',
