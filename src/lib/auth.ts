@@ -1,17 +1,25 @@
-import NextAuth from 'next-auth';
+import NextAuth, { type NextAuthConfig } from 'next-auth';
 import Google from 'next-auth/providers/google';
 import GitHub from 'next-auth/providers/github';
 import Resend from 'next-auth/providers/resend';
 import { FirestoreAdapter } from '@auth/firebase-adapter';
 import { db } from './firebase';
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
-  // The adapter stores verification tokens (magic links) and OAuth accounts.
-  // Kept in prefixed collections so NextAuth's own schema does not collide
-  // with GPTwiki's existing `users` collection, which the signIn callback
-  // below continues to maintain with our custom fields (wikisCount, etc.).
+/**
+ * NextAuth config is produced by a factory so the FirestoreAdapter (and
+ * the underlying firebase-admin app it pulls in) is only instantiated at
+ * request time, not at module load / build time. During `next build`,
+ * FIREBASE_PROJECT_ID is not in the environment and constructing the
+ * adapter eagerly would fail with
+ * `Service account object must contain a string "project_id" property`.
+ */
+const buildConfig = (): NextAuthConfig => ({
   adapter: FirestoreAdapter({
     firestore: db,
+    // Prefixed collection names keep NextAuth's schema separate from
+    // GPTwiki's own `users` collection, which holds product fields like
+    // wikisCount. The signIn callback below mirrors auth identities into
+    // `users` so feature code stays unchanged.
     collections: {
       users: 'authjs_users',
       accounts: 'authjs_accounts',
@@ -19,7 +27,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       verificationTokens: 'authjs_verification_tokens',
     },
   }),
-  // Keep JWT sessions — no server round-trip per request, unlike DB sessions.
+  // Keep JWT sessions — no per-request DB read, unlike database sessions.
   session: { strategy: 'jwt' },
   providers: [
     Google({
@@ -30,10 +38,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientId: process.env.AUTH_GITHUB_ID,
       clientSecret: process.env.AUTH_GITHUB_SECRET,
     }),
-    // Email magic link via Resend — users enter an email and receive a sign-in
-    // link with a one-time verification token. No password, no OAuth app
-    // required by the user's country, so it opens the door to users who
-    // can't use Google/GitHub easily (China, Russia, Middle East, etc.).
+    // Email magic-link via Resend. Enter an email, receive a one-time
+    // sign-in link. No password, no regional OAuth restrictions — opens
+    // the door to users without easy Google/GitHub access.
     Resend({
       apiKey: process.env.AUTH_RESEND_KEY,
       from: process.env.AUTH_EMAIL_FROM || 'no-reply@gptwiki.net',
@@ -43,13 +50,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async signIn({ user, account }) {
       if (!user.email) return false;
 
-      // Mirror auth identity into the legacy `users` collection that
-      // WikiCard, Leaderboard, and /api/user/* read from. The adapter
-      // already persisted to `authjs_users`; this keeps feature code
-      // working unchanged.
       const userRef = db.collection('users').doc(user.id!);
       const userDoc = await userRef.get();
-
       if (!userDoc.exists) {
         await userRef.set({
           name: user.name || user.email.split('@')[0] || '',
@@ -60,7 +62,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           createdAt: Date.now(),
         });
       }
-
       return true;
     },
     async session({ session, token }) {
@@ -81,3 +82,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     verifyRequest: '/login?check=1',
   },
 });
+
+export const { handlers, signIn, signOut, auth } = NextAuth(buildConfig);
