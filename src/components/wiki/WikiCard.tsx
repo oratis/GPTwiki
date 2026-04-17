@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Eye, Clock, Bot } from 'lucide-react';
+import { Eye, Clock, Bot, MessageSquare } from 'lucide-react';
 import type { Wiki } from '@/types';
 import { timeAgo, truncate } from '@/lib/utils';
 import { getModelDisplayName } from '@/lib/models';
@@ -17,8 +17,20 @@ export default function WikiCard({ wiki }: WikiCardProps) {
   return (
     <Link
       href={`/wiki/${wiki.id}`}
-      className="group block rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:border-blue-200 hover:shadow-md"
+      className="group block overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-blue-200 hover:shadow-md"
     >
+      {wiki.imageUrl && (
+        <div className="h-40 w-full overflow-hidden bg-gray-100">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={wiki.imageUrl}
+            alt={wiki.title}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform group-hover:scale-105"
+          />
+        </div>
+      )}
+      <div className="p-5">
       <h3 className="mb-2 text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
         {wiki.title}
       </h3>
@@ -48,9 +60,16 @@ export default function WikiCard({ wiki }: WikiCardProps) {
           <Clock className="h-3.5 w-3.5" />
           {timeAgo(wiki.createdAt)}
         </span>
+        {(wiki.threadCount ?? 0) > 0 && (
+          <span className="flex items-center gap-1 text-blue-500">
+            <MessageSquare className="h-3.5 w-3.5" />
+            {wiki.threadCount}
+          </span>
+        )}
         <span className="ml-auto text-gray-500">
           {t('wiki.by')} {wiki.authorName}
         </span>
+      </div>
       </div>
     </Link>
   );

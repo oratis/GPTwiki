@@ -6,9 +6,17 @@ const SEED_SECRET = process.env.AUTH_SECRET;
 const WIKI_API = (lang: string) =>
   `https://${lang}.wikipedia.org/w/api.php`;
 
+interface WikiImage {
+  source: string;
+  width: number;
+  height: number;
+}
+
 interface WikiArticle {
   title: string;
   extract: string;
+  thumbnail?: WikiImage;
+  originalimage?: WikiImage;
 }
 
 const LANG_CONFIG: Record<string, { name: string; target: number }> = {
@@ -69,7 +77,7 @@ function buildQuestion(lang: string, title: string): string {
  * Much faster than the REST API random endpoint (1 article per call).
  */
 async function fetchRandomBatch(lang: string): Promise<WikiArticle[]> {
-  const url = `${WIKI_API(lang)}?action=query&generator=random&grnnamespace=0&grnlimit=20&prop=extracts&exintro=true&explaintext=true&format=json`;
+  const url = `${WIKI_API(lang)}?action=query&generator=random&grnnamespace=0&grnlimit=20&prop=extracts|pageimages&piprop=thumbnail|original&pithumbsize=800&exintro=true&explaintext=true&format=json`;
   try {
     const res = await fetch(url, {
       headers: { 'User-Agent': 'GPTwiki-Bot/1.0 (gptwiki.net; content aggregation)' },
@@ -85,9 +93,20 @@ async function fetchRandomBatch(lang: string): Promise<WikiArticle[]> {
     }
     const pages = data.query.pages;
     const articles: WikiArticle[] = [];
-    for (const page of Object.values(pages) as Array<{ title: string; extract?: string; ns?: number }>) {
+    for (const page of Object.values(pages) as Array<{
+      title: string;
+      extract?: string;
+      ns?: number;
+      thumbnail?: WikiImage;
+      original?: WikiImage;
+    }>) {
       if (page.extract && page.extract.length >= 80 && !page.title.includes(':')) {
-        articles.push({ title: page.title, extract: page.extract });
+        articles.push({
+          title: page.title,
+          extract: page.extract,
+          thumbnail: page.thumbnail,
+          originalimage: page.original,
+        });
       }
     }
     return articles;
@@ -101,7 +120,7 @@ async function fetchRandomBatch(lang: string): Promise<WikiArticle[]> {
  * Fetch articles from a specific category with extracts.
  */
 async function fetchCategoryBatch(lang: string, category: string, cmcontinue?: string): Promise<{ articles: WikiArticle[]; cmcontinue?: string }> {
-  let url = `${WIKI_API(lang)}?action=query&generator=categorymembers&gcmtitle=Category:${encodeURIComponent(category)}&gcmlimit=50&gcmnamespace=0&gcmtype=page&prop=extracts&exintro=true&explaintext=true&format=json`;
+  let url = `${WIKI_API(lang)}?action=query&generator=categorymembers&gcmtitle=Category:${encodeURIComponent(category)}&gcmlimit=50&gcmnamespace=0&gcmtype=page&prop=extracts|pageimages&piprop=thumbnail|original&pithumbsize=800&exintro=true&explaintext=true&format=json`;
   if (cmcontinue) url += `&gcmcontinue=${encodeURIComponent(cmcontinue)}`;
 
   try {
@@ -112,9 +131,9 @@ async function fetchCategoryBatch(lang: string, category: string, cmcontinue?: s
     const data = await res.json();
     const pages = data.query?.pages || {};
     const articles: WikiArticle[] = [];
-    for (const page of Object.values(pages) as Array<{ title: string; extract?: string }>) {
+    for (const page of Object.values(pages) as Array<{ title: string; extract?: string; thumbnail?: WikiImage; original?: WikiImage }>) {
       if (page.extract && page.extract.length >= 80 && !page.title.includes(':')) {
-        articles.push({ title: page.title, extract: page.extract });
+        articles.push({ title: page.title, extract: page.extract, thumbnail: page.thumbnail, originalimage: page.original });
       }
     }
     return { articles, cmcontinue: data.continue?.gcmcontinue };
@@ -127,7 +146,7 @@ async function fetchCategoryBatch(lang: string, category: string, cmcontinue?: s
  * Fetch articles using allpages with extracts - paginated.
  */
 async function fetchAllPagesBatch(lang: string, apcontinue?: string): Promise<{ articles: WikiArticle[]; apcontinue?: string }> {
-  let url = `${WIKI_API(lang)}?action=query&generator=allpages&gapnamespace=0&gaplimit=50&gapfilterredir=nonredirects&prop=extracts&exintro=true&explaintext=true&format=json`;
+  let url = `${WIKI_API(lang)}?action=query&generator=allpages&gapnamespace=0&gaplimit=50&gapfilterredir=nonredirects&prop=extracts|pageimages&piprop=thumbnail|original&pithumbsize=800&exintro=true&explaintext=true&format=json`;
   if (apcontinue) url += `&gapcontinue=${encodeURIComponent(apcontinue)}`;
 
   try {
@@ -138,9 +157,9 @@ async function fetchAllPagesBatch(lang: string, apcontinue?: string): Promise<{ 
     const data = await res.json();
     const pages = data.query?.pages || {};
     const articles: WikiArticle[] = [];
-    for (const page of Object.values(pages) as Array<{ title: string; extract?: string }>) {
+    for (const page of Object.values(pages) as Array<{ title: string; extract?: string; thumbnail?: WikiImage; original?: WikiImage }>) {
       if (page.extract && page.extract.length >= 80 && !page.title.includes(':')) {
-        articles.push({ title: page.title, extract: page.extract });
+        articles.push({ title: page.title, extract: page.extract, thumbnail: page.thumbnail, originalimage: page.original });
       }
     }
     return { articles, apcontinue: data.continue?.gapcontinue };
@@ -161,12 +180,15 @@ async function storeArticles(lang: string, articles: WikiArticle[]): Promise<num
     const batch = db.batch();
 
     for (const article of chunk) {
-      const content = `# ${article.title}\n\n${article.extract}`;
+      const imageMarkdown = article.thumbnail
+        ? `![${article.title}](${article.thumbnail.source})\n\n`
+        : '';
+      const content = `# ${article.title}\n\n${imageMarkdown}${article.extract}`;
       const summary = article.extract.substring(0, 300);
       const tags = generateTags(article.title, article.extract, lang);
       const question = buildQuestion(lang, article.title);
 
-      batch.set(db.collection('wikis').doc(), {
+      const doc: Record<string, unknown> = {
         title: article.title,
         question,
         content,
@@ -183,9 +205,20 @@ async function storeArticles(lang: string, articles: WikiArticle[]): Promise<num
         views: Math.floor(Math.random() * 50) + 5,
         createdAt: now - Math.floor(Math.random() * 90 * 24 * 60 * 60 * 1000),
         updatedAt: now,
-        source: `wikipedia-${lang}`,
+        source: `wikipedia-${lang}-rich`,
         language: lang,
-      });
+      };
+
+      if (article.thumbnail) {
+        doc.imageUrl = article.thumbnail.source;
+        doc.imageWidth = article.thumbnail.width;
+        doc.imageHeight = article.thumbnail.height;
+      }
+      if (article.originalimage) {
+        doc.originalImageUrl = article.originalimage.source;
+      }
+
+      batch.set(db.collection('wikis').doc(), doc);
     }
 
     try {
@@ -345,13 +378,22 @@ export async function GET(req: NextRequest) {
   const langKeys = Object.keys(LANG_CONFIG);
   const langCounts = await Promise.all(
     langKeys.map(async (lang) => {
-      const snap = await db.collection('wikis').where('source', '==', `wikipedia-${lang}`).count().get();
-      return { lang, count: snap.data().count };
+      const [plainSnap, richSnap] = await Promise.all([
+        db.collection('wikis').where('source', '==', `wikipedia-${lang}`).count().get(),
+        db.collection('wikis').where('source', '==', `wikipedia-${lang}-rich`).count().get(),
+      ]);
+      return { lang, plain: plainSnap.data().count, rich: richSnap.data().count };
     })
   );
 
   const counts: Record<string, number> = {};
-  for (const { lang, count } of langCounts) counts[lang] = count;
+  let totalRich = 0;
+  for (const { lang, plain, rich } of langCounts) {
+    counts[lang] = plain;
+    counts[`${lang}-rich`] = rich;
+    totalRich += rich;
+  }
+  counts['__total_rich'] = totalRich;
 
   const seedSnap = await db.collection('wikis').where('source', '==', 'seed').count().get();
   counts['seed'] = seedSnap.data().count;

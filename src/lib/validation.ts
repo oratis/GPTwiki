@@ -27,6 +27,16 @@ export const chatRequestSchema = z.object({
   model: aiModelSchema,
 });
 
+export const threadCreateSchema = z.object({
+  question: z.string().trim().min(1).max(2000),
+  aiModel: aiModelSchema,
+});
+
+export const threadListQuerySchema = z.object({
+  cursor: z.coerce.number().int().nonnegative().optional(),
+  limit: z.coerce.number().int().min(1).max(50).default(10),
+});
+
 // ─── Query params ────────────────────────────────────────────────────────
 export const searchQuerySchema = z.object({
   q: z.string().trim().max(200).optional(),

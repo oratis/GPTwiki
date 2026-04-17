@@ -27,6 +27,28 @@ export interface Wiki {
   views: number;
   createdAt: number;
   updatedAt: number;
+  threadCount?: number;
+  imageUrl?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  originalImageUrl?: string;
+}
+
+export interface ThreadReply {
+  id: string;
+  question: string;
+  answer: string;
+  aiModel: AIModel;
+  authorId: string;
+  authorName: string;
+  authorImage?: string;
+  conversation: Message[];
+  createdAt: number;
+}
+
+export interface ThreadReplyCreateInput {
+  question: string;
+  aiModel: AIModel;
 }
 
 export interface WikiCreateInput {

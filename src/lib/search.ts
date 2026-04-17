@@ -220,3 +220,55 @@ export async function updateWiki(
     updatedAt: Date.now(),
   });
 }
+
+// ─── Thread Replies ───
+
+export async function createThreadReply(
+  wikiId: string,
+  data: {
+    question: string;
+    answer: string;
+    aiModel: string;
+    authorId: string;
+    authorName: string;
+    authorImage?: string;
+    conversation: Array<{ id: string; role: string; content: string; timestamp: number }>;
+  }
+): Promise<string> {
+  const { FieldValue } = await import('firebase-admin/firestore');
+  const docRef = await db.collection('wikis').doc(wikiId).collection('threads').add({
+    ...data,
+    createdAt: Date.now(),
+  });
+  // Atomically increment threadCount on parent wiki
+  await db.collection('wikis').doc(wikiId).update({
+    threadCount: FieldValue.increment(1),
+  });
+  return docRef.id;
+}
+
+export async function getThreadReplies(
+  wikiId: string,
+  cursor?: number,
+  limit = 10
+): Promise<{ threads: Array<Record<string, unknown> & { id: string; createdAt: number }>; nextCursor: number | null }> {
+  let query = db
+    .collection('wikis')
+    .doc(wikiId)
+    .collection('threads')
+    .orderBy('createdAt', 'asc')
+    .limit(limit + 1);
+
+  if (cursor) {
+    query = query.where('createdAt', '>', cursor);
+  }
+
+  const snapshot = await query.get();
+  const docs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Record<string, unknown> & { id: string; createdAt: number }));
+
+  const hasMore = docs.length > limit;
+  const threads = hasMore ? docs.slice(0, limit) : docs;
+  const nextCursor = hasMore ? (threads[threads.length - 1].createdAt as number) : null;
+
+  return { threads, nextCursor };
+}
