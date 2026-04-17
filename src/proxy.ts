@@ -6,6 +6,7 @@ import { supportedLocales, defaultLocale, matchLocale } from '@/lib/i18n/server'
 const BYPASS_PREFIXES = [
   '/api',
   '/_next',
+  '/embed',
   '/robots.txt',
   '/sitemap.xml',
   '/favicon',

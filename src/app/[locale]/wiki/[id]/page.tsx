@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { ArrowLeft, Eye, Bot, Clock, Tag, User } from 'lucide-react';
 import WikiContent from '@/components/wiki/WikiContent';
 import ShareButtons from '@/components/wiki/ShareButtons';
+import EmbedCodeButton from '@/components/wiki/EmbedCodeButton';
 import ThreadReplyList from '@/components/wiki/ThreadReplyList';
 import WikiInteractive from '@/components/wiki/WikiInteractive';
 import RelatedWikis from '@/components/wiki/RelatedWikis';
@@ -196,9 +197,10 @@ export default async function WikiDetailPage({
           </div>
         )}
 
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-6 flex items-center justify-between gap-3">
           <hr className="flex-1" />
-          <div className="ml-4">
+          <div className="flex items-center gap-2">
+            <EmbedCodeButton wikiId={id} />
             <ShareButtons
               url={`https://gptwiki.net/${locale}/wiki/${id}`}
               title={wiki.title}

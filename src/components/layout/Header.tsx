@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from '@/components/LocaleLink';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { BookOpen, MessageSquarePlus, LogIn, LogOut, User, Folder, Heart } from 'lucide-react';
@@ -63,9 +64,11 @@ export default function Header() {
                   className="flex items-center gap-2 hover:opacity-80 transition-opacity"
                 >
                   {session.user?.image ? (
-                    <img
+                    <Image
                       src={session.user.image}
                       alt=""
+                      width={32}
+                      height={32}
                       className="h-8 w-8 rounded-full ring-2 ring-transparent hover:ring-blue-300 transition-all"
                     />
                   ) : (

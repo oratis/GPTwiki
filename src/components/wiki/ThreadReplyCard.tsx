@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { User, Bot, Clock } from 'lucide-react';
 import { timeAgo } from '@/lib/utils';
 import { getModelDisplayName } from '@/lib/models';
@@ -13,9 +14,11 @@ export default function ThreadReplyCard({ reply }: { reply: ThreadReply }) {
       <div className="mb-3 flex items-center gap-3 text-sm text-gray-500">
         <div className="flex items-center gap-1.5">
           {reply.authorImage ? (
-            <img
+            <Image
               src={reply.authorImage}
               alt={reply.authorName}
+              width={24}
+              height={24}
               className="h-6 w-6 rounded-full"
             />
           ) : (

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from '@/components/LocaleLink';
 import { Trophy, BookOpen, Loader2 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
@@ -64,9 +65,11 @@ export default function LeaderboardSection() {
                   </span>
 
                   {user.image ? (
-                    <img
+                    <Image
                       src={user.image}
                       alt={user.name}
+                      width={32}
+                      height={32}
                       className="h-8 w-8 rounded-full object-cover"
                     />
                   ) : (

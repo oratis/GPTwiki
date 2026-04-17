@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from '@/components/LocaleLink';
 import { Eye, Clock, Bot, MessageSquare } from 'lucide-react';
 import type { Wiki } from '@/types';
@@ -20,13 +21,14 @@ export default function WikiCard({ wiki }: WikiCardProps) {
       className="group block overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-blue-200 hover:shadow-md"
     >
       {wiki.imageUrl && (
-        <div className="h-40 w-full overflow-hidden bg-gray-100">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+        <div className="relative h-40 w-full overflow-hidden bg-gray-100">
+          <Image
             src={wiki.imageUrl}
             alt={wiki.title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             loading="lazy"
-            className="h-full w-full object-cover transition-transform group-hover:scale-105"
+            className="object-cover transition-transform group-hover:scale-105"
           />
         </div>
       )}
