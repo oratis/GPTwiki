@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, use } from 'react';
-import Link from 'next/link';
+import Link from '@/components/LocaleLink';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { User, Calendar, BookOpen, Loader2, ArrowLeft } from 'lucide-react';

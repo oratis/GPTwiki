@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Link from '@/components/LocaleLink';
 import { Heart, Coffee, DollarSign, CheckCircle, Loader2 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
 
@@ -160,12 +161,12 @@ export default function DonatePage() {
           </div>
           <h1 className="mb-3 text-3xl font-bold text-gray-900">{t('donate.thankYou')}</h1>
           <p className="mb-6 text-gray-600">{t('donate.thankYouMsg')}</p>
-          <a
+          <Link
             href="/"
             className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-sm font-medium text-white hover:bg-blue-700"
           >
             {t('common.backHome')}
-          </a>
+          </Link>
         </div>
       </div>
     );

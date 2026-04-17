@@ -1,12 +1,15 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { Globe } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
 import { locales, type Locale } from '@/lib/i18n/locales';
 
 export default function LanguageSwitcher() {
   const { locale, setLocale } = useI18n();
+  const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -19,6 +22,22 @@ export default function LanguageSwitcher() {
     document.addEventListener('mousedown', handleClick);
     return () => document.removeEventListener('mousedown', handleClick);
   }, []);
+
+  const switchLocale = (next: Locale) => {
+    setLocale(next);
+    setOpen(false);
+    // Replace the current locale segment in the URL and navigate.
+    if (pathname) {
+      const segments = pathname.split('/');
+      // pathname begins with a leading "/", so segments[0] is ''
+      if (segments.length >= 2 && segments[1] in locales) {
+        segments[1] = next;
+      } else {
+        segments.splice(1, 0, next);
+      }
+      router.push(segments.join('/') || `/${next}`);
+    }
+  };
 
   return (
     <div className="relative" ref={ref}>
@@ -36,10 +55,7 @@ export default function LanguageSwitcher() {
           {(Object.entries(locales) as [Locale, string][]).map(([code, name]) => (
             <button
               key={code}
-              onClick={() => {
-                setLocale(code);
-                setOpen(false);
-              }}
+              onClick={() => switchLocale(code)}
               className={`flex w-full items-center px-3 py-2 text-left text-sm transition-colors ${
                 code === locale
                   ? 'bg-blue-50 font-medium text-blue-700'

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import Link from '@/components/LocaleLink';
 import { Trophy, BookOpen, Loader2 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
 import type { UserProfile } from '@/types';

@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/components/LocaleLink';
 import { Eye, Clock, Bot, MessageSquare } from 'lucide-react';
 import type { Wiki } from '@/types';
 import { timeAgo, truncate } from '@/lib/utils';

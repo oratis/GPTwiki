@@ -13,28 +13,37 @@ interface I18nContextType {
 
 const I18nContext = createContext<I18nContextType | null>(null);
 
-function detectBrowserLocale(): Locale {
-  if (typeof window === 'undefined') return defaultLocale;
-  const stored = localStorage.getItem('gptwiki-locale');
-  if (stored && stored in translations) return stored as Locale;
-
-  const browserLang = navigator.language.split('-')[0];
-  if (browserLang in translations) return browserLang as Locale;
-  return defaultLocale;
+interface I18nProviderProps {
+  children: ReactNode;
+  /**
+   * Initial locale from the server (derived from URL `[locale]` segment).
+   * URL is the source of truth for the current locale; localStorage is only
+   * used to persist a preference hint that the proxy cookie picks up on
+   * subsequent visits.
+   */
+  initialLocale?: Locale;
 }
 
-export function I18nProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(defaultLocale);
+export function I18nProvider({ children, initialLocale }: I18nProviderProps) {
+  const [locale, setLocaleState] = useState<Locale>(initialLocale ?? defaultLocale);
 
+  // Keep the <html> attributes in sync on the client for accessibility and
+  // writing-direction changes when the URL locale changes.
   useEffect(() => {
-    setLocaleState(detectBrowserLocale());
-  }, []);
+    if (typeof document === 'undefined') return;
+    document.documentElement.lang = locale;
+    document.documentElement.dir = rtlLocales.includes(locale) ? 'rtl' : 'ltr';
+  }, [locale]);
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale);
-    localStorage.setItem('gptwiki-locale', newLocale);
-    document.documentElement.lang = newLocale;
-    document.documentElement.dir = rtlLocales.includes(newLocale) ? 'rtl' : 'ltr';
+    if (typeof document !== 'undefined') {
+      // Persist the choice for the proxy to read on the next navigation.
+      document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=${60 * 60 * 24 * 365}`;
+      try {
+        localStorage.setItem('gptwiki-locale', newLocale);
+      } catch { /* ignore */ }
+    }
   }, []);
 
   const t = useCallback(

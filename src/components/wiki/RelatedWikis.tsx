@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import { Eye, Tag } from 'lucide-react';
 import { getWikisByTag } from '@/lib/search';
+import { localeHref } from '@/lib/i18n/links';
+import { defaultLocale, type Locale } from '@/lib/i18n/locales';
 import type { Wiki } from '@/types';
 
 interface Props {
   currentWikiId: string;
   tags: string[];
-  locale?: string;
+  locale?: Locale;
 }
 
 /**
@@ -15,7 +17,7 @@ interface Props {
  * Runs at build-time for ISR pages so it ships as pre-rendered HTML — pure
  * SEO fuel for internal linking.
  */
-export default async function RelatedWikis({ currentWikiId, tags }: Props) {
+export default async function RelatedWikis({ currentWikiId, tags, locale = defaultLocale }: Props) {
   if (!tags?.length) return null;
 
   // Pull wikis for up to 3 tags in parallel, then merge.
@@ -42,7 +44,7 @@ export default async function RelatedWikis({ currentWikiId, tags }: Props) {
         {related.map((w) => (
           <Link
             key={w.id}
-            href={`/wiki/${w.id}`}
+            href={localeHref(locale, `/wiki/${w.id}`)}
             className="group block rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
           >
             <h3 className="mb-2 line-clamp-2 text-base font-semibold text-gray-900 group-hover:text-blue-600">

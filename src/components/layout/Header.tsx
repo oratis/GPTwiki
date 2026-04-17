@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/components/LocaleLink';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { BookOpen, MessageSquarePlus, LogIn, LogOut, User, Folder, Heart } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';

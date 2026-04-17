@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import Link from '@/components/LocaleLink';
 import { MessageSquarePlus, Search, TrendingUp, Clock } from 'lucide-react';
 import WikiCard from '@/components/wiki/WikiCard';
 import WikiSearch from '@/components/wiki/WikiSearch';
