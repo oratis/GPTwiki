@@ -1,5 +1,11 @@
 import { db } from './firebase';
+import type { QueryDocumentSnapshot } from 'firebase-admin/firestore';
 import type { Wiki, UserProfile, UserApiKeys } from '@/types';
+
+/** A wiki "has a header image" when imageUrl is a non-empty string. */
+function hasHeaderImage(data: FirebaseFirestore.DocumentData): boolean {
+  return typeof data.imageUrl === 'string' && data.imageUrl.trim().length > 0;
+}
 
 export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
   if (!query.trim()) return [];
@@ -54,14 +60,44 @@ export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
   return wikis;
 }
 
+/**
+ * Top wikis by view count, restricted to entries that have a header image.
+ *
+ * Firestore can't combine `where('imageUrl', '!=', null)` with
+ * `orderBy('views')` without a composite index — and docs with no image
+ * omit the field entirely rather than storing null. So we page through
+ * `views desc` and filter in memory until `limit` image-bearing wikis are
+ * collected, capped by `maxScan` to bound the work.
+ */
 export async function getPopularWikis(limit = 12): Promise<Wiki[]> {
-  const snapshot = await db
-    .collection('wikis')
-    .orderBy('views', 'desc')
-    .limit(limit)
-    .get();
+  const results: Wiki[] = [];
+  // Wide pages keep this to one Firestore round-trip in the common case.
+  const pageSize = Math.max(limit * 16, 200);
+  const maxScan = Math.max(limit * 50, 2400);
+  let scanned = 0;
+  let cursor: QueryDocumentSnapshot | undefined;
 
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Wiki));
+  while (results.length < limit && scanned < maxScan) {
+    let query = db.collection('wikis').orderBy('views', 'desc').limit(pageSize);
+    if (cursor) query = query.startAfter(cursor);
+
+    const snapshot = await query.get();
+    if (snapshot.empty) break;
+
+    for (const doc of snapshot.docs) {
+      const data = doc.data();
+      if (hasHeaderImage(data)) {
+        results.push({ id: doc.id, ...data } as Wiki);
+        if (results.length >= limit) break;
+      }
+    }
+
+    scanned += snapshot.size;
+    cursor = snapshot.docs[snapshot.docs.length - 1];
+    if (snapshot.size < pageSize) break;
+  }
+
+  return results.slice(0, limit);
 }
 
 export async function getRecentWikis(limit = 12): Promise<Wiki[]> {

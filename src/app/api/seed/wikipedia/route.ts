@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
+import { mirrorImageToGCS } from '@/lib/gcs';
 
 const SEED_SECRET = process.env.AUTH_SECRET;
 
@@ -169,14 +170,52 @@ async function fetchAllPagesBatch(lang: string, apcontinue?: string): Promise<{ 
 }
 
 /**
+ * Mirror an article's Wikipedia thumbnails to GCS in parallel. On mirror
+ * failure (upstream 404 / 429 / timeout) the corresponding field is
+ * dropped so we never persist a dead `upload.wikimedia.org` URL into the
+ * database or the rendered markdown.
+ */
+async function mirrorArticleImages(article: WikiArticle): Promise<WikiArticle> {
+  const [thumb, orig] = await Promise.all([
+    article.thumbnail
+      ? mirrorImageToGCS(article.thumbnail.source, { prefix: 'wikipedia/thumb' })
+      : Promise.resolve(null),
+    article.originalimage
+      ? mirrorImageToGCS(article.originalimage.source, { prefix: 'wikipedia/orig' })
+      : Promise.resolve(null),
+  ]);
+
+  const result: WikiArticle = { title: article.title, extract: article.extract };
+  if (article.thumbnail && thumb) {
+    result.thumbnail = { ...article.thumbnail, source: thumb };
+  }
+  if (article.originalimage && orig) {
+    result.originalimage = { ...article.originalimage, source: orig };
+  }
+  return result;
+}
+
+async function mirrorBatch(articles: WikiArticle[], concurrency = 16): Promise<WikiArticle[]> {
+  const out: WikiArticle[] = [];
+  for (let i = 0; i < articles.length; i += concurrency) {
+    const chunk = articles.slice(i, i + concurrency);
+    const mirrored = await Promise.all(chunk.map(mirrorArticleImages));
+    out.push(...mirrored);
+  }
+  return out;
+}
+
+/**
  * Store articles to Firestore using batch writes (max 500 per batch).
  */
 async function storeArticles(lang: string, articles: WikiArticle[]): Promise<number> {
   let stored = 0;
   const now = Date.now();
 
-  for (let i = 0; i < articles.length; i += 450) {
-    const chunk = articles.slice(i, i + 450);
+  const mirroredArticles = await mirrorBatch(articles);
+
+  for (let i = 0; i < mirroredArticles.length; i += 450) {
+    const chunk = mirroredArticles.slice(i, i + 450);
     const batch = db.batch();
 
     for (const article of chunk) {

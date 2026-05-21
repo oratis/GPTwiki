@@ -6,7 +6,6 @@ import { MessageSquarePlus, Search, TrendingUp, Clock } from 'lucide-react';
 import WikiCard from '@/components/wiki/WikiCard';
 import WikiSearch from '@/components/wiki/WikiSearch';
 import RecentWikisSection from '@/components/wiki/RecentWikisSection';
-import LeaderboardSection from '@/components/wiki/LeaderboardSection';
 import { useI18n } from '@/lib/i18n/context';
 import type { Wiki } from '@/types';
 
@@ -130,17 +129,11 @@ export default function HomePage() {
           )}
         </section>
 
-        {/* Leaderboard + Recent (hide during search) */}
+        {/* Recent (hide during search) */}
         {!isSearching && (
-          <>
-            <section className="mt-12">
-              <LeaderboardSection />
-            </section>
-
-            <section className="mt-12">
-              <RecentWikisSection />
-            </section>
-          </>
+          <section className="mt-12">
+            <RecentWikisSection />
+          </section>
         )}
       </div>
     </div>
