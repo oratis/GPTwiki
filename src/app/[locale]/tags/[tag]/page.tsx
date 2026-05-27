@@ -3,37 +3,19 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Tag } from 'lucide-react';
 import WikiCard from '@/components/wiki/WikiCard';
-import { getAllTags, getWikisByTag } from '@/lib/search';
+import { getWikisByTag } from '@/lib/search';
 import {
   hasLocale,
   supportedLocales,
   getTranslations,
-  type Locale,
 } from '@/lib/i18n/server';
 import { localeHref } from '@/lib/i18n/links';
 
-export const revalidate = 600;
-export const dynamicParams = true;
+// Dynamic at request time — build env can't reach Firestore, so we can't
+// pre-render content here. Cloud Run runtime has credentials.
+export const dynamic = 'force-dynamic';
 
 type RouteParams = { locale: string; tag: string };
-
-/**
- * Pre-render the top 25 tags at build time. dynamicParams=true means any
- * other tag (we have ~1100 of them) is rendered on demand and cached.
- */
-export async function generateStaticParams(): Promise<Array<{ locale: Locale; tag: string }>> {
-  try {
-    const tags = await getAllTags();
-    const top = tags.slice(0, 25);
-    const out: Array<{ locale: Locale; tag: string }> = [];
-    for (const loc of supportedLocales) {
-      for (const tg of top) out.push({ locale: loc, tag: tg.name });
-    }
-    return out;
-  } catch {
-    return [];
-  }
-}
 
 export async function generateMetadata({
   params,
