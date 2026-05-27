@@ -52,11 +52,12 @@ const START_AFTER = flagValue('start-after');
 // each Firestore doc gets visited by exactly one runner.
 const SHARD_START = flagValue('shard-start');
 const SHARD_END = flagValue('shard-end');
-// With batched Wikipedia lookups (50 titles/call) the Firestore page size
-// no longer caps the API spend, so we use a bigger page for fewer round
-// trips. CONCURRENCY now controls GCS upload parallelism for the docs
-// that actually have a Wikipedia thumbnail (~35% of scanned).
-const CONCURRENCY = Number(flagValue('concurrency') ?? 24);
+// CONCURRENCY = parallel `upload.wikimedia.org` fetches. Wikimedia
+// rate-limits aggressively per source IP; empirically 5-6 is the
+// sustained ceiling before 429 storms eat most of the work. The retry
+// logic in mirrorImageToGCS reclaims the rest. Bumping this past ~8
+// almost always *lowers* effective throughput.
+const CONCURRENCY = Number(flagValue('concurrency') ?? 6);
 const PAGE = Number(flagValue('page') ?? 500);
 
 function initFirebase() {
