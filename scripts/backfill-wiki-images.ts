@@ -46,6 +46,12 @@ function flagValue(name: string): string | undefined {
 }
 const LIMIT = Number(flagValue('limit') ?? 0);
 const START_AFTER = flagValue('start-after');
+// Optional keyspace shard bounds. --shard-start is *inclusive*, --shard-end
+// is *exclusive* — pass the same upper-bound to both consecutive shards
+// (e.g. shardA --shard-end=A, shardB --shard-start=A --shard-end=H) and
+// each Firestore doc gets visited by exactly one runner.
+const SHARD_START = flagValue('shard-start');
+const SHARD_END = flagValue('shard-end');
 // With batched Wikipedia lookups (50 titles/call) the Firestore page size
 // no longer caps the API spend, so we use a bigger page for fewer round
 // trips. CONCURRENCY now controls GCS upload parallelism for the docs
@@ -322,7 +328,9 @@ async function main(): Promise<void> {
   console.log(
     `${tag()} page=${PAGE} concurrency=${CONCURRENCY}` +
       (LIMIT ? ` limit=${LIMIT}` : '') +
-      (START_AFTER ? ` start-after=${START_AFTER}` : ''),
+      (START_AFTER ? ` start-after=${START_AFTER}` : '') +
+      (SHARD_START ? ` shard-start=${SHARD_START}` : '') +
+      (SHARD_END ? ` shard-end=${SHARD_END}` : ''),
   );
 
   const stats: { scanned: number } & Record<Action, number> = {
@@ -338,7 +346,16 @@ async function main(): Promise<void> {
 
   while (true) {
     let q = db.collection('wikis').orderBy('__name__').limit(PAGE);
-    if (lastId) q = q.startAfter(lastId);
+    if (lastId) {
+      q = q.startAfter(lastId);
+    } else if (SHARD_START) {
+      // First page of a sharded run: take everything from SHARD_START
+      // (inclusive). Subsequent pages use lastId via startAfter above.
+      q = q.startAt(db.collection('wikis').doc(SHARD_START));
+    }
+    if (SHARD_END) {
+      q = q.endBefore(db.collection('wikis').doc(SHARD_END));
+    }
     const snap = await q.get();
     if (snap.empty) break;
 
