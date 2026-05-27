@@ -32,6 +32,8 @@ export interface Wiki {
   imageWidth?: number;
   imageHeight?: number;
   originalImageUrl?: string;
+  /** ISO 639-1 code of the article's content language (e.g. "en", "zh"). */
+  language?: string;
 }
 
 export interface ThreadReply {

@@ -68,8 +68,29 @@ export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
  * omit the field entirely rather than storing null. So we page through
  * `views desc` and filter in memory until `limit` image-bearing wikis are
  * collected, capped by `maxScan` to bound the work.
+ *
+ * When `language` is supplied we narrow the scan to that locale via a
+ * composite index on `(language ASC, views DESC)` — without it, the
+ * one-in-15 hit rate would push the in-memory filter well past `maxScan`
+ * and return too few results. If the index hasn't been created yet (e.g.
+ * fresh project), Firestore throws FAILED_PRECONDITION; we log it and
+ * fall back to the unfiltered query so the page still renders.
  */
-export async function getPopularWikis(limit = 12): Promise<Wiki[]> {
+export async function getPopularWikis(limit = 12, language?: string): Promise<Wiki[]> {
+  try {
+    return await collectPopularWikis(limit, language);
+  } catch (err) {
+    if (language && isMissingIndexError(err)) {
+      console.warn(
+        `[getPopularWikis] Composite index (language, views desc) missing — falling back to unfiltered. Create it at the URL in the error log to enable per-locale popular wikis.`
+      );
+      return collectPopularWikis(limit);
+    }
+    throw err;
+  }
+}
+
+async function collectPopularWikis(limit: number, language?: string): Promise<Wiki[]> {
   const results: Wiki[] = [];
   // Wide pages keep this to one Firestore round-trip in the common case.
   const pageSize = Math.max(limit * 16, 200);
@@ -78,7 +99,10 @@ export async function getPopularWikis(limit = 12): Promise<Wiki[]> {
   let cursor: QueryDocumentSnapshot | undefined;
 
   while (results.length < limit && scanned < maxScan) {
-    let query = db.collection('wikis').orderBy('views', 'desc').limit(pageSize);
+    let query = language
+      ? db.collection('wikis').where('language', '==', language).orderBy('views', 'desc')
+      : db.collection('wikis').orderBy('views', 'desc');
+    query = query.limit(pageSize);
     if (cursor) query = query.startAfter(cursor);
 
     const snapshot = await query.get();
@@ -100,14 +124,33 @@ export async function getPopularWikis(limit = 12): Promise<Wiki[]> {
   return results.slice(0, limit);
 }
 
-export async function getRecentWikis(limit = 12): Promise<Wiki[]> {
-  const snapshot = await db
-    .collection('wikis')
-    .orderBy('createdAt', 'desc')
-    .limit(limit)
-    .get();
+export async function getRecentWikis(limit = 12, language?: string): Promise<Wiki[]> {
+  try {
+    const query = language
+      ? db.collection('wikis').where('language', '==', language).orderBy('createdAt', 'desc')
+      : db.collection('wikis').orderBy('createdAt', 'desc');
+    const snapshot = await query.limit(limit).get();
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Wiki));
+  } catch (err) {
+    if (language && isMissingIndexError(err)) {
+      console.warn(
+        `[getRecentWikis] Composite index (language, createdAt desc) missing — falling back to unfiltered.`
+      );
+      return getRecentWikis(limit);
+    }
+    throw err;
+  }
+}
 
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Wiki));
+/**
+ * Firestore Admin throws code 9 (FAILED_PRECONDITION) when a query needs
+ * a composite index that doesn't exist yet; the error message includes a
+ * URL to auto-create it.
+ */
+function isMissingIndexError(err: unknown): boolean {
+  if (!err || typeof err !== 'object') return false;
+  const e = err as { code?: number; message?: string };
+  return e.code === 9 || (typeof e.message === 'string' && e.message.includes('FAILED_PRECONDITION'));
 }
 
 export async function getWikiById(id: string): Promise<Wiki | null> {
@@ -184,19 +227,28 @@ export async function updateUserApiKeys(userId: string, apiKeys: UserApiKeys): P
 
 export async function getRecentWikisPaginated(
   cursor?: number,
-  limit = 12
+  limit = 12,
+  language?: string
 ): Promise<{ wikis: Wiki[]; nextCursor: number | null }> {
-  let query = db.collection('wikis').orderBy('createdAt', 'desc');
+  try {
+    let query = language
+      ? db.collection('wikis').where('language', '==', language).orderBy('createdAt', 'desc')
+      : db.collection('wikis').orderBy('createdAt', 'desc');
+    if (cursor) query = query.startAfter(cursor);
 
-  if (cursor) {
-    query = query.startAfter(cursor);
+    const snapshot = await query.limit(limit).get();
+    const wikis = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Wiki));
+    const nextCursor = wikis.length === limit ? wikis[wikis.length - 1].createdAt : null;
+    return { wikis, nextCursor };
+  } catch (err) {
+    if (language && isMissingIndexError(err)) {
+      console.warn(
+        `[getRecentWikisPaginated] Composite index (language, createdAt desc) missing — falling back to unfiltered.`
+      );
+      return getRecentWikisPaginated(cursor, limit);
+    }
+    throw err;
   }
-
-  const snapshot = await query.limit(limit).get();
-  const wikis = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Wiki));
-  const nextCursor = wikis.length === limit ? wikis[wikis.length - 1].createdAt : null;
-
-  return { wikis, nextCursor };
 }
 
 // ─── Leaderboard ───
