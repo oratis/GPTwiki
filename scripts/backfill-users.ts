@@ -36,7 +36,12 @@
  * healed users.
  */
 
-import { initializeApp, cert, type ServiceAccount } from 'firebase-admin/app';
+import {
+  initializeApp,
+  cert,
+  applicationDefault,
+  type ServiceAccount,
+} from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 import { config } from 'dotenv';
 
@@ -48,12 +53,24 @@ const REWRITE_WIKIS = args.includes('--rewrite-wikis');
 const DELETE_ORPHANS = args.includes('--delete-orphans');
 const DRY = !APPLY;
 
-const serviceAccount: ServiceAccount = {
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-  privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-};
-const app = initializeApp({ credential: cert(serviceAccount) });
+// Prefer explicit service-account env vars (Phase 4 pattern used by the
+// other backfill scripts). Fall back to Application Default Credentials —
+// useful when running locally with `gcloud auth application-default login`
+// already done, so an operator doesn't need to dig up the service-account
+// JSON for a one-off migration.
+function initFirebase() {
+  const projectId = process.env.FIREBASE_PROJECT_ID || 'gptwiki';
+  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+  const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+  if (clientEmail && privateKey) {
+    const sa: ServiceAccount = { projectId, clientEmail, privateKey };
+    return initializeApp({ credential: cert(sa), projectId });
+  }
+  console.log('▸ no FIREBASE_CLIENT_EMAIL/PRIVATE_KEY in env — using ADC');
+  return initializeApp({ credential: applicationDefault(), projectId });
+}
+
+const app = initFirebase();
 const db = getFirestore(app);
 
 interface AuthjsUser {
