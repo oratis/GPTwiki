@@ -82,21 +82,20 @@ export async function mirrorImageToGCS(
 
   const hash = createHash('sha1').update(url).digest('hex').slice(0, 16);
 
-  // Try several plausible extensions when checking cache so we don't miss
-  // a hit just because we'd otherwise guess `.jpg` for a previously
-  // uploaded `.png`. Order matters: the first existing one wins.
-  const cacheCandidates = ['.jpg', '.png', '.webp', '.svg', '.gif'];
+  // Single cache probe using the extension implied by the URL. A
+  // multi-probe loop costs ~100ms per checked extension and adds up
+  // fast on a cold cache; one targeted probe keeps the re-run win
+  // (no upstream fetch on hit) without slowing first-time fetches.
+  const guessedExt = guessExt('', url);
   const bucket = getStorage().bucket(GCS_BUCKET);
-  for (const ext of cacheCandidates) {
-    const objectPath = `${prefix}/${hash}${ext}`;
-    try {
-      const [exists] = await bucket.file(objectPath).exists();
-      if (exists) {
-        return `https://storage.googleapis.com/${GCS_BUCKET}/${objectPath}`;
-      }
-    } catch {
-      // Treat cache probe error as miss — fall through to upstream fetch.
+  const cachedPath = `${prefix}/${hash}${guessedExt}`;
+  try {
+    const [exists] = await bucket.file(cachedPath).exists();
+    if (exists) {
+      return `https://storage.googleapis.com/${GCS_BUCKET}/${cachedPath}`;
     }
+  } catch {
+    // Treat probe error as miss — fall through to upstream fetch.
   }
 
   // No cache hit: fetch from upstream, retry on 429 / transient network.
