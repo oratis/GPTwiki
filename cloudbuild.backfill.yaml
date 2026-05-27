@@ -1,0 +1,15 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-f'
+      - 'Dockerfile.backfill'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/gptwiki/gptwiki/wiki-image-backfill:latest'
+      - '.'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/gptwiki/gptwiki/wiki-image-backfill:latest']
+
+images:
+  - 'us-central1-docker.pkg.dev/gptwiki/gptwiki/wiki-image-backfill:latest'

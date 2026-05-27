@@ -46,12 +46,48 @@ function flagValue(name: string): string | undefined {
 }
 const LIMIT = Number(flagValue('limit') ?? 0);
 const START_AFTER = flagValue('start-after');
-// Optional keyspace shard bounds. --shard-start is *inclusive*, --shard-end
-// is *exclusive* — pass the same upper-bound to both consecutive shards
-// (e.g. shardA --shard-end=A, shardB --shard-start=A --shard-end=H) and
-// each Firestore doc gets visited by exactly one runner.
-const SHARD_START = flagValue('shard-start');
-const SHARD_END = flagValue('shard-end');
+
+// Map a position in the 62-char Firestore auto-ID alphabet (0-9A-Za-z)
+// to its character. Used to evenly slice the keyspace across N tasks.
+function posToChar(pos: number): string {
+  if (pos < 10) return String.fromCharCode(48 + pos); // 0-9
+  if (pos < 36) return String.fromCharCode(65 + pos - 10); // A-Z
+  return String.fromCharCode(97 + pos - 36); // a-z
+}
+
+// Compute keyspace [start, end) for task `index` out of `count`. start is
+// undefined for task 0, end is undefined for the last task — so the
+// outermost shards cover everything before/after the explicit boundaries
+// (e.g. doc IDs with leading '-' or '_' or future schema changes).
+function computeShardForTask(
+  index: number,
+  count: number,
+): { start?: string; end?: string } {
+  const startPos = Math.floor((index * 62) / count);
+  const endPos = Math.floor(((index + 1) * 62) / count);
+  return {
+    start: index === 0 ? undefined : posToChar(startPos),
+    end: index === count - 1 ? undefined : posToChar(endPos),
+  };
+}
+
+// Cloud Run Jobs set CLOUD_RUN_TASK_INDEX and CLOUD_RUN_TASK_COUNT for
+// each task. When present, derive the shard bounds automatically so the
+// same image works for any --tasks count.
+let SHARD_START = flagValue('shard-start');
+let SHARD_END = flagValue('shard-end');
+const taskIndex = process.env.CLOUD_RUN_TASK_INDEX;
+const taskCount = process.env.CLOUD_RUN_TASK_COUNT;
+if (taskIndex !== undefined && taskCount !== undefined) {
+  const idx = Number(taskIndex);
+  const cnt = Number(taskCount);
+  const auto = computeShardForTask(idx, cnt);
+  if (!SHARD_START && auto.start) SHARD_START = auto.start;
+  if (!SHARD_END && auto.end) SHARD_END = auto.end;
+  console.log(
+    `▸ cloud-run task ${idx}/${cnt} → shard [${auto.start ?? '*'}, ${auto.end ?? '*'})`,
+  );
+}
 // CONCURRENCY = parallel `upload.wikimedia.org` fetches. Wikimedia
 // rate-limits aggressively per source IP; empirically 5-6 is the
 // sustained ceiling before 429 storms eat most of the work. The retry

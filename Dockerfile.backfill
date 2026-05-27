@@ -1,0 +1,19 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# tsx + firebase-admin + @google-cloud/storage + dotenv pulled from
+# package.json. Slim image: no Next.js build, no dev hooks.
+COPY package.json package-lock.json ./
+RUN npm ci --no-audit --no-fund && npm cache clean --force
+
+COPY tsconfig.json ./
+COPY scripts/backfill-wiki-images.ts ./scripts/
+COPY src/lib/gcs.ts ./src/lib/
+
+# Cloud Run sets CLOUD_RUN_TASK_INDEX / CLOUD_RUN_TASK_COUNT; the script
+# reads those to derive its shard. Concurrency=16 is safe per-IP, and
+# each Cloud Run task runs from its own egress IP so 8 tasks × 16 = 128
+# parallel upstream fetches without sharing Wikimedia's rate-limit
+# bucket.
+CMD ["npx", "tsx", "scripts/backfill-wiki-images.ts", "--apply", "--concurrency=16"]
