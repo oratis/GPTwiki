@@ -12,8 +12,8 @@ COPY scripts/backfill-wiki-images.ts ./scripts/
 COPY src/lib/gcs.ts ./src/lib/
 
 # Cloud Run sets CLOUD_RUN_TASK_INDEX / CLOUD_RUN_TASK_COUNT; the script
-# reads those to derive its shard. Concurrency=16 is safe per-IP, and
-# each Cloud Run task runs from its own egress IP so 8 tasks × 16 = 128
-# parallel upstream fetches without sharing Wikimedia's rate-limit
-# bucket.
-CMD ["npx", "tsx", "scripts/backfill-wiki-images.ts", "--apply", "--concurrency=16"]
+# reads those to derive its shard. The script also bumps undici's
+# global Agent to 64 connections-per-origin, so --concurrency=32 can
+# actually saturate fetches on IP-clean tasks (defaults to 10
+# otherwise). Throttled IPs are 429-bounded regardless.
+CMD ["npx", "tsx", "scripts/backfill-wiki-images.ts", "--apply", "--concurrency=32"]

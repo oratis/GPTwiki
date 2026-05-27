@@ -33,9 +33,18 @@ import {
 } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 import { config } from 'dotenv';
+import { Agent, setGlobalDispatcher } from 'undici';
 import { mirrorImageToGCS, isGcsUrl } from '../src/lib/gcs';
 
 config({ path: '.env.local', override: true });
+
+// Node's global `fetch` uses undici under the hood, whose default Agent
+// caps connections-per-origin around 10. That ceilings the script at
+// ~10 parallel fetches against upload.wikimedia.org no matter how high
+// we set --concurrency. Bump to 64 so an IP-clean Cloud Run task can
+// actually saturate its bucket — on throttled IPs Wikimedia 429s us
+// well before this cap is reached so it's effectively a no-op there.
+setGlobalDispatcher(new Agent({ connections: 64, pipelining: 1 }));
 
 const args = process.argv.slice(2);
 const APPLY = args.includes('--apply');
