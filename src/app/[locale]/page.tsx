@@ -1,47 +1,75 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import Link from '@/components/LocaleLink';
-import { MessageSquarePlus, Search, TrendingUp, Clock } from 'lucide-react';
+import Link from 'next/link';
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { MessageSquarePlus, TrendingUp, Clock } from 'lucide-react';
 import WikiCard from '@/components/wiki/WikiCard';
-import WikiSearch from '@/components/wiki/WikiSearch';
+import HomeSearchIsland from '@/components/wiki/HomeSearchIsland';
 import RecentWikisSection from '@/components/wiki/RecentWikisSection';
-import { useI18n } from '@/lib/i18n/context';
-import type { Wiki } from '@/types';
+import { getPopularWikis, getRecentWikis } from '@/lib/search';
+import {
+  hasLocale,
+  supportedLocales,
+  getTranslations,
+  type Locale,
+} from '@/lib/i18n/server';
+import { localeHref } from '@/lib/i18n/links';
 
-export default function HomePage() {
-  const { t } = useI18n();
-  const [wikis, setWikis] = useState<Wiki[]>([]);
-  const [searchResults, setSearchResults] = useState<Wiki[] | null>(null);
-  const [loading, setLoading] = useState(true);
+export const revalidate = 600; // 10 min ISR
 
-  useEffect(() => {
-    fetch('/api/search')
-      .then((res) => res.json())
-      .then((data) => setWikis(data.wikis || []))
-      .catch(() => setWikis([]))
-      .finally(() => setLoading(false));
-  }, []);
+type RouteParams = { locale: string };
 
-  const handleSearch = async (query: string) => {
-    if (!query.trim()) {
-      setSearchResults(null);
-      return;
-    }
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
-      const data = await res.json();
-      setSearchResults(data.wikis || []);
-    } catch {
-      setSearchResults([]);
-    } finally {
-      setLoading(false);
-    }
+export function generateStaticParams(): Array<{ locale: Locale }> {
+  return supportedLocales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<RouteParams>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  if (!hasLocale(locale)) return {};
+  const t = getTranslations(locale);
+  const title = `${t('home.title')} — ${t('home.subtitle')}`;
+  const description = t('home.subtitle');
+  const canonical = `https://gptwiki.net/${locale}`;
+
+  const languages: Record<string, string> = {};
+  for (const loc of supportedLocales) languages[loc] = `https://gptwiki.net/${loc}`;
+  languages['x-default'] = 'https://gptwiki.net/en';
+
+  return {
+    title,
+    description,
+    alternates: { canonical, languages },
+    openGraph: {
+      type: 'website',
+      title,
+      description,
+      url: canonical,
+      siteName: 'GPTwiki',
+      locale,
+    },
+    twitter: { card: 'summary_large_image', title, description },
   };
+}
 
-  const displayWikis = searchResults ?? wikis;
-  const isSearching = searchResults !== null;
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<RouteParams>;
+}) {
+  const { locale } = await params;
+  if (!hasLocale(locale)) notFound();
+  const t = getTranslations(locale);
+
+  // Fetch in parallel on the server so crawlers see populated HTML.
+  // Failures fall back to empty arrays — the page renders without that
+  // section rather than 500-ing on a transient Firestore error.
+  const [popular, recent] = await Promise.all([
+    getPopularWikis(9).catch(() => []),
+    getRecentWikis(12).catch(() => []),
+  ]);
 
   return (
     <div>
@@ -55,10 +83,10 @@ export default function HomePage() {
             {t('home.subtitle')}
           </p>
           <div className="mx-auto mb-8 max-w-2xl">
-            <WikiSearch onSearch={handleSearch} placeholder={t('home.searchPlaceholder')} />
+            <HomeSearchIsland locale={locale} placeholder={t('home.searchPlaceholder')} />
           </div>
           <Link
-            href="/chat"
+            href={localeHref(locale, '/chat')}
             className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-blue-700 shadow-lg hover:bg-blue-50 transition-colors"
           >
             <MessageSquarePlus className="h-5 w-5" />
@@ -68,58 +96,26 @@ export default function HomePage() {
       </section>
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        {/* Popular / Search Results */}
+        {/* Popular wikis — SSR'd so the link graph is crawlable */}
         <section>
           <div className="mb-8 flex items-center gap-2">
-            {isSearching ? (
-              <>
-                <Search className="h-5 w-5 text-blue-600" />
-                <h2 className="text-xl font-bold text-gray-900">
-                  {t('home.searchResults')} ({searchResults.length})
-                </h2>
-                <button onClick={() => setSearchResults(null)} className="ml-2 text-sm text-blue-600 hover:underline">
-                  {t('home.clear')}
-                </button>
-              </>
-            ) : (
-              <>
-                <TrendingUp className="h-5 w-5 text-blue-600" />
-                <h2 className="text-xl font-bold text-gray-900">{t('home.popularWikis')}</h2>
-              </>
-            )}
+            <TrendingUp className="h-5 w-5 text-blue-600" />
+            <h2 className="text-xl font-bold text-gray-900">{t('home.popularWikis')}</h2>
           </div>
 
-          {loading ? (
+          {popular.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="animate-pulse rounded-xl border border-gray-200 bg-white p-5">
-                  <div className="mb-2 h-5 w-3/4 rounded bg-gray-200" />
-                  <div className="mb-3 h-4 w-full rounded bg-gray-100" />
-                  <div className="mb-3 h-4 w-2/3 rounded bg-gray-100" />
-                  <div className="flex gap-2">
-                    <div className="h-5 w-16 rounded-full bg-gray-100" />
-                    <div className="h-5 w-12 rounded-full bg-gray-100" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : displayWikis.length > 0 ? (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {displayWikis.map((wiki) => (
+              {popular.map((wiki) => (
                 <WikiCard key={wiki.id} wiki={wiki} />
               ))}
             </div>
           ) : (
-            <div className="py-20 text-center">
+            <div className="py-12 text-center">
               <Clock className="mx-auto mb-4 h-12 w-12 text-gray-300" />
-              <h3 className="mb-2 text-lg font-medium text-gray-900">
-                {isSearching ? t('home.noResults') : t('home.noWikis')}
-              </h3>
-              <p className="mb-6 text-gray-500">
-                {isSearching ? t('home.noResultsHint') : t('home.noWikisHint')}
-              </p>
+              <h3 className="mb-2 text-lg font-medium text-gray-900">{t('home.noWikis')}</h3>
+              <p className="mb-6 text-gray-500">{t('home.noWikisHint')}</p>
               <Link
-                href="/chat"
+                href={localeHref(locale, '/chat')}
                 className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-sm font-medium text-white hover:bg-blue-700"
               >
                 <MessageSquarePlus className="h-4 w-4" />
@@ -129,12 +125,10 @@ export default function HomePage() {
           )}
         </section>
 
-        {/* Recent (hide during search) */}
-        {!isSearching && (
-          <section className="mt-12">
-            <RecentWikisSection />
-          </section>
-        )}
+        {/* Recent wikis — initial batch SSR'd; infinite-scroll loads more on the client */}
+        <section className="mt-12">
+          <RecentWikisSection initialWikis={recent} />
+        </section>
       </div>
     </div>
   );
