@@ -46,8 +46,12 @@ function flagValue(name: string): string | undefined {
 }
 const LIMIT = Number(flagValue('limit') ?? 0);
 const START_AFTER = flagValue('start-after');
-const CONCURRENCY = Number(flagValue('concurrency') ?? 12);
-const PAGE = Number(flagValue('page') ?? 200);
+// With batched Wikipedia lookups (50 titles/call) the Firestore page size
+// no longer caps the API spend, so we use a bigger page for fewer round
+// trips. CONCURRENCY now controls GCS upload parallelism for the docs
+// that actually have a Wikipedia thumbnail (~35% of scanned).
+const CONCURRENCY = Number(flagValue('concurrency') ?? 24);
+const PAGE = Number(flagValue('page') ?? 500);
 
 function initFirebase() {
   const projectId = process.env.FIREBASE_PROJECT_ID || 'gptwiki';
@@ -78,59 +82,96 @@ interface WikiImage {
   height?: number;
 }
 
+interface MediaWikiPage {
+  pageid?: number;
+  title?: string;
+  missing?: string;
+  thumbnail?: WikiImage;
+  original?: WikiImage;
+}
+
 interface MediaWikiResponse {
   query?: {
-    pages?: Record<
-      string,
-      {
-        pageid?: number;
-        title?: string;
-        missing?: string;
-        thumbnail?: WikiImage;
-        original?: WikiImage;
-      }
-    >;
+    normalized?: { from: string; to: string }[];
+    redirects?: { from: string; to: string }[];
+    pages?: Record<string, MediaWikiPage>;
   };
 }
 
 type Action = 'skip-has-image' | 'skip-no-title' | 'no-wiki-match' | 'mirror-failed' | 'updated' | 'failed';
 
 const USER_AGENT = 'GPTwiki-Bot/1.0 (https://gptwiki.net)';
+const MEDIAWIKI_BATCH_SIZE = 50; // MediaWiki API caps `titles=` at 50.
 
-async function fetchWikipediaImage(
-  title: string,
+/**
+ * Batch-fetch pageimages from `{lang}.wikipedia.org` for up to 50 titles
+ * in a single API call. Returns a map keyed by the *original* requested
+ * title, threading the response's `normalized` + `redirects` arrays so
+ * disambiguation/redirect aliases still resolve to the right page.
+ */
+async function fetchWikipediaImagesBatch(
+  titles: string[],
   lang: string,
-): Promise<{ thumbnail?: WikiImage; original?: WikiImage } | null> {
-  // Use MediaWiki API with prop=pageimages — same endpoint the seed flow
-  // uses, but querying by title instead of randomly sampling.
+): Promise<Map<string, { thumbnail: WikiImage; original?: WikiImage }>> {
+  const out = new Map<string, { thumbnail: WikiImage; original?: WikiImage }>();
+  if (titles.length === 0) return out;
+
   const url = new URL(`https://${lang}.wikipedia.org/w/api.php`);
   url.searchParams.set('action', 'query');
   url.searchParams.set('format', 'json');
   url.searchParams.set('prop', 'pageimages');
   url.searchParams.set('piprop', 'thumbnail|original');
   url.searchParams.set('pithumbsize', '640');
-  url.searchParams.set('titles', title);
+  url.searchParams.set('pilimit', String(titles.length));
+  url.searchParams.set('titles', titles.join('|'));
   url.searchParams.set('redirects', '1');
   url.searchParams.set('origin', '*');
 
+  let data: MediaWikiResponse | null = null;
   try {
     const ac = new AbortController();
-    const timer = setTimeout(() => ac.abort(), 15_000);
+    const timer = setTimeout(() => ac.abort(), 20_000);
     const res = await fetch(url.toString(), {
       headers: { 'User-Agent': USER_AGENT },
       signal: ac.signal,
     }).finally(() => clearTimeout(timer));
-    if (!res.ok) return null;
-    const data = (await res.json()) as MediaWikiResponse;
-    const pages = data.query?.pages;
-    if (!pages) return null;
-    const page = Object.values(pages)[0];
-    if (!page || page.missing !== undefined) return null;
-    if (!page.thumbnail) return null;
-    return { thumbnail: page.thumbnail, original: page.original };
+    if (!res.ok) return out;
+    data = (await res.json()) as MediaWikiResponse;
   } catch {
-    return null;
+    return out;
   }
+
+  const pages = data?.query?.pages;
+  if (!pages) return out;
+
+  // Forward each original title through the normalize → redirect chain to
+  // find the title under which it now appears in `pages`.
+  const finalTitle = new Map<string, string>();
+  for (const t of titles) finalTitle.set(t, t);
+  const apply = (mapping: { from: string; to: string }[] | undefined) => {
+    if (!mapping) return;
+    for (const m of mapping) {
+      for (const [k, v] of finalTitle) {
+        if (v === m.from) finalTitle.set(k, m.to);
+      }
+    }
+  };
+  apply(data?.query?.normalized);
+  apply(data?.query?.redirects);
+
+  // Index pages by their final title for O(1) lookup.
+  const pageByTitle = new Map<string, MediaWikiPage>();
+  for (const p of Object.values(pages)) {
+    if (p?.title) pageByTitle.set(p.title, p);
+  }
+
+  for (const [orig, final] of finalTitle) {
+    const p = pageByTitle.get(final);
+    if (!p || p.missing !== undefined) continue;
+    if (!p.thumbnail) continue;
+    out.set(orig, { thumbnail: p.thumbnail, original: p.original });
+  }
+  return out;
 }
 
 /**
@@ -152,30 +193,96 @@ function insertImageMarkdown(content: string, title: string, url: string): strin
   return imageMd + content;
 }
 
-interface ProcessResult {
-  action: Action;
-  detail?: string;
+interface EligibleDoc {
+  id: string;
+  title: string;
+  lang: string;
+  content: string;
 }
 
-async function processDoc(docId: string, data: WikiDoc): Promise<ProcessResult> {
-  if (data.imageUrl && data.imageUrl.trim().length > 0) {
+function classifyDoc(
+  doc: { id: string; data: WikiDoc },
+): { action: 'skip-has-image' | 'skip-no-title' } | { eligible: EligibleDoc } {
+  if (doc.data.imageUrl && doc.data.imageUrl.trim().length > 0) {
     return { action: 'skip-has-image' };
   }
-  if (!data.title) {
+  if (!doc.data.title) {
     return { action: 'skip-no-title' };
   }
+  return {
+    eligible: {
+      id: doc.id,
+      title: doc.data.title,
+      lang: doc.data.language || 'en',
+      content: doc.data.content ?? '',
+    },
+  };
+}
 
-  const lang = data.language || 'en';
-  const wikiImages = await fetchWikipediaImage(data.title, lang);
-  if (!wikiImages || !wikiImages.thumbnail) {
-    return { action: 'no-wiki-match', detail: `${lang}:${data.title}` };
+/**
+ * Slice an array into fixed-size chunks. Last chunk may be smaller.
+ */
+function chunked<T>(arr: T[], size: number): T[][] {
+  const out: T[][] = [];
+  for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
+  return out;
+}
+
+/**
+ * Per-language batched fetch: groups eligible docs by language, sends
+ * one MediaWiki API call per 50-title chunk in parallel. Returns a flat
+ * map of docId → page image data for the ones that resolved.
+ */
+async function fetchAllImages(
+  eligible: EligibleDoc[],
+): Promise<Map<string, { thumbnail: WikiImage; original?: WikiImage }>> {
+  const byLang = new Map<string, EligibleDoc[]>();
+  for (const e of eligible) {
+    const list = byLang.get(e.lang) ?? [];
+    list.push(e);
+    byLang.set(e.lang, list);
   }
 
-  const thumb = wikiImages.thumbnail;
-  const orig = wikiImages.original;
+  type BatchTask = { lang: string; docs: EligibleDoc[] };
+  const tasks: BatchTask[] = [];
+  for (const [lang, docs] of byLang) {
+    for (const c of chunked(docs, MEDIAWIKI_BATCH_SIZE)) {
+      tasks.push({ lang, docs: c });
+    }
+  }
 
-  // Mirror to GCS so we never persist a Wikimedia upstream URL that may
-  // be purged. Same prefix conventions as the seed flow.
+  // Within a language, MediaWiki rate-limits per-IP. Fire all batches in
+  // parallel — 5xx/429 just yields an empty map for that batch and those
+  // docs will roll up as 'no-wiki-match' (retryable on a future run).
+  const results = await Promise.all(
+    tasks.map(async (t) => {
+      const titleToImage = await fetchWikipediaImagesBatch(
+        t.docs.map((d) => d.title),
+        t.lang,
+      );
+      // Map back from title to docId. Multiple docs can share a title
+      // across languages but within a single batch they're unique.
+      const out = new Map<string, { thumbnail: WikiImage; original?: WikiImage }>();
+      for (const d of t.docs) {
+        const img = titleToImage.get(d.title);
+        if (img) out.set(d.id, img);
+      }
+      return out;
+    }),
+  );
+
+  const merged = new Map<string, { thumbnail: WikiImage; original?: WikiImage }>();
+  for (const r of results) for (const [k, v] of r) merged.set(k, v);
+  return merged;
+}
+
+async function mirrorAndWrite(
+  eligible: EligibleDoc,
+  images: { thumbnail: WikiImage; original?: WikiImage },
+): Promise<{ action: Action; detail?: string }> {
+  const thumb = images.thumbnail;
+  const orig = images.original;
+
   const [mirroredThumb, mirroredOrig] = await Promise.all([
     isGcsUrl(thumb.source)
       ? Promise.resolve(thumb.source)
@@ -197,17 +304,15 @@ async function processDoc(docId: string, data: WikiDoc): Promise<ProcessResult> 
   if (thumb.height) updates.imageHeight = thumb.height;
   if (mirroredOrig) updates.originalImageUrl = mirroredOrig;
 
-  // Insert markdown image into content. The seed flow uses the article
-  // title as alt text, so we do the same.
-  const newContent = insertImageMarkdown(data.content ?? '', data.title, mirroredThumb);
-  if (newContent !== (data.content ?? '')) {
+  const newContent = insertImageMarkdown(eligible.content, eligible.title, mirroredThumb);
+  if (newContent !== eligible.content) {
     updates.content = newContent;
   }
 
   if (!DRY) {
-    await db.collection('wikis').doc(docId).update(updates);
+    await db.collection('wikis').doc(eligible.id).update(updates);
   }
-  return { action: 'updated', detail: `${lang}:${data.title} → ${mirroredThumb}` };
+  return { action: 'updated', detail: `${eligible.lang}:${eligible.title} → ${mirroredThumb}` };
 }
 
 function tag(): string {
@@ -232,42 +337,59 @@ async function main(): Promise<void> {
     failed: 0,
   };
   let lastId: string | undefined = START_AFTER;
-  let done = false;
 
-  while (!done) {
+  while (true) {
     let q = db.collection('wikis').orderBy('__name__').limit(PAGE);
     if (lastId) q = q.startAfter(lastId);
     const snap = await q.get();
     if (snap.empty) break;
 
-    for (let i = 0; i < snap.docs.length; i += CONCURRENCY) {
-      const chunk = snap.docs.slice(i, i + CONCURRENCY);
+    // ── Phase 1: classify ──────────────────────────────────────────
+    const eligible: EligibleDoc[] = [];
+    for (const doc of snap.docs) {
+      const data = doc.data() as WikiDoc;
+      const c = classifyDoc({ id: doc.id, data });
+      if ('action' in c) {
+        stats[c.action]++;
+        stats.scanned++;
+      } else {
+        eligible.push(c.eligible);
+      }
+    }
+
+    // ── Phase 2: batched Wikipedia lookup ──────────────────────────
+    const images = eligible.length > 0 ? await fetchAllImages(eligible) : new Map();
+
+    // ── Phase 3: mirror + write, with bounded GCS concurrency ──────
+    const eligibleWithImage = eligible.filter((e) => images.has(e.id));
+    const eligibleNoMatch = eligible.filter((e) => !images.has(e.id));
+    for (const e of eligibleNoMatch) {
+      stats['no-wiki-match']++;
+      stats.scanned++;
+      console.log(`  ✗ ${e.id}  no match: ${e.lang}:${e.title}`);
+    }
+
+    for (let i = 0; i < eligibleWithImage.length; i += CONCURRENCY) {
+      const batch = eligibleWithImage.slice(i, i + CONCURRENCY);
       const results = await Promise.all(
-        chunk.map(async (doc) => {
-          const data = doc.data() as WikiDoc;
+        batch.map(async (e) => {
           try {
-            return await processDoc(doc.id, data);
+            return await mirrorAndWrite(e, images.get(e.id)!);
           } catch (err) {
-            console.error(`[${doc.id}] error:`, (err as Error).message);
+            console.error(`[${e.id}] error:`, (err as Error).message);
             return { action: 'failed' as Action };
           }
         }),
       );
       for (let j = 0; j < results.length; j++) {
         const r = results[j];
-        stats.scanned++;
         stats[r.action]++;
+        stats.scanned++;
         if (r.action === 'updated') {
-          console.log(`  ✓ ${chunk[j].id}  ${r.detail}`);
-        } else if (r.action === 'no-wiki-match') {
-          console.log(`  ✗ ${chunk[j].id}  no match: ${r.detail}`);
+          console.log(`  ✓ ${batch[j].id}  ${r.detail}`);
         } else if (r.action === 'mirror-failed') {
-          console.log(`  ⚠ ${chunk[j].id}  mirror failed: ${r.detail}`);
+          console.log(`  ⚠ ${batch[j].id}  mirror failed: ${r.detail}`);
         }
-      }
-      if (LIMIT && stats.scanned >= LIMIT) {
-        done = true;
-        break;
       }
     }
 
@@ -279,6 +401,7 @@ async function main(): Promise<void> {
         `failed=${stats.failed} lastId=${lastId}`,
     );
 
+    if (LIMIT && stats.scanned >= LIMIT) break;
     if (snap.size < PAGE) break;
   }
 
