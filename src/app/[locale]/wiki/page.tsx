@@ -8,17 +8,14 @@ import {
   hasLocale,
   supportedLocales,
   getTranslations,
-  type Locale,
 } from '@/lib/i18n/server';
 
-export const revalidate = 300;
+// See note in [locale]/page.tsx — Docker build has no Firestore creds,
+// so build-time pre-render would cache an empty "noWikis" state.
+export const dynamic = 'force-dynamic';
 
 type RouteParams = { locale: string };
 type RouteSearch = { q?: string };
-
-export function generateStaticParams(): Array<{ locale: Locale }> {
-  return supportedLocales.map((locale) => ({ locale }));
-}
 
 export async function generateMetadata({
   params,

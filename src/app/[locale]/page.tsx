@@ -10,17 +10,17 @@ import {
   hasLocale,
   supportedLocales,
   getTranslations,
-  type Locale,
 } from '@/lib/i18n/server';
 import { localeHref } from '@/lib/i18n/links';
 
-export const revalidate = 600; // 10 min ISR
+// Render on demand at request time (where Firebase credentials exist) and
+// cache for 60s downstream. We deliberately skip generateStaticParams here
+// — the Docker build environment has no Firestore credentials, so a
+// build-time pre-render would lock in an empty "No wikis yet" HTML for
+// the entire revalidate window after every deploy.
+export const dynamic = 'force-dynamic';
 
 type RouteParams = { locale: string };
-
-export function generateStaticParams(): Array<{ locale: Locale }> {
-  return supportedLocales.map((locale) => ({ locale }));
-}
 
 export async function generateMetadata({
   params,

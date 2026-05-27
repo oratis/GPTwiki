@@ -8,18 +8,14 @@ import {
   hasLocale,
   supportedLocales,
   getTranslations,
-  type Locale,
 } from '@/lib/i18n/server';
 import { localeHref } from '@/lib/i18n/links';
 
-export const revalidate = 600;
+// See note in [locale]/page.tsx — Docker build has no Firestore creds.
+export const dynamic = 'force-dynamic';
 
 type RouteParams = { locale: string };
 type RouteSearch = { tag?: string };
-
-export function generateStaticParams(): Array<{ locale: Locale }> {
-  return supportedLocales.map((locale) => ({ locale }));
-}
 
 export async function generateMetadata({
   params,
