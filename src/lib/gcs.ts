@@ -6,13 +6,21 @@ const GCS_BUCKET = process.env.GCS_WIKI_IMAGES_BUCKET || 'gptwiki-images';
 let _storage: Storage | null = null;
 function getStorage(): Storage {
   if (_storage) return _storage;
-  _storage = new Storage({
-    projectId: process.env.FIREBASE_PROJECT_ID,
-    credentials: {
-      client_email: process.env.FIREBASE_CLIENT_EMAIL,
-      private_key: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    },
-  });
+  // Prefer explicit service-account env vars (Cloud Run injects these).
+  // Fall back to Application Default Credentials so one-off scripts run
+  // from a developer machine work after `gcloud auth application-default
+  // login` — without dragging the service-account JSON onto disk.
+  const projectId = process.env.FIREBASE_PROJECT_ID;
+  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+  const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+  if (clientEmail && privateKey) {
+    _storage = new Storage({
+      projectId,
+      credentials: { client_email: clientEmail, private_key: privateKey },
+    });
+  } else {
+    _storage = new Storage({ projectId });
+  }
   return _storage;
 }
 
