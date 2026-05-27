@@ -120,7 +120,7 @@ async function fetchWikipediaImagesBatch(
   url.searchParams.set('action', 'query');
   url.searchParams.set('format', 'json');
   url.searchParams.set('prop', 'pageimages');
-  url.searchParams.set('piprop', 'thumbnail|original');
+  url.searchParams.set('piprop', 'thumbnail');
   url.searchParams.set('pithumbsize', '640');
   url.searchParams.set('pilimit', String(titles.length));
   url.searchParams.set('titles', titles.join('|'));
@@ -281,16 +281,15 @@ async function mirrorAndWrite(
   images: { thumbnail: WikiImage; original?: WikiImage },
 ): Promise<{ action: Action; detail?: string }> {
   const thumb = images.thumbnail;
-  const orig = images.original;
 
-  const [mirroredThumb, mirroredOrig] = await Promise.all([
-    isGcsUrl(thumb.source)
-      ? Promise.resolve(thumb.source)
-      : mirrorImageToGCS(thumb.source, { prefix: 'wikipedia/thumb' }),
-    orig && !isGcsUrl(orig.source)
-      ? mirrorImageToGCS(orig.source, { prefix: 'wikipedia/orig' })
-      : Promise.resolve(orig?.source ?? null),
-  ]);
+  // Only mirror the thumbnail. `originalImageUrl` is written by the seed
+  // flow but never read by any rendering code — fetching the full-size
+  // image here (often multi-MB and aggressively purged upstream) doubles
+  // the per-wiki cost and roughly doubles the upstream-404 rate for zero
+  // user-visible benefit.
+  const mirroredThumb = isGcsUrl(thumb.source)
+    ? thumb.source
+    : await mirrorImageToGCS(thumb.source, { prefix: 'wikipedia/thumb' });
 
   if (!mirroredThumb) {
     return { action: 'mirror-failed', detail: thumb.source };
@@ -302,7 +301,6 @@ async function mirrorAndWrite(
   };
   if (thumb.width) updates.imageWidth = thumb.width;
   if (thumb.height) updates.imageHeight = thumb.height;
-  if (mirroredOrig) updates.originalImageUrl = mirroredOrig;
 
   const newContent = insertImageMarkdown(eligible.content, eligible.title, mirroredThumb);
   if (newContent !== eligible.content) {
