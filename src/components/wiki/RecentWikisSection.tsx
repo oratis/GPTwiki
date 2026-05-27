@@ -6,11 +6,21 @@ import { useI18n } from '@/lib/i18n/context';
 import WikiCard from '@/components/wiki/WikiCard';
 import type { Wiki } from '@/types';
 
-export default function RecentWikisSection() {
+interface Props {
+  /** Initial batch from the server. When omitted, falls back to fetching client-side. */
+  initialWikis?: Wiki[];
+}
+
+export default function RecentWikisSection({ initialWikis }: Props = {}) {
   const { t } = useI18n();
-  const [wikis, setWikis] = useState<Wiki[]>([]);
-  const [nextCursor, setNextCursor] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [wikis, setWikis] = useState<Wiki[]>(initialWikis ?? []);
+  const [nextCursor, setNextCursor] = useState<number | null>(
+    initialWikis && initialWikis.length > 0
+      ? initialWikis[initialWikis.length - 1].createdAt
+      : null
+  );
+  // If server hydrated us with initial data we're never in the "initial load" state.
+  const [loading, setLoading] = useState(!initialWikis);
   const [loadingMore, setLoadingMore] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
@@ -40,9 +50,10 @@ export default function RecentWikisSection() {
     }
   }, []);
 
+  // Only fetch on mount if the server didn't pre-populate us.
   useEffect(() => {
-    fetchWikis();
-  }, [fetchWikis]);
+    if (!initialWikis) fetchWikis();
+  }, [initialWikis, fetchWikis]);
 
   useEffect(() => {
     if (!sentinelRef.current || nextCursor === null) return;

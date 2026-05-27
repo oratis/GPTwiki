@@ -1,20 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
-import { supportedLocales } from '@/lib/i18n/server';
+import { supportedLocales, defaultLocale } from '@/lib/i18n/server';
 
 const BASE_URL = 'https://gptwiki.net';
-const BATCH_SIZE = 5000;
+const BATCH_SIZE = 2000;
 
 /**
- * Sitemap index + per-page sitemaps.
+ * Sitemap index + per-page wiki sitemaps.
  *
- * Each wiki URL is emitted once per supported locale, with `xhtml:link`
- * alternates tying the language versions together (Google's recommended
- * format — see https://developers.google.com/search/docs/specialized/international/localized-versions#sitemap).
+ * Why the shape it has:
+ *  - Each wiki is emitted ONCE (under the default locale URL) with
+ *    `xhtml:link` alternates for every supported locale. Per Google,
+ *    the alternate annotation only needs to live on one `<url>`
+ *    (https://developers.google.com/search/docs/specialized/international/localized-versions#sitemap).
+ *    Emitting one URL per locale was multiplying output 15x and OOMing
+ *    Cloud Run on every wiki sub-page (all returning 503).
+ *  - Pagination uses `__name__` (Firestore document ID) cursors instead
+ *    of `offset()`. `offset(N)` is O(N) in Firestore — page 79 was
+ *    scanning ~395K docs before yielding anything.
+ *  - The index pre-computes cursors by streaming all wiki IDs once
+ *    (single-field projection, ~8 MB at 400K docs) and caches the
+ *    result in-process for 1h; HTTP `s-maxage` extends that across
+ *    instances via the CDN.
  *
- *   GET /api/sitemap             → sitemap index
- *   GET /api/sitemap?page=static → static pages (home, wiki list, browse, tags…)
- *   GET /api/sitemap?page=0..N   → 5000 wikis per page
+ *   GET /api/sitemap                     → sitemap index
+ *   GET /api/sitemap?page=static         → home, wiki list, browse, tag pages
+ *   GET /api/sitemap?page=<docId|0>      → up to BATCH_SIZE wikis starting after cursor
  */
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -23,20 +34,67 @@ export async function GET(req: NextRequest) {
   return generateSitemapIndex();
 }
 
+// ─── In-process cursor cache ───────────────────────────────────────────────
+
+type Checkpoint = { startAfter: string | null };
+type CursorCache = { computedAt: number; checkpoints: Checkpoint[] };
+
+const CURSOR_TTL_MS = 60 * 60 * 1000; // 1h
+let _cursorCache: CursorCache | null = null;
+
+async function getCheckpoints(): Promise<Checkpoint[]> {
+  const now = Date.now();
+  if (_cursorCache && now - _cursorCache.computedAt < CURSOR_TTL_MS) {
+    return _cursorCache.checkpoints;
+  }
+
+  // Stream all wiki IDs ordered by document ID, picking every BATCH_SIZE-th
+  // ID as a cursor boundary. We use `select()` with no args to fetch
+  // document references only (no field data).
+  const checkpoints: Checkpoint[] = [{ startAfter: null }];
+  const stream = db.collection('wikis').orderBy('__name__').select().stream();
+  let count = 0;
+  for await (const doc of stream as AsyncIterable<FirebaseFirestore.QueryDocumentSnapshot>) {
+    count++;
+    if (count % BATCH_SIZE === 0) {
+      checkpoints.push({ startAfter: doc.id });
+    }
+  }
+  // The last checkpoint may have nothing after it; drop it if its cursor
+  // would yield zero docs (i.e., total is an exact multiple of BATCH_SIZE).
+  if (count % BATCH_SIZE === 0 && checkpoints.length > 1) {
+    checkpoints.pop();
+  }
+
+  _cursorCache = { computedAt: now, checkpoints };
+  return checkpoints;
+}
+
+// ─── Index ─────────────────────────────────────────────────────────────────
+
 async function generateSitemapIndex() {
-  const countSnap = await db.collection('wikis').count().get();
-  const total = countSnap.data().count;
-  const pages = Math.ceil(total / BATCH_SIZE);
+  let checkpoints: Checkpoint[];
+  try {
+    checkpoints = await getCheckpoints();
+  } catch (err) {
+    console.error('Sitemap checkpoint scan failed:', err);
+    // Fall back to a static-only index rather than 500 — robots still gets
+    // *something* and Google will retry later.
+    checkpoints = [];
+  }
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
   xml += `  <sitemap><loc>${BASE_URL}/api/sitemap?page=static</loc></sitemap>\n`;
-  for (let i = 0; i < pages; i++) {
-    xml += `  <sitemap><loc>${BASE_URL}/api/sitemap?page=${i}</loc></sitemap>\n`;
+  for (const cp of checkpoints) {
+    const pageKey = cp.startAfter ?? '0';
+    xml += `  <sitemap><loc>${BASE_URL}/api/sitemap?page=${encodeURIComponent(pageKey)}</loc></sitemap>\n`;
   }
   xml += '</sitemapindex>';
   return xmlResponse(xml);
 }
+
+// ─── Sub-pages ─────────────────────────────────────────────────────────────
 
 async function generateSitemapPage(pageKey: string) {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -53,36 +111,35 @@ async function generateSitemapPage(pageKey: string) {
       xml += urlWithAlternates(path, freq, prio);
     }
 
-    // Non-localized singletons (feed, RSS)
     xml += urlNoLocale(`${BASE_URL}/api/feed`, 'daily', 0.3);
 
-    // Tag browse pages, localized
+    // Tag landing pages now live at /tags/[tag] (real SSR routes) instead
+    // of /browse?tag=... query shells.
     const tags = [
       'science', 'technology', 'history', 'geography', 'arts', 'medicine',
       'sports', 'politics', 'nature', 'philosophy', 'economics', 'engineering',
-      'mathematics',
+      'mathematics', 'literature', 'culture', 'religion', 'biology', 'physics',
+      'art', 'biography', 'architecture', 'design', 'music', 'astronomy',
     ];
     for (const tag of tags) {
-      xml += urlWithAlternates(`/browse?tag=${encodeURIComponent(tag)}`, 'weekly', 0.6);
+      xml += urlWithAlternates(`/tags/${encodeURIComponent(tag)}`, 'weekly', 0.6);
     }
   } else {
-    const page = parseInt(pageKey, 10);
-    if (Number.isNaN(page)) {
-      return new NextResponse('Invalid page', { status: 400 });
-    }
-    const offset = page * BATCH_SIZE;
-    const snapshot = await db
-      .collection('wikis')
-      .orderBy('createdAt', 'desc')
-      .offset(offset)
-      .limit(BATCH_SIZE)
-      .select('createdAt')
-      .get();
-
-    for (const doc of snapshot.docs) {
-      const data = doc.data();
-      const lastmod = new Date(data.createdAt).toISOString();
-      xml += urlWithAlternates(`/wiki/${doc.id}`, 'weekly', 0.7, lastmod);
+    try {
+      let q = db.collection('wikis').orderBy('__name__');
+      if (pageKey !== '0') {
+        q = q.startAfter(pageKey);
+      }
+      const snapshot = await q.limit(BATCH_SIZE).select('createdAt', 'updatedAt').get();
+      for (const doc of snapshot.docs) {
+        const data = doc.data() as { createdAt?: number; updatedAt?: number };
+        const ts = data.updatedAt ?? data.createdAt;
+        const lastmod = ts ? new Date(ts).toISOString() : undefined;
+        xml += urlWithAlternates(`/wiki/${doc.id}`, 'weekly', 0.7, lastmod);
+      }
+    } catch (err) {
+      console.error('Sitemap page query failed:', { pageKey, err });
+      return new NextResponse('Sitemap page generation failed', { status: 500 });
     }
   }
 
@@ -90,25 +147,26 @@ async function generateSitemapPage(pageKey: string) {
   return xmlResponse(xml);
 }
 
+// ─── XML helpers ───────────────────────────────────────────────────────────
+
 /**
- * Emit one <url> block for each supported locale, each with xhtml:link
- * alternates pointing at every sibling locale (including x-default).
+ * Emit a single `<url>` for `path`, using the default locale as the loc and
+ * attaching xhtml:link alternates for every supported locale + x-default.
+ * This is Google's documented format and yields 15× less XML than the
+ * one-url-per-locale pattern.
  */
 function urlWithAlternates(path: string, freq: string, prio: number, lastmod?: string): string {
-  let block = '';
   const normalized = path === '' ? '' : path.startsWith('/') ? path : `/${path}`;
-  for (const loc of supportedLocales) {
-    const loc_url = `${BASE_URL}/${loc}${normalized}`;
-    block += `  <url>\n    <loc>${escapeXml(loc_url)}</loc>\n`;
-    if (lastmod) block += `    <lastmod>${lastmod}</lastmod>\n`;
-    block += `    <changefreq>${freq}</changefreq>\n    <priority>${prio}</priority>\n`;
-    for (const alt of supportedLocales) {
-      const altUrl = `${BASE_URL}/${alt}${normalized}`;
-      block += `    <xhtml:link rel="alternate" hreflang="${alt}" href="${escapeXml(altUrl)}"/>\n`;
-    }
-    block += `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(`${BASE_URL}/en${normalized}`)}"/>\n`;
-    block += `  </url>\n`;
+  const canonical = `${BASE_URL}/${defaultLocale}${normalized}`;
+  let block = `  <url>\n    <loc>${escapeXml(canonical)}</loc>\n`;
+  if (lastmod) block += `    <lastmod>${lastmod}</lastmod>\n`;
+  block += `    <changefreq>${freq}</changefreq>\n    <priority>${prio}</priority>\n`;
+  for (const alt of supportedLocales) {
+    const altUrl = `${BASE_URL}/${alt}${normalized}`;
+    block += `    <xhtml:link rel="alternate" hreflang="${alt}" href="${escapeXml(altUrl)}"/>\n`;
   }
+  block += `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(canonical)}"/>\n`;
+  block += `  </url>\n`;
   return block;
 }
 
