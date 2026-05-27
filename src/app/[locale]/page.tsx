@@ -66,9 +66,11 @@ export default async function HomePage({
   // Fetch in parallel on the server so crawlers see populated HTML.
   // Failures fall back to empty arrays — the page renders without that
   // section rather than 500-ing on a transient Firestore error.
+  // Filter by the current locale so /en shows English wikis, /zh Chinese,
+  // etc. (with fallback to unfiltered if the composite index is missing).
   const [popular, recent] = await Promise.all([
-    getPopularWikis(9).catch(() => []),
-    getRecentWikis(12).catch(() => []),
+    getPopularWikis(9, locale).catch(() => []),
+    getRecentWikis(12, locale).catch(() => []),
   ]);
 
   return (

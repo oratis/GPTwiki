@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function RecentWikisSection({ initialWikis }: Props = {}) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [wikis, setWikis] = useState<Wiki[]>(initialWikis ?? []);
   const [nextCursor, setNextCursor] = useState<number | null>(
     initialWikis && initialWikis.length > 0
@@ -33,7 +33,7 @@ export default function RecentWikisSection({ initialWikis }: Props = {}) {
     }
 
     try {
-      const params = new URLSearchParams({ limit: '12' });
+      const params = new URLSearchParams({ limit: '12', lang: locale });
       if (cursor !== undefined) {
         params.set('cursor', String(cursor));
       }
@@ -48,7 +48,7 @@ export default function RecentWikisSection({ initialWikis }: Props = {}) {
       setLoading(false);
       setLoadingMore(false);
     }
-  }, []);
+  }, [locale]);
 
   // Only fetch on mount if the server didn't pre-populate us.
   useEffect(() => {
