@@ -1,6 +1,6 @@
 import { db } from './firebase';
 import type { QueryDocumentSnapshot } from 'firebase-admin/firestore';
-import type { Wiki, UserProfile, UserApiKeys } from '@/types';
+import type { Wiki, UserProfile, PublicUserProfile, UserApiKeys } from '@/types';
 
 /** A wiki "has a header image" when imageUrl is a non-empty string. */
 function hasHeaderImage(data: FirebaseFirestore.DocumentData): boolean {
@@ -203,6 +203,21 @@ export async function getUserProfile(id: string): Promise<UserProfile | null> {
   const doc = await db.collection('users').doc(id).get();
   if (!doc.exists) return null;
   return { id: doc.id, ...doc.data() } as UserProfile;
+}
+
+// Project a full UserProfile down to fields safe for unauthenticated clients.
+// Allowlist (not denylist) so new private fields don't leak by default.
+export function toPublicUserProfile(p: UserProfile): PublicUserProfile {
+  return {
+    id: p.id,
+    name: p.name,
+    image: p.image,
+    provider: p.provider,
+    wikisCount: p.wikisCount,
+    createdAt: p.createdAt,
+    followersCount: p.followersCount,
+    followingCount: p.followingCount,
+  };
 }
 
 // ─── API Keys ───

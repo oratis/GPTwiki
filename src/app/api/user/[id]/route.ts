@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getUserProfile } from '@/lib/search';
+import { getUserProfile, toPublicUserProfile } from '@/lib/search';
 
 export async function GET(
   _req: NextRequest,
@@ -9,7 +9,7 @@ export async function GET(
     const { id } = await params;
     const user = await getUserProfile(id);
     if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 });
-    return NextResponse.json(user);
+    return NextResponse.json(toPublicUserProfile(user));
   } catch (error) {
     console.error('User API error:', error);
     return NextResponse.json({ error: 'Failed to fetch user' }, { status: 500 });
