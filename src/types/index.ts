@@ -91,6 +91,14 @@ export interface UserProfile {
   emailNotificationsDisabled?: boolean;
 }
 
+// Safe-to-expose subset of UserProfile. Anything sent to an unauthenticated
+// client (e.g. /api/user/[id], /api/leaderboard) must go through this so that
+// email, apiKeys, and notification prefs never leak.
+export type PublicUserProfile = Pick<
+  UserProfile,
+  'id' | 'name' | 'image' | 'provider' | 'wikisCount' | 'createdAt' | 'followersCount' | 'followingCount'
+>;
+
 export interface Follow {
   id: string;          // `${followerId}_${followeeId}`
   followerId: string;
