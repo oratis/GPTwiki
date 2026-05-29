@@ -1,7 +1,48 @@
 import { Storage } from '@google-cloud/storage';
 import { createHash } from 'node:crypto';
+import { lookup } from 'node:dns/promises';
+import { isIP } from 'node:net';
 
 const GCS_BUCKET = process.env.GCS_WIKI_IMAGES_BUCKET || 'gptwiki-images';
+
+// SSRF guard: reject private/loopback/link-local/metadata targets so this
+// image-mirror primitive can't be pointed at internal services or the cloud
+// metadata endpoint. Allows any public image host (e.g. upload.wikimedia.org).
+function isPrivateIp(ip: string): boolean {
+  if (isIP(ip) === 4) {
+    const [a, b] = ip.split('.').map(Number);
+    if (a === 0 || a === 10 || a === 127) return true;
+    if (a === 169 && b === 254) return true; // link-local + cloud metadata
+    if (a === 172 && b >= 16 && b <= 31) return true;
+    if (a === 192 && b === 168) return true;
+    if (a === 100 && b >= 64 && b <= 127) return true; // CGNAT
+    return false;
+  }
+  const lower = ip.toLowerCase();
+  if (lower === '::1') return true; // loopback
+  if (lower.startsWith('fe80')) return true; // link-local
+  if (lower.startsWith('fc') || lower.startsWith('fd')) return true; // ULA
+  if (lower.startsWith('::ffff:')) return isPrivateIp(lower.replace('::ffff:', ''));
+  return false;
+}
+
+async function isSafePublicHttpUrl(url: string): Promise<boolean> {
+  let u: URL;
+  try {
+    u = new URL(url);
+  } catch {
+    return false;
+  }
+  if (u.protocol !== 'http:' && u.protocol !== 'https:') return false;
+  const host = u.hostname;
+  if (isIP(host)) return !isPrivateIp(host);
+  try {
+    const addrs = await lookup(host, { all: true });
+    return addrs.length > 0 && addrs.every((a) => !isPrivateIp(a.address));
+  } catch {
+    return false;
+  }
+}
 
 let _storage: Storage | null = null;
 function getStorage(): Storage {
@@ -96,6 +137,13 @@ export async function mirrorImageToGCS(
     }
   } catch {
     // Treat probe error as miss — fall through to upstream fetch.
+  }
+
+  // Block SSRF targets before making any upstream request (cache hits above
+  // never reach here, so public images pay no DNS cost on the hot path).
+  if (!(await isSafePublicHttpUrl(url))) {
+    console.warn('[mirrorImageToGCS] blocked non-public/unsafe URL:', url);
+    return null;
   }
 
   // No cache hit: fetch from upstream, retry on 429 / transient network.
