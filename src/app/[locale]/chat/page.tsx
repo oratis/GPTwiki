@@ -6,11 +6,16 @@ export const metadata = {
   title: 'New Conversation',
 };
 
-export default async function ChatPage() {
+export default async function ChatPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   const session = await auth();
 
   if (!session?.user) {
-    redirect('/login');
+    redirect(`/${locale}/login`);
   }
 
   return <ChatInterface />;

@@ -6,6 +6,7 @@ import { Send, RefreshCw, FilePlus, Loader2 } from 'lucide-react';
 import type { AIModel, Message } from '@/types';
 import { generateId } from '@/lib/utils';
 import { useI18n } from '@/lib/i18n/context';
+import { localeHref } from '@/lib/i18n/links';
 import MessageBubble from '@/components/chat/MessageBubble';
 
 interface WikiContinueChatProps {
@@ -23,7 +24,7 @@ export default function WikiContinueChat({
   isAuthor,
   onWikiUpdated,
 }: WikiContinueChatProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const router = useRouter();
   const [newMessages, setNewMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -135,7 +136,7 @@ export default function WikiContinueChat({
 
       if (!res.ok) throw new Error('Create failed');
       const data = await res.json();
-      router.push(`/wiki/${data.id}`);
+      router.push(localeHref(locale, `/wiki/${data.id}`));
     } catch (error) {
       console.error('Create wiki error:', error);
       alert('Failed to create wiki');

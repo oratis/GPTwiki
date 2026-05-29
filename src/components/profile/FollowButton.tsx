@@ -1,8 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useSession, signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { UserPlus, UserCheck, Loader2 } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/context';
+import { localeHref } from '@/lib/i18n/links';
 
 interface Props {
   userId: string;
@@ -16,6 +19,8 @@ interface Props {
  */
 export default function FollowButton({ userId, initialFollowersCount = 0 }: Props) {
   const { data: session, status } = useSession();
+  const { locale } = useI18n();
+  const router = useRouter();
   const [following, setFollowing] = useState<boolean | null>(null);
   const [count, setCount] = useState(initialFollowersCount);
   const [pending, setPending] = useState(false);
@@ -43,7 +48,7 @@ export default function FollowButton({ userId, initialFollowersCount = 0 }: Prop
 
   const toggle = async () => {
     if (status !== 'authenticated') {
-      signIn();
+      router.push(localeHref(locale, '/login'));
       return;
     }
     if (following === null || pending) return;

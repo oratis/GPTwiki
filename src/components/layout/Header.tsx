@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from '@/components/LocaleLink';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import { BookOpen, MessageSquarePlus, LogIn, LogOut, User, Folder, Heart } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -88,13 +88,13 @@ export default function Header() {
               </div>
             </>
           ) : (
-            <button
-              onClick={() => signIn()}
+            <Link
+              href="/login"
               className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
             >
               <LogIn className="h-4 w-4" />
               {t('header.signIn')}
-            </button>
+            </Link>
           )}
         </nav>
       </div>
