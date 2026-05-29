@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X, BookPlus, Loader2 } from 'lucide-react';
 import type { Message, AIModel } from '@/types';
 import { useI18n } from '@/lib/i18n/context';
@@ -20,6 +20,16 @@ export default function PublishDialog({ open, onClose, messages, model }: Publis
   const [publishing, setPublishing] = useState(false);
   const [published, setPublished] = useState(false);
   const [wikiId, setWikiId] = useState('');
+
+  // Close on Escape for keyboard users.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [open, onClose]);
 
   if (!open) return null;
 
@@ -55,12 +65,22 @@ export default function PublishDialog({ open, onClose, messages, model }: Publis
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="publish-dialog-title"
+        className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl"
+      >
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900">
+          <h2 id="publish-dialog-title" className="text-lg font-semibold text-gray-900">
             {published ? t('publish.success') : t('publish.title')}
           </h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="text-gray-400 hover:text-gray-600"
+          >
             <X className="h-5 w-5" />
           </button>
         </div>
