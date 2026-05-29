@@ -8,7 +8,7 @@ import { useI18n } from '@/lib/i18n/context';
 import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Header() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const { t } = useI18n();
 
   return (
@@ -49,7 +49,9 @@ export default function Header() {
             </span>
           </Link>
 
-          {session ? (
+          {/* Don't show an auth control until the session resolves —
+              otherwise cached/ISR pages flash "Sign In" to logged-in users. */}
+          {status === 'loading' ? null : session ? (
             <>
               <Link
                 href="/chat"
