@@ -20,12 +20,18 @@ export default function robots(): MetadataRoute.Robots {
         ],
         disallow: [
           '/api/',
+          // Pages live under /{locale}/... so disallow both the bare path
+          // (the redirect source) and the localized variants for all locales.
           '/login',
+          '/*/login',
           '/profile/',
+          '/*/profile/',
           '/chat',
-          // Search-result variants shouldn't be indexed — they fragment
-          // ranking across many low-value URLs.
-          '/*?q=*',
+          '/*/chat',
+          // Note: search-result pages (?q=) are kept crawlable here on purpose
+          // and excluded via a page-level `noindex` robots meta instead — a
+          // robots.txt disallow would block crawling and prevent Google from
+          // ever seeing that noindex directive.
         ],
       },
     ],
