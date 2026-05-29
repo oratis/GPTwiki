@@ -49,7 +49,7 @@ export default function ApiKeyManager() {
       setInputValue('');
       setMessage({ text: t('apiKeys.saved'), type: 'success' });
     } catch {
-      setMessage({ text: 'Failed to save API key', type: 'error' });
+      setMessage({ text: t('errors.saveKeyFailed'), type: 'error' });
     } finally {
       setSaving(false);
     }
@@ -71,7 +71,7 @@ export default function ApiKeyManager() {
       setMaskedKeys((prev) => ({ ...prev, [provider]: null }));
       setMessage({ text: t('apiKeys.removed'), type: 'success' });
     } catch {
-      setMessage({ text: 'Failed to remove API key', type: 'error' });
+      setMessage({ text: t('errors.removeKeyFailed'), type: 'error' });
     } finally {
       setSaving(false);
     }

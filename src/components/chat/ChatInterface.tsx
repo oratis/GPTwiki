@@ -206,6 +206,7 @@ export default function ChatInterface() {
           <button
             onClick={handleSend}
             disabled={!input.trim() || loading}
+            aria-label={t('chat.send')}
             className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 transition-colors"
           >
             <Send className="h-5 w-5" />

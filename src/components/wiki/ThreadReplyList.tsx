@@ -81,7 +81,7 @@ export default function ThreadReplyList({ wikiId, threadCount = 0 }: ThreadReply
       setShowCompose(false);
     } catch (error) {
       console.error('Post thread error:', error);
-      alert('Failed to post reply');
+      alert(t('errors.replyFailed'));
     } finally {
       setPosting(false);
     }
@@ -176,6 +176,7 @@ export default function ThreadReplyList({ wikiId, threadCount = 0 }: ThreadReply
             <button
               onClick={handlePost}
               disabled={!question.trim() || posting}
+              aria-label={t('chat.send')}
               className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
             >
               {posting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}

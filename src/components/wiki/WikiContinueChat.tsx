@@ -110,7 +110,7 @@ export default function WikiContinueChat({
       onWikiUpdated();
     } catch (error) {
       console.error('Update wiki error:', error);
-      alert('Failed to update wiki');
+      alert(t('errors.updateWikiFailed'));
     } finally {
       setUpdating(false);
     }
@@ -139,7 +139,7 @@ export default function WikiContinueChat({
       router.push(localeHref(locale, `/wiki/${data.id}`));
     } catch (error) {
       console.error('Create wiki error:', error);
-      alert('Failed to create wiki');
+      alert(t('errors.createWikiFailed'));
     } finally {
       setCreating(false);
     }
@@ -180,6 +180,7 @@ export default function WikiContinueChat({
         <button
           onClick={handleSend}
           disabled={!input.trim() || loading}
+          aria-label={t('chat.send')}
           className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
         >
           {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
