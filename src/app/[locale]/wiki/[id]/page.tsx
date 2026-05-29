@@ -53,6 +53,13 @@ export async function generateMetadata({
     wiki.summary || (wiki.content?.replace(/[#*`_[\]]/g, '').slice(0, 200) ?? '');
   const canonical = `https://gptwiki.net/${locale}/wiki/${id}`;
 
+  // The OG route runs on the edge and can't read Firestore, so pass the
+  // title/subtitle directly instead of an id it would ignore (which made
+  // every wiki share the same generic card).
+  const ogImage = `/api/og?title=${encodeURIComponent(wiki.title)}&subtitle=${encodeURIComponent(
+    description.slice(0, 120)
+  )}`;
+
   // hreflang alternates — same wiki ID across all locales
   const languages: Record<string, string> = {};
   for (const loc of supportedLocales) languages[loc] = `https://gptwiki.net/${loc}/wiki/${id}`;
@@ -74,13 +81,13 @@ export async function generateMetadata({
       modifiedTime: new Date(wiki.updatedAt).toISOString(),
       authors: [wiki.authorName],
       tags: wiki.tags,
-      images: [`/api/og?id=${id}`],
+      images: [ogImage],
     },
     twitter: {
       card: 'summary_large_image',
       title: wiki.title,
       description,
-      images: [`/api/og?id=${id}`],
+      images: [ogImage],
     },
   };
 }
@@ -110,7 +117,9 @@ function buildJsonLd(
       name: 'GPTwiki',
       url: 'https://gptwiki.net',
     },
-    image: `https://gptwiki.net/api/og?id=${id}`,
+    image: `https://gptwiki.net/api/og?title=${encodeURIComponent(
+      wiki.title
+    )}&subtitle=${encodeURIComponent((wiki.summary || '').slice(0, 120))}`,
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     inLanguage: (wiki as { language?: string }).language || locale,
     interactionStatistic: {
