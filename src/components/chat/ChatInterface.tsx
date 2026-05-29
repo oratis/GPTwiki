@@ -96,10 +96,6 @@ export default function ChatInterface() {
         setMessages([...newMessages, { ...assistantMsg }]);
       }
 
-      // Auto-show publish dialog after first complete exchange
-      if (newMessages.length === 1) {
-        setTimeout(() => setShowPublish(true), 500);
-      }
     } catch (error) {
       console.error('Chat error:', error);
       const errorMsg: Message = {
@@ -129,7 +125,7 @@ export default function ChatInterface() {
         {messages.length >= 2 && !loading && (
           <button
             onClick={() => setShowPublish(true)}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 transition-colors animate-pulse hover:animate-none"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 transition-colors motion-safe:animate-pulse hover:animate-none"
           >
             <BookPlus className="h-4 w-4" />
             {t('chat.publishWiki')}
