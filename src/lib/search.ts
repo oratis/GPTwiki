@@ -1,5 +1,5 @@
 import { db } from './firebase';
-import type { QueryDocumentSnapshot } from 'firebase-admin/firestore';
+import { FieldValue, type QueryDocumentSnapshot } from 'firebase-admin/firestore';
 import type { Wiki, UserProfile, PublicUserProfile, UserApiKeys } from '@/types';
 
 /** A wiki "has a header image" when imageUrl is a non-empty string. */
@@ -153,16 +153,24 @@ function isMissingIndexError(err: unknown): boolean {
   return e.code === 9 || (typeof e.message === 'string' && e.message.includes('FAILED_PRECONDITION'));
 }
 
+// Pure read — never mutates. View counting is done explicitly via
+// incrementWikiViews() so reads from metadata/API/notification paths don't
+// inflate the count (it previously wrote on every read, and the wiki page
+// read twice, double-counting every view).
 export async function getWikiById(id: string): Promise<Wiki | null> {
   const doc = await db.collection('wikis').doc(id).get();
   if (!doc.exists) return null;
-
-  // Increment views
-  await doc.ref.update({
-    views: (doc.data()!.views || 0) + 1,
-  });
-
   return { id: doc.id, ...doc.data() } as Wiki;
+}
+
+// Atomic, fire-and-forget view increment. Swallows errors so a failed write
+// never breaks page rendering.
+export async function incrementWikiViews(id: string): Promise<void> {
+  try {
+    await db.collection('wikis').doc(id).update({ views: FieldValue.increment(1) });
+  } catch (e) {
+    console.error('Failed to increment wiki views:', e);
+  }
 }
 
 export async function createWiki(
