@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Code, Check, Copy } from 'lucide-react';
 
 interface Props {
@@ -14,6 +14,16 @@ interface Props {
 export default function EmbedCodeButton({ wikiId }: Props) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  // Close on Escape for keyboard users.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [open]);
 
   const snippet = `<iframe
   src="https://gptwiki.net/embed/${wikiId}"
@@ -52,10 +62,15 @@ export default function EmbedCodeButton({ wikiId }: Props) {
           onClick={() => setOpen(false)}
         >
           <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="embed-dialog-title"
             className="w-full max-w-xl rounded-2xl bg-white p-6 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="mb-2 text-lg font-semibold text-gray-900">Embed this wiki</h3>
+            <h3 id="embed-dialog-title" className="mb-2 text-lg font-semibold text-gray-900">
+              Embed this wiki
+            </h3>
             <p className="mb-4 text-sm text-gray-600">
               Paste this snippet into any blog or forum to show a preview card linking
               back to GPTwiki.
