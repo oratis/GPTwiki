@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
 import { mirrorImageToGCS } from '@/lib/gcs';
-
-const SEED_SECRET = process.env.AUTH_SECRET;
+import { isAuthorizedSeedRequest } from '@/lib/seed-auth';
 
 const WIKI_API = (lang: string) =>
   `https://${lang}.wikipedia.org/w/api.php`;
@@ -278,10 +277,7 @@ async function storeArticles(lang: string, articles: WikiArticle[]): Promise<num
  * This is 10-20x faster than the REST API approach.
  */
 export async function POST(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const secret = searchParams.get('secret');
-
-  if (secret !== SEED_SECRET) {
+  if (!isAuthorizedSeedRequest(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -404,10 +400,7 @@ export async function POST(req: NextRequest) {
  * GET /api/seed/wikipedia?secret=xxx
  */
 export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const secret = searchParams.get('secret');
-
-  if (secret !== SEED_SECRET) {
+  if (!isAuthorizedSeedRequest(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

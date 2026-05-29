@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
-
-const SEED_SECRET = process.env.AUTH_SECRET;
+import { isAuthorizedSeedRequest } from '@/lib/seed-auth';
 
 const entries = [
   { title: 'JavaScript', question: 'What is JavaScript?', content: '# JavaScript\n\nJavaScript is a high-level, interpreted programming language that conforms to the ECMAScript specification. It is one of the core technologies of the World Wide Web.\n\n## Key Features\n\n- **Dynamic typing** - Variables are not bound to a specific data type\n- **First-class functions** - Functions can be assigned to variables, passed as arguments\n- **Prototype-based OOP** - Objects can inherit directly from other objects\n- **Event-driven** - Code execution triggered by events\n- **Asynchronous programming** - Promises and async/await\n\n## Modern JavaScript (ES6+)\n\n- Arrow functions, template literals, destructuring\n- Modules (import/export), classes\n- let/const, spread/rest operators\n\n## Runtimes\n\n- Browser (V8, SpiderMonkey), Node.js, Deno, Bun', summary: 'JavaScript is a high-level programming language and one of the core technologies of the World Wide Web.', tags: ['javascript', 'programming', 'web development'] },
@@ -23,10 +22,7 @@ const entries = [
 ];
 
 export async function POST(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const secret = searchParams.get('secret');
-
-  if (secret !== SEED_SECRET) {
+  if (!isAuthorizedSeedRequest(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
