@@ -7,57 +7,92 @@ function hasHeaderImage(data: FirebaseFirestore.DocumentData): boolean {
   return typeof data.imageUrl === 'string' && data.imageUrl.trim().length > 0;
 }
 
+// Common words carry no search signal and — because the old substring match
+// did `title.includes(kw)` — caused "the"/"is"/"what" to match nearly every
+// article (e.g. a "photic sneeze reflex" query surfaced "The Roche Limit").
+const SEARCH_STOPWORDS = new Set([
+  'the', 'a', 'an', 'and', 'or', 'but', 'of', 'to', 'in', 'on', 'at', 'for',
+  'is', 'are', 'was', 'were', 'be', 'been', 'being', 'am', 'as', 'by', 'from',
+  'with', 'about', 'into', 'than', 'then', 'this', 'that', 'these', 'those',
+  'it', 'its', 'i', 'you', 'he', 'she', 'we', 'they', 'do', 'does', 'did',
+  'can', 'could', 'would', 'should', 'will', 'what', 'who', 'whom', 'whose',
+  'which', 'how', 'why', 'when', 'where', 'there', 'here', 'my', 'your',
+]);
+
+function tokenize(s: string): string[] {
+  return s
+    .toLowerCase()
+    .split(/\s+/)
+    .map((t) => t.replace(/[^\p{L}\p{N}]+/gu, ''))
+    .filter(Boolean);
+}
+
+/**
+ * Keyword search over wikis, ranked by relevance.
+ *
+ * NOTE: this is not a full-text index — it gathers candidates from exact tag
+ * matches plus a bounded window of recent docs, then scores them in memory.
+ * Recall across all ~280k articles still needs a dedicated index
+ * (Typesense/Algolia, or a tokenized keyword array on each doc); see #14.
+ */
 export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
   if (!query.trim()) return [];
 
-  const keywords = query
-    .toLowerCase()
-    .split(/\s+/)
-    .filter((w) => w.length > 1);
-
+  const tokens = tokenize(query).filter((w) => w.length > 1);
+  // Drop stopwords for signal; if the query is *only* stopwords, fall back to
+  // the raw tokens so we still return something rather than nothing.
+  let keywords = tokens.filter((w) => !SEARCH_STOPWORDS.has(w));
+  if (keywords.length === 0) keywords = tokens;
   if (keywords.length === 0) return [];
+  const phrase = keywords.join(' ');
 
-  // Search by tags first
-  const tagResults = await db
+  // Candidate set: exact tag matches (high precision) + a recent-doc pool for
+  // title/question substring hits. De-duplicated by id.
+  const candidates = new Map<string, FirebaseFirestore.DocumentData>();
+
+  const tagSnap = await db
     .collection('wikis')
     .where('tags', 'array-contains-any', keywords.slice(0, 10))
-    .limit(limit)
+    .limit(50)
     .get();
+  tagSnap.docs.forEach((doc) => candidates.set(doc.id, doc.data()));
 
-  const wikis: Wiki[] = [];
-  const seenIds = new Set<string>();
-
-  tagResults.docs.forEach((doc) => {
-    if (!seenIds.has(doc.id)) {
-      seenIds.add(doc.id);
-      wikis.push({ id: doc.id, ...doc.data() } as Wiki);
-    }
+  const recentSnap = await db
+    .collection('wikis')
+    .orderBy('createdAt', 'desc')
+    .limit(150)
+    .get();
+  recentSnap.docs.forEach((doc) => {
+    if (!candidates.has(doc.id)) candidates.set(doc.id, doc.data());
   });
 
-  // If not enough results, do a title-based search
-  if (wikis.length < limit) {
-    const allWikis = await db
-      .collection('wikis')
-      .orderBy('createdAt', 'desc')
-      .limit(100)
-      .get();
+  // Score each candidate: title hits weigh most, then exact tag, then partial
+  // tag / question. Counting distinct keyword hits ranks focused matches above
+  // ones that only share an incidental word.
+  const scored: { id: string; data: FirebaseFirestore.DocumentData; score: number }[] = [];
+  for (const [id, data] of candidates) {
+    const title = (data.title || '').toLowerCase();
+    const question = (data.question || '').toLowerCase();
+    const tags: string[] = (data.tags || []).map((t: string) => t.toLowerCase());
 
-    allWikis.docs.forEach((doc) => {
-      if (seenIds.has(doc.id)) return;
-      const data = doc.data();
-      const titleLower = (data.title || '').toLowerCase();
-      const questionLower = (data.question || '').toLowerCase();
-      const matches = keywords.some(
-        (kw) => titleLower.includes(kw) || questionLower.includes(kw)
-      );
-      if (matches && wikis.length < limit) {
-        seenIds.add(doc.id);
-        wikis.push({ id: doc.id, ...data } as Wiki);
-      }
-    });
+    let score = 0;
+    for (const kw of keywords) {
+      if (title.includes(kw)) score += 3;
+      if (tags.includes(kw)) score += 2;
+      else if (tags.some((t) => t.includes(kw))) score += 1;
+      if (question.includes(kw)) score += 1;
+    }
+    // Whole-phrase title match is the strongest signal.
+    if (keywords.length > 1 && title.includes(phrase)) score += 4;
+
+    if (score > 0) scored.push({ id, data, score });
   }
 
-  return wikis;
+  scored.sort(
+    (a, b) => b.score - a.score || (b.data.views || 0) - (a.data.views || 0)
+  );
+
+  return scored.slice(0, limit).map(({ id, data }) => ({ id, ...data } as Wiki));
 }
 
 /**
