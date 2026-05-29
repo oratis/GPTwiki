@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
       // GCS bucket holding Seedream-generated wiki imagery
       { protocol: "https", hostname: "storage.googleapis.com" },
     ],
+    // Prefer AVIF (falls back to WebP) for the large 2K hero images.
+    formats: ["image/avif", "image/webp"],
+    // GCS wiki images live at content-hashed, immutable paths, so the
+    // optimizer can cache aggressively instead of re-fetching/re-encoding.
+    minimumCacheTTL: 2678400, // 31 days
+    // Required in Next 16. No component requests a non-default quality, so
+    // the single allowed value keeps the optimizer surface minimal.
+    qualities: [75],
   },
   async headers() {
     return [
