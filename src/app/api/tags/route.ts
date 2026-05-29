@@ -1,9 +1,10 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getAllTags } from '@/lib/search';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const tags = await getAllTags();
+    const lang = new URL(req.url).searchParams.get('lang') || undefined;
+    const tags = await getAllTags(lang);
     return NextResponse.json({ tags });
   } catch (error) {
     console.error('Tags error:', error);

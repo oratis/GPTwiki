@@ -281,24 +281,39 @@ export async function getTopContributors(limit = 20): Promise<UserProfile[]> {
 
 // ─── Tags / Categories ───
 
-export async function getAllTags(): Promise<{ name: string; count: number }[]> {
-  const snapshot = await db
-    .collection('wikis')
-    .orderBy('createdAt', 'desc')
-    .limit(500)
-    .get();
+export async function getAllTags(
+  language?: string
+): Promise<{ name: string; count: number }[]> {
+  try {
+    const base = db.collection('wikis');
+    const query = (
+      language
+        ? base.where('language', '==', language).orderBy('createdAt', 'desc')
+        : base.orderBy('createdAt', 'desc')
+    ).limit(500);
 
-  const tagCounts: Record<string, number> = {};
-  snapshot.docs.forEach((doc) => {
-    const tags = doc.data().tags as string[] | undefined;
-    tags?.forEach((tag) => {
-      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    const snapshot = await query.get();
+
+    const tagCounts: Record<string, number> = {};
+    snapshot.docs.forEach((doc) => {
+      const tags = doc.data().tags as string[] | undefined;
+      tags?.forEach((tag) => {
+        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+      });
     });
-  });
 
-  return Object.entries(tagCounts)
-    .map(([name, count]) => ({ name, count }))
-    .sort((a, b) => b.count - a.count);
+    return Object.entries(tagCounts)
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count);
+  } catch (err) {
+    if (language && isMissingIndexError(err)) {
+      console.warn(
+        `[getAllTags] Composite index (language, createdAt desc) missing — falling back to unfiltered.`
+      );
+      return getAllTags();
+    }
+    throw err;
+  }
 }
 
 export async function getWikisByTag(tag: string, limit = 20): Promise<Wiki[]> {

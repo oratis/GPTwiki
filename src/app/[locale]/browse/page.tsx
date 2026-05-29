@@ -72,7 +72,7 @@ export default async function BrowsePage({
   if (!hasLocale(locale)) notFound();
   const t = getTranslations(locale);
 
-  const tags = await getAllTags().catch(() => []);
+  const tags = await getAllTags(locale).catch(() => []);
   // Default to the most popular tag so the page never renders empty for crawlers.
   const selectedTag = rawTag?.trim() || tags[0]?.name;
 
