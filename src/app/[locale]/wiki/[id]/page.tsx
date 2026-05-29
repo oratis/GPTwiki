@@ -44,10 +44,10 @@ export async function generateMetadata({
   params: Promise<RouteParams>;
 }): Promise<Metadata> {
   const { locale, id } = await params;
-  if (!hasLocale(locale)) return { title: 'Wiki not found | GPTwiki' };
+  if (!hasLocale(locale)) return { title: 'Wiki not found' };
 
   const wiki = await getWikiById(id).catch(() => null);
-  if (!wiki) return { title: 'Wiki not found | GPTwiki' };
+  if (!wiki) return { title: 'Wiki not found' };
 
   const description =
     wiki.summary || (wiki.content?.replace(/[#*`_[\]]/g, '').slice(0, 200) ?? '');
@@ -66,7 +66,7 @@ export async function generateMetadata({
   languages['x-default'] = `https://gptwiki.net/en/wiki/${id}`;
 
   return {
-    title: `${wiki.title} | GPTwiki`,
+    title: wiki.title,
     description,
     keywords: wiki.tags,
     alternates: { canonical, languages },

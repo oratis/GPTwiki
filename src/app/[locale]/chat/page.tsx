@@ -3,7 +3,7 @@ import { auth } from '@/lib/auth';
 import ChatInterface from '@/components/chat/ChatInterface';
 
 export const metadata = {
-  title: 'New Conversation - GPTwiki',
+  title: 'New Conversation',
 };
 
 export default async function ChatPage() {

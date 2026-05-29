@@ -34,7 +34,7 @@ export async function GET() {
       const data = doc.data();
       const title = escapeXml(data.title || 'Untitled');
       const summary = escapeXml((data.summary || data.content || '').substring(0, 500));
-      const link = `${BASE_URL}/wiki/${doc.id}`;
+      const link = `${BASE_URL}/${data.language || 'en'}/wiki/${doc.id}`;
       const pubDate = new Date(data.createdAt).toUTCString();
       const author = escapeXml(data.authorName || 'GPTwiki Bot');
       const categories = (data.tags || []).map((t: string) => `    <category>${escapeXml(t)}</category>`).join('\n');
