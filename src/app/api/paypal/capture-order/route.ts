@@ -1,8 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { db } from '@/lib/firebase';
 
 const PAYPAL_API = process.env.NODE_ENV === 'production'
   ? 'https://api-m.paypal.com'
   : 'https://api-m.sandbox.paypal.com';
+
+// Pull the captured amount PayPal actually settled from the capture response.
+function extractCapturedAmount(
+  capture: Record<string, unknown>
+): { value: string; currency: string } | null {
+  const units = (capture.purchase_units as Array<Record<string, unknown>> | undefined) ?? [];
+  const payments = units[0]?.payments as Record<string, unknown> | undefined;
+  const captures = payments?.captures as Array<Record<string, unknown>> | undefined;
+  const amount = captures?.[0]?.amount as { value?: string; currency_code?: string } | undefined;
+  if (!amount?.value || !amount?.currency_code) return null;
+  return { value: amount.value, currency: amount.currency_code };
+}
 
 async function getAccessToken(): Promise<string> {
   const auth = Buffer.from(
@@ -28,8 +41,8 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { orderId } = body;
 
-    if (!orderId) {
-      return NextResponse.json({ error: 'Missing orderId' }, { status: 400 });
+    if (!orderId || typeof orderId !== 'string' || orderId.length > 64) {
+      return NextResponse.json({ error: 'Missing or invalid orderId' }, { status: 400 });
     }
 
     const accessToken = await getAccessToken();
@@ -49,9 +62,42 @@ export async function POST(req: NextRequest) {
     }
 
     const capture = await res.json();
+
+    // Only treat a fully completed capture as success — don't report a
+    // PENDING/DECLINED capture back to the client as if it paid.
+    if (capture.status !== 'COMPLETED') {
+      console.error('PayPal capture not completed:', orderId, capture.status);
+      return NextResponse.json(
+        { error: 'Payment not completed', status: capture.status },
+        { status: 402 }
+      );
+    }
+
+    const amount = extractCapturedAmount(capture);
+
+    // Fire-and-forget donation ledger entry from PayPal's settled amount
+    // (source of truth). Wrapped so a Firestore hiccup never breaks the
+    // donor's confirmation.
+    (async () => {
+      try {
+        await db.collection('donations').doc(orderId).set({
+          orderId,
+          captureId: capture.id ?? null,
+          amount: amount?.value ?? null,
+          currency: amount?.currency ?? null,
+          status: capture.status,
+          createdAt: Date.now(),
+        });
+      } catch (e) {
+        console.error('Failed to record donation ledger:', e);
+      }
+    })();
+
     return NextResponse.json({
       id: capture.id,
       status: capture.status,
+      amount: amount?.value ?? null,
+      currency: amount?.currency ?? null,
     });
   } catch (error) {
     console.error('Capture order error:', error);
