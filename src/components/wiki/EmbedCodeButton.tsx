@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Code, Check, Copy } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/context';
 
 interface Props {
   wikiId: string;
@@ -12,6 +13,7 @@ interface Props {
  * third-party blogs/forums can paste to render a GPTwiki card.
  */
 export default function EmbedCodeButton({ wikiId }: Props) {
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -50,10 +52,11 @@ export default function EmbedCodeButton({ wikiId }: Props) {
         type="button"
         onClick={() => setOpen(true)}
         className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-50 transition-colors"
-        title="Embed this wiki on your site"
+        title={t('embed.tooltip')}
+        aria-label={t('embed.tooltip')}
       >
         <Code className="h-3.5 w-3.5" />
-        Embed
+        {t('embed.button')}
       </button>
 
       {open && (
@@ -69,11 +72,10 @@ export default function EmbedCodeButton({ wikiId }: Props) {
             onClick={(e) => e.stopPropagation()}
           >
             <h3 id="embed-dialog-title" className="mb-2 text-lg font-semibold text-gray-900">
-              Embed this wiki
+              {t('embed.heading')}
             </h3>
             <p className="mb-4 text-sm text-gray-600">
-              Paste this snippet into any blog or forum to show a preview card linking
-              back to GPTwiki.
+              {t('embed.description')}
             </p>
             <pre className="mb-3 max-h-48 overflow-auto rounded-lg bg-gray-900 p-4 text-xs text-gray-100">
               {snippet}
@@ -83,7 +85,7 @@ export default function EmbedCodeButton({ wikiId }: Props) {
                 onClick={() => setOpen(false)}
                 className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-50"
               >
-                Close
+                {t('embed.close')}
               </button>
               <button
                 onClick={copy}
@@ -91,11 +93,11 @@ export default function EmbedCodeButton({ wikiId }: Props) {
               >
                 {copied ? (
                   <>
-                    <Check className="h-4 w-4" /> Copied
+                    <Check className="h-4 w-4" /> {t('share.copied')}
                   </>
                 ) : (
                   <>
-                    <Copy className="h-4 w-4" /> Copy code
+                    <Copy className="h-4 w-4" /> {t('embed.copyCode')}
                   </>
                 )}
               </button>

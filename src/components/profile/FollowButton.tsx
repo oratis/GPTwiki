@@ -19,7 +19,7 @@ interface Props {
  */
 export default function FollowButton({ userId, initialFollowersCount = 0 }: Props) {
   const { data: session, status } = useSession();
-  const { locale } = useI18n();
+  const { locale, t } = useI18n();
   const router = useRouter();
   const [following, setFollowing] = useState<boolean | null>(null);
   const [count, setCount] = useState(initialFollowersCount);
@@ -73,7 +73,7 @@ export default function FollowButton({ userId, initialFollowersCount = 0 }: Prop
     }
   };
 
-  const label = following ? 'Following' : 'Follow';
+  const label = following ? t('profile.following') : t('profile.follow');
   const Icon = following ? UserCheck : UserPlus;
 
   return (

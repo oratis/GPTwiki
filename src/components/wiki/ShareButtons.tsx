@@ -2,6 +2,7 @@
 
 import { Share2 } from 'lucide-react';
 import { useState } from 'react';
+import { useI18n } from '@/lib/i18n/context';
 
 interface ShareButtonsProps {
   url: string;
@@ -10,6 +11,7 @@ interface ShareButtonsProps {
 }
 
 export default function ShareButtons({ url, title }: ShareButtonsProps) {
+  const { t } = useI18n();
   const [copied, setCopied] = useState(false);
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
@@ -76,7 +78,8 @@ export default function ShareButtons({ url, title }: ShareButtonsProps) {
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
-          title={`Share on ${link.name}`}
+          title={t('share.on', { name: link.name })}
+          aria-label={t('share.on', { name: link.name })}
           className={`inline-flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition-colors ${link.color}`}
         >
           {link.icon}
@@ -84,10 +87,11 @@ export default function ShareButtons({ url, title }: ShareButtonsProps) {
       ))}
       <button
         onClick={handleCopy}
-        title="Copy link"
+        title={t('share.copyLink')}
+        aria-label={t('share.copyLink')}
         className="inline-flex h-8 items-center gap-1 rounded-full border border-gray-200 px-3 text-xs text-gray-500 hover:bg-gray-100 transition-colors"
       >
-        {copied ? '✓ Copied' : 'Copy'}
+        {copied ? `✓ ${t('share.copied')}` : t('share.copy')}
       </button>
     </div>
   );
