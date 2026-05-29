@@ -14,15 +14,18 @@ export function truncate(str: string, maxLength: number): string {
   return str.substring(0, maxLength) + '...';
 }
 
-export function timeAgo(timestamp: number): string {
+// Localized relative time. Uses Intl.RelativeTimeFormat so all supported
+// locales render correctly (previously hardcoded Chinese on every locale).
+export function timeAgo(timestamp: number, locale: string = 'en'): string {
   const seconds = Math.floor((Date.now() - timestamp) / 1000);
-  if (seconds < 60) return '刚刚';
+  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
+  if (seconds < 60) return rtf.format(-seconds, 'second');
   const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}分钟前`;
+  if (minutes < 60) return rtf.format(-minutes, 'minute');
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}小时前`;
+  if (hours < 24) return rtf.format(-hours, 'hour');
   const days = Math.floor(hours / 24);
-  if (days < 30) return `${days}天前`;
+  if (days < 30) return rtf.format(-days, 'day');
   const months = Math.floor(days / 30);
-  return `${months}个月前`;
+  return rtf.format(-months, 'month');
 }

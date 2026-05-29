@@ -13,7 +13,7 @@ interface WikiCardProps {
 }
 
 export default function WikiCard({ wiki }: WikiCardProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   return (
     <Link
@@ -60,7 +60,7 @@ export default function WikiCard({ wiki }: WikiCardProps) {
         </span>
         <span className="flex items-center gap-1">
           <Clock className="h-3.5 w-3.5" />
-          {timeAgo(wiki.createdAt)}
+          {timeAgo(wiki.createdAt, locale)}
         </span>
         {(wiki.threadCount ?? 0) > 0 && (
           <span className="flex items-center gap-1 text-blue-500">
