@@ -86,10 +86,15 @@ export function checkRateLimit(opts: RateLimitOptions): RateLimitResult {
 /** Extract a client identifier from a Next request — userId if available, else IP. */
 export function getClientId(req: Request, userId?: string | null): string {
   if (userId) return `u:${userId}`;
+  // Prefer Cloudflare's CF-Connecting-IP: CF overwrites it on every proxied
+  // request, so (unlike the client-controlled first x-forwarded-for entry) it
+  // can't be spoofed to dodge the per-IP limit. The site sits behind CF.
+  const cf = req.headers.get('cf-connecting-ip');
+  if (cf) return `ip:${cf.trim()}`;
+  const real = req.headers.get('x-real-ip');
+  if (real) return `ip:${real.trim()}`;
   const xff = req.headers.get('x-forwarded-for');
   if (xff) return `ip:${xff.split(',')[0]?.trim() || 'unknown'}`;
-  const real = req.headers.get('x-real-ip');
-  if (real) return `ip:${real}`;
   return 'ip:unknown';
 }
 
