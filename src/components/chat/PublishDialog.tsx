@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { X, BookPlus, Loader2 } from 'lucide-react';
 import type { Message, AIModel } from '@/types';
 import { useI18n } from '@/lib/i18n/context';
+import LocaleLink from '@/components/LocaleLink';
 
 interface PublishDialogProps {
   open: boolean;
@@ -72,12 +73,12 @@ export default function PublishDialog({ open, onClose, messages, model }: Publis
             <p className="mb-4 text-gray-600">
               {t('publish.successMsg')}
             </p>
-            <a
+            <LocaleLink
               href={`/wiki/${wikiId}`}
               className="inline-block rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-700"
             >
               {t('publish.viewWiki')}
-            </a>
+            </LocaleLink>
           </div>
         ) : (
           <>
