@@ -23,7 +23,7 @@ export async function generateMetadata({
   params: Promise<RouteParams>;
 }): Promise<Metadata> {
   const { locale, tag: rawTag } = await params;
-  if (!hasLocale(locale)) return { title: 'GPTwiki' };
+  if (!hasLocale(locale)) return { title: { absolute: 'GPTwiki' } };
   const tag = decodeURIComponent(rawTag);
   const t = getTranslations(locale);
 
