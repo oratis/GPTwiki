@@ -57,7 +57,7 @@ export default function PublishDialog({ open, onClose, messages, model }: Publis
       setPublished(true);
     } catch (error) {
       console.error('Publish error:', error);
-      alert('Failed to publish wiki. Please try again.');
+      alert(t('errors.publishFailed'));
     } finally {
       setPublishing(false);
     }

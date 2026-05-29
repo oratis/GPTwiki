@@ -38,7 +38,7 @@ function LoginInner() {
         setSent(true);
       }
     } catch {
-      setError('Failed to send email. Please try again.');
+      setError(t('errors.sendEmailFailed'));
     } finally {
       setSubmitting(false);
     }

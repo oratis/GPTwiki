@@ -60,7 +60,7 @@ export default function DonatePage() {
     script.src = 'https://www.paypal.com/web-sdk/v6/core';
     script.async = true;
     script.onload = () => initPayPal();
-    script.onerror = () => setError('Failed to load PayPal SDK');
+    script.onerror = () => setError(t('errors.paypalLoad'));
     document.body.appendChild(script);
   }, []);
 
@@ -113,7 +113,7 @@ export default function DonatePage() {
       }
     } catch (err) {
       console.error('PayPal init error:', err);
-      setError('Failed to initialize PayPal');
+      setError(t('errors.paypalLoad'));
     }
   }
 
