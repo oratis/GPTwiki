@@ -14,7 +14,7 @@ import type { Wiki, UserProfile } from '@/types';
 
 export default function ProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const { data: session } = useSession();
   const isOwnProfile = session?.user?.id === id;
   const [user, setUser] = useState<UserProfile | null>(null);
@@ -105,7 +105,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
             <div className="mt-3 flex flex-wrap justify-center sm:justify-start gap-4 text-sm text-gray-500">
               <span className="flex items-center gap-1.5">
                 <Calendar className="h-4 w-4" />
-                {t('profile.joined')} {timeAgo(user.createdAt)}
+                {t('profile.joined')} {timeAgo(user.createdAt, locale)}
               </span>
               <span className="flex items-center gap-1.5">
                 <BookOpen className="h-4 w-4" />

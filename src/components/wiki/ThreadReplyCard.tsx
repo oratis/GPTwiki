@@ -4,10 +4,12 @@ import Image from 'next/image';
 import { User, Bot, Clock } from 'lucide-react';
 import { timeAgo } from '@/lib/utils';
 import { getModelDisplayName } from '@/lib/models';
+import { useI18n } from '@/lib/i18n/context';
 import WikiContent from './WikiContent';
 import type { ThreadReply } from '@/types';
 
 export default function ThreadReplyCard({ reply }: { reply: ThreadReply }) {
+  const { locale } = useI18n();
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
       {/* Header: author + time + model */}
@@ -32,7 +34,7 @@ export default function ThreadReplyCard({ reply }: { reply: ThreadReply }) {
         </span>
         <span className="flex items-center gap-1">
           <Clock className="h-3.5 w-3.5" />
-          {timeAgo(reply.createdAt)}
+          {timeAgo(reply.createdAt, locale)}
         </span>
       </div>
 
