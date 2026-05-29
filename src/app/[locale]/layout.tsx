@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import '../globals.css';
 import Providers from '@/components/layout/Providers';
 import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 import GoogleAnalytics from '@/components/layout/GoogleAnalytics';
 import {
   hasLocale,
@@ -105,6 +106,7 @@ export default async function RootLayout({ children, params }: Props) {
         <Providers locale={locale}>
           <Header />
           <main className="flex-1">{children}</main>
+          <Footer />
         </Providers>
       </body>
     </html>
