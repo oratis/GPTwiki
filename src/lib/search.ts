@@ -1,6 +1,7 @@
 import { db } from './firebase';
 import { FieldValue, type QueryDocumentSnapshot } from 'firebase-admin/firestore';
 import type { Wiki, UserProfile, PublicUserProfile, UserApiKeys } from '@/types';
+import { encryptSecret, decryptSecret } from './crypto';
 
 /** A wiki "has a header image" when imageUrl is a non-empty string. */
 function hasHeaderImage(data: FirebaseFirestore.DocumentData): boolean {
@@ -268,7 +269,15 @@ export function toPublicUserProfile(p: UserProfile): PublicUserProfile {
 export async function getUserApiKeys(userId: string): Promise<UserApiKeys | null> {
   const doc = await db.collection('users').doc(userId).get();
   if (!doc.exists) return null;
-  return (doc.data()?.apiKeys as UserApiKeys) || null;
+  const stored = doc.data()?.apiKeys as UserApiKeys | undefined;
+  if (!stored) return null;
+  // Decrypt at the storage boundary so callers always see plaintext.
+  const out: UserApiKeys = {};
+  for (const k of ['anthropic', 'openai', 'google'] as const) {
+    const v = stored[k];
+    if (v) out[k] = decryptSecret(v);
+  }
+  return out;
 }
 
 export async function getUserEmail(userId: string): Promise<string | null> {
@@ -278,7 +287,13 @@ export async function getUserEmail(userId: string): Promise<string | null> {
 }
 
 export async function updateUserApiKeys(userId: string, apiKeys: UserApiKeys): Promise<void> {
-  await db.collection('users').doc(userId).update({ apiKeys });
+  // Encrypt each provider key before persisting.
+  const encrypted: UserApiKeys = {};
+  for (const k of ['anthropic', 'openai', 'google'] as const) {
+    const v = apiKeys[k];
+    if (v) encrypted[k] = encryptSecret(v);
+  }
+  await db.collection('users').doc(userId).update({ apiKeys: encrypted });
 }
 
 // ─── Paginated Recent Wikis ───
