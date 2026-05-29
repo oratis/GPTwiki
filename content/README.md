@@ -12,9 +12,12 @@ Hand-authored, original encyclopedia-style articles for GPTwiki, ready to review
 |------|-------|----------|
 | `science-and-nature.ts` | Biology, earth science, physics phenomena | 8 |
 | `history-and-society.ts` | History, economics, civilization | 8 |
-| `technology-and-math.ts` | Tech concepts, mathematics, how-things-work | 8 |
+| `technology-and-math.ts` | Tech concepts, mathematics | 8 |
 | `mind-health-everyday.ts` | Neuroscience, medicine, everyday science | 8 |
-| **Total** | | **32** |
+| `space-and-astronomy.ts` | Moon, stars, cosmology, the solar system | 8 |
+| `arts-language-culture.ts` | Color, music, typography, language, story | 8 |
+| `how-things-work.ts` | Everyday technology explainers (high-SEO "how X works") | 8 |
+| **Total** | | **56** |
 
 `index.ts` re-exports everything as `allDrafts`.
 
