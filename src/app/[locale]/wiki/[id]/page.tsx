@@ -8,7 +8,7 @@ import EmbedCodeButton from '@/components/wiki/EmbedCodeButton';
 import ThreadReplyList from '@/components/wiki/ThreadReplyList';
 import WikiInteractive from '@/components/wiki/WikiInteractive';
 import RelatedWikis from '@/components/wiki/RelatedWikis';
-import { getWikiById, getPopularWikis } from '@/lib/search';
+import { getWikiById, getPopularWikis, incrementWikiViews } from '@/lib/search';
 import { timeAgo } from '@/lib/utils';
 import { getModelDisplayName } from '@/lib/models';
 import {
@@ -140,6 +140,9 @@ export default async function WikiDetailPage({
 
   const wiki = await getWikiById(id);
   if (!wiki) notFound();
+
+  // Count one view per page render (not in generateMetadata / API reads).
+  void incrementWikiViews(id);
 
   const t = getTranslations(locale);
   const jsonLd = buildJsonLd(wiki, locale, id);
