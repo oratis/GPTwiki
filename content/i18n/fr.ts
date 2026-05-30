@@ -942,4 +942,241 @@ On pense que les souvenirs sont stockés sous forme de motifs de connexions renf
 
 Se souvenir n’est pas comme rejouer un enregistrement. Chaque fois que vous vous rappelez quelque chose, le cerveau le reconstruit, et les détails peuvent se décaler ou se mêler à d’autres informations. C’est pourquoi les souvenirs des témoins peuvent être faux avec assurance, et pourquoi se remémorer de façon répétée peut subtilement réécrire l’original.`,
   },
+  // ── Batch 5: Espace et astronomie ──
+  {
+    title: 'Les phases de la Lune',
+    question: 'Pourquoi la Lune change-t-elle de forme au cours du mois ?',
+    summary:
+      'Les phases de la Lune sont dues au changement d’angle sous lequel nous voyons sa moitié éclairée par le Soleil ; la Lune ne change pas, seule la part de son côté éclairé qui nous fait face change.',
+    tags: ['astronomie', 'lune', 'espace', 'sciences de la terre', 'science'],
+    language: 'fr',
+    content: `# Les phases de la Lune
+
+La Lune semble changer de forme au cours d’un mois, passant d’un fin croissant à un disque plein puis revenant. La Lune elle-même ne change pas — ce qui change, c’est la part de sa moitié éclairée par le Soleil que nous pouvons voir depuis la Terre.
+
+## Pourquoi les phases se produisent
+
+Le Soleil éclaire toujours la moitié de la Lune, comme il éclaire la moitié de la Terre. À mesure que la Lune orbite autour de la Terre tous les 29,5 jours environ, l’angle entre le Soleil, la Lune et la Terre change, de sorte que nous voyons différentes fractions de cette moitié éclairée.
+
+## Les phases principales
+
+- **Nouvelle Lune.** La Lune se trouve entre la Terre et le Soleil, son côté éclairé nous tourne donc le dos et elle est presque invisible.
+- **Premier croissant → premier quartier → gibbeuse croissante.** Chaque nuit, une part plus grande du côté éclairé apparaît.
+- **Pleine Lune.** La Terre est entre le Soleil et la Lune, nous voyons donc toute la face éclairée.
+- **Gibbeuse décroissante → dernier quartier → dernier croissant.** La part éclairée se réduit vers la prochaine nouvelle Lune.
+
+« Croissante » signifie qui augmente ; « décroissante », qui diminue.
+
+## Toujours la même face
+
+La Lune est en **rotation synchrone** avec la Terre : elle tourne une fois par orbite, et nous montre donc toujours le même côté. Les phases ne sont pas la « face cachée » de la Lune qui apparaîtrait ; ce n’est que la ligne jour/nuit (le **terminateur**) qui balaie la face que nous voyons toujours.
+
+## À ne pas confondre avec une éclipse
+
+Les phases sont un résultat quotidien de la géométrie orbitale. Les **éclipses** sont des événements plus rares qui exigent que les trois corps s’alignent presque exactement.`,
+  },
+  {
+    title: 'Les comètes',
+    question: 'Que sont les comètes et pourquoi développent-elles une queue ?',
+    summary:
+      'Les comètes sont des corps glacés du système solaire externe qui, en approchant du Soleil, libèrent gaz et poussière pour former une chevelure brillante et de longues queues qui pointent toujours à l’opposé du Soleil.',
+    tags: ['astronomie', 'comètes', 'système solaire', 'espace', 'science'],
+    language: 'fr',
+    content: `# Les comètes
+
+On appelle souvent les comètes des « boules de neige sales » : de petits corps de glace, de poussière et de roche restés de la formation du système solaire. La plupart de leur vie, elles sont sombres et invisibles, mais un voyage près du Soleil peut les transformer en l’un des spectacles les plus saisissants du ciel.
+
+## D’où elles viennent
+
+Les comètes naissent dans les confins froids du système solaire : la **ceinture de Kuiper**, au-delà de Neptune, et le **nuage d’Oort**, bien plus lointain, une vaste enveloppe qui entourerait le Soleil. De temps à autre, une poussée gravitationnelle en envoie une chuter vers l’intérieur.
+
+## Anatomie d’une comète
+
+- **Le noyau.** Le cœur solide de glace et de poussière, généralement de quelques kilomètres seulement.
+- **La chevelure (coma).** En approchant du Soleil, la glace se sublime (passe directement du solide au gaz) et entoure le noyau d’un nuage brillant de gaz et de poussière.
+- **Les queues.** Les comètes en ont souvent deux : une **queue de poussière** qui s’incurve le long de la trajectoire, et une **queue ionique** droite et bleutée de gaz chargé, poussée directement par le vent solaire.
+
+## Les queues pointent à l’opposé du Soleil
+
+Une surprise fréquente : la queue d’une comète ne traîne pas derrière comme de la fumée. **Le rayonnement solaire et le vent solaire** poussent vers l’extérieur la matière libérée, si bien que la queue pointe toujours à peu près **à l’opposé du Soleil** — même quand la comète repart vers l’espace.
+
+## Des visiteuses prévisibles
+
+Certaines comètes reviennent selon un calendrier régulier. La plus célèbre, la **comète de Halley**, revient tous les 76 ans environ et a été observée depuis plus de deux mille ans.`,
+  },
+  {
+    title: 'Le cycle de vie d’une étoile',
+    question: 'Comment naissent les étoiles, et comment meurent-elles ?',
+    summary:
+      'Les étoiles se forment à partir de nuages de gaz en effondrement, brillent en fusionnant l’hydrogène pendant l’essentiel de leur vie, et finissent en naines blanches, étoiles à neutrons ou trous noirs selon leur masse.',
+    tags: ['astronomie', 'étoiles', 'espace', 'physique', 'science'],
+    language: 'fr',
+    content: `# Le cycle de vie d’une étoile
+
+Les étoiles ne sont pas éternelles. Elles naissent, vivent de millions à des milliards d’années, et meurent de façons qui dépendent presque entièrement de la masse avec laquelle elles ont commencé.
+
+## Naissance
+
+Les étoiles se forment dans de vastes nuages de gaz et de poussière appelés **nébuleuses**. Quand une partie du nuage devient assez dense, la gravité la rassemble en une boule chaude et tournante. Quand le cœur devient assez chaud et dense, la **fusion nucléaire** s’allume : les atomes d’hydrogène fusionnent en hélium, libérant une énergie énorme. Une étoile est née.
+
+## La séquence principale
+
+Pendant l’essentiel de sa vie, une étoile est dans une phase longue et stable appelée **séquence principale**, équilibrant l’attraction de la gravité vers l’intérieur et la poussée de l’énergie de fusion vers l’extérieur. Notre Soleil est à peu près à la moitié de sa vie sur la séquence principale, d’environ 10 milliards d’années.
+
+## La mort dépend de la masse
+
+Quand une étoile épuise son hydrogène, son destin bifurque selon la masse :
+
+- Les **étoiles comme le Soleil** gonflent en **géantes rouges**, puis se débarrassent de leurs couches externes, laissant un cœur dense qui refroidit appelé **naine blanche**.
+- Les **étoiles massives** brûlent leur combustible vite et finissent dans une explosion colossale — une **supernova** — qui surpasse un instant l’éclat d’une galaxie. Le cœur restant devient une **étoile à neutrons** ultradense ou, s’il est assez massif, un **trou noir**.
+
+## Recyclage cosmique
+
+Les supernovas forgent et dispersent dans l’espace des éléments lourds comme le fer, le carbone et l’or. Ceux-ci enrichissent de nouvelles nébuleuses, qui forment de nouvelles étoiles et planètes. En un sens bien réel, les atomes de notre corps ont été fabriqués dans des étoiles mortes depuis longtemps.`,
+  },
+  {
+    title: 'Les aurores polaires',
+    question: 'Qu’est-ce qui cause les aurores boréales et australes ?',
+    summary:
+      'Les aurores sont des rideaux de lumière brillante produits quand des particules chargées venues du Soleil sont canalisées par le champ magnétique terrestre vers la haute atmosphère, où elles excitent des molécules de gaz.',
+    tags: ['astronomie', 'atmosphère', 'météo spatiale', 'physique', 'science'],
+    language: 'fr',
+    content: `# Les aurores polaires
+
+Les aurores — boréales (*aurora borealis*) et australes (*aurora australis*) — sont des manifestations lumineuses dans le ciel nocturne près des pôles. Elles sont le résultat visible d’un lien entre le Soleil et le champ magnétique de la Terre.
+
+## La source solaire
+
+Le Soleil émet sans cesse des particules chargées appelées **vent solaire**, et des sursauts d’activité comme les éruptions solaires peuvent envoyer des rafales particulièrement fortes. Quand ces particules atteignent la Terre, la plupart sont déviées par le **champ magnétique** de la planète.
+
+## Canalisées vers les pôles
+
+Le champ magnétique canalise une partie des particules vers les **pôles magnétiques**, c’est pourquoi les aurores se voient surtout aux hautes latitudes. Quand les particules plongent dans la haute atmosphère, elles entrent en collision avec des molécules de gaz.
+
+## Pourquoi les couleurs
+
+Chaque collision énergise une molécule de gaz, qui libère ensuite cette énergie sous forme de lumière :
+
+- Le **vert**, la couleur la plus courante, provient de l’oxygène à des altitudes moyennes.
+- Le **rouge** provient de l’oxygène très haut.
+- Le **bleu et le violet** proviennent de l’azote.
+
+Il en résulte des rideaux, des arcs et des spirales ondoyants qui changent à mesure que varient les flux de particules.
+
+## Météo spatiale
+
+Les fortes tempêtes solaires peuvent pousser les aurores vers des latitudes plus basses et, surtout, perturber les satellites, les communications radio et les réseaux électriques. L’étude des aurores fait donc partie de la surveillance de la « **météo spatiale** », et d’autres planètes dotées d’un champ magnétique, comme Jupiter et Saturne, ont leurs propres aurores spectaculaires.`,
+  },
+  {
+    title: 'Années-lumière et distances cosmiques',
+    question: 'Qu’est-ce qu’une année-lumière et comment mesure-t-on les distances dans l’espace ?',
+    summary:
+      'Une année-lumière est la distance que parcourt la lumière en un an ; comme les distances cosmiques sont énormes, les astronomes utilisent le temps de trajet de la lumière et des méthodes ingénieuses fondées sur la géométrie et la luminosité pour les mesurer.',
+    tags: ['astronomie', 'espace', 'physique', 'mesure', 'science'],
+    language: 'fr',
+    content: `# Années-lumière et distances cosmiques
+
+L’espace est si vaste que les unités ordinaires comme le kilomètre deviennent peu maniables. Pour gérer ces échelles, les astronomes mesurent la distance à l’aide de la vitesse de la lumière.
+
+## Ce qu’est une année-lumière
+
+Une **année-lumière** est la distance que parcourt la lumière en un an — environ 9 500 milliards de kilomètres. Malgré son nom, elle mesure une *distance*, pas un temps. La lumière est ce qu’il y a de plus rapide dans l’univers, une année-lumière représente donc une étendue énorme.
+
+## Regarder le passé
+
+Comme la lumière met du temps à voyager, voir un objet lointain, c’est le voir tel qu’il *était* quand la lumière est partie. La lumière du Soleil a environ 8 minutes quand elle nous parvient ; le système stellaire le plus proche, Alpha du Centaure, est à environ 4 années-lumière, nous le voyons donc tel qu’il était il y a 4 ans. Les galaxies les plus lointaines sont à des milliards d’années-lumière : des fenêtres sur l’univers primitif.
+
+## Comment on mesure les distances
+
+Les astronomes bâtissent une « **échelle des distances cosmiques** », avec des méthodes qui portent de plus en plus loin :
+
+- **La parallaxe.** Pour les étoiles proches, les astronomes mesurent le léger décalage de la position apparente d’une étoile à mesure que la Terre orbite le Soleil — le même effet que vous voyez quand un objet proche se décale sur le fond quand vous bougez la tête.
+- **Les chandelles standard.** Certaines étoiles et étoiles en explosion (comme les supernovas de type Ia) ont une luminosité réelle connue. En comparant leur éclat *apparent* à leur éclat *réel*, les astronomes calculent la distance.
+- **Le décalage vers le rouge.** Pour les galaxies les plus lointaines, l’étirement de leur lumière révèle leur vitesse d’éloignement, qui se rapporte à la distance dans un univers en expansion.
+
+Chaque échelon est étalonné sur celui du dessous, ce qui permet aux astronomes de cartographier le cosmos jusqu’à son bord visible.`,
+  },
+  {
+    title: 'Les exoplanètes',
+    question: 'Comment les astronomes trouvent-ils des planètes autour d’autres étoiles ?',
+    summary:
+      'Les exoplanètes sont des planètes en orbite autour d’étoiles autres que le Soleil ; les astronomes les détectent surtout par le léger assombrissement de la lumière stellaire lors d’un transit, ou par le faible vacillement de l’étoile.',
+    tags: ['astronomie', 'exoplanètes', 'espace', 'science', 'découverte'],
+    language: 'fr',
+    content: `# Les exoplanètes
+
+Une exoplanète est une planète en orbite autour d’une étoile autre que notre Soleil. Les premières exoplanètes confirmées autour d’une étoile semblable au Soleil ont été trouvées dans les années 1990 ; depuis, on en a découvert des milliers, transformant notre vision de la galaxie.
+
+## Pourquoi elles sont difficiles à voir
+
+Les planètes ne produisent pas leur propre lumière et sont minuscules à côté de leur étoile hôte éblouissante — comme repérer de loin une luciole près d’un projecteur. Aussi les astronomes détectent-ils en général les exoplanètes de façon **indirecte**, par leurs effets sur l’étoile.
+
+## Les principales méthodes de détection
+
+- **La méthode du transit.** Si l’orbite d’une planète passe entre nous et son étoile, elle bloque une fraction minuscule de la lumière stellaire, causant une petite baisse régulière de luminosité. Mesurer ces baisses révèle la taille et l’orbite de la planète. Le télescope Kepler de la NASA s’en est servi pour trouver des milliers de planètes.
+- **La méthode des vitesses radiales.** La gravité d’une planète tire son étoile et la fait vaciller légèrement. Ce vacillement décale la lumière de l’étoile (par effet Doppler) et révèle la masse et l’orbite de la planète.
+
+D’autres méthodes incluent l’**imagerie directe** de planètes grandes et lointaines et la **microlentille gravitationnelle**.
+
+## Ce que nous avons appris
+
+Les exoplanètes sont étonnamment variées : « Jupiters chauds » brûlants qui orbitent en quelques jours, « super-Terres » plus grandes que la nôtre, et mondes dans la **zone habitable**, où les températures pourraient permettre l’eau liquide. Ces découvertes suggèrent que les planètes sont communes — la plupart des étoiles en abriteraient — ce qui aiguise la recherche de mondes capables d’abriter la vie.`,
+  },
+  {
+    title: 'Le Big Bang',
+    question: 'Qu’est-ce que la théorie du Big Bang et quelles preuves l’étayent ?',
+    summary:
+      'La théorie du Big Bang soutient que l’univers a commencé il y a environ 13,8 milliards d’années à partir d’un état extrêmement chaud et dense et s’est étendu depuis, étayée par plusieurs lignes de preuves.',
+    tags: ['astronomie', 'cosmologie', 'physique', 'univers', 'science'],
+    language: 'fr',
+    content: `# Le Big Bang
+
+La théorie du Big Bang est la principale explication scientifique du début de l’univers. Elle affirme qu’il y a environ **13,8 milliards d’années**, l’univers a démarré dans un état extraordinairement chaud et dense, et qu’il s’est depuis étendu et refroidi.
+
+## Une idée fausse courante
+
+Le Big Bang n’a pas été une explosion *dans* un espace vide. C’est plutôt l’espace lui-même qui a commencé à s’étendre partout à la fois. Il n’y a pas de « centre » unique de l’univers ; chaque région s’éloigne de toutes les autres, comme des points à la surface d’un ballon qui se gonfle.
+
+## Les preuves
+
+Trois grandes observations étayent la théorie :
+
+- **L’univers en expansion.** Dans les années 1920, Edwin Hubble a découvert que les galaxies lointaines s’éloignent de nous, et d’autant plus vite qu’elles sont éloignées. Rembobiner cette expansion pointe vers un commencement dense.
+- **Le fond diffus cosmologique (CMB).** Une faible lueur de rayonnement micro-onde remplit tout le ciel : la rémanence refroidie de l’univers primitif et chaud, prédite avant d’être trouvée en 1965.
+- **L’abondance des éléments légers.** La théorie prédit avec précision les proportions d’hydrogène, d’hélium et de lithium formées dans les premières minutes de l’univers.
+
+## Ce qu’elle dit et ne dit pas
+
+Le Big Bang décrit l’*évolution* de l’univers à partir d’une fraction de seconde — pas le « pourquoi » ultime ni ce qui, le cas échéant, est venu « avant ». Des questions restent ouvertes, dont la nature de la **matière noire** et de l’**énergie noire**, qui constituent ensemble l’essentiel du contenu de l’univers et régissent son expansion en cours.`,
+  },
+  {
+    title: 'Les éclipses',
+    question: 'Quelle est la différence entre une éclipse de Soleil et une éclipse de Lune ?',
+    summary:
+      'Les éclipses se produisent quand le Soleil, la Terre et la Lune s’alignent : une éclipse de Soleil survient quand la Lune masque le Soleil, et une éclipse de Lune quand l’ombre de la Terre tombe sur la Lune.',
+    tags: ['astronomie', 'lune', 'soleil', 'espace', 'science'],
+    language: 'fr',
+    content: `# Les éclipses
+
+Une éclipse se produit quand le Soleil, la Terre et la Lune s’alignent de sorte que l’un projette une ombre sur un autre, ou lui masque la vue. Il en existe deux types principaux, et il est facile de les confondre.
+
+## Éclipse de Soleil
+
+Une **éclipse de Soleil** se produit lors de la nouvelle Lune, quand **la Lune passe entre le Soleil et la Terre**, bloquant la lumière du Soleil. Comme l’ombre de la Lune est petite, seuls les gens situés dans une bande étroite de la Terre la voient.
+
+- Lors d’une éclipse solaire **totale**, la Lune couvre entièrement le Soleil, révélant un instant la ténue atmosphère externe du Soleil (la couronne) et transformant le jour en pénombre.
+- Une coïncidence remarquable le rend possible : le Soleil est environ 400 fois plus large que la Lune, mais aussi environ 400 fois plus loin, si bien que les deux paraissent de même taille dans notre ciel.
+
+⚠️ Regarder directement une éclipse de Soleil sans filtres adaptés peut endommager les yeux.
+
+## Éclipse de Lune
+
+Une **éclipse de Lune** se produit lors de la pleine Lune, quand **la Terre passe entre le Soleil et la Lune**, projetant son ombre sur la Lune. Elle est visible de partout sur la face nocturne de la Terre et son observation est tout à fait sans danger.
+
+Lors d’une éclipse de Lune totale, la Lune luit souvent d’un rouge cuivré — une « **Lune de sang** » — parce qu’une partie de la lumière solaire se courbe en traversant l’atmosphère terrestre et tombe sur la Lune, filtrée vers le rouge comme les couchers de soleil.
+
+## Pourquoi pas chaque mois
+
+L’orbite de la Lune est inclinée d’environ 5° par rapport à l’orbite de la Terre autour du Soleil, si bien que les trois corps ne s’alignent généralement pas avec précision. Cette inclinaison explique que les éclipses n’arrivent que quelques fois par an et non chaque mois.`,
+  },
 ];
