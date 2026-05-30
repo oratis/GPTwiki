@@ -16,10 +16,10 @@ Legend: ✅ done · ⬜ todo
 | 3 Technology & Math | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | 4 Mind/Health/Everyday | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | 5 Space & Astronomy | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 6 Arts/Language/Culture | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 7 How Things Work | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| 6 Arts/Language/Culture | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| 7 How Things Work | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 
-**Done so far:** 208 / 784 translations — ✅ Chinese, ✅ Japanese, ✅ Korean COMPLETE; 🔄 Spanish (es) batches 1–5.
+**Done so far:** 224 / 784 translations — ✅ Chinese, ✅ Japanese, ✅ Korean, ✅ Spanish COMPLETE (4 of 14 languages).
 
 Each translated article is a separate wiki document with its own `language`
 code and localized title/question/content/summary/tags, so it slots into the
