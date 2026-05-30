@@ -703,4 +703,480 @@ Una conexión puede tener un ancho de banda alto pero una latencia alta, o al re
 
 El **rendimiento (throughput)** es la tasa de datos que realmente se logra en la práctica, que suele ser menor que el ancho de banda teórico. La **fluctuación (jitter)** es la variación de la latencia con el tiempo, que puede perturbar la voz y el vídeo aunque la latencia media sea baja.`,
   },
+  // ── Batch 4: Mente, salud y vida cotidiana ──
+  {
+    title: 'El efecto placebo',
+    question: '¿Por qué un tratamiento falso a veces hace que la gente se sienta mejor?',
+    summary:
+      'El efecto placebo es una mejora real de los síntomas producida por las expectativas y creencias de una persona sobre un tratamiento, y no por un principio activo.',
+    tags: ['medicina', 'psicología', 'salud', 'ciencia', 'mente'],
+    language: 'es',
+    content: `# El efecto placebo
+
+El efecto placebo ocurre cuando la salud de una persona mejora de verdad tras recibir un tratamiento sin ningún principio activo terapéutico, como una pastilla de azúcar o una inyección de suero salino. La mejora proviene de la respuesta de la mente y el cuerpo a *esperar* mejorar.
+
+## Una respuesta real y medible
+
+Los placebos no están "todo en la cabeza" en un sentido despectivo. La expectativa puede desencadenar cambios fisiológicos reales: el cerebro puede liberar sus propias sustancias analgésicas (como las endorfinas) y las respuestas al estrés pueden modificarse. El efecto es más fuerte en síntomas moldeados por la percepción, como el **dolor, las náuseas, la fatiga y la ansiedad**, y más débil en los procesos objetivos de la enfermedad: un placebo no reducirá un tumor ni curará una infección.
+
+## Por qué importa para la ciencia
+
+Como la sola expectativa puede cambiar cómo se siente la gente, los ensayos médicos usan **controles con placebo**. Los pacientes reciben al azar el fármaco real o un placebo y, lo ideal, ni ellos ni los investigadores saben quién recibió cuál (un diseño **doble ciego**). Un tratamiento nuevo debe superar al placebo para considerarse eficaz.
+
+## El efecto nocebo
+
+La otra cara es el **efecto nocebo**: las expectativas negativas pueden producir síntomas negativos reales. Basta con advertir a alguien sobre los posibles efectos secundarios de un fármaco para que algunas personas los experimenten.
+
+## Ética y uso
+
+Engañar deliberadamente a los pacientes plantea problemas éticos, por lo que los médicos rara vez recetan placebos puros. Pero comprender el efecto ayuda a explicar por qué el propio entorno clínico, atento y seguro, contribuye a la curación.`,
+  },
+  {
+    title: 'Por qué dormimos',
+    question: '¿Por qué necesitan dormir los seres humanos?',
+    summary:
+      'El sueño es un estado vital y activo en el que el cerebro y el cuerpo realizan reparación, consolidación de la memoria y eliminación de desechos; la falta crónica de sueño daña la salud, el ánimo y la cognición.',
+    tags: ['biología', 'salud', 'neurociencia', 'psicología', 'ciencia'],
+    language: 'es',
+    content: `# Por qué dormimos
+
+El sueño ocupa cerca de un tercio de la vida humana, pero está lejos de ser inactividad. Es un estado activo y cuidadosamente regulado, esencial para la salud física y mental.
+
+## Etapas del sueño
+
+Una noche de sueño recorre etapas aproximadamente cada 90 minutos:
+
+- **Sueño no REM**, que incluye el sueño profundo de "ondas lentas", cuando el cuerpo repara tejidos, forma hueso y músculo y refuerza el sistema inmunitario.
+- **Sueño REM (movimientos oculares rápidos)**, cuando ocurren la mayoría de los sueños vívidos y el cerebro está muy activo.
+
+## Qué hace el sueño
+
+La investigación apunta a varias funciones esenciales:
+
+- **Consolidación de la memoria.** El cerebro reproduce y reorganiza las experiencias del día, trasladando información al almacenamiento a largo plazo y reforzando el aprendizaje.
+- **Eliminación de desechos.** Durante el sueño, el cerebro elimina subproductos metabólicos, incluidas proteínas vinculadas a enfermedades neurodegenerativas.
+- **Restauración.** Las hormonas que regulan el crecimiento, el apetito y el estrés se reequilibran.
+
+## El coste de dormir poco
+
+La privación crónica de sueño se asocia con deterioro de la atención y el juicio, debilitamiento de la inmunidad, aumento de peso y mayor riesgo de cardiopatías, diabetes y trastornos del ánimo. Incluso déficits modestos pero sostenidos reducen de forma medible el rendimiento mental.
+
+## El reloj corporal
+
+El sueño está gobernado por el **ritmo circadiano**, un reloj interno de unas 24 horas sincronizado en gran medida por la luz. Alterarlo —con el trabajo por turnos, el desfase horario o las pantallas nocturnas— puede empeorar la calidad del sueño aunque las horas totales parezcan suficientes.`,
+  },
+  {
+    title: 'La cafeína y el cerebro',
+    question: '¿Cómo te mantiene despierto la cafeína?',
+    summary:
+      'La cafeína combate la somnolencia bloqueando la adenosina, una sustancia cerebral que se acumula durante el día y favorece el sueño, enmascarando temporalmente la fatiga en lugar de eliminarla.',
+    tags: ['biología', 'neurociencia', 'salud', 'química', 'mente'],
+    language: 'es',
+    content: `# La cafeína y el cerebro
+
+La cafeína es la sustancia psicoactiva más usada del mundo, presente en el café, el té, el chocolate y muchos refrescos. Actúa interfiriendo con una de las señales naturales de sueño del cerebro.
+
+## Bloquear la señal de "cansancio"
+
+Mientras permaneces despierto, una molécula llamada **adenosina** se acumula poco a poco en el cerebro. Cuando la adenosina se une a sus receptores, frena la actividad nerviosa y produce somnolencia. La cafeína tiene una forma parecida a la de la adenosina, así que se desliza en esos mismos receptores y los bloquea, sin activarlos. El cerebro deja de recibir el mensaje de "estás cansado" y aumenta la alerta.
+
+## Efectos secundarios
+
+Con la adenosina bloqueada, los estimulantes naturales del cerebro, como la dopamina y la adrenalina, actúan con más libertad. Por eso la cafeína puede agudizar la concentración, levantar el ánimo y elevar el ritmo cardíaco.
+
+## Enmascara, no elimina, la fatiga
+
+Es crucial entender que la cafeína no elimina la necesidad subyacente de dormir. La adenosina sigue acumulándose tras el bloqueo; cuando la cafeína se disipa, puede inundar los receptores ahora disponibles, lo que a veces produce un "bajón".
+
+## Tolerancia y abstinencia
+
+Con el uso regular, el cerebro crea más receptores, así que hace falta más cafeína para el mismo efecto: la **tolerancia**. Dejarla de golpe puede causar síntomas de **abstinencia**, como dolores de cabeza e irritabilidad, durante unos días. Los efectos también se desvanecen despacio: la cafeína tiene una vida media de varias horas, por lo que un café de la tarde puede aún perturbar el sueño de esa noche.`,
+  },
+  {
+    title: 'El efecto Doppler',
+    question: '¿Por qué cambia de tono una sirena al pasar junto a ti?',
+    summary:
+      'El efecto Doppler es el cambio en la frecuencia observada de una onda cuando la fuente y el observador se mueven uno respecto al otro, lo que explica el cambio de tono de las sirenas y el corrimiento al rojo de las galaxias lejanas.',
+    tags: ['física', 'ondas', 'sonido', 'astronomía', 'ciencia'],
+    language: 'es',
+    content: `# El efecto Doppler
+
+El efecto Doppler es el cambio en la frecuencia de una onda a medida que su fuente se acerca o se aleja de un observador. Es más familiar con el sonido, pero se aplica a todas las ondas, incluida la luz.
+
+## El ejemplo cotidiano
+
+Cuando se acerca una ambulancia, su sirena suena más aguda; al pasar y alejarse, el tono baja. La sirena en sí nunca cambia. Lo que cambia es cómo te llegan las ondas sonoras:
+
+- Cuando la fuente se **acerca**, cada onda se emite un poco más cerca que la anterior, así que las ondas se apiñan: longitud de onda más corta, frecuencia **más alta** (tono más agudo).
+- Cuando se **aleja**, las ondas se estiran: longitud de onda más larga, frecuencia **más baja** (tono más grave).
+
+## Por qué ocurre
+
+El efecto surge únicamente del movimiento relativo, que comprime o estira el espaciado entre las crestas sucesivas de las ondas. Cuanto más rápido es el movimiento relativo, mayor es el cambio.
+
+## El efecto Doppler con la luz
+
+La luz también se desplaza. El movimiento de alejamiento estira la luz hacia longitudes de onda más largas y rojas (**corrimiento al rojo**); el de acercamiento la desplaza hacia el azul (**corrimiento al azul**). Esto es una piedra angular de la astronomía: el corrimiento al rojo de las galaxias lejanas reveló que el universo se **expande**, y los corrimientos Doppler permiten a los astrónomos medir cómo se mueven las estrellas y las galaxias.
+
+## Usos prácticos
+
+El principio impulsa los **radares** de velocidad, el radar meteorológico que sigue el movimiento de las tormentas y la **ecografía Doppler** médica, que mide el flujo sanguíneo rebotando sonido en las células en movimiento.`,
+  },
+  {
+    title: 'Por qué el cielo es azul',
+    question: '¿Por qué el cielo es azul de día y rojo al atardecer?',
+    summary:
+      'El cielo es azul porque las moléculas del aire dispersan la luz azul de longitud de onda corta mucho más que los otros colores; al atardecer, la luz atraviesa más atmósfera, dispersa el azul y deja los rojos.',
+    tags: ['física', 'luz', 'atmósfera', 'óptica', 'ciencia'],
+    language: 'es',
+    content: `# Por qué el cielo es azul
+
+El color azul del cielo diurno y los colores encendidos del atardecer provienen de la misma física: la dispersión de la luz solar por la atmósfera.
+
+## La luz solar es una mezcla de colores
+
+Aunque parezca blanca, la luz solar contiene todos los colores del arcoíris, cada uno con una **longitud de onda** distinta: el azul y el violeta son cortos; el rojo y el naranja, largos.
+
+## La dispersión de Rayleigh
+
+Al atravesar el aire, la luz solar choca con moléculas de gas mucho más pequeñas que su longitud de onda. Estas moléculas diminutas dispersan las longitudes de onda **cortas** mucho más que las largas, un efecto llamado **dispersión de Rayleigh**, en el que la dispersión aumenta bruscamente al disminuir la longitud de onda. La luz azul se dispersa unas diez veces más que la roja.
+
+## Por qué azul y no violeta
+
+El violeta se dispersa aún más que el azul, entonces, ¿por qué el cielo no es violeta? Por dos razones: el Sol emite menos violeta que azul, y los ojos humanos son más sensibles al azul. La combinación hace que el cielo nos parezca azul.
+
+## Amanecer y atardecer
+
+Cuando el Sol está bajo en el horizonte, su luz atraviesa una porción mucho más gruesa de atmósfera. Para cuando te llega, la mayor parte del azul se ha dispersado en otras direcciones, dejando que dominen los **rojos y naranjas** de mayor longitud de onda. El polvo y la contaminación pueden intensificar aún más estos colores.
+
+## En otros mundos
+
+El color de un cielo depende de su atmósfera. Marte, con su aire fino y polvoriento, puede mostrar un cielo diurno color caramelo y atardeceres azulados, lo contrario de la Tierra.`,
+  },
+  {
+    title: 'La resistencia a los antibióticos',
+    question: '¿Por qué los antibióticos son cada vez menos eficaces?',
+    summary:
+      'La resistencia a los antibióticos surge cuando las bacterias evolucionan para sobrevivir a fármacos que antes las mataban; el uso excesivo y el mal uso aceleran este proceso, amenazando con volver peligrosas de nuevo a infecciones comunes.',
+    tags: ['medicina', 'biología', 'salud', 'evolución', 'ciencia'],
+    language: 'es',
+    content: `# La resistencia a los antibióticos
+
+La resistencia a los antibióticos es una de las amenazas más graves de la medicina moderna. Ocurre cuando las bacterias cambian de modo que los fármacos diseñados para matarlas dejan de funcionar.
+
+## Evolución acelerada
+
+Los antibióticos matan o detienen a las bacterias, pero en cualquier población grande unos pocos microbios pueden portar mutaciones aleatorias que les ayudan a sobrevivir. Cuando los antibióticos eliminan a las bacterias vulnerables, estos supervivientes resistentes se multiplican y transmiten su resistencia. Las bacterias también pueden **intercambiar genes de resistencia** directamente entre sí, propagando el rasgo con rapidez. Esto es **selección natural** que ocurre en días, no en milenios.
+
+## Qué lo impulsa
+
+El proceso se acelera por el comportamiento humano:
+
+- **Uso excesivo:** recetar antibióticos para enfermedades víricas como los resfriados, que no pueden tratar.
+- **Tratamientos incompletos:** dejarlos antes de tiempo, lo que deja vivas a las bacterias más resistentes.
+- **Uso intensivo en la agricultura:** dosificar de forma rutinaria a animales sanos.
+
+## Por qué es peligrosa
+
+A medida que la resistencia se propaga, infecciones, cirugías y tratamientos antes rutinarios, como la quimioterapia, se vuelven más arriesgados. Las "superbacterias" resistentes a varios fármacos ya causan muchas muertes al año, y la cartera de antibióticos realmente nuevos ha sido escasa.
+
+## Qué ayuda
+
+Frenar la resistencia significa usar antibióticos solo cuando hacen falta, completar los tratamientos recetados, mejorar la higiene y la vacunación para prevenir infecciones de entrada, e invertir en investigar nuevos tratamientos. Es una responsabilidad compartida entre pacientes, médicos, agricultores y gobiernos.`,
+  },
+  {
+    title: 'El ciclo del nitrógeno',
+    question: '¿Cómo se mueve el nitrógeno entre el aire, el suelo y los seres vivos?',
+    summary:
+      'El ciclo del nitrógeno es el conjunto de procesos que convierten el nitrógeno entre su forma atmosférica inerte y compuestos utilizables por la vida, esencial para las proteínas y el ADN y central para la agricultura.',
+    tags: ['biología', 'ciencias de la tierra', 'agricultura', 'química', 'medio ambiente'],
+    language: 'es',
+    content: `# El ciclo del nitrógeno
+
+El nitrógeno es esencial para toda la vida: forma parte de las proteínas y el ADN. Aunque el aire es alrededor de un 78 % de nitrógeno gaseoso, la mayoría de los organismos no pueden usarlo directamente. El ciclo del nitrógeno es la serie de procesos naturales que convierte el nitrógeno en formas utilizables y de vuelta.
+
+## El problema con el N2
+
+El nitrógeno atmosférico existe como **N2**, dos átomos unidos por un triple enlace excepcionalmente fuerte. Romper ese enlace requiere mucha energía, así que las plantas y los animales no pueden aprovechar por sí mismos la vasta reserva del aire.
+
+## Pasos clave
+
+- **Fijación del nitrógeno.** **Bacterias** especializadas —muchas viven en las raíces de leguminosas como las judías y el trébol— convierten el N2 en amoníaco. Los rayos y los procesos industriales también fijan nitrógeno.
+- **Nitrificación.** Otras bacterias convierten el amoníaco en **nitritos** y luego en **nitratos**, la forma que la mayoría de las plantas absorbe por las raíces.
+- **Asimilación.** Las plantas captan nitratos para construir proteínas; los animales obtienen su nitrógeno comiendo plantas u otros animales.
+- **Descomposición y amonificación.** Cuando los organismos mueren o excretan, los descomponedores devuelven el nitrógeno al suelo como amoníaco.
+- **Desnitrificación.** Por último, ciertas bacterias convierten los nitratos de nuevo en N2 gaseoso, completando el ciclo.
+
+## El impacto humano
+
+La invención del **proceso de Haber-Bosch**, que fija nitrógeno industrialmente para fabricar fertilizantes, aumentó enormemente la producción de alimentos y hoy sostiene a buena parte de la población mundial. Pero el exceso de fertilizante que se filtra sobrecarga ríos y mares, causando **floraciones de algas** y "zonas muertas" sin oxígeno, lo que convierte el ciclo del nitrógeno en una preocupación ambiental clave.`,
+  },
+  {
+    title: 'Cómo funciona la memoria',
+    question: '¿Cómo almacena y recupera recuerdos el cerebro?',
+    summary:
+      'La memoria es la capacidad del cerebro de codificar, almacenar y recuperar información cambiando las conexiones entre neuronas; tiene varios tipos y es reconstructiva, no perfecta.',
+    tags: ['neurociencia', 'psicología', 'biología', 'mente', 'ciencia'],
+    language: 'es',
+    content: `# Cómo funciona la memoria
+
+La memoria nos permite aprender del pasado y dar sentido al presente. Más que un único archivador, es un conjunto de sistemas relacionados.
+
+## Tres procesos básicos
+
+- **Codificación.** Convertir una experiencia en una forma que el cerebro pueda almacenar, con ayuda de la atención y el significado.
+- **Almacenamiento.** Conservar esa información a lo largo del tiempo.
+- **Recuperación.** Traerla de vuelta cuando se necesita.
+
+## Tipos de memoria
+
+- La **memoria sensorial** retiene impresiones en bruto durante una fracción de segundo.
+- La **memoria a corto plazo (de trabajo)** mantiene activa una pequeña cantidad de información durante segundos, lo bastante para marcar un número de teléfono.
+- La **memoria a largo plazo** puede almacenar cantidades enormes durante años. Incluye la memoria **explícita** (hechos y sucesos que puedes describir) y la **implícita** (habilidades como montar en bici).
+
+## La biología
+
+Se cree que los recuerdos se almacenan como patrones de conexiones reforzadas entre neuronas, un principio que a menudo se resume como "las neuronas que se activan juntas se conectan juntas". El **hipocampo** es crucial para formar nuevos recuerdos a largo plazo, mientras que los recuerdos más antiguos y consolidados dependen más de la corteza. El **sueño** desempeña un papel clave en la consolidación del aprendizaje del día.
+
+## La memoria es reconstructiva
+
+Recordar no es como reproducir una grabación. Cada vez que recuerdas algo, el cerebro lo reconstruye, y los detalles pueden cambiar o mezclarse con otra información. Por eso los recuerdos de los testigos pueden estar equivocados con total seguridad, y por eso recordar repetidamente puede reescribir sutilmente el original.`,
+  },
+  // ── Batch 5: Espacio y astronomía ──
+  {
+    title: 'Las fases de la Luna',
+    question: '¿Por qué cambia de forma la Luna a lo largo del mes?',
+    summary:
+      'Las fases de la Luna se deben al cambio del ángulo desde el que vemos su mitad iluminada por el Sol; la Luna no cambia, solo cuánto de su lado iluminado nos da la cara.',
+    tags: ['astronomía', 'luna', 'espacio', 'ciencias de la tierra', 'ciencia'],
+    language: 'es',
+    content: `# Las fases de la Luna
+
+La Luna parece cambiar de forma a lo largo de un mes, pasando de una fina media luna a un disco lleno y de vuelta. La Luna en sí no cambia; lo que cambia es cuánto de su mitad iluminada por el Sol podemos ver desde la Tierra.
+
+## Por qué ocurren las fases
+
+El Sol siempre ilumina la mitad de la Luna, igual que ilumina la mitad de la Tierra. A medida que la Luna orbita la Tierra cada 29,5 días aproximadamente, el ángulo entre el Sol, la Luna y la Tierra cambia, de modo que vemos distintas fracciones de esa mitad iluminada.
+
+## Las fases principales
+
+- **Luna nueva.** La Luna se sitúa entre la Tierra y el Sol, así que su lado iluminado nos da la espalda y resulta casi invisible.
+- **Creciente → cuarto creciente → gibosa creciente.** Cada noche entra en vista una porción mayor del lado iluminado.
+- **Luna llena.** La Tierra está entre el Sol y la Luna, así que vemos toda la cara iluminada.
+- **Gibosa menguante → cuarto menguante → menguante.** La porción iluminada se reduce hacia la siguiente luna nueva.
+
+"Creciente" significa que aumenta; "menguante", que disminuye.
+
+## Siempre la misma cara
+
+La Luna está en **rotación síncrona** con la Tierra: gira una vez por órbita, así que siempre nos muestra el mismo lado. Las fases no son la "cara oculta" de la Luna entrando en vista; son simplemente la línea día/noche (el **terminador**) barriendo la cara que siempre vemos.
+
+## No es lo mismo que un eclipse
+
+Las fases son un resultado cotidiano de la geometría orbital. Los **eclipses** son sucesos más raros que requieren que los tres cuerpos se alineen casi exactamente.`,
+  },
+  {
+    title: 'Los cometas',
+    question: '¿Qué son los cometas y por qué les crece una cola?',
+    summary:
+      'Los cometas son cuerpos helados del sistema solar exterior que, al acercarse al Sol, liberan gas y polvo para formar una coma brillante y largas colas que siempre apuntan en dirección contraria al Sol.',
+    tags: ['astronomía', 'cometas', 'sistema solar', 'espacio', 'ciencia'],
+    language: 'es',
+    content: `# Los cometas
+
+A los cometas se les suele llamar "bolas de nieve sucias": cuerpos pequeños de hielo, polvo y roca que quedaron de la formación del sistema solar. Durante la mayor parte de su vida son oscuros e invisibles, pero un viaje cerca del Sol puede transformarlos en uno de los espectáculos más asombrosos del cielo.
+
+## De dónde vienen
+
+Los cometas se originan en los confines fríos del sistema solar: el **cinturón de Kuiper**, más allá de Neptuno, y la **nube de Oort**, mucho más lejana, una vasta envoltura que se cree rodea al Sol. De vez en cuando, un empujón gravitatorio envía uno cayendo hacia el interior.
+
+## Anatomía de un cometa
+
+- **Núcleo.** El centro sólido de hielo y polvo, normalmente de solo unos kilómetros.
+- **Coma.** Al acercarse al Sol, el hielo se vaporiza (pasa directamente de sólido a gas) y rodea el núcleo con una nube brillante de gas y polvo.
+- **Colas.** Los cometas suelen tener dos: una **cola de polvo** que se curva a lo largo de la trayectoria, y una **cola de iones** recta y azulada de gas cargado, empujada directamente por el viento solar.
+
+## Las colas apuntan lejos del Sol
+
+Una sorpresa común es que la cola de un cometa no va arrastrándose detrás como el humo. **La radiación solar y el viento solar** empujan hacia fuera el material liberado, así que la cola siempre apunta más o menos **lejos del Sol**, incluso cuando el cometa regresa hacia el espacio.
+
+## Visitantes predecibles
+
+Algunos cometas orbitan en calendarios regulares. El más famoso, el **cometa Halley**, regresa cada 76 años aproximadamente y se ha registrado durante más de dos mil años.`,
+  },
+  {
+    title: 'El ciclo de vida de una estrella',
+    question: '¿Cómo nacen las estrellas y cómo mueren?',
+    summary:
+      'Las estrellas se forman a partir de nubes de gas en colapso, brillan fusionando hidrógeno durante la mayor parte de su vida y terminan como enanas blancas, estrellas de neutrones o agujeros negros según su masa.',
+    tags: ['astronomía', 'estrellas', 'espacio', 'física', 'ciencia'],
+    language: 'es',
+    content: `# El ciclo de vida de una estrella
+
+Las estrellas no son eternas. Nacen, viven de millones a miles de millones de años, y mueren de formas que dependen casi por completo de la masa con la que empezaron.
+
+## Nacimiento
+
+Las estrellas se forman dentro de vastas nubes de gas y polvo llamadas **nebulosas**. Cuando una parte de la nube se vuelve lo bastante densa, la gravedad la reúne en una bola caliente y giratoria. Cuando el núcleo se vuelve lo bastante caliente y denso, se enciende la **fusión nuclear**: los átomos de hidrógeno se fusionan en helio, liberando una energía enorme. Así nace una estrella.
+
+## La secuencia principal
+
+Durante la mayor parte de su vida, una estrella está en una fase larga y estable llamada **secuencia principal**, equilibrando el tirón hacia dentro de la gravedad con el empuje hacia fuera de la energía de fusión. Nuestro Sol está aproximadamente a la mitad de su vida en la secuencia principal, de unos 10 000 millones de años.
+
+## La muerte depende de la masa
+
+Cuando una estrella agota su hidrógeno, su destino se bifurca según la masa:
+
+- Las **estrellas como el Sol** se hinchan en **gigantes rojas**, luego desprenden sus capas externas y dejan un núcleo denso que se enfría llamado **enana blanca**.
+- Las **estrellas masivas** queman su combustible deprisa y terminan en una explosión colosal —una **supernova**— que por un instante brilla más que una galaxia. El núcleo que queda se convierte en una **estrella de neutrones** ultradensa o, si es lo bastante masivo, en un **agujero negro**.
+
+## Reciclaje cósmico
+
+Las supernovas forjan y esparcen elementos pesados como el hierro, el carbono y el oro por el espacio. Estos enriquecen nuevas nebulosas, que forman nuevas estrellas y planetas. En un sentido muy real, los átomos de nuestro cuerpo se fabricaron dentro de estrellas que murieron hace mucho.`,
+  },
+  {
+    title: 'Las auroras',
+    question: '¿Qué causa las luces del norte y del sur?',
+    summary:
+      'Las auroras son cortinas de luz brillante que se producen cuando partículas cargadas del Sol son canalizadas por el campo magnético de la Tierra hacia la atmósfera superior, donde excitan moléculas de gas.',
+    tags: ['astronomía', 'atmósfera', 'clima espacial', 'física', 'ciencia'],
+    language: 'es',
+    content: `# Las auroras
+
+Las auroras —las luces del norte (*aurora boreal*) y las del sur (*aurora austral*)— son despliegues brillantes de luz en el cielo nocturno cerca de los polos. Son el resultado visible de una conexión entre el Sol y el campo magnético de la Tierra.
+
+## La fuente solar
+
+El Sol emite sin cesar partículas cargadas llamadas **viento solar**, y los estallidos de actividad como las erupciones solares pueden enviar ráfagas especialmente fuertes. Cuando estas partículas llegan a la Tierra, la mayoría son desviadas por el **campo magnético** del planeta.
+
+## Canalizadas hacia los polos
+
+El campo magnético canaliza algunas partículas hacia los **polos magnéticos**, por eso las auroras suelen verse en latitudes altas. Cuando las partículas se precipitan en la atmósfera superior, chocan con moléculas de gas.
+
+## Por qué los colores
+
+Cada colisión energiza una molécula de gas, que luego libera esa energía como luz:
+
+- El **verde**, el color más común, proviene del oxígeno a altitudes moderadas.
+- El **rojo** proviene del oxígeno a gran altura.
+- El **azul y el violeta** provienen del nitrógeno.
+
+El resultado son cortinas, arcos y espirales ondulantes que cambian a medida que varían los flujos de partículas.
+
+## Clima espacial
+
+Las tormentas solares fuertes pueden empujar las auroras hacia latitudes más bajas y, lo que es más importante, pueden perturbar satélites, comunicaciones por radio y redes eléctricas. Por eso el estudio de las auroras forma parte de la vigilancia del "**clima espacial**", y otros planetas con campo magnético, como Júpiter y Saturno, tienen auroras espectaculares propias.`,
+  },
+  {
+    title: 'Años luz y la distancia cósmica',
+    question: '¿Qué es un año luz y cómo medimos las distancias en el espacio?',
+    summary:
+      'Un año luz es la distancia que recorre la luz en un año; como las distancias cósmicas son enormes, los astrónomos usan el tiempo de viaje de la luz y métodos ingeniosos basados en la geometría y el brillo para medirlas.',
+    tags: ['astronomía', 'espacio', 'física', 'medición', 'ciencia'],
+    language: 'es',
+    content: `# Años luz y la distancia cósmica
+
+El espacio es tan vasto que las unidades corrientes como los kilómetros resultan poco manejables. Para lidiar con estas escalas, los astrónomos miden la distancia usando la velocidad de la luz.
+
+## Qué es un año luz
+
+Un **año luz** es la distancia que recorre la luz en un año: unos 9,5 billones de kilómetros. A pesar del nombre, mide *distancia*, no tiempo. La luz es lo más rápido del universo, así que un año luz representa una extensión enorme.
+
+## Mirar al pasado
+
+Como la luz tarda en viajar, ver un objeto lejano significa verlo tal como *era* cuando la luz partió. La luz del Sol tiene unos 8 minutos cuando nos llega; el sistema estelar más cercano, Alfa Centauri, está a unos 4 años luz, así que lo vemos como era hace 4 años. Las galaxias más lejanas están a miles de millones de años luz: ventanas al universo primitivo.
+
+## Cómo se miden las distancias
+
+Los astrónomos construyen una "**escalera de distancias cósmicas**", con métodos que alcanzan cada vez más lejos:
+
+- **Paralaje.** Para las estrellas cercanas, los astrónomos miden el ligero desplazamiento de su posición aparente a medida que la Tierra orbita el Sol, el mismo efecto que ves cuando un objeto cercano se desplaza contra el fondo al mover la cabeza.
+- **Candelas estándar.** Ciertas estrellas y estrellas en explosión (como las supernovas de tipo Ia) tienen un brillo real conocido. Comparando lo brillantes que *parecen* con lo brillantes que *son* en realidad, los astrónomos calculan la distancia.
+- **Corrimiento al rojo.** Para las galaxias más lejanas, el estiramiento de su luz revela a qué velocidad se alejan, lo que se relaciona con la distancia en un universo en expansión.
+
+Cada peldaño se calibra con el de abajo, lo que permite a los astrónomos cartografiar el cosmos hasta su borde visible.`,
+  },
+  {
+    title: 'Los exoplanetas',
+    question: '¿Cómo encuentran los astrónomos planetas alrededor de otras estrellas?',
+    summary:
+      'Los exoplanetas son planetas que orbitan estrellas distintas del Sol; los astrónomos los detectan sobre todo por el ligero oscurecimiento de la luz estelar cuando un planeta transita, o por el leve bamboleo de la estrella.',
+    tags: ['astronomía', 'exoplanetas', 'espacio', 'ciencia', 'descubrimiento'],
+    language: 'es',
+    content: `# Los exoplanetas
+
+Un exoplaneta es un planeta que orbita una estrella distinta de nuestro Sol. Los primeros exoplanetas confirmados alrededor de una estrella similar al Sol se hallaron en la década de 1990; desde entonces se han descubierto miles, transformando nuestra visión de la galaxia.
+
+## Por qué son difíciles de ver
+
+Los planetas no producen su propia luz y son diminutos junto a sus deslumbrantes estrellas anfitrionas, como avistar de lejos una luciérnaga junto a un reflector. Por eso los astrónomos suelen detectar exoplanetas de forma **indirecta**, por sus efectos sobre la estrella.
+
+## Los principales métodos de detección
+
+- **El método del tránsito.** Si la órbita de un planeta pasa entre nosotros y su estrella, bloquea una fracción minúscula de la luz estelar, causando una pequeña y regular caída de brillo. Medir estas caídas revela el tamaño y la órbita del planeta. El telescopio Kepler de la NASA usó esto para hallar miles de planetas.
+- **El método de la velocidad radial.** La gravedad de un planeta tira de su estrella y la hace bambolearse ligeramente. Este bamboleo desplaza la luz de la estrella (por el efecto Doppler) y revela la masa y la órbita del planeta.
+
+Otros métodos incluyen la **imagen directa** de planetas grandes y lejanos y la **microlente gravitatoria**.
+
+## Lo que hemos aprendido
+
+Los exoplanetas son asombrosamente diversos: "júpiteres calientes" abrasadores que orbitan en días, "supertierras" mayores que la nuestra y mundos en la **zona habitable**, donde las temperaturas podrían permitir agua líquida. Los descubrimientos sugieren que los planetas son comunes —la mayoría de las estrellas probablemente los alberguen—, lo que agudiza la búsqueda de mundos que puedan sostener vida.`,
+  },
+  {
+    title: 'El Big Bang',
+    question: '¿Qué es la teoría del Big Bang y qué pruebas la respaldan?',
+    summary:
+      'La teoría del Big Bang sostiene que el universo comenzó hace unos 13 800 millones de años a partir de un estado extremadamente caliente y denso y se ha expandido desde entonces, respaldada por varias líneas de evidencia.',
+    tags: ['astronomía', 'cosmología', 'física', 'universo', 'ciencia'],
+    language: 'es',
+    content: `# El Big Bang
+
+La teoría del Big Bang es la principal explicación científica de cómo comenzó el universo. Sostiene que, hace unos **13 800 millones de años**, el universo partió de un estado extraordinariamente caliente y denso, y desde entonces se ha estado expandiendo y enfriando.
+
+## Una idea equivocada común
+
+El Big Bang no fue una explosión *hacia* un espacio vacío. Más bien, el propio espacio empezó a expandirse en todas partes a la vez. No hay un único "centro" del universo; cada región se aleja de todas las demás, como puntos en la superficie de un globo que se infla.
+
+## Las pruebas
+
+Tres grandes observaciones respaldan la teoría:
+
+- **El universo en expansión.** En la década de 1920, Edwin Hubble descubrió que las galaxias lejanas se alejan de nosotros, y tanto más rápido cuanto más lejos están. Rebobinar esta expansión apunta a un comienzo denso.
+- **El fondo cósmico de microondas (CMB).** Un tenue resplandor de radiación de microondas llena todo el cielo: el resplandor remanente y enfriado del universo primitivo y caliente, predicho antes de hallarse en 1965.
+- **La abundancia de elementos ligeros.** La teoría predice con exactitud las proporciones de hidrógeno, helio y litio que se formaron en los primeros minutos del universo.
+
+## Qué dice y qué no
+
+El Big Bang describe la *evolución* del universo desde una fracción de segundo en adelante, no el "porqué" último ni qué, si es que algo, hubo "antes". Quedan preguntas abiertas, incluida la naturaleza de la **materia oscura** y la **energía oscura**, que juntas constituyen la mayor parte del contenido del universo y rigen su expansión en curso.`,
+  },
+  {
+    title: 'Los eclipses',
+    question: '¿Cuál es la diferencia entre un eclipse solar y uno lunar?',
+    summary:
+      'Los eclipses ocurren cuando el Sol, la Tierra y la Luna se alinean: un eclipse solar sucede cuando la Luna bloquea el Sol, y uno lunar cuando la sombra de la Tierra cae sobre la Luna.',
+    tags: ['astronomía', 'luna', 'sol', 'espacio', 'ciencia'],
+    language: 'es',
+    content: `# Los eclipses
+
+Un eclipse ocurre cuando el Sol, la Tierra y la Luna se alinean de modo que uno proyecta una sombra sobre otro, o le bloquea la vista. Hay dos tipos principales, y es fácil confundirlos.
+
+## Eclipse solar
+
+Un **eclipse solar** ocurre durante la luna nueva, cuando **la Luna pasa entre el Sol y la Tierra**, bloqueando la luz del Sol. Como la sombra de la Luna es pequeña, solo lo ve la gente situada en una franja estrecha de la Tierra.
+
+- En un eclipse solar **total**, la Luna cubre por completo el Sol, revelando por un instante la tenue atmósfera exterior del Sol (la corona) y convirtiendo el día en penumbra.
+- Una coincidencia notable lo hace posible: el Sol es unas 400 veces más ancho que la Luna, pero también está unas 400 veces más lejos, así que ambos parecen del mismo tamaño en nuestro cielo.
+
+⚠️ Mirar directamente un eclipse solar sin filtros adecuados puede dañar los ojos.
+
+## Eclipse lunar
+
+Un **eclipse lunar** ocurre durante la luna llena, cuando **la Tierra pasa entre el Sol y la Luna**, proyectando su sombra sobre la Luna. Se ve desde cualquier lugar del lado nocturno de la Tierra y es completamente seguro de observar.
+
+Durante un eclipse lunar total, la Luna suele brillar de un rojo cobrizo —una "**luna de sangre**"— porque parte de la luz solar se curva al atravesar la atmósfera terrestre y cae sobre la Luna, filtrada hacia el rojo igual que los atardeceres.
+
+## Por qué no cada mes
+
+La órbita de la Luna está inclinada unos 5° respecto a la órbita de la Tierra alrededor del Sol, así que los tres cuerpos no suelen alinearse con precisión. Esa inclinación es la razón por la que los eclipses ocurren solo unas pocas veces al año y no cada mes.`,
+  },
 ];
