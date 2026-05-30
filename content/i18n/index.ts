@@ -1,6 +1,7 @@
 import type { DraftArticle } from '../types';
 import { zh } from './zh';
 import { ja } from './ja';
+import { ko } from './ko';
 
 // Aggregated translations across all languages completed so far. Append new
 // per-language arrays here as each language file is built out. The seeder
@@ -9,6 +10,7 @@ import { ja } from './ja';
 export const allTranslations: DraftArticle[] = [
   ...zh,
   ...ja,
+  ...ko,
 ];
 
-export { zh, ja };
+export { zh, ja, ko };
