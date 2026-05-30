@@ -453,4 +453,493 @@ Eben diese Starrheit war auch seine Schwäche. Die Geldmenge war an die Goldrese
 
 Die Nationen lösten sich schrittweise vom Gold. Das System brach 1971 endgültig zusammen, als die Vereinigten Staaten die Umtauschbarkeit des Dollars in Gold beendeten. Heute nutzt die Welt **Fiatgeld**, dessen Wert auf der Glaubwürdigkeit von Regierungen und Zentralbanken ruht und nicht auf einer physischen Ware.`,
   },
+  // ── Batch 3: Technik und Mathematik ──
+  {
+    title: 'Wie GPS funktioniert',
+    question: 'Woher weiß GPS genau, wo du bist?',
+    summary:
+      'GPS bestimmt den Standort, indem es die Laufzeit der Signale mehrerer Satelliten misst und Trilateration anwendet; präzise Atomuhren und relativistische Korrekturen machen es auf wenige Meter genau.',
+    tags: ['Technik', 'Navigation', 'Satelliten', 'Physik', 'Ingenieurwesen'],
+    language: 'de',
+    content: `# Wie GPS funktioniert
+
+Das Globale Positionsbestimmungssystem (GPS) lässt einen Empfänger — in deinem Telefon, Auto oder deiner Uhr — überall auf der Erde bestimmen, wo er ist, meist auf wenige Meter genau. Es beruht auf einer Konstellation von Satelliten und etwas raffinierter Physik.
+
+## Satelliten und Signale
+
+GPS nutzt rund 30 Satelliten, die in etwa 20 000 km Höhe kreisen und so angeordnet sind, dass von jedem Punkt des Planeten stets mehrere sichtbar sind. Jeder sendet fortlaufend ein Funksignal, das die genaue **Zeit** des Aussendens und die **Position** des Satelliten enthält.
+
+## Trilateration
+
+Der Empfänger misst, wie lange jedes Signal brauchte. Da Funkwellen sich mit Lichtgeschwindigkeit bewegen, verrät die Laufzeit die **Entfernung** zu diesem Satelliten. Die Entfernung zu einem Satelliten setzt dich irgendwo auf eine Kugel um ihn; das Kombinieren der Entfernungen zu mehreren Satelliten engt deine Position auf einen einzigen Punkt ein. Diese geometrische Technik heißt **Trilateration**. Es braucht Signale von mindestens vier Satelliten — drei zur Standortbestimmung und ein vierter, um den Uhrenfehler des Empfängers zu lösen.
+
+## Warum Uhren und Relativität wichtig sind
+
+Die Zeitmessung muss außerordentlich präzise sein: Ein Fehler von einer Millionstel Sekunde würde die Position um Hunderte Meter verschieben. Die Satelliten tragen **Atomuhren**, und das System korrigiert sogar **Einsteins Relativität** — die Geschwindigkeit der Satelliten und ihre schwächere Schwerkraft lassen ihre Uhren etwas anders ticken als Uhren am Boden. Ohne diese Korrekturen würde GPS um Kilometer pro Tag abweichen.
+
+## Mehr als Positionsbestimmung
+
+Dieselbe präzise Zeitmessung untermauert Finanznetze, Stromnetze und Telekommunikation und macht GPS zu einem stillen Rückgrat der modernen Infrastruktur.`,
+  },
+  {
+    title: 'Die Public-Key-Kryptografie',
+    question: 'Wie können zwei Fremde sicher über das offene Internet kommunizieren?',
+    summary:
+      'Die Public-Key-Kryptografie nutzt mathematisch verknüpfte Schlüsselpaare — einen öffentlichen, einen privaten —, damit Menschen Nachrichten verschlüsseln und Identitäten prüfen können, ohne je vorab ein Geheimnis zu teilen.',
+    tags: ['Technik', 'Kryptografie', 'Sicherheit', 'Mathematik', 'Internet'],
+    language: 'de',
+    content: `# Die Public-Key-Kryptografie
+
+Die Public-Key-Kryptografie ist der Durchbruch, der sichere Kommunikation zwischen Menschen ermöglicht, die sich nie begegnet sind. Sie untermauert HTTPS, sichere Messenger, digitale Signaturen und Kryptowährungen.
+
+## Die Idee des Schlüsselpaars
+
+Die herkömmliche („symmetrische“) Verschlüsselung nutzt einen einzigen geteilten Schlüssel zum Ver- und Entriegeln einer Nachricht — was ein Problem aufwirft: Wie teilt man diesen Schlüssel überhaupt sicher? Die Public-Key- (oder **asymmetrische**) Kryptografie löst das mit einem **Paar** von Schlüsseln:
+
+- Einem **öffentlichen Schlüssel**, den jeder sehen darf.
+- Einem **privaten Schlüssel**, den der Besitzer geheim hält.
+
+Beide sind mathematisch so verknüpft, dass, was ein Schlüssel verriegelt, nur der andere entriegeln kann — doch das Kennen des öffentlichen Schlüssels erlaubt nicht, den privaten zu berechnen.
+
+## Zwei Hauptanwendungen
+
+- **Verschlüsselung.** Um jemandem eine vertrauliche Nachricht zu senden, verschlüsselst du sie mit *dessen öffentlichem Schlüssel*; nur dessen privater Schlüssel kann sie entschlüsseln.
+- **Digitale Signaturen.** Um zu beweisen, dass eine Nachricht wirklich von dir stammt, signierst du sie mit *deinem privaten Schlüssel*; jeder kann sie mit deinem öffentlichen Schlüssel prüfen, was Echtheit und Unversehrtheit bestätigt.
+
+## Die Mathematik dahinter
+
+Die Sicherheit ruht auf Problemen, die in eine Richtung leicht, in die Gegenrichtung aber äußerst schwer zu lösen sind — etwa das **Faktorisieren** riesiger Zahlen (RSA) oder das Lösen diskreter Logarithmen auf **elliptischen Kurven**. Sie umzukehren würde unpraktikabel viel Rechenzeit kosten.
+
+## Im Alltag
+
+Wenn dein Browser ein Schloss zeigt, hat er bereits Public-Key-Kryptografie genutzt, um die Website zu prüfen und einen schnellen geteilten Schlüssel für den Rest der Sitzung auszuhandeln.`,
+  },
+  {
+    title: 'Die Fibonacci-Folge',
+    question: 'Was ist die Fibonacci-Folge und warum erscheint sie in der Natur?',
+    summary:
+      'Die Fibonacci-Folge ist eine Reihe, in der jede Zahl die Summe der beiden vorigen ist; sie hängt mit dem Goldenen Schnitt zusammen und erscheint in Mustern wie Blütenblättern und Spiralgehäusen.',
+    tags: ['Mathematik', 'Muster', 'Natur', 'Geometrie', 'Wissenschaft'],
+    language: 'de',
+    content: `# Die Fibonacci-Folge
+
+Die Fibonacci-Folge ist eines der berühmtesten Muster der Mathematik: eine einfache Regel, die überraschende Verbindungen zur Geometrie und zur natürlichen Welt hervorbringt.
+
+## Die Regel
+
+Beginne mit 0 und 1, und mache jede neue Zahl zur **Summe der beiden vorigen**:
+
+\`\`\`
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
+\`\`\`
+
+Die Folge ist nach dem italienischen Mathematiker **Leonardo von Pisa** (Fibonacci) benannt, der sie 1202 über ein Rätsel zur Kaninchenzucht in Europa einführte, obwohl sie in der indischen Mathematik früher bekannt war.
+
+## Verbindung zum Goldenen Schnitt
+
+Teile eine beliebige Fibonacci-Zahl durch die vorhergehende, und das Ergebnis nähert sich immer mehr etwa **1,618** — dem **Goldenen Schnitt** (oft als φ geschrieben). Je weiter man in der Folge geht, desto genauer wird die Näherung.
+
+## Warum sie in der Natur erscheint
+
+Fibonacci-Zahlen erscheinen in der Anzahl der Blütenblätter vieler Blumen, der Anordnung der Samen einer Sonnenblume und der Verzweigung von Pflanzen. Der tiefere Grund ist **effizientes Packen**: Blätter oder Samen in Winkeln anzuordnen, die mit dem Goldenen Schnitt zusammenhängen, lässt eine Pflanze Sonnenlicht einfangen oder Samen mit minimaler Überlappung unterbringen. Das Muster ist also weniger eine mystische Signatur als eine natürliche Folge der Optimierung.
+
+## Über die Biologie hinaus
+
+Die Folge taucht auch in Computeralgorithmen, Finanzanalysen und der Kunst auf, wo der Goldene Schnitt seit Langem mit ansprechenden Proportionen verbunden ist.`,
+  },
+  {
+    title: 'Primzahlen',
+    question: 'Was sind Primzahlen und warum sind sie wichtig?',
+    summary:
+      'Primzahlen sind ganze Zahlen größer als eins, die außer eins und sich selbst keine Teiler haben; sie sind die Bausteine der Arithmetik und die Grundlage der modernen Verschlüsselung.',
+    tags: ['Mathematik', 'Zahlen', 'Kryptografie', 'Theorie', 'Wissenschaft'],
+    language: 'de',
+    content: `# Primzahlen
+
+Eine Primzahl ist eine ganze Zahl größer als 1, die sich nur durch 1 und sich selbst ohne Rest teilen lässt. Die ersten Primzahlen sind 2, 3, 5, 7, 11 und 13. Zahlen mit weiteren Teilern, wie 6 (= 2 × 3), heißen **zusammengesetzt**.
+
+## Die Atome der Arithmetik
+
+Primzahlen sind grundlegend wegen des **Fundamentalsatzes der Arithmetik**: Jede ganze Zahl größer als 1 lässt sich auf genau eine Weise (von der Reihenfolge abgesehen) als Produkt von Primzahlen schreiben. Zum Beispiel 60 = 2 × 2 × 3 × 5. In diesem Sinn sind Primzahlen die unteilbaren „Atome“, aus denen alle anderen Zahlen aufgebaut sind.
+
+## Unendlich viele
+
+Der griechische Mathematiker **Euklid** bewies vor über zweitausend Jahren, dass es keine größte Primzahl gibt — die Liste setzt sich endlos fort. Doch Primzahlen werden seltener, je größer die Zahlen werden, und genau vorherzusagen, wo sie liegen, ist ein tiefes, noch ungelöstes Gebiet der Mathematik, das mit der berühmten **Riemann-Hypothese** verbunden ist.
+
+## Warum sie heute wichtig sind
+
+Primzahlen treiben die moderne **Kryptografie** an. Verfahren wie RSA beruhen auf einer praktischen Asymmetrie: Zwei große Primzahlen zu multiplizieren ist leicht, doch die entstandene riesige Zahl zu nehmen und die ursprünglichen Primzahlen zurückzugewinnen (**Faktorisieren**) ist mit heutigen Computern außerordentlich schwer. Diese Schwierigkeit hält Online-Banking, Messenger und Handel sicher.
+
+## Eine fortlaufende Jagd
+
+Mathematiker und Freiwillige mit vernetzten Computern suchen unentwegt nach immer größeren Primzahlen. Die größten bekannten Primzahlen haben inzwischen Dutzende Millionen Stellen.`,
+  },
+  {
+    title: 'Der Zinseszins',
+    question: 'Warum ist der Zinseszins über die Zeit so mächtig?',
+    summary:
+      'Zinseszins sind Zinsen, die sowohl auf das ursprüngliche Kapital als auch auf bereits angesammelte Zinsen anfallen, was ein exponentielles Wachstum erzeugt, das frühes und langfristiges Sparen belohnt.',
+    tags: ['Finanzen', 'Wirtschaft', 'Mathematik', 'Geld', 'Privatfinanzen'],
+    language: 'de',
+    content: `# Der Zinseszins
+
+Der Zinseszins wird oft die mächtigste Kraft der Finanzen genannt. Es ist das Erzielen von Zinsen nicht nur auf das ursprünglich angelegte Geld, sondern auch auf die Zinsen, die dieses Geld bereits erbracht hat.
+
+## Einfach gegen zusammengesetzt
+
+Beim **einfachen Zins** verdienst du jede Periode einen festen Betrag, der nur auf der ursprünglichen Summe (dem **Kapital**) beruht. Beim **Zinseszins** werden die Zinsen jeder Periode dem Saldo zugeschlagen, sodass die Zinsen der nächsten Periode auf einem größeren Betrag berechnet werden. Das Wachstum beschleunigt sich also mit der Zeit — es ist **exponentiell**, nicht linear.
+
+## Ein kurzes Beispiel
+
+Lege 1000 zu 7 % pro Jahr an:
+
+- Nach 1 Jahr: 1070
+- Nach 10 Jahren: etwa 1967
+- Nach 30 Jahren: etwa 7612
+
+Das Geld **verdoppelt** sich etwa alle zehn Jahre, ohne dass ein Cent hinzukommt — und je länger es läuft, desto dramatischer der Effekt.
+
+## Die 72er-Regel
+
+Eine handliche Faustregel, die **72er-Regel**, schätzt, wie lange eine Anlage zum Verdoppeln braucht: Teile 72 durch den jährlichen Zinssatz. Bei 8 % verdoppelt sich das Geld in etwa 9 Jahren (72 ÷ 8).
+
+## Warum die Zeit am meisten zählt
+
+Da sich der Zinseszins auf sich selbst aufbaut, zählt **früh anzufangen** oft mehr, als später große Beträge anzulegen. Dieselbe Logik wirkt umgekehrt bei Schulden: Unbezahlte Salden hochverzinster Kredite oder Kreditkarten verzinsen sich gegen den Schuldner, weshalb solche Schulden beunruhigend schnell wachsen können.`,
+  },
+  {
+    title: 'Hashfunktionen',
+    question: 'Was ist eine Hashfunktion und wo wird sie eingesetzt?',
+    summary:
+      'Eine Hashfunktion bildet Daten beliebiger Größe auf eine Zeichenkette fester Länge ab; gute kryptografische Hashes sind schnell, deterministisch und praktisch unmöglich umzukehren oder zu Kollisionen zu bringen.',
+    tags: ['Technik', 'Informatik', 'Kryptografie', 'Sicherheit', 'Daten'],
+    language: 'de',
+    content: `# Hashfunktionen
+
+Eine Hashfunktion ist ein kleines, aber wesentliches Werkzeug der Informatik. Sie nimmt eine Eingabe beliebiger Länge — ein Wort, eine Datei, eine ganze Datenbank — und erzeugt eine Ausgabe fester Länge, den **Hash** oder die **Prüfsumme**.
+
+## Wichtige Eigenschaften
+
+Eine nützliche Hashfunktion ist:
+
+- **Deterministisch.** Dieselbe Eingabe erzeugt stets denselben Hash.
+- **Schnell** zu berechnen.
+- **Von fester Länge.** Eine Nachricht von einem Zeichen und eine Datei von einem Gigabyte ergeben etwa ein 256-Bit-Resultat.
+
+Ein *kryptografischer* Hash fügt stärkere Garantien hinzu:
+
+- **Einwegfunktion.** Aus einem Hash lässt sich die ursprüngliche Eingabe nicht praktikabel zurückgewinnen.
+- **Kollisionssicher.** Es ist praktisch unmöglich, zwei verschiedene Eingaben mit demselben Hash zu finden.
+- **Lawineneffekt.** Das Ändern eines einzigen Zeichens der Eingabe verwürfelt die Ausgabe vollständig.
+
+## Alltägliche Anwendungen
+
+- **Passwortspeicherung.** Systeme speichern den Hash eines Passworts, nicht das Passwort selbst, sodass ein Datenleck die Geheimnisse der Nutzer nicht direkt preisgibt.
+- **Integritätsprüfungen.** Downloads veröffentlichen oft einen Hash, damit man prüfen kann, dass eine Datei unversehrt und unverändert ankam.
+- **Datenstrukturen.** **Hashtabellen** nutzen Hashing, um Einträge nahezu sofort zu finden, gleich wie viele Daten gespeichert sind.
+- **Blockchains.** Kryptowährungen verketten Blöcke mittels Hashes und machen das Hauptbuch manipulationssicher.
+
+## Gängige Algorithmen
+
+Moderne Systeme bevorzugen starke Funktionen wie **SHA-256**. Ältere wie MD5 und SHA-1 gelten für die Sicherheit heute als gebrochen, weil Forscher Wege fanden, Kollisionen zu erzeugen, und sollten nicht zum Schutz sensibler Daten verwendet werden.`,
+  },
+  {
+    title: 'Die Turingmaschine',
+    question: 'Was ist eine Turingmaschine und warum ist sie grundlegend für die Informatik?',
+    summary:
+      'Die Turingmaschine ist ein einfaches mathematisches Modell des Rechnens, 1936 von Alan Turing ersonnen, das definiert, was es heißt, dass ein Problem berechenbar ist, und die gesamte Informatik untermauert.',
+    tags: ['Informatik', 'Mathematik', 'Theorie', 'Geschichte', 'Technik'],
+    language: 'de',
+    content: `# Die Turingmaschine
+
+Die Turingmaschine ist kein physisches Gerät, sondern ein Gedankenexperiment — ein mathematisches Modell, das die Idee des Rechnens selbst erfasst. 1936 von **Alan Turing** vorgeschlagen, bleibt sie das theoretische Fundament der Informatik.
+
+## Ein täuschend einfacher Aufbau
+
+Eine Turingmaschine besteht aus:
+
+- Einem unendlichen **Band**, in Zellen unterteilt, von denen jede ein Symbol enthält.
+- Einem **Kopf**, der das Symbol darunter lesen und schreiben und sich nach links oder rechts bewegen kann.
+- Einer Menge von **Zuständen** und einer Tabelle von **Regeln**, die der Maschine sagen, was sie je nach aktuellem Zustand und gelesenem Symbol tun soll.
+
+Aus diesen minimalen Teilen kann die Maschine jedes schrittweise Verfahren ausführen. Turings Einsicht war, dass dieses einfache System mächtig genug ist, **jede** Berechnung auszuführen, die sich durch einen Algorithmus beschreiben lässt.
+
+## Universalität
+
+Turing beschrieb auch eine **universelle** Maschine, die die Beschreibung jeder anderen Turingmaschine einlesen und sie dann nachbilden kann. Dies ist der theoretische Vorfahr des modernen programmierbaren Computers: eine Maschine, die verschiedene Software ausführt, statt für jede Aufgabe ein eigenes Gerät.
+
+## Die Grenzen des Rechnens
+
+Das Modell offenbarte auch Grenzen. Turing bewies, dass manche Probleme **unentscheidbar** sind: Kein Algorithmus kann sie lösen. Das berühmteste ist das **Halteproblem**: Es gibt keine allgemeine Methode zu bestimmen, ob ein Programm für jede Eingabe schließlich anhält oder ewig weiterläuft.
+
+## Eine bleibende Wirkung
+
+Alles, was ein echter Computer berechnen kann, kann auch eine Turingmaschine berechnen (genug Zeit und Band vorausgesetzt). Diese Gleichwertigkeit ist der Grund, warum das Modell bis heute die Grenzen dessen definiert, was Computer können — und nicht können.`,
+  },
+  {
+    title: 'Bandbreite und Latenz',
+    question: 'Was ist der Unterschied zwischen Bandbreite und Latenz?',
+    summary:
+      'Bandbreite ist, wie viele Daten eine Verbindung pro Sekunde befördern kann, während Latenz die Verzögerung ist, bevor Daten einzutreffen beginnen; beide prägen, wie „schnell“ sich ein Netz anfühlt, sind aber nicht dasselbe.',
+    tags: ['Technik', 'Netzwerke', 'Internet', 'Informatik', 'Ingenieurwesen'],
+    language: 'de',
+    content: `# Bandbreite und Latenz
+
+Man sagt oft, eine Verbindung sei „schnell“, doch Geschwindigkeit hat in Wahrheit zwei verschiedene Dimensionen: **Bandbreite** und **Latenz**. Sie zu verwechseln, ist eine häufige Quelle des Ärgers mit Netzen.
+
+## Bandbreite: wie viel
+
+Die **Bandbreite** ist die größte Datenmenge, die eine Verbindung in einer gegebenen Zeit übertragen kann, meist in Megabit oder Gigabit pro Sekunde gemessen. Ein nützlicher Vergleich ist die Breite eines Rohrs: Ein breiteres Rohr lässt mehr Wasser auf einmal durch. Bandbreite hilft am meisten beim Bewegen **großer** Datenmengen — hochauflösendes Video streamen, große Dateien herunterladen oder in die Cloud sichern.
+
+## Latenz: wie bald
+
+Die **Latenz** ist die Verzögerung zwischen dem Senden einer Anfrage und dem Empfang der ersten Antwort, in Millisekunden gemessen. Im Rohrvergleich ist es, wie lange das Wasser von einem Ende zum anderen braucht. Latenz hängt von der Entfernung (Signale können die Lichtgeschwindigkeit nicht überschreiten), der Zahl der Netz-Hops und Verarbeitungsverzögerungen ab. Latenz zählt am meisten bei **interaktiven** Aufgaben — Videoanrufe, Online-Spiele und schnelle Web-Anfragen.
+
+## Warum der Unterschied wichtig ist
+
+Eine Verbindung kann hohe Bandbreite, aber hohe Latenz haben — oder umgekehrt. Eine Satellitenverbindung mag viele Daten befördern und sich dennoch träge anfühlen, weil jedes Signal Zehntausende Kilometer zurücklegt. Darum kann ein Video flüssig streamen (Bandbreite), während sich ein Spiel noch träge anfühlt (Latenz).
+
+## Verwandte Begriffe
+
+Der **Durchsatz (Throughput)** ist die in der Praxis tatsächlich erreichte Datenrate, meist niedriger als die theoretische Bandbreite. Der **Jitter** ist die zeitliche Schwankung der Latenz, die Sprache und Video stören kann, selbst wenn die mittlere Latenz niedrig ist.`,
+  },
+  // ── Batch 4: Geist, Gesundheit und Alltag ──
+  {
+    title: 'Der Placebo-Effekt',
+    question: 'Warum lässt eine Scheinbehandlung Menschen manchmal besser fühlen?',
+    summary:
+      'Der Placebo-Effekt ist eine echte Besserung der Beschwerden, hervorgerufen durch die Erwartungen und Überzeugungen einer Person über eine Behandlung und nicht durch einen Wirkstoff.',
+    tags: ['Medizin', 'Psychologie', 'Gesundheit', 'Wissenschaft', 'Geist'],
+    language: 'de',
+    content: `# Der Placebo-Effekt
+
+Der Placebo-Effekt tritt ein, wenn sich der Gesundheitszustand eines Menschen tatsächlich bessert, nachdem er eine Behandlung ohne therapeutischen Wirkstoff erhalten hat — etwa eine Zuckerpille oder eine Kochsalzinjektion. Die Besserung entspringt der Reaktion von Geist und Körper auf die *Erwartung*, besser zu werden.
+
+## Eine echte, messbare Reaktion
+
+Placebos sind nicht im abwertenden Sinne „alles nur Einbildung“. Erwartung kann echte körperliche Veränderungen auslösen: Das Gehirn kann eigene schmerzlindernde Stoffe (etwa Endorphine) ausschütten, und Stressreaktionen können sich verschieben. Der Effekt ist am stärksten bei Beschwerden, die von der Wahrnehmung geprägt sind, wie **Schmerz, Übelkeit, Müdigkeit und Angst**, und am schwächsten bei objektiven Krankheitsvorgängen — ein Placebo wird keinen Tumor schrumpfen lassen noch eine Infektion heilen.
+
+## Warum er für die Wissenschaft wichtig ist
+
+Da allein die Erwartung das Empfinden ändern kann, nutzen medizinische Studien **Placebo-Kontrollen**. Patienten erhalten zufällig das echte Mittel oder ein Placebo, und idealerweise wissen weder sie noch die Forscher, wer was bekam (ein **Doppelblind**-Design). Eine neue Behandlung muss das Placebo übertreffen, um als wirksam zu gelten.
+
+## Der Nocebo-Effekt
+
+Die Kehrseite ist der **Nocebo-Effekt**: Negative Erwartungen können echte negative Beschwerden erzeugen. Schon vor möglichen Nebenwirkungen eines Mittels gewarnt zu werden, kann manche sie erleben lassen.
+
+## Ethik und Anwendung
+
+Patienten absichtlich zu täuschen wirft ethische Probleme auf, weshalb Ärzte selten reine Placebos verordnen. Doch das Verständnis des Effekts hilft zu erklären, warum ein fürsorgliches, zuversichtliches klinisches Umfeld selbst zur Heilung beiträgt.`,
+  },
+  {
+    title: 'Warum wir schlafen',
+    question: 'Warum müssen Menschen schlafen?',
+    summary:
+      'Schlaf ist ein lebenswichtiger, aktiver Zustand, in dem Gehirn und Körper Reparatur, Gedächtnisfestigung und Abfallbeseitigung leisten; chronischer Schlafmangel schadet Gesundheit, Stimmung und Kognition.',
+    tags: ['Biologie', 'Gesundheit', 'Neurowissenschaft', 'Psychologie', 'Wissenschaft'],
+    language: 'de',
+    content: `# Warum wir schlafen
+
+Schlaf nimmt etwa ein Drittel des menschlichen Lebens ein, ist aber alles andere als untätig. Er ist ein aktiver, sorgfältig regulierter Zustand, der für die körperliche und seelische Gesundheit unerlässlich ist.
+
+## Die Schlafstadien
+
+Eine Nacht durchläuft Stadien etwa alle 90 Minuten:
+
+- **Non-REM-Schlaf**, einschließlich des tiefen „Slow-Wave“-Schlafs, in dem der Körper Gewebe repariert, Knochen und Muskeln aufbaut und das Immunsystem stärkt.
+- **REM-Schlaf (schnelle Augenbewegungen)**, in dem die meisten lebhaften Träume auftreten und das Gehirn hochaktiv ist.
+
+## Was der Schlaf bewirkt
+
+Die Forschung weist auf mehrere Kernfunktionen:
+
+- **Gedächtnisfestigung.** Das Gehirn spielt die Erlebnisse des Tages erneut ab und ordnet sie um, verlagert Informationen in den Langzeitspeicher und stärkt das Lernen.
+- **Abfallbeseitigung.** Im Schlaf spült das Gehirn Stoffwechselnebenprodukte aus, darunter Proteine, die mit neurodegenerativen Erkrankungen verbunden sind.
+- **Erholung.** Hormone, die Wachstum, Appetit und Stress regulieren, werden neu ausbalanciert.
+
+## Die Kosten von zu wenig
+
+Chronischer Schlafmangel ist mit verminderter Aufmerksamkeit und Urteilskraft, geschwächter Immunität, Gewichtszunahme und höherem Risiko für Herzkrankheiten, Diabetes und Stimmungsstörungen verbunden. Selbst geringe, aber anhaltende Defizite mindern messbar die geistige Leistung.
+
+## Die innere Uhr
+
+Der Schlaf wird vom **zirkadianen Rhythmus** gesteuert, einer inneren ~24-Stunden-Uhr, die vor allem durch Licht synchronisiert wird. Ihn zu stören — durch Schichtarbeit, Jetlag oder späte Bildschirme — kann die Schlafqualität verschlechtern, selbst wenn die Gesamtstunden ausreichend erscheinen.`,
+  },
+  {
+    title: 'Koffein und das Gehirn',
+    question: 'Wie hält dich Koffein wach?',
+    summary:
+      'Koffein bekämpft Schläfrigkeit, indem es Adenosin blockiert, einen Hirnstoff, der sich tagsüber ansammelt und Schlaf fördert, und maskiert so die Müdigkeit vorübergehend, statt sie zu beseitigen.',
+    tags: ['Biologie', 'Neurowissenschaft', 'Gesundheit', 'Chemie', 'Geist'],
+    language: 'de',
+    content: `# Koffein und das Gehirn
+
+Koffein ist die weltweit am häufigsten konsumierte psychoaktive Substanz, enthalten in Kaffee, Tee, Schokolade und vielen Erfrischungsgetränken. Es wirkt, indem es eines der natürlichen Schlafsignale des Gehirns stört.
+
+## Das „Müdigkeits“-Signal blockieren
+
+Während du wach bleibst, sammelt sich im Gehirn allmählich ein Molekül namens **Adenosin** an. Bindet Adenosin an seine Rezeptoren, verlangsamt es die Nervenaktivität und macht schläfrig. Koffein hat eine dem Adenosin ähnliche Form, schlüpft also in dieselben Rezeptoren und blockiert sie — ohne sie zu aktivieren. Das Gehirn erhält die Botschaft „du bist müde“ nicht mehr, und die Wachheit steigt.
+
+## Folgewirkungen
+
+Mit blockiertem Adenosin wirken die natürlichen Anregungsstoffe des Gehirns, etwa Dopamin und Adrenalin, freier. Darum kann Koffein die Konzentration schärfen, die Stimmung heben und den Herzschlag erhöhen.
+
+## Es maskiert, beseitigt aber nicht die Müdigkeit
+
+Entscheidend ist: Koffein beseitigt nicht das zugrunde liegende Schlafbedürfnis. Adenosin sammelt sich hinter der Blockade weiter an; wenn das Koffein nachlässt, kann es die nun freien Rezeptoren überfluten, was manchmal einen „Absturz“ erzeugt.
+
+## Toleranz und Entzug
+
+Bei regelmäßigem Gebrauch bildet das Gehirn mehr Rezeptoren, sodass für dieselbe Wirkung mehr Koffein nötig ist — **Toleranz**. Abruptes Absetzen kann einige Tage **Entzugssymptome** wie Kopfschmerzen und Reizbarkeit hervorrufen. Die Wirkung lässt zudem langsam nach: Koffein hat eine Halbwertszeit von mehreren Stunden, sodass ein Nachmittagskaffee den Schlaf jener Nacht noch stören kann.`,
+  },
+  {
+    title: 'Der Doppler-Effekt',
+    question: 'Warum ändert eine Sirene ihre Tonhöhe, wenn sie an dir vorbeifährt?',
+    summary:
+      'Der Doppler-Effekt ist die Änderung der beobachteten Frequenz einer Welle, wenn sich Quelle und Beobachter relativ zueinander bewegen, was die wechselnde Tonhöhe von Sirenen und die Rotverschiebung ferner Galaxien erklärt.',
+    tags: ['Physik', 'Wellen', 'Schall', 'Astronomie', 'Wissenschaft'],
+    language: 'de',
+    content: `# Der Doppler-Effekt
+
+Der Doppler-Effekt ist die Änderung der Frequenz einer Welle, wenn sich ihre Quelle einem Beobachter nähert oder von ihm entfernt. Am vertrautesten ist er beim Schall, gilt aber für alle Wellen, auch für Licht.
+
+## Das Alltagsbeispiel
+
+Nähert sich ein Krankenwagen, klingt seine Sirene höher; fährt er vorbei und entfernt sich, sinkt die Tonhöhe. Die Sirene selbst ändert sich nie. Was sich ändert, ist, wie die Schallwellen dich erreichen:
+
+- Wenn sich die Quelle **nähert**, wird jede Welle etwas näher als die vorige ausgesandt, sodass sich die Wellen stauen — kürzere Wellenlänge, **höhere** Frequenz (höherer Ton).
+- Wenn sie sich **entfernt**, werden die Wellen gedehnt — längere Wellenlänge, **niedrigere** Frequenz (tieferer Ton).
+
+## Warum es geschieht
+
+Der Effekt entsteht allein aus der Relativbewegung, die den Abstand zwischen aufeinanderfolgenden Wellenbergen staucht oder dehnt. Je schneller die Relativbewegung, desto größer die Verschiebung.
+
+## Der Doppler-Effekt beim Licht
+
+Auch Licht verschiebt sich. Bewegung von uns weg dehnt das Licht zu längeren, röteren Wellenlängen (**Rotverschiebung**); Bewegung auf uns zu verschiebt es bläulicher (**Blauverschiebung**). Das ist ein Eckpfeiler der Astronomie: Die Rotverschiebung ferner Galaxien offenbarte, dass sich das Universum **ausdehnt**, und Doppler-Verschiebungen lassen Astronomen messen, wie sich Sterne und Galaxien bewegen.
+
+## Praktische Anwendungen
+
+Das Prinzip treibt **Radar**-Geschwindigkeitsmessgeräte, das Wetterradar, das die Bewegung von Stürmen verfolgt, und den medizinischen **Doppler-Ultraschall** an, der den Blutfluss misst, indem er Schall an bewegten Zellen reflektiert.`,
+  },
+  {
+    title: 'Warum der Himmel blau ist',
+    question: 'Warum ist der Himmel tagsüber blau und beim Sonnenuntergang rot?',
+    summary:
+      'Der Himmel ist blau, weil die Luftmoleküle das kurzwellige blaue Licht weit stärker streuen als andere Farben; beim Sonnenuntergang durchquert das Licht mehr Atmosphäre, das Blau wird fortgestreut und die Rottöne bleiben.',
+    tags: ['Physik', 'Licht', 'Atmosphäre', 'Optik', 'Wissenschaft'],
+    language: 'de',
+    content: `# Warum der Himmel blau ist
+
+Das Blau des Taghimmels und die feurigen Farben des Sonnenuntergangs entstehen aus derselben Physik: der Streuung des Sonnenlichts durch die Atmosphäre.
+
+## Sonnenlicht ist eine Mischung von Farben
+
+Obwohl es weiß erscheint, enthält Sonnenlicht alle Farben des Regenbogens, jede mit einer anderen **Wellenlänge** — Blau und Violett sind kurz, Rot und Orange lang.
+
+## Die Rayleigh-Streuung
+
+Beim Durchqueren der Luft trifft Sonnenlicht auf Gasmoleküle, die viel kleiner sind als seine Wellenlänge. Diese winzigen Moleküle streuen **kurze** Wellenlängen weit stärker als lange — ein Effekt namens **Rayleigh-Streuung**, bei dem die Streuung mit abnehmender Wellenlänge stark zunimmt. Blaues Licht wird etwa zehnmal so stark gestreut wie rotes.
+
+## Warum Blau, nicht Violett
+
+Violett wird sogar stärker gestreut als Blau — warum ist der Himmel also nicht violett? Aus zwei Gründen: Die Sonne sendet weniger Violett als Blau aus, und das menschliche Auge ist empfindlicher für Blau. Die Kombination lässt den Himmel uns blau erscheinen.
+
+## Sonnenauf- und -untergang
+
+Steht die Sonne tief am Horizont, durchquert ihr Licht eine viel dickere Schicht Atmosphäre. Bis es dich erreicht, ist das meiste Blau in andere Richtungen gestreut, sodass die langwelligen **Rot- und Orangetöne** vorherrschen. Staub und Verschmutzung können diese Farben noch vertiefen.
+
+## Auf anderen Welten
+
+Die Farbe eines Himmels hängt von seiner Atmosphäre ab. Mars mit seiner dünnen, staubigen Luft kann einen butterscotchfarbenen Taghimmel und bläuliche Sonnenuntergänge zeigen — das Gegenteil der Erde.`,
+  },
+  {
+    title: 'Antibiotikaresistenz',
+    question: 'Warum werden Antibiotika immer weniger wirksam?',
+    summary:
+      'Antibiotikaresistenz entsteht, wenn Bakterien sich so entwickeln, dass sie Medikamente überleben, die sie einst töteten; Übergebrauch und Fehlgebrauch beschleunigen diesen Prozess und drohen, häufige Infektionen wieder gefährlich zu machen.',
+    tags: ['Medizin', 'Biologie', 'Gesundheit', 'Evolution', 'Wissenschaft'],
+    language: 'de',
+    content: `# Antibiotikaresistenz
+
+Antibiotikaresistenz ist eine der schwersten Bedrohungen der modernen Medizin. Sie tritt ein, wenn Bakterien sich so verändern, dass die zu ihrer Tötung entwickelten Medikamente nicht mehr wirken.
+
+## Evolution im Schnelldurchlauf
+
+Antibiotika töten oder stoppen Bakterien, doch in jeder großen Population können einige Mikroben zufällige Mutationen tragen, die ihnen das Überleben erleichtern. Wenn Antibiotika die anfälligen Bakterien auslöschen, vermehren sich diese resistenten Überlebenden und vererben ihre Resistenz. Bakterien können **Resistenzgene** auch direkt untereinander **austauschen** und das Merkmal rasch verbreiten. Das ist **natürliche Selektion**, die in Tagen statt Jahrtausenden geschieht.
+
+## Was sie antreibt
+
+Der Prozess wird durch menschliches Verhalten beschleunigt:
+
+- **Übergebrauch** — Antibiotika für virale Erkrankungen wie Erkältungen verschreiben, die sie nicht behandeln können.
+- **Unvollständige Einnahme** — zu früh absetzen und die zäheren Bakterien am Leben lassen.
+- **Starker Einsatz in der Landwirtschaft** — gesunde Tiere routinemäßig dosieren.
+
+## Warum sie gefährlich ist
+
+Mit der Ausbreitung der Resistenz werden einst routinemäßige Infektionen, Operationen und Behandlungen wie die Chemotherapie riskanter. Gegen mehrere Medikamente resistente „Superkeime“ verursachen bereits viele Todesfälle pro Jahr, und der Nachschub an wirklich neuen Antibiotika ist dünn geblieben.
+
+## Was hilft
+
+Die Resistenz zu bremsen heißt, Antibiotika nur bei Bedarf zu nutzen, verordnete Behandlungen abzuschließen, Hygiene und Impfung zu verbessern, um Infektionen von vornherein zu verhindern, und in die Erforschung neuer Behandlungen zu investieren. Es ist eine geteilte Verantwortung von Patienten, Ärzten, Landwirten und Regierungen.`,
+  },
+  {
+    title: 'Der Stickstoffkreislauf',
+    question: 'Wie bewegt sich Stickstoff zwischen Luft, Boden und Lebewesen?',
+    summary:
+      'Der Stickstoffkreislauf ist die Reihe von Vorgängen, die Stickstoff zwischen seiner reaktionsträgen Form in der Luft und für das Leben nutzbaren Verbindungen umwandeln, unerlässlich für Proteine und DNA und zentral für die Landwirtschaft.',
+    tags: ['Biologie', 'Geowissenschaften', 'Landwirtschaft', 'Chemie', 'Umwelt'],
+    language: 'de',
+    content: `# Der Stickstoffkreislauf
+
+Stickstoff ist für alles Leben unerlässlich — er ist Teil von Proteinen und DNA. Obwohl die Luft zu etwa 78 % aus Stickstoffgas besteht, können die meisten Organismen ihn nicht direkt nutzen. Der Stickstoffkreislauf ist die Reihe natürlicher Vorgänge, die Stickstoff in nutzbare Formen umwandelt und wieder zurück.
+
+## Das Problem mit dem N2
+
+Atmosphärischer Stickstoff liegt als **N2** vor, zwei Atome, die durch eine außergewöhnlich starke Dreifachbindung verbunden sind. Diese Bindung zu brechen erfordert viel Energie, sodass Pflanzen und Tiere den riesigen Vorrat der Luft nicht selbst anzapfen können.
+
+## Schlüsselschritte
+
+- **Stickstofffixierung.** Spezialisierte **Bakterien** — viele leben in den Wurzeln von Hülsenfrüchten wie Bohnen und Klee — wandeln N2 in Ammoniak um. Auch Blitze und industrielle Verfahren fixieren Stickstoff.
+- **Nitrifikation.** Andere Bakterien wandeln Ammoniak in **Nitrit** und dann **Nitrat** um, die Form, die die meisten Pflanzen über die Wurzeln aufnehmen.
+- **Assimilation.** Pflanzen nehmen Nitrat auf, um Proteine zu bauen; Tiere erhalten ihren Stickstoff, indem sie Pflanzen oder andere Tiere fressen.
+- **Zersetzung und Ammonifikation.** Sterben Organismen oder scheiden sie aus, geben Zersetzer den Stickstoff als Ammoniak an den Boden zurück.
+- **Denitrifikation.** Schließlich wandeln bestimmte Bakterien Nitrat wieder in N2-Gas um und schließen den Kreislauf.
+
+## Der menschliche Einfluss
+
+Die Erfindung des **Haber-Bosch-Verfahrens**, das Stickstoff industriell zu Dünger fixiert, steigerte die Nahrungsmittelproduktion enorm und ernährt heute einen großen Teil der Weltbevölkerung. Doch überschüssiger abfließender Dünger überlastet Flüsse und Meere, verursacht **Algenblüten** und sauerstoffarme „Todeszonen“ und macht den Stickstoffkreislauf zu einem zentralen Umweltthema.`,
+  },
+  {
+    title: 'Wie das Gedächtnis funktioniert',
+    question: 'Wie speichert und ruft das Gehirn Erinnerungen ab?',
+    summary:
+      'Das Gedächtnis ist die Fähigkeit des Gehirns, Informationen zu kodieren, zu speichern und abzurufen, indem es die Verbindungen zwischen Neuronen verändert; es hat mehrere Arten und ist rekonstruktiv, nicht perfekt.',
+    tags: ['Neurowissenschaft', 'Psychologie', 'Biologie', 'Geist', 'Wissenschaft'],
+    language: 'de',
+    content: `# Wie das Gedächtnis funktioniert
+
+Das Gedächtnis lässt uns aus der Vergangenheit lernen und die Gegenwart deuten. Eher als ein einzelner Aktenschrank ist es eine Menge zusammenhängender Systeme.
+
+## Drei Grundprozesse
+
+- **Kodierung.** Eine Erfahrung in eine Form bringen, die das Gehirn speichern kann, unterstützt durch Aufmerksamkeit und Bedeutung.
+- **Speicherung.** Diese Information über die Zeit bewahren.
+- **Abruf.** Sie bei Bedarf zurückholen.
+
+## Arten des Gedächtnisses
+
+- Das **sensorische Gedächtnis** hält rohe Eindrücke für den Bruchteil einer Sekunde.
+- Das **Kurzzeit- (Arbeits-) Gedächtnis** hält eine kleine Menge an Information für Sekunden aktiv — genug, um eine Telefonnummer zu wählen.
+- Das **Langzeitgedächtnis** kann gewaltige Mengen über Jahre speichern. Es umfasst das **explizite** Gedächtnis (Fakten und Ereignisse, die man beschreiben kann) und das **implizite** (Fertigkeiten wie Radfahren).
+
+## Die Biologie
+
+Man nimmt an, dass Erinnerungen als Muster verstärkter Verbindungen zwischen Neuronen gespeichert werden — ein Prinzip, oft zusammengefasst als „Neuronen, die zusammen feuern, verdrahten sich zusammen“. Der **Hippocampus** ist entscheidend für die Bildung neuer Langzeiterinnerungen, während ältere, gefestigte Erinnerungen stärker auf dem Cortex beruhen. Der **Schlaf** spielt eine Schlüsselrolle bei der Festigung des Lernens des Tages.
+
+## Das Gedächtnis ist rekonstruktiv
+
+Erinnern ist nicht wie das Abspielen einer Aufnahme. Jedes Mal, wenn du dich an etwas erinnerst, baut das Gehirn es neu zusammen, und Einzelheiten können sich verschieben oder mit anderen Informationen vermischen. Darum können Zeugenerinnerungen mit voller Überzeugung falsch sein, und darum kann wiederholtes Erinnern das Original subtil umschreiben.`,
+  },
 ];
