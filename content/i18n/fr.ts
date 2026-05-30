@@ -453,4 +453,493 @@ Cette même rigidité était sa faiblesse. La masse monétaire était liée aux 
 
 Les nations se sont détachées de l’or par étapes. Le système s’est finalement effondré en 1971, quand les États-Unis ont mis fin à la convertibilité du dollar en or. Aujourd’hui, le monde utilise une **monnaie fiduciaire**, dont la valeur repose sur la crédibilité des gouvernements et des banques centrales et non sur une marchandise physique.`,
   },
+  // ── Batch 3: Technologie et mathématiques ──
+  {
+    title: 'Comment fonctionne le GPS',
+    question: 'Comment le GPS sait-il exactement où vous êtes ?',
+    summary:
+      'Le GPS détermine la position en mesurant le temps de trajet des signaux de plusieurs satellites et en utilisant la trilatération ; des horloges atomiques précises et des corrections relativistes le rendent exact à quelques mètres près.',
+    tags: ['technologie', 'navigation', 'satellites', 'physique', 'ingénierie'],
+    language: 'fr',
+    content: `# Comment fonctionne le GPS
+
+Le système de positionnement par satellites (GPS) permet à un récepteur — dans votre téléphone, votre voiture ou votre montre — de déterminer où il se trouve n’importe où sur la Terre, en général à quelques mètres près. Il repose sur une constellation de satellites et sur un peu de physique ingénieuse.
+
+## Satellites et signaux
+
+Le GPS utilise une trentaine de satellites en orbite à environ 20 000 km d’altitude, disposés de façon qu’il y en ait toujours plusieurs visibles depuis n’importe quel point de la planète. Chacun émet sans cesse un signal radio portant l’**heure** exacte de son envoi et la **position** du satellite.
+
+## Trilatération
+
+Le récepteur mesure le temps qu’a mis chaque signal à arriver. Comme les ondes radio voyagent à la vitesse de la lumière, le temps de trajet révèle la **distance** à ce satellite. Connaître la distance à un satellite vous place quelque part sur une sphère autour de lui ; combiner les distances à plusieurs satellites réduit votre position à un seul point. Cette technique géométrique s’appelle la **trilatération**. Il faut les signaux d’au moins quatre satellites — trois pour fixer la position et un quatrième pour résoudre l’erreur d’horloge du récepteur.
+
+## Pourquoi les horloges et la relativité comptent
+
+La synchronisation doit être extraordinairement précise : une erreur d’un millionième de seconde décalerait la position de centaines de mètres. Les satellites embarquent des **horloges atomiques**, et le système corrige même la **relativité d’Einstein** : la vitesse des satellites et leur gravité plus faible font battre leurs horloges à un rythme légèrement différent de celui des horloges au sol. Sans ces corrections, le GPS dériverait de plusieurs kilomètres par jour.
+
+## Au-delà du positionnement
+
+La même synchronisation précise sous-tend les réseaux financiers, les réseaux électriques et les télécommunications, faisant du GPS une colonne vertébrale discrète de l’infrastructure moderne.`,
+  },
+  {
+    title: 'La cryptographie à clé publique',
+    question: 'Comment deux inconnus peuvent-ils communiquer en sécurité sur l’Internet ouvert ?',
+    summary:
+      'La cryptographie à clé publique utilise des paires de clés liées mathématiquement — une publique, une privée — pour que chacun puisse chiffrer des messages et vérifier des identités sans jamais partager de secret au préalable.',
+    tags: ['technologie', 'cryptographie', 'sécurité', 'mathématiques', 'internet'],
+    language: 'fr',
+    content: `# La cryptographie à clé publique
+
+La cryptographie à clé publique est la percée qui rend possible la communication sécurisée entre des personnes qui ne se sont jamais rencontrées. Elle sous-tend le HTTPS, la messagerie sécurisée, les signatures numériques et les cryptomonnaies.
+
+## L’idée de la paire de clés
+
+Le chiffrement traditionnel (« symétrique ») utilise une unique clé partagée pour verrouiller et déverrouiller un message — ce qui pose un problème : comment partager cette clé en sécurité au départ ? La cryptographie à clé publique (ou **asymétrique**) le résout avec une **paire** de clés :
+
+- Une **clé publique**, que tout le monde peut voir.
+- Une **clé privée**, que le propriétaire garde secrète.
+
+Les deux sont liées mathématiquement de sorte que ce qu’une clé verrouille, seule l’autre peut le déverrouiller — mais connaître la clé publique ne permet pas de calculer la clé privée.
+
+## Deux usages principaux
+
+- **Chiffrement.** Pour envoyer à quelqu’un un message confidentiel, vous le chiffrez avec *sa clé publique* ; seule sa clé privée peut le déchiffrer.
+- **Signatures numériques.** Pour prouver qu’un message vient bien de vous, vous le signez avec *votre clé privée* ; chacun peut le vérifier avec votre clé publique, ce qui confirme l’authenticité et l’absence d’altération.
+
+## La mathématique derrière
+
+La sécurité repose sur des problèmes faciles à calculer dans un sens mais extrêmement difficiles à inverser — comme **factoriser** d’énormes nombres (RSA) ou résoudre des logarithmes discrets sur des **courbes elliptiques**. Les inverser demanderait un temps de calcul irréaliste.
+
+## Dans la vie quotidienne
+
+Quand votre navigateur affiche un cadenas, il a déjà utilisé la cryptographie à clé publique pour vérifier le site et établir une clé partagée rapide pour le reste de la session.`,
+  },
+  {
+    title: 'La suite de Fibonacci',
+    question: 'Qu’est-ce que la suite de Fibonacci et pourquoi apparaît-elle dans la nature ?',
+    summary:
+      'La suite de Fibonacci est une série où chaque nombre est la somme des deux précédents ; elle est liée au nombre d’or et apparaît dans des motifs comme les pétales des fleurs et les coquilles en spirale.',
+    tags: ['mathématiques', 'motifs', 'nature', 'géométrie', 'science'],
+    language: 'fr',
+    content: `# La suite de Fibonacci
+
+La suite de Fibonacci est l’un des motifs les plus célèbres des mathématiques : une règle simple qui produit des liens surprenants avec la géométrie et le monde naturel.
+
+## La règle
+
+Commencez par 0 et 1, puis faites de chaque nouveau nombre la **somme des deux précédents** :
+
+\`\`\`
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
+\`\`\`
+
+La suite porte le nom du mathématicien italien **Léonard de Pise** (Fibonacci), qui l’a introduite en Europe en 1202 à travers une énigme sur l’élevage de lapins, bien qu’elle ait été connue plus tôt dans les mathématiques indiennes.
+
+## Lien avec le nombre d’or
+
+Divisez n’importe quel nombre de Fibonacci par le précédent, et le résultat se rapproche de plus en plus d’environ **1,618** — le **nombre d’or** (souvent noté φ). Plus on avance dans la suite, plus l’approximation devient exacte.
+
+## Pourquoi elle apparaît dans la nature
+
+Les nombres de Fibonacci apparaissent dans le nombre de pétales de nombreuses fleurs, la disposition des graines d’un tournesol et la ramification des plantes. La raison plus profonde est l’**empilement efficace** : disposer les feuilles ou les graines selon des angles liés au nombre d’or permet à une plante de capter la lumière ou de loger des graines avec un chevauchement minimal. Ce motif est donc moins une signature mystique qu’une conséquence naturelle de l’optimisation.
+
+## Au-delà de la biologie
+
+La suite apparaît aussi dans les algorithmes informatiques, l’analyse financière et l’art, où le nombre d’or est depuis longtemps associé à des proportions agréables.`,
+  },
+  {
+    title: 'Les nombres premiers',
+    question: 'Que sont les nombres premiers et pourquoi sont-ils importants ?',
+    summary:
+      'Les nombres premiers sont des entiers supérieurs à un qui n’ont d’autres diviseurs que un et eux-mêmes ; ils sont les briques de l’arithmétique et la base du chiffrement moderne.',
+    tags: ['mathématiques', 'nombres', 'cryptographie', 'théorie', 'science'],
+    language: 'fr',
+    content: `# Les nombres premiers
+
+Un nombre premier est un entier supérieur à 1 qui ne peut être divisé exactement que par 1 et par lui-même. Les premiers nombres premiers sont 2, 3, 5, 7, 11 et 13. Les nombres ayant d’autres diviseurs, comme 6 (= 2 × 3), sont dits **composés**.
+
+## Les atomes de l’arithmétique
+
+Les nombres premiers sont fondamentaux à cause du **théorème fondamental de l’arithmétique** : tout entier supérieur à 1 peut s’écrire comme produit de nombres premiers d’une seule manière (à l’ordre près). Par exemple, 60 = 2 × 2 × 3 × 5. En ce sens, les premiers sont les « atomes » indivisibles à partir desquels se construisent tous les autres nombres.
+
+## En nombre infini
+
+Le mathématicien grec **Euclide** a démontré il y a plus de deux mille ans qu’il n’existe pas de plus grand nombre premier — la liste se poursuit à l’infini. Pourtant, les premiers se raréfient à mesure que les nombres grandissent, et prédire exactement où ils se trouvent est un domaine profond et encore irrésolu des mathématiques, lié à la célèbre **hypothèse de Riemann**.
+
+## Pourquoi ils comptent aujourd’hui
+
+Les nombres premiers alimentent la **cryptographie** moderne. Des méthodes comme RSA reposent sur une asymétrie pratique : multiplier deux grands premiers est facile, mais prendre l’énorme nombre obtenu et retrouver les premiers d’origine (**factoriser**) est extraordinairement difficile avec les ordinateurs actuels. Cette difficulté garde sûrs la banque en ligne, la messagerie et le commerce.
+
+## Une chasse continue
+
+Des mathématiciens et des bénévoles utilisant des ordinateurs en réseau cherchent sans cesse des premiers toujours plus grands. Les plus grands premiers connus comptent désormais des dizaines de millions de chiffres.`,
+  },
+  {
+    title: 'Les intérêts composés',
+    question: 'Pourquoi les intérêts composés sont-ils si puissants avec le temps ?',
+    summary:
+      'Les intérêts composés sont les intérêts gagnés à la fois sur le capital initial et sur les intérêts déjà accumulés, ce qui produit une croissance exponentielle qui récompense l’épargne précoce et de long terme.',
+    tags: ['finance', 'économie', 'mathématiques', 'monnaie', 'finances personnelles'],
+    language: 'fr',
+    content: `# Les intérêts composés
+
+On appelle souvent les intérêts composés la force la plus puissante de la finance. C’est le fait de gagner des intérêts non seulement sur l’argent investi au départ, mais aussi sur les intérêts que cet argent a déjà rapportés.
+
+## Simples ou composés
+
+Avec les **intérêts simples**, vous gagnez un montant fixe à chaque période, fondé uniquement sur la somme de départ (le **capital**). Avec les **intérêts composés**, les intérêts de chaque période s’ajoutent au solde, de sorte que les intérêts de la période suivante se calculent sur un montant plus grand. La croissance s’accélère donc avec le temps : elle est **exponentielle** et non linéaire.
+
+## Un exemple rapide
+
+Placez 1 000 à 7 % par an :
+
+- Après 1 an : 1 070
+- Après 10 ans : environ 1 967
+- Après 30 ans : environ 7 612
+
+L’argent **double** à peu près chaque décennie sans ajouter un centime — et plus on le laisse, plus l’effet est spectaculaire.
+
+## La règle de 72
+
+Un raccourci pratique, la **règle de 72**, estime le temps qu’il faut pour qu’un placement double : divisez 72 par le taux d’intérêt annuel. À 8 %, l’argent double en environ 9 ans (72 ÷ 8).
+
+## Pourquoi le temps compte le plus
+
+Comme la capitalisation se construit sur elle-même, **commencer tôt** compte souvent plus qu’investir de grosses sommes plus tard. La même logique joue à l’inverse pour la dette : les soldes impayés des prêts ou des cartes à taux élevé se capitalisent contre l’emprunteur, ce qui explique pourquoi cette dette peut croître de façon alarmante.`,
+  },
+  {
+    title: 'Les fonctions de hachage',
+    question: 'Qu’est-ce qu’une fonction de hachage et où l’utilise-t-on ?',
+    summary:
+      'Une fonction de hachage transforme des données de toute taille en une chaîne de longueur fixe ; les bonnes fonctions de hachage cryptographiques sont rapides, déterministes et pratiquement impossibles à inverser ou à faire entrer en collision.',
+    tags: ['technologie', 'informatique', 'cryptographie', 'sécurité', 'données'],
+    language: 'fr',
+    content: `# Les fonctions de hachage
+
+Une fonction de hachage est un outil petit mais essentiel en informatique. Elle prend une entrée de n’importe quelle longueur — un mot, un fichier, une base de données entière — et produit une sortie de longueur fixe appelée **hachage** ou **empreinte**.
+
+## Propriétés clés
+
+Une fonction de hachage utile est :
+
+- **Déterministe.** La même entrée produit toujours le même hachage.
+- **Rapide** à calculer.
+- **De longueur fixe.** Un message d’un caractère et un fichier d’un gigaoctet donnent, par exemple, un résultat de 256 bits.
+
+Une fonction de hachage *cryptographique* ajoute des garanties plus fortes :
+
+- **À sens unique.** À partir d’un hachage, on ne peut pas retrouver de façon réaliste l’entrée d’origine.
+- **Résistante aux collisions.** Il est pratiquement impossible de trouver deux entrées différentes ayant le même hachage.
+- **Effet d’avalanche.** Changer un seul caractère de l’entrée brouille entièrement la sortie.
+
+## Usages quotidiens
+
+- **Stockage des mots de passe.** Les systèmes stockent le hachage d’un mot de passe, pas le mot de passe lui-même, de sorte qu’une fuite de la base de données ne révèle pas directement les secrets des utilisateurs.
+- **Vérifications d’intégrité.** Les téléchargements publient souvent un hachage pour vérifier qu’un fichier est arrivé intact et non altéré.
+- **Structures de données.** Les **tables de hachage** utilisent le hachage pour trouver les éléments presque instantanément, quel que soit le volume de données.
+- **Chaînes de blocs.** Les cryptomonnaies enchaînent les blocs au moyen de hachages, rendant le registre infalsifiable.
+
+## Algorithmes courants
+
+Les systèmes modernes préfèrent des fonctions robustes comme **SHA-256**. Les plus anciennes, comme MD5 et SHA-1, sont aujourd’hui considérées comme cassées pour la sécurité parce que des chercheurs ont trouvé des moyens de créer des collisions, et ne devraient pas servir à protéger des données sensibles.`,
+  },
+  {
+    title: 'La machine de Turing',
+    question: 'Qu’est-ce qu’une machine de Turing et pourquoi est-elle fondamentale pour l’informatique ?',
+    summary:
+      'La machine de Turing est un modèle mathématique simple du calcul, imaginé par Alan Turing en 1936, qui définit ce que signifie qu’un problème soit calculable et sous-tend toute l’informatique.',
+    tags: ['informatique', 'mathématiques', 'théorie', 'histoire', 'technologie'],
+    language: 'fr',
+    content: `# La machine de Turing
+
+La machine de Turing n’est pas un appareil physique, mais une expérience de pensée — un modèle mathématique qui saisit l’idée même de calcul. Proposée par **Alan Turing** en 1936, elle reste le fondement théorique de l’informatique.
+
+## Une conception trompeusement simple
+
+Une machine de Turing comprend :
+
+- Un **ruban** infini divisé en cases, chacune contenant un symbole.
+- Une **tête** qui peut lire et écrire le symbole situé en dessous et se déplacer à gauche ou à droite.
+- Un ensemble d’**états** et une table de **règles** qui indiquent à la machine quoi faire selon son état actuel et le symbole qu’elle lit.
+
+À partir de ces pièces minimales, la machine peut effectuer n’importe quelle procédure pas à pas. L’intuition de Turing fut que ce système simple est assez puissant pour réaliser **tout** calcul descriptible par un algorithme.
+
+## Universalité
+
+Turing a aussi décrit une machine **universelle** capable de lire la description de n’importe quelle autre machine de Turing puis de l’imiter. C’est l’ancêtre théorique de l’ordinateur programmable moderne : une machine qui exécute différents logiciels plutôt qu’un appareil distinct pour chaque tâche.
+
+## Les limites du calcul
+
+Le modèle a aussi révélé des limites. Turing a démontré que certains problèmes sont **indécidables** : aucun algorithme ne peut les résoudre. Le plus célèbre est le **problème de l’arrêt** : il n’existe pas de méthode générale pour déterminer, pour tout programme et toute entrée, si le programme finira par s’arrêter ou tournera indéfiniment.
+
+## Une influence durable
+
+Tout ce qu’un ordinateur réel peut calculer, une machine de Turing peut le calculer aussi (avec assez de temps et de ruban). Cette équivalence explique pourquoi le modèle définit encore les frontières de ce que les ordinateurs peuvent — et ne peuvent pas — faire.`,
+  },
+  {
+    title: 'Débit et latence',
+    question: 'Quelle est la différence entre le débit et la latence ?',
+    summary:
+      'Le débit est la quantité de données qu’une connexion peut transporter par seconde, tandis que la latence est le délai avant que les données commencent à arriver ; les deux déterminent la « rapidité » ressentie d’un réseau, mais ne sont pas la même chose.',
+    tags: ['technologie', 'réseaux', 'internet', 'informatique', 'ingénierie'],
+    language: 'fr',
+    content: `# Débit et latence
+
+On dit souvent qu’une connexion est « rapide », mais la vitesse a en réalité deux dimensions distinctes : le **débit** et la **latence**. Les confondre est une source fréquente de frustration avec les réseaux.
+
+## Débit : combien
+
+Le **débit** est la quantité maximale de données qu’une connexion peut transférer en un temps donné, généralement mesurée en mégabits ou gigabits par seconde. Une analogie utile est la largeur d’un tuyau : un tuyau plus large laisse passer plus d’eau à la fois. Le débit aide surtout à déplacer de **grandes** quantités de données — diffuser de la vidéo haute résolution, télécharger de gros fichiers ou sauvegarder dans le nuage.
+
+## Latence : à quelle vitesse
+
+La **latence** est le délai entre l’envoi d’une requête et la réception de la première réponse, mesuré en millisecondes. Dans l’analogie du tuyau, c’est le temps que met l’eau à aller d’un bout à l’autre. La latence dépend de la distance (les signaux ne peuvent pas dépasser la vitesse de la lumière), du nombre de sauts réseau et des délais de traitement. La latence compte surtout pour les tâches **interactives** — visioconférences, jeux en ligne et requêtes web rapides.
+
+## Pourquoi la différence compte
+
+Une connexion peut avoir un débit élevé mais une latence élevée, ou l’inverse. Une liaison par satellite peut transporter beaucoup de données et pourtant sembler lente parce que chaque signal parcourt des dizaines de milliers de kilomètres. C’est pourquoi une vidéo peut se diffuser sans accroc (débit) tandis qu’un jeu paraît encore saccadé (latence).
+
+## Termes liés
+
+Le **débit utile (throughput)** est le taux de données réellement atteint en pratique, généralement inférieur au débit théorique. La **gigue (jitter)** est la variation de la latence dans le temps, qui peut perturber la voix et la vidéo même si la latence moyenne est faible.`,
+  },
+  // ── Batch 4: Esprit, santé et vie quotidienne ──
+  {
+    title: 'L’effet placebo',
+    question: 'Pourquoi un faux traitement peut-il parfois faire que les gens se sentent mieux ?',
+    summary:
+      'L’effet placebo est une amélioration réelle des symptômes produite par les attentes et les croyances d’une personne au sujet d’un traitement, et non par un principe actif.',
+    tags: ['médecine', 'psychologie', 'santé', 'science', 'esprit'],
+    language: 'fr',
+    content: `# L’effet placebo
+
+L’effet placebo se produit quand l’état de santé d’une personne s’améliore réellement après avoir reçu un traitement sans aucun principe actif thérapeutique — comme une pilule de sucre ou une injection de sérum physiologique. L’amélioration vient de la réponse du corps et de l’esprit au fait de *s’attendre* à aller mieux.
+
+## Une réponse réelle et mesurable
+
+Les placebos ne sont pas « tout dans la tête » au sens méprisant. L’attente peut déclencher de réels changements physiologiques : le cerveau peut libérer ses propres substances analgésiques (comme les endorphines), et les réponses au stress peuvent se modifier. L’effet est le plus fort sur les symptômes façonnés par la perception, comme la **douleur, les nausées, la fatigue et l’anxiété**, et le plus faible sur les processus objectifs de la maladie : un placebo ne réduira pas une tumeur ni ne guérira une infection.
+
+## Pourquoi cela compte pour la science
+
+Comme la seule attente peut changer le ressenti, les essais médicaux utilisent des **contrôles avec placebo**. Les patients reçoivent au hasard le vrai médicament ou un placebo et, idéalement, ni eux ni les chercheurs ne savent qui a reçu quoi (un essai en **double aveugle**). Un nouveau traitement doit faire mieux que le placebo pour être jugé efficace.
+
+## L’effet nocebo
+
+Le revers est l’**effet nocebo** : des attentes négatives peuvent produire de réels symptômes négatifs. Être simplement averti des effets secondaires possibles d’un médicament peut faire que certains les ressentent.
+
+## Éthique et usage
+
+Tromper délibérément les patients pose des problèmes éthiques, c’est pourquoi les médecins prescrivent rarement des placebos purs. Mais comprendre l’effet aide à expliquer pourquoi un cadre clinique bienveillant et assuré contribue lui-même à la guérison.`,
+  },
+  {
+    title: 'Pourquoi nous dormons',
+    question: 'Pourquoi les êtres humains ont-ils besoin de dormir ?',
+    summary:
+      'Le sommeil est un état vital et actif où le cerveau et le corps effectuent réparation, consolidation de la mémoire et élimination des déchets ; le manque chronique de sommeil nuit à la santé, à l’humeur et à la cognition.',
+    tags: ['biologie', 'santé', 'neurosciences', 'psychologie', 'science'],
+    language: 'fr',
+    content: `# Pourquoi nous dormons
+
+Le sommeil occupe environ un tiers de la vie humaine, mais il est loin d’être inactif. C’est un état actif et finement régulé, essentiel à la santé physique et mentale.
+
+## Les stades du sommeil
+
+Une nuit de sommeil parcourt des stades environ toutes les 90 minutes :
+
+- **Le sommeil non paradoxal**, qui inclut le sommeil profond à « ondes lentes », quand le corps répare les tissus, fabrique os et muscles et renforce le système immunitaire.
+- **Le sommeil paradoxal (mouvements oculaires rapides)**, quand surviennent la plupart des rêves vifs et que le cerveau est très actif.
+
+## Ce que fait le sommeil
+
+La recherche pointe plusieurs fonctions essentielles :
+
+- **Consolidation de la mémoire.** Le cerveau rejoue et réorganise les expériences de la journée, déplaçant l’information vers le stockage à long terme et renforçant l’apprentissage.
+- **Élimination des déchets.** Pendant le sommeil, le cerveau évacue des sous-produits métaboliques, dont des protéines liées aux maladies neurodégénératives.
+- **Restauration.** Les hormones qui régulent la croissance, l’appétit et le stress se rééquilibrent.
+
+## Le coût de trop peu de sommeil
+
+La privation chronique de sommeil est liée à une baisse de l’attention et du jugement, à un affaiblissement de l’immunité, à une prise de poids et à un risque accru de maladies cardiaques, de diabète et de troubles de l’humeur. Même des déficits modestes mais durables réduisent de façon mesurable les performances mentales.
+
+## L’horloge biologique
+
+Le sommeil est régi par le **rythme circadien**, une horloge interne d’environ 24 heures synchronisée surtout par la lumière. Le perturber — par le travail posté, le décalage horaire ou les écrans tardifs — peut dégrader la qualité du sommeil même si le nombre total d’heures paraît suffisant.`,
+  },
+  {
+    title: 'La caféine et le cerveau',
+    question: 'Comment la caféine vous tient-elle éveillé ?',
+    summary:
+      'La caféine combat la somnolence en bloquant l’adénosine, une substance cérébrale qui s’accumule au cours de la journée et favorise le sommeil, masquant temporairement la fatigue plutôt que de l’éliminer.',
+    tags: ['biologie', 'neurosciences', 'santé', 'chimie', 'esprit'],
+    language: 'fr',
+    content: `# La caféine et le cerveau
+
+La caféine est la substance psychoactive la plus consommée au monde, présente dans le café, le thé, le chocolat et de nombreux sodas. Elle agit en interférant avec l’un des signaux de sommeil naturels du cerveau.
+
+## Bloquer le signal de « fatigue »
+
+Tant que vous restez éveillé, une molécule appelée **adénosine** s’accumule peu à peu dans le cerveau. Quand l’adénosine se lie à ses récepteurs, elle ralentit l’activité nerveuse et provoque la somnolence. La caféine a une forme semblable à l’adénosine, elle se glisse donc dans ces mêmes récepteurs et les bloque — sans les activer. Le cerveau cesse de recevoir le message « tu es fatigué » et la vigilance monte.
+
+## Effets en cascade
+
+L’adénosine étant bloquée, les stimulants naturels du cerveau, comme la dopamine et l’adrénaline, agissent plus librement. C’est pourquoi la caféine peut aiguiser la concentration, remonter l’humeur et accélérer le rythme cardiaque.
+
+## Elle masque, mais n’efface pas, la fatigue
+
+Surtout, la caféine n’élimine pas le besoin sous-jacent de sommeil. L’adénosine continue de s’accumuler derrière le blocage ; quand la caféine se dissipe, elle peut affluer vers les récepteurs désormais libres, ce qui provoque parfois un « coup de pompe ».
+
+## Tolérance et sevrage
+
+Avec un usage régulier, le cerveau crée davantage de récepteurs, il faut donc plus de caféine pour le même effet : la **tolérance**. Arrêter brutalement peut causer des symptômes de **sevrage**, comme maux de tête et irritabilité, pendant quelques jours. Les effets s’estompent aussi lentement : la caféine a une demi-vie de plusieurs heures, si bien qu’un café de l’après-midi peut encore perturber le sommeil de la nuit.`,
+  },
+  {
+    title: 'L’effet Doppler',
+    question: 'Pourquoi une sirène change-t-elle de hauteur quand elle passe près de vous ?',
+    summary:
+      'L’effet Doppler est le changement de la fréquence observée d’une onde lorsque la source et l’observateur se déplacent l’un par rapport à l’autre, ce qui explique la variation de hauteur des sirènes et le décalage vers le rouge des galaxies lointaines.',
+    tags: ['physique', 'ondes', 'son', 'astronomie', 'science'],
+    language: 'fr',
+    content: `# L’effet Doppler
+
+L’effet Doppler est le changement de fréquence d’une onde à mesure que sa source s’approche ou s’éloigne d’un observateur. Il est le plus familier avec le son, mais s’applique à toutes les ondes, y compris la lumière.
+
+## L’exemple du quotidien
+
+Quand une ambulance approche, sa sirène sonne plus aigu ; quand elle passe et s’éloigne, la hauteur baisse. La sirène elle-même ne change jamais. Ce qui change, c’est la façon dont les ondes sonores vous parviennent :
+
+- Quand la source **approche**, chaque onde est émise un peu plus près que la précédente, si bien que les ondes se tassent : longueur d’onde plus courte, fréquence **plus élevée** (son plus aigu).
+- Quand elle **s’éloigne**, les ondes s’étirent : longueur d’onde plus longue, fréquence **plus basse** (son plus grave).
+
+## Pourquoi cela arrive
+
+L’effet naît uniquement du mouvement relatif, qui comprime ou étire l’espacement entre les crêtes successives des ondes. Plus le mouvement relatif est rapide, plus le décalage est grand.
+
+## L’effet Doppler avec la lumière
+
+La lumière se décale aussi. Le mouvement d’éloignement étire la lumière vers des longueurs d’onde plus longues et plus rouges (**décalage vers le rouge**) ; celui de rapprochement la décale vers le bleu (**décalage vers le bleu**). C’est une pierre angulaire de l’astronomie : le décalage vers le rouge des galaxies lointaines a révélé que l’univers est en **expansion**, et les décalages Doppler permettent aux astronomes de mesurer le mouvement des étoiles et des galaxies.
+
+## Usages pratiques
+
+Le principe alimente les **radars** de vitesse, le radar météo qui suit le mouvement des tempêtes et l’**échographie Doppler** médicale, qui mesure le flux sanguin en renvoyant le son sur les cellules en mouvement.`,
+  },
+  {
+    title: 'Pourquoi le ciel est bleu',
+    question: 'Pourquoi le ciel est-il bleu le jour et rouge au coucher du soleil ?',
+    summary:
+      'Le ciel est bleu parce que les molécules de l’air diffusent la lumière bleue de courte longueur d’onde bien plus que les autres couleurs ; au coucher, la lumière traverse plus d’atmosphère, diffusant le bleu et laissant les rouges.',
+    tags: ['physique', 'lumière', 'atmosphère', 'optique', 'science'],
+    language: 'fr',
+    content: `# Pourquoi le ciel est bleu
+
+La couleur bleue du ciel de jour et les couleurs flamboyantes du coucher de soleil viennent de la même physique : la diffusion de la lumière solaire par l’atmosphère.
+
+## La lumière du soleil est un mélange de couleurs
+
+Bien qu’elle paraisse blanche, la lumière du soleil contient toutes les couleurs de l’arc-en-ciel, chacune avec une **longueur d’onde** différente — le bleu et le violet sont courts, le rouge et l’orange sont longs.
+
+## La diffusion de Rayleigh
+
+En traversant l’air, la lumière du soleil heurte des molécules de gaz bien plus petites que sa longueur d’onde. Ces minuscules molécules diffusent les **courtes** longueurs d’onde bien plus que les longues — un effet appelé **diffusion de Rayleigh**, où la diffusion augmente fortement quand la longueur d’onde diminue. La lumière bleue est diffusée environ dix fois plus que la rouge.
+
+## Pourquoi le bleu, et non le violet
+
+Le violet est diffusé encore plus que le bleu, alors pourquoi le ciel n’est-il pas violet ? Pour deux raisons : le Soleil émet moins de violet que de bleu, et l’œil humain est plus sensible au bleu. La combinaison fait que le ciel nous paraît bleu.
+
+## Lever et coucher de soleil
+
+Quand le Soleil est bas sur l’horizon, sa lumière traverse une tranche d’atmosphère bien plus épaisse. Le temps qu’elle vous parvienne, l’essentiel du bleu a été diffusé dans d’autres directions, laissant dominer les **rouges et oranges** de plus grande longueur d’onde. La poussière et la pollution peuvent encore intensifier ces couleurs.
+
+## Sur d’autres mondes
+
+La couleur d’un ciel dépend de son atmosphère. Mars, avec son air mince et poussiéreux, peut montrer un ciel de jour couleur caramel et des couchers de soleil bleutés — l’inverse de la Terre.`,
+  },
+  {
+    title: 'La résistance aux antibiotiques',
+    question: 'Pourquoi les antibiotiques deviennent-ils moins efficaces ?',
+    summary:
+      'La résistance aux antibiotiques apparaît quand des bactéries évoluent pour survivre à des médicaments qui les tuaient autrefois ; le surusage et le mésusage accélèrent ce processus, menaçant de rendre à nouveau dangereuses des infections courantes.',
+    tags: ['médecine', 'biologie', 'santé', 'évolution', 'science'],
+    language: 'fr',
+    content: `# La résistance aux antibiotiques
+
+La résistance aux antibiotiques est l’une des menaces les plus graves de la médecine moderne. Elle survient quand des bactéries changent de sorte que les médicaments conçus pour les tuer cessent de fonctionner.
+
+## L’évolution en accéléré
+
+Les antibiotiques tuent ou stoppent les bactéries, mais dans toute grande population, quelques microbes peuvent porter des mutations aléatoires qui les aident à survivre. Quand les antibiotiques éliminent les bactéries vulnérables, ces survivants résistants se multiplient et transmettent leur résistance. Les bactéries peuvent aussi **échanger directement des gènes de résistance** entre elles, propageant le trait rapidement. C’est de la **sélection naturelle** qui se produit en quelques jours, pas en millénaires.
+
+## Ce qui l’alimente
+
+Le processus est accéléré par le comportement humain :
+
+- **Le surusage** — prescrire des antibiotiques pour des maladies virales comme le rhume, qu’ils ne peuvent traiter.
+- **Les traitements incomplets** — s’arrêter trop tôt, laissant en vie les bactéries les plus coriaces.
+- **L’usage intensif en agriculture** — administrer de façon routinière à des animaux sains.
+
+## Pourquoi c’est dangereux
+
+À mesure que la résistance se propage, des infections, des chirurgies et des traitements autrefois courants comme la chimiothérapie deviennent plus risqués. Les « superbactéries » résistantes à plusieurs médicaments causent déjà de nombreux décès chaque année, et le réservoir d’antibiotiques vraiment nouveaux est resté mince.
+
+## Ce qui aide
+
+Ralentir la résistance suppose d’utiliser les antibiotiques seulement quand c’est nécessaire, de terminer les traitements prescrits, d’améliorer l’hygiène et la vaccination pour prévenir les infections dès le départ, et d’investir dans la recherche de nouveaux traitements. C’est une responsabilité partagée entre patients, médecins, agriculteurs et gouvernements.`,
+  },
+  {
+    title: 'Le cycle de l’azote',
+    question: 'Comment l’azote circule-t-il entre l’air, le sol et les êtres vivants ?',
+    summary:
+      'Le cycle de l’azote est l’ensemble des processus qui convertissent l’azote entre sa forme atmosphérique inerte et des composés utilisables par le vivant, essentiel aux protéines et à l’ADN et central pour l’agriculture.',
+    tags: ['biologie', 'sciences de la terre', 'agriculture', 'chimie', 'environnement'],
+    language: 'fr',
+    content: `# Le cycle de l’azote
+
+L’azote est essentiel à toute vie — il fait partie des protéines et de l’ADN. Bien que l’air soit composé d’environ 78 % d’azote gazeux, la plupart des organismes ne peuvent pas l’utiliser directement. Le cycle de l’azote est la série de processus naturels qui convertit l’azote en formes utilisables, et inversement.
+
+## Le problème du N2
+
+L’azote atmosphérique existe sous forme de **N2**, deux atomes liés par une triple liaison exceptionnellement forte. Rompre cette liaison demande beaucoup d’énergie, si bien que les plantes et les animaux ne peuvent pas puiser par eux-mêmes dans la vaste réserve de l’air.
+
+## Étapes clés
+
+- **Fixation de l’azote.** Des **bactéries** spécialisées — dont beaucoup vivent dans les racines de légumineuses comme les haricots et le trèfle — convertissent le N2 en ammoniac. La foudre et les procédés industriels fixent aussi l’azote.
+- **Nitrification.** D’autres bactéries convertissent l’ammoniac en **nitrites** puis en **nitrates**, la forme que la plupart des plantes absorbent par leurs racines.
+- **Assimilation.** Les plantes captent les nitrates pour bâtir des protéines ; les animaux obtiennent leur azote en mangeant des plantes ou d’autres animaux.
+- **Décomposition et ammonification.** Quand les organismes meurent ou excrètent, les décomposeurs renvoient l’azote au sol sous forme d’ammoniac.
+- **Dénitrification.** Enfin, certaines bactéries reconvertissent les nitrates en N2 gazeux, bouclant le cycle.
+
+## L’impact humain
+
+L’invention du **procédé Haber-Bosch**, qui fixe l’azote industriellement pour fabriquer des engrais, a énormément accru la production alimentaire et soutient aujourd’hui une grande partie de la population mondiale. Mais l’excès d’engrais qui ruisselle surcharge rivières et mers, causant des **proliférations d’algues** et des « zones mortes » privées d’oxygène, faisant du cycle de l’azote une préoccupation environnementale majeure.`,
+  },
+  {
+    title: 'Comment fonctionne la mémoire',
+    question: 'Comment le cerveau stocke-t-il et retrouve-t-il les souvenirs ?',
+    summary:
+      'La mémoire est la capacité du cerveau d’encoder, de stocker et de récupérer l’information en modifiant les connexions entre neurones ; elle comporte plusieurs types et est reconstructive, non parfaite.',
+    tags: ['neurosciences', 'psychologie', 'biologie', 'esprit', 'science'],
+    language: 'fr',
+    content: `# Comment fonctionne la mémoire
+
+La mémoire nous permet d’apprendre du passé et de donner du sens au présent. Plutôt qu’un unique classeur, c’est un ensemble de systèmes liés.
+
+## Trois processus de base
+
+- **Encodage.** Transformer une expérience en une forme que le cerveau peut stocker, aidé par l’attention et le sens.
+- **Stockage.** Conserver cette information dans le temps.
+- **Récupération.** La ramener quand on en a besoin.
+
+## Types de mémoire
+
+- La **mémoire sensorielle** retient des impressions brutes pendant une fraction de seconde.
+- La **mémoire à court terme (de travail)** garde une petite quantité d’information active pendant quelques secondes — assez pour composer un numéro de téléphone.
+- La **mémoire à long terme** peut stocker d’énormes quantités pendant des années. Elle comprend la mémoire **explicite** (faits et événements que l’on peut décrire) et la mémoire **implicite** (compétences comme faire du vélo).
+
+## La biologie
+
+On pense que les souvenirs sont stockés sous forme de motifs de connexions renforcées entre neurones — un principe souvent résumé par « les neurones qui s’activent ensemble se câblent ensemble ». L’**hippocampe** est crucial pour former de nouveaux souvenirs à long terme, tandis que les souvenirs plus anciens et consolidés dépendent davantage du cortex. Le **sommeil** joue un rôle clé dans la consolidation de l’apprentissage de la journée.
+
+## La mémoire est reconstructive
+
+Se souvenir n’est pas comme rejouer un enregistrement. Chaque fois que vous vous rappelez quelque chose, le cerveau le reconstruit, et les détails peuvent se décaler ou se mêler à d’autres informations. C’est pourquoi les souvenirs des témoins peuvent être faux avec assurance, et pourquoi se remémorer de façon répétée peut subtilement réécrire l’original.`,
+  },
 ];
