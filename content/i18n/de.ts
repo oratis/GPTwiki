@@ -942,4 +942,241 @@ Man nimmt an, dass Erinnerungen als Muster verstärkter Verbindungen zwischen Ne
 
 Erinnern ist nicht wie das Abspielen einer Aufnahme. Jedes Mal, wenn du dich an etwas erinnerst, baut das Gehirn es neu zusammen, und Einzelheiten können sich verschieben oder mit anderen Informationen vermischen. Darum können Zeugenerinnerungen mit voller Überzeugung falsch sein, und darum kann wiederholtes Erinnern das Original subtil umschreiben.`,
   },
+  // ── Batch 5: Weltraum und Astronomie ──
+  {
+    title: 'Die Mondphasen',
+    question: 'Warum ändert der Mond im Lauf des Monats seine Gestalt?',
+    summary:
+      'Die Mondphasen entstehen durch den wechselnden Winkel, unter dem wir seine von der Sonne beleuchtete Hälfte sehen; der Mond ändert sich nicht, nur wie viel seiner beleuchteten Seite uns zugewandt ist.',
+    tags: ['Astronomie', 'Mond', 'Weltraum', 'Geowissenschaften', 'Wissenschaft'],
+    language: 'de',
+    content: `# Die Mondphasen
+
+Der Mond scheint im Lauf eines Monats seine Gestalt zu ändern, von einer dünnen Sichel zu einer vollen Scheibe und zurück. Der Mond selbst ändert sich nicht — was sich ändert, ist, wie viel seiner von der Sonne beleuchteten Hälfte wir von der Erde aus sehen können.
+
+## Warum die Phasen entstehen
+
+Die Sonne beleuchtet stets die Hälfte des Mondes, so wie sie die Hälfte der Erde beleuchtet. Während der Mond die Erde etwa alle 29,5 Tage umrundet, ändert sich der Winkel zwischen Sonne, Mond und Erde, sodass wir verschiedene Anteile dieser beleuchteten Hälfte sehen.
+
+## Die Hauptphasen
+
+- **Neumond.** Der Mond steht zwischen Erde und Sonne, seine beleuchtete Seite ist von uns abgewandt und er ist nahezu unsichtbar.
+- **Zunehmende Sichel → erstes Viertel → zunehmender Halbmond.** Jede Nacht kommt ein größerer Teil der beleuchteten Seite in Sicht.
+- **Vollmond.** Die Erde steht zwischen Sonne und Mond, sodass wir die ganze beleuchtete Seite sehen.
+- **Abnehmender Halbmond → letztes Viertel → abnehmende Sichel.** Der beleuchtete Teil schrumpft zum nächsten Neumond hin.
+
+„Zunehmend“ heißt wachsend; „abnehmend“ heißt schrumpfend.
+
+## Stets dieselbe Seite
+
+Der Mond ist mit der Erde **gebunden rotierend**: Er dreht sich einmal pro Umlauf, zeigt uns also stets dieselbe Seite. Die Phasen sind nicht die „Rückseite“ des Mondes, die in Sicht käme; sie sind nur die Tag/Nacht-Linie (der **Terminator**), die über die Seite streicht, die wir immer sehen.
+
+## Nicht dasselbe wie eine Finsternis
+
+Phasen sind ein alltägliches Ergebnis der Bahngeometrie. **Finsternisse** sind seltenere Ereignisse, die erfordern, dass sich die drei Körper fast genau ausrichten.`,
+  },
+  {
+    title: 'Kometen',
+    question: 'Was sind Kometen und warum wächst ihnen ein Schweif?',
+    summary:
+      'Kometen sind eisige Körper aus dem äußeren Sonnensystem, die nahe der Sonne Gas und Staub freisetzen und so eine leuchtende Koma und lange Schweife bilden, die stets von der Sonne wegweisen.',
+    tags: ['Astronomie', 'Kometen', 'Sonnensystem', 'Weltraum', 'Wissenschaft'],
+    language: 'de',
+    content: `# Kometen
+
+Kometen werden oft „schmutzige Schneebälle“ genannt — kleine Körper aus Eis, Staub und Gestein, die aus der Entstehung des Sonnensystems übrig blieben. Den Großteil ihres Lebens sind sie dunkel und unsichtbar, doch eine Reise nahe der Sonne kann sie in eines der eindrucksvollsten Schauspiele des Himmels verwandeln.
+
+## Woher sie kommen
+
+Kometen entstehen in den kalten Außenbereichen des Sonnensystems: dem **Kuipergürtel** jenseits Neptuns und der weit entfernteren **Oortschen Wolke**, einer riesigen Hülle, die die Sonne umgeben soll. Von Zeit zu Zeit schickt ein Schwerkraftstoß einen nach innen fallen.
+
+## Aufbau eines Kometen
+
+- **Der Kern.** Der feste Kern aus Eis und Staub, meist nur wenige Kilometer groß.
+- **Die Koma.** Nähert sich der Komet der Sonne, sublimiert das Eis (geht direkt von fest zu gasförmig über) und umhüllt den Kern mit einer leuchtenden Wolke aus Gas und Staub.
+- **Die Schweife.** Kometen haben oft zwei: einen **Staubschweif**, der sich entlang der Bahn krümmt, und einen geraden, bläulichen **Ionenschweif** aus geladenem Gas, der vom Sonnenwind direkt weggetrieben wird.
+
+## Die Schweife weisen von der Sonne weg
+
+Eine häufige Überraschung: Der Schweif eines Kometen schleppt nicht wie Rauch hinterher. **Sonnenstrahlung und Sonnenwind** treiben das freigesetzte Material nach außen, sodass der Schweif stets ungefähr **von der Sonne weg** weist — selbst wenn der Komet zurück ins All steuert.
+
+## Vorhersagbare Besucher
+
+Manche Kometen umlaufen nach festen Zeitplänen. Der berühmteste, der **Halleysche Komet**, kehrt etwa alle 76 Jahre zurück und ist seit über zweitausend Jahren verzeichnet.`,
+  },
+  {
+    title: 'Der Lebenszyklus eines Sterns',
+    question: 'Wie werden Sterne geboren und wie sterben sie?',
+    summary:
+      'Sterne entstehen aus kollabierenden Gaswolken, leuchten den Großteil ihres Lebens durch die Fusion von Wasserstoff und enden je nach Masse als Weiße Zwerge, Neutronensterne oder Schwarze Löcher.',
+    tags: ['Astronomie', 'Sterne', 'Weltraum', 'Physik', 'Wissenschaft'],
+    language: 'de',
+    content: `# Der Lebenszyklus eines Sterns
+
+Sterne sind nicht ewig. Sie werden geboren, leben Millionen bis Milliarden Jahre und sterben auf Weisen, die fast vollständig davon abhängen, mit wie viel Masse sie begannen.
+
+## Geburt
+
+Sterne entstehen in riesigen Wolken aus Gas und Staub, **Nebel** genannt. Wird ein Teil der Wolke dicht genug, zieht die Schwerkraft ihn zu einer heißen, rotierenden Kugel zusammen. Wird der Kern heiß und dicht genug, zündet die **Kernfusion** — Wasserstoffatome verschmelzen zu Helium und setzen gewaltige Energie frei. Ein Stern ist geboren.
+
+## Die Hauptreihe
+
+Den Großteil seines Lebens ist ein Stern in einer langen, stabilen Phase, der **Hauptreihe**, in der er den Zug der Schwerkraft nach innen mit dem Druck der Fusionsenergie nach außen ausbalanciert. Unsere Sonne ist etwa zur Hälfte ihres ~10 Milliarden Jahre langen Hauptreihenlebens.
+
+## Der Tod hängt von der Masse ab
+
+Erschöpft ein Stern seinen Wasserstoff, gabelt sich sein Schicksal nach der Masse:
+
+- **Sonnenähnliche Sterne** blähen sich zu **Roten Riesen** auf, stoßen dann ihre Außenschichten ab und hinterlassen einen dichten, abkühlenden Kern, den **Weißen Zwerg**.
+- **Massereiche Sterne** verbrennen ihren Brennstoff schnell und enden in einer gewaltigen Explosion — einer **Supernova** —, die kurz eine ganze Galaxie überstrahlt. Der verbleibende Kern wird zu einem ultradichten **Neutronenstern** oder, wenn massereich genug, zu einem **Schwarzen Loch**.
+
+## Kosmisches Recycling
+
+Supernovae schmieden und verstreuen schwere Elemente wie Eisen, Kohlenstoff und Gold im All. Diese bereichern neue Nebel, die neue Sterne und Planeten bilden. In einem ganz realen Sinn wurden die Atome unseres Körpers in längst gestorbenen Sternen gefertigt.`,
+  },
+  {
+    title: 'Polarlichter',
+    question: 'Was verursacht die Nord- und Südlichter?',
+    summary:
+      'Polarlichter sind leuchtende Vorhänge, die entstehen, wenn geladene Teilchen von der Sonne vom Erdmagnetfeld in die obere Atmosphäre gelenkt werden, wo sie Gasmoleküle anregen.',
+    tags: ['Astronomie', 'Atmosphäre', 'Weltraumwetter', 'Physik', 'Wissenschaft'],
+    language: 'de',
+    content: `# Polarlichter
+
+Polarlichter — die Nordlichter (*Aurora borealis*) und Südlichter (*Aurora australis*) — sind leuchtende Erscheinungen am Nachthimmel nahe den Polen. Sie sind das sichtbare Ergebnis einer Verbindung zwischen der Sonne und dem Magnetfeld der Erde.
+
+## Die Quelle in der Sonne
+
+Die Sonne strömt unaufhörlich geladene Teilchen aus, den **Sonnenwind**, und Ausbrüche wie Sonneneruptionen können besonders starke Böen senden. Erreichen diese Teilchen die Erde, werden die meisten vom **Magnetfeld** des Planeten abgelenkt.
+
+## Zu den Polen gelenkt
+
+Das Magnetfeld lenkt einige Teilchen zu den **Magnetpolen**, weshalb Polarlichter meist in hohen Breiten zu sehen sind. Stürzen die Teilchen in die obere Atmosphäre, stoßen sie mit Gasmolekülen zusammen.
+
+## Warum die Farben
+
+Jeder Stoß energiert ein Gasmolekül, das diese Energie dann als Licht abgibt:
+
+- **Grün**, die häufigste Farbe, stammt von Sauerstoff in mittleren Höhen.
+- **Rot** stammt von Sauerstoff in sehr großer Höhe.
+- **Blau und Violett** stammen von Stickstoff.
+
+Das Ergebnis sind wogende Vorhänge, Bögen und Spiralen, die sich mit den Teilchenströmen ändern.
+
+## Weltraumwetter
+
+Starke Sonnenstürme können Polarlichter in niedrigere Breiten drücken und, wichtiger, Satelliten, Funkverkehr und Stromnetze stören. Daher ist die Erforschung der Polarlichter Teil der Überwachung des „**Weltraumwetters**“, und andere Planeten mit Magnetfeld, wie Jupiter und Saturn, haben ihre eigenen spektakulären Polarlichter.`,
+  },
+  {
+    title: 'Lichtjahre und kosmische Entfernungen',
+    question: 'Was ist ein Lichtjahr und wie messen wir Entfernungen im Weltraum?',
+    summary:
+      'Ein Lichtjahr ist die Strecke, die Licht in einem Jahr zurücklegt; da kosmische Entfernungen riesig sind, nutzen Astronomen die Lichtlaufzeit und geschickte, auf Geometrie und Helligkeit beruhende Methoden, um sie zu messen.',
+    tags: ['Astronomie', 'Weltraum', 'Physik', 'Messung', 'Wissenschaft'],
+    language: 'de',
+    content: `# Lichtjahre und kosmische Entfernungen
+
+Der Weltraum ist so riesig, dass gewöhnliche Einheiten wie der Kilometer unhandlich werden. Um diese Maßstäbe zu bewältigen, messen Astronomen Entfernungen mithilfe der Lichtgeschwindigkeit.
+
+## Was ein Lichtjahr ist
+
+Ein **Lichtjahr** ist die Strecke, die Licht in einem Jahr zurücklegt — etwa 9,5 Billionen Kilometer. Trotz des Namens misst es eine *Entfernung*, keine Zeit. Licht ist das Schnellste im Universum, ein Lichtjahr steht also für eine gewaltige Spanne.
+
+## In die Vergangenheit blicken
+
+Da Licht Zeit zum Reisen braucht, heißt einen fernen Körper zu sehen, ihn so zu sehen, wie er *war*, als das Licht aufbrach. Das Licht der Sonne ist etwa 8 Minuten alt, wenn es uns erreicht; das nächste Sternsystem, Alpha Centauri, ist etwa 4 Lichtjahre entfernt, wir sehen es also, wie es vor 4 Jahren war. Die fernsten Galaxien sind Milliarden Lichtjahre entfernt — Fenster ins frühe Universum.
+
+## Wie Entfernungen gemessen werden
+
+Astronomen bauen eine „**kosmische Entfernungsleiter**“ mit Methoden, die immer weiter reichen:
+
+- **Parallaxe.** Für nahe Sterne messen Astronomen die winzige Verschiebung der scheinbaren Sternposition, während die Erde die Sonne umkreist — derselbe Effekt, den man sieht, wenn ein naher Gegenstand sich vor dem Hintergrund verschiebt, sobald man den Kopf bewegt.
+- **Standardkerzen.** Bestimmte Sterne und explodierende Sterne (wie Supernovae vom Typ Ia) haben eine bekannte wahre Helligkeit. Indem man vergleicht, wie hell sie *erscheinen*, mit dem, wie hell sie *wirklich* sind, berechnen Astronomen die Entfernung.
+- **Rotverschiebung.** Für die fernsten Galaxien verrät die Dehnung ihres Lichts, wie schnell sie sich entfernen, was in einem expandierenden Universum mit der Entfernung zusammenhängt.
+
+Jede Sprosse wird an der darunter geeicht, sodass Astronomen den Kosmos bis zu seinem sichtbaren Rand kartieren können.`,
+  },
+  {
+    title: 'Exoplaneten',
+    question: 'Wie finden Astronomen Planeten um andere Sterne?',
+    summary:
+      'Exoplaneten sind Planeten, die andere Sterne als die Sonne umkreisen; Astronomen entdecken sie meist durch das winzige Abdunkeln des Sternlichts bei einem Transit oder durch das leichte Taumeln des Sterns.',
+    tags: ['Astronomie', 'Exoplaneten', 'Weltraum', 'Wissenschaft', 'Entdeckung'],
+    language: 'de',
+    content: `# Exoplaneten
+
+Ein Exoplanet ist ein Planet, der einen anderen Stern als unsere Sonne umkreist. Die ersten bestätigten Exoplaneten um einen sonnenähnlichen Stern wurden in den 1990er-Jahren gefunden; seither hat man Tausende entdeckt und damit unseren Blick auf die Galaxie verwandelt.
+
+## Warum sie schwer zu sehen sind
+
+Planeten erzeugen kein eigenes Licht und sind winzig neben ihrem blendenden Wirtsstern — wie aus der Ferne ein Glühwürmchen neben einem Suchscheinwerfer zu erspähen. Daher entdecken Astronomen Exoplaneten meist **indirekt**, an ihren Wirkungen auf den Stern.
+
+## Die wichtigsten Nachweismethoden
+
+- **Die Transitmethode.** Zieht die Bahn eines Planeten zwischen uns und seinem Stern hindurch, blockiert er einen winzigen Bruchteil des Sternlichts und verursacht eine kleine, regelmäßige Helligkeitssenkung. Das Messen dieser Senkungen verrät Größe und Bahn des Planeten. Das Kepler-Teleskop der NASA fand damit Tausende Planeten.
+- **Die Radialgeschwindigkeitsmethode.** Die Schwerkraft eines Planeten zieht an seinem Stern und lässt ihn leicht taumeln. Dieses Taumeln verschiebt das Sternlicht (per Doppler-Effekt) und verrät Masse und Bahn des Planeten.
+
+Weitere Methoden sind die **direkte Abbildung** großer, ferner Planeten und das **Gravitationsmikrolinsen**.
+
+## Was wir gelernt haben
+
+Exoplaneten sind erstaunlich vielfältig: glühende „heiße Jupiter“, die in Tagen umlaufen, „Supererden“, größer als unsere, und Welten in der **habitablen Zone**, wo Temperaturen flüssiges Wasser erlauben könnten. Die Entdeckungen legen nahe, dass Planeten häufig sind — die meisten Sterne dürften welche beherbergen —, was die Suche nach Welten, die Leben tragen könnten, schärft.`,
+  },
+  {
+    title: 'Der Urknall',
+    question: 'Was ist die Urknalltheorie und welche Belege stützen sie?',
+    summary:
+      'Die Urknalltheorie besagt, dass das Universum vor etwa 13,8 Milliarden Jahren aus einem extrem heißen, dichten Zustand begann und sich seither ausdehnt, gestützt durch mehrere Belege.',
+    tags: ['Astronomie', 'Kosmologie', 'Physik', 'Universum', 'Wissenschaft'],
+    language: 'de',
+    content: `# Der Urknall
+
+Die Urknalltheorie ist die führende wissenschaftliche Erklärung für den Anfang des Universums. Sie besagt, dass das Universum vor etwa **13,8 Milliarden Jahren** in einem außerordentlich heißen, dichten Zustand begann und sich seither ausgedehnt und abgekühlt hat.
+
+## Ein häufiges Missverständnis
+
+Der Urknall war keine Explosion *in* einen leeren Raum. Vielmehr begann der Raum selbst sich überall zugleich auszudehnen. Es gibt kein einzelnes „Zentrum“ des Universums; jede Region entfernt sich von jeder anderen, wie Punkte auf der Oberfläche eines sich aufblähenden Ballons.
+
+## Die Belege
+
+Drei große Beobachtungen stützen die Theorie:
+
+- **Das expandierende Universum.** In den 1920er-Jahren fand Edwin Hubble, dass sich ferne Galaxien von uns entfernen, und zwar umso schneller, je weiter sie sind. Diese Ausdehnung zurückzuspulen weist auf einen dichten Anfang.
+- **Die kosmische Mikrowellenhintergrundstrahlung (CMB).** Ein schwaches Glühen von Mikrowellenstrahlung erfüllt den ganzen Himmel — das abgekühlte Nachglühen des frühen, heißen Universums, vorhergesagt, bevor es 1965 gefunden wurde.
+- **Die Häufigkeit leichter Elemente.** Die Theorie sagt die Anteile von Wasserstoff, Helium und Lithium genau voraus, die in den ersten Minuten des Universums entstanden.
+
+## Was sie sagt und was nicht
+
+Der Urknall beschreibt die *Entwicklung* des Universums von einem Sekundenbruchteil an — nicht das letzte „Warum“ oder was, falls überhaupt, „davor“ war. Offene Fragen bleiben, darunter die Natur der **dunklen Materie** und der **dunklen Energie**, die zusammen den Großteil des Inhalts des Universums ausmachen und seine fortdauernde Ausdehnung bestimmen.`,
+  },
+  {
+    title: 'Finsternisse',
+    question: 'Was ist der Unterschied zwischen einer Sonnen- und einer Mondfinsternis?',
+    summary:
+      'Finsternisse treten auf, wenn Sonne, Erde und Mond sich ausrichten: Eine Sonnenfinsternis geschieht, wenn der Mond die Sonne verdeckt, und eine Mondfinsternis, wenn der Schatten der Erde auf den Mond fällt.',
+    tags: ['Astronomie', 'Mond', 'Sonne', 'Weltraum', 'Wissenschaft'],
+    language: 'de',
+    content: `# Finsternisse
+
+Eine Finsternis tritt auf, wenn Sonne, Erde und Mond sich so ausrichten, dass einer einen Schatten auf einen anderen wirft oder ihm die Sicht verdeckt. Es gibt zwei Hauptarten, und sie sind leicht zu verwechseln.
+
+## Sonnenfinsternis
+
+Eine **Sonnenfinsternis** geschieht bei Neumond, wenn **der Mond zwischen Sonne und Erde** hindurchzieht und das Licht der Sonne blockiert. Da der Schatten des Mondes klein ist, sehen sie nur Menschen in einem schmalen Streifen der Erde.
+
+- Bei einer **totalen** Sonnenfinsternis bedeckt der Mond die Sonne ganz, enthüllt kurz die zarte äußere Atmosphäre der Sonne (die Korona) und verwandelt den Tag in Dämmerung.
+- Ein bemerkenswerter Zufall macht das möglich: Die Sonne ist etwa 400-mal so breit wie der Mond, aber auch etwa 400-mal so weit entfernt, sodass beide an unserem Himmel gleich groß erscheinen.
+
+⚠️ Eine Sonnenfinsternis ohne geeignete Filter direkt anzusehen, kann die Augen schädigen.
+
+## Mondfinsternis
+
+Eine **Mondfinsternis** geschieht bei Vollmond, wenn **die Erde zwischen Sonne und Mond** hindurchzieht und ihren Schatten auf den Mond wirft. Sie ist von überall auf der Nachtseite der Erde sichtbar und völlig gefahrlos zu beobachten.
+
+Während einer totalen Mondfinsternis leuchtet der Mond oft kupferrot — ein „**Blutmond**“ —, weil etwas Sonnenlicht beim Durchgang durch die Erdatmosphäre gebrochen wird und auf den Mond fällt, rot gefiltert wie bei Sonnenuntergängen.
+
+## Warum nicht jeden Monat
+
+Die Mondbahn ist um etwa 5° gegen die Erdbahn um die Sonne geneigt, sodass sich die drei Körper meist nicht genau ausrichten. Diese Neigung ist der Grund, warum Finsternisse nur einige Male im Jahr auftreten und nicht jeden Monat.`,
+  },
 ];
