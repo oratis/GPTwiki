@@ -13,8 +13,13 @@ import { initializeApp, cert, type ServiceAccount } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 import { config } from 'dotenv';
 import { allDrafts } from '../content';
+import { allTranslations } from '../content/i18n';
 
 config({ path: '.env.local' });
+
+// English originals + all completed translations. Titles are language-specific,
+// so de-dup by title is safe across languages.
+const corpus = [...allDrafts, ...allTranslations];
 
 const APPLY = process.argv.includes('--apply');
 
@@ -33,12 +38,15 @@ async function titleExists(title: string): Promise<boolean> {
 }
 
 async function main() {
-  console.log(`${APPLY ? 'APPLY' : 'DRY RUN'} — ${allDrafts.length} draft articles\n`);
+  console.log(
+    `${APPLY ? 'APPLY' : 'DRY RUN'} — ${corpus.length} draft articles ` +
+      `(${allDrafts.length} en + ${allTranslations.length} translated)\n`
+  );
   const now = Date.now();
   let written = 0;
   let skipped = 0;
 
-  for (const draft of allDrafts) {
+  for (const draft of corpus) {
     if (await titleExists(draft.title)) {
       console.log(`SKIP  (exists)  ${draft.title}`);
       skipped++;
@@ -46,7 +54,7 @@ async function main() {
     }
 
     if (!APPLY) {
-      console.log(`WOULD WRITE     ${draft.title}  [${draft.tags.join(', ')}]  ${draft.content.length} chars`);
+      console.log(`WOULD WRITE  [${draft.language}]  ${draft.title}  (${draft.content.length} chars)`);
       written++;
       continue;
     }

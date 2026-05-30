@@ -14,6 +14,10 @@ export interface DraftArticle {
   summary: string;
   /** Lowercase category/keyword tags. */
   tags: string[];
-  /** ISO 639-1 content language. */
-  language: 'en';
+  /** ISO 639-1 content language (one of the 15 supported locales). */
+  language: DraftLanguage;
 }
+
+export type DraftLanguage =
+  | 'en' | 'zh' | 'ja' | 'ko' | 'es' | 'fr' | 'de' | 'pt'
+  | 'ru' | 'ar' | 'hi' | 'it' | 'tr' | 'vi' | 'th';
