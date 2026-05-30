@@ -1179,4 +1179,521 @@ Lors d’une éclipse de Lune totale, la Lune luit souvent d’un rouge cuivré 
 
 L’orbite de la Lune est inclinée d’environ 5° par rapport à l’orbite de la Terre autour du Soleil, si bien que les trois corps ne s’alignent généralement pas avec précision. Cette inclinaison explique que les éclipses n’arrivent que quelques fois par an et non chaque mois.`,
   },
+  // ── Batch 6: Arts, langue et culture ──
+  {
+    title: 'La théorie des couleurs',
+    question: 'Comment les couleurs s’accordent-elles, et qu’est-ce qui rend certaines combinaisons agréables ?',
+    summary:
+      'La théorie des couleurs étudie comment les couleurs se rapportent et se combinent, à l’aide d’outils comme le cercle chromatique et de concepts comme les schémas complémentaires et analogues pour guider l’art et le design.',
+    tags: ['art', 'design', 'couleur', 'culture', 'visuel'],
+    language: 'fr',
+    content: `# La théorie des couleurs
+
+La théorie des couleurs est l’ensemble des repères pratiques que les artistes et les designers utilisent pour combiner les couleurs avec efficacité. Elle mêle physique, perception et esthétique en principes simples et applicables.
+
+## Le cercle chromatique
+
+L’outil classique est le **cercle chromatique**, qui dispose les couleurs en cercle :
+
+- Les **couleurs primaires** (dans la théorie traditionnelle du pigment : rouge, jaune, bleu) ne peuvent être obtenues par mélange.
+- Les **couleurs secondaires** (orange, vert, violet) naissent du mélange de deux primaires.
+- Les **couleurs tertiaires** remplissent les espaces intermédiaires.
+
+## Trois propriétés de la couleur
+
+Toute couleur peut se décrire par :
+
+- **La teinte** : son identité de base (rouge, bleu, etc.).
+- **La saturation** : son intensité ou sa pâleur.
+- **La valeur (luminosité)** : sa clarté ou son obscurité.
+
+## Schémas de couleurs courants
+
+- **Complémentaire.** Des couleurs opposées sur le cercle (comme le bleu et l’orange) créent un contraste et une énergie forts.
+- **Analogue.** Des couleurs voisines (comme le bleu, le turquoise et le vert) paraissent harmonieuses et calmes.
+- **Triadique.** Trois couleurs régulièrement espacées offrent équilibre et vivacité.
+
+## Chaud, froid et sens
+
+Les couleurs sont souvent regroupées en **chaudes** (rouges, oranges, jaunes) ou **froides** (bleus, verts, violets), ce qui agit sur l’humeur et la sensation de profondeur. Les cultures attachent aussi des sens aux couleurs, dont les designers tiennent compte pour communiquer.
+
+## Lumière contre pigment
+
+Une subtilité clé : mélanger de la **lumière** (comme sur les écrans) suit des règles différentes de mélanger de la peinture. Les écrans combinent de la lumière rouge, verte et bleue (RVB) qui s’additionne vers le blanc, tandis que les pigments soustraient la lumière et se mélangent vers le sombre.`,
+  },
+  {
+    title: 'La perspective linéaire',
+    question: 'Comment les artistes font-ils paraître un dessin plat en trois dimensions ?',
+    summary:
+      'La perspective linéaire est une technique de dessin, formalisée à la Renaissance, qui crée l’illusion de profondeur en faisant converger les lignes parallèles vers des points de fuite sur un horizon.',
+    tags: ['art', 'dessin', 'histoire', 'design', 'visuel'],
+    language: 'fr',
+    content: `# La perspective linéaire
+
+La perspective linéaire est une méthode pour représenter l’espace tridimensionnel sur une surface plane, créant une illusion convaincante de profondeur. Ses règles, élaborées durant la Renaissance italienne, ont révolutionné l’art occidental.
+
+## L’idée centrale
+
+Dans la réalité, les objets paraissent plus petits à mesure qu’ils s’éloignent, et les lignes parallèles — comme les bords d’une longue route — semblent converger en s’éloignant. La perspective linéaire capte cela avec quelques constructions simples :
+
+- Une **ligne d’horizon**, qui représente le niveau des yeux du spectateur.
+- Un ou plusieurs **points de fuite** sur cette ligne, où les lignes parallèles qui s’éloignent semblent se rejoindre.
+- Les **orthogonales**, les lignes convergentes qui guident la taille et l’emplacement des objets.
+
+## Types
+
+- **Perspective à un point.** Un seul point de fuite, idéal pour les scènes vues de face, comme regarder droit dans un couloir.
+- **Perspective à deux points.** Deux points de fuite, utiles pour les objets vus de biais, comme l’angle d’un bâtiment.
+- **Perspective à trois points.** Ajoute un troisième point en haut ou en bas, suggérant une hauteur ou une profondeur extrêmes.
+
+## Une percée de la Renaissance
+
+L’architecte **Filippo Brunelleschi** a démontré la géométrie au début des années 1400, et elle fut bientôt codifiée par écrit. D’un coup, les peintres pouvaient construire pièces, rues et paysages avec une cohérence mathématique, donnant à leur œuvre un réalisme nouveau.
+
+## Au-delà de la géométrie
+
+Les artistes utilisent aussi la **perspective atmosphérique** — rendre les objets lointains plus pâles, plus bleutés et moins détaillés — pour renforcer la sensation de profondeur qu’établit la perspective linéaire.`,
+  },
+  {
+    title: 'L’harmonie et les gammes musicales',
+    question: 'Pourquoi certaines combinaisons de notes sont-elles agréables ?',
+    summary:
+      'L’harmonie musicale naît en grande partie de rapports de fréquence simples entre les notes ; les gammes organisent les hauteurs en motifs que les cultures utilisent pour bâtir mélodie et harmonie.',
+    tags: ['musique', 'art', 'son', 'culture', 'mathématiques'],
+    language: 'fr',
+    content: `# L’harmonie et les gammes musicales
+
+Pourquoi un accord sonne-t-il « juste » alors qu’un choc aléatoire de notes sonne dur ? L’essentiel de la réponse tient à la physique du son et aux motifs que les cultures en tirent.
+
+## Les notes sont des fréquences
+
+Une note musicale est une onde sonore qui vibre à une **fréquence** donnée. Quand les fréquences de deux notes sont liées par des **rapports simples**, leurs ondes s’alignent souvent, et nos oreilles tendent à entendre le résultat comme **consonant** (agréable). Les rapports complexes et discordants sonnent **dissonants** (tendus).
+
+## L’octave et les rapports simples
+
+La relation la plus fondamentale est l’**octave**, un rapport de fréquence d’exactement **2:1** — les deux notes sonnent si semblables qu’on leur donne le même nom. Parmi les autres fortes consonances : la quinte juste (environ 3:2) et la quarte juste (environ 4:3). On attribue traditionnellement au penseur grec Pythagore d’avoir lié ces intervalles agréables à des rapports numériques simples.
+
+## Les gammes
+
+Une **gamme** est un ensemble choisi de hauteurs dans une octave, disposées selon un motif de pas. La musique occidentale utilise souvent les gammes **majeure** et **mineure** de sept notes, tandis que beaucoup de traditions emploient des gammes **pentatoniques** (cinq notes). Le motif de grands et petits pas donne à chaque gamme son caractère : les gammes majeures paraissent souvent lumineuses, les mineures plus sombres.
+
+## Harmonie et accordage
+
+L’**harmonie** est le fait de faire sonner plusieurs notes ensemble, comme dans les accords. Pour que les instruments jouent dans n’importe quelle tonalité, l’accordage occidental moderne ajuste légèrement les rapports purs dans un compromis appelé **tempérament égal**, espaçant uniformément les 12 notes de l’octave. Il sacrifie la pureté parfaite à la souplesse, un compromis au cœur de l’accordage des pianos et des guitares.`,
+  },
+  {
+    title: 'L’étymologie : d’où viennent les mots',
+    question: 'Comment les mots apparaissent-ils et changent-ils de sens avec le temps ?',
+    summary:
+      'L’étymologie est l’étude de l’origine des mots et de l’évolution de leurs formes et de leurs sens ; le français en particulier mêle des sources latines, germaniques et bien d’autres.',
+    tags: ['langue', 'linguistique', 'histoire', 'culture', 'mots'],
+    language: 'fr',
+    content: `# L’étymologie : d’où viennent les mots
+
+L’étymologie est l’étude de l’origine des mots : d’où ils viennent, comment leurs sons et leurs graphies ont évolué, et comment leurs sens se sont déplacés au fil des siècles.
+
+## Les langues ont des familles
+
+La plupart des langues européennes et de nombreuses langues asiatiques descendent d’un ancêtre reconstruit appelé **indo-européen commun**, parlé il y a des milliers d’années. À mesure que les populations s’étendaient et se séparaient, leur parler s’est diversifié en branches comme le germanique, le roman (issu du latin), le slave et l’indo-iranien. C’est pourquoi « mère » ressemble à *Mutter* (allemand), *madre* (espagnol) et *mata* (sanskrit).
+
+## Le français, langue romane
+
+Le français descend surtout du **latin**, mais il a emprunté à de nombreuses sources : le germanique (francique) au début du Moyen Âge, l’arabe (par l’espagnol et le commerce : *algèbre*, *sucre*), puis l’anglais à l’ère moderne. Ces couches font de l’histoire d’une langue une carte de ses contacts.
+
+## Comment les sens changent
+
+Les mots restent rarement immobiles. Les schémas courants incluent :
+
+- **L’élargissement.** Un mot qui désignait quelque chose de précis en vient à désigner une catégorie plus large.
+- **Le rétrécissement.** Un terme général finit par se rapporter à quelque chose de plus particulier.
+- **Le glissement sémantique.** Le sens dérive avec l’usage ; bien des mots ont migré du neutre au positif, ou inversement.
+
+## Pourquoi c’est important
+
+L’étymologie est plus qu’une curiosité. Remonter à l’origine des mots révèle des histoires de migration, de conquête, de commerce et de technologie — chaque contact laisse sa marque sur une langue. Elle aide aussi les apprenants à décoder des mots inconnus en reconnaissant racines, préfixes et suffixes partagés.`,
+  },
+  {
+    title: 'Le rôle de la mythologie',
+    question: 'Pourquoi presque toutes les cultures ont-elles créé des mythes ?',
+    summary:
+      'Les mythes sont des récits traditionnels qui expliquent le monde, encodent des valeurs et lient les communautés ; bien qu’ils ne soient pas littéralement vrais, ils ont rempli des fonctions explicatives, morales et sociales vitales.',
+    tags: ['mythologie', 'culture', 'histoire', 'religion', 'récit'],
+    language: 'fr',
+    content: `# Le rôle de la mythologie
+
+Presque toutes les cultures humaines ont créé des **mythes** : des récits traditionnels sur les dieux, les héros et les origines du monde. Leur présence quasi universelle suggère qu’ils répondent à des besoins humains profonds.
+
+## Ce que sont les mythes
+
+Un mythe n’est pas simplement un récit faux. Dans son cadre culturel d’origine, un mythe est un récit sacré ou fondateur qui explique comment les choses sont nées et pourquoi le monde fonctionne ainsi. Le mot vient du grec *mythos*, « récit » ou « parole ».
+
+## Ce que font les mythes
+
+Les chercheurs identifient plusieurs fonctions qui se recoupent :
+
+- **Explication.** Avant la science, les mythes répondaient aux grandes questions : pourquoi le soleil traverse-t-il le ciel ? pourquoi les saisons changent-elles ? Le mythe grec de Perséphone, par exemple, expliquait le retour de l’hiver.
+- **Guide moral.** Les mythes modèlent les vertus et mettent en garde contre les vices, dramatisant les conséquences de l’orgueil, de la cupidité ou du courage.
+- **Cohésion sociale.** Les récits partagés lient une communauté par une identité, une histoire et des valeurs communes.
+- **Faire face au mystère.** Les mythes donnent un sens à la naissance, à la mort, à l’amour et à la souffrance — des expériences qui résistent à une explication simple.
+
+## Motifs communs
+
+À travers des cultures lointaines, des motifs semblables reviennent : la création à partir du chaos, de grands déluges, un voyage aux enfers et le « voyage du héros », où un protagoniste part, affronte des épreuves et revient transformé. Ces motifs récurrents suggèrent que les mythes touchent des aspects partagés de l’imagination humaine.
+
+## Le mythe aujourd’hui
+
+Même à une époque scientifique, le récit mythique persiste dans la littérature, le cinéma et le folklore : preuve que l’appétit humain pour des récits porteurs de sens ne s’est jamais éteint.`,
+  },
+  {
+    title: 'La typographie',
+    question: 'Qu’est-ce que la typographie et pourquoi façonne-t-elle notre lecture ?',
+    summary:
+      'La typographie est l’art de disposer le texte pour rendre le langage écrit lisible et expressif, ce qui implique le choix des caractères, l’espacement et la hiérarchie qui guident subtilement le lecteur.',
+    tags: ['design', 'art', 'communication', 'typographie', 'visuel'],
+    language: 'fr',
+    content: `# La typographie
+
+La typographie est l’art de disposer lettres et texte pour que le langage soit lisible, clair et agréable à l’œil. Souvent invisible quand elle est bien faite, elle façonne profondément notre expérience du mot écrit.
+
+## Caractères et polices
+
+Une **police de caractères (typeface)** est un dessin pour un ensemble de signes (comme Helvetica ou Times New Roman) ; une **fonte (font)** en est une taille et un style précis. Les caractères se regroupent en grandes familles :
+
+- **Avec empattement (serif).** Des lettres aux petits traits de finition (« pieds »), souvent vues comme traditionnelles et employées dans les longs textes imprimés.
+- **Sans empattement (sans serif).** Des lettres nettes sans ces traits, courantes à l’écran pour leur simplicité.
+- Les caractères **à chasse fixe, scripts et d’affichage** servent à des usages spécialisés.
+
+## Les éléments
+
+Une bonne typographie équilibre quantité de petites décisions :
+
+- **Hiérarchie.** Varier la taille, la graisse et l’espacement signale ce qui est un titre, un sous-titre ou le corps du texte, guidant l’œil.
+- **Espacement.** Le *crénage* (espace entre certaines lettres), l’*approche* (espacement général des lettres) et l’*interligne* agissent tous sur la lisibilité.
+- **Justification (longueur de ligne).** Une ligne trop longue ou trop courte fatigue le lecteur.
+
+## Pourquoi c’est important
+
+La typographie n’est pas un simple ornement. Un texte clair aide le lecteur à absorber vite et confortablement l’information, tandis que de mauvais choix causent fatigue ou confusion. Le caractère porte aussi un **ton** : une police d’affichage espiègle et une police à empattement sobre envoient des messages très différents avant qu’on ait lu un mot.
+
+## Une longue tradition
+
+La discipline s’étend des mains soigneuses des copistes médiévaux aux caractères de métal de Gutenberg, jusqu’aux écrans d’aujourd’hui, où le design adaptatif doit garder le texte lisible sur d’innombrables appareils.`,
+  },
+  {
+    title: 'La structure narrative',
+    question: 'Pourquoi tant d’histoires suivent-elles une forme semblable ?',
+    summary:
+      'La structure narrative est l’ossature qui organise les événements d’une histoire ; des schémas familiers comme la structure en trois actes et l’arc narratif aident à créer la tension et à offrir une résolution satisfaisante.',
+    tags: ['récit', 'écriture', 'culture', 'littérature', 'art'],
+    language: 'fr',
+    content: `# La structure narrative
+
+La structure narrative est l’ossature sous-jacente qui organise les événements d’une histoire. Dans les romans, les films, le théâtre et les contes populaires, certaines formes reviennent parce qu’elles captent l’attention de façon fiable et procurent de la satisfaction.
+
+## L’arc classique
+
+Beaucoup d’histoires suivent un schéma de montée et de descente souvent appelé **pyramide de Freytag** :
+
+1. **Exposition.** Présenter les personnages, le cadre et le monde ordinaire.
+2. **Action montante.** Un conflit surgit et les complications accumulent la tension.
+3. **Climax.** Le point de bascule de tension maximale.
+4. **Action descendante.** Les conséquences se déploient.
+5. **Dénouement.** Le conflit se résout et l’on atteint une nouvelle normalité.
+
+## La structure en trois actes
+
+Une variante très utilisée, surtout au cinéma, divise l’histoire en trois actes : **mise en place** (présenter le monde et le problème), **confrontation** (le protagoniste lutte, les enjeux montent) et **résolution** (le climax et l’issue). Des « points de bascule » clairs poussent l’histoire d’un acte au suivant.
+
+## Le voyage du héros
+
+Un autre schéma influent décrit un héros qui quitte le monde ordinaire, franchit l’inconnu, affronte des épreuves et une épreuve profonde, et revient transformé. Ses variantes apparaissent aussi bien dans les mythes que dans les grands succès modernes.
+
+## Pourquoi la structure aide
+
+La structure n’est pas une formule rigide, mais un outil. Elle gère la **tension et le rythme**, fait que le conflit pousse l’histoire en avant et donne au public un sentiment satisfaisant d’achèvement. Les conteurs habiles jouent souvent *à rebours* des structures attendues — en retenant la résolution, en brouillant la chronologie ou en subvertissant le climax — précisément parce que le public connaît si bien la forme familière.`,
+  },
+  {
+    title: 'La communication non verbale',
+    question: 'Quelle part de notre communication passe sans les mots ?',
+    summary:
+      'La communication non verbale transmet du sens par le langage corporel, les expressions du visage, le ton, le geste et l’espace ; elle porte souvent l’information émotionnelle plus puissamment que les mots.',
+    tags: ['psychologie', 'communication', 'culture', 'comportement', 'société'],
+    language: 'fr',
+    content: `# La communication non verbale
+
+La communication non verbale est tout ce que nous transmettons sans mots : expressions du visage, gestes, posture, contact visuel, ton de la voix et même la distance que nous gardons. C’est une couche constante, et souvent inconsciente, de l’interaction humaine.
+
+## Les canaux principaux
+
+- **Expressions du visage.** Certaines émotions, comme la joie, la peur et le dégoût, s’expriment par des mouvements du visage reconnus dans bien des cultures.
+- **Langage corporel.** La posture et les gestes signalent confiance, ouverture, tension ou ennui.
+- **Contact visuel.** Il régule la conversation et transmet attention, intérêt ou défi.
+- **Paralangage.** *Comment* nous parlons — hauteur, débit, volume, pauses — colore le sens de nos mots.
+- **Proxémie.** L’usage de l’espace personnel, qui varie selon la relation et la culture.
+
+## Pourquoi c’est important
+
+Les signaux non verbaux sont particulièrement puissants pour les messages **émotionnels**. Quand les mots et le langage corporel de quelqu’un se contredisent — dire « ça va » les dents serrées —, l’auditeur tend à se fier au signal non verbal. Une grande part de la complicité, de la confiance et de la persuasion repose sur ces canaux tacites.
+
+## La culture la façonne
+
+Bien que certaines expressions semblent répandues, beaucoup de normes non verbales sont **propres à chaque culture**. La quantité appropriée de contact visuel, le sens d’un geste précis et la distance de conversation confortable diffèrent d’une société à l’autre — une source fréquente de malentendus interculturels.
+
+## À l’ère numérique
+
+La communication par texte dépouille la plupart des signaux non verbaux, c’est pourquoi le ton est si facilement mal interprété en ligne. Les **émojis**, la ponctuation et la mise en forme ont en partie évolué pour combler le vide, restituant un peu du signal émotionnel que le contact en face à face transmet naturellement.`,
+  },
+  // ── Batch 7: Comment ça marche ──
+  {
+    title: 'Comment fonctionne le Wi-Fi',
+    question: 'Comment le Wi-Fi envoie-t-il Internet dans les airs ?',
+    summary:
+      'Le Wi-Fi utilise des ondes radio pour transporter des données entre les appareils et un routeur, encodant l’information numérique sur des bandes de fréquences précises à courte distance sans câbles.',
+    tags: ['technologie', 'réseaux', 'sans fil', 'internet', 'ingénierie'],
+    language: 'fr',
+    content: `# Comment fonctionne le Wi-Fi
+
+Le Wi-Fi permet aux appareils de se connecter à un réseau et à Internet sans câbles, en utilisant des **ondes radio** pour transporter les données dans les airs sur de courtes distances.
+
+## Des ondes radio qui portent des données
+
+Au fond, le Wi-Fi est une radio bidirectionnelle. Un **routeur** est relié à Internet (souvent par un câble physique) et contient aussi un émetteur et un récepteur radio. Votre téléphone ou ordinateur portable a la même chose. Ils échangent des données en encodant des 1 et des 0 numériques sur des ondes radio, en faisant varier rapidement les propriétés de l’onde pour représenter l’information, un procédé appelé **modulation**.
+
+## Bandes de fréquences et canaux
+
+Le Wi-Fi utilise surtout deux bandes de fréquences : autour de **2,4 GHz** et de **5 GHz** (les normes récentes ajoutent 6 GHz).
+
+- **2,4 GHz** porte plus loin et traverse mieux les murs, mais est plus lente et plus encombrée (elle partage l’espace avec les fours à micro-ondes et d’autres appareils).
+- **5 GHz** est plus rapide et moins encombrée, mais a une portée plus courte.
+
+Chaque bande est divisée en **canaux** pour que les réseaux proches n’interfèrent pas entre eux.
+
+## Traduire vers Internet
+
+Le routeur agit comme traducteur et agent de circulation. Il reçoit les données sans fil de vos appareils, les envoie par la connexion Internet filaire et achemine les données entrantes vers le bon appareil. Chaque appareil est identifié par une adresse matérielle (MAC) unique et reçoit une adresse de réseau local.
+
+## Sécurité
+
+Comme les ondes radio se propagent dans toutes les directions, n’importe qui à proximité pourrait en principe écouter. C’est pourquoi le Wi-Fi **chiffre** le trafic — les réseaux modernes utilisent les normes WPA2 ou WPA3 —, de sorte que les données sont brouillées et qu’un mot de passe est requis pour se connecter.`,
+  },
+  {
+    title: 'Comment les batteries stockent l’énergie',
+    question: 'Comment une batterie stocke-t-elle et libère-t-elle de l’électricité ?',
+    summary:
+      'Les batteries stockent l’énergie chimiquement et la libèrent sous forme d’électricité grâce à des réactions qui poussent des électrons d’une électrode à l’autre ; les modèles rechargeables inversent la réaction.',
+    tags: ['technologie', 'chimie', 'énergie', 'ingénierie', 'science'],
+    language: 'fr',
+    content: `# Comment les batteries stockent l’énergie
+
+Une batterie stocke l’énergie comme potentiel chimique et la convertit en électricité à la demande. C’est, pour l’essentiel, une réaction chimique contrôlée mise à profit pour pousser des électrons dans un circuit.
+
+## Les pièces de base
+
+Toute cellule de batterie a trois composants clés :
+
+- Une **électrode négative (anode)**.
+- Une **électrode positive (cathode)**.
+- Un **électrolyte**, une substance entre les deux qui laisse circuler les ions chargés mais pas les électrons.
+
+## Comment circule le courant
+
+À l’intérieur de la batterie, une réaction chimique à l’anode libère des **électrons**. Comme l’électrolyte empêche les électrons de traverser directement, ils sont contraints de passer par le circuit externe — votre appareil — pour atteindre la cathode. Ce flux d’électrons *est* le courant électrique qui alimente l’appareil. Pendant ce temps, les **ions** chargés se déplacent dans l’électrolyte pour maintenir la chimie en équilibre.
+
+## Tension et capacité
+
+Le choix des matériaux fixe la **tension** (la « poussée » derrière le courant), tandis que la quantité de matière active fixe la **capacité** (la durée, mesurée en ampères-heures). C’est pourquoi des chimies différentes conviennent à des tâches différentes.
+
+## Les batteries rechargeables
+
+Dans une batterie **rechargeable**, comme les cellules **lithium-ion** des téléphones et des voitures électriques, la réaction est réversible. Appliquer de l’électricité externe pousse la chimie à l’envers, ramenant les ions à leur électrode de départ et restaurant l’énergie stockée. Au fil de nombreux cycles, les matériaux se dégradent lentement, c’est pourquoi les batteries retiennent moins de charge en vieillissant.
+
+## Une note de sécurité
+
+Comme elles concentrent beaucoup d’énergie dans un petit espace, les batteries endommagées ou surchauffées — surtout au lithium-ion — peuvent défaillir dangereusement, c’est pourquoi elles comportent des circuits de protection.`,
+  },
+  {
+    title: 'Comment fonctionnent les écrans tactiles',
+    question: 'Comment un écran tactile sait-il où se trouve votre doigt ?',
+    summary:
+      'La plupart des écrans tactiles modernes sont capacitifs : ils détectent le petit changement d’un champ électrique causé par votre doigt conducteur, localisant précisément le toucher sur une grille d’électrodes.',
+    tags: ['technologie', 'électronique', 'ingénierie', 'appareils', 'physique'],
+    language: 'fr',
+    content: `# Comment fonctionnent les écrans tactiles
+
+Les écrans tactiles nous permettent de commander des appareils en touchant directement l’écran. Le type le plus courant dans les téléphones et tablettes est l’écran tactile **capacitif**, qui détecte les propriétés électriques de votre doigt.
+
+## La détection capacitive
+
+L’écran est recouvert d’une couche conductrice transparente portant un **champ électrique** petit et uniforme. Le corps humain conduit l’électricité, donc quand votre doigt touche le verre, il prélève une quantité minime de charge et perturbe le champ en ce point.
+
+Sous la surface, une grille d’électrodes (souvent disposées en lignes et colonnes) détecte exactement *où* le champ a changé. Le contrôleur de l’appareil lit ces coordonnées plusieurs fois par seconde et les signale au logiciel comme un toucher.
+
+## Le multitactile
+
+Comme la grille peut détecter des changements en plusieurs points à la fois, les écrans capacitifs gèrent le **multitactile** — reconnaître des gestes comme le pincement pour zoomer et le défilement à deux doigts. C’est une grande raison pour laquelle les écrans capacitifs ont supplanté les anciens modèles.
+
+## Pourquoi les gants échouent souvent
+
+Comme la technologie repose sur la **conductivité** de votre doigt, les gants ordinaires bloquent l’effet — c’est pourquoi les gants compatibles avec les écrans utilisent du fil conducteur au bout des doigts. Un stylet en plastique ne fonctionnera pas non plus, sauf s’il est conçu spécialement pour imiter la conductivité d’un doigt.
+
+## D’autres types
+
+Les écrans plus anciens ou spécialisés utilisent d’autres méthodes. Les écrans tactiles **résistifs**, encore présents dans certains appareils industriels ou bon marché, ont deux couches souples qui se pressent physiquement l’une contre l’autre quand on appuie ; ils fonctionnent avec n’importe quel objet, y compris un doigt ganté ou un simple stylet, mais n’ont pas le multitactile et sont moins réactifs.`,
+  },
+  {
+    title: 'Comment fonctionne la réfrigération',
+    question: 'Comment un réfrigérateur rend-il les choses froides ?',
+    summary:
+      'Les réfrigérateurs déplacent la chaleur hors de leur intérieur à l’aide d’un fluide frigorigène qui absorbe la chaleur en s’évaporant et la libère en se condensant, entraîné en boucle continue par un compresseur.',
+    tags: ['technologie', 'physique', 'ingénierie', 'thermodynamique', 'science'],
+    language: 'fr',
+    content: `# Comment fonctionne la réfrigération
+
+Un réfrigérateur ne « crée pas du froid » — il **déplace la chaleur** de l’intérieur du meuble vers la pièce. Il le fait grâce à un cycle ingénieux et à un fluide de travail appelé **fluide frigorigène**.
+
+## Le principe clé
+
+Quand un liquide s’évapore en gaz, il **absorbe de la chaleur** de son entourage (pensez à la sueur qui rafraîchit la peau). Quand un gaz se condense de nouveau en liquide, il **libère de la chaleur**. Un réfrigérateur exploite cela en faisant s’évaporer le frigorigène dans le compartiment froid et se condenser à l’extérieur.
+
+## Le cycle frigorifique
+
+Le frigorigène parcourt sans cesse quatre étapes :
+
+1. **Compresseur.** Comprime le gaz frigorigène, élevant sa pression et sa température.
+2. **Serpentins du condenseur** (à l’arrière ou au bas). Le gaz chaud et à haute pression libère de la chaleur dans la pièce et se condense en liquide.
+3. **Détendeur.** Le liquide passe par une vanne étroite et chute fortement en pression et en température.
+4. **Serpentins de l’évaporateur** (à l’intérieur). Le liquide froid s’évapore, absorbant la chaleur du compartiment des aliments et le refroidissant.
+
+Le gaz retourne ensuite au compresseur et le cycle recommence.
+
+## Pourquoi l’arrière est chaud
+
+La chaleur retirée de l’intérieur doit aller quelque part : elle est rejetée dans la pièce par les serpentins du condenseur, c’est pourquoi l’arrière ou les côtés d’un réfrigérateur sont chauds.
+
+## La même idée, partout
+
+Les climatiseurs et les pompes à chaleur utilisent le même cycle. Une pompe à chaleur peut même le faire fonctionner à l’envers pour *chauffer* un logement, déplaçant la chaleur de l’extérieur froid vers l’intérieur — une forme efficace de chauffage.`,
+  },
+  {
+    title: 'Comment fonctionnent les casques à réduction de bruit',
+    question: 'Comment les casques annulent-ils le bruit de fond ?',
+    summary:
+      'Les casques à réduction active de bruit utilisent des micros pour détecter le son ambiant et génèrent une onde sonore opposée qui interfère de façon destructive avec lui, réduisant le bruit de fond constant.',
+    tags: ['technologie', 'son', 'physique', 'ingénierie', 'audio'],
+    language: 'fr',
+    content: `# Comment fonctionnent les casques à réduction de bruit
+
+Les casques à réduction de bruit atténuent le son de fond indésirable, rendant les trajets et les environnements bruyants plus supportables. Les versions avancées y parviennent par une astuce physique élégante appelée **interférence destructive**.
+
+## Le son, ce sont des ondes
+
+Le son voyage comme des ondes de pression dans l’air. Quand deux ondes se rencontrent, elles se combinent. Si la crête de l’une coïncide avec le creux de l’autre — si elles sont « en opposition de phase » —, les ondes s’annulent et produisent le silence. C’est l’**interférence destructive**.
+
+## La réduction active de bruit
+
+Les casques à réduction active de bruit (ANC) utilisent ce principe :
+
+1. De minuscules **micros** sur le casque échantillonnent sans cesse le bruit ambiant.
+2. Un processeur calcule instantanément une onde sonore exactement **opposée** (inversée) à ce bruit.
+3. Les haut-parleurs du casque diffusent cet « anti-bruit » en même temps que votre musique.
+
+Quand l’anti-bruit rencontre le bruit entrant, les deux ondes s’annulent et vous entendez bien moins le fond.
+
+## Ce qu’il fait bien — et moins bien
+
+L’ANC fonctionne le mieux sur les sons **constants et de basse fréquence**, comme le bourdonnement continu d’un moteur d’avion ou de la climatisation, car ils sont assez prévisibles pour être annulés. Il peine avec les sons **soudains, aigus et de haute fréquence**, comme une voix proche, qui changent trop vite.
+
+## Passif contre actif
+
+Il existe aussi l’isolation **passive** : utiliser du rembourrage et une bonne étanchéité pour bloquer physiquement le son, comme des bouchons d’oreilles. Beaucoup de casques combinent les deux : l’isolation passive bloque les hautes fréquences tandis que l’annulation active s’occupe du grondement grave.`,
+  },
+  {
+    title: 'Comment les LED produisent de la lumière',
+    question: 'Pourquoi les lampes LED sont-elles si efficaces ?',
+    summary:
+      'Les LED produisent de la lumière quand des électrons traversent un semi-conducteur et libèrent directement de l’énergie sous forme de photons, gaspillant peu de chaleur — ce qui les rend bien plus efficaces que les anciennes ampoules.',
+    tags: ['technologie', 'électronique', 'physique', 'énergie', 'ingénierie'],
+    language: 'fr',
+    content: `# Comment les LED produisent de la lumière
+
+Une LED — **diode électroluminescente** — transforme l’électricité en lumière de façon directe et efficace. Les LED dominent aujourd’hui des écrans de téléphones aux ampoules domestiques parce qu’elles utilisent une fraction de l’énergie de l’éclairage ancien.
+
+## De la lumière issue d’un semi-conducteur
+
+Une LED est faite d’un **semi-conducteur**, un matériau dont la capacité à conduire l’électricité peut être conçue avec précision. Elle comporte deux régions : l’une avec des électrons en trop (type n) et l’autre avec des « trous » où manquent des électrons (type p).
+
+Quand on applique une tension, les électrons traversent la jonction entre les régions et tombent dans les trous. Chaque fois qu’un électron tombe dans un trou d’énergie plus basse, il libère un paquet d’énergie sous forme de **photon**, une particule de lumière. Ce processus s’appelle l’**électroluminescence**.
+
+## Pourquoi la couleur est fixe
+
+L’énergie de chaque photon — et donc la **couleur** de la lumière — dépend du matériau semi-conducteur. Des composés différents émettent de la lumière rouge, verte ou bleue. Les LED blanches sont en général des LED bleues recouvertes d’un phosphore qui convertit une partie du bleu en d’autres couleurs, se mélangeant vers le blanc.
+
+## Pourquoi elles sont efficaces
+
+Les anciennes ampoules **à incandescence** font de la lumière en chauffant un fil jusqu’à ce qu’il rougeoie, gaspillant environ 90 % de l’énergie en chaleur. Les LED convertissent l’électricité en lumière de façon bien plus directe, produisent beaucoup plus de lumière par watt et restent froides. Elles durent aussi des dizaines de milliers d’heures et s’allument instantanément.
+
+## Partout autour de vous
+
+La même technologie, miniaturisée et empilée par millions, forme les pixels des écrans LED et OLED, et alimente voyants, feux de circulation et afficheurs dans toute la vie moderne.`,
+  },
+  {
+    title: 'Comment fonctionnent les panneaux solaires',
+    question: 'Comment les panneaux solaires transforment-ils la lumière du soleil en électricité ?',
+    summary:
+      'Les panneaux solaires utilisent l’effet photovoltaïque : les photons de la lumière solaire arrachent des électrons dans des cellules semi-conductrices, et un champ électrique interne les canalise en un courant utilisable.',
+    tags: ['technologie', 'énergie', 'physique', 'énergie renouvelable', 'ingénierie'],
+    language: 'fr',
+    content: `# Comment fonctionnent les panneaux solaires
+
+Les panneaux solaires convertissent la lumière du soleil directement en électricité grâce à l’**effet photovoltaïque**. Sans pièces mobiles, ils produisent silencieusement de l’énergie dès que le soleil brille.
+
+## La cellule photovoltaïque
+
+Un panneau solaire est fait de nombreuses **cellules photovoltaïques (PV)**, généralement en **silicium**, un semi-conducteur. Chaque cellule a deux couches de silicium traitées pour donner à l’une un léger surplus d’électrons et à l’autre un léger déficit. Là où les couches se rejoignent, un **champ électrique** interne se crée.
+
+## De la lumière au courant
+
+La lumière du soleil arrive sous forme de paquets d’énergie appelés **photons**. Quand un photon frappe la cellule avec assez d’énergie, il arrache un électron à un atome de silicium. Le champ électrique interne pousse ces électrons libérés dans une seule direction, et des contacts métalliques les recueillent. Ce flux orienté d’électrons est un **courant** électrique : de l’électricité utilisable.
+
+## Du continu à l’alternatif
+
+Les cellules PV produisent du **courant continu (CC)**. Les foyers et le réseau utilisent du **courant alternatif (CA)**, donc un appareil appelé **onduleur** convertit la sortie CC du panneau en CA. L’énergie excédentaire peut être stockée dans des batteries ou réinjectée dans le réseau.
+
+## Ce qui influe sur la production
+
+La production d’un panneau dépend de l’intensité de la lumière, de l’angle, de la température et de l’ombre — même une ombre partielle sur une cellule peut réduire de façon disproportionnée la production d’un panneau. Le rendement (la fraction de lumière convertie en électricité) des panneaux de silicium commerciaux typiques avoisine 20 %.
+
+## Pourquoi c’est important
+
+Comme la lumière du soleil est abondante et gratuite, le solaire est une pierre angulaire de l’**énergie renouvelable**. La baisse des coûts en a fait l’une des sources d’électricité nouvelle les moins chères dans une grande partie du monde, centrale aux efforts pour réduire les émissions des énergies fossiles.`,
+  },
+  {
+    title: 'Comment un four à micro-ondes chauffe les aliments',
+    question: 'Pourquoi un four à micro-ondes cuit-il les aliments si vite ?',
+    summary:
+      'Les fours à micro-ondes émettent des ondes radio accordées pour faire tourner rapidement les molécules d’eau des aliments, générant de la chaleur dans tout l’aliment et pas seulement en surface.',
+    tags: ['technologie', 'physique', 'ingénierie', 'alimentation', 'science'],
+    language: 'fr',
+    content: `# Comment un four à micro-ondes chauffe les aliments
+
+Un four à micro-ondes chauffe vite les aliments en ciblant les **molécules d’eau** qu’ils contiennent avec un type précis d’onde radio, générant de la chaleur de l’intérieur plutôt que d’une flamme ou d’une résistance externe.
+
+## Micro-ondes et eau
+
+Un composant appelé **magnétron** produit des **micro-ondes** — une forme de rayonnement électromagnétique — généralement à une fréquence d’environ 2,45 gigahertz. Les molécules d’eau sont **polaires**, c’est-à-dire qu’elles ont une extrémité légèrement positive et une légèrement négative. Le champ électrique des micro-ondes, qui alterne rapidement, fait basculer ces molécules des milliards de fois par seconde. Ce va-et-vient frénétique est une **friction à l’échelle moléculaire**, et la friction produit de la chaleur.
+
+## Chauffer de l’intérieur
+
+Comme les ondes pénètrent de quelques centimètres dans l’aliment, elles en chauffent un volume d’un coup, au lieu de conduire lentement la chaleur depuis la surface comme un four classique. C’est pourquoi les micro-ondes sont si rapides — bien que le centre même d’un aliment épais dépende en partie de la chaleur qui se propage vers l’intérieur, d’où les consignes de « laisser reposer ».
+
+## Pourquoi des comportements étranges
+
+- Le **chauffage inégal** se produit parce que les ondes forment des points chauds et froids ; un **plateau tournant** fait tourner l’aliment pour uniformiser.
+- Le **métal** peut réfléchir les ondes et provoquer des étincelles, c’est pourquoi la plupart des récipients métalliques sont dangereux.
+- Les aliments à faible teneur en eau, comme le pain sec, chauffent mal, tandis que ceux riches en eau chauffent vite.
+
+## Est-ce sans danger ?
+
+Les micro-ondes sont un rayonnement **non ionisant** : elles n’ont pas l’énergie d’altérer les atomes ni de rendre les aliments radioactifs. Un treillis métallique dans la porte réfléchit les ondes vers l’intérieur et les contient. L’aliment est simplement chauffé ; il n’est pas transformé chimiquement par le rayonnement lui-même.`,
+  },
 ];
