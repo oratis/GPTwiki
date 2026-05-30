@@ -453,4 +453,254 @@ Esa misma rigidez era su debilidad. La oferta monetaria estaba atada a las reser
 
 Las naciones se desvincularon del oro por etapas. El sistema se derrumbó finalmente en 1971, cuando Estados Unidos puso fin a la convertibilidad del dólar en oro. Hoy el mundo usa **dinero fiduciario**, cuyo valor descansa en la credibilidad de los gobiernos y los bancos centrales y no en una mercancía física.`,
   },
+  // ── Batch 3: Tecnología y matemáticas ──
+  {
+    title: 'Cómo funciona el GPS',
+    question: '¿Cómo sabe el GPS exactamente dónde estás?',
+    summary:
+      'El GPS determina la ubicación midiendo el tiempo de viaje de las señales de varios satélites y usando trilateración; relojes atómicos precisos y correcciones relativistas lo hacen exacto hasta unos pocos metros.',
+    tags: ['tecnología', 'navegación', 'satélites', 'física', 'ingeniería'],
+    language: 'es',
+    content: `# Cómo funciona el GPS
+
+El Sistema de Posicionamiento Global (GPS) permite a un receptor —en tu teléfono, tu coche o tu reloj— averiguar dónde está en cualquier lugar de la Tierra, normalmente con un margen de unos pocos metros. Se apoya en una constelación de satélites y en algo de física ingeniosa.
+
+## Satélites y señales
+
+El GPS usa unos 30 satélites que orbitan a unos 20 000 km de altura, dispuestos de modo que siempre haya varios visibles desde cualquier punto del planeta. Cada uno emite sin cesar una señal de radio que lleva la **hora** exacta a la que se envió y la **posición** del satélite.
+
+## Trilateración
+
+El receptor mide cuánto tardó en llegar cada señal. Como las ondas de radio viajan a la velocidad de la luz, el tiempo de viaje revela la **distancia** a ese satélite. Conocer la distancia a un satélite te sitúa en algún punto de una esfera a su alrededor; combinar las distancias a varios satélites reduce tu posición a un único punto. Esta técnica geométrica se llama **trilateración**. Se necesitan señales de al menos cuatro satélites: tres para fijar la posición y un cuarto para resolver el error del reloj del receptor.
+
+## Por qué importan los relojes y la relatividad
+
+La sincronización debe ser extraordinariamente precisa: un error de una millonésima de segundo desviaría la posición cientos de metros. Los satélites llevan **relojes atómicos**, y el sistema corrige incluso la **relatividad de Einstein**: la velocidad de los satélites y su gravedad más débil hacen que sus relojes marchen a un ritmo algo distinto del de los relojes en tierra. Sin estas correcciones, el GPS se desviaría kilómetros al día.
+
+## Más allá del posicionamiento
+
+La misma sincronización precisa sustenta las redes financieras, las redes eléctricas y las telecomunicaciones, lo que convierte al GPS en una columna vertebral silenciosa de la infraestructura moderna.`,
+  },
+  {
+    title: 'La criptografía de clave pública',
+    question: '¿Cómo pueden dos desconocidos comunicarse de forma segura por la internet abierta?',
+    summary:
+      'La criptografía de clave pública usa pares de claves vinculadas matemáticamente —una pública y una privada— para que las personas cifren mensajes y verifiquen identidades sin compartir nunca un secreto de antemano.',
+    tags: ['tecnología', 'criptografía', 'seguridad', 'matemáticas', 'internet'],
+    language: 'es',
+    content: `# La criptografía de clave pública
+
+La criptografía de clave pública es el avance que hace posible la comunicación segura entre personas que nunca se han conocido. Sustenta el HTTPS, la mensajería segura, las firmas digitales y las criptomonedas.
+
+## La idea del par de claves
+
+El cifrado tradicional ("simétrico") usa una única clave compartida para cerrar y abrir un mensaje, lo que plantea un problema: ¿cómo compartir esa clave de forma segura en primer lugar? La criptografía de clave pública (o **asimétrica**) lo resuelve con un **par** de claves:
+
+- Una **clave pública**, que cualquiera puede ver.
+- Una **clave privada**, que el propietario mantiene en secreto.
+
+Ambas están vinculadas matemáticamente de modo que lo que una clave cierra, solo la otra puede abrirlo, pero conocer la clave pública no permite calcular la privada.
+
+## Dos usos principales
+
+- **Cifrado.** Para enviar a alguien un mensaje confidencial, lo cifras con *su clave pública*; solo su clave privada puede descifrarlo.
+- **Firmas digitales.** Para probar que un mensaje es realmente tuyo, lo firmas con *tu clave privada*; cualquiera puede verificarlo con tu clave pública, lo que confirma su autenticidad y que no fue alterado.
+
+## La matemática detrás
+
+La seguridad descansa en problemas fáciles de calcular en un sentido pero extremadamente difíciles de revertir, como **factorizar** números enormes (RSA) o resolver logaritmos discretos en **curvas elípticas**. Revertirlos llevaría cantidades de tiempo de cómputo poco prácticas.
+
+## En la vida cotidiana
+
+Cuando tu navegador muestra un candado, ya ha usado criptografía de clave pública para verificar el sitio web y establecer una clave compartida rápida para el resto de la sesión.`,
+  },
+  {
+    title: 'La sucesión de Fibonacci',
+    question: '¿Qué es la sucesión de Fibonacci y por qué aparece en la naturaleza?',
+    summary:
+      'La sucesión de Fibonacci es una serie en la que cada número es la suma de los dos anteriores; se relaciona con la proporción áurea y aparece en patrones como los pétalos de las flores y las conchas en espiral.',
+    tags: ['matemáticas', 'patrones', 'naturaleza', 'geometría', 'ciencia'],
+    language: 'es',
+    content: `# La sucesión de Fibonacci
+
+La sucesión de Fibonacci es uno de los patrones más famosos de las matemáticas: una regla sencilla que produce conexiones sorprendentes con la geometría y el mundo natural.
+
+## La regla
+
+Empieza con 0 y 1, y luego haz que cada número nuevo sea la **suma de los dos anteriores**:
+
+\`\`\`
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
+\`\`\`
+
+La sucesión lleva el nombre del matemático italiano **Leonardo de Pisa** (Fibonacci), que la introdujo en Europa en 1202 mediante un acertijo sobre la cría de conejos, aunque ya se conocía antes en las matemáticas de la India.
+
+## Vínculo con la proporción áurea
+
+Divide cualquier número de Fibonacci entre el anterior y el resultado se acerca cada vez más a aproximadamente **1,618**: la **proporción áurea** (a menudo escrita φ). Cuanto más avanzas en la sucesión, más exacta es la aproximación.
+
+## Por qué aparece en la naturaleza
+
+Los números de Fibonacci aparecen en el número de pétalos de muchas flores, la disposición de las semillas en un girasol y la ramificación de las plantas. La razón más profunda es el **empaquetamiento eficiente**: colocar hojas o semillas en ángulos relacionados con la proporción áurea permite a una planta captar la luz solar o acomodar semillas con un solapamiento mínimo. Así que el patrón es menos una firma mística que una consecuencia natural de la optimización.
+
+## Más allá de la biología
+
+La sucesión también aparece en algoritmos informáticos, análisis financiero y arte, donde la proporción áurea se ha asociado durante mucho tiempo con proporciones agradables.`,
+  },
+  {
+    title: 'Los números primos',
+    question: '¿Qué son los números primos y por qué son importantes?',
+    summary:
+      'Los números primos son números enteros mayores que uno que no tienen más divisores que el uno y ellos mismos; son los componentes básicos de la aritmética y la base del cifrado moderno.',
+    tags: ['matemáticas', 'números', 'criptografía', 'teoría', 'ciencia'],
+    language: 'es',
+    content: `# Los números primos
+
+Un número primo es un número entero mayor que 1 que solo puede dividirse exactamente entre 1 y entre sí mismo. Los primeros primos son 2, 3, 5, 7, 11 y 13. Los números que tienen divisores adicionales, como el 6 (= 2 × 3), se llaman **compuestos**.
+
+## Los átomos de la aritmética
+
+Los primos son fundamentales por el **teorema fundamental de la aritmética**: todo número entero mayor que 1 puede escribirse como producto de primos de una única manera (sin contar el orden). Por ejemplo, 60 = 2 × 2 × 3 × 5. En este sentido, los primos son los "átomos" indivisibles a partir de los cuales se construyen todos los demás números.
+
+## Infinitamente muchos
+
+El matemático griego **Euclides** demostró hace más de dos mil años que no existe un primo más grande: la lista sigue para siempre. Sin embargo, los primos se vuelven más escasos a medida que crecen los números, y predecir exactamente dónde caen es un área profunda y aún sin resolver de las matemáticas, conectada con la famosa **hipótesis de Riemann**.
+
+## Por qué importan hoy
+
+Los primos impulsan la **criptografía** moderna. Métodos como RSA se apoyan en una asimetría práctica: multiplicar dos primos grandes es fácil, pero tomar el número enorme resultante y recuperar los primos originales (**factorizar**) es extraordinariamente difícil con los ordenadores actuales. Esa dificultad mantiene seguros la banca en línea, la mensajería y el comercio.
+
+## Una búsqueda continua
+
+Matemáticos y voluntarios que usan ordenadores en red siguen buscando primos cada vez mayores. Los primos más grandes conocidos tienen ya decenas de millones de dígitos.`,
+  },
+  {
+    title: 'El interés compuesto',
+    question: '¿Por qué el interés compuesto es tan poderoso con el tiempo?',
+    summary:
+      'El interés compuesto es el interés que se gana tanto sobre el capital original como sobre el interés ya acumulado, lo que produce un crecimiento exponencial que recompensa el ahorro temprano y a largo plazo.',
+    tags: ['finanzas', 'economía', 'matemáticas', 'dinero', 'finanzas personales'],
+    language: 'es',
+    content: `# El interés compuesto
+
+Al interés compuesto se le llama a menudo la fuerza más poderosa de las finanzas. Es el proceso de ganar interés no solo sobre el dinero que inviertes inicialmente, sino también sobre el interés que ese dinero ya ha generado.
+
+## Simple frente a compuesto
+
+Con el **interés simple**, ganas una cantidad fija cada período basada solo en la suma original (el **capital**). Con el **interés compuesto**, el interés de cada período se suma al saldo, de modo que el interés del período siguiente se calcula sobre una cantidad mayor. Por tanto, el crecimiento se acelera con el tiempo: es **exponencial** y no lineal.
+
+## Un ejemplo rápido
+
+Invierte 1000 al 7 % anual:
+
+- Tras 1 año: 1070
+- Tras 10 años: unos 1967
+- Tras 30 años: unos 7612
+
+El dinero se **duplica** aproximadamente cada década sin añadir ni un céntimo, y cuanto más tiempo se mantiene, más espectacular es el efecto.
+
+## La regla del 72
+
+Un atajo práctico, la **regla del 72**, estima cuánto tarda una inversión en duplicarse: divide 72 entre la tasa de interés anual. Al 8 %, el dinero se duplica en unos 9 años (72 ÷ 8).
+
+## Por qué el tiempo es lo que más importa
+
+Como la capitalización se construye sobre sí misma, **empezar pronto** suele importar más que invertir grandes cantidades más tarde. La misma lógica funciona a la inversa con la deuda: los saldos impagados de préstamos o tarjetas de alto interés se acumulan contra el deudor, por lo que esa deuda puede crecer de forma alarmante.`,
+  },
+  {
+    title: 'Las funciones hash',
+    question: '¿Qué es una función hash y dónde se usa?',
+    summary:
+      'Una función hash transforma datos de cualquier tamaño en una cadena de longitud fija; las buenas funciones hash criptográficas son rápidas, deterministas y prácticamente imposibles de revertir o de falsificar colisiones.',
+    tags: ['tecnología', 'informática', 'criptografía', 'seguridad', 'datos'],
+    language: 'es',
+    content: `# Las funciones hash
+
+Una función hash es una herramienta pequeña pero esencial en la informática. Toma una entrada de cualquier longitud —una palabra, un archivo, una base de datos entera— y produce una salida de longitud fija llamada **hash** o **resumen**.
+
+## Propiedades clave
+
+Una función hash útil es:
+
+- **Determinista.** La misma entrada produce siempre el mismo hash.
+- **Rápida** de calcular.
+- **De longitud fija.** Un mensaje de un carácter y un archivo de un gigabyte dan, por ejemplo, un resultado de 256 bits.
+
+Una función hash *criptográfica* añade garantías más fuertes:
+
+- **Unidireccional.** Dado un hash, no se puede recuperar de forma viable la entrada original.
+- **Resistente a colisiones.** Es prácticamente imposible hallar dos entradas distintas con el mismo hash.
+- **Efecto avalancha.** Cambiar un solo carácter de la entrada altera por completo la salida.
+
+## Usos cotidianos
+
+- **Almacenamiento de contraseñas.** Los sistemas guardan el hash de una contraseña, no la contraseña en sí, de modo que una filtración de la base de datos no revela directamente los secretos de los usuarios.
+- **Comprobaciones de integridad.** Las descargas suelen publicar un hash para verificar que un archivo llegó intacto y sin manipular.
+- **Estructuras de datos.** Las **tablas hash** usan el hashing para encontrar elementos casi al instante, sin importar cuántos datos se almacenen.
+- **Cadenas de bloques.** Las criptomonedas encadenan bloques mediante hashes, lo que hace el libro mayor a prueba de manipulaciones.
+
+## Algoritmos comunes
+
+Los sistemas modernos prefieren funciones fuertes como **SHA-256**. Las más antiguas, como MD5 y SHA-1, hoy se consideran rotas para la seguridad porque los investigadores hallaron formas de crear colisiones, y no deberían usarse para proteger datos sensibles.`,
+  },
+  {
+    title: 'La máquina de Turing',
+    question: '¿Qué es una máquina de Turing y por qué es fundamental para la informática?',
+    summary:
+      'La máquina de Turing es un modelo matemático simple de computación, ideado por Alan Turing en 1936, que define qué significa que un problema sea computable y sustenta toda la informática.',
+    tags: ['informática', 'matemáticas', 'teoría', 'historia', 'tecnología'],
+    language: 'es',
+    content: `# La máquina de Turing
+
+La máquina de Turing no es un dispositivo físico, sino un experimento mental: un modelo matemático que captura la idea misma de la computación. Propuesta por **Alan Turing** en 1936, sigue siendo el fundamento teórico de la informática.
+
+## Un diseño engañosamente simple
+
+Una máquina de Turing consta de:
+
+- Una **cinta** infinita dividida en celdas, cada una con un símbolo.
+- Un **cabezal** que puede leer y escribir el símbolo que tiene debajo y moverse a izquierda o derecha.
+- Un conjunto de **estados** y una tabla de **reglas** que indican a la máquina qué hacer según su estado actual y el símbolo que lee.
+
+A partir de estas piezas mínimas, la máquina puede llevar a cabo cualquier procedimiento paso a paso. La intuición de Turing fue que este sistema simple es lo bastante potente para realizar **cualquier** cálculo que pueda describirse mediante un algoritmo.
+
+## Universalidad
+
+Turing también describió una máquina **universal** capaz de leer la descripción de cualquier otra máquina de Turing y luego imitarla. Este es el ancestro teórico del ordenador programable moderno: una máquina que ejecuta distintos programas en lugar de un dispositivo separado para cada tarea.
+
+## Los límites de la computación
+
+El modelo también reveló límites. Turing demostró que algunos problemas son **indecidibles**: ningún algoritmo puede resolverlos. El más famoso es el **problema de la parada**: no existe un método general para determinar, para todo programa y entrada, si el programa acabará deteniéndose o se ejecutará para siempre.
+
+## Una influencia duradera
+
+Todo lo que un ordenador real puede computar, también puede computarlo una máquina de Turing (con tiempo y cinta suficientes). Esa equivalencia es la razón por la que el modelo sigue definiendo las fronteras de lo que los ordenadores pueden, y no pueden, hacer.`,
+  },
+  {
+    title: 'Ancho de banda y latencia',
+    question: '¿Cuál es la diferencia entre ancho de banda y latencia?',
+    summary:
+      'El ancho de banda es cuántos datos puede transportar una conexión por segundo, mientras que la latencia es el retardo antes de que los datos empiecen a llegar; ambos determinan lo "rápida" que se siente una red, pero no son lo mismo.',
+    tags: ['tecnología', 'redes', 'internet', 'informática', 'ingeniería'],
+    language: 'es',
+    content: `# Ancho de banda y latencia
+
+La gente suele decir que una conexión es "rápida", pero la velocidad tiene en realidad dos dimensiones distintas: el **ancho de banda** y la **latencia**. Confundirlas es una fuente común de frustración con las redes.
+
+## Ancho de banda: cuánto
+
+El **ancho de banda** es la cantidad máxima de datos que una conexión puede transferir en un tiempo dado, normalmente medida en megabits o gigabits por segundo. Una analogía útil es el grosor de una tubería: una tubería más ancha deja pasar más agua a la vez. El ancho de banda ayuda sobre todo al mover **grandes** cantidades de datos: transmitir vídeo de alta resolución, descargar archivos grandes o hacer copias de seguridad en la nube.
+
+## Latencia: cuán pronto
+
+La **latencia** es el retardo entre enviar una petición y recibir la primera respuesta, medido en milisegundos. En la analogía de la tubería, es cuánto tarda el agua en viajar de un extremo a otro. La latencia depende de la distancia (las señales no pueden superar la velocidad de la luz), del número de saltos de red y de los retardos de procesamiento. La latencia importa sobre todo en tareas **interactivas**: videollamadas, juegos en línea y peticiones web rápidas.
+
+## Por qué importa la diferencia
+
+Una conexión puede tener un ancho de banda alto pero una latencia alta, o al revés. Un enlace por satélite podría transportar muchos datos y aun así sentirse lento porque cada señal viaja decenas de miles de kilómetros. Por eso un vídeo puede transmitirse con fluidez (ancho de banda) mientras un juego sigue sintiéndose con retardo (latencia).
+
+## Términos relacionados
+
+El **rendimiento (throughput)** es la tasa de datos que realmente se logra en la práctica, que suele ser menor que el ancho de banda teórico. La **fluctuación (jitter)** es la variación de la latencia con el tiempo, que puede perturbar la voz y el vídeo aunque la latencia media sea baja.`,
+  },
 ];
