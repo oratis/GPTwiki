@@ -952,4 +952,246 @@ I ricordi sono conservati come schemi di connessioni tra neuroni. Quando imparia
 
 La memoria è ricostruttiva: ogni volta che recuperiamo un ricordo lo riassembliamo, e possiamo alterarlo senza accorgercene. Questo spiega perché i ricordi possono essere vividi e tuttavia errati, perché le testimonianze oculari sono inaffidabili e perché ripetizione e associazioni aiutano a fissare le informazioni.`,
   },
+  // ── Batch 5: Spazio e astronomia ──
+  {
+    title: 'Le fasi della Luna',
+    question: 'Perché la Luna cambia forma nel corso del mese?',
+    summary:
+      'Le fasi della Luna sono le forme mutevoli della sua parte illuminata viste dalla Terra, causate dal modo in cui la luce solare la colpisce mentre orbita attorno al nostro pianeta.',
+    tags: ['astronomia', 'luna', 'spazio', 'scienza', 'sistema solare'],
+    language: 'it',
+    content: `# Le fasi della Luna
+
+La Luna sembra cambiare forma nel corso di circa un mese, passando da un sottile spicchio alla Luna piena e ritorno. Queste **fasi** non derivano da un'ombra proiettata dalla Terra, ma dalla combinazione tra come la luce solare colpisce la Luna e l'angolo da cui la osserviamo.
+
+## La causa reale
+
+Metà della Luna è sempre illuminata dal Sole, proprio come metà della Terra vive il giorno. Ma mentre la Luna orbita attorno alla Terra, vediamo quantità diverse di quella metà illuminata. Quando la Luna è dal lato opposto al Sole rispetto a noi, vediamo l'intera faccia illuminata — la **Luna piena**. Quando è tra noi e il Sole, la faccia rivolta verso di noi è scura — la **Luna nuova**.
+
+## Il ciclo delle fasi
+
+Il ciclo completo dura circa 29,5 giorni e attraversa otto fasi:
+
+1. **Luna nuova** — quasi invisibile.
+2. **Falce crescente** — comincia ad apparire una sottile striscia.
+3. **Primo quarto** — metà illuminata, in via di riempimento.
+4. **Gibbosa crescente** — più di metà illuminata.
+5. **Luna piena** — intero disco illuminato.
+6. **Gibbosa calante** — comincia a diminuire.
+7. **Ultimo quarto** — di nuovo mezza Luna, dal lato opposto.
+8. **Falce calante** — una sottile striscia prima del ritorno della Luna nuova.
+
+«Crescente» significa che la parte illuminata aumenta; «calante» che diminuisce.
+
+## La stessa faccia
+
+La Luna impiega lo stesso tempo a ruotare una volta sul proprio asse e a orbitare attorno alla Terra, un fenomeno detto **rotazione sincrona**. Per questo ci mostra sempre la stessa faccia, e il «lato nascosto» non è mai visibile dalla Terra.`,
+  },
+  {
+    title: 'Le comete',
+    question: 'Cosa sono le comete e da dove vengono?',
+    summary:
+      'Le comete sono corpi ghiacciati avanzati dalla formazione del sistema solare che sviluppano code luminose quando si avvicinano al Sole e il calore vaporizza il loro ghiaccio.',
+    tags: ['astronomia', 'comete', 'spazio', 'sistema solare', 'scienza'],
+    language: 'it',
+    content: `# Le comete
+
+Le comete sono tra gli oggetti più spettacolari del cielo notturno: palle di ghiaccio e polvere che prendono vita quando si avvicinano al Sole. Spesso dette «palle di neve sporche», sono resti congelati degli albori del sistema solare.
+
+## Di cosa sono fatte
+
+Il cuore di una cometa è il **nucleo**, una miscela solida di ghiaccio, polvere, roccia e composti congelati larga solo pochi chilometri. Per miliardi di anni restano congelate nelle gelide periferie del sistema solare.
+
+## Perché crescono le code
+
+Quando l'orbita di una cometa la avvicina al Sole, il calore fa passare il suo ghiaccio direttamente allo stato gassoso, in un processo detto **sublimazione**. Questo forma un'atmosfera sfumata e luminosa attorno al nucleo, la **chioma**, e libera polvere. La pressione della radiazione solare e il vento solare spingono questo materiale lontano dal Sole, creando una o più **code** che possono estendersi per milioni di chilometri. Per questo la coda di una cometa punta sempre in direzione opposta al Sole, e non dietro al suo moto.
+
+## Da dove vengono
+
+La maggior parte delle comete proviene da due regioni lontane:
+
+- La **fascia di Kuiper**, un disco di corpi ghiacciati oltre Nettuno, fonte di molte comete a periodo breve.
+- La **nube di Oort**, un guscio sferico assai più distante che avvolge il sistema solare, fonte delle comete a periodo lungo.
+
+## Visitatori dal passato
+
+Poiché le comete conservano materiale congelato dei primi giorni del sistema solare, sono come capsule del tempo. Gli scienziati le studiano per conoscere le condizioni di 4,6 miliardi di anni fa, e alcuni sospettano che le comete abbiano contribuito a portare acqua e molecole organiche sulla Terra primordiale.`,
+  },
+  {
+    title: 'Il ciclo di vita di una stella',
+    question: 'Come nascono, vivono e muoiono le stelle?',
+    summary:
+      'Le stelle si formano da nubi di gas in collasso, brillano per milioni o miliardi di anni fondendo elementi e muoiono in modi diversi — da nane bianche a supernove — a seconda della loro massa.',
+    tags: ['astronomia', 'stelle', 'spazio', 'fisica', 'scienza'],
+    language: 'it',
+    content: `# Il ciclo di vita di una stella
+
+Le stelle sembrano eterne, ma nascono, vivono e muoiono nel corso di immense scale di tempo. Il destino di una stella dipende quasi interamente da una proprietà: la sua **massa**.
+
+## La nascita
+
+Le stelle nascono dentro immense nubi di gas e polvere dette **nebulose**. Quando una regione diventa abbastanza densa, la gravità la fa collassare e riscaldare. Quando il nucleo raggiunge circa 10 milioni di gradi, inizia la **fusione nucleare** — gli atomi di idrogeno si fondono in elio, liberando energia. Una stella è nata.
+
+## La mezza età
+
+Per gran parte della vita una stella si trova sulla **sequenza principale**, bilanciando la forza di gravità che la comprime verso l'interno con la pressione della fusione che spinge verso l'esterno. Il nostro Sole è in questa fase stabile da circa 4,6 miliardi di anni e proseguirà per altri 5 miliardi. Le stelle più piccole e fredde bruciano il combustibile lentamente e durano migliaia di miliardi di anni; quelle grandi e calde consumano il loro in soli pochi milioni.
+
+## La morte
+
+La fine di una stella dipende dalla sua massa:
+
+- **Stelle come il Sole** si gonfiano in **giganti rosse**, espellono gli strati esterni e lasciano dietro un nucleo denso e in raffreddamento detto **nana bianca**.
+- **Stelle molto più massicce** finiscono in un'esplosione catastrofica detta **supernova**, che per un breve istante può brillare più di un'intera galassia. Ciò che resta diventa una **stella di neutroni** ultradensa o, se la stella era abbastanza massiccia, un **buco nero**.
+
+## Fucine cosmiche
+
+Le stelle sono le fabbriche dell'universo. La fusione al loro interno, e le esplosioni che le concludono, hanno creato quasi tutti gli elementi più pesanti dell'idrogeno — compresi il carbonio e l'ossigeno in te. Siamo, letteralmente, fatti di polvere di stelle.`,
+  },
+  {
+    title: 'Le aurore',
+    question: 'Cosa causa le luci del nord e del sud?',
+    summary:
+      'Le aurore sono spettacoli di luce colorata presso i poli terrestri, prodotti quando particelle cariche del Sole si scontrano con i gas atmosferici guidate dal campo magnetico del pianeta.',
+    tags: ['astronomia', 'atmosfera', 'fisica', 'spazio', 'scienza'],
+    language: 'it',
+    content: `# Le aurore
+
+Le aurore — le **luci del nord** (aurora boreale) e le **luci del sud** (aurora australe) — sono tra gli spettacoli più magnifici della natura: cortine scintillanti di luce verde, rosa e viola che danzano nei cieli polari.
+
+## La causa: il vento solare
+
+Le aurore nascono dal Sole, che soffia senza sosta un flusso di particelle cariche detto **vento solare**. Quando queste particelle raggiungono la Terra, la maggior parte viene deviata dal **campo magnetico** del pianeta. Ma vicino ai poli magnetici le linee di campo si immergono nell'atmosfera, incanalando alcune particelle verso il basso.
+
+## La creazione della luce
+
+Immergendosi nell'alta atmosfera, queste particelle energetiche urtano atomi e molecole di gas. Gli urti eccitano i gas — spingono i loro elettroni a livelli di energia più alti. Quando gli elettroni tornano alla normalità, liberano l'energia in eccesso come luce. Gas diversi brillano di colori diversi:
+
+- L'**ossigeno** produce il verde (il più comune) e, alle alte quote, il rosso.
+- L'**azoto** produce il blu e il viola.
+
+## Perché vicino ai poli
+
+Poiché la forma del campo magnetico terrestre incanala le particelle verso le regioni polari, le aurore sono più comuni alle alte latitudini, attorno ad anelli detti **ovali aurorali**. Durante forti tempeste solari si possono vedere assai più vicino all'equatore del solito.
+
+## Oltre la Terra
+
+Le aurore non sono esclusive della Terra. Spettacoli simili sono stati osservati su Giove, Saturno e altri pianeti dotati di campi magnetici e atmosfere — un promemoria del fatto che il nostro pianeta fa parte di un sistema solare mosso dal Sole.`,
+  },
+  {
+    title: 'Anni luce e distanze cosmiche',
+    question: "Cos'è un anno luce e come misurano lo spazio gli astronomi?",
+    summary:
+      'Un anno luce è la distanza che la luce percorre in un anno; gli astronomi lo usano insieme a tecniche come la parallasse per misurare le immense distanze tra stelle e galassie.',
+    tags: ['astronomia', 'spazio', 'distanza', 'fisica', 'scienza'],
+    language: 'it',
+    content: `# Anni luce e distanze cosmiche
+
+Le distanze nello spazio sono così immense che i chilometri diventano inutili. Per misurare il cosmo, gli astronomi usano l'**anno luce** — e un'ingegnosa scala di tecniche per stabilire quanto siano davvero lontane le cose.
+
+## Cos'è un anno luce
+
+Un anno luce è una misura di **distanza**, non di tempo: è la distanza che la luce percorre in un anno, circa 9.500 miliardi di chilometri. Poiché la luce viaggia a velocità finita, guardare nello spazio significa guardare nel passato. La stella più vicina oltre al Sole dista circa 4,2 anni luce, perciò la vediamo com'era oltre quattro anni fa. Alcune galassie le vediamo com'erano miliardi di anni fa.
+
+## Misurare distanze vicine: la parallasse
+
+Per le stelle relativamente vicine, gli astronomi usano la **parallasse**. Osservando una stella da lati opposti dell'orbita terrestre (a sei mesi di distanza), essa appare spostarsi leggermente rispetto allo sfondo più lontano. Maggiore lo spostamento, più vicina la stella. È lo stesso effetto del chiudere un occhio per volta e vedere il pollice saltare.
+
+## Misurare distanze maggiori
+
+Oltre la portata della parallasse, gli astronomi usano «candele standard» — oggetti di luminosità reale nota. Confrontando la loro luminosità reale con quanto appaiono fiochi, si deduce la distanza. Le **variabili Cefeidi** e un certo tipo di **supernova** fungono da queste candele e permettono di misurare distanze fino a galassie lontane.
+
+## Una scala che rende umili
+
+Questi strumenti rivelano un universo di una vastità sbalorditiva: miliardi di galassie, ciascuna con miliardi di stelle, sparse su distanze così grandi che la luce che oggi catturiamo è partita molto prima che la Terra esistesse.`,
+  },
+  {
+    title: 'Gli esopianeti',
+    question: 'Cosa sono gli esopianeti e come li troviamo?',
+    summary:
+      'Gli esopianeti sono pianeti che orbitano attorno ad altre stelle; ne sono stati scoperti migliaia con metodi indiretti, alcuni nella zona abitabile dove potrebbe esistere acqua liquida.',
+    tags: ['astronomia', 'esopianeti', 'spazio', 'scienza', 'scoperta'],
+    language: 'it',
+    content: `# Gli esopianeti
+
+Un esopianeta è un pianeta che orbita attorno a una stella diversa dal nostro Sole. Per secoli abbiamo potuto solo immaginare tali mondi; oggi ne conosciamo migliaia, e questa scienza ha trasformato la nostra visione del posto che occupiamo nell'universo.
+
+## Perché sono difficili da vedere
+
+Gli esopianeti sono estremamente difficili da osservare direttamente. Non emettono luce propria e si perdono nel bagliore intenso delle loro stelle — come cercare di vedere una lucciola accanto a un faro. Per questo quasi tutti gli esopianeti sono trovati con mezzi **indiretti**.
+
+## Come li troviamo
+
+Due metodi dominano la ricerca:
+
+- **Il metodo del transito.** Se l'orbita di un pianeta passa tra noi e la sua stella, esso blocca una frazione minuscola della sua luce. Misurare questi piccoli cali regolari di luminosità rivela il pianeta e ne indica le dimensioni. Il telescopio spaziale Kepler ha usato questo metodo per trovare migliaia di mondi.
+- **Il metodo della velocità radiale.** Un pianeta in orbita esercita una lieve attrazione gravitazionale sulla sua stella, facendola oscillare. Questa oscillazione sposta un po' la luce della stella, rivelando la presenza e la massa del pianeta.
+
+## Una diversità sbalorditiva
+
+Gli esopianeti si sono rivelati incredibilmente vari: giganti gassosi «gioviani caldi» che orbitano incollati alle loro stelle, «superterre» rocciose più grandi del nostro pianeta e mondi con due soli. Molti sistemi non somigliano per nulla al nostro.
+
+## La ricerca della vita
+
+Il premio più ambito è trovare pianeti nella **zona abitabile** — la distanza da una stella alla quale potrebbe esistere acqua liquida in superficie. Nuovi telescopi cominciano ad analizzare le atmosfere degli esopianeti in cerca di gas che possano indicare la vita, rendendo finalmente verificabile l'antica domanda «siamo soli?».`,
+  },
+  {
+    title: 'Il Big Bang',
+    question: "Come è cominciato l'universo?",
+    summary:
+      "La teoria del Big Bang descrive l'universo in espansione da uno stato caldo e denso circa 13,8 miliardi di anni fa, sostenuta da prove come il bagliore cosmico residuo e le galassie in allontanamento.",
+    tags: ['astronomia', 'cosmologia', 'universo', 'fisica', 'scienza'],
+    language: 'it',
+    content: `# Il Big Bang
+
+La teoria del Big Bang è la migliore spiegazione scientifica di come è cominciato l'universo. Sostiene che tutto lo spazio, il tempo, la materia e l'energia siano emersi da uno stato straordinariamente caldo e denso circa **13,8 miliardi di anni fa**, e che l'universo si espanda da allora.
+
+## Non fu un'esplosione nello spazio
+
+Nonostante il nome, il Big Bang non fu un'esplosione che scagliò materia in uno spazio vuoto preesistente. Fu la rapida espansione **dello spazio stesso**, da uno stato in cui tutto ciò che oggi vediamo era compresso in un volume incredibilmente piccolo, caldo e denso. Mentre lo spazio si espandeva, si raffreddava, e la materia poté gradualmente formarsi e aggregarsi.
+
+## Le prove
+
+Tre osservazioni principali sostengono la teoria:
+
+- **Le galassie in allontanamento.** Negli anni '20 Edwin Hubble scoprì che le galassie lontane si allontanano da noi, e più sono lontane più velocemente — esattamente ciò che ci si aspetterebbe da un universo in espansione.
+- **La radiazione cosmica di fondo a microonde.** Un debole bagliore a microonde arriva da ogni direzione del cielo — il calore residuo raffreddato dell'universo primordiale, previsto prima di essere scoperto.
+- **L'abbondanza degli elementi leggeri.** Le proporzioni osservate di idrogeno ed elio coincidono con precisione con quanto previsto dalle reazioni nei primi minuti dell'universo.
+
+## Cosa venne dopo
+
+Mentre l'universo si raffreddava, la materia formò atomi, poi stelle, e queste si aggregarono in galassie. Nel corso di miliardi di anni la gravità costruì le strutture che oggi vediamo.
+
+## Cosa il Big Bang non spiega
+
+La teoria descrive come l'universo si sia evoluto da una frazione di secondo dopo l'inizio in poi, ma non dice cosa lo abbia «causato» né cosa ci fosse «prima» — domande che restano tra le più profonde della scienza.`,
+  },
+  {
+    title: 'Le eclissi',
+    question: 'Cosa causa le eclissi solari e lunari?',
+    summary:
+      'Le eclissi avvengono quando Sole, Terra e Luna si allineano, facendo proiettare a un corpo la propria ombra su un altro; le eclissi solari oscurano il Sole e quelle lunari offuscano la Luna piena.',
+    tags: ['astronomia', 'luna', 'sole', 'spazio', 'scienza'],
+    language: 'it',
+    content: `# Le eclissi
+
+Un'eclissi avviene quando Sole, Terra e Luna si allineano in modo che uno proietti la propria ombra su un altro. Questi eventi impressionanti un tempo erano temuti come presagi; oggi li comprendiamo come una bella e prevedibile geometria celeste.
+
+## Eclissi solari
+
+Un'eclissi solare avviene durante la Luna nuova, quando la Luna passa direttamente tra la Terra e il Sole, bloccando la luce solare. Benché la Luna sia molto più piccola del Sole, è circa 400 volte più vicina, perciò i due appaiono in cielo quasi delle stesse dimensioni — una coincidenza notevole.
+
+- In un'eclissi solare **totale**, la Luna copre del tutto il Sole, rivelando per brevi istanti la debole atmosfera esterna del Sole — la **corona** — e trasformando il giorno in crepuscolo.
+- In un'eclissi **parziale**, è oscurata solo una parte del Sole.
+- In un'eclissi **anulare**, la Luna è un po' più lontana e lascia un brillante «anello di fuoco» attorno alla sua sagoma.
+
+## Eclissi lunari
+
+Un'eclissi lunare avviene durante la Luna piena, quando la Terra si trova tra il Sole e la Luna e proietta la propria ombra su di essa. A differenza delle eclissi solari, è sicuro osservarle a occhio nudo e sono visibili da tutto il lato notturno della Terra contemporaneamente.
+
+Durante un'eclissi lunare **totale**, la Luna assume spesso una tinta rossastra — la cosiddetta «Luna di sangue» — perché l'atmosfera terrestre devia la luce solare rossastra sulla sua superficie.
+
+## Perché non avvengono ogni mese
+
+L'orbita della Luna è leggermente inclinata rispetto a quella della Terra, perciò la Luna di solito passa un po' sopra o sotto l'allineamento perfetto. Le eclissi avvengono solo nelle poche occasioni in cui i tre corpi si allineano con precisione, il che rende ognuna un evento speciale.`,
+  },
 ];
