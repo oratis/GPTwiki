@@ -1194,4 +1194,270 @@ Durante um eclipse lunar **total**, a Lua muitas vezes adquire um tom avermelhad
 
 A órbita da Lua é levemente inclinada em relação à da Terra, de modo que ela em geral passa um pouco acima ou abaixo do alinhamento perfeito. Os eclipses só ocorrem nas poucas ocasiões em que os três corpos se alinham com precisão, o que torna cada um deles um acontecimento especial.`,
   },
+  // ── Batch 6: Artes, língua e cultura ──
+  {
+    title: 'A teoria das cores',
+    question: 'Como as cores funcionam e por que algumas combinam?',
+    summary:
+      'A teoria das cores explica como as cores se relacionam, se misturam e se combinam, usando ferramentas como o círculo cromático para guiar artistas, designers e quem trabalha com cor.',
+    tags: ['arte', 'design', 'cor', 'visual', 'cultura'],
+    language: 'pt',
+    content: `# A teoria das cores
+
+A teoria das cores é o conjunto de princípios que descreve como as cores se relacionam, como se misturam e como produzem efeitos diferentes quando combinadas. Artistas, designers e decoradores a usam para criar imagens harmoniosas ou cheias de contraste.
+
+## O círculo cromático
+
+A ferramenta central é o **círculo cromático**, que dispõe as cores num anel para mostrar suas relações. Ele organiza-se em torno de três grupos:
+
+- **Cores primárias** (no modelo tradicional dos pigmentos: vermelho, amarelo e azul) não podem ser feitas pela mistura de outras.
+- **Cores secundárias** (verde, laranja, roxo) vêm da mistura de duas primárias.
+- **Cores terciárias** vêm da mistura de uma primária com uma secundária vizinha.
+
+## Misturar a luz e a tinta
+
+É crucial perceber que a cor se mistura de modos diferentes conforme o meio. Misturar **luz** (como nas telas) é **aditivo** — combinar vermelho, verde e azul produz branco. Misturar **pigmentos** (como tintas) é **subtrativo** — combinar muitas cores tende ao escuro e ao acastanhado.
+
+## Esquemas de cores
+
+A teoria descreve combinações que costumam agradar ao olho:
+
+- **Complementares:** cores opostas no círculo (como azul e laranja), que criam um contraste vibrante.
+- **Análogas:** cores vizinhas (como azul, azul-esverdeado e verde), que criam harmonia.
+- **Tríades:** três cores igualmente espaçadas, que equilibram variedade e equilíbrio.
+
+## Mais que estética
+
+As cores também carregam **temperatura** (vermelhos e laranjas quentes; azuis e verdes frios) e associações psicológicas que influenciam o humor e o significado. Compreender esses efeitos ajuda a explicar por que certas combinações nos parecem energéticas, calmas ou tensas.`,
+  },
+  {
+    title: 'A perspectiva linear',
+    question: 'Como os artistas criam a ilusão de profundidade numa superfície plana?',
+    summary:
+      'A perspectiva linear é uma técnica que usa linhas convergentes e pontos de fuga para criar a ilusão de profundidade tridimensional sobre uma superfície plana, revolucionando a arte renascentista.',
+    tags: ['arte', 'história', 'técnica', 'visual', 'cultura'],
+    language: 'pt',
+    content: `# A perspectiva linear
+
+A perspectiva linear é um método para criar a ilusão de profundidade e espaço numa superfície plana. Codificada na Itália renascentista, transformou a pintura ao permitir que os artistas representassem o mundo de forma realista, como visto de um único ponto de vista.
+
+## A ideia central
+
+A perspectiva linear baseia-se numa observação simples: objetos paralelos parecem se aproximar à medida que se afastam. Pense em trilhos de trem que parecem juntar-se ao longe. A técnica formaliza isso com alguns elementos-chave:
+
+- A **linha do horizonte**, à altura dos olhos do observador.
+- Um ou mais **pontos de fuga** sobre esse horizonte, onde as linhas paralelas que se afastam parecem convergir.
+- **Linhas ortogonais**, as linhas que recuam e seguem em direção a um ponto de fuga.
+
+Os objetos são desenhados menores e mais próximos do ponto de fuga conforme estão mais distantes, criando uma profundidade convincente.
+
+## Tipos de perspectiva
+
+- A **perspectiva de um ponto** usa um único ponto de fuga, ideal para olhar diretamente uma rua ou um corredor.
+- A **perspectiva de dois pontos** usa dois, útil para representar a quina de um edifício.
+- A **perspectiva de três pontos** acrescenta um terceiro ponto (em cima ou embaixo) para vistas dramáticas, olhando para cima ou para baixo.
+
+## Um avanço histórico
+
+O arquiteto **Filippo Brunelleschi** demonstrou a perspectiva matemática por volta de 1420, e ela logo se tornou um pilar da arte ocidental. Pela primeira vez, os pintores podiam construir cenas espacialmente coerentes, dando ao seu trabalho um realismo notável.
+
+## Por que importa
+
+A perspectiva linear é mais que um truque: reflete como a luz e a visão realmente funcionam. Os mesmos princípios hoje sustentam o desenho técnico, a arquitetura, os videogames e os gráficos de computador.`,
+  },
+  {
+    title: 'A harmonia e as escalas musicais',
+    question: 'O que faz com que as notas musicais soem bem juntas?',
+    summary:
+      'A harmonia e as escalas baseiam-se nas relações matemáticas entre as frequências sonoras; notas com razões simples soam consonantes e formam os blocos de construção da música.',
+    tags: ['música', 'som', 'matemática', 'arte', 'cultura'],
+    language: 'pt',
+    content: `# A harmonia e as escalas musicais
+
+Por que algumas combinações de notas soam agradáveis e outras tensas? A resposta está numa interação fascinante entre a física, a matemática e a percepção humana.
+
+## O som é vibração
+
+Uma nota musical é produzida por algo que vibra a certa frequência, medida em hertz (vibrações por segundo). Uma vibração mais rápida soa mais aguda; uma mais lenta, mais grave. A relação entre as frequências de duas notas determina como elas soam juntas.
+
+## Razões simples soam consonantes
+
+A intuição-chave, que remonta à antiga Grécia, é que as notas cujas frequências formam **razões simples** soam consonantes (estáveis e agradáveis):
+
+- A **oitava** é uma razão de 2:1 — uma frequência exatamente o dobro da outra. As duas notas soam tão semelhantes que recebem o mesmo nome.
+- A **quinta justa** é uma razão de 3:2, uma das combinações mais agradáveis.
+- A **quarta justa** é de 4:3.
+
+Razões mais complexas tendem a soar mais dissonantes, ou tensas — algo que a música usa de propósito para criar e depois resolver tensão.
+
+## A construção das escalas
+
+Uma **escala** é uma sequência selecionada de notas dentro de uma oitava. A maioria das músicas ocidentais usa 12 alturas igualmente espaçadas, das quais se extraem escalas de sete notas como a **maior** (em geral alegre e luminosa) e a **menor** (muitas vezes mais sombria ou melancólica). Outras culturas usam escalas diferentes, com seus próprios padrões característicos.
+
+## Harmonia
+
+A **harmonia** é o som de várias notas tocadas ao mesmo tempo, em geral em **acordes**. As progressões de acordes criam movimento — afastando-se da estabilidade rumo à tensão e voltando à resolução —, o que dá à música boa parte de sua força emocional.`,
+  },
+  {
+    title: 'A etimologia',
+    question: 'De onde vêm as palavras?',
+    summary:
+      'A etimologia é o estudo da origem das palavras e de como seus significados e formas mudaram ao longo do tempo, revelando história, contatos culturais e os laços entre as línguas.',
+    tags: ['língua', 'palavras', 'história', 'linguística', 'cultura'],
+    language: 'pt',
+    content: `# A etimologia
+
+A etimologia é o estudo das origens das palavras: de onde vêm, como suas formas e significados mudaram e como se relacionam com palavras de outras línguas. Cada palavra carrega um fragmento de história.
+
+## Rastrear o passado das palavras
+
+Os etimólogos buscam a história de uma palavra comparando-a com formas mais antigas e com palavras correlatas de línguas aparentadas. Por exemplo, a palavra portuguesa *pai* e a inglesa *father* descendem ambas de uma raiz ancestral comum, prova de que o português, o inglês e muitas outras pertencem à família **indo-europeia**.
+
+## Como as palavras mudam
+
+As palavras se transformam de muitas maneiras ao longo do tempo:
+
+- **Deslocamento de significado.** A palavra inglesa *nice* já significou "tolo"; seu sentido derivou ao longo dos séculos.
+- **Empréstimo.** As línguas tomam palavras umas das outras. O português absorveu termos do árabe (*almofada*, *açúcar*), do tupi (*abacaxi*) e de muitas outras línguas.
+- **Mudança sonora.** A pronúncia evolui ao longo de gerações, às vezes de forma regular e previsível.
+- **Composição e abreviação.** Palavras novas surgem da combinação de antigas ou do encurtamento das já existentes.
+
+## Falsas pistas
+
+Nem toda semelhança revela parentesco. Os **falsos cognatos** são palavras que parecem ligadas, mas não são, e as **etimologias populares** são histórias inventadas e atraentes que muitas vezes estão erradas. Os etimólogos sérios apoiam-se em provas documentadas e em padrões sonoros regulares, e não em meros palpites.
+
+## Por que importa
+
+A etimologia ilumina a história — registrando migrações, conquistas, comércio e tecnologias. Também aprofunda a compreensão da própria língua, revelando os laços ocultos entre palavras que, de outro modo, pareceriam sem relação.`,
+  },
+  {
+    title: 'O propósito da mitologia',
+    question: 'Por que toda cultura humana cria mitos?',
+    summary:
+      'Os mitos são histórias tradicionais que explicam o mundo, transmitem valores e unem comunidades; aparecem em todas as culturas humanas e cumprem funções psicológicas e sociais profundas.',
+    tags: ['mitologia', 'cultura', 'história', 'narração', 'sociedade'],
+    language: 'pt',
+    content: `# O propósito da mitologia
+
+Toda cultura humana conhecida criou mitos — histórias tradicionais sobre deuses, heróis e as origens do mundo. Longe de serem meras fantasias, os mitos cumprem funções profundas que ajudam as sociedades a dar sentido à existência.
+
+## O que é um mito
+
+Um mito é uma história tradicional, muitas vezes sagrada, que se passa num passado distante e explica algo fundamental sobre o mundo ou a condição humana. Os mitos diferem das fábulas (lições curtas) e das lendas (com raízes em pessoas ou eventos históricos), embora as categorias muitas vezes se sobreponham.
+
+## As funções da mitologia
+
+Os estudiosos identificam vários papéis interligados:
+
+- **Explicação.** Os mitos respondem às grandes perguntas: como o mundo começou, por que existe a morte, de onde vêm o trovão ou as estações. Antes da ciência, davam estrutura ao desconhecido.
+- **Orientação moral e social.** Os mitos transmitem os valores, as normas e os ideais de uma cultura, mostrando o que é honra, coragem e bom comportamento.
+- **Coesão social.** Histórias compartilhadas unem as comunidades por uma identidade e uma memória comuns, ligando as gerações.
+- **Conforto psicológico.** Os mitos ajudam as pessoas a enfrentar o medo, o sofrimento e o mistério, situando as vidas individuais dentro de um quadro maior e significativo.
+
+## Padrões comuns
+
+Mitologias de culturas muito distantes às vezes compartilham temas marcantes — grandes dilúvios, a criação do caos, heróis que enfrentam provações. Estudiosos como Joseph Campbell argumentaram que muitas histórias de heróis seguem uma "jornada" comum, sugerindo padrões compartilhados na imaginação humana.
+
+## Os mitos hoje
+
+Embora costumemos associar o mito ao mundo antigo, as histórias ainda cumprem essas funções na atualidade — pela religião, pela literatura nacional e até pelas franquias de super-heróis que veiculam valores partilhados.`,
+  },
+  {
+    title: 'A tipografia',
+    question: 'O que é a tipografia e por que ela importa?',
+    summary:
+      'A tipografia é a arte de dispor o texto para torná-lo legível, claro e expressivo; molda como lemos e influencia o tom e a clareza tanto na impressão quanto na tela.',
+    tags: ['design', 'tipografia', 'comunicação', 'arte', 'visual'],
+    language: 'pt',
+    content: `# A tipografia
+
+A tipografia é a arte e a técnica de dispor o texto. Abrange a escolha das fontes, dos tamanhos, dos espaçamentos e do leiaute, e tudo o que faz a palavra escrita ser legível, clara e expressiva. Boa tipografia muitas vezes passa despercebida, mas molda silenciosamente cada leitura que fazemos.
+
+## Conceitos fundamentais
+
+- Uma **fonte tipográfica (typeface)** é o desenho de um conjunto de caracteres (como Helvetica ou Times New Roman); uma **fonte (font)**, em sentido estrito, é uma variação ou tamanho específico dela.
+- As fontes **serifadas** têm pequenos traços nas pontas das letras; as **sem serifa** (sans-serif), não. As serifadas costumam parecer tradicionais; as sem serifa, modernas e limpas.
+- O **kerning** é o ajuste do espaço entre dois caracteres específicos; o **tracking**, o espaçamento geral; e o **leading**, o espaço vertical entre as linhas.
+
+## Por que a tipografia importa
+
+A tipografia afeta tanto a **legibilidade** (a facilidade de distinguir cada caractere) quanto a **leiturabilidade** (a facilidade de ler passagens inteiras). Boas escolhas reduzem o cansaço, guiam o olhar e ajudam o leitor a entender depressa o que importa. Escolhas ruins — texto apertado, contraste fraco, fontes desajeitadas — cansam e até afastam o leitor.
+
+## Transmitir o tom
+
+As fontes carregam personalidade. Uma serifada elegante pode sugerir tradição e autoridade; uma sem serifa arredondada pode parecer amistosa e acessível; uma fonte manuscrita pode evocar informalidade. Os tipógrafos escolhem em função do tom para reforçar a mensagem das próprias palavras.
+
+## A hierarquia visual
+
+A tipografia cria **hierarquia** — usando tamanho, peso e espaçamento para mostrar o que é título, subtítulo e corpo de texto. Essa estrutura ajuda o leitor a percorrer o conteúdo e a entender como a informação se organiza, seja num livro, num cartaz ou numa página web.`,
+  },
+  {
+    title: 'A estrutura narrativa',
+    question: 'O que dá forma a uma boa história?',
+    summary:
+      'A estrutura narrativa é a moldura que organiza uma história — situação, conflito e resolução; padrões comuns como o arco em três atos ajudam a construir histórias satisfatórias entre culturas.',
+    tags: ['narração', 'escrita', 'literatura', 'arte', 'cultura'],
+    language: 'pt',
+    content: `# A estrutura narrativa
+
+A estrutura narrativa é a moldura subjacente que organiza uma história — a ordem e a maneira como os acontecimentos são apresentados. Embora as histórias variem imensamente, a maioria se apoia em padrões compartilhados que ajudam o público a segui-las e a senti-las.
+
+## O arco básico
+
+Muitas histórias seguem um arco com elementos reconhecíveis:
+
+1. **Exposição.** Apresentam-se os personagens, o cenário e a situação.
+2. **Ação crescente.** Surge um conflito ou problema, e a tensão aumenta.
+3. **Clímax.** O ponto de virada ou o momento de maior intensidade.
+4. **Ação decrescente.** As consequências do clímax se desenrolam.
+5. **Desfecho (resolução).** A história chega ao fim e amarra os fios soltos.
+
+Esse padrão é muitas vezes representado como a "pirâmide de Freytag".
+
+## Estruturas comuns
+
+- O **arco em três atos** divide a história em preparação, confronto e resolução — a espinha dorsal de grande parte do cinema e do teatro.
+- A **jornada do herói** descreve um protagonista que deixa o mundo comum, enfrenta provações, é transformado e retorna mudado — um padrão presente em mitos do mundo inteiro.
+
+## Por que a estrutura funciona
+
+A estrutura cria **expectativa e satisfação**. Ao montar conflitos e depois resolvê-los, controla o ritmo do interesse e da emoção. Um conflito sem resolução frustra; uma resolução sem conflito acumulado parece vazia. A boa estrutura mantém os dois em equilíbrio.
+
+## Romper as regras
+
+Narradores experientes muitas vezes brincam com a estrutura — começando pelo meio (*in medias res*), usando linhas do tempo não lineares ou múltiplos pontos de vista. Mas essas variações são, em geral, eficazes justamente por jogarem com a estrutura familiar que o público leva, intuitivamente, dentro de si.`,
+  },
+  {
+    title: 'A comunicação não verbal',
+    question: 'Quanto comunicamos sem palavras?',
+    summary:
+      'A comunicação não verbal abrange a linguagem corporal, as expressões faciais, o gesto, o tom e o espaço; transmite grande parte do significado e muitas vezes fala mais alto que as palavras.',
+    tags: ['comunicação', 'psicologia', 'cultura', 'comportamento', 'sociedade'],
+    language: 'pt',
+    content: `# A comunicação não verbal
+
+Boa parte da comunicação humana acontece sem palavra alguma. A comunicação não verbal — expressões faciais, gestos, postura, tom de voz e mais — transmite emoções, atitudes e intenções, muitas vezes com mais força do que a própria fala.
+
+## Os canais do não verbal
+
+A comunicação não verbal flui por muitos canais ao mesmo tempo:
+
+- **Expressões faciais.** O rosto comunica emoções com rapidez, e várias expressões básicas (como felicidade, surpresa e raiva) são reconhecidas entre as culturas.
+- **Gesto e linguagem corporal.** Os movimentos das mãos, a postura e a maneira de mover o corpo enfatizam ou substituem palavras.
+- **Contato visual.** O olhar pode demonstrar atenção, desafio ou intimidade, com significado que varia muito entre culturas.
+- **Proxêmica.** O uso do espaço pessoal indica intimidade, formalidade ou hierarquia.
+- **Paralinguagem.** O tom, o ritmo, o volume e as pausas moldam o sentido das palavras — *como* algo é dito, e não só o que é dito.
+
+## Por que importa
+
+A comunicação não verbal modela poderosamente como as mensagens são recebidas. Um mesmo "tudo bem" pode soar sincero, sarcástico ou hesitante, conforme o tom e a expressão. Quando os sinais verbais e não verbais se contradizem, as pessoas tendem a confiar mais no não verbal.
+
+## Variação cultural
+
+Embora algumas expressões sejam universais, muitos sinais não verbais são específicos de cada cultura. Os gestos, a distância adequada para conversar e as regras sobre o contato visual diferem amplamente, e mal-entendidos podem surgir com facilidade entre culturas.
+
+## Ler os sinais
+
+Embora seja tentador acreditar que se pode "ler" alguém como um livro aberto, os sinais não verbais são ambíguos e melhor interpretados em conjunto e no contexto, e não isoladamente. A consciência deles, ainda assim, torna a comunicação mais rica e eficaz.`,
+  },
 ];
