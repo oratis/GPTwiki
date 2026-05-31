@@ -952,4 +952,246 @@ As memórias são guardadas como padrões de conexões entre os neurônios. Quan
 
 A memória é reconstrutiva: cada vez que recuperamos uma lembrança, nós a remontamos, e podemos alterá-la sem perceber. Isso explica por que as memórias podem ser vívidas e ainda assim erradas, por que os relatos de testemunhas são pouco confiáveis e por que repetições e associações ajudam a fixar a informação.`,
   },
+  // ── Batch 5: Espaço e astronomia ──
+  {
+    title: 'As fases da Lua',
+    question: 'Por que a Lua muda de forma ao longo do mês?',
+    summary:
+      'As fases da Lua são as formas mutáveis de sua parte iluminada vistas da Terra, causadas pelo modo como a luz do sol incide sobre ela à medida que orbita o nosso planeta.',
+    tags: ['astronomia', 'lua', 'espaço', 'ciência', 'sistema solar'],
+    language: 'pt',
+    content: `# As fases da Lua
+
+A Lua parece mudar de forma ao longo de cerca de um mês, passando de um fino crescente à Lua cheia e de volta. Essas **fases** não vêm de qualquer sombra projetada pela Terra, mas da combinação entre como a luz do sol incide sobre a Lua e o ângulo de onde a observamos.
+
+## A causa real
+
+Metade da Lua está sempre iluminada pelo Sol, tal como metade da Terra vive o dia. Mas, à medida que a Lua orbita a Terra, vemos quantidades diferentes dessa metade iluminada. Quando a Lua está do lado oposto ao Sol em relação a nós, vemos a face iluminada por inteiro — a **Lua cheia**. Quando está entre nós e o Sol, a face voltada para nós fica escura — a **Lua nova**.
+
+## O ciclo das fases
+
+O ciclo completo dura cerca de 29,5 dias e passa por oito fases:
+
+1. **Lua nova** — praticamente invisível.
+2. **Crescente côncava** — uma fatia fina começa a aparecer.
+3. **Quarto crescente** — metade iluminada, ficando mais cheia.
+4. **Gibosa crescente** — mais da metade iluminada.
+5. **Lua cheia** — disco inteiro iluminado.
+6. **Gibosa minguante** — começa a diminuir.
+7. **Quarto minguante** — de novo meia Lua, do lado oposto.
+8. **Crescente minguante** — uma fatia fina antes de a Lua nova retornar.
+
+"Crescente" significa que a parte iluminada está aumentando; "minguante", que está diminuindo.
+
+## A mesma face
+
+A Lua leva o mesmo tempo para girar uma vez sobre si mesma e para orbitar a Terra, fenômeno chamado **rotação síncrona**. Por isso ela sempre nos mostra a mesma face, e o "lado oculto" nunca é visível da Terra.`,
+  },
+  {
+    title: 'Os cometas',
+    question: 'O que são os cometas e de onde vêm?',
+    summary:
+      'Os cometas são corpos gelados sobrados da formação do sistema solar que desenvolvem caudas brilhantes ao se aproximarem do Sol e o aquecimento vaporiza seu gelo.',
+    tags: ['astronomia', 'cometas', 'espaço', 'sistema solar', 'ciência'],
+    language: 'pt',
+    content: `# Os cometas
+
+Os cometas são alguns dos objetos mais espetaculares do céu noturno: bolas de gelo e poeira que ganham vida ao se aproximarem do Sol. Muitas vezes chamados de "bolas de neve sujas", são restos congelados dos primórdios do sistema solar.
+
+## Do que são feitos
+
+O coração de um cometa é o **núcleo**, uma mistura sólida de gelo, poeira, rocha e compostos congelados com apenas alguns quilômetros de extensão. Por bilhões de anos, eles permanecem congelados nos confins gelados do sistema solar.
+
+## Por que crescem caudas
+
+Quando a órbita de um cometa o aproxima do Sol, o calor faz seu gelo passar direto para gás, num processo chamado **sublimação**. Isso forma uma atmosfera difusa e brilhante ao redor do núcleo, a **coma**, e libera poeira. A pressão da radiação solar e o vento solar empurram esse material para longe do Sol, criando uma ou mais **caudas** que podem estender-se por milhões de quilômetros. Por isso a cauda de um cometa sempre aponta para o lado oposto ao Sol, e não para trás de seu movimento.
+
+## De onde vêm
+
+A maioria dos cometas tem origem em duas regiões distantes:
+
+- O **Cinturão de Kuiper**, um disco de corpos gelados além de Netuno, fonte de muitos cometas de período mais curto.
+- A **Nuvem de Oort**, uma casca esférica muito mais distante envolvendo o sistema solar, fonte dos cometas de período longo.
+
+## Visitantes do passado
+
+Como os cometas conservam material congelado dos primeiros dias do sistema solar, são como cápsulas do tempo. Os cientistas os estudam para aprender sobre as condições de 4,6 bilhões de anos atrás, e alguns suspeitam que os cometas tenham ajudado a trazer água e moléculas orgânicas à Terra primitiva.`,
+  },
+  {
+    title: 'O ciclo de vida de uma estrela',
+    question: 'Como as estrelas nascem, vivem e morrem?',
+    summary:
+      'As estrelas se formam a partir de nuvens de gás em colapso, brilham por milhões ou bilhões de anos fundindo elementos e morrem de maneiras diferentes — de anãs brancas a supernovas — conforme sua massa.',
+    tags: ['astronomia', 'estrelas', 'espaço', 'física', 'ciência'],
+    language: 'pt',
+    content: `# O ciclo de vida de uma estrela
+
+As estrelas parecem eternas, mas nascem, vivem e morrem ao longo de imensas escalas de tempo. O destino de uma estrela depende quase inteiramente de uma propriedade: a sua **massa**.
+
+## O nascimento
+
+As estrelas nascem dentro de imensas nuvens de gás e poeira chamadas **nebulosas**. Quando uma região fica densa o bastante, a gravidade a faz colapsar e se aquecer. Quando o núcleo atinge cerca de 10 milhões de graus, começa a **fusão nuclear** — átomos de hidrogênio se fundem em hélio, liberando energia. Uma estrela nasceu.
+
+## A meia-idade
+
+Durante a maior parte da vida, uma estrela está na **sequência principal**, equilibrando a força da gravidade que a comprime para dentro com a pressão da fusão que a empurra para fora. O nosso Sol está nessa fase estável há cerca de 4,6 bilhões de anos e seguirá por outros 5 bilhões. Estrelas menores e mais frias queimam o combustível devagar e duram trilhões de anos; as gigantes e quentes consomem o seu em só alguns milhões.
+
+## A morte
+
+O fim de uma estrela depende da sua massa:
+
+- **Estrelas como o Sol** incham até virar **gigantes vermelhas**, expelem as camadas externas e deixam para trás um núcleo denso e em resfriamento chamado **anã branca**.
+- **Estrelas muito mais massivas** terminam numa explosão catastrófica chamada **supernova**, que por um breve instante pode brilhar mais que uma galáxia inteira. O que resta vira uma **estrela de nêutrons** ultradensa ou, se a estrela era massiva o bastante, um **buraco negro**.
+
+## Forjas cósmicas
+
+As estrelas são as fábricas do universo. A fusão dentro delas, e as explosões que as encerram, criaram quase todos os elementos mais pesados que o hidrogênio — incluindo o carbono e o oxigênio em você. Somos, literalmente, feitos de poeira de estrelas.`,
+  },
+  {
+    title: 'As auroras',
+    question: 'O que causa as luzes do norte e do sul?',
+    summary:
+      'As auroras são exibições de luz coloridas perto dos polos da Terra, produzidas quando partículas carregadas do Sol colidem com gases atmosféricos guiadas pelo campo magnético do planeta.',
+    tags: ['astronomia', 'atmosfera', 'física', 'espaço', 'ciência'],
+    language: 'pt',
+    content: `# As auroras
+
+As auroras — as **luzes do norte** (aurora boreal) e as **luzes do sul** (aurora austral) — estão entre os mais belos espetáculos da natureza: cortinas reluzentes de luz verde, rosa e roxa que dançam pelos céus polares.
+
+## A causa: o vento solar
+
+As auroras começam no Sol, que sopra sem parar um fluxo de partículas carregadas chamado **vento solar**. Quando essas partículas chegam à Terra, a maioria é desviada pelo **campo magnético** do planeta. Mas perto dos polos magnéticos as linhas de campo mergulham na atmosfera, canalizando algumas partículas para baixo.
+
+## A criação da luz
+
+Ao mergulhar na alta atmosfera, essas partículas energéticas colidem com átomos e moléculas de gás. As colisões excitam os gases — empurram seus elétrons para estados de energia mais altos. Quando os elétrons voltam ao normal, liberam o excesso de energia como luz. Diferentes gases brilham em cores diferentes:
+
+- O **oxigênio** produz verde (o mais comum) e, em grandes altitudes, vermelho.
+- O **nitrogênio** produz azul e roxo.
+
+## Por que perto dos polos
+
+Como a forma do campo magnético da Terra canaliza as partículas para as regiões polares, as auroras são mais comuns em altas latitudes, em torno de anéis chamados **ovais aurorais**. Durante tempestades solares fortes, podem ser vistas muito mais perto do equador do que o normal.
+
+## Além da Terra
+
+As auroras não são exclusivas da Terra. Espetáculos semelhantes já foram observados em Júpiter, Saturno e outros planetas com campos magnéticos e atmosferas — uma lembrança de que o nosso planeta faz parte de um sistema solar movido pelo Sol.`,
+  },
+  {
+    title: 'Os anos-luz e as distâncias cósmicas',
+    question: 'O que é um ano-luz e como os astrônomos medem o espaço?',
+    summary:
+      'Um ano-luz é a distância que a luz percorre em um ano; os astrônomos usam ele e técnicas como a paralaxe para medir as vastas distâncias entre estrelas e galáxias.',
+    tags: ['astronomia', 'espaço', 'distância', 'física', 'ciência'],
+    language: 'pt',
+    content: `# Os anos-luz e as distâncias cósmicas
+
+As distâncias no espaço são tão imensas que os quilômetros tornam-se inúteis. Para medir o cosmos, os astrônomos usam o **ano-luz** — e uma escada engenhosa de técnicas para determinar quão longe as coisas realmente estão.
+
+## O que é um ano-luz
+
+Um ano-luz é uma medida de **distância**, não de tempo: é a distância que a luz percorre num ano, cerca de 9,5 trilhões de quilômetros. Como a luz viaja a velocidade finita, olhar para o espaço é olhar para o passado. A estrela mais próxima além do Sol está a cerca de 4,2 anos-luz, então a vemos como era há mais de quatro anos. Algumas galáxias as vemos como eram bilhões de anos atrás.
+
+## Medir distâncias próximas: a paralaxe
+
+Para estrelas relativamente próximas, os astrônomos usam a **paralaxe**. Ao observar uma estrela em lados opostos da órbita da Terra (com seis meses de diferença), ela parece deslocar-se ligeiramente contra o fundo mais distante. Quanto maior o deslocamento, mais próxima a estrela. É o mesmo efeito de fechar um olho de cada vez e ver o polegar saltar.
+
+## Medir distâncias maiores
+
+Além do alcance da paralaxe, os astrônomos usam "velas-padrão" — objetos de brilho real conhecido. Comparando seu brilho real com o quão tênues parecem, deduz-se a distância. As **estrelas variáveis cefeidas** e um certo tipo de **supernova** servem como essas velas e permitem medir distâncias até galáxias remotas.
+
+## Uma escala humilhante
+
+Essas ferramentas revelam um universo de uma vastidão impressionante: bilhões de galáxias, cada uma com bilhões de estrelas, espalhadas por distâncias tão grandes que a luz que captamos hoje partiu muito antes de a Terra existir.`,
+  },
+  {
+    title: 'Os exoplanetas',
+    question: 'O que são os exoplanetas e como os encontramos?',
+    summary:
+      'Os exoplanetas são planetas que orbitam outras estrelas; milhares já foram descobertos por métodos indiretos, alguns na zona habitável onde poderia existir água líquida.',
+    tags: ['astronomia', 'exoplanetas', 'espaço', 'ciência', 'descoberta'],
+    language: 'pt',
+    content: `# Os exoplanetas
+
+Um exoplaneta é um planeta que orbita uma estrela que não é o nosso Sol. Por séculos só pudemos imaginar tais mundos; hoje conhecemos milhares deles, e essa ciência transformou nossa visão do lugar que ocupamos no universo.
+
+## Por que são difíceis de ver
+
+Os exoplanetas são extremamente difíceis de observar diretamente. Eles não emitem luz própria e ficam ofuscados pelo brilho intenso de suas estrelas — como tentar ver um vaga-lume ao lado de um holofote. Por isso quase todos os exoplanetas são encontrados por meios **indiretos**.
+
+## Como os encontramos
+
+Dois métodos dominam a busca:
+
+- **O método do trânsito.** Se a órbita de um planeta passa entre nós e sua estrela, ele bloqueia uma fração minúscula da luz dela. Medir essas pequenas quedas regulares de brilho revela o planeta e indica seu tamanho. O telescópio espacial Kepler usou esse método para encontrar milhares de mundos.
+- **O método da velocidade radial.** Um planeta em órbita exerce um leve puxão gravitacional sobre sua estrela, fazendo-a bambolear. Esse bamboleio desloca um pouco a luz da estrela, revelando a presença e a massa do planeta.
+
+## Uma diversidade impressionante
+
+Os exoplanetas revelaram-se incrivelmente variados: "júpiteres quentes" gigantes gasosos que orbitam coladas às suas estrelas, "superterras" rochosas maiores que o nosso planeta e mundos com dois sóis. Muitos sistemas não se parecem em nada com o nosso.
+
+## A busca por vida
+
+O prêmio mais cobiçado é encontrar planetas na **zona habitável** — a distância de uma estrela em que poderia existir água líquida na superfície. Telescópios novos começam a analisar as atmosferas dos exoplanetas em busca de gases que possam indicar vida, tornando a antiga pergunta "estamos sós?" finalmente testável.`,
+  },
+  {
+    title: 'O Big Bang',
+    question: 'Como o universo começou?',
+    summary:
+      'A teoria do Big Bang descreve o universo expandindo-se de um estado quente e denso há cerca de 13,8 bilhões de anos, sustentada por provas como o brilho residual cósmico e as galáxias em afastamento.',
+    tags: ['astronomia', 'cosmologia', 'universo', 'física', 'ciência'],
+    language: 'pt',
+    content: `# O Big Bang
+
+A teoria do Big Bang é a melhor explicação científica de como o universo começou. Sustenta que todo o espaço, o tempo, a matéria e a energia surgiram de um estado extraordinariamente quente e denso há cerca de **13,8 bilhões de anos**, e que o universo se expande desde então.
+
+## Não foi uma explosão no espaço
+
+Apesar do nome, o Big Bang não foi uma explosão que lançou matéria por um espaço vazio preexistente. Foi a rápida expansão do **próprio espaço**, a partir de um estado em que tudo o que hoje vemos estava comprimido num volume inimaginavelmente pequeno, quente e denso. À medida que o espaço se expandia, esfriava, e a matéria pôde aos poucos se formar e se agrupar.
+
+## As provas
+
+Três observações principais sustentam a teoria:
+
+- **As galáxias em afastamento.** Na década de 1920, Edwin Hubble descobriu que galáxias distantes se afastam de nós, e quanto mais longe, mais rápido — exatamente o que se esperaria de um universo em expansão.
+- **A radiação cósmica de fundo em micro-ondas.** Um tênue brilho de micro-ondas chega de todas as direções do céu — o calor residual resfriado do universo primitivo, previsto antes de ser descoberto.
+- **A abundância dos elementos leves.** As proporções observadas de hidrogênio e hélio coincidem precisamente com o previsto pelas reações nos primeiros minutos do universo.
+
+## O que veio depois
+
+À medida que o universo esfriava, a matéria formou átomos, depois estrelas, e estas se reuniram em galáxias. Ao longo de bilhões de anos, a gravidade construiu as estruturas que hoje vemos.
+
+## O que o Big Bang não explica
+
+A teoria descreve como o universo evoluiu de uma fração de segundo após o início em diante, mas não diz o que o "causou" nem o que havia "antes" — perguntas que continuam entre as mais profundas da ciência.`,
+  },
+  {
+    title: 'Os eclipses',
+    question: 'O que causa os eclipses solares e lunares?',
+    summary:
+      'Os eclipses ocorrem quando o Sol, a Terra e a Lua se alinham, fazendo um corpo lançar sombra sobre outro; os eclipses solares ocultam o Sol e os lunares escurecem a Lua cheia.',
+    tags: ['astronomia', 'lua', 'sol', 'espaço', 'ciência'],
+    language: 'pt',
+    content: `# Os eclipses
+
+Um eclipse acontece quando o Sol, a Terra e a Lua se alinham de modo que um lança sua sombra sobre outro. Esses eventos impressionantes já foram temidos como presságios; hoje os entendemos como uma geometria celeste bela e previsível.
+
+## Eclipses solares
+
+Um eclipse solar ocorre durante a Lua nova, quando a Lua passa diretamente entre a Terra e o Sol, bloqueando a luz solar. Embora a Lua seja muito menor que o Sol, está cerca de 400 vezes mais perto, e assim os dois parecem quase do mesmo tamanho no céu — uma coincidência notável.
+
+- Num eclipse solar **total**, a Lua cobre o Sol por completo, revelando por breves instantes a fraca atmosfera externa do Sol, a **corona**, e transformando o dia em crepúsculo.
+- Num eclipse **parcial**, só uma parte do Sol é encoberta.
+- Num eclipse **anular**, a Lua está num pouco mais distante e deixa um brilhante "anel de fogo" ao redor de sua silhueta.
+
+## Eclipses lunares
+
+Um eclipse lunar ocorre durante a Lua cheia, quando a Terra fica entre o Sol e a Lua e lança sua sombra sobre ela. Diferentemente dos eclipses solares, é seguro vê-los a olho nu e são visíveis de todo o lado noturno da Terra ao mesmo tempo.
+
+Durante um eclipse lunar **total**, a Lua muitas vezes adquire um tom avermelhado — a chamada "Lua de sangue" —, pois a atmosfera da Terra desvia a luz solar avermelhada sobre sua superfície.
+
+## Por que não acontecem todos os meses
+
+A órbita da Lua é levemente inclinada em relação à da Terra, de modo que ela em geral passa um pouco acima ou abaixo do alinhamento perfeito. Os eclipses só ocorrem nas poucas ocasiões em que os três corpos se alinham com precisão, o que torna cada um deles um acontecimento especial.`,
+  },
 ];
