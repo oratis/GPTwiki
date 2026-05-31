@@ -703,4 +703,253 @@ Một kết nối có thể băng thông cao nhưng độ trễ cao, hoặc ngư
 
 **Thông lượng (throughput)** là tốc độ dữ liệu thực sự đạt được trong thực tế, thường thấp hơn băng thông lý thuyết. **Độ rung (jitter)** là sự dao động của độ trễ theo thời gian, có thể làm hỏng âm thanh và video ngay cả khi độ trễ trung bình thấp.`,
   },
+  // ── Batch 4: Tâm trí, sức khỏe và đời thường ──
+  {
+    title: 'Hiệu ứng giả dược',
+    question: 'Vì sao một phương pháp điều trị giả vẫn có thể khiến người ta cảm thấy khá hơn?',
+    summary:
+      'Hiệu ứng giả dược xảy ra khi một phương pháp điều trị không có thành phần hoạt tính lại cải thiện triệu chứng của một người vì họ kỳ vọng được giúp đỡ, hé lộ mối liên hệ mạnh mẽ giữa tâm trí và cơ thể.',
+    tags: ['sức khỏe', 'tâm lý học', 'y học', 'não bộ', 'khoa học'],
+    language: 'vi',
+    content: `# Hiệu ứng giả dược
+
+Hiệu ứng giả dược là một trong những hiện tượng hấp dẫn nhất của y học: người ta thường khá hơn sau khi nhận một phương pháp điều trị không có chút năng lực chữa bệnh nào — một viên đường, một mũi nước muối hay một thủ thuật giả vờ — chỉ vì họ tin rằng nó sẽ giúp ích.
+
+## Điều gì xảy ra
+
+Giả dược là một phương pháp điều trị mô phỏng. Khi ai đó nhận nó mà tưởng là thật, kỳ vọng cải thiện có thể khởi phát những thay đổi đo lường được: ít đau hơn theo lời kể, tâm trạng tốt hơn, thậm chí biến đổi ở các dấu hiệu cơ thể. Hiệu ứng mạnh nhất ở những triệu chứng do não điều biến, như **đau, lo âu, mệt mỏi và buồn nôn**.
+
+## Vì sao nó xảy ra
+
+Dường như có nhiều cơ chế tham gia:
+
+- **Kỳ vọng.** Mong đợi sự nhẹ nhõm có thể khiến não giải phóng các chất tự nhiên như endorphin.
+- **Điều kiện hóa.** Những liên kết đã học (chiếc áo blouse trắng, hành động uống một viên thuốc) có thể gợi ra những phản ứng thật theo thói quen.
+- **Giảm lo âu.** Cảm giác được chăm sóc làm giảm căng thẳng, mà bản thân điều này có thể làm dịu triệu chứng.
+
+Điều quan trọng cần lưu ý là giả dược không làm khối u nhỏ lại hay chữa khỏi nhiễm trùng — chúng chủ yếu thay đổi **nhận thức** và một số phản ứng do não điều hòa.
+
+## Vì sao quan trọng với khoa học
+
+Vì giả dược mạnh đến vậy, các thuốc mới phải vượt qua chúng trong các **thử nghiệm có đối chứng giả dược**. Người tham gia được chia thành nhóm nhận điều trị thật và nhóm nhận giả dược, mà không biết là loại nào; chỉ khi điều trị thật vượt rõ rệt giả dược thì mới được coi là thực sự có hiệu quả.
+
+## Người anh em đen tối
+
+**Hiệu ứng nocebo** thì ngược lại: kỳ vọng bị hại có thể tạo ra những triệu chứng tiêu cực thật, như cảm thấy tác dụng phụ vì một lời cảnh báo, dù chỉ nhận một viên đường.`,
+  },
+  {
+    title: 'Vì sao chúng ta ngủ',
+    question: 'Vì sao chúng ta cần ngủ mỗi đêm?',
+    summary:
+      'Giấc ngủ là một trạng thái sinh học thiết yếu nâng đỡ trí nhớ, sự sửa chữa tế bào, điều hòa hormone và việc dọn dẹp của não; thiếu ngủ kinh niên gây hại cho sức khỏe và chức năng tinh thần.',
+    tags: ['sức khỏe', 'sinh học', 'não bộ', 'giấc ngủ', 'khoa học'],
+    language: 'vi',
+    content: `# Vì sao chúng ta ngủ
+
+Chúng ta dành khoảng một phần ba cuộc đời để ngủ, nhưng giấc ngủ còn lâu mới là thời gian lãng phí. Đó là một quá trình chủ động, được điều hòa cẩn thận, thiết yếu cho cơ thể và tâm trí. Dù các nhà khoa học vẫn tranh luận về mọi chức năng của nó, bằng chứng về tầm quan trọng của nó là áp đảo.
+
+## Giấc ngủ làm gì
+
+Giấc ngủ dường như đảm nhận nhiều chức năng thiết yếu:
+
+- **Củng cố trí nhớ.** Não xử lý lại và củng cố các ký ức trong ngày, chuyển những gì đã học từ lưu trữ ngắn hạn sang dài hạn.
+- **Dọn dẹp tế bào.** Trong khi ngủ, não thải các chất chuyển hóa thải nhanh hơn, trong đó có các protein liên quan đến bệnh thoái hóa thần kinh.
+- **Sửa chữa và tăng trưởng.** Cơ thể sửa chữa mô, dựng xương và cơ, và giải phóng các hormone quan trọng cho sự tăng trưởng.
+- **Điều hòa.** Giấc ngủ điều chỉnh sự thèm ăn, tâm trạng, chức năng miễn dịch và cân bằng hormone.
+
+## Các giai đoạn của giấc ngủ
+
+Giấc ngủ diễn ra theo các chu kỳ khoảng 90 phút, luân phiên giữa giấc ngủ **không REM** (gồm giấc ngủ sâu sóng chậm, tuyệt vời cho phục hồi thể chất) và giấc ngủ **REM** (nơi diễn ra phần lớn những giấc mơ sống động và giúp ích cho trí nhớ và điều hòa cảm xúc). Một đêm lành mạnh đi qua vài chu kỳ trọn vẹn như vậy.
+
+## Cái giá của ngủ kém
+
+Thiếu ngủ kinh niên gắn với các vấn đề trí nhớ, suy giảm phán đoán, tâm trạng rối loạn và nguy cơ cao hơn về béo phì, tiểu đường, bệnh tim và suy giảm miễn dịch. Ngay cả mất ngủ ở mức vừa cũng làm suy giảm sự chú ý và thời gian phản ứng ngang với rượu.
+
+## Cần ngủ bao nhiêu
+
+Hầu hết người lớn cần 7-9 giờ mỗi đêm, còn thiếu niên và trẻ em thì nhiều hơn. Nhu cầu thay đổi tùy người, nhưng cực kỳ ít người thực sự hoạt động tốt với giấc ngủ ít một cách thường xuyên.`,
+  },
+  {
+    title: 'Caffeine và não bộ',
+    question: 'Caffeine khiến chúng ta tỉnh táo hơn như thế nào?',
+    summary:
+      'Caffeine chặn adenosine, chất hóa học trong não gây buồn ngủ, tạm thời giảm mệt mỏi và tăng sự tỉnh táo — đó là lý do nó là chất kích thích được dùng nhiều nhất thế giới.',
+    tags: ['sức khỏe', 'não bộ', 'hóa học', 'sinh học', 'đời thường'],
+    language: 'vi',
+    content: `# Caffeine và não bộ
+
+Caffeine là chất hướng thần được tiêu thụ nhiều nhất thế giới, có trong cà phê, trà, sô-cô-la, nước ngọt và nước tăng lực. Khả năng xua đi cơn buồn ngủ của nó đến từ một mẹo sinh hóa chính xác trong não.
+
+## Chặn tín hiệu buồn ngủ
+
+Suốt cả ngày thức, một chất gọi là **adenosine** tích tụ trong não. Nó gắn vào các thụ thể và dần tạo ra cảm giác mệt mỏi, góp phần tạo nên "áp lực ngủ" rốt cuộc đưa ta vào giấc.
+
+Caffeine có cấu trúc phân tử khá giống adenosine. Nó vừa khít vào cùng những thụ thể ấy và **chặn** chúng mà không kích hoạt. Khi các tín hiệu mệt mỏi từ adenosine bị chặn, bạn thấy tỉnh táo và tỉnh giấc hơn — nhưng nỗi mệt mỏi nền vẫn ở đó bên dưới, chờ đợi, khi tác dụng của caffeine tan đi.
+
+## Tác dụng phụ
+
+Bằng cách chặn adenosine, caffeine cũng để các chất truyền tin hóa học khác như **dopamine** hoạt động tự do hơn, điều này có thể cải thiện đôi chút tâm trạng, sự tập trung và thời gian phản ứng. Đó là lý do một liều vừa phải thấy hữu ích đến vậy.
+
+## Dung nạp và cai
+
+Với việc dùng đều đặn, não thích nghi bằng cách tạo **nhiều thụ thể** adenosine hơn, nên cần nhiều caffeine hơn cho cùng tác dụng — đó là **dung nạp**. Nếu ai đó dừng đột ngột, tất cả những thụ thể dôi ra ấy bỏ ngỏ cho adenosine, gây đau đầu, mệt mỏi và cáu kỉnh cho đến khi não điều chỉnh lại.
+
+## Thời điểm và liều lượng
+
+Caffeine đạt tác dụng tối đa trong khoảng 20-45 phút và có "bán thời gian sống" khoảng 5 giờ, nên một liều buổi chiều vẫn có thể quấy rối giấc ngủ đêm. Liều vừa phải an toàn với hầu hết mọi người, nhưng quá mức có thể gây lo âu, hồi hộp và mất ngủ.`,
+  },
+  {
+    title: 'Hiệu ứng Doppler',
+    question: 'Vì sao còi xe cứu thương đổi cao độ khi đi ngang qua?',
+    summary:
+      'Hiệu ứng Doppler là sự thay đổi tần số của một sóng khi nguồn và người quan sát chuyển động tương đối với nhau, nghe thấy ở những tiếng còi đi qua và được dùng từ radar đến thiên văn học.',
+    tags: ['vật lý', 'âm thanh', 'sóng', 'thiên văn học', 'khoa học'],
+    language: 'vi',
+    content: `# Hiệu ứng Doppler
+
+Hiệu ứng Doppler là sự thay đổi tần số của một sóng khi nguồn của nó và người quan sát chuyển động tương đối với nhau. Đó là lý do còi xe cứu thương nghe cao hơn khi tiến lại gần và trầm hơn sau khi đã đi qua.
+
+## Vì sao nó xảy ra
+
+Sóng âm truyền qua một khoảng cách với một nhịp cố định. Nếu nguồn âm chuyển động về phía bạn, mỗi sóng kế tiếp xuất phát từ một điểm gần hơn một chút, nên các sóng **bị nén lại** — tần số cao hơn, cao độ cao hơn. Khi nguồn ra xa, các sóng **bị giãn ra** — tần số thấp hơn, cao độ trầm hơn. Sự chuyển đổi chính nó xảy ra đúng vào lúc nguồn lướt ngang qua bạn.
+
+## Không chỉ âm thanh
+
+Hiệu ứng Doppler áp dụng cho mọi sóng, kể cả ánh sáng. Với ánh sáng, một vật tiến lại gần có sóng bị nén về phía đầu **xanh lam** của quang phổ (dịch xanh), còn vật ra xa thì bị giãn về phía **đỏ** (dịch đỏ). Những thay đổi này quá nhỏ để thấy ở tốc độ thường ngày, nhưng trở nên đo được ở quy mô thiên văn.
+
+## Ứng dụng thực tế
+
+- **Radar và súng bắn tốc độ** dội sóng vào phương tiện và đo độ dịch để tính tốc độ.
+- **Dự báo thời tiết** dùng radar Doppler để theo dõi chuyển động của mưa và bão.
+- **Y học** dùng siêu âm Doppler để hình ảnh hóa dòng máu.
+- **Thiên văn học** dùng dịch đỏ để đo tốc độ chuyển động của sao và thiên hà.
+
+## Một manh mối vũ trụ
+
+Dịch Doppler của ánh sáng là một trong những bằng chứng chính cho thấy vũ trụ đang giãn nở: các thiên hà xa cho thấy dịch đỏ, chỉ ra rằng gần như tất cả đang ra xa chúng ta.`,
+  },
+  {
+    title: 'Vì sao bầu trời xanh',
+    question: 'Vì sao ban ngày bầu trời xanh còn lúc hoàng hôn lại đỏ?',
+    summary:
+      'Bầu trời xanh vì các phân tử không khí tán xạ ánh sáng mặt trời bước sóng ngắn (xanh lam) mạnh hơn ánh sáng bước sóng dài, một quá trình gọi là tán xạ Rayleigh.',
+    tags: ['vật lý', 'ánh sáng', 'khí quyển', 'màu sắc', 'khoa học'],
+    language: 'vi',
+    content: `# Vì sao bầu trời xanh
+
+Màu xanh của bầu trời ban ngày là kết quả của cách ánh sáng mặt trời tương tác với khí quyển Trái Đất. Lời giải thích đến từ một quá trình gọi là **tán xạ Rayleigh**.
+
+## Ánh sáng mặt trời gồm nhiều màu
+
+Dù trông trắng, ánh sáng mặt trời là một hỗn hợp của mọi màu cầu vồng, mỗi màu có bước sóng riêng. Ánh sáng xanh lam và tím có bước sóng **ngắn**; đỏ và cam có bước sóng **dài**.
+
+## Tán xạ thiên về màu xanh
+
+Khi đi vào khí quyển, ánh sáng mặt trời va vào các phân tử khí nhỏ hơn nhiều so với bước sóng của nó. Những phân tử này tán xạ các bước sóng ngắn mạnh hơn nhiều so với bước sóng dài — ánh sáng xanh lam bị tán xạ gấp vài lần ánh sáng đỏ. Kết quả là ánh sáng xanh lam bị rải khắp bầu trời, và chính từ ánh sáng xanh tán xạ ấy mà bầu trời có màu xanh, dù bạn nhìn về đâu.
+
+## Còn màu tím thì sao?
+
+Màu tím có bước sóng còn ngắn hơn cả xanh lam, và bị tán xạ thậm chí nhiều hơn. Nhưng bầu trời không có vẻ tím vì Mặt Trời phát ít ánh sáng tím hơn và mắt ta kém nhạy với nó hơn nhiều, nên ta cảm nhận bầu trời là xanh lam.
+
+## Hoàng hôn đỏ
+
+Gần lúc bình minh và hoàng hôn, ánh sáng mặt trời đi qua một lớp khí quyển dày hơn nhiều để đến với ta. Dọc đường đi ấy, rất nhiều ánh sáng xanh bị tán xạ đi mất đến nỗi chủ yếu chỉ còn lại các bước sóng dài, nhuộm bầu trời thành đỏ, cam và hồng.
+
+## Cùng một vật lý ở nơi khác
+
+Tán xạ Rayleigh cũng giải thích vì sao các vật ở xa trông hơi xanh và vì sao khí quyển Trái Đất nhìn từ không gian cho thấy một đường xanh mỏng ở chân trời.`,
+  },
+  {
+    title: 'Kháng kháng sinh',
+    question: 'Vì sao kháng sinh đang mất hiệu lực?',
+    summary:
+      'Kháng kháng sinh nảy sinh khi vi khuẩn tiến hóa để sống sót qua những loại thuốc nhằm tiêu diệt chúng, bị thúc đẩy nhanh bởi việc lạm dụng và dùng sai, đe dọa khiến những nhiễm trùng thông thường trở lại nguy hiểm.',
+    tags: ['sức khỏe', 'y học', 'sinh học', 'tiến hóa', 'khoa học'],
+    language: 'vi',
+    content: `# Kháng kháng sinh
+
+Kháng kháng sinh là một trong những mối đe dọa nghiêm trọng nhất đối với sức khỏe toàn cầu. Nó xảy ra khi vi khuẩn tiến hóa đến mức không còn bị tiêu diệt bởi những kháng sinh từng hiệu quả chống lại chúng, khiến các nhiễm trùng khó điều trị hơn — đôi khi là không thể.
+
+## Kháng thuốc nảy sinh ra sao
+
+Kháng sinh giết các vi khuẩn nhạy cảm, nhưng quần thể vi khuẩn thì khổng lồ và đa dạng. Tình cờ, một số mang những đột biến giúp chúng sống sót. Khi một kháng sinh loại bỏ các vi khuẩn nhạy cảm, những con kháng thuốc sống sót và sinh sôi — đó là **chọn lọc tự nhiên** đang diễn ra. Vi khuẩn còn trao đổi gen kháng thuốc trực tiếp với nhau, lan truyền nhanh khả năng ấy.
+
+## Điều gì thúc đẩy vấn đề
+
+Nhiều yếu tố làm trầm trọng tình trạng kháng thuốc:
+
+- **Lạm dụng** kháng sinh, kể cả cho các nhiễm virus như cảm lạnh, vốn chúng vô hiệu.
+- **Điều trị không trọn vẹn**, khi bệnh nhân ngừng thuốc quá sớm và để những vi khuẩn kháng nhất sống sót.
+- **Dùng nhiều trong nông nghiệp**, nơi kháng sinh được cho động vật khỏe mạnh để thúc tăng trưởng.
+
+Mỗi lần phơi nhiễm cho vi khuẩn thêm cơ hội phát triển phòng vệ.
+
+## Vì sao quan trọng
+
+Kháng sinh nâng đỡ y học hiện đại — chúng không chỉ điều trị nhiễm trùng mà còn khiến phẫu thuật, hóa trị và sinh nở trở nên an toàn. Vi khuẩn kháng thuốc, đôi khi gọi là "siêu vi khuẩn", đe dọa đảo ngược tiến bộ ấy, đưa ta về một thời mà những vết xước và nhiễm trùng thông thường có thể gây tử vong.
+
+## Điều gì có ích
+
+Các giải pháp gồm chỉ dùng kháng sinh khi cần, hoàn thành các liệu trình được kê, cải thiện vệ sinh và kiểm soát nhiễm khuẩn, hạn chế dùng trong nông nghiệp, và đầu tư nghiên cứu kháng sinh mới cùng các liệu pháp thay thế.`,
+  },
+  {
+    title: 'Chu trình nitơ',
+    question: 'Nitơ di chuyển qua các sinh vật sống và môi trường như thế nào?',
+    summary:
+      'Chu trình nitơ chuyển khí nitơ trơ thành những dạng mà sinh vật sống có thể dùng và trả nó về khí quyển, nuôi sống toàn bộ sự sống qua vi khuẩn, thực vật và sự phân hủy.',
+    tags: ['sinh học', 'hóa học', 'sinh thái học', 'khoa học Trái Đất', 'khoa học'],
+    language: 'vi',
+    content: `# Chu trình nitơ
+
+Nitơ thiết yếu cho sự sống — nó là một thành phần then chốt của protein và ADN. Dù khí quyển Trái Đất chứa 78% khí nitơ, hầu hết sinh vật sống không thể dùng trực tiếp dạng này. Chu trình nitơ là tập hợp các quá trình chuyển nitơ thành những dạng dùng được rồi cuối cùng trả nó về không khí.
+
+## Vấn đề của nitơ trơ
+
+Khí nitơ khí quyển (N₂) cực kỳ bền: hai nguyên tử của nó nối với nhau bằng một liên kết ba tốn rất nhiều năng lượng để bẻ gãy. Trước khi thực vật và động vật có thể dùng nitơ, nó phải được "cố định" thành những dạng phản ứng mạnh hơn, như amoniac hay nitrat.
+
+## Các giai đoạn chính
+
+- **Cố định.** Vi khuẩn đặc biệt — nhiều con sống trong rễ các cây họ đậu như đậu — chuyển N₂ thành amoniac. Sét và phân bón công nghiệp cũng cố định nitơ.
+- **Nitrat hóa.** Các vi khuẩn khác biến amoniac thành nitrit rồi thành nitrat, dạng mà thực vật hấp thụ dễ nhất.
+- **Đồng hóa.** Thực vật hấp thu các hợp chất nitơ và dùng chúng để dựng protein; động vật lấy nitơ bằng cách ăn thực vật.
+- **Amoni hóa.** Các sinh vật phân hủy trả nitơ về đất dưới dạng amoniac bằng cách phân giải chất thải và sinh vật chết.
+- **Khử nitrat.** Lại có những vi khuẩn khác chuyển nitrat trở lại thành khí nitơ, trả nó về khí quyển và khép kín chu trình.
+
+## Tác động của con người
+
+Việc phát minh cố định nitơ công nghiệp (quá trình Haber-Bosch) đã làm tăng vọt sản lượng lương thực, nhưng phân bón dư thừa chảy vào sông và đại dương. Ở đó nó nuôi những đợt bùng phát tảo không kiểm soát làm cạn kiệt oxy và tạo nên những "vùng chết", cho thấy sự mất cân bằng của một chu trình tự nhiên mang lại những hệ quả sâu rộng ra sao.`,
+  },
+  {
+    title: 'Trí nhớ hoạt động như thế nào',
+    question: 'Não lưu trữ và truy hồi ký ức như thế nào?',
+    summary:
+      'Trí nhớ là việc não mã hóa, lưu trữ và truy hồi thông tin qua các mạng nơ-ron; nó bao gồm nhiều hệ thống khác nhau và mang tính kiến tạo lại, chứ không phải một bản ghi hoàn hảo.',
+    tags: ['não bộ', 'tâm lý học', 'sinh học', 'học tập', 'khoa học'],
+    language: 'vi',
+    content: `# Trí nhớ hoạt động như thế nào
+
+Trí nhớ là khả năng của não mã hóa, lưu giữ và truy hồi thông tin. Khác xa một máy ghi hình, nó là một hệ thống chủ động, kiến tạo lại, định hình nên con người chúng ta.
+
+## Ba bước cơ bản
+
+- **Mã hóa.** Thông tin đến từ các giác quan được chuyển thành một dạng mà não có thể lưu giữ.
+- **Lưu trữ.** Thông tin ấy được giữ lại theo thời gian, từ vài giây đến cả một đời.
+- **Truy hồi.** Thông tin được lưu được mang trở lại khi cần — chính là hành vi nhớ lại.
+
+## Các loại trí nhớ
+
+Trí nhớ không phải một thứ duy nhất. Các nhà tâm lý phân biệt nó thành những hệ thống khác nhau:
+
+- **Trí nhớ giác quan** giữ những ấn tượng ngắn ngủi, kéo dài trong tích tắc.
+- **Trí nhớ ngắn hạn (hay làm việc)** giữ một lượng nhỏ thông tin trong vài giây khi bạn đang dùng nó.
+- **Trí nhớ dài hạn** lưu thông tin trong những khoảng dài và có dung lượng cực lớn. Nó gồm ký ức **tường minh** (sự kiện và biến cố bạn gợi lại một cách có ý thức) và **ẩn tàng** (kỹ năng và thói quen, như đi xe đạp).
+
+## Nền tảng vật lý
+
+Ký ức được lưu dưới dạng các kiểu kết nối giữa các nơ-ron. Khi học, các khớp thần kinh giữa một số nơ-ron mạnh lên — một nguyên lý thường được tóm tắt là "các nơ-ron cùng kích hoạt thì cùng kết nối". Việc củng cố một ký ức bền vững phụ thuộc nhiều vào giấc ngủ và vào một vùng não gọi là **hồi hải mã**.
+
+## Vì sao trí nhớ phản bội — và đánh lừa ta
+
+Trí nhớ mang tính kiến tạo lại: mỗi lần truy hồi một ký ức, ta ráp lại nó, và có thể thay đổi nó mà không hề hay biết. Điều này giải thích vì sao ký ức có thể vừa sống động vừa sai, vì sao lời khai nhân chứng không đáng tin, và vì sao sự lặp lại cùng các liên tưởng giúp ghim thông tin lại.`,
+  },
 ];
