@@ -453,4 +453,254 @@ Bu aynı katılık onun zayıflığıydı. Para arzı ekonominin gereksinimlerin
 
 Uluslar altından aşamalı olarak koptu. Sistem 1971'de, ABD doların altına çevrilebilirliğine son verince tamamen çöktü. Bugün dünya, değeri fiziksel bir mala değil hükûmetlere ve merkez bankalarına duyulan güvene dayanan **itibarî paraya (fiat)** dayanır.`,
   },
+  // ── Batch 3: Teknoloji ve matematik ──
+  {
+    title: 'GPS Nasıl Çalışır',
+    question: 'GPS nerede olduğunuzu tam olarak nasıl bilir?',
+    summary:
+      'GPS; konumu, birçok uydudan gelen sinyallerin yol süresini ölçerek ve üçlü uzaklık ölçümü (trilaterasyon) kullanarak belirler; hassas atom saatleri ve görelilik düzeltmeleri onu birkaç metreye dek doğru kılar.',
+    tags: ['teknoloji', 'navigasyon', 'uydular', 'fizik', 'mühendislik'],
+    language: 'tr',
+    content: `# GPS Nasıl Çalışır
+
+Küresel Konumlandırma Sistemi (GPS), telefonunuzdaki, arabanızdaki ya da saatinizdeki bir alıcının Dünya'nın herhangi bir yerinde nerede olduğunu, genellikle birkaç metre içinde bulmasını sağlar. Bir uydu takımyıldızına ve ustaca bir fiziğe dayanır.
+
+## Uydular ve sinyaller
+
+GPS, yaklaşık 20.000 km yükseklikte yörüngede olan, gezegenin herhangi bir noktasından her zaman birkaçı görünecek biçimde yerleştirilmiş yaklaşık 30 uydu kullanır. Her biri, gönderildiği tam **zamanı** ve uydunun **konumunu** taşıyan bir radyo sinyalini sürekli yayınlar.
+
+## Trilaterasyon
+
+Alıcı, her sinyalin ulaşmasının ne kadar sürdüğünü ölçer. Radyo dalgaları ışık hızında gittiği için yol süresi, o uyduya olan **uzaklığı** ortaya koyar. Bir uyduya olan uzaklığı bilmek sizi onun çevresindeki bir küre üzerinde bir yere yerleştirir; birçok uyduya olan uzaklıkları birleştirmek konumunuzu tek bir noktaya daraltır. Bu geometrik tekniğe **trilaterasyon** denir. En az dört uydudan sinyal gerekir — üçü konumu belirlemek, dördüncüsü alıcının saat hatasını çözmek için.
+
+## Saatler ve görelilik neden önemli
+
+Eşzamanlama olağanüstü hassas olmalıdır: saniyenin milyonda birlik bir hata, konumu yüzlerce metre kaydırır. Uydular **atom saatleri** taşır; sistem, **Einstein'ın göreliliğini** bile düzeltir — uyduların hızı ve daha zayıf yerçekimi, saatlerini yerdekilerden biraz farklı bir hızda işletir. Bu düzeltmeler olmasa GPS günde kilometrelerce şaşardı.
+
+## Konumlandırmanın ötesinde
+
+Aynı hassas eşzamanlama; finans ağlarını, elektrik şebekelerini ve telekomünikasyonu destekler ve GPS'i modern altyapının sessiz bir bel kemiği yapar.`,
+  },
+  {
+    title: 'Açık Anahtarlı Kriptografi',
+    question: 'İki yabancı açık internette nasıl güvenle iletişim kurabilir?',
+    summary:
+      'Açık anahtarlı kriptografi; matematiksel olarak bağlı anahtar çiftleri — biri açık, biri özel — kullanır; böylece insanlar önceden bir sır paylaşmadan iletileri şifreler ve kimlikleri doğrular.',
+    tags: ['teknoloji', 'kriptografi', 'güvenlik', 'matematik', 'internet'],
+    language: 'tr',
+    content: `# Açık Anahtarlı Kriptografi
+
+Açık anahtarlı kriptografi, hiç karşılaşmamış insanlar arasında güvenli iletişimi olanaklı kılan atılımdır. HTTPS'in, güvenli mesajlaşmanın, dijital imzaların ve kripto paraların temelidir.
+
+## Anahtar çifti fikri
+
+Geleneksel ("simetrik") şifreleme, bir iletiyi kilitlemek ve açmak için tek bir paylaşılan anahtar kullanır — bu da bir sorun yaratır: o anahtar başlangıçta güvenle nasıl paylaşılır? Açık anahtarlı (ya da **asimetrik**) kriptografi bunu bir anahtar **çiftiyle** çözer:
+
+- Herkesin görebileceği bir **açık anahtar**.
+- Sahibinin gizli tuttuğu bir **özel anahtar**.
+
+İkisi öyle matematiksel olarak bağlıdır ki bir anahtarın kilitlediğini yalnızca diğeri açabilir — ama açık anahtarı bilmek özel anahtarı hesaplamayı sağlamaz.
+
+## İki ana kullanım
+
+- **Şifreleme.** Birine gizli bir ileti göndermek için onu *o kişinin açık anahtarıyla* şifrelersiniz; yalnızca onun özel anahtarı çözebilir.
+- **Dijital imzalar.** Bir iletinin gerçekten size ait olduğunu kanıtlamak için onu *kendi özel anahtarınızla* imzalarsınız; herkes açık anahtarınızla doğrulayabilir; bu da gerçekliği ve değiştirilmediğini onaylar.
+
+## Arkasındaki matematik
+
+Güvenlik, bir yönde hesaplaması kolay ama tersine çevirmesi son derece zor sorunlara dayanır — devasa sayıları **çarpanlarına ayırmak** (RSA) ya da **eliptik eğriler** üzerinde ayrık logaritmaları çözmek gibi. Bunları tersine çevirmek, uygulanamaz miktarda hesaplama gerektirir.
+
+## Gündelik yaşamda
+
+Tarayıcınız bir kilit gösterdiğinde, siteyi doğrulamak ve oturumun geri kalanı için hızlı bir paylaşılan anahtar kurmak üzere açık anahtarlı kriptografiyi çoktan kullanmıştır.`,
+  },
+  {
+    title: 'Fibonacci Dizisi',
+    question: 'Fibonacci dizisi nedir ve doğada neden görünür?',
+    summary:
+      'Fibonacci dizisi, her sayının kendinden önceki ikisinin toplamı olduğu bir seridir; altın oranla ilişkilidir ve çiçek taç yaprakları ile sarmal kabuklar gibi desenlerde görünür.',
+    tags: ['matematik', 'desenler', 'doğa', 'geometri', 'bilim'],
+    language: 'tr',
+    content: `# Fibonacci Dizisi
+
+Fibonacci dizisi, matematiğin en ünlü desenlerinden biridir: geometriyle ve doğal dünyayla şaşırtıcı bağlantılar üreten basit bir kural.
+
+## Kural
+
+0 ve 1 ile başlayın ve her yeni sayıyı **önceki ikisinin toplamı** yapın:
+
+\`\`\`
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
+\`\`\`
+
+Dizi, adını İtalyan matematikçi **Pisalı Leonardo'dan** (Fibonacci) alır; onu 1202'de tavşan üretimi üzerine bir bilmeceyle Avrupa'ya tanıttı, ama dizi Hint matematiğinde daha önceden biliniyordu.
+
+## Altın oranla bağ
+
+Herhangi bir Fibonacci sayısını kendinden öncekine bölün; sonuç giderek yaklaşık **1,618'e** — **altın orana** (çoğunlukla φ ile gösterilir) — yaklaşır. Dizide ne kadar ilerlerseniz yaklaşım o kadar kesinleşir.
+
+## Doğada neden görünür
+
+Fibonacci sayıları, birçok çiçeğin taç yaprak sayısında, ayçiçeği tohumlarının diziliminde ve bitkilerin dallanmasında görünür. Daha derin nedeni **verimli paketlemedir**: yaprakları ya da tohumları altın oranla ilişkili açılarla dizmek, bir bitkinin güneş ışığını yakalamasını ya da tohumları en az örtüşmeyle yerleştirmesini sağlar. Yani desen, mistik bir imzadan çok, eniyilemenin doğal bir sonucudur.
+
+## Biyolojinin ötesinde
+
+Dizi ayrıca bilgisayar algoritmalarında, finansal çözümlemede ve sanatta da ortaya çıkar; orada altın oran uzun süredir hoş orantılarla ilişkilendirilir.`,
+  },
+  {
+    title: 'Asal Sayılar',
+    question: 'Asal sayılar nedir ve neden önemlidir?',
+    summary:
+      'Asal sayılar; birden büyük, bir ve kendisi dışında böleni olmayan tam sayılardır; aritmetiğin yapı taşları ve modern kriptografinin temelidir.',
+    tags: ['matematik', 'sayılar', 'kriptografi', 'kuram', 'bilim'],
+    language: 'tr',
+    content: `# Asal Sayılar
+
+Asal sayı, yalnızca 1'e ve kendisine tam bölünebilen 1'den büyük bir tam sayıdır. İlk asal sayılar 2, 3, 5, 7, 11 ve 13'tür. 6 (= 2 × 3) gibi ek bölenleri olan sayılara **bileşik** denir.
+
+## Aritmetiğin atomları
+
+Asal sayılar, **aritmetiğin temel teoremi** nedeniyle temeldir: 1'den büyük her tam sayı, asalların çarpımı olarak tek bir biçimde yazılabilir (sıra sayılmazsa). Örneğin 60 = 2 × 2 × 3 × 5. Bu anlamda asal sayılar, diğer tüm sayıların kendisinden inşa edildiği bölünmez "atomlardır".
+
+## Sonsuz çoklukta
+
+Yunan matematikçi **Öklid**, iki bin yıldan fazla önce en büyük asalın olmadığını kanıtladı — liste sonsuza dek sürer. Yine de asallar, sayılar büyüdükçe seyrekleşir; tam olarak nerede düştüklerini öngörmek, ünlü **Riemann hipoteziyle** bağlı, derin ve hâlâ çözülmemiş bir matematik alanıdır.
+
+## Bugün neden önemli
+
+Asal sayılar modern **kriptografiyi** sürer. RSA gibi yöntemler işlevsel bir asimetriye dayanır: iki büyük asalı çarpmak kolaydır, ama ortaya çıkan devasa sayıyı alıp özgün asalları geri elde etmek (**çarpanlarına ayırmak**) bugünün bilgisayarları için son derece zordur. Bu güçlük; çevrim içi bankacılığı, mesajlaşmayı ve ticareti güvende tutar.
+
+## Süregelen bir arayış
+
+Bilgisayar ağları kullanan matematikçiler ve gönüllüler, giderek daha büyük asallar aramayı sürdürür. Bilinen en büyük asal sayılar bugün on milyonlarca basamak içerir.`,
+  },
+  {
+    title: 'Bileşik Faiz',
+    question: 'Bileşik faiz zaman içinde neden bu kadar güçlüdür?',
+    summary:
+      'Bileşik faiz; hem özgün anaparaya hem de daha önce birikmiş faize kazanılan faizdir; bu da erken ve uzun vadeli birikimi ödüllendiren üstel bir büyüme üretir.',
+    tags: ['finans', 'ekonomi', 'matematik', 'para', 'kişisel finans'],
+    language: 'tr',
+    content: `# Bileşik Faiz
+
+Bileşik faiz, çoğu zaman finansın en güçlü kuvveti diye anılır. Yalnızca başlangıçta yatırdığınız paraya değil, o paranın daha önce kazandığı faize de faiz kazanma sürecidir.
+
+## Basit faize karşı bileşik faiz
+
+**Basit faizde**, her dönemde yalnızca özgün tutara (**anapara**) dayanan sabit bir miktar kazanırsınız. **Bileşik faizde**, her dönemin faizi bakiyeye eklenir, böylece bir sonraki dönemin faizi daha büyük bir tutar üzerinden hesaplanır. Dolayısıyla büyüme zaman içinde hızlanır — doğrusal değil **üsteldir**.
+
+## Hızlı bir örnek
+
+1000'i yıllık %7 ile yatırın:
+
+- 1 yıl sonra: 1070
+- 10 yıl sonra: yaklaşık 1967
+- 30 yıl sonra: yaklaşık 7612
+
+Para, tek kuruş eklemeden yaklaşık her on yılda **ikiye katlanır** — ve ne kadar uzun tutulursa sonuç o kadar çarpıcı olur.
+
+## 72 kuralı
+
+İşlevsel bir kestirme, **72 kuralı**, bir yatırımın ikiye katlanmasının ne kadar süreceğini tahmin eder: 72'yi yıllık faiz oranına bölün. %8'de para yaklaşık 9 yılda ikiye katlanır (72 ÷ 8).
+
+## Zaman neden en çok önemli
+
+Bileşik faiz kendi üzerine inşa ettiğinden, **erken başlamak** çoğu zaman daha sonra büyük tutarlar yatırmaktan daha önemlidir. Aynı mantık borçla tersine işler: yüksek faizli kredilerin ya da kartların ödenmemiş bakiyeleri borçlunun aleyhine birikir, bu yüzden böyle bir borç ürkütücü bir hızla büyüyebilir.`,
+  },
+  {
+    title: 'Özet (Hash) Fonksiyonları',
+    question: 'Özet fonksiyonu nedir ve nerede kullanılır?',
+    summary:
+      'Özet fonksiyonu, herhangi bir boyuttaki veriyi sabit uzunlukta bir diziye dönüştürür; iyi kriptografik özet fonksiyonları hızlı, belirlenimci ve tersine çevrilmesi ya da çakışma üretilmesi işlevsel olarak olanaksızdır.',
+    tags: ['teknoloji', 'bilgisayar bilimi', 'kriptografi', 'güvenlik', 'veri'],
+    language: 'tr',
+    content: `# Özet (Hash) Fonksiyonları
+
+Özet fonksiyonu, hesaplamada küçük ama temel bir araçtır. Herhangi bir uzunlukta bir girdi alır — bir sözcük, bir dosya, koca bir veritabanı — ve **özet** ya da **sindirim (digest)** denen sabit uzunlukta bir çıktı üretir.
+
+## Temel özellikler
+
+İşe yarar bir özet fonksiyonu:
+
+- **Belirlenimcidir.** Aynı girdi her zaman aynı özeti verir.
+- Hesaplaması **hızlıdır**.
+- **Sabit uzunluktadır.** Tek karakterlik bir ileti ve bir gigabaytlık bir dosya, örneğin 256 bitlik bir sonuç verir.
+
+Bir *kriptografik* özet fonksiyonu daha güçlü güvenceler ekler:
+
+- **Tek yönlü.** Bir özetten, özgün girdi işlevsel olarak geri elde edilemez.
+- **Çakışmaya dirençli.** Aynı özete sahip iki farklı girdi bulmak işlevsel olarak olanaksızdır.
+- **Çığ etkisi.** Girdinin tek bir karakterini değiştirmek çıktıyı tümüyle karıştırır.
+
+## Gündelik kullanımlar
+
+- **Parola saklama.** Sistemler, parolanın kendisini değil özetini saklar; böylece bir veritabanı sızıntısı kullanıcıların sırlarını doğrudan açığa çıkarmaz.
+- **Bütünlük denetimleri.** İndirmeler çoğu zaman bir dosyanın bozulmadan ve oynanmadan geldiğini doğrulamak için bir özet yayımlar.
+- **Veri yapıları.** **Özet tabloları**, ne kadar veri saklanırsa saklansın öğeleri neredeyse anında bulmak için özetlemeyi kullanır.
+- **Blok zincirleri.** Kripto paralar, blokları özetlerle birbirine bağlayarak defteri oynanmaya karşı korur.
+
+## Yaygın algoritmalar
+
+Modern sistemler **SHA-256** gibi güçlü fonksiyonları yeğler. MD5 ve SHA-1 gibi eskiler, araştırmacılar çakışma üretmenin yollarını bulduğundan bugün güvenlik açısından kırılmış sayılır ve duyarlı verileri korumak için kullanılmamalıdır.`,
+  },
+  {
+    title: 'Turing Makinesi',
+    question: 'Turing makinesi nedir ve hesaplama için neden temeldir?',
+    summary:
+      'Turing makinesi; Alan Turing\'in 1936\'da tasarladığı, bir sorunun hesaplanabilir olmasının ne demek olduğunu tanımlayan ve tüm hesaplamayı destekleyen basit bir matematiksel hesaplama modelidir.',
+    tags: ['bilgisayar bilimi', 'matematik', 'kuram', 'tarih', 'teknoloji'],
+    language: 'tr',
+    content: `# Turing Makinesi
+
+Turing makinesi, fiziksel bir aygıt değil bir düşünce deneyidir — hesaplama fikrinin ta kendisini yakalayan matematiksel bir model. 1936'da **Alan Turing** tarafından önerilen makine, bilgisayar biliminin kuramsal temeli olmayı sürdürür.
+
+## Aldatıcı ölçüde basit bir tasarım
+
+Bir Turing makinesi şunlardan oluşur:
+
+- Her birinde bir simge bulunan hücrelere bölünmüş, sonsuz uzunlukta bir **şerit**.
+- Altındaki simgeyi okuyup yazabilen ve sola ya da sağa hareket edebilen bir **kafa**.
+- Makineye, o anki durumuna ve okuduğu simgeye göre ne yapacağını söyleyen bir **durumlar** kümesi ile bir **kurallar** tablosu.
+
+Bu asgari parçalardan makine, herhangi bir adım adım yordamı yürütebilir. Turing'in sezgisi, bu basit sistemin bir algoritmayla betimlenebilecek **herhangi** bir hesaplamayı yürütecek kadar güçlü olduğuydu.
+
+## Evrensellik
+
+Turing ayrıca, başka herhangi bir Turing makinesinin betimini okuyup onu taklit edebilen **evrensel** bir makine de betimledi. Bu, modern programlanabilir bilgisayarın kuramsal atasıdır: her görev için ayrı bir aygıt yerine farklı programlar çalıştıran bir makine.
+
+## Hesaplamanın sınırları
+
+Model sınırları da açığa çıkardı. Turing, bazı sorunların **karar verilemez** olduğunu kanıtladı: hiçbir algoritma onları çözemez. En ünlüsü **durma sorunudur**: her program ve girdi için, programın sonunda duracağını mı yoksa sonsuza dek mi çalışacağını belirleyecek genel bir yöntem yoktur.
+
+## Kalıcı bir etki
+
+Gerçek bir bilgisayarın hesaplayabildiği her şeyi, bir Turing makinesi de hesaplayabilir (yeterli zaman ve şerit verilirse). Bu denklik, modelin bilgisayarların neyi yapabileceğinin — ve yapamayacağının — sınırlarını hâlâ tanımlamasının nedenidir.`,
+  },
+  {
+    title: 'Bant Genişliği ve Gecikme',
+    question: 'Bant genişliği ile gecikme arasındaki fark nedir?',
+    summary:
+      'Bant genişliği, bir bağlantının saniyede ne kadar veri taşıyabildiğidir; gecikme ise verinin gelmeye başlamasından önceki bekleme süresidir; ikisi de bir ağın ne kadar "hızlı" göründüğünü biçimler, ama aynı şey değildir.',
+    tags: ['teknoloji', 'ağlar', 'internet', 'bilgisayar bilimi', 'mühendislik'],
+    language: 'tr',
+    content: `# Bant Genişliği ve Gecikme
+
+İnsanlar çoğu zaman bir bağlantının "hızlı" olduğunu söyler, ama hızın aslında iki ayrı boyutu vardır: **bant genişliği** ve **gecikme**. Bunları karıştırmak, ağlardan duyulan hayal kırıklığının yaygın bir kaynağıdır.
+
+## Bant genişliği: ne kadar
+
+**Bant genişliği**, bir bağlantının belirli bir sürede aktarabileceği en yüksek veri miktarıdır; genellikle saniyede megabit ya da gigabit olarak ölçülür. İşe yarar bir benzetme borunun genişliğidir: daha geniş bir boru bir seferde daha çok su geçirir. Bant genişliği, en çok **büyük** miktarda veri taşımakta işe yarar — yüksek çözünürlüklü video akışı, büyük dosyalar indirmek ya da buluta yedeklemek.
+
+## Gecikme: ne kadar erken
+
+**Gecikme**, bir istek göndermekle ilk yanıtı almak arasındaki beklemedir; milisaniyeyle ölçülür. Boru benzetmesinde, suyun bir uçtan diğerine gitmesinin ne kadar sürdüğüdür. Gecikme; uzaklığa (sinyaller ışık hızını aşamaz), ağ sıçramalarının sayısına ve işlem gecikmelerine bağlıdır. Gecikme en çok **etkileşimli** görevlerde önemlidir — görüntülü aramalar, çevrim içi oyunlar ve hızlı web istekleri.
+
+## Fark neden önemli
+
+Bir bağlantının bant genişliği yüksek ama gecikmesi yüksek olabilir ya da tersi. Bir uydu bağlantısı çok veri taşıyabilir ve yine de yavaş görünebilir, çünkü her sinyal on binlerce kilometre kat eder. Bu yüzden bir video akıcı oynayabilirken (bant genişliği) bir oyun hâlâ takılıyormuş gibi gelebilir (gecikme).
+
+## İlgili terimler
+
+**İş çıkarımı (throughput)**, uygulamada gerçekten elde edilen veri hızıdır; genellikle kuramsal bant genişliğinden düşüktür. **Titreşim (jitter)**, gecikmenin zaman içindeki dalgalanmasıdır; ortalama gecikme düşük olsa bile sesi ve videoyu bozabilir.`,
+  },
 ];
