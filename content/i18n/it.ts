@@ -1194,4 +1194,270 @@ Durante un'eclissi lunare **totale**, la Luna assume spesso una tinta rossastra 
 
 L'orbita della Luna è leggermente inclinata rispetto a quella della Terra, perciò la Luna di solito passa un po' sopra o sotto l'allineamento perfetto. Le eclissi avvengono solo nelle poche occasioni in cui i tre corpi si allineano con precisione, il che rende ognuna un evento speciale.`,
   },
+  // ── Batch 6: Arti, lingua e cultura ──
+  {
+    title: 'La teoria dei colori',
+    question: 'Come funzionano i colori e perché alcuni si abbinano?',
+    summary:
+      'La teoria dei colori spiega come i colori si relazionano, si mescolano e si abbinano, usando strumenti come la ruota dei colori per guidare artisti, designer e chi lavora con il colore.',
+    tags: ['arte', 'design', 'colore', 'visivo', 'cultura'],
+    language: 'it',
+    content: `# La teoria dei colori
+
+La teoria dei colori è l'insieme dei principi che descrivono come i colori si relazionano tra loro, come si mescolano e come producono effetti diversi quando vengono accostati. Artisti, designer e arredatori la usano per creare immagini armoniose o ricche di contrasto.
+
+## La ruota dei colori
+
+Lo strumento centrale è la **ruota dei colori**, che dispone i colori in un anello per mostrarne le relazioni. È organizzata attorno a tre gruppi:
+
+- I **colori primari** (nel modello tradizionale dei pigmenti: rosso, giallo e blu) non possono essere ottenuti mescolando altri.
+- I **colori secondari** (verde, arancione, viola) nascono dalla mescolanza di due primari.
+- I **colori terziari** nascono dalla mescolanza di un primario con un secondario adiacente.
+
+## Mescolare luce e pigmento
+
+È fondamentale capire che il colore si mescola in modi diversi a seconda del mezzo. Mescolare **luce** (come negli schermi) è **additivo** — combinare rosso, verde e blu produce il bianco. Mescolare **pigmenti** (come le vernici) è **sottrattivo** — combinare molti colori tende allo scuro e al fangoso.
+
+## Schemi di colore
+
+La teoria descrive combinazioni che di solito piacciono all'occhio:
+
+- **Complementari:** colori opposti sulla ruota (come blu e arancione), che creano un contrasto vibrante.
+- **Analoghi:** colori vicini (come blu, blu-verde e verde), che creano armonia.
+- **Triadi:** tre colori equidistanti, che bilanciano varietà ed equilibrio.
+
+## Più dell'estetica
+
+I colori portano anche una **temperatura** (rossi e arancioni caldi; blu e verdi freddi) e associazioni psicologiche che influenzano umore e significato. Comprendere questi effetti aiuta a spiegare perché certe combinazioni ci appaiono energiche, calme o tese.`,
+  },
+  {
+    title: 'La prospettiva lineare',
+    question: "Come creano gli artisti l'illusione della profondità su una superficie piana?",
+    summary:
+      "La prospettiva lineare è una tecnica che usa linee convergenti e punti di fuga per creare l'illusione della profondità tridimensionale su una superficie piana, rivoluzionando l'arte rinascimentale.",
+    tags: ['arte', 'storia', 'tecnica', 'visivo', 'cultura'],
+    language: 'it',
+    content: `# La prospettiva lineare
+
+La prospettiva lineare è un metodo per creare l'illusione della profondità e dello spazio su una superficie piana. Codificata nell'Italia rinascimentale, trasformò la pittura permettendo agli artisti di rappresentare il mondo in modo realistico, come visto da un unico punto di vista.
+
+## L'idea centrale
+
+La prospettiva lineare si basa su un'osservazione semplice: gli oggetti paralleli sembrano avvicinarsi man mano che si allontanano. Pensa ai binari del treno che sembrano congiungersi in lontananza. La tecnica formalizza questo con alcuni elementi chiave:
+
+- La **linea dell'orizzonte**, all'altezza degli occhi dell'osservatore.
+- Uno o più **punti di fuga** su quell'orizzonte, dove le linee parallele che si allontanano sembrano convergere.
+- Le **ortogonali**, le linee che recedono e puntano verso un punto di fuga.
+
+Gli oggetti sono disegnati più piccoli e più vicini al punto di fuga man mano che sono più lontani, creando una profondità convincente.
+
+## Tipi di prospettiva
+
+- La **prospettiva a un punto** usa un solo punto di fuga, ideale per guardare dritto lungo una strada o un corridoio.
+- La **prospettiva a due punti** ne usa due, utile per rappresentare lo spigolo di un edificio.
+- La **prospettiva a tre punti** aggiunge un terzo punto (in alto o in basso) per vedute drammatiche, guardando in su o in giù.
+
+## Una svolta storica
+
+L'architetto **Filippo Brunelleschi** dimostrò la prospettiva matematica intorno al 1420, e divenne presto un pilastro dell'arte occidentale. Per la prima volta i pittori poterono costruire scene spazialmente coerenti, dando alle loro opere un realismo notevole.
+
+## Perché conta
+
+La prospettiva lineare è più di un trucco: riflette il modo in cui luce e visione funzionano davvero. Gli stessi principi sostengono oggi il disegno tecnico, l'architettura, i videogiochi e la grafica al computer.`,
+  },
+  {
+    title: "L'armonia e le scale musicali",
+    question: 'Cosa fa suonare bene insieme le note musicali?',
+    summary:
+      "L'armonia e le scale si basano su relazioni matematiche tra le frequenze del suono; le note con rapporti semplici suonano consonanti e formano i mattoni della musica.",
+    tags: ['musica', 'suono', 'matematica', 'arte', 'cultura'],
+    language: 'it',
+    content: `# L'armonia e le scale musicali
+
+Perché alcune combinazioni di note suonano gradevoli e altre tese? La risposta sta in un'affascinante interazione tra fisica, matematica e percezione umana.
+
+## Il suono è vibrazione
+
+Una nota musicale è prodotta da qualcosa che vibra a una certa frequenza, misurata in hertz (vibrazioni al secondo). Una vibrazione più rapida suona più acuta; una più lenta più grave. Il rapporto tra le frequenze di due note determina come suonano insieme.
+
+## I rapporti semplici suonano consonanti
+
+L'intuizione chiave, che risale all'antica Grecia, è che le note le cui frequenze formano **rapporti semplici** suonano consonanti (stabili e gradevoli):
+
+- L'**ottava** è un rapporto di 2:1 — una frequenza esattamente doppia dell'altra. Le due note suonano così simili da ricevere lo stesso nome.
+- La **quinta giusta** è un rapporto di 3:2, una delle combinazioni più gradevoli.
+- La **quarta giusta** è di 4:3.
+
+I rapporti più complessi tendono a suonare più dissonanti, o tesi — cosa che la musica usa di proposito per creare e poi risolvere la tensione.
+
+## La costruzione delle scale
+
+Una **scala** è una sequenza selezionata di note entro un'ottava. La maggior parte della musica occidentale usa 12 altezze equidistanti, da cui si ricavano scale di sette note come la **maggiore** (di solito allegra e luminosa) e la **minore** (spesso più cupa o malinconica). Altre culture usano scale diverse, con i propri schemi caratteristici.
+
+## L'armonia
+
+L'**armonia** è il suono di più note suonate insieme, di solito in **accordi**. Le progressioni di accordi creano movimento — allontanandosi dalla stabilità verso la tensione e tornando alla risoluzione — il che dà alla musica gran parte della sua forza emotiva.`,
+  },
+  {
+    title: "L'etimologia",
+    question: 'Da dove vengono le parole?',
+    summary:
+      "L'etimologia è lo studio dell'origine delle parole e di come i loro significati e le loro forme siano cambiati nel tempo, rivelando storia, contatti culturali e i legami tra le lingue.",
+    tags: ['lingua', 'parole', 'storia', 'linguistica', 'cultura'],
+    language: 'it',
+    content: `# L'etimologia
+
+L'etimologia è lo studio dell'origine delle parole: da dove vengono, come le loro forme e i loro significati sono cambiati e come si relazionano con parole di altre lingue. Ogni parola porta con sé un frammento di storia.
+
+## Ricostruire il passato delle parole
+
+Gli etimologi ricercano la storia di una parola confrontandola con forme più antiche e con parole affini in lingue imparentate. Per esempio, la parola italiana *madre* e l'inglese *mother* discendono entrambe da una comune radice antica, prova che l'italiano, l'inglese e molte altre appartengono alla famiglia **indoeuropea**.
+
+## Come cambiano le parole
+
+Le parole si trasformano in molti modi nel tempo:
+
+- **Slittamento di significato.** La parola inglese *nice* significava un tempo «sciocco»; il suo senso è scivolato nel corso dei secoli.
+- **Prestito.** Le lingue prendono parole l'una dall'altra. L'italiano ha assorbito termini dall'arabo (*algebra*, *zucchero*), dal francese, dall'inglese e da molte altre lingue.
+- **Mutamento fonetico.** La pronuncia evolve nel corso delle generazioni, a volte in modo regolare e prevedibile.
+- **Composizione e abbreviazione.** Nuove parole nascono dalla combinazione di parole antiche o dall'accorciamento di quelle esistenti.
+
+## False piste
+
+Non ogni somiglianza rivela una parentela. I **falsi affini** sono parole che sembrano collegate ma non lo sono, e le **etimologie popolari** sono storie inventate e accattivanti che spesso si rivelano errate. Gli etimologi seri si basano su prove documentate e su mutamenti fonetici regolari, non su semplici congetture.
+
+## Perché conta
+
+L'etimologia illumina la storia — registrando migrazioni, conquiste, commerci e tecnologie. Approfondisce anche la comprensione della lingua stessa, rivelando i legami nascosti tra parole che altrimenti sembrerebbero estranee.`,
+  },
+  {
+    title: 'Lo scopo della mitologia',
+    question: 'Perché ogni cultura umana crea miti?',
+    summary:
+      'I miti sono racconti tradizionali che spiegano il mondo, trasmettono valori e uniscono le comunità; compaiono in tutte le culture umane e assolvono profonde funzioni psicologiche e sociali.',
+    tags: ['mitologia', 'cultura', 'storia', 'narrazione', 'società'],
+    language: 'it',
+    content: `# Lo scopo della mitologia
+
+Ogni cultura umana nota ha creato miti — racconti tradizionali su dèi, eroi e le origini del mondo. Lungi dall'essere semplici fantasie, i miti assolvono funzioni profonde che aiutano le società a dare senso all'esistenza.
+
+## Cos'è un mito
+
+Un mito è un racconto tradizionale, spesso sacro, ambientato in un passato remoto e che spiega qualcosa di fondamentale sul mondo o sulla natura umana. I miti differiscono dalle favole (brevi insegnamenti) e dalle leggende (radicate in persone o eventi storici), benché le categorie si sovrappongano spesso.
+
+## Le funzioni della mitologia
+
+Gli studiosi individuano diversi ruoli intrecciati:
+
+- **Spiegazione.** I miti rispondono alle grandi domande: come è cominciato il mondo, perché esiste la morte, da dove vengono il tuono o le stagioni. Prima della scienza, davano una struttura all'ignoto.
+- **Guida morale e sociale.** I miti trasmettono i valori, le norme e gli ideali di una cultura, mostrando cosa siano l'onore, il coraggio e il buon comportamento.
+- **Coesione sociale.** I racconti condivisi uniscono le comunità con un'identità e una memoria comuni, legando le generazioni.
+- **Conforto psicologico.** I miti aiutano le persone ad affrontare paura, sofferenza e mistero, collocando le singole vite in un quadro più ampio e dotato di senso.
+
+## Schemi comuni
+
+Le mitologie di culture assai lontane a volte condividono temi sorprendenti — grandi diluvi, creazione dal caos, eroi che affrontano prove. Studiosi come Joseph Campbell hanno sostenuto che molte storie di eroi seguono un comune «viaggio», suggerendo schemi condivisi nell'immaginazione umana.
+
+## I miti oggi
+
+Benché associamo di solito il mito al mondo antico, i racconti assolvono ancora oggi queste funzioni — attraverso la religione, la letteratura nazionale e perfino le saghe di supereroi che veicolano valori condivisi.`,
+  },
+  {
+    title: 'La tipografia',
+    question: "Cos'è la tipografia e perché conta?",
+    summary:
+      "La tipografia è l'arte di disporre il testo per renderlo leggibile, chiaro ed espressivo; plasma il modo in cui leggiamo e influenza il tono e la chiarezza sia su carta sia su schermo.",
+    tags: ['design', 'tipografia', 'comunicazione', 'arte', 'visivo'],
+    language: 'it',
+    content: `# La tipografia
+
+La tipografia è l'arte e la tecnica di disporre il testo. Comprende la scelta dei caratteri, delle dimensioni, delle spaziature e dell'impaginazione, e tutto ciò che rende la parola scritta leggibile, chiara ed espressiva. Una buona tipografia passa spesso inosservata, ma plasma silenziosamente ogni nostra lettura.
+
+## Concetti fondamentali
+
+- Un **carattere tipografico (typeface)** è il disegno di un insieme di segni (come Helvetica o Times New Roman); un **font**, in senso stretto, è una sua specifica variante o dimensione.
+- I caratteri **con grazie (serif)** hanno piccoli tratti alle estremità delle lettere; quelli **senza grazie (sans-serif)** no. I serif appaiono spesso tradizionali; i sans-serif moderni e puliti.
+- La **crenatura (kerning)** è la regolazione dello spazio tra due segni specifici; il **tracking** la spaziatura complessiva; e l'**interlinea (leading)** lo spazio verticale tra le righe.
+
+## Perché la tipografia conta
+
+La tipografia influisce sia sulla **leggibilità** (la facilità di distinguere ogni segno) sia sulla **lievità di lettura** (la facilità di leggere interi brani). Buone scelte riducono l'affaticamento, guidano lo sguardo e aiutano il lettore a cogliere in fretta ciò che conta. Scelte sbagliate — testo serrato, contrasto debole, caratteri goffi — stancano e perfino allontanano il lettore.
+
+## Trasmettere il tono
+
+I caratteri hanno una personalità. Un elegante serif può suggerire tradizione e autorevolezza; un sans-serif tondeggiante può apparire amichevole e accessibile; un carattere corsivo può evocare informalità. I tipografi scelgono in base al tono per rafforzare il messaggio delle parole stesse.
+
+## La gerarchia visiva
+
+La tipografia crea una **gerarchia** — usando dimensione, spessore e spaziatura per mostrare cosa sia titolo, sottotitolo e corpo del testo. Questa struttura aiuta il lettore a scorrere il contenuto e a capire come sono organizzate le informazioni, sia in un libro, sia in un manifesto, sia in una pagina web.`,
+  },
+  {
+    title: 'La struttura narrativa',
+    question: 'Cosa dà forma a una buona storia?',
+    summary:
+      "La struttura narrativa è l'impalcatura che organizza una storia — situazione, conflitto e risoluzione; schemi comuni come l'arco in tre atti aiutano a costruire storie appaganti tra le culture.",
+    tags: ['narrazione', 'scrittura', 'letteratura', 'arte', 'cultura'],
+    language: 'it',
+    content: `# La struttura narrativa
+
+La struttura narrativa è l'impalcatura sottostante che organizza una storia — l'ordine e il modo in cui gli eventi sono presentati. Benché le storie varino immensamente, la maggior parte poggia su schemi condivisi che aiutano il pubblico a seguirle e a sentirle.
+
+## L'arco di base
+
+Molte storie seguono un arco con elementi riconoscibili:
+
+1. **Esposizione.** Si presentano personaggi, ambientazione e situazione.
+2. **Azione crescente.** Sorge un conflitto o un problema, e la tensione aumenta.
+3. **Climax.** Il punto di svolta o il momento di massima intensità.
+4. **Azione calante.** Si dipanano le conseguenze del climax.
+5. **Scioglimento (risoluzione).** La storia giunge alla fine e lega i fili in sospeso.
+
+Questo schema è spesso rappresentato come la «piramide di Freytag».
+
+## Strutture comuni
+
+- L'**arco in tre atti** divide la storia in impostazione, confronto e risoluzione — la spina dorsale di gran parte del cinema e del teatro.
+- Il **viaggio dell'eroe** descrive un protagonista che lascia il mondo ordinario, affronta prove, si trasforma e torna cambiato — uno schema presente nei miti di tutto il mondo.
+
+## Perché la struttura funziona
+
+La struttura crea **attesa e soddisfazione**. Costruendo conflitti e poi risolvendoli, controlla il ritmo dell'interesse e dell'emozione. Un conflitto senza risoluzione frustra; una risoluzione senza conflitto accumulato appare vuota. Una buona struttura tiene i due in equilibrio.
+
+## Infrangere le regole
+
+I narratori esperti giocano spesso con la struttura — cominciando dal mezzo (*in medias res*), usando linee temporali non lineari o più punti di vista. Ma queste varianti sono di solito efficaci proprio perché giocano con la struttura familiare che il pubblico porta, intuitivamente, dentro di sé.`,
+  },
+  {
+    title: 'La comunicazione non verbale',
+    question: 'Quanto comunichiamo senza parole?',
+    summary:
+      'La comunicazione non verbale comprende il linguaggio del corpo, le espressioni del viso, i gesti, il tono e lo spazio; trasmette gran parte del significato e spesso parla più forte delle parole.',
+    tags: ['comunicazione', 'psicologia', 'cultura', 'comportamento', 'società'],
+    language: 'it',
+    content: `# La comunicazione non verbale
+
+Gran parte della comunicazione umana avviene senza una sola parola. La comunicazione non verbale — espressioni del viso, gesti, postura, tono di voce e altro — trasmette emozioni, atteggiamenti e intenzioni, spesso con più forza del parlato stesso.
+
+## I canali del non verbale
+
+La comunicazione non verbale scorre per molti canali contemporaneamente:
+
+- **Espressioni del viso.** Il volto comunica le emozioni rapidamente, e diverse espressioni di base (come felicità, sorpresa e rabbia) sono riconosciute tra le culture.
+- **Gesto e linguaggio del corpo.** I movimenti delle mani, la postura e il modo di muovere il corpo enfatizzano o sostituiscono le parole.
+- **Contatto visivo.** Lo sguardo può mostrare attenzione, sfida o intimità, con un significato che varia molto tra le culture.
+- **Prossemica.** L'uso dello spazio segnala intimità, formalità o gerarchia.
+- **Paralinguaggio.** Tono, ritmo, volume e pause plasmano il significato delle parole — *come* qualcosa è detto, e non solo cosa.
+
+## Perché conta
+
+La comunicazione non verbale plasma potentemente il modo in cui i messaggi vengono recepiti. Uno stesso «sto bene» può suonare sincero, sarcastico o esitante a seconda del tono e dell'espressione. Quando i segnali verbali e non verbali si contraddicono, le persone tendono a fidarsi di più del non verbale.
+
+## Variazione culturale
+
+Benché alcune espressioni siano universali, molti segnali non verbali sono specifici di ciascuna cultura. I gesti, la distanza adeguata per conversare e le regole sul contatto visivo variano ampiamente, e i malintesi possono sorgere facilmente tra le culture.
+
+## Leggere i segnali
+
+Benché sia allettante credere di poter «leggere» qualcuno come un libro aperto, i segnali non verbali sono ambigui e si interpretano meglio insieme e nel contesto, anziché isolati. Eppure la consapevolezza di essi rende la comunicazione più ricca ed efficace.`,
+  },
 ];
