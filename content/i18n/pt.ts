@@ -1460,4 +1460,247 @@ Embora algumas expressões sejam universais, muitos sinais não verbais são esp
 
 Embora seja tentador acreditar que se pode "ler" alguém como um livro aberto, os sinais não verbais são ambíguos e melhor interpretados em conjunto e no contexto, e não isoladamente. A consciência deles, ainda assim, torna a comunicação mais rica e eficaz.`,
   },
+  // ── Batch 7: Como as coisas funcionam ──
+  {
+    title: 'Como funciona o Wi-Fi',
+    question: 'Como o Wi-Fi envia dados pelo ar?',
+    summary:
+      'O Wi-Fi usa ondas de rádio para transportar dados entre os dispositivos e um roteador, codificando a informação em sinais de alta frequência que carregam o tráfego da internet sem fios.',
+    tags: ['tecnologia', 'redes', 'rádio', 'internet', 'engenharia'],
+    language: 'pt',
+    content: `# Como funciona o Wi-Fi
+
+O Wi-Fi conecta nossos dispositivos à internet sem cabos, usando ondas de rádio para transportar dados entre um aparelho e um roteador. É uma forma de comunicação por rádio bidirecional otimizada para mover dados rapidamente a curtas distâncias.
+
+## Ondas de rádio que carregam dados
+
+O Wi-Fi transmite informação por **ondas de rádio**, o mesmo tipo de onda usado pelo rádio e pelos celulares, mas em frequências mais altas — em geral 2,4 GHz e 5 GHz (e, mais recentemente, 6 GHz). O dispositivo e o roteador convertem os dados digitais (1s e 0s) em padrões de ondas de rádio e os convertem de volta na outra ponta, num processo chamado **modulação**.
+
+## O papel do roteador
+
+O **roteador** é a central. Ele se liga à internet por um cabo (em geral por uma operadora de banda larga) e, sem fio, retransmite dados de e para todos os dispositivos conectados. Quando você carrega uma página, o aparelho envia um pedido por rádio ao roteador, que o repassa à internet e devolve a resposta.
+
+## Bandas e canais
+
+As duas bandas principais oferecem um compromisso:
+
+- **2,4 GHz** alcança mais longe e atravessa melhor as paredes, mas é mais lenta e mais sujeita a interferência (de micro-ondas, telefones sem fio e redes vizinhas).
+- **5 GHz** (e 6 GHz) é mais rápida e menos congestionada, mas alcança distâncias menores.
+
+Cada banda divide-se em **canais** para reduzir a interferência entre dispositivos próximos.
+
+## Alcance e interferência
+
+Os sinais de Wi-Fi enfraquecem com a distância e são absorvidos por paredes, água e metal. É por isso que a conexão piora mais longe do roteador e por que repetidores ou sistemas em malha (mesh) ajudam a cobrir casas maiores. Apesar dessas limitações, o Wi-Fi tornou-se a forma padrão de conectar bilhões de aparelhos à internet.`,
+  },
+  {
+    title: 'Como as baterias armazenam energia',
+    question: 'Como uma bateria guarda e libera energia?',
+    summary:
+      'As baterias armazenam energia em forma química e a convertem em eletricidade por reações que movem elétrons entre dois eletrodos, fornecendo corrente a um circuito.',
+    tags: ['tecnologia', 'energia', 'química', 'eletricidade', 'engenharia'],
+    language: 'pt',
+    content: `# Como as baterias armazenam energia
+
+As baterias estão por toda parte — em telefones, carros, controles remotos —, mas seu funcionamento é uma elegante peça de química. Uma bateria guarda energia em forma **química** e a libera como **energia elétrica** sob demanda.
+
+## As partes essenciais
+
+Toda bateria tem três componentes-chave:
+
+- Um **eletrodo negativo** (o ânodo).
+- Um **eletrodo positivo** (o cátodo).
+- Um **eletrólito**, a substância entre eles que permite o movimento de partículas carregadas.
+
+## Como flui a energia
+
+A energia vem de uma **reação química** que "quer" acontecer entre os materiais dos dois eletrodos. Quando se conecta uma bateria a um circuito:
+
+1. No ânodo, ocorre uma reação que libera elétrons.
+2. Esses elétrons não podem atravessar o eletrólito; em vez disso, fluem pelo circuito externo — alimentando o aparelho no caminho.
+3. Ao mesmo tempo, partículas carregadas (íons) movem-se pelo eletrólito de dentro da bateria para manter o equilíbrio.
+
+Esse fluxo de elétrons pelo circuito externo é a **corrente elétrica** que faz o aparelho funcionar. A bateria "acaba" quando os materiais químicos se esgotam.
+
+## Recarregáveis ou não
+
+Nas baterias **descartáveis** (como as alcalinas), as reações químicas não se revertem facilmente, e a bateria é descartada quando se esgota. Nas baterias **recarregáveis** (como as de íon-lítio dos telefones), passar corrente no sentido contrário reverte as reações químicas, restaurando os materiais ao estado original para serem usados de novo — embora a repetição vá degradando aos poucos a bateria.
+
+## Por que importa a tensão
+
+Materiais diferentes liberam quantidades diferentes de energia por elétron, o que determina a **tensão** da bateria. Combinar células em série soma suas tensões, e é por isso que conjuntos de células alimentam tudo, de lanternas a carros elétricos.`,
+  },
+  {
+    title: 'Como funcionam as telas sensíveis ao toque',
+    question: 'Como a tela do telefone sabe onde você toca?',
+    summary:
+      'A maioria das telas sensíveis ao toque detecta o toque sentindo mudanças num campo elétrico na superfície da tela, permitindo localizar com precisão os dedos e os gestos.',
+    tags: ['tecnologia', 'eletrônica', 'interface', 'engenharia', 'dispositivos'],
+    language: 'pt',
+    content: `# Como funcionam as telas sensíveis ao toque
+
+As telas sensíveis ao toque (touchscreens) tornaram-se a principal forma de interagir com telefones, tablets e muitos outros dispositivos. Embora pareçam mágica, dependem de detectar exatamente onde o dedo encosta no vidro.
+
+## O tipo capacitivo
+
+A maioria dos aparelhos modernos usa telas **capacitivas**. Sob o vidro há uma grade transparente de material condutor que mantém um pequeno campo elétrico na superfície. O corpo humano também conduz eletricidade, então, quando o dedo toca a tela, ele perturba localmente esse campo elétrico. O dispositivo detecta exatamente onde a carga mudou e interpreta a posição como um toque.
+
+Como dependem da condutividade do corpo, as telas capacitivas em geral não respondem a uma caneta comum nem a uma luva grossa — daí as luvas e canetas "compatíveis com toque" feitas de materiais especiais. Sua grande vantagem é o suporte ao **multitoque**, que detecta vários dedos ao mesmo tempo e permite gestos como pinçar para dar zoom.
+
+## O tipo resistivo
+
+Um tipo mais antigo, a tela **resistiva**, usa duas camadas flexíveis separadas por um pequeno espaço. Ao pressioná-la, as camadas se tocam naquele ponto, e o dispositivo registra a posição. As telas resistivas funcionam com qualquer objeto (dedo, caneta, luva), mas costumam ser menos nítidas e não dão conta bem do multitoque. Ainda são usadas em alguns equipamentos industriais e dispositivos mais antigos.
+
+## Do toque à ação
+
+Em ambos os casos, o hardware da tela converte o toque em coordenadas que o software interpreta. O sistema operacional decide o que está sob o dedo — um botão, um link, um controle deslizante — e responde de acordo. Tudo isso acontece em milissegundos, criando a sensação fluida de manipular diretamente o que está na tela.`,
+  },
+  {
+    title: 'Como funciona a refrigeração',
+    question: 'Como uma geladeira mantém os alimentos frios?',
+    summary:
+      'A refrigeração mantém os alimentos frios deslocando o calor de dentro para fora, usando um fluido refrigerante que circula, se vaporiza e se comprime num ciclo contínuo.',
+    tags: ['tecnologia', 'física', 'calor', 'engenharia', 'cotidiano'],
+    language: 'pt',
+    content: `# Como funciona a refrigeração
+
+Uma geladeira não "cria" frio — ela **remove calor**. Ao mover continuamente o calor de seu interior para a cozinha, mantém os alimentos numa temperatura baixa que retarda o crescimento bacteriano e a deterioração.
+
+## A ideia central
+
+A refrigeração baseia-se num princípio simples: quando um líquido se transforma em gás (evaporação), ele **absorve calor** do entorno; quando um gás volta a líquido (condensação), ele **libera calor**. A geladeira faz uma substância especial, o **refrigerante**, passar repetidamente por essas transições em lugares diferentes, transportando o calor de dentro para fora.
+
+## O ciclo de refrigeração
+
+O ciclo tem quatro etapas principais:
+
+1. **Evaporação.** Dentro da geladeira, o refrigerante líquido passa por uma serpentina e evapora, absorvendo o calor do compartimento e resfriando-o.
+2. **Compressão.** Um **compressor** comprime o gás refrigerante, elevando sua pressão e temperatura.
+3. **Condensação.** O gás quente passa pelas serpentinas atrás ou embaixo da geladeira, libera calor para o ambiente e volta a líquido.
+4. **Expansão.** O refrigerante passa por uma válvula de expansão, cai de pressão e esfria, pronto para recomeçar o ciclo.
+
+## Por que a parte de trás esquenta
+
+Se você tocar as serpentinas atrás de uma geladeira, vai notar que estão quentes. É o calor retirado de dentro sendo liberado para fora. Uma geladeira, na prática, bombeia calor de um lugar frio para outro mais quente — algo que não acontece por conta própria e que exige a energia fornecida pelo compressor.
+
+## A mesma tecnologia em toda parte
+
+O mesmo ciclo alimenta os condicionadores de ar e as bombas de calor. Um condicionador de ar é, em essência, uma geladeira que resfria um cômodo e joga o calor para fora; uma bomba de calor pode inverter o sentido para aquecer um ambiente.`,
+  },
+  {
+    title: 'Como funcionam os fones com cancelamento de ruído',
+    question: 'Como os fones de ouvido eliminam o ruído de fundo?',
+    summary:
+      'Os fones com cancelamento ativo de ruído usam microfones para captar o som de fundo e geram uma onda sonora oposta que o anula antes de chegar aos seus ouvidos.',
+    tags: ['tecnologia', 'som', 'ondas', 'engenharia', 'eletrônica'],
+    language: 'pt',
+    content: `# Como funcionam os fones com cancelamento de ruído
+
+Os fones com cancelamento de ruído conseguem fazer um avião barulhento ou um escritório agitado parecerem subitamente silenciosos. Eles fazem isso de duas maneiras: bloqueando o som fisicamente e, de forma mais engenhosa, cancelando-o eletronicamente.
+
+## Som é ondas
+
+O som viaja em ondas de pressão pelo ar. Como toda onda, tem picos e vales. Se você sobrepuser duas ondas, elas se combinam: picos alinhados com picos somam-se (ficam mais altos), mas um pico alinhado com um vale **anula-se**. Esse cancelamento, chamado **interferência destrutiva**, é o segredo do cancelamento ativo de ruído.
+
+## Cancelamento ativo de ruído
+
+Os fones com cancelamento **ativo** (ANC) usam:
+
+1. **Microfones** que captam o ruído de fundo ao seu redor.
+2. Um chip que analisa instantaneamente essa onda sonora e gera uma onda **espelhada (oposta)** — uma "antionda" com picos onde o ruído tem vales.
+3. **Alto-falantes** que tocam essa onda oposta junto com o áudio que você quer ouvir.
+
+Quando a antionda encontra o ruído de fundo, as duas se anulam em grande parte, e seus ouvidos percebem muito menos barulho. Isso funciona melhor com sons **graves e constantes**, como o ronco de um motor.
+
+## Cancelamento passivo de ruído
+
+O cancelamento **passivo** é simplesmente bloqueio físico: almofadas bem ajustadas e materiais densos que vedam os ruídos, do mesmo modo que tampões de ouvido. Funciona bem para os sons agudos e repentinos, que o cancelamento ativo tem mais dificuldade de neutralizar.
+
+## Por que não silêncio perfeito
+
+O cancelamento ativo não é perfeito. Sons agudos, complexos e imprevisíveis (como vozes) são difíceis de cancelar, porque o sistema precisa prever e igualar a onda quase instantaneamente. Por isso os fones com cancelamento amortecem com maestria o ronronar constante de um avião, mas mesmo assim deixam passar boa parte da fala próxima.`,
+  },
+  {
+    title: 'Como os LEDs produzem luz',
+    question: 'Como um LED produz luz com tão pouca energia?',
+    summary:
+      'Os LEDs produzem luz quando a corrente elétrica atravessa um material semicondutor, liberando energia diretamente como fótons — muito mais eficiente do que aquecer um filamento.',
+    tags: ['tecnologia', 'luz', 'eletrônica', 'energia', 'engenharia'],
+    language: 'pt',
+    content: `# Como os LEDs produzem luz
+
+Os LEDs (diodos emissores de luz) iluminam tudo, de lâmpadas a telas e indicadores. São notavelmente eficientes porque convertem a eletricidade diretamente em luz, com pouquíssimo desperdício de calor.
+
+## Luz a partir de um semicondutor
+
+Um LED é um tipo de **diodo**, um componente feito de material **semicondutor** que deixa a corrente fluir sobretudo num único sentido. O semicondutor é "dopado" para criar duas regiões: uma com excesso de elétrons e outra com "lacunas" onde faltam elétrons.
+
+Quando a corrente atravessa o LED, os elétrons cruzam a junção e preenchem as lacunas. A cada passo, um elétron perde um pouco de energia — e, num LED, essa energia é liberada como uma partícula de luz, um **fóton**. Esse processo, de transformar eletricidade direto em luz, chama-se **eletroluminescência**.
+
+## O que define a cor
+
+A **cor** da luz depende da energia liberada a cada salto de elétron, que por sua vez depende do material semicondutor específico. Materiais diferentes produzem vermelho, verde, azul e assim por diante. Os LEDs brancos costumam ser obtidos com um LED azul recoberto por uma camada de **fósforo** que converte parte da luz azul em outras cores, somando-se em luz branca.
+
+## Por que são tão eficientes
+
+As lâmpadas incandescentes antigas produziam luz aquecendo um filamento até ele brilhar, e desperdiçavam a maior parte da energia como calor. Os LEDs pulam essa etapa e geram luz diretamente, então usam uma fração da energia para o mesmo brilho e duram muito mais. É por isso que substituíram em grande parte as tecnologias mais antigas na iluminação.
+
+## Em toda parte
+
+Como os LEDs são pequenos, duráveis e controláveis, estão por toda parte: na iluminação de casas, nos faróis, nos imensos painéis de vídeo e nos milhões de minúsculos LEDs vermelho, verde e azul que formam a imagem da tela do seu telefone.`,
+  },
+  {
+    title: 'Como funcionam os painéis solares',
+    question: 'Como os painéis solares transformam a luz do sol em eletricidade?',
+    summary:
+      'Os painéis solares convertem a luz do sol em eletricidade usando células de material semicondutor que liberam elétrons quando atingidas pela luz, gerando uma corrente elétrica.',
+    tags: ['tecnologia', 'energia', 'eletricidade', 'meio ambiente', 'engenharia'],
+    language: 'pt',
+    content: `# Como funcionam os painéis solares
+
+Os painéis solares convertem a luz do sol diretamente em eletricidade, sem partes móveis nem combustível. Eles se apoiam no **efeito fotovoltaico**, no qual certos materiais produzem corrente elétrica ao serem atingidos pela luz.
+
+## A célula solar
+
+A unidade básica é a **célula solar (fotovoltaica)**, em geral feita de **silício**, o mesmo semicondutor dos chips de computador. A célula tem duas camadas tratadas (dopadas) de modo a criar um campo elétrico na junção entre elas: uma camada tem elétrons sobrando, e a outra tem "lacunas" onde faltam elétrons.
+
+## Da luz à eletricidade
+
+A luz é feita de pequenos pacotes de energia chamados **fótons**. Quando um fóton de energia suficiente atinge a célula, ele pode arrancar um elétron de um átomo de silício. O campo elétrico interno empurra esses elétrons livres numa direção consistente, criando um fluxo — uma **corrente elétrica**. Fios de metal na célula recolhem essa corrente para que ela alimente um circuito.
+
+## De células a sistemas
+
+Uma única célula produz pouca energia, então muitas são ligadas para formar um **painel**, e vários painéis formam um **conjunto (array)**. As células geram corrente **contínua (CC)**, mas as casas e a rede elétrica usam corrente **alternada (CA)**, então um aparelho chamado **inversor** faz a conversão. Quando um sistema produz mais do que se usa, o excedente muitas vezes pode ser injetado de volta na rede.
+
+## Vantagens e limites
+
+A energia solar é renovável, silenciosa e, depois de instalada, produz eletricidade sem emissões nem combustível. As limitações são que só gera com luz e que sua produção varia com o clima, a estação e a hora do dia. Por isso costuma ser combinada com baterias ou com a rede elétrica para fornecer energia de modo constante.`,
+  },
+  {
+    title: 'Como o forno de micro-ondas aquece os alimentos',
+    question: 'Como um forno de micro-ondas aquece a comida tão depressa?',
+    summary:
+      'Os fornos de micro-ondas aquecem os alimentos com ondas de rádio que fazem as moléculas de água vibrarem, gerando calor diretamente dentro da comida em vez de aquecê-la de fora.',
+    tags: ['tecnologia', 'física', 'ondas', 'calor', 'cotidiano'],
+    language: 'pt',
+    content: `# Como o forno de micro-ondas aquece os alimentos
+
+O forno de micro-ondas cozinha mais rápido que um forno convencional porque aquece a comida de um jeito fundamentalmente diferente — gerando calor dentro do próprio alimento, em vez de aquecê-lo de fora para dentro.
+
+## Micro-ondas: um tipo de onda de rádio
+
+Apesar do nome, as micro-ondas são uma forma de **onda de rádio** — radiação eletromagnética de uma frequência específica (em geral cerca de 2,45 GHz). Dentro do forno, um componente chamado **magnetron** gera essas ondas e as dirige para a câmara de cozimento, onde elas ricocheteiam nas paredes metálicas e atravessam o alimento.
+
+## Agitar as moléculas de água
+
+A chave está em como as micro-ondas interagem com a **água**. As moléculas de água têm uma extremidade positiva e outra negativa. O campo elétrico das micro-ondas oscila para frente e para trás bilhões de vezes por segundo, e as moléculas de água giram rapidamente para se alinhar a ele. Esse atrito molecular gera calor. Como a maioria dos alimentos contém água, eles se aquecem por dentro de forma rápida e relativamente uniforme.
+
+## Por que aquece tão rápido — e de forma desigual
+
+Como as micro-ondas penetram alguns centímetros no alimento, aquecem uma boa parte de uma vez, em vez de depender do calor que viaja lentamente da superfície para o interior. Mas elas não penetram fundo de modo uniforme, e podem se concentrar em alguns pontos, o que cria as conhecidas regiões frias. É por isso que os micro-ondas têm prato giratório e por que mexer ou deixar a comida "descansar" ajuda a igualar a temperatura.
+
+## Segurança e mitos
+
+As micro-ondas usam radiação **não ionizante**, que aquece, mas não tem energia para danificar o DNA como os raios X. A malha metálica na porta bloqueia a saída das micro-ondas. O metal dentro do forno pode causar faíscas porque concentra o campo elétrico, mas o forno em si não torna o alimento "radioativo" de modo algum.`,
+  },
 ];
