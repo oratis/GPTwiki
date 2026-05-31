@@ -703,4 +703,253 @@ Bir bağlantının bant genişliği yüksek ama gecikmesi yüksek olabilir ya da
 
 **İş çıkarımı (throughput)**, uygulamada gerçekten elde edilen veri hızıdır; genellikle kuramsal bant genişliğinden düşüktür. **Titreşim (jitter)**, gecikmenin zaman içindeki dalgalanmasıdır; ortalama gecikme düşük olsa bile sesi ve videoyu bozabilir.`,
   },
+  // ── Batch 4: Zihin, sağlık ve gündelik yaşam ──
+  {
+    title: 'Plasebo Etkisi',
+    question: 'Sahte bir tedavi yine de insanları nasıl daha iyi hissettirebilir?',
+    summary:
+      'Plasebo etkisi; etkin maddesi olmayan bir tedavinin, kişi yardım beklediği için belirtilerini iyileştirmesiyle ortaya çıkar ve zihin ile beden arasındaki güçlü bağı açığa vurur.',
+    tags: ['sağlık', 'psikoloji', 'tıp', 'beyin', 'bilim'],
+    language: 'tr',
+    content: `# Plasebo Etkisi
+
+Plasebo etkisi, tıbbın en büyüleyici olgularından biridir: insanlar çoğu zaman hiçbir iyileştirici gücü olmayan bir tedaviden sonra iyileşir — bir şeker hapı, bir serum fizyolojik iğnesi ya da göstermelik bir işlem — yalnızca yardım edeceğine inandıkları için.
+
+## Ne olur
+
+Plasebo, sahte bir tedavidir. Biri onu gerçek sanarak aldığında, iyileşme beklentisi ölçülebilir değişiklikleri tetikleyebilir: daha az bildirilen ağrı, daha iyi ruh hâli, hatta bedensel işaretlerde değişimler. Etki en çok beyin tarafından düzenlenen belirtilerde güçlüdür — **ağrı, kaygı, yorgunluk ve mide bulantısı** gibi.
+
+## Neden olur
+
+Birkaç düzenek işin içinde gibidir:
+
+- **Beklenti.** Rahatlama beklemek, beyni endorfin gibi doğal maddeler salmaya yöneltebilir.
+- **Koşullanma.** Öğrenilmiş çağrışımlar (beyaz önlük, hap alma edimi), alışkanlıkla gerçek tepkiler uyandırabilir.
+- **Kaygının azalması.** İlgi görmek stresi azaltır, bu da tek başına belirtileri hafifletebilir.
+
+Şunu belirtmek önemli: plasebolar tümörleri küçültmez, enfeksiyonları iyileştirmez — çoğunlukla **algıyı** ve beyin tarafından düzenlenen bazı tepkileri değiştirir.
+
+## Bilim için neden önemli
+
+Plasebolar bu denli güçlü olduğundan, yeni ilaçların onları **plasebo denetimli denemelerde** geçmesi gerekir. Katılımcılar, hangisini aldıklarını bilmeden gerçek tedaviyi alanlar ve plaseboyu alanlar olarak ayrılır; ancak gerçek tedavi plaseboyu açıkça geçerse gerçekten işe yaradığı kabul edilir.
+
+## Karanlık akraba
+
+**Nosebo etkisi** bunun tersidir: zarar beklemek gerçek olumsuz belirtiler doğurabilir; kişi yalnızca bir şeker hapı almış olsa bile, bir uyarı yüzünden yan etki hissetmek gibi.`,
+  },
+  {
+    title: 'Neden Uyuruz',
+    question: 'Her gece uyumaya neden gerek duyarız?',
+    summary:
+      'Uyku; belleği, hücre onarımını, hormon düzenlemesini ve beyin temizliğini destekleyen hayati bir biyolojik durumdur; süreğen yoksunluk sağlığa ve zihinsel işleve zarar verir.',
+    tags: ['sağlık', 'biyoloji', 'beyin', 'uyku', 'bilim'],
+    language: 'tr',
+    content: `# Neden Uyuruz
+
+Yaşamımızın yaklaşık üçte birini uyuyarak geçiririz, ama uyku kayıp zaman olmaktan çok uzaktır. Beden ve zihin için zorunlu, etkin ve özenle düzenlenen bir süreçtir. Bilim insanları tüm işlevlerini hâlâ tartışsa da, öneminin kanıtları ezicidir.
+
+## Uyku ne yapar
+
+Uyku birçok hayati işlevi yerine getiriyor gibidir:
+
+- **Bellek pekiştirme.** Beyin, günün anılarını yeniden işler ve güçlendirir; öğrendiklerimizi kısa süreli bellekten uzun süreli belleğe taşır.
+- **Hücre temizliği.** Uyku sırasında beyin, metabolik atıkları daha hızlı atar; bunların arasında sinir-yıkımı hastalıklarıyla bağlı proteinler de vardır.
+- **Onarım ve büyüme.** Beden dokuları onarır, kemik ve kas yapar ve büyüme için önemli hormonları salar.
+- **Düzenleme.** Uyku; iştahı, ruh hâlini, bağışıklık işlevini ve hormon dengesini ayarlar.
+
+## Uyku evreleri
+
+Uyku, yaklaşık 90 dakikalık döngüler hâlinde akar; **REM dışı** uyku (fiziksel toparlanma için en iyi olan derin yavaş dalga uykusu dahil) ile **REM** uykusu (canlı rüyaların çoğunun görüldüğü, belleğe ve duygu düzenlemesine yardım eden) arasında dönüşümlüdür. Sağlıklı bir gece, bu tam döngülerden birkaçından geçer.
+
+## Kötü uykunun bedeli
+
+Süreğen uyku yoksunluğu; bellek sorunları, bozulmuş yargı, sarsılmış ruh hâli ve obezite, diyabet, kalp hastalığı ile bağışıklık eksikliği riskinin artmasıyla bağlıdır. Ölçülü bir uyku kaybı bile dikkati ve tepki süresini alkol kadar bozar.
+
+## Ne kadar gerekir
+
+Çoğu yetişkin gecede 7-9 saate, ergenler ve çocuklar daha fazlasına gereksinim duyar. Gereksinim kişiden kişiye değişir, ama çok azı az uykuyla sürekli gerçekten iyi işlev görebilir.`,
+  },
+  {
+    title: 'Kafein ve Beyin',
+    question: 'Kafein bizi nasıl daha uyanık kılar?',
+    summary:
+      'Kafein; beynin uyku veren kimyasalı olan adenozini bloke ederek yorgunluğu geçici olarak azaltır ve uyanıklığı artırır — bu yüzden dünyanın en çok kullanılan uyarıcısıdır.',
+    tags: ['sağlık', 'beyin', 'kimya', 'biyoloji', 'gündelik'],
+    language: 'tr',
+    content: `# Kafein ve Beyin
+
+Kafein, dünyanın en çok tüketilen ruh etkin maddesidir; kahvede, çayda, çikolatada, gazlı içeceklerde ve enerji içeceklerinde bulunur. Uykuyu kovma yeteneği, beyindeki kesin bir biyokimyasal hileden gelir.
+
+## Uyku işaretini bloke etmek
+
+Uyanık geçen gün boyunca beyinde **adenozin** adlı bir madde birikir. Alıcılara bağlanır ve yavaş yavaş yorgunluk duygusu üretir; sonunda bizi uyutan "uyku basıncını" oluşturmaya yardım eder.
+
+Kafeinin moleküler yapısı adenozine epey benzer. Aynı alıcılara oturur ve onları etkinleştirmeden **bloke eder**. Adenozinin yorgunluk işaretleri kesilince daha uyanık ve diri hissedersiniz — ama altta yatan yorgunluk hâlâ aşağıda, bekler; kafeinin etkisi geçtiğinde geri gelir.
+
+## İkincil etkiler
+
+Adenozini bloke ederek kafein, **dopamin** gibi başka kimyasal habercilerin de daha serbest çalışmasına izin verir; bu da ruh hâlini, odaklanmayı ve tepki süresini biraz iyileştirebilir. Ölçülü bir dozun bu denli yararlı görünmesinin nedeni budur.
+
+## Tolerans ve yoksunluk
+
+Düzenli kullanımla beyin, **daha çok** adenozin alıcısı yaparak uyum sağlar, böylece aynı etki için daha çok kafein gerekir — bu **toleranstır**. Kişi birden bırakırsa, tüm o fazladan alıcı adenozine açık kalır; beyin yeniden ayarlanana dek baş ağrısı, yorgunluk ve sinirlilik yaratır.
+
+## Zamanlama ve miktar
+
+Kafein tam etkisine yaklaşık 20-45 dakikada ulaşır ve "yarı ömrü" yaklaşık 5 saattir, bu yüzden öğleden sonraki bir doz gece uykusunu yine de bozabilir. Ölçülü dozlar çoğu kişi için güvenlidir, ama fazlası kaygı, çarpıntı ve uykusuzluğa yol açabilir.`,
+  },
+  {
+    title: 'Doppler Etkisi',
+    question: 'Bir ambulans sireni geçerken perdesini neden değiştirir?',
+    summary:
+      'Doppler etkisi; kaynak ile gözlemci birbirine göre hareket ettiğinde bir dalganın frekansındaki değişimdir; geçen sirenlerde duyulur ve radardan astronomiye dek kullanılır.',
+    tags: ['fizik', 'ses', 'dalgalar', 'astronomi', 'bilim'],
+    language: 'tr',
+    content: `# Doppler Etkisi
+
+Doppler etkisi; bir dalganın kaynağı ile gözlemci birbirine göre hareket ettiğinde dalganın frekansındaki değişimdir. Bir ambulans sireninin yaklaşırken daha tiz, geçtikten sonra daha pes gelmesinin nedeni budur.
+
+## Neden olur
+
+Ses dalgaları bir uzaklığı sabit bir hızda kat eder. Sesin kaynağı size doğru hareket ederse, her ardışık dalga biraz daha yakın bir noktadan çıkar, böylece dalgalar **sıkışır** — daha yüksek frekans, daha tiz perde. Kaynak uzaklaştıkça dalgalar **gerilir** — daha düşük frekans, daha pes perde. Değişimin kendisi, kaynağın tam yanınızdan geçtiği anda olur.
+
+## Yalnızca ses değil
+
+Doppler etkisi ışık dahil tüm dalgalara uygulanır. Işık için, yaklaşan bir nesnenin dalgaları tayfın **mavi** ucuna doğru sıkışır (maviye kayma), uzaklaşan bir nesneninkiler **kırmızıya** doğru gerilir (kırmızıya kayma). Değişimler gündelik hızlarda görülemeyecek kadar küçüktür, ama astronomik ölçeklerde ölçülebilir hâle gelir.
+
+## Gerçek dünyada kullanımlar
+
+- **Radar ve hız radarları**, dalgaları araçlardan sektirir ve hızı hesaplamak için kaymayı ölçer.
+- **Hava tahmini**, yağmurun ve fırtınaların hareketini izlemek için Doppler radarını kullanır.
+- **Tıp**, kan akışını görüntülemek için Doppler ultrasonunu kullanır.
+- **Astronomi**, yıldızların ve gökadaların hareket hızını ölçmek için kırmızıya kaymayı kullanır.
+
+## Bir kozmik ipucu
+
+Işığın Doppler kayması, evrenin genişlediğinin başlıca kanıtlarından biridir: uzak gökadalar kırmızıya kayma gösterir, bu da neredeyse hepsinin bizden uzaklaştığına işaret eder.`,
+  },
+  {
+    title: 'Gökyüzü Neden Mavi',
+    question: 'Gökyüzü gündüz neden mavi, gün batımında neden kırmızıdır?',
+    summary:
+      'Gökyüzü mavidir çünkü hava molekülleri kısa dalga boylu (mavi) güneş ışığını uzun dalga boylu olandan daha güçlü saçar; bu sürece Rayleigh saçılması denir.',
+    tags: ['fizik', 'ışık', 'atmosfer', 'renk', 'bilim'],
+    language: 'tr',
+    content: `# Gökyüzü Neden Mavi
+
+Gökyüzünün gündüz mavi olması, güneş ışığının Dünya atmosferiyle nasıl etkileştiğinin sonucudur. Açıklama, **Rayleigh saçılması** denen bir süreçten gelir.
+
+## Güneş ışığı birçok renkten oluşur
+
+Beyaz görünse de güneş ışığı, her biri kendi dalga boyuna sahip gökkuşağının tüm renklerinin bir karışımıdır. Mavi ve mor ışığın dalga boyu **kısadır**; kırmızı ve turuncununki **uzundur**.
+
+## Saçılma maviyi kayırır
+
+Atmosfere girerken güneş ışığı, dalga boyundan çok daha küçük gaz molekülleriyle çarpışır. Bu moleküller kısa dalga boylarını uzun olanlardan çok daha güçlü saçar — mavi ışık, kırmızıdan birkaç kat fazla saçılır. Sonuçta mavi ışık tüm gökyüzüne dağılır ve nereye bakarsanız bakın gökyüzünün maviliği bu saçılan mavi ışıktan gelir.
+
+## Peki ya mor?
+
+Morun dalga boyu maviden bile kısadır ve daha da fazla saçılır. Ama gökyüzü mor görünmez, çünkü Güneş daha az mor ışık yayar ve gözlerimiz ona çok daha az duyarlıdır; bu yüzden gökyüzünü mavi algılarız.
+
+## Kırmızı gün batımları
+
+Gün doğumu ve gün batımına yakın, güneş ışığı bize ulaşmak için atmosferin çok daha kalın bir diliminden geçer. Bu yol boyunca o kadar çok mavi ışık saçılır ki çoğunlukla uzun dalga boyları kalır ve gökyüzünü kırmızıya, turuncuya ve pembeye boğar.
+
+## Aynı fizik başka yerlerde
+
+Rayleigh saçılması ayrıca uzak nesnelerin neden mavimsi göründüğünü ve uzaydan görülen Dünya atmosferinin ufukta neden ince bir mavi çizgi gösterdiğini de açıklar.`,
+  },
+  {
+    title: 'Antibiyotik Direnci',
+    question: 'Antibiyotikler neden etkisini yitiriyor?',
+    summary:
+      'Antibiyotik direnci; bakteriler onları öldürmek için tasarlanan ilaçlardan kurtulacak biçimde evrildiğinde ortaya çıkar; aşırı ve yanlış kullanımla hızlanır ve yaygın enfeksiyonları yeniden tehlikeli kılmakla tehdit eder.',
+    tags: ['sağlık', 'tıp', 'biyoloji', 'evrim', 'bilim'],
+    language: 'tr',
+    content: `# Antibiyotik Direnci
+
+Antibiyotik direnci, küresel sağlığa yönelik en ciddi tehditlerden biridir. Bakteriler, daha önce onlara karşı etkili olan antibiyotiklerce artık öldürülmeyecek biçimde evrildiğinde ortaya çıkar ve enfeksiyonların tedavisini zorlaştırır — kimi zaman olanaksızlaştırır.
+
+## Direnç nasıl ortaya çıkar
+
+Antibiyotikler duyarlı bakterileri öldürür, ama bakteri toplulukları devasa ve çeşitlidir. Rastlantıyla bazıları, hayatta kalmaya yardım eden mutasyonlar taşır. Bir antibiyotik duyarlı bakterileri ortadan kaldırdığında, dirençli olanlar hayatta kalır ve çoğalır — bu, iş başında **doğal seçilimdir**. Bakteriler ayrıca direnç genlerini doğrudan birbirleriyle değiş tokuş eder ve bu yeteneği hızla yayar.
+
+## Sorunu ne hızlandırır
+
+Birkaç etken direnci ağırlaştırır:
+
+- Antibiyotiklerin **aşırı kullanımı**, etkili olmadıkları soğuk algınlığı gibi viral enfeksiyonlar için bile.
+- **Eksik tedavi**, hastalar ilacı çok erken bıraktığında en dirençli mikropların hayatta kalmasına izin verir.
+- **Tarımda yoğun kullanım**, sağlıklı hayvanlara büyümeyi hızlandırmak için antibiyotik verilir.
+
+Her maruz kalış, bakterilere savunma geliştirmek için daha çok fırsat verir.
+
+## Neden önemli
+
+Antibiyotikler modern tıbbı destekler — yalnızca enfeksiyonları tedavi etmez, ameliyatı, kemoterapiyi ve doğumu güvenli kılar. Kimi zaman "süper mikroplar" denen dirençli bakteriler, bu ilerlemeyi geri almakla tehdit eder ve bizi çiziklerin ve yaygın enfeksiyonların ölümcül olabildiği bir çağa döndürebilir.
+
+## Ne işe yarar
+
+Çözümler; antibiyotikleri yalnızca gerektiğinde kullanmayı, verilen tedavileri tamamlamayı, hijyeni ve enfeksiyon denetimini iyileştirmeyi, tarımsal kullanımı sınırlamayı ve yeni antibiyotikler ile alternatif tedavilerin araştırmasına yatırım yapmayı içerir.`,
+  },
+  {
+    title: 'Azot Döngüsü',
+    question: 'Azot, canlılar ile çevre arasında nasıl dolaşır?',
+    summary:
+      'Azot döngüsü; tepkimesiz azot gazını canlıların kullanabileceği biçimlere çevirir ve onu atmosfere geri verir; bakteriler, bitkiler ve ayrışma yoluyla tüm yaşamı besler.',
+    tags: ['biyoloji', 'kimya', 'ekoloji', 'yer bilimi', 'bilim'],
+    language: 'tr',
+    content: `# Azot Döngüsü
+
+Azot yaşam için zorunludur — proteinlerin ve DNA'nın anahtar bir bileşenidir. Dünya atmosferi %78 azot gazı olsa da, çoğu canlı bu biçimi doğrudan kullanamaz. Azot döngüsü, azotu kullanılabilir biçimlere çeviren ve sonunda havaya geri veren süreçler bütünüdür.
+
+## Tepkimesiz azot sorunu
+
+Atmosferik azot gazı (N₂) olağanüstü kararlıdır: iki atomu, kırılması çok enerji isteyen bir üçlü bağla birleşmiştir. Bitkiler ve hayvanlar azotu kullanabilmeden önce, onun amonyak ya da nitrat gibi daha tepkin biçimlere "bağlanması" gerekir.
+
+## Ana aşamalar
+
+- **Bağlama.** Özel bakteriler — çoğu fasulye gibi baklagillerin köklerinde yaşar — N₂'yi amonyağa çevirir. Şimşekler ve sanayi gübreleri de azotu bağlar.
+- **Nitrifikasyon.** Başka bakteriler amonyağı nitrite, sonra nitrata çevirir; bu, bitkilerin en kolay soğurduğu biçimdir.
+- **Özümseme.** Bitkiler azot bileşiklerini alıp protein yapmak için kullanır; hayvanlar azotu bitki yiyerek elde eder.
+- **Amonifikasyon.** Ayrıştırıcılar, atıkları ve ölü canlıları parçalayarak azotu toprağa amonyak olarak geri verir.
+- **Denitrifikasyon.** Yine başka bakteriler nitratı azot gazına geri çevirir, onu atmosfere geri verir ve döngüyü kapatır.
+
+## İnsan etkisi
+
+Azotun sanayide bağlanmasının (Haber-Bosch süreci) icadı, besin üretimini muazzam artırdı, ama fazla gübre ırmaklara ve okyanuslara akar. Orada oksijeni tüketen ve "ölü bölgeler" yaratan denetimsiz alg patlamalarını besler; bu da doğal bir döngünün dengesizliğinin ne denli geniş kapsamlı sonuçlar doğurduğunu gösterir.`,
+  },
+  {
+    title: 'Bellek Nasıl Çalışır',
+    question: 'Beyin anıları nasıl saklar ve geri çağırır?',
+    summary:
+      'Bellek; beynin nöron ağları aracılığıyla bilgiyi kodlaması, saklaması ve geri çağırmasıdır; farklı sistemleri kapsar ve kusursuz bir kayıt değil, yeniden kurucu bir süreçtir.',
+    tags: ['beyin', 'psikoloji', 'biyoloji', 'öğrenme', 'bilim'],
+    language: 'tr',
+    content: `# Bellek Nasıl Çalışır
+
+Bellek, beynin bilgiyi kodlama, saklama ve geri çağırma yeteneğidir. Bir video kaydedicisinden çok uzak; kim olduğumuzu biçimlendiren etkin, yeniden kurucu bir sistemdir.
+
+## Üç temel aşama
+
+- **Kodlama.** Duyulardan gelen bilgi, beynin saklayabileceği bir biçime çevrilir.
+- **Saklama.** Bu bilgi zaman içinde tutulur, saniyelerden bir ömre dek.
+- **Geri çağırma.** Saklanan bilgi gerektiğinde geri getirilir — anımsama edimi.
+
+## Bellek türleri
+
+Bellek tek bir şey değildir. Psikologlar onu farklı sistemlere ayırır:
+
+- **Duyusal bellek**, saniyenin kesirleri kadar süren kısa izlenimleri tutar.
+- **Kısa süreli (ya da işleyen) bellek**, onu kullandığınız sürece az miktarda bilgiyi saniyelerce tutar.
+- **Uzun süreli bellek**, bilgiyi uzun süreler saklar ve çok geniş bir sığası vardır. **Açık** anıları (bilinçli olarak çağırdığınız olgular ve olaylar) ve **örtük** anıları (bisiklete binmek gibi beceriler ve alışkanlıklar) içerir.
+
+## Fiziksel temel
+
+Anılar, nöronlar arasındaki bağlantı desenleri olarak saklanır. Öğrenirken belirli nöronlar arasındaki sinapslar güçlenir — çoğu zaman "birlikte ateşlenen nöronlar birlikte bağlanır" diye özetlenen bir ilke. Kararlı bir anının pekişmesi, uykuya ve beyindeki **hipokampüs** denen bir bölgeye güçlü biçimde bağlıdır.
+
+## Bellek neden yanıltır — ve bizi aldatır
+
+Bellek yeniden kurucudur: bir anıyı her geri çağırdığımızda onu yeniden birleştiririz ve farkında olmadan değiştirebiliriz. Bu, anıların neden canlı ama yine de yanlış olabileceğini, görgü tanıklıklarının neden güvenilmez olduğunu ve yinelemenin ile çağrışımların bilgiyi tutmaya neden yardım ettiğini açıklar.`,
+  },
 ];
