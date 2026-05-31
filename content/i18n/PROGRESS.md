@@ -11,15 +11,15 @@ Legend: ✅ done · ⬜ todo
 
 | Batch (8 articles) | zh | ja | ko | es | fr | de | pt | ru | ar | hi | it | tr | vi | th |
 |--------------------|----|----|----|----|----|----|----|----|----|----|----|----|----|----|
-| 1 Science & Nature | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 2 History & Society | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 3 Technology & Math | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 4 Mind/Health/Everyday | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 5 Space & Astronomy | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 6 Arts/Language/Culture | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| 7 How Things Work | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| 1 Science & Nature | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2 History & Society | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| 3 Technology & Math | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| 4 Mind/Health/Everyday | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5 Space & Astronomy | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| 6 Arts/Language/Culture | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| 7 How Things Work | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 
-**Done so far:** 392 / 784 translations — ✅ Chinese, ✅ Japanese, ✅ Korean, ✅ Spanish, ✅ French, ✅ German, ✅ Portuguese COMPLETE (7 of 14 languages — exactly halfway).
+**Done so far:** 448 / 784 translations — ✅ Chinese, ✅ Japanese, ✅ Korean, ✅ Spanish, ✅ French, ✅ German, ✅ Portuguese, ✅ Russian COMPLETE (8 of 14 languages).
 
 Each translated article is a separate wiki document with its own `language`
 code and localized title/question/content/summary/tags, so it slots into the
