@@ -1179,4 +1179,521 @@ Während einer totalen Mondfinsternis leuchtet der Mond oft kupferrot — ein �
 
 Die Mondbahn ist um etwa 5° gegen die Erdbahn um die Sonne geneigt, sodass sich die drei Körper meist nicht genau ausrichten. Diese Neigung ist der Grund, warum Finsternisse nur einige Male im Jahr auftreten und nicht jeden Monat.`,
   },
+  // ── Batch 6: Kunst, Sprache und Kultur ──
+  {
+    title: 'Die Farbenlehre',
+    question: 'Wie wirken Farben zusammen, und was macht manche Kombinationen ansprechend?',
+    summary:
+      'Die Farbenlehre untersucht, wie Farben zueinander stehen und sich verbinden, mit Werkzeugen wie dem Farbkreis und Konzepten wie Komplementär- und Analogschemata zur Anleitung von Kunst und Design.',
+    tags: ['Kunst', 'Design', 'Farbe', 'Kultur', 'visuell'],
+    language: 'de',
+    content: `# Die Farbenlehre
+
+Die Farbenlehre ist die Sammlung praktischer Leitlinien, mit denen Künstler und Designer Farben wirkungsvoll kombinieren. Sie verbindet Physik, Wahrnehmung und Ästhetik zu einfachen, anwendbaren Grundsätzen.
+
+## Der Farbkreis
+
+Das klassische Werkzeug ist der **Farbkreis**, der die Farben in einem Kreis anordnet:
+
+- **Primärfarben** (in der traditionellen Pigmentlehre: Rot, Gelb, Blau) lassen sich nicht aus anderen mischen.
+- **Sekundärfarben** (Orange, Grün, Violett) entstehen aus der Mischung zweier Primärfarben.
+- **Tertiärfarben** füllen die Zwischenräume.
+
+## Drei Eigenschaften der Farbe
+
+Jede Farbe lässt sich beschreiben durch:
+
+- **Farbton** — ihre Grundidentität (Rot, Blau usw.).
+- **Sättigung** — wie kräftig oder gedämpft sie ist.
+- **Helligkeit (Wert)** — wie hell oder dunkel sie ist.
+
+## Gängige Farbschemata
+
+- **Komplementär.** Auf dem Kreis gegenüberliegende Farben (wie Blau und Orange) erzeugen starken Kontrast und Energie.
+- **Analog.** Benachbarte Farben (wie Blau, Türkis, Grün) wirken harmonisch und ruhig.
+- **Triadisch.** Drei gleichmäßig verteilte Farben bieten Ausgewogenheit bei Lebendigkeit.
+
+## Warm, kalt und Bedeutung
+
+Farben werden oft in **warme** (Rot, Orange, Gelb) oder **kalte** (Blau, Grün, Violett) gruppiert, was auf Stimmung und Tiefenwirkung wirkt. Auch Kulturen verbinden Bedeutungen mit Farben, was Designer beim Kommunizieren bedenken.
+
+## Licht gegen Pigment
+
+Eine wichtige Feinheit: Das Mischen von **Licht** (wie auf Bildschirmen) folgt anderen Regeln als das Mischen von Farbe. Bildschirme verbinden rotes, grünes und blaues Licht (RGB), das sich zu Weiß addiert, während Pigmente Licht abziehen und sich zum Dunkeln hin mischen.`,
+  },
+  {
+    title: 'Die Zentralperspektive',
+    question: 'Wie lassen Künstler eine flache Zeichnung dreidimensional wirken?',
+    summary:
+      'Die Zentralperspektive ist eine in der Renaissance formalisierte Zeichentechnik, die durch das Zusammenlaufen paralleler Linien zu Fluchtpunkten auf einem Horizont die Illusion von Tiefe erzeugt.',
+    tags: ['Kunst', 'Zeichnung', 'Geschichte', 'Design', 'visuell'],
+    language: 'de',
+    content: `# Die Zentralperspektive
+
+Die Zentralperspektive ist eine Methode, dreidimensionalen Raum auf einer flachen Fläche darzustellen und eine überzeugende Illusion von Tiefe zu schaffen. Ihre Regeln, in der italienischen Renaissance ausgearbeitet, revolutionierten die westliche Kunst.
+
+## Die Kernidee
+
+In der Wirklichkeit erscheinen Gegenstände kleiner, je weiter sie entfernt sind, und parallele Linien — wie die Ränder einer langen Straße — scheinen beim Zurückweichen zusammenzulaufen. Die Zentralperspektive erfasst das mit wenigen einfachen Bausteinen:
+
+- Einer **Horizontlinie**, die die Augenhöhe des Betrachters darstellt.
+- Einem oder mehreren **Fluchtpunkten** auf dieser Linie, an denen sich zurückweichende parallele Linien zu treffen scheinen.
+- Den **Orthogonalen**, den zusammenlaufenden Linien, die Größe und Lage der Gegenstände leiten.
+
+## Arten
+
+- **Ein-Punkt-Perspektive.** Ein einziger Fluchtpunkt, ideal für frontal gesehene Szenen, etwa direkt in einen Flur zu blicken.
+- **Zwei-Punkt-Perspektive.** Zwei Fluchtpunkte, nützlich für schräg gesehene Gegenstände, etwa die Ecke eines Gebäudes.
+- **Drei-Punkt-Perspektive.** Fügt oben oder unten einen dritten Punkt hinzu und suggeriert extreme Höhe oder Tiefe.
+
+## Ein Durchbruch der Renaissance
+
+Der Architekt **Filippo Brunelleschi** führte die Geometrie im frühen 15. Jahrhundert vor, und sie wurde bald schriftlich festgehalten. Plötzlich konnten Maler Räume, Straßen und Landschaften mit mathematischer Stimmigkeit aufbauen und ihrem Werk einen neuen Realismus verleihen.
+
+## Über die Geometrie hinaus
+
+Künstler nutzen auch die **Luftperspektive** — ferne Gegenstände blasser, bläulicher und weniger detailliert zu machen —, um die Tiefenwirkung zu verstärken, die die Zentralperspektive begründet.`,
+  },
+  {
+    title: 'Harmonie und Tonleitern',
+    question: 'Warum klingen manche Kombinationen von Tönen angenehm?',
+    summary:
+      'Musikalische Harmonie entsteht großenteils aus einfachen Frequenzverhältnissen zwischen Tönen; Tonleitern ordnen Tonhöhen zu Mustern, mit denen Kulturen Melodie und Harmonie bauen.',
+    tags: ['Musik', 'Kunst', 'Schall', 'Kultur', 'Mathematik'],
+    language: 'de',
+    content: `# Harmonie und Tonleitern
+
+Warum klingt ein Akkord „richtig“, während ein zufälliges Aufeinanderprallen von Tönen schroff klingt? Ein Großteil der Antwort liegt in der Physik des Schalls und den Mustern, die Kulturen daraus bauen.
+
+## Töne sind Frequenzen
+
+Ein musikalischer Ton ist eine Schallwelle, die mit einer bestimmten **Frequenz** schwingt. Stehen die Frequenzen zweier Töne in **einfachen Verhältnissen**, richten sich ihre Wellen oft aus, und unsere Ohren neigen dazu, das Ergebnis als **konsonant** (angenehm) zu hören. Komplexe, kollidierende Verhältnisse klingen **dissonant** (gespannt).
+
+## Die Oktave und einfache Verhältnisse
+
+Die grundlegendste Beziehung ist die **Oktave**, ein Frequenzverhältnis von genau **2:1** — die beiden Töne klingen so ähnlich, dass wir ihnen denselben Namen geben. Weitere starke Konsonanzen sind die reine Quinte (etwa 3:2) und die reine Quarte (etwa 4:3). Traditionell wird dem griechischen Denker Pythagoras zugeschrieben, diese angenehmen Intervalle mit einfachen Zahlenverhältnissen verknüpft zu haben.
+
+## Tonleitern
+
+Eine **Tonleiter** ist ein ausgewählter Satz von Tonhöhen innerhalb einer Oktave, in einem Muster von Schritten angeordnet. Die westliche Musik nutzt häufig die siebentönige **Dur**- und **Moll**-Tonleiter, während viele Traditionen **pentatonische** (fünftönige) Leitern verwenden. Das Muster großer und kleiner Schritte gibt jeder Leiter ihren Charakter — Dur-Leitern wirken oft hell, Moll-Leitern düsterer.
+
+## Harmonie und Stimmung
+
+**Harmonie** ist das gleichzeitige Erklingen mehrerer Töne, wie in Akkorden. Damit Instrumente in jeder Tonart spielen können, passt die moderne westliche Stimmung die reinen Verhältnisse leicht an, in einem Kompromiss namens **gleichstufige Stimmung**, der die 12 Töne der Oktave gleichmäßig verteilt. Sie opfert die vollkommene Reinheit der Flexibilität — ein Abwägen im Kern der Stimmung von Klavieren und Gitarren.`,
+  },
+  {
+    title: 'Etymologie: Woher Wörter kommen',
+    question: 'Wie entstehen Wörter und wie ändern sie mit der Zeit ihre Bedeutung?',
+    summary:
+      'Die Etymologie erforscht den Ursprung von Wörtern und wie sich ihre Formen und Bedeutungen wandeln; das Englische etwa mischt germanische, lateinische, französische und viele weitere Quellen.',
+    tags: ['Sprache', 'Linguistik', 'Geschichte', 'Kultur', 'Wörter'],
+    language: 'de',
+    content: `# Etymologie: Woher Wörter kommen
+
+Die Etymologie erforscht den Ursprung von Wörtern — woher sie kamen, wie sich ihre Laute und Schreibungen wandelten und wie ihre Bedeutungen über die Jahrhunderte drifteten.
+
+## Sprachen haben Familien
+
+Die meisten europäischen und viele asiatische Sprachen stammen von einem rekonstruierten Vorfahren ab, dem **Urindogermanischen**, das vor Tausenden Jahren gesprochen wurde. Als sich Bevölkerungen ausbreiteten und trennten, verzweigte sich ihre Sprache in Äste wie das Germanische, das Romanische (aus dem Lateinischen), das Slawische und das Indo-Iranische. Darum ähnelt „Mutter“ dem *mother* (Englisch), *mère* (Französisch) und *mata* (Sanskrit).
+
+## Das Deutsche und das Entlehnen
+
+Das Deutsche ist eine germanische Sprache, hat aber über die Jahrhunderte viel entlehnt: Latein durch Kirche und Gelehrsamkeit (*Fenster*, *Keller*), Französisch durch Hof und Mode (*Etage*, *Büro*) und heute Englisch in der modernen Welt (*Computer*, *Team*). Diese Schichten machen die Geschichte einer Sprache zur Karte ihrer Kontakte.
+
+## Wie sich Bedeutungen wandeln
+
+Wörter bleiben selten stehen. Häufige Muster sind:
+
+- **Erweiterung.** Ein Wort, das einst etwas Bestimmtes meinte, bezeichnet später eine breitere Kategorie.
+- **Verengung.** Ein allgemeiner Begriff bezieht sich am Ende auf etwas Spezielleres.
+- **Bedeutungswandel.** Der Sinn gleitet mit dem Gebrauch; viele Wörter wanderten vom Neutralen ins Positive oder umgekehrt.
+
+## Warum es wichtig ist
+
+Etymologie ist mehr als eine Kuriosität. Den Ursprung von Wörtern nachzuverfolgen offenbart Geschichten von Wanderung, Eroberung, Handel und Technik — jeder Kontakt hinterlässt seine Spur in einer Sprache. Sie hilft Lernenden auch, unbekannte Wörter zu entschlüsseln, indem sie gemeinsame Wurzeln, Vor- und Nachsilben erkennen.`,
+  },
+  {
+    title: 'Der Zweck der Mythologie',
+    question: 'Warum schuf nahezu jede Kultur Mythen?',
+    summary:
+      'Mythen sind überlieferte Erzählungen, die die Welt erklären, Werte kodieren und Gemeinschaften binden; obwohl nicht wörtlich wahr, erfüllten sie wesentliche erklärende, moralische und soziale Funktionen.',
+    tags: ['Mythologie', 'Kultur', 'Geschichte', 'Religion', 'Erzählung'],
+    language: 'de',
+    content: `# Der Zweck der Mythologie
+
+Fast jede menschliche Kultur hat **Mythen** geschaffen — überlieferte Erzählungen über Götter, Helden und die Ursprünge der Welt. Ihre nahezu universelle Präsenz lässt vermuten, dass sie tiefen menschlichen Bedürfnissen entsprechen.
+
+## Was Mythen sind
+
+Ein Mythos ist nicht einfach eine falsche Geschichte. In seinem ursprünglichen kulturellen Rahmen ist ein Mythos eine heilige oder grundlegende Erzählung, die erklärt, wie die Dinge entstanden und warum die Welt so funktioniert. Das Wort stammt vom griechischen *mythos*, „Erzählung“ oder „Rede“.
+
+## Was Mythen leisten
+
+Forscher nennen mehrere sich überschneidende Funktionen:
+
+- **Erklärung.** Vor der Wissenschaft beantworteten Mythen die großen Fragen: Warum zieht die Sonne über den Himmel? Warum wechseln die Jahreszeiten? Der griechische Mythos der Persephone etwa erklärte die Wiederkehr des Winters.
+- **Moralische Leitung.** Mythen führen Tugenden vor und warnen vor Lastern, indem sie die Folgen von Hochmut, Gier oder Mut dramatisieren.
+- **Sozialer Zusammenhalt.** Geteilte Erzählungen binden eine Gemeinschaft durch gemeinsame Identität, Geschichte und Werte.
+- **Mit dem Rätselhaften umgehen.** Mythen geben Geburt, Tod, Liebe und Leid Sinn — Erfahrungen, die sich schlichter Erklärung widersetzen.
+
+## Gemeinsame Motive
+
+Über ferne Kulturen hinweg kehren ähnliche Motive wieder: Schöpfung aus dem Chaos, große Fluten, eine Reise in die Unterwelt und die „Heldenreise“, in der ein Held auszieht, Prüfungen besteht und verwandelt zurückkehrt. Solche wiederkehrenden Muster legen nahe, dass Mythen geteilte Seiten der menschlichen Vorstellungskraft berühren.
+
+## Der Mythos heute
+
+Selbst in einem wissenschaftlichen Zeitalter besteht das mythische Erzählen in Literatur, Film und Volkssagen fort — ein Beleg, dass der menschliche Hunger nach bedeutungsvollen Geschichten nie erloschen ist.`,
+  },
+  {
+    title: 'Die Typografie',
+    question: 'Was ist Typografie und warum prägt sie, wie wir lesen?',
+    summary:
+      'Typografie ist die Kunst, Schrift so anzuordnen, dass geschriebene Sprache lesbar und ausdrucksstark wird, mit Schriftwahl, Abstand und Hierarchie, die den Leser unmerklich führen.',
+    tags: ['Design', 'Kunst', 'Kommunikation', 'Typografie', 'visuell'],
+    language: 'de',
+    content: `# Die Typografie
+
+Typografie ist das Handwerk, Buchstaben und Text so anzuordnen, dass Sprache lesbar, klar und ansprechend wird. Oft unsichtbar, wenn sie gut gemacht ist, prägt sie zutiefst, wie wir das geschriebene Wort erleben.
+
+## Schriftarten und Schriften
+
+Eine **Schriftart (typeface)** ist ein Entwurf für einen Satz von Zeichen (wie Helvetica oder Times New Roman); eine **Schrift (font)** ist eine bestimmte Größe und ein bestimmter Stil davon. Schriftarten gliedern sich in große Familien:
+
+- **Serif.** Buchstaben mit kleinen Abschlussstrichen („Füßchen“), oft als traditionell empfunden und in langen Drucktexten verwendet.
+- **Serifenlos (Sans-Serif).** Klare Buchstaben ohne diese Striche, wegen ihrer Schlichtheit auf Bildschirmen verbreitet.
+- **Dicktengleiche, Schreib- und Auszeichnungsschriften** dienen besonderen Zwecken.
+
+## Die Bausteine
+
+Gute Typografie balanciert viele kleine Entscheidungen:
+
+- **Hierarchie.** Größe, Strichstärke und Abstand zu variieren signalisiert, was Überschrift, Zwischentitel oder Fließtext ist, und leitet das Auge.
+- **Abstand.** *Unterschneidung* (Abstand zwischen bestimmten Buchstaben), *Laufweite* (allgemeiner Buchstabenabstand) und *Zeilenabstand* wirken alle auf die Lesbarkeit.
+- **Zeilenlänge.** Zu lange oder zu kurze Zeilen ermüden den Leser.
+
+## Warum es wichtig ist
+
+Typografie ist nicht bloß Zierde. Klare Schrift hilft dem Leser, Information rasch und bequem aufzunehmen, während schlechte Wahl Ermüdung oder Verwirrung verursacht. Schrift trägt auch einen **Ton**: Eine verspielte Auszeichnungsschrift und eine nüchterne Serifenschrift senden sehr verschiedene Botschaften, bevor ein Wort gelesen ist.
+
+## Eine lange Tradition
+
+Die Disziplin reicht von den sorgfältigen Händen mittelalterlicher Schreiber über Gutenbergs Metalllettern bis zu den Bildschirmen von heute, wo responsives Design den Text auf unzähligen Geräten lesbar halten muss.`,
+  },
+  {
+    title: 'Die Erzählstruktur',
+    question: 'Warum folgen so viele Geschichten einer ähnlichen Form?',
+    summary:
+      'Die Erzählstruktur ist das Gerüst, das die Ereignisse einer Geschichte ordnet; vertraute Muster wie der Drei-Akt-Aufbau und der Erzählbogen helfen, Spannung aufzubauen und eine befriedigende Auflösung zu liefern.',
+    tags: ['Erzählung', 'Schreiben', 'Kultur', 'Literatur', 'Kunst'],
+    language: 'de',
+    content: `# Die Erzählstruktur
+
+Die Erzählstruktur ist das zugrunde liegende Gerüst, das die Ereignisse einer Geschichte ordnet. In Romanen, Filmen, Theaterstücken und Volksmärchen kehren bestimmte Formen wieder, weil sie verlässlich die Aufmerksamkeit fesseln und sich befriedigend anfühlen.
+
+## Der klassische Bogen
+
+Viele Geschichten folgen einem auf- und absteigenden Muster, oft **Freytags Pyramide** genannt:
+
+1. **Exposition.** Figuren, Schauplatz und die gewöhnliche Welt einführen.
+2. **Steigende Handlung.** Ein Konflikt taucht auf, und Verwicklungen bauen Spannung auf.
+3. **Höhepunkt.** Der Wendepunkt höchster Spannung.
+4. **Fallende Handlung.** Die Folgen entfalten sich.
+5. **Auflösung.** Der Konflikt wird beigelegt, und eine neue Normalität ist erreicht.
+
+## Der Drei-Akt-Aufbau
+
+Eine weit verbreitete Variante, vor allem im Film, teilt die Geschichte in drei Akte: **Aufbau** (Welt und Problem einführen), **Konfrontation** (der Protagonist kämpft, der Einsatz steigt) und **Auflösung** (Höhepunkt und Ausgang). Klare „Wendepunkte“ treiben die Geschichte von einem Akt in den nächsten.
+
+## Die Heldenreise
+
+Ein weiteres einflussreiches Muster beschreibt einen Helden, der die gewöhnliche Welt verlässt, ins Unbekannte vordringt, Prüfungen und eine tiefe Bewährung besteht und verwandelt zurückkehrt. Seine Spielarten erscheinen in Mythen wie in modernen Kinoerfolgen.
+
+## Warum Struktur hilft
+
+Struktur ist keine starre Formel, sondern ein Werkzeug. Sie steuert **Spannung und Tempo**, sorgt dafür, dass der Konflikt die Geschichte vorantreibt, und gibt dem Publikum ein befriedigendes Gefühl des Abschlusses. Geschickte Erzähler spielen oft *gegen* die erwarteten Strukturen — halten die Auflösung zurück, verwirren die Chronologie oder untergraben den Höhepunkt — gerade weil das Publikum die vertraute Form so gut kennt.`,
+  },
+  {
+    title: 'Die nonverbale Kommunikation',
+    question: 'Wie viel teilen wir ohne Worte mit?',
+    summary:
+      'Die nonverbale Kommunikation vermittelt Bedeutung durch Körpersprache, Gesichtsausdruck, Tonfall, Geste und Raum; sie trägt emotionale Information oft kraftvoller als Worte.',
+    tags: ['Psychologie', 'Kommunikation', 'Kultur', 'Verhalten', 'Gesellschaft'],
+    language: 'de',
+    content: `# Die nonverbale Kommunikation
+
+Nonverbale Kommunikation ist alles, was wir ohne Worte vermitteln — Gesichtsausdrücke, Gesten, Haltung, Blickkontakt, Tonfall und sogar der Abstand, den wir wahren. Es ist eine ständige, oft unbewusste Schicht menschlicher Interaktion.
+
+## Die Hauptkanäle
+
+- **Gesichtsausdrücke.** Manche Gefühle, wie Freude, Furcht und Ekel, werden durch Gesichtsbewegungen ausgedrückt, die in vielen Kulturen erkannt werden.
+- **Körpersprache.** Haltung und Gesten signalisieren Selbstsicherheit, Offenheit, Anspannung oder Langeweile.
+- **Blickkontakt.** Reguliert das Gespräch und vermittelt Aufmerksamkeit, Interesse oder Herausforderung.
+- **Parasprache.** *Wie* wir sprechen — Tonhöhe, Tempo, Lautstärke, Pausen — färbt die Bedeutung unserer Worte.
+- **Proxemik.** Der Gebrauch des persönlichen Raums, der je nach Beziehung und Kultur variiert.
+
+## Warum es wichtig ist
+
+Nonverbale Signale sind besonders kraftvoll für **emotionale** Botschaften. Widersprechen sich Worte und Körpersprache — „mir geht’s gut“ mit zusammengebissenen Zähnen zu sagen —, neigen Zuhörer dazu, dem nonverbalen Signal zu trauen. Ein Großteil von Verbundenheit, Vertrauen und Überzeugung beruht auf diesen unausgesprochenen Kanälen.
+
+## Die Kultur formt sie
+
+Obwohl manche Ausdrücke verbreitet erscheinen, sind viele nonverbale Normen **kulturspezifisch**. Das angemessene Maß an Blickkontakt, die Bedeutung einer bestimmten Geste und der angenehme Gesprächsabstand unterscheiden sich zwischen Gesellschaften — eine häufige Quelle interkultureller Missverständnisse.
+
+## Im digitalen Zeitalter
+
+Textbasierte Kommunikation entkleidet die meisten nonverbalen Signale, weshalb der Ton online so leicht falsch verstanden wird. **Emojis**, Zeichensetzung und Formatierung haben sich teils entwickelt, um die Lücke zu füllen, und holen ein wenig des emotionalen Signals zurück, das der Kontakt von Angesicht zu Angesicht natürlich trägt.`,
+  },
+  // ── Batch 7: Wie die Dinge funktionieren ──
+  {
+    title: 'Wie WLAN funktioniert',
+    question: 'Wie sendet WLAN das Internet durch die Luft?',
+    summary:
+      'WLAN nutzt Funkwellen, um Daten zwischen Geräten und einem Router zu übertragen, und kodiert digitale Information auf bestimmten Frequenzbändern über kurze Entfernungen ohne Kabel.',
+    tags: ['Technik', 'Netzwerke', 'drahtlos', 'Internet', 'Ingenieurwesen'],
+    language: 'de',
+    content: `# Wie WLAN funktioniert
+
+WLAN lässt Geräte ohne Kabel mit einem Netz und dem Internet verbinden, indem es **Funkwellen** nutzt, um Daten über kurze Entfernungen durch die Luft zu tragen.
+
+## Funkwellen tragen Daten
+
+Im Kern ist WLAN ein wechselseitiger Funk. Ein **Router** ist mit dem Internet verbunden (oft per physischem Kabel) und enthält zudem einen Funksender und -empfänger. Dein Telefon oder Laptop hat dasselbe. Sie tauschen Daten aus, indem sie digitale Einsen und Nullen auf Funkwellen kodieren — die Eigenschaften der Welle rasch variierend, um Information darzustellen, ein Vorgang namens **Modulation**.
+
+## Frequenzbänder und Kanäle
+
+WLAN nutzt vor allem zwei Frequenzbänder: um **2,4 GHz** und **5 GHz** (neuere Standards fügen 6 GHz hinzu).
+
+- **2,4 GHz** reicht weiter und durchdringt Wände besser, ist aber langsamer und überfüllter (es teilt den Raum mit Mikrowellen und anderen Geräten).
+- **5 GHz** ist schneller und weniger überlastet, hat aber eine geringere Reichweite.
+
+Jedes Band ist in **Kanäle** unterteilt, damit sich nahe Netze nicht stören.
+
+## Übersetzung ins Internet
+
+Der Router wirkt als Übersetzer und Verkehrslenker. Er empfängt drahtlose Daten von deinen Geräten, sendet sie über die kabelgebundene Internetverbindung weiter und leitet eingehende Daten an das richtige Gerät. Jedes Gerät wird durch eine eindeutige Hardware-Adresse (MAC) erkannt und erhält eine lokale Netzadresse.
+
+## Sicherheit
+
+Da sich Funkwellen in alle Richtungen ausbreiten, könnte im Prinzip jeder in der Nähe mithören. Darum **verschlüsselt** WLAN den Verkehr — moderne Netze nutzen die Standards WPA2 oder WPA3 —, sodass die Daten verwürfelt werden und ein Passwort zum Beitritt nötig ist.`,
+  },
+  {
+    title: 'Wie Batterien Energie speichern',
+    question: 'Wie speichert und gibt eine Batterie Strom ab?',
+    summary:
+      'Batterien speichern Energie chemisch und geben sie als Strom durch Reaktionen ab, die Elektronen von einer Elektrode zur anderen treiben; wiederaufladbare Typen kehren die Reaktion um.',
+    tags: ['Technik', 'Chemie', 'Energie', 'Ingenieurwesen', 'Wissenschaft'],
+    language: 'de',
+    content: `# Wie Batterien Energie speichern
+
+Eine Batterie speichert Energie als chemisches Potenzial und wandelt sie bei Bedarf in Strom um. Im Grunde ist sie eine gesteuerte chemische Reaktion, genutzt, um Elektronen durch einen Stromkreis zu treiben.
+
+## Die Grundbestandteile
+
+Jede Batteriezelle hat drei Schlüsselbauteile:
+
+- Eine **negative Elektrode (Anode)**.
+- Eine **positive Elektrode (Kathode)**.
+- Einen **Elektrolyt**, eine Substanz dazwischen, die geladene Ionen, aber keine Elektronen durchlässt.
+
+## Wie Strom fließt
+
+In der Batterie setzt eine chemische Reaktion an der Anode **Elektronen** frei. Da der Elektrolyt verhindert, dass Elektronen direkt überqueren, werden sie gezwungen, durch den äußeren Stromkreis — dein Gerät — zur Kathode zu wandern. Dieser Elektronenfluss *ist* der elektrische Strom, der das Gerät antreibt. Unterdessen bewegen sich geladene **Ionen** durch den Elektrolyt, um die Chemie im Gleichgewicht zu halten.
+
+## Spannung und Kapazität
+
+Die Wahl der Materialien legt die **Spannung** fest (den „Druck“ hinter dem Strom), während die Menge des Aktivmaterials die **Kapazität** festlegt (wie lange sie hält, in Amperestunden gemessen). Darum eignen sich verschiedene Chemien für verschiedene Aufgaben.
+
+## Wiederaufladbare Batterien
+
+In einer **wiederaufladbaren** Batterie, wie den **Lithium-Ionen**-Zellen in Telefonen und Elektroautos, ist die Reaktion umkehrbar. Externer Strom treibt die Chemie rückwärts, bewegt die Ionen zur Ausgangselektrode zurück und stellt die gespeicherte Energie wieder her. Über viele Zyklen verschleißen die Materialien langsam, weshalb Batterien im Alter weniger Ladung halten.
+
+## Ein Hinweis zur Sicherheit
+
+Da sie viel Energie auf kleinem Raum bündeln, können beschädigte oder überhitzte Batterien — besonders Lithium-Ionen — gefährlich versagen, weshalb sie Schutzschaltungen enthalten.`,
+  },
+  {
+    title: 'Wie Touchscreens funktionieren',
+    question: 'Woher weiß ein Touchscreen, wo dein Finger ist?',
+    summary:
+      'Die meisten modernen Touchscreens sind kapazitiv: Sie erfassen die winzige Änderung eines elektrischen Feldes, die dein leitfähiger Finger verursacht, und bestimmen den Berührpunkt präzise auf einem Elektrodenraster.',
+    tags: ['Technik', 'Elektronik', 'Ingenieurwesen', 'Geräte', 'Physik'],
+    language: 'de',
+    content: `# Wie Touchscreens funktionieren
+
+Touchscreens lassen uns Geräte steuern, indem wir die Anzeige direkt antippen. Der häufigste Typ in Telefonen und Tablets ist der **kapazitive** Touchscreen, der die elektrischen Eigenschaften deines Fingers erfasst.
+
+## Kapazitive Erfassung
+
+Der Bildschirm ist mit einer durchsichtigen leitfähigen Schicht überzogen, die ein kleines, gleichmäßiges **elektrisches Feld** trägt. Der menschliche Körper leitet Strom, sodass dein Finger beim Berühren des Glases eine winzige Ladungsmenge abzieht und das Feld an dieser Stelle stört.
+
+Unter der Oberfläche erfasst ein Raster aus Elektroden (oft in Zeilen und Spalten) genau, *wo* sich das Feld geändert hat. Die Steuerung des Geräts liest diese Koordinaten vielfach pro Sekunde und meldet sie der Software als Berührung.
+
+## Multitouch
+
+Da das Raster Änderungen an mehreren Punkten zugleich erfassen kann, beherrschen kapazitive Bildschirme **Multitouch** — das Erkennen von Gesten wie dem Zoomen durch Spreizen und dem Scrollen mit zwei Fingern. Das ist ein großer Grund, warum kapazitive Bildschirme ältere Bauarten verdrängten.
+
+## Warum Handschuhe oft scheitern
+
+Da die Technik auf der **Leitfähigkeit** deines Fingers beruht, blockieren gewöhnliche Handschuhe den Effekt — daher nutzen touchscreentaugliche Handschuhe leitfähiges Garn an den Fingerspitzen. Auch ein Kunststoffstift funktioniert nicht, sofern er nicht eigens gestaltet ist, die Leitfähigkeit eines Fingers nachzuahmen.
+
+## Andere Arten
+
+Ältere oder spezialisierte Bildschirme nutzen andere Methoden. **Resistive** Touchscreens, noch in manchen Industrie- und günstigen Geräten zu finden, haben zwei biegsame Schichten, die beim Drücken physisch zusammengepresst werden; sie reagieren auf jeden Gegenstand, auch auf einen behandschuhten Finger oder schlichten Stift, beherrschen aber kein Multitouch und wirken weniger reaktionsschnell.`,
+  },
+  {
+    title: 'Wie Kühlung funktioniert',
+    question: 'Wie macht ein Kühlschrank Dinge kalt?',
+    summary:
+      'Kühlschränke befördern Wärme aus ihrem Inneren mithilfe eines Kältemittels, das beim Verdampfen Wärme aufnimmt und beim Kondensieren abgibt, angetrieben in einem fortlaufenden Kreislauf durch einen Verdichter.',
+    tags: ['Technik', 'Physik', 'Ingenieurwesen', 'Thermodynamik', 'Wissenschaft'],
+    language: 'de',
+    content: `# Wie Kühlung funktioniert
+
+Ein Kühlschrank „erzeugt keine Kälte“ — er **befördert Wärme** aus dem Inneren des Schranks in den Raum. Das gelingt ihm mit einem raffinierten Kreislauf und einem Arbeitsmittel namens **Kältemittel**.
+
+## Das Schlüsselprinzip
+
+Wenn eine Flüssigkeit zu Gas verdampft, **nimmt sie Wärme** aus ihrer Umgebung auf (denk daran, wie Schweiß die Haut kühlt). Wenn ein Gas wieder zu Flüssigkeit kondensiert, **gibt es Wärme ab**. Ein Kühlschrank nutzt das, indem er das Kältemittel im kalten Fach verdampfen und außen kondensieren lässt.
+
+## Der Kühlkreislauf
+
+Das Kältemittel durchläuft unaufhörlich vier Stufen:
+
+1. **Verdichter.** Presst das Kältemittelgas zusammen und erhöht Druck und Temperatur.
+2. **Verflüssiger-Schlangen** (an Rück- oder Unterseite). Das heiße Gas hohen Drucks gibt Wärme an den Raum ab und kondensiert zu Flüssigkeit.
+3. **Expansionsventil.** Die Flüssigkeit strömt durch ein enges Ventil und fällt stark in Druck und Temperatur.
+4. **Verdampfer-Schlangen** (im Inneren). Die kalte Flüssigkeit verdampft, nimmt Wärme aus dem Lebensmittelfach auf und kühlt es.
+
+Das Gas kehrt dann zum Verdichter zurück, und der Kreislauf wiederholt sich.
+
+## Warum die Rückseite warm ist
+
+Die dem Inneren entzogene Wärme muss irgendwohin — sie wird über die Verflüssiger-Schlangen in den Raum abgegeben, weshalb sich Rück- oder Seitenfläche eines Kühlschranks warm anfühlen.
+
+## Dieselbe Idee, überall
+
+Klimaanlagen und Wärmepumpen nutzen denselben Kreislauf. Eine Wärmepumpe kann ihn sogar umgekehrt laufen lassen, um eine Wohnung zu *heizen*, indem sie Wärme von draußen nach drinnen befördert — eine effiziente Form des Heizens.`,
+  },
+  {
+    title: 'Wie Noise-Cancelling-Kopfhörer funktionieren',
+    question: 'Wie löschen Kopfhörer Hintergrundgeräusche aus?',
+    summary:
+      'Aktive Noise-Cancelling-Kopfhörer nutzen Mikrofone, um Umgebungsschall zu erfassen, und erzeugen eine gegenläufige Schallwelle, die destruktiv mit ihm interferiert und so stetiges Hintergrundgeräusch verringert.',
+    tags: ['Technik', 'Schall', 'Physik', 'Ingenieurwesen', 'Audio'],
+    language: 'de',
+    content: `# Wie Noise-Cancelling-Kopfhörer funktionieren
+
+Noise-Cancelling-Kopfhörer verringern unerwünschten Hintergrundschall und machen Reisen und laute Umgebungen erträglicher. Die fortgeschrittenen Modelle gelingen das mit einem feinen physikalischen Kniff namens **destruktive Interferenz**.
+
+## Schall sind Wellen
+
+Schall breitet sich als Druckwellen in der Luft aus. Treffen zwei Wellen aufeinander, verbinden sie sich. Fällt der Berg der einen mit dem Tal der anderen zusammen — sind sie „gegenphasig“ —, heben sich die Wellen auf und erzeugen Stille. Das ist **destruktive Interferenz**.
+
+## Aktives Noise-Cancelling
+
+Aktive Noise-Cancelling-Kopfhörer (ANC) nutzen dieses Prinzip:
+
+1. Winzige **Mikrofone** am Kopfhörer tasten den Umgebungslärm fortlaufend ab.
+2. Ein Prozessor berechnet sofort eine Schallwelle, die das genaue **Gegenteil** (Inverse) dieses Lärms ist.
+3. Die Lautsprecher des Kopfhörers spielen diesen „Antischall“ zusammen mit deiner Musik ab.
+
+Trifft der Antischall auf den eingehenden Lärm, heben sich die beiden Wellen auf, und du hörst den Hintergrund viel leiser.
+
+## Was es gut kann — und was nicht
+
+ANC wirkt am besten bei **stetigen, niederfrequenten** Geräuschen wie dem dauernden Dröhnen eines Flugzeugtriebwerks oder einer Klimaanlage, weil sie vorhersehbar genug zum Auslöschen sind. Mit **plötzlichen, scharfen, hochfrequenten** Geräuschen wie einer nahen Stimme tut es sich schwer, da sie sich zu schnell ändern.
+
+## Passiv gegen aktiv
+
+Es gibt auch die **passive** Schalldämmung — Polsterung und eine dichte Abdichtung, um Schall physisch zu blockieren, wie Ohrstöpsel. Viele Kopfhörer verbinden beides: Die passive Dämmung blockiert hohe Frequenzen, während das aktive Auslöschen das tiefe Dröhnen übernimmt.`,
+  },
+  {
+    title: 'Wie LEDs Licht erzeugen',
+    question: 'Warum sind LED-Leuchten so effizient?',
+    summary:
+      'LEDs erzeugen Licht, wenn Elektronen durch einen Halbleiter wandern und Energie direkt als Photonen abgeben, wobei wenig Wärme verschwendet wird — das macht sie weit effizienter als alte Glühlampen.',
+    tags: ['Technik', 'Elektronik', 'Physik', 'Energie', 'Ingenieurwesen'],
+    language: 'de',
+    content: `# Wie LEDs Licht erzeugen
+
+Eine LED — **Leuchtdiode** — wandelt Strom direkt und effizient in Licht um. LEDs beherrschen heute von Telefonbildschirmen bis zu Haushaltslampen alles, weil sie einen Bruchteil der Energie alter Beleuchtung nutzen.
+
+## Licht aus einem Halbleiter
+
+Eine LED besteht aus einem **Halbleiter**, einem Material, dessen Fähigkeit, Strom zu leiten, sich präzise gestalten lässt. Sie hat zwei Bereiche: einen mit überschüssigen Elektronen (n-Typ) und einen mit „Löchern“, wo Elektronen fehlen (p-Typ).
+
+Wird eine Spannung angelegt, fließen Elektronen über die Grenze zwischen den Bereichen und fallen in die Löcher. Jedes Mal, wenn ein Elektron in ein Loch niedrigerer Energie fällt, gibt es ein Energiepaket als **Photon** ab — ein Lichtteilchen. Dieser Vorgang heißt **Elektrolumineszenz**.
+
+## Warum die Farbe festliegt
+
+Die Energie jedes Photons — und damit die **Farbe** des Lichts — hängt vom Halbleitermaterial ab. Verschiedene Verbindungen senden rotes, grünes oder blaues Licht aus. Weiße LEDs sind meist blaue LEDs, beschichtet mit einem Leuchtstoff, der einen Teil des Blaus in andere Farben umwandelt, die sich zu Weiß mischen.
+
+## Warum sie effizient sind
+
+Alte **Glühlampen** erzeugen Licht, indem sie einen Draht erhitzen, bis er glüht, und verschwenden rund 90 % der Energie als Wärme. LEDs wandeln Strom weit direkter in Licht um, geben viel mehr Licht pro Watt ab und bleiben kühl. Sie halten zudem Zehntausende Stunden und schalten sich sofort ein.
+
+## Überall, wohin man sieht
+
+Dieselbe Technik, verkleinert und millionenfach gepackt, bildet die Pixel von LED- und OLED-Bildschirmen und treibt Anzeigen, Ampeln und Displays im ganzen modernen Leben an.`,
+  },
+  {
+    title: 'Wie Solarmodule funktionieren',
+    question: 'Wie wandeln Solarmodule Sonnenlicht in Strom um?',
+    summary:
+      'Solarmodule nutzen den photovoltaischen Effekt: Photonen des Sonnenlichts schlagen Elektronen in Halbleiterzellen los, und ein eingebautes elektrisches Feld leitet sie in einen nutzbaren Strom.',
+    tags: ['Technik', 'Energie', 'Physik', 'erneuerbare Energie', 'Ingenieurwesen'],
+    language: 'de',
+    content: `# Wie Solarmodule funktionieren
+
+Solarmodule wandeln Sonnenlicht direkt in Strom um, mithilfe des **photovoltaischen Effekts**. Ohne bewegliche Teile erzeugen sie still Energie, sobald die Sonne scheint.
+
+## Die Photovoltaikzelle
+
+Ein Solarmodul besteht aus vielen **Photovoltaik- (PV-) Zellen**, meist aus dem Halbleiter **Silizium**. Jede Zelle hat zwei Siliziumschichten, die so behandelt sind, dass die eine einen leichten Überschuss an Elektronen und die andere einen leichten Mangel hat. Wo die Schichten aufeinandertreffen, entsteht ein eingebautes **elektrisches Feld**.
+
+## Von Licht zu Strom
+
+Sonnenlicht trifft als Energiepakete namens **Photonen** ein. Trifft ein Photon mit genug Energie auf die Zelle, schlägt es ein Elektron aus einem Siliziumatom heraus. Das eingebaute elektrische Feld treibt diese freigesetzten Elektronen in eine einzige Richtung, und Metallkontakte sammeln sie. Dieser gerichtete Elektronenfluss ist ein elektrischer **Strom** — nutzbarer Strom.
+
+## Von Gleich- zu Wechselstrom
+
+PV-Zellen erzeugen **Gleichstrom (DC)**. Haushalte und das Netz nutzen **Wechselstrom (AC)**, also wandelt ein Gerät namens **Wechselrichter** die DC-Ausgabe des Moduls in AC um. Überschüssige Energie kann in Batterien gespeichert oder ins Netz zurückgespeist werden.
+
+## Was die Ausbeute beeinflusst
+
+Die Ausbeute eines Moduls hängt von Lichtstärke, Winkel, Temperatur und Verschattung ab — selbst eine Teilverschattung einer Zelle kann die Ausbeute eines Moduls überproportional senken. Der Wirkungsgrad (der Anteil des in Strom umgewandelten Lichts) typischer kommerzieller Siliziummodule liegt bei etwa 20 %.
+
+## Warum es wichtig ist
+
+Da Sonnenlicht reichlich und kostenlos ist, ist Solarenergie ein Eckpfeiler der **erneuerbaren Energie**. Sinkende Kosten haben sie in weiten Teilen der Welt zu einer der billigsten Quellen neuen Stroms gemacht, zentral für die Bemühungen, die Emissionen aus fossilen Brennstoffen zu senken.`,
+  },
+  {
+    title: 'Wie ein Mikrowellenherd Speisen erhitzt',
+    question: 'Warum gart ein Mikrowellenherd Speisen so schnell?',
+    summary:
+      'Mikrowellenherde senden Funkwellen aus, die so abgestimmt sind, dass sie die Wassermoleküle in Speisen schnell rotieren lassen und so Wärme im ganzen Lebensmittel und nicht nur an der Oberfläche erzeugen.',
+    tags: ['Technik', 'Physik', 'Ingenieurwesen', 'Lebensmittel', 'Wissenschaft'],
+    language: 'de',
+    content: `# Wie ein Mikrowellenherd Speisen erhitzt
+
+Ein Mikrowellenherd erhitzt Speisen schnell, indem er die **Wassermoleküle** in ihrem Inneren mit einer bestimmten Art von Funkwelle anvisiert und so Wärme von innen erzeugt statt aus einer Flamme oder einem äußeren Heizelement.
+
+## Mikrowellen und Wasser
+
+Ein Bauteil namens **Magnetron** erzeugt **Mikrowellen** — eine Form elektromagnetischer Strahlung — meist mit einer Frequenz von etwa 2,45 Gigahertz. Wassermoleküle sind **polar**, das heißt, sie haben ein leicht positives und ein leicht negatives Ende. Das rasch wechselnde elektrische Feld der Mikrowellen lässt diese Moleküle milliardenfach pro Sekunde hin und her kippen. Dieses hektische Hin und Her ist **Reibung auf molekularer Ebene**, und Reibung erzeugt Wärme.
+
+## Von innen erhitzen
+
+Da die Wellen einige Zentimeter in die Speise eindringen, erhitzen sie ein Volumen auf einmal, statt die Wärme wie ein herkömmlicher Ofen langsam von der Oberfläche nach innen zu leiten. Darum sind Mikrowellen so schnell — obwohl der innerste Kern eines dicken Stücks teils darauf angewiesen ist, dass sich die Wärme nach innen ausbreitet, daher die Hinweise „ruhen lassen“.
+
+## Warum es sich seltsam verhält
+
+- **Ungleichmäßiges Erhitzen** tritt auf, weil die Wellen heiße und kalte Stellen bilden; ein **Drehteller** dreht die Speise, um das auszugleichen.
+- **Metall** kann die Wellen reflektieren und Funken auslösen, weshalb die meisten Metallbehälter unsicher sind.
+- Speisen mit wenig Wasser, wie trockenes Brot, erhitzen sich schlecht, während wasserreiche schnell heiß werden.
+
+## Ist es sicher?
+
+Mikrowellen sind **nichtionisierende** Strahlung — ihnen fehlt die Energie, Atome zu verändern oder Speisen radioaktiv zu machen. Ein Metallgitter in der Tür reflektiert die Wellen ins Innere zurück und hält sie eingeschlossen. Die Speise wird einfach erhitzt; sie wird durch die Strahlung selbst nicht chemisch verändert.`,
+  },
 ];
