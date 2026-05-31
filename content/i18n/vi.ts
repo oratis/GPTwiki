@@ -1460,4 +1460,247 @@ Dù một số biểu cảm là phổ quát, nhiều tín hiệu phi ngôn ngữ
 
 Dù thật hấp dẫn khi tin rằng có thể "đọc" một người như một cuốn sách mở, các tín hiệu phi ngôn ngữ là mơ hồ và được diễn giải tốt nhất khi đặt cùng nhau và trong ngữ cảnh, chứ không phải riêng lẻ. Tuy vậy, ý thức về chúng làm cho giao tiếp phong phú và hiệu quả hơn.`,
   },
+  // ── Batch 7: Mọi thứ hoạt động như thế nào ──
+  {
+    title: 'Wi-Fi hoạt động như thế nào',
+    question: 'Wi-Fi gửi dữ liệu trong không khí như thế nào?',
+    summary:
+      'Wi-Fi dùng sóng vô tuyến để tải dữ liệu giữa các thiết bị và một bộ định tuyến, mã hóa thông tin thành các tín hiệu tần số cao mang lưu lượng internet mà không cần dây.',
+    tags: ['công nghệ', 'mạng', 'vô tuyến', 'internet', 'kỹ thuật'],
+    language: 'vi',
+    content: `# Wi-Fi hoạt động như thế nào
+
+Wi-Fi kết nối các thiết bị của ta với internet mà không cần cáp, dùng sóng vô tuyến để tải dữ liệu giữa một thiết bị và một bộ định tuyến. Đó là một hình thức truyền thông vô tuyến hai chiều được tối ưu để di chuyển dữ liệu nhanh ở khoảng cách ngắn.
+
+## Sóng vô tuyến mang dữ liệu
+
+Wi-Fi truyền thông tin bằng **sóng vô tuyến** — cùng loại sóng mà radio và điện thoại di động dùng, nhưng ở tần số cao hơn, thường là 2,4 GHz và 5 GHz (và gần đây là 6 GHz). Thiết bị và bộ định tuyến chuyển dữ liệu số (các số 1 và 0) thành các kiểu sóng vô tuyến rồi chuyển ngược lại ở đầu kia, một quá trình gọi là **điều chế**.
+
+## Vai trò của bộ định tuyến
+
+**Bộ định tuyến** là nút trung tâm. Nó nối với internet qua một sợi cáp (thường từ một nhà cung cấp băng rộng) và chuyển tiếp dữ liệu không dây đến và từ mọi thiết bị đã kết nối. Khi bạn tải một trang, thiết bị gửi một yêu cầu bằng vô tuyến đến bộ định tuyến, nó chuyển tiếp đến internet và mang câu trả lời trở lại.
+
+## Các băng tần và kênh
+
+Hai băng tần chính đưa ra một sự đánh đổi:
+
+- **2,4 GHz** vươn xa hơn và xuyên tường tốt hơn, nhưng chậm hơn và dễ bị nhiễu hơn (từ lò vi sóng, điện thoại không dây và các mạng lân cận).
+- **5 GHz** (và 6 GHz) nhanh hơn và ít tắc nghẽn hơn, nhưng vươn được khoảng cách ngắn hơn.
+
+Mỗi băng tần được chia thành các **kênh** để giảm nhiễu giữa các thiết bị ở gần.
+
+## Tầm với và nhiễu
+
+Tín hiệu Wi-Fi yếu đi theo khoảng cách và bị hấp thụ bởi tường, nước và kim loại. Vì vậy kết nối tệ đi khi ra xa bộ định tuyến, và vì vậy các bộ lặp hay hệ thống mạng lưới (mesh) giúp phủ những ngôi nhà lớn hơn. Bất chấp những giới hạn này, Wi-Fi đã trở thành cách tiêu chuẩn để nối hàng tỷ thiết bị với internet.`,
+  },
+  {
+    title: 'Pin lưu trữ năng lượng như thế nào',
+    question: 'Một viên pin lưu trữ và giải phóng năng lượng như thế nào?',
+    summary:
+      'Pin lưu trữ năng lượng ở dạng hóa học và chuyển nó thành điện qua các phản ứng di chuyển electron giữa hai điện cực, cấp dòng điện cho một mạch.',
+    tags: ['công nghệ', 'năng lượng', 'hóa học', 'điện', 'kỹ thuật'],
+    language: 'vi',
+    content: `# Pin lưu trữ năng lượng như thế nào
+
+Pin có ở khắp nơi — trong điện thoại, ô tô, điều khiển từ xa — nhưng cách chúng hoạt động là một mảnh hóa học thanh nhã. Một viên pin lưu trữ năng lượng ở dạng **hóa học** và giải phóng nó dưới dạng năng lượng **điện** khi cần.
+
+## Các bộ phận thiết yếu
+
+Mỗi viên pin có ba thành phần then chốt:
+
+- Một **điện cực âm** (cực dương trong, anode).
+- Một **điện cực dương** (cực âm trong, cathode).
+- Một **chất điện phân**, chất nằm giữa hai cực cho phép các hạt tích điện di chuyển.
+
+## Năng lượng chảy như thế nào
+
+Năng lượng đến từ một **phản ứng hóa học** "muốn" xảy ra giữa các vật liệu của hai điện cực. Khi bạn nối một viên pin với một mạch:
+
+1. Ở cực âm, một phản ứng diễn ra giải phóng electron.
+2. Các electron này không thể đi qua chất điện phân; thay vào đó chúng chảy qua mạch ngoài — cấp năng lượng cho thiết bị trên đường đi.
+3. Cùng lúc, các hạt tích điện (ion) di chuyển qua chất điện phân bên trong pin để giữ thế cân bằng.
+
+Dòng electron qua mạch ngoài này chính là **dòng điện** làm thiết bị chạy. Pin "hết" khi các vật liệu hóa học cạn kiệt.
+
+## Sạc lại được hay không
+
+Trong các pin **dùng một lần** (như pin kiềm), các phản ứng hóa học không dễ đảo ngược, và pin bị bỏ đi khi hết. Trong các pin **sạc lại được** (như pin lithium-ion trong điện thoại), cho dòng điện chạy theo chiều ngược đảo ngược các phản ứng hóa học, đưa vật liệu về trạng thái ban đầu để dùng lại — dù việc lặp lại làm pin xuống cấp dần.
+
+## Vì sao điện áp quan trọng
+
+Các vật liệu khác nhau giải phóng những lượng năng lượng khác nhau cho mỗi electron, qua đó quyết định **điện áp** của pin. Nối các ô (cell) theo nối tiếp thì cộng điện áp của chúng, vì vậy những bộ ô cấp năng lượng cho đủ thứ, từ đèn pin đến ô tô điện.`,
+  },
+  {
+    title: 'Màn hình cảm ứng hoạt động như thế nào',
+    question: 'Màn hình điện thoại biết bạn chạm vào đâu như thế nào?',
+    summary:
+      'Hầu hết màn hình cảm ứng phát hiện cú chạm bằng cách cảm nhận những thay đổi trong một điện trường trên bề mặt màn hình, cho phép xác định chính xác vị trí ngón tay và cử chỉ.',
+    tags: ['công nghệ', 'điện tử', 'giao diện', 'kỹ thuật', 'thiết bị'],
+    language: 'vi',
+    content: `# Màn hình cảm ứng hoạt động như thế nào
+
+Màn hình cảm ứng đã trở thành cách chính để tương tác với điện thoại, máy tính bảng và nhiều thiết bị khác. Dù trông như phép màu, chúng dựa trên việc phát hiện chính xác nơi ngón tay chạm vào mặt kính.
+
+## Loại điện dung
+
+Hầu hết thiết bị hiện đại dùng màn hình **điện dung**. Bên dưới kính là một lưới trong suốt bằng vật liệu dẫn điện duy trì một điện trường nhỏ trên bề mặt. Cơ thể người cũng dẫn điện, nên khi ngón tay chạm vào màn hình, nó làm xáo trộn cục bộ điện trường này. Thiết bị phát hiện chính xác nơi điện tích thay đổi và diễn giải vị trí đó thành một cú chạm.
+
+Vì phụ thuộc vào tính dẫn điện của cơ thể, màn hình điện dung thường không phản hồi với một cây bút thường hay một chiếc găng dày — do đó có những găng tay và bút cảm ứng "tương thích" làm từ vật liệu đặc biệt. Lợi thế lớn của nó là hỗ trợ **đa chạm**, phát hiện nhiều ngón tay cùng lúc và cho phép những cử chỉ như chụm để thu phóng.
+
+## Loại điện trở
+
+Một loại cũ hơn, màn hình **điện trở**, dùng hai lớp dẻo cách nhau bởi một khoảng nhỏ. Khi ấn, hai lớp chạm vào nhau tại điểm đó, và thiết bị ghi nhận vị trí. Màn hình điện trở hoạt động với bất kỳ vật nào (ngón tay, bút, găng), nhưng thường kém sắc nét hơn và không xử lý đa chạm tốt. Chúng vẫn được dùng trong một số thiết bị công nghiệp và thiết bị cũ hơn.
+
+## Từ cú chạm đến hành động
+
+Trong cả hai trường hợp, phần cứng màn hình chuyển cú chạm thành những tọa độ mà phần mềm diễn giải. Hệ điều hành quyết định cái gì nằm dưới ngón tay — một nút, một liên kết, một thanh trượt — và phản hồi tương ứng. Tất cả diễn ra trong vài mili giây, tạo cảm giác mượt mà như đang trực tiếp thao tác lên thứ trên màn hình.`,
+  },
+  {
+    title: 'Làm lạnh hoạt động như thế nào',
+    question: 'Một chiếc tủ lạnh giữ thức ăn lạnh như thế nào?',
+    summary:
+      'Làm lạnh giữ thức ăn lạnh bằng cách di chuyển nhiệt từ bên trong ra bên ngoài, dùng một chất làm lạnh tuần hoàn, bốc hơi và bị nén trong một chu trình liên tục.',
+    tags: ['công nghệ', 'vật lý', 'nhiệt', 'kỹ thuật', 'đời thường'],
+    language: 'vi',
+    content: `# Làm lạnh hoạt động như thế nào
+
+Một chiếc tủ lạnh không "tạo ra" cái lạnh — nó **lấy nhiệt đi**. Bằng cách liên tục di chuyển nhiệt từ bên trong ra nhà bếp, nó giữ thức ăn ở một nhiệt độ thấp làm chậm sự sinh sôi của vi khuẩn và sự hư hỏng.
+
+## Ý tưởng cốt lõi
+
+Làm lạnh dựa trên một nguyên lý đơn giản: khi một chất lỏng biến thành khí (bốc hơi), nó **hấp thụ nhiệt** từ môi trường xung quanh; khi một chất khí trở lại lỏng (ngưng tụ), nó **giải phóng nhiệt**. Tủ lạnh cho một chất đặc biệt, gọi là **chất làm lạnh**, đi qua những chuyển đổi này lặp đi lặp lại ở những nơi khác nhau, tải nhiệt từ trong ra ngoài.
+
+## Chu trình làm lạnh
+
+Chu trình có bốn giai đoạn chính:
+
+1. **Bốc hơi.** Bên trong tủ lạnh, chất làm lạnh lỏng đi qua một cuộn ống và bốc hơi, hấp thụ nhiệt từ ngăn và làm nó lạnh đi.
+2. **Nén.** Một **máy nén** nén khí làm lạnh, nâng áp suất và nhiệt độ của nó.
+3. **Ngưng tụ.** Khí nóng đi qua các cuộn ống sau hoặc dưới tủ lạnh, giải phóng nhiệt ra phòng và trở lại lỏng.
+4. **Giãn nở.** Chất làm lạnh đi qua một van giãn nở, áp suất giảm và nó lạnh đi, sẵn sàng bắt đầu lại chu trình.
+
+## Vì sao mặt sau nóng
+
+Nếu bạn chạm vào các cuộn ống sau một chiếc tủ lạnh, bạn sẽ thấy chúng ấm. Đó là nhiệt lấy từ bên trong đang được giải phóng ra ngoài. Tủ lạnh về bản chất bơm nhiệt từ một nơi lạnh sang một nơi ấm hơn — điều không tự xảy ra và đòi hỏi năng lượng do máy nén cung cấp.
+
+## Cùng công nghệ ở khắp nơi
+
+Cùng chu trình ấy vận hành các máy điều hòa không khí và bơm nhiệt. Một máy điều hòa về bản chất là một chiếc tủ lạnh làm mát một căn phòng và đẩy nhiệt ra ngoài; một bơm nhiệt có thể đảo chiều để sưởi ấm một không gian.`,
+  },
+  {
+    title: 'Tai nghe chống ồn hoạt động như thế nào',
+    question: 'Tai nghe khử tiếng ồn nền như thế nào?',
+    summary:
+      'Tai nghe chống ồn chủ động dùng micro để bắt âm thanh nền và tạo ra một sóng âm ngược triệt tiêu nó trước khi đến tai bạn.',
+    tags: ['công nghệ', 'âm thanh', 'sóng', 'kỹ thuật', 'điện tử'],
+    language: 'vi',
+    content: `# Tai nghe chống ồn hoạt động như thế nào
+
+Tai nghe chống ồn có thể khiến một chiếc máy bay ồn ào hay một văn phòng đông đúc bỗng yên tĩnh. Chúng làm vậy theo hai cách: chặn âm thanh về mặt vật lý và, một cách tài tình hơn, triệt tiêu nó bằng điện tử.
+
+## Âm thanh là sóng
+
+Âm thanh truyền dưới dạng sóng áp suất qua không khí. Như mọi sóng, nó có đỉnh và đáy. Nếu bạn chồng hai sóng lên nhau, chúng kết hợp: đỉnh thẳng hàng với đỉnh thì cộng lại (to hơn), nhưng đỉnh thẳng hàng với đáy thì **triệt tiêu**. Sự triệt tiêu này, gọi là **giao thoa triệt tiêu**, là bí quyết của chống ồn chủ động.
+
+## Chống ồn chủ động
+
+Tai nghe chống ồn **chủ động** (ANC) dùng:
+
+1. **Micro** bắt tiếng ồn nền quanh bạn.
+2. Một chip phân tích tức thì sóng âm này và tạo ra một sóng **ảnh gương (ngược)** — một "phản sóng" có đỉnh ở nơi tiếng ồn có đáy.
+3. **Loa** phát sóng ngược này cùng với âm thanh bạn muốn nghe.
+
+Khi phản sóng gặp tiếng ồn nền, hai sóng phần lớn triệt tiêu nhau, và tai bạn cảm nhận ít tiếng ồn hơn rất nhiều. Điều này hiệu quả nhất với những âm thanh **trầm, ổn định**, như tiếng ù của một động cơ.
+
+## Chống ồn thụ động
+
+Chống ồn **thụ động** chỉ là chặn vật lý: những đệm ôm khít và vật liệu dày bịt kín tiếng ồn, hệt như nút bịt tai. Nó xử lý tốt những âm thanh cao, đột ngột, vốn khó để chống ồn chủ động triệt tiêu.
+
+## Vì sao không hoàn toàn im lặng
+
+Chống ồn chủ động không hoàn hảo. Những âm thanh cao, phức tạp và khó lường (như giọng nói) khó triệt tiêu, vì hệ thống phải dự đoán và khớp sóng gần như tức thì. Vì vậy tai nghe chống ồn dập tắt tài tình tiếng ù đều đặn của một chiếc máy bay, nhưng vẫn để lọt phần lớn lời nói ở gần.`,
+  },
+  {
+    title: 'LED tạo ra ánh sáng như thế nào',
+    question: 'Một con LED tạo ra ánh sáng với rất ít năng lượng như thế nào?',
+    summary:
+      'LED tạo ra ánh sáng khi dòng điện đi qua một vật liệu bán dẫn, giải phóng năng lượng trực tiếp dưới dạng photon — hiệu quả hơn nhiều so với nung nóng một sợi tóc bóng đèn.',
+    tags: ['công nghệ', 'ánh sáng', 'điện tử', 'năng lượng', 'kỹ thuật'],
+    language: 'vi',
+    content: `# LED tạo ra ánh sáng như thế nào
+
+LED (điốt phát quang) thắp sáng đủ thứ, từ bóng đèn đến màn hình và đèn báo. Chúng hiệu quả đáng kể vì chuyển điện trực tiếp thành ánh sáng với rất ít nhiệt lãng phí.
+
+## Ánh sáng từ một chất bán dẫn
+
+LED là một loại **điốt**, một linh kiện làm từ vật liệu **bán dẫn** cho dòng điện chảy chủ yếu theo một chiều. Chất bán dẫn được "pha tạp" để tạo hai vùng: một vùng dư electron và một vùng có những "lỗ trống" nơi thiếu electron.
+
+Khi dòng điện đi qua LED, các electron vượt qua mối nối và lấp đầy các lỗ trống. Ở mỗi bước, một electron mất một ít năng lượng — và trong một con LED, năng lượng này được giải phóng dưới dạng một hạt ánh sáng, một **photon**. Quá trình biến điện trực tiếp thành ánh sáng này gọi là **phát quang điện**.
+
+## Điều gì quyết định màu sắc
+
+**Màu** của ánh sáng phụ thuộc vào năng lượng giải phóng ở mỗi bước nhảy electron, mà điều này lại phụ thuộc vào vật liệu bán dẫn cụ thể. Những vật liệu khác nhau tạo ra đỏ, lục, lam, v.v. LED trắng thường được tạo bằng một con LED lam phủ một lớp **phosphor** chuyển một phần ánh sáng lam thành các màu khác, cộng lại thành ánh sáng trắng.
+
+## Vì sao chúng hiệu quả đến vậy
+
+Những bóng đèn dây tóc cũ tạo ánh sáng bằng cách nung nóng một sợi tóc đến khi nó phát sáng, và lãng phí phần lớn năng lượng thành nhiệt. LED bỏ qua bước này và tạo ánh sáng trực tiếp, nên dùng một phần nhỏ năng lượng cho cùng độ sáng và bền hơn nhiều. Đó là lý do chúng đã phần lớn thay thế những công nghệ chiếu sáng cũ hơn.
+
+## Ở khắp nơi
+
+Vì LED nhỏ, bền và dễ điều khiển, chúng có ở khắp nơi: trong chiếu sáng nhà cửa, đèn pha, những màn hình video khổng lồ, và hàng triệu con LED đỏ, lục và lam tí hon tạo nên hình ảnh trên màn hình điện thoại của bạn.`,
+  },
+  {
+    title: 'Tấm pin mặt trời hoạt động như thế nào',
+    question: 'Tấm pin mặt trời biến ánh sáng mặt trời thành điện như thế nào?',
+    summary:
+      'Tấm pin mặt trời biến ánh sáng mặt trời thành điện bằng cách dùng những tế bào làm từ vật liệu bán dẫn giải phóng electron khi bị ánh sáng chiếu vào, tạo ra một dòng điện.',
+    tags: ['công nghệ', 'năng lượng', 'điện', 'môi trường', 'kỹ thuật'],
+    language: 'vi',
+    content: `# Tấm pin mặt trời hoạt động như thế nào
+
+Tấm pin mặt trời biến ánh sáng mặt trời trực tiếp thành điện, không có bộ phận chuyển động và không cần nhiên liệu. Chúng dựa trên **hiệu ứng quang điện**, trong đó một số vật liệu tạo ra dòng điện khi bị ánh sáng chiếu vào.
+
+## Tế bào quang điện
+
+Đơn vị cơ bản là **tế bào quang điện (pin mặt trời)**, thường làm từ **silic**, cùng loại bán dẫn dùng trong chip máy tính. Tế bào có hai lớp được xử lý (pha tạp) sao cho tạo ra một điện trường tại mối nối giữa chúng: một lớp dư electron, lớp kia có những "lỗ trống" nơi thiếu electron.
+
+## Từ ánh sáng đến điện
+
+Ánh sáng gồm những gói năng lượng nhỏ gọi là **photon**. Khi một photon đủ năng lượng chiếu vào tế bào, nó có thể bứt một electron khỏi một nguyên tử silic. Điện trường bên trong đẩy những electron tự do này theo một chiều nhất quán, tạo ra một dòng chảy — một **dòng điện**. Những sợi dây kim loại trên tế bào thu dòng điện này để nó có thể cấp năng lượng cho một mạch.
+
+## Từ tế bào đến hệ thống
+
+Một tế bào đơn lẻ tạo ít năng lượng, nên nhiều tế bào được nối lại để tạo một **tấm**, và nhiều tấm tạo thành một **dàn**. Các tế bào tạo ra dòng **một chiều (DC)**, nhưng nhà cửa và lưới điện dùng dòng **xoay chiều (AC)**, nên một thiết bị gọi là **biến tần** thực hiện việc chuyển đổi. Khi một hệ thống tạo nhiều hơn mức dùng, phần dư thường có thể được đẩy ngược lại lưới điện.
+
+## Ưu điểm và giới hạn
+
+Năng lượng mặt trời tái tạo được, êm ái, và sau khi lắp đặt thì tạo điện không phát thải và không cần nhiên liệu. Những giới hạn là nó chỉ tạo điện khi có ánh sáng và sản lượng của nó thay đổi theo thời tiết, mùa và giờ trong ngày. Vì vậy nó thường được kết hợp với pin hoặc lưới điện để cấp năng lượng một cách ổn định.`,
+  },
+  {
+    title: 'Lò vi sóng làm nóng thức ăn như thế nào',
+    question: 'Một lò vi sóng làm nóng thức ăn nhanh đến vậy như thế nào?',
+    summary:
+      'Lò vi sóng làm nóng thức ăn bằng sóng vô tuyến khiến các phân tử nước dao động, tạo nhiệt trực tiếp bên trong thức ăn thay vì làm nóng nó từ bên ngoài.',
+    tags: ['công nghệ', 'vật lý', 'sóng', 'nhiệt', 'đời thường'],
+    language: 'vi',
+    content: `# Lò vi sóng làm nóng thức ăn như thế nào
+
+Lò vi sóng nấu nhanh hơn một lò truyền thống vì nó làm nóng thức ăn theo một cách khác biệt căn bản — tạo nhiệt bên trong chính thức ăn, thay vì làm nóng nó từ ngoài vào trong.
+
+## Vi sóng: một loại sóng vô tuyến
+
+Bất chấp cái tên, vi sóng là một dạng **sóng vô tuyến** — bức xạ điện từ ở một tần số cụ thể (thường khoảng 2,45 GHz). Bên trong lò, một linh kiện gọi là **magnetron** tạo ra những sóng này và hướng chúng vào khoang nấu, nơi chúng dội khỏi các vách kim loại và đi xuyên qua thức ăn.
+
+## Lắc các phân tử nước
+
+Mấu chốt nằm ở cách vi sóng tương tác với **nước**. Các phân tử nước có một đầu dương và một đầu âm. Điện trường của vi sóng dao động qua lại hàng tỷ lần mỗi giây, và các phân tử nước quay nhanh để thẳng hàng với nó. Sự ma sát phân tử này tạo ra nhiệt. Vì hầu hết thức ăn chứa nước, chúng nóng lên từ bên trong một cách nhanh chóng và tương đối đều.
+
+## Vì sao nóng nhanh đến vậy — và không đều
+
+Vì vi sóng thâm nhập vài centimet vào thức ăn, chúng làm nóng một phần lớn cùng một lúc, thay vì dựa vào việc nhiệt di chuyển chậm từ bề mặt vào trong. Nhưng chúng không thâm nhập sâu một cách đều đặn, và có thể tập trung ở một số điểm, tạo nên những vùng lạnh quen thuộc. Đó là lý do lò vi sóng có một đĩa xoay và đó là lý do khuấy hay để thức ăn "nghỉ" giúp làm đều nhiệt độ.
+
+## An toàn và những lầm tưởng
+
+Vi sóng dùng bức xạ **không ion hóa**, vốn làm nóng nhưng không có năng lượng để làm hỏng ADN như tia X. Tấm lưới kim loại trên cửa chặn vi sóng thoát ra ngoài. Kim loại bên trong lò có thể gây tia lửa vì nó tập trung điện trường, nhưng bản thân chiếc lò không làm thức ăn trở nên "phóng xạ" theo bất kỳ cách nào.`,
+  },
 ];
