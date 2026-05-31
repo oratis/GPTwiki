@@ -1,0 +1,1706 @@
+import type { DraftArticle } from '../types';
+
+// Italian (it) translations of the editorial drafts. Faithful, natural
+// translations of the English originals; tags are localized. Built up batch
+// by batch.
+export const it: DraftArticle[] = [
+  // ── Batch 1: Scienza e natura ──
+  {
+    title: 'La fotosintesi',
+    question: 'Come trasformano le piante la luce del sole in cibo?',
+    summary:
+      'La fotosintesi è il processo con cui piante, alghe e alcuni batteri convertono energia luminosa, acqua e anidride carbonica in energia chimica immagazzinata come zuccheri, liberando ossigeno come sottoprodotto.',
+    tags: ['biologia', 'piante', 'energia', 'chimica', 'scienza'],
+    language: 'it',
+    content: `# La fotosintesi
+
+La fotosintesi è il processo biochimico che permette a piante, alghe e alcuni batteri di fabbricare il proprio cibo a partire dalla luce. È alla base di quasi tutte le catene alimentari della Terra e la fonte dell'ossigeno che respiriamo.
+
+## La reazione di base
+
+In forma semplificata, la fotosintesi combina anidride carbonica e acqua, usando l'energia luminosa, per produrre glucosio e ossigeno:
+
+\`\`\`
+6 CO2 + 6 H2O + energia luminosa -> C6H12O6 + 6 O2
+\`\`\`
+
+Lo zucchero (glucosio) immagazzina energia chimica che l'organismo usa poi per crescere e per il metabolismo. L'ossigeno viene liberato nell'atmosfera.
+
+## Due fasi
+
+- **Reazioni dipendenti dalla luce.** Nelle membrane di strutture dette tilacoidi, il pigmento verde **clorofilla** assorbe la luce. Questa energia spezza le molecole d'acqua, libera ossigeno e viene catturata in due trasportatori di energia, l'ATP e il NADPH.
+- **Ciclo di Calvin (reazioni indipendenti dalla luce).** Nel fluido circostante (lo stroma), l'ATP e il NADPH alimentano una serie di reazioni che fissano l'anidride carbonica in zucchero.
+
+## Perché conta
+
+La fotosintesi sottrae anidride carbonica dall'aria e la fissa nel tessuto vivente, il che la rende centrale per il ciclo globale del carbonio e la regolazione del clima. I combustibili fossili sono, in sostanza, antica luce solare catturata dalla fotosintesi milioni di anni fa.
+
+## Varianti
+
+Le piante dei climi caldi e secchi usano spesso vie adattate — chiamate fotosintesi **C4** e **CAM** — che riducono la perdita d'acqua e migliorano l'efficienza sotto stress. Questo spiega perché colture come il mais e la canna da zucchero prosperano sotto il sole intenso.`,
+  },
+  {
+    title: "Il ciclo dell'acqua",
+    question: "Come si muove l'acqua attraverso il pianeta?",
+    summary:
+      "Il ciclo dell'acqua è il movimento continuo dell'acqua attraverso evaporazione, condensazione, precipitazione e deflusso, che ridistribuisce l'acqua dolce sulla Terra.",
+    tags: ['scienze della Terra', 'acqua', 'clima', 'geografia', 'scienza'],
+    language: 'it',
+    content: `# Il ciclo dell'acqua
+
+Il ciclo dell'acqua, o ciclo idrologico, descrive come l'acqua circola senza sosta tra gli oceani, l'atmosfera e la terraferma. La quantità totale d'acqua sulla Terra resta pressoché costante; il ciclo si limita a spostarla tra serbatoi diversi.
+
+## Le fasi principali
+
+- **Evaporazione.** Il calore del Sole trasforma l'acqua liquida — per lo più degli oceani — in vapore. Le piante aggiungono umidità con la **traspirazione**, e insieme sono talvolta dette *evapotraspirazione*.
+- **Condensazione.** Salendo e raffreddandosi, il vapore si condensa attorno a minuscole particelle e forma le nubi.
+- **Precipitazione.** Quando le gocce diventano abbastanza pesanti, cadono come pioggia, neve, nevischio o grandine.
+- **Raccolta e deflusso.** L'acqua si raccoglie in fiumi, laghi e oceani, oppure s'infiltra nel suolo ricaricando le falde, e infine torna al mare.
+
+## Serbatoi e tempo di residenza
+
+L'acqua può trascorrere tempi assai diversi in ciascun serbatoio — giorni nell'atmosfera, ma migliaia di anni nelle acque sotterranee profonde o nel ghiaccio polare. Questi «tempi di residenza» determinano quanto rapidamente gli effetti dell'inquinamento o della siccità si propagano nel sistema.
+
+## Perché conta
+
+Il ciclo dell'acqua porta acqua dolce agli ecosistemi e all'agricoltura, modella il clima e l'erosione, e regola la temperatura spostando enormi quantità di calore. L'attività umana — sbarrare i fiumi, prosciugare le zone umide e riscaldare il clima — può intensificare alluvioni e siccità alterando l'equilibrio del ciclo.`,
+  },
+  {
+    title: 'La tettonica delle placche',
+    question: 'Perché i continenti si muovono e avvengono i terremoti?',
+    summary:
+      'La tettonica delle placche è la teoria secondo cui lo strato esterno della Terra è diviso in placche mobili le cui interazioni formano montagne e oceani e provocano terremoti e vulcani.',
+    tags: ['scienze della Terra', 'geologia', 'terremoti', 'vulcani', 'scienza'],
+    language: 'it',
+    content: `# La tettonica delle placche
+
+La tettonica delle placche è la teoria unificante della geologia. Spiega che lo strato esterno rigido della Terra — la **litosfera** — è diviso in una dozzina circa di grandi placche e diverse minori, che scivolano lentamente sulla roccia più calda e parzialmente fusa sottostante.
+
+## Cosa muove le placche
+
+Le placche poggiano sull'**astenosfera**, uno strato duttile del mantello superiore. Il calore che fuoriesce dall'interno della Terra genera una lenta convezione, e forze come il tiraggio delle lastre dense che sprofondano («trazione di placca») spostano le placche di alcuni centimetri all'anno — più o meno la velocità con cui crescono le unghie.
+
+## Tre tipi di margini
+
+- **Divergenti.** Le placche si allontanano e il magma risale formando nuova crosta — per esempio lungo la dorsale medio-atlantica.
+- **Convergenti.** Le placche si scontrano. Una può sprofondare sotto l'altra (**subduzione**), formando fosse profonde, vulcani e terremoti; oppure due continenti si corrugano e sollevano catene come l'Himalaya.
+- **Trasformi.** Le placche scivolano orizzontalmente l'una accanto all'altra, come nella faglia di Sant'Andrea in California, accumulando tensioni che si liberano nei terremoti.
+
+## Le prove
+
+La teoria nacque da idee precedenti sulla deriva dei continenti. Linee di costa combacianti, fossili identici su continenti oggi lontani e i motivi magnetici a bande congelati nella roccia del fondale oceanico hanno confermato che le placche hanno riplasmato il globo nel corso di centinaia di milioni di anni — e continuano a farlo.`,
+  },
+  {
+    title: 'Il sistema immunitario umano',
+    question: 'Come si difende il corpo dalle malattie?',
+    summary:
+      'Il sistema immunitario è una rete stratificata di cellule, tessuti e molecole che individua e neutralizza i patogeni distinguendo al contempo le cellule proprie del corpo dalle minacce esterne.',
+    tags: ['biologia', 'medicina', 'salute', 'corpo umano', 'scienza'],
+    language: 'it',
+    content: `# Il sistema immunitario umano
+
+Il sistema immunitario è la rete di difesa del corpo contro batteri, virus, funghi e altre minacce. Opera per strati sovrapposti, dalle barriere fisiche a risposte cellulari altamente specifiche.
+
+## Immunità innata
+
+La prima linea di difesa è rapida ma generica. Comprende barriere fisiche come la pelle e il muco, e cellule come i **macrofagi** e i **neutrofili**, che inghiottono gli invasori. L'infiammazione e la febbre fanno parte di questa risposta rapida, pensata per frenare i patogeni e richiamare aiuto.
+
+## Immunità adattativa
+
+Se la minaccia persiste, il sistema **adattativo** organizza un attacco mirato:
+
+- I **linfociti B** producono **anticorpi**: proteine che si legano a molecole specifiche (antigeni) di un patogeno e lo contrassegnano per la distruzione.
+- I **linfociti T** uccidono direttamente le cellule infette o coordinano la risposta più ampia.
+
+Una caratteristica cruciale è la **memoria**: dopo un'infezione restano cellule di memoria a vita lunga, così il corpo risponde molto più in fretta se lo stesso patogeno ritorna. È il principio della **vaccinazione**, che allena il sistema immunitario con una versione o un frammento innocuo di un patogeno.
+
+## Quando qualcosa va storto
+
+Il sistema deve distinguere il «proprio» dall'«estraneo». I suoi fallimenti portano a **malattie autoimmuni** (attacco al proprio tessuto), **allergie** (reazione eccessiva a sostanze innocue) o **immunodeficienza** (risposta troppo debole). Bilanciare sensibilità e contenimento è una delle conquiste più notevoli della biologia.`,
+  },
+  {
+    title: 'I mitocondri',
+    question: 'Perché i mitocondri sono detti la centrale energetica della cellula?',
+    summary:
+      "I mitocondri sono organelli che generano gran parte dell'energia utilizzabile di una cellula tramite la respirazione e portano un proprio DNA, ereditato da un lontano antenato batterico.",
+    tags: ['biologia', 'cellule', 'energia', 'genetica', 'scienza'],
+    language: 'it',
+    content: `# I mitocondri
+
+I mitocondri sono minuscole strutture all'interno della maggior parte delle nostre cellule, famosi come «centrale energetica della cellula» perché producono gran parte dell'energia che muove la vita.
+
+## Produrre energia
+
+I mitocondri svolgono la **respirazione aerobica**, convertendo nutrienti e ossigeno in **ATP** (adenosintrifosfato), la molecola che le cellule usano come moneta energetica. Il processo avviene sulla membrana interna ripiegata del mitocondrio, le cui pieghe (creste) aumentano la superficie disponibile per le reazioni che producono energia. Una singola cellula può ospitare da uno a migliaia di mitocondri a seconda del suo fabbisogno energetico; le cellule muscolari e cardiache ne sono particolarmente ricche.
+
+## Un antenato batterico
+
+I mitocondri hanno un proprio piccolo anello di DNA e si riproducono per divisione, proprio come i batteri. Questo sostiene la **teoria endosimbiotica**: i mitocondri discendono da batteri a vita libera inghiottiti da una cellula primordiale circa due miliardi di anni fa e divenuti partner permanenti.
+
+## Ereditati dalla madre
+
+Poiché gli spermatozoi non apportano quasi mitocondri, il **DNA mitocondriale** si trasmette per linea materna quasi immutato. I genetisti lo usano per ricostruire l'ascendenza e le migrazioni umane fino a un passato remoto.
+
+## Legami con la salute
+
+I difetti dei mitocondri possono causare vari disturbi ereditari, e il declino mitocondriale è studiato come fattore dell'invecchiamento e di malattie come il Parkinson.`,
+  },
+  {
+    title: 'Le correnti oceaniche',
+    question: "Cosa fa circolare l'acqua di mare in giganteschi anelli intorno al mondo?",
+    summary:
+      'Le correnti oceaniche sono flussi su larga scala di acqua marina spinti da vento, temperatura e salinità; ridistribuiscono il calore sul pianeta e modellano i climi regionali.',
+    tags: ['scienze della Terra', 'oceanografia', 'clima', 'geografia', 'scienza'],
+    language: 'it',
+    content: `# Le correnti oceaniche
+
+Le correnti oceaniche sono movimenti continui e direzionali dell'acqua di mare. Agiscono come un sistema circolatorio che avvolge il pianeta, trasportando calore, nutrienti e vita marina per migliaia di chilometri.
+
+## Correnti superficiali
+
+In prossimità della superficie le correnti sono spinte soprattutto dal **vento**. La rotazione terrestre devia i loro percorsi con l'**effetto Coriolis**, organizzandole in grandi sistemi rotanti detti **vortici (gyre)**. La Corrente del Golfo, per esempio, porta acqua calda dai tropici verso l'Europa, regalando all'Europa occidentale un clima più mite di quanto ci si aspetterebbe dalla sua latitudine.
+
+## Circolazione profonda
+
+Sotto la superficie le correnti sono spinte da differenze di **densità**, che dipende da temperatura e salinità. L'acqua fredda e salata presso i poli sprofonda e scorre sul fondo oceanico, mentre acqua più calda risale altrove. Questo lento anello globale è detto **circolazione termoalina** o «nastro trasportatore oceanico», e un giro completo può richiedere circa mille anni.
+
+## Perché contano
+
+Le correnti mitigano le temperature globali spostando calore dall'equatore ai poli. Alimentano la **risalita (upwelling)** di nutrienti che sostiene alcune delle pescherie più ricche del mondo e influenzano fenomeni meteorologici come El Niño. Poiché il nastro dipende dallo sprofondare dell'acqua polare fredda e densa, gli scienziati sorvegliano i segnali che lo scioglimento dei ghiacci e il riscaldamento del mare possano indebolirlo.`,
+  },
+  {
+    title: "L'effetto serra",
+    question: 'Come tengono calda la Terra i gas atmosferici?',
+    summary:
+      "L'effetto serra è il riscaldamento che si verifica quando certi gas atmosferici trattengono il calore irradiato dalla superficie terrestre, mantenendo il pianeta abitabile ma intensificandosi al crescere di quei gas.",
+    tags: ['clima', 'scienze della Terra', 'atmosfera', 'ambiente', 'scienza'],
+    language: 'it',
+    content: `# L'effetto serra
+
+L'effetto serra è il processo naturale che mantiene la Terra abbastanza calda per la vita. Senza di esso la temperatura media della superficie del pianeta sarebbe ben al di sotto del punto di congelamento.
+
+## Come funziona
+
+La luce del sole attraversa l'atmosfera e scalda la superficie terrestre. La superficie poi irradia di nuovo quell'energia verso l'esterno come radiazione **infrarossa** (calore). Certi gas — soprattutto **anidride carbonica, metano, vapore acqueo e protossido di azoto** — assorbono parte di questo infrarosso in uscita e lo riemettono in tutte le direzioni, anche verso il basso. Il risultato è che il calore resta nella bassa atmosfera invece di sfuggire direttamente nello spazio.
+
+Il nome viene da una vaga analogia con una serra, benché una vera serra si scaldi soprattutto bloccando il movimento dell'aria, non trattenendo l'infrarosso.
+
+## L'equilibrio naturale
+
+Per gran parte della storia, la quantità di gas serra e l'energia che lascia la Terra sono rimaste in approssimativo equilibrio, mantenendo il clima relativamente stabile.
+
+## L'influenza umana
+
+La combustione di combustibili fossili, la deforestazione e l'agricoltura hanno portato le concentrazioni di anidride carbonica e metano a livelli mai visti da centinaia di migliaia di anni. Questo effetto serra **potenziato** altera l'equilibrio e fa trattenere al pianeta più calore. Le conseguenze comprendono l'aumento delle temperature globali, il mutare dei regimi meteorologici, lo scioglimento dei ghiacci e l'innalzamento del livello del mare — il meccanismo centrale del cambiamento climatico moderno.`,
+  },
+  {
+    title: 'La bioluminescenza',
+    question: 'Come e perché alcuni esseri viventi brillano al buio?',
+    summary:
+      'La bioluminescenza è la produzione di luce da parte di organismi viventi mediante una reazione chimica, usata per comunicare, mimetizzarsi, attirare prede e trovare partner.',
+    tags: ['biologia', 'chimica', 'oceanografia', 'animali', 'scienza'],
+    language: 'it',
+    content: `# La bioluminescenza
+
+La bioluminescenza è la capacità degli organismi viventi di produrre la propria luce. Dalle lucciole che lampeggiano in una notte d'estate alle onde che brillano su una spiaggia buia, compare in tutto l'albero della vita — ed è particolarmente comune nelle profondità marine.
+
+## La chimica
+
+Il bagliore nasce da una reazione chimica e non dal calore, il che ne fa una forma di «luce fredda» che non spreca quasi energia. Una molecola emettitrice di luce detta **luciferina** reagisce con l'ossigeno, con l'aiuto di un enzima detto **luciferasi**. La reazione libera energia come luce visibile, di solito blu o verde — i colori che vanno più lontano nell'acqua di mare.
+
+## Perché gli organismi brillano
+
+La bioluminescenza assolve molti scopi:
+
+- **Attirare prede.** Il pesce lanterna fa oscillare un'esca luminosa davanti alla bocca.
+- **Difesa.** Alcuni calamari rilasciano nubi luminose per confondere i predatori; altri usano la luce per fondersi con il debole chiarore proveniente dall'alto (controilluminazione).
+- **Comunicazione e corteggiamento.** Le lucciole emettono lampi con schemi propri di ogni specie per trovare partner.
+- **Simbiosi.** Molti animali non producono luce da soli, ma ospitano batteri luminosi in organi appositi.
+
+## Nell'oceano profondo
+
+La luce si spegne nel buio totale qualche centinaio di metri più giù, e sotto quel limite la stragrande maggioranza degli animali sa produrre luce. In questo mondo privo di luce, la bioluminescenza è meno una curiosità che una lingua primordiale della sopravvivenza.`,
+  },
+  // ── Batch 2: Storia e società ──
+  {
+    title: 'La Via della Seta',
+    question: "Cos'era la Via della Seta e perché fu importante?",
+    summary:
+      "La Via della Seta era una rete di rotte commerciali che collegò l'Asia orientale al Mediterraneo per oltre mille anni, trasportando merci, tecnologie, religioni e idee tra le civiltà.",
+    tags: ['storia', 'commercio', 'asia', 'civiltà', 'geografia'],
+    language: 'it',
+    content: `# La Via della Seta
+
+La Via della Seta non era un'unica strada lastricata, ma una vasta rete di rotte terrestri e marittime che collegava Cina, Asia centrale, India, Persia e mondo mediterraneo. Attiva dal II secolo a.C. circa al XV secolo, plasmò lo sviluppo di ogni società che toccò.
+
+## Più della seta
+
+La seta cinese fu il lusso che diede alla rete il suo nome moderno (coniato da un geografo dell'Ottocento), ma vi scorrevano innumerevoli merci: spezie, tè, porcellana, vetro, metalli preziosi, cavalli e carta. Pochi mercanti percorrevano l'intera distanza; le merci passavano piuttosto di mano in mano lungo una catena di commercianti e città-oasi come Samarcanda e Kashgar.
+
+## Una via per le idee
+
+L'impatto più profondo della rotta fu culturale. Il **buddismo** si diffuse dall'India alla Cina per queste vie, mentre anche islam, cristianesimo e manicheismo viaggiavano con i mercanti. Tecnologie cruciali — **carta, polvere da sparo e bussola** — si spostarono verso ovest, trasformando le società che le accolsero.
+
+## Malattia e declino
+
+Gli stessi collegamenti che portavano il commercio portavano anche la malattia; molti storici legano la Via della Seta alla diffusione della **peste nera** nel XIV secolo. La rete declinò gradualmente man mano che le rotte marittime divenivano più economiche e sicure e gli imperi terrestri si frammentavano.
+
+## Eredità
+
+La Via della Seta è ricordata come uno dei grandi motori di scambio della storia — prova che civiltà lontane erano collegate assai prima e assai più profondamente di quanto si credesse.`,
+  },
+  {
+    title: 'La stampa a caratteri mobili',
+    question: 'Come cambiò il mondo la stampa?',
+    summary:
+      "La stampa, perfezionata da Johannes Gutenberg intorno al 1440, rese i libri economici e abbondanti, accelerando l'alfabetizzazione, la scienza, la riforma religiosa e la diffusione delle idee in Europa.",
+    tags: ['storia', 'tecnologia', 'comunicazione', 'cultura', 'europa'],
+    language: 'it',
+    content: `# La stampa a caratteri mobili
+
+La stampa è una delle invenzioni più decisive della storia. Meccanizzando la copia dei testi, trasformò i libri da rari tesori copiati a mano in oggetti prodotti in serie.
+
+## La svolta di Gutenberg
+
+La stampa con blocchi intagliati esisteva già in Asia orientale, ma intorno al 1440 l'orafo tedesco **Johannes Gutenberg** riunì diverse innovazioni in un sistema pratico: **caratteri mobili in metallo** durevoli, un inchiostro a base d'olio che aderiva al metallo e un torchio a vite adattato dalla produzione del vino. La sua **Bibbia a 42 righe** (1455 circa) dimostrò che il metodo poteva rivaleggiare con la bellezza dei manoscritti a una frazione del costo.
+
+## Un'esplosione di informazione
+
+Prima della stampa, un amanuense poteva impiegare mesi per copiare un solo libro. Dopo, una tipografia poteva produrre centinaia di copie identiche nello stesso tempo. Entro il 1500 le stamperie di tutta Europa avevano prodotto milioni di volumi. I prezzi crollarono, l'alfabetizzazione crebbe e i testi standardizzati permisero al sapere di accumularsi in modo affidabile.
+
+## Rimodellare la società
+
+Le conseguenze furono profonde:
+
+- La **Riforma protestante** si diffuse rapidamente perché opuscoli e Bibbie tradotte raggiungevano i lettori comuni.
+- La **Rivoluzione scientifica** dipese dalla possibilità per gli studiosi di condividere diagrammi e dati precisi oltre i confini.
+- La stampa standardizzata aiutò a stabilizzare le lingue nazionali e a diffondere la letteratura in volgare.
+
+## Eredità
+
+La stampa è spesso vista come la prima tecnologia dell'informazione a democratizzare il sapere — antesignana di ogni successivo balzo, dai giornali a Internet.`,
+  },
+  {
+    title: 'La Rivoluzione Industriale',
+    question: 'Cosa fu la Rivoluzione Industriale e come trasformò la società?',
+    summary:
+      "La Rivoluzione Industriale fu il passaggio dalla produzione manuale alla fabbricazione con macchine, iniziata nell'Inghilterra del Settecento, che rimodellò economie, città, lavoro e vita quotidiana nel mondo intero.",
+    tags: ['storia', 'economia', 'tecnologia', 'società', 'industria'],
+    language: 'it',
+    content: `# La Rivoluzione Industriale
+
+La Rivoluzione Industriale fu un periodo di cambiamento drastico, iniziato in Gran Bretagna intorno al 1760, in cui le economie passarono dall'agricoltura e dall'artigianato all'industria meccanizzata e alla produzione di fabbrica.
+
+## Perché la Gran Bretagna, perché allora
+
+Si combinarono diversi fattori: **carbone** abbondante come combustibile, giacimenti di ferro, capitale dal commercio, manodopera in fuga dalle campagne e un'ondata di invenzioni pratiche. La **macchina a vapore** migliorata, perfezionata da James Watt, diede alle fabbriche una fonte di energia potente e indipendente dal luogo. Le macchine tessili meccanizzate moltiplicarono la produzione di un singolo lavoratore.
+
+## Dalla fattoria alla fabbrica
+
+La produzione si spostò dalle case sparse a **fabbriche** centralizzate, erette presso l'energia e i trasporti. Il ferro, e poi l'acciaio, resero possibili macchine e ferrovie; i canali e poi la ferrovia abbassarono drasticamente il costo del trasporto delle merci. Le città si gonfiarono mentre la gente migrava verso il lavoro industriale.
+
+## Costi e benefici
+
+La rivoluzione finì per innalzare il tenore di vita e la durata della vita e creò industrie del tutto nuove. Ma i suoi primi decenni portarono condizioni dure: orari lunghi, lavoro minorile, macchine pericolose, baraccopoli sovraffollate e inquinamento. Questi disagi alimentarono i movimenti operai, le leggi di riforma e nuove idee politiche sui diritti dei lavoratori.
+
+## Un punto di svolta duraturo
+
+Una «seconda rivoluzione industriale» a fine Ottocento aggiunse l'elettricità, la chimica e la produzione di massa. Insieme, queste trasformazioni fissarono lo stampo del mondo industriale moderno — e avviarono l'aumento dell'uso dei combustibili fossili che oggi guida le sfide climatiche.`,
+  },
+  {
+    title: 'Le origini della scrittura',
+    question: 'Quando e perché gli esseri umani inventarono la scrittura?',
+    summary:
+      'La scrittura fu inventata in modo indipendente in diverse civiltà antiche, a partire dalla Mesopotamia intorno al 3400 a.C., in origine per tenere registri economici prima di evolversi fino a rendere pienamente il linguaggio.',
+    tags: ['storia', 'lingua', 'civiltà', 'comunicazione', 'cultura'],
+    language: 'it',
+    content: `# Le origini della scrittura
+
+La scrittura — la registrazione del linguaggio con segni visibili e durevoli — è una delle invenzioni che definiscono l'umanità. Comparve in modo indipendente in almeno alcuni luoghi e, ogni volta, trasformò le società che la svilupparono.
+
+## Nata dalla contabilità
+
+La più antica scrittura nota proviene dalla **Mesopotamia** (l'odierno Iraq) intorno al 3400-3200 a.C. Non nacque come letteratura, ma come **contabilità**: gli amministratori dei templi dovevano tenere conto di grano, bestiame e commerci. Semplici disegni incisi nell'argilla divennero a poco a poco i segni a forma di cuneo noti come **scrittura cuneiforme**, tracciati con uno stilo di canna.
+
+## Invenzioni indipendenti
+
+La scrittura sorse da sé anche in **Egitto** (i geroglifici), in **Cina** (gli antenati dei caratteri cinesi, usati per la divinazione) e in **Mesoamerica** (i Maya e i loro predecessori). L'essere stata inventata più di una volta mostra che rispondeva a un bisogno profondo delle società complesse.
+
+## Dai disegni ai suoni
+
+Le prime scritture mescolavano simboli per le cose e simboli per i suoni. Un grande balzo fu l'**alfabeto** — un piccolo insieme di segni che rappresentano singoli suoni — che risale a popoli di lingua semitica intorno al 1800 a.C. e fu poi adattato da Fenici e Greci. Gli alfabeti resero la lettura e la scrittura più facili da apprendere e diffondere.
+
+## Perché contò
+
+La scrittura permise a conoscenze, leggi, contratti e racconti di sopravvivere ai loro creatori. Rese governabili gli imperi, permise alla scienza di accumularsi e trasformò la memoria da fragile atto personale in un registro condiviso e duraturo.`,
+  },
+  {
+    title: "L'inflazione",
+    question: "Cosa causa l'inflazione e perché conta?",
+    summary:
+      "L'inflazione è un aumento sostenuto del livello generale dei prezzi, che riduce il potere d'acquisto del denaro; un'inflazione moderata è normale, ma un'inflazione alta o instabile danneggia le economie.",
+    tags: ['economia', 'finanza', 'denaro', 'politica', 'società'],
+    language: 'it',
+    content: `# L'inflazione
+
+L'inflazione è il ritmo con cui il livello generale dei prezzi di beni e servizi sale nel tempo. Quando c'è inflazione, ogni unità di valuta compra un po' meno di prima — il denaro perde potere d'acquisto.
+
+## Come si misura
+
+Gli economisti misurano l'inflazione con **indici dei prezzi**, il più comune dei quali è l'indice dei prezzi al consumo (IPC), che segue il costo di un «paniere» rappresentativo di beni e servizi quotidiani. Se il paniere costa il 3% in più rispetto a un anno prima, l'inflazione annua è del 3%.
+
+## Cosa la causa
+
+L'inflazione nasce di solito da due grandi forze:
+
+- **Inflazione da domanda.** Quando la domanda supera ciò che un'economia può produrre, gli acquirenti spingono i prezzi verso l'alto.
+- **Inflazione da costi.** Quando il costo di fattori come l'energia o il lavoro sale, le imprese lo scaricano sui prezzi.
+
+In entrambi i casi, la maggior parte degli economisti ritiene che l'inflazione sostenuta sia strettamente legata alla crescita dell'**offerta di moneta** rispetto alla produzione reale.
+
+## Perché conta
+
+Un po' d'inflazione — le banche centrali mirano in genere al 2% circa — è considerato sano, perché stimola la spesa e gli investimenti ed evita i pericoli del calo dei prezzi (**deflazione**). Ma un'inflazione alta erode i risparmi, distorce le decisioni e può sfuggire al controllo, come nei casi di **iperinflazione** in cui i prezzi raddoppiano in giorni.
+
+## Come si gestisce
+
+Le banche centrali combattono l'inflazione eccessiva soprattutto alzando i **tassi d'interesse**, il che raffredda l'indebitamento e la spesa. Bilanciare l'inflazione con l'occupazione e la crescita è una delle sfide centrali della politica economica.`,
+  },
+  {
+    title: 'Il metodo scientifico',
+    question: 'Come funziona davvero la scienza?',
+    summary:
+      "Il metodo scientifico è un approccio sistematico per costruire conoscenza tramite osservazione, ipotesi, esperimento e revisione, che pone le prove e la testabilità al di sopra dell'autorità.",
+    tags: ['scienza', 'filosofia', 'metodo', 'storia', 'istruzione'],
+    language: 'it',
+    content: `# Il metodo scientifico
+
+Il metodo scientifico è il processo disciplinato che la scienza usa per indagare il mondo. Più che una ricetta rigida, è un atteggiamento fondato sul mettere alla prova le idee contro le prove e sull'essere disposti a scartare quelle che non reggono.
+
+## Il ciclo centrale
+
+Un ciclo tipico passa attraverso diverse fasi:
+
+1. **Osservazione.** Notare un fenomeno o un enigma.
+2. **Domanda.** Formulare qualcosa di specifico al riguardo.
+3. **Ipotesi.** Proporre una spiegazione testabile — un'affermazione che, in linea di principio, potrebbe essere dimostrata falsa.
+4. **Previsione.** Dedurre cosa dovrebbe accadere se l'ipotesi è vera.
+5. **Esperimento.** Verificare la previsione in condizioni controllate, idealmente variando un solo fattore alla volta.
+6. **Analisi e revisione.** Confrontare i risultati con la previsione e poi affinare, respingere o ampliare l'ipotesi.
+
+## Principi chiave
+
+- **Testabilità e falsificabilità.** Un'affermazione scientifica deve fare previsioni che possano fallire. Le idee che spiegano tutto e non vietano nulla non sono scientifiche.
+- **Riproducibilità.** Altri devono poter ripetere un esperimento e ottenere lo stesso risultato.
+- **Revisione tra pari.** I nuovi lavori sono esaminati da altri esperti prima di essere ampiamente accettati.
+- **Conoscenza provvisoria.** Anche le teorie ben fondate restano aperte alla revisione se emergono prove migliori.
+
+## Perché funziona
+
+Esigendo prove e invitando alla critica, il metodo scientifico corregge i propri errori nel tempo. Non promette certezza, ma si è rivelato straordinariamente potente nel produrre una comprensione affidabile e cumulativa della natura.`,
+  },
+  {
+    title: 'La democrazia ateniese',
+    question: "Come cominciò la democrazia nell'antica Atene?",
+    summary:
+      'La democrazia ateniese, sviluppata nel V secolo a.C., fu un precoce sistema di autogoverno diretto dei cittadini, influente come antenato delle idee democratiche moderne nonostante i suoi marcati limiti.',
+    tags: ['storia', 'politica', 'grecia', 'democrazia', 'civiltà'],
+    language: 'it',
+    content: `# La democrazia ateniese
+
+L'antica Atene è spesso detta la culla della democrazia. Nel V e nel IV secolo a.C. sviluppò un sistema in cui i comuni cittadini, e non i re o una ristretta élite, prendevano le decisioni dello Stato.
+
+## Come funzionava
+
+La democrazia ateniese era **diretta**, non rappresentativa. Le grandi decisioni erano prese dall'**Assemblea (Ecclesia)**, aperta a tutti i cittadini aventi diritto, che dibattevano e votavano di persona su leggi, guerra e politica. Un **Consiglio dei Cinquecento**, scelto a sorte, preparava l'ordine del giorno, e la maggior parte delle cariche pubbliche e delle giurie era pure assegnata per **sorteggio** anziché per elezione — uno sforzo deliberato per impedire la concentrazione del potere.
+
+## Riformatori chiave
+
+Il percorso passò per diverse figure: **Solone** alleggerì i debiti e ampliò la partecipazione; **Clistene**, intorno al 508 a.C., riorganizzò i cittadini in nuovi gruppi che attraversavano le antiche fedeltà ed è spesso considerato il fondatore del sistema; e **Pericle** presiedette al suo apice maturo e sicuro.
+
+## Limiti marcati
+
+Per gli standard moderni il sistema era ristretto. La cittadinanza — e dunque la voce politica — escludeva **donne, schiavi e residenti stranieri**, lasciando partecipare solo una minoranza della popolazione.
+
+## Eredità
+
+Nonostante questi limiti, la democrazia ateniese introdusse idee durature: che l'autorità legittima possa risiedere nei governati, che i cittadini debbano deliberare apertamente e che nessuno sia al di sopra della legge. Questi principi riecheggiarono nell'Illuminismo e confluirono nel disegno delle democrazie moderne.`,
+  },
+  {
+    title: 'Il gold standard',
+    question: "Cos'era il gold standard e perché i paesi lo abbandonarono?",
+    summary:
+      "Il gold standard era un sistema monetario in cui il valore di una valuta era ancorato a una quantità specifica d'oro; stabilizzava i tassi di cambio ma limitava la flessibilità, e fu abbandonato nel XX secolo.",
+    tags: ['economia', 'storia', 'denaro', 'finanza', 'politica'],
+    language: 'it',
+    content: `# Il gold standard
+
+Il gold standard (sistema aureo) era un sistema in cui il valore del denaro di un paese era direttamente legato all'oro. Sotto un gold standard pieno, la carta moneta poteva essere convertita, su richiesta, in una quantità fissa di metallo.
+
+## Come funzionava
+
+Ogni unità di valuta rappresentava un peso definito d'oro, e i governi si impegnavano a convertire le banconote in oro a quel tasso. Poiché molti paesi ancoravano le proprie valute all'oro, i tassi di cambio tra esse erano di fatto **fissi**, il che rendeva più prevedibili il commercio e gli investimenti internazionali.
+
+## I vantaggi
+
+I suoi sostenitori apprezzavano il gold standard per la **stabilità** e la **disciplina**. Poiché il denaro era coperto da una merce fisica limitata, i governi non potevano stampare valuta con facilità per finanziare la spesa, il che tendeva a mantenere bassa l'inflazione di lungo periodo e a generare fiducia nella valuta.
+
+## Gli svantaggi
+
+Questa stessa rigidità era la sua debolezza. L'offerta di moneta era vincolata alle riserve auree anziché ai bisogni dell'economia, perciò i governi avevano poco margine per rispondere a recessioni, crisi bancarie o shock. Molti economisti ritengono che il gold standard abbia aggravato e diffuso la **Grande depressione** degli anni Trenta, poiché i paesi vi si aggrapparono invece di stimolare le proprie economie.
+
+## La fine dell'oro
+
+Le nazioni si sganciarono dall'oro per gradi. Il sistema crollò del tutto nel 1971, quando gli Stati Uniti posero fine alla convertibilità del dollaro in oro. Oggi il mondo usa la **moneta fiat**, il cui valore poggia sulla fiducia nei governi e nelle banche centrali, e non su una merce fisica.`,
+  },
+  // ── Batch 3: Tecnologia e matematica ──
+  {
+    title: 'Come funziona il GPS',
+    question: 'Come fa il GPS a sapere esattamente dove ti trovi?',
+    summary:
+      'Il GPS determina la posizione misurando il tempo di viaggio dei segnali di più satelliti e usando la trilaterazione; orologi atomici precisi e correzioni relativistiche lo rendono accurato a pochi metri.',
+    tags: ['tecnologia', 'navigazione', 'satelliti', 'fisica', 'ingegneria'],
+    language: 'it',
+    content: `# Come funziona il GPS
+
+Il Sistema di Posizionamento Globale (GPS) permette a un ricevitore — nel tuo telefono, auto o orologio — di scoprire dove si trova in qualsiasi punto della Terra, di solito con un margine di pochi metri. Si basa su una costellazione di satelliti e su un po' di fisica ingegnosa.
+
+## Satelliti e segnali
+
+Il GPS usa circa 30 satelliti in orbita a circa 20.000 km di quota, disposti in modo che ce ne siano sempre diversi visibili da qualsiasi punto del pianeta. Ciascuno trasmette di continuo un segnale radio che porta l'**ora** esatta dell'invio e la **posizione** del satellite.
+
+## Trilaterazione
+
+Il ricevitore misura quanto tempo ha impiegato ciascun segnale ad arrivare. Poiché le onde radio viaggiano alla velocità della luce, il tempo di viaggio rivela la **distanza** da quel satellite. Conoscere la distanza da un satellite ti colloca da qualche parte su una sfera attorno a esso; combinare le distanze da più satelliti restringe la tua posizione a un unico punto. Questa tecnica geometrica si chiama **trilaterazione**. Servono segnali da almeno quattro satelliti — tre per fissare la posizione e un quarto per risolvere l'errore dell'orologio del ricevitore.
+
+## Perché contano orologi e relatività
+
+La sincronizzazione deve essere straordinariamente precisa: un errore di un milionesimo di secondo sposterebbe la posizione di centinaia di metri. I satelliti portano **orologi atomici**, e il sistema corregge perfino la **relatività di Einstein** — la velocità dei satelliti e la loro gravità più debole fanno scorrere i loro orologi a un ritmo un po' diverso da quelli a terra. Senza queste correzioni il GPS sbaglierebbe di chilometri al giorno.
+
+## Oltre il posizionamento
+
+La stessa sincronizzazione precisa sostiene le reti finanziarie, le reti elettriche e le telecomunicazioni, facendo del GPS una spina dorsale silenziosa dell'infrastruttura moderna.`,
+  },
+  {
+    title: 'La crittografia a chiave pubblica',
+    question: 'Come possono due estranei comunicare in modo sicuro su Internet aperta?',
+    summary:
+      'La crittografia a chiave pubblica usa coppie di chiavi legate matematicamente — una pubblica e una privata — perché le persone cifrino i messaggi e verifichino le identità senza mai condividere prima un segreto.',
+    tags: ['tecnologia', 'crittografia', 'sicurezza', 'matematica', 'internet'],
+    language: 'it',
+    content: `# La crittografia a chiave pubblica
+
+La crittografia a chiave pubblica è la svolta che rende possibile la comunicazione sicura tra persone che non si sono mai incontrate. È alla base di HTTPS, della messaggistica sicura, delle firme digitali e delle criptovalute.
+
+## L'idea della coppia di chiavi
+
+La cifratura tradizionale («simmetrica») usa un'unica chiave condivisa per chiudere e aprire un messaggio — il che crea un problema: come condividere quella chiave in modo sicuro all'inizio? La crittografia a chiave pubblica (o **asimmetrica**) lo risolve con una **coppia** di chiavi:
+
+- Una **chiave pubblica**, che chiunque può vedere.
+- Una **chiave privata**, che il proprietario tiene segreta.
+
+Le due sono legate matematicamente in modo che ciò che una chiave chiude solo l'altra può aprire — ma conoscere la chiave pubblica non permette di calcolare quella privata.
+
+## Due usi principali
+
+- **Cifratura.** Per inviare a qualcuno un messaggio riservato, lo cifri con *la sua chiave pubblica*; solo la sua chiave privata può decifrarlo.
+- **Firme digitali.** Per provare che un messaggio è davvero tuo, lo firmi con *la tua chiave privata*; chiunque può verificarlo con la tua chiave pubblica, il che conferma l'autenticità e l'assenza di manomissioni.
+
+## La matematica dietro
+
+La sicurezza poggia su problemi facili da calcolare in un senso ma estremamente difficili da invertire — come **fattorizzare** numeri enormi (RSA) o risolvere logaritmi discreti su **curve ellittiche**. Invertirli richiederebbe quantità di calcolo impraticabili.
+
+## Nella vita quotidiana
+
+Quando il tuo browser mostra un lucchetto, ha già usato la crittografia a chiave pubblica per verificare il sito e stabilire una rapida chiave condivisa per il resto della sessione.`,
+  },
+  {
+    title: 'La successione di Fibonacci',
+    question: "Cos'è la successione di Fibonacci e perché compare in natura?",
+    summary:
+      'La successione di Fibonacci è una serie in cui ogni numero è la somma dei due precedenti; è legata alla sezione aurea e compare in motivi come i petali dei fiori e le conchiglie a spirale.',
+    tags: ['matematica', 'motivi', 'natura', 'geometria', 'scienza'],
+    language: 'it',
+    content: `# La successione di Fibonacci
+
+La successione di Fibonacci è uno dei motivi più famosi della matematica: una regola semplice che produce connessioni sorprendenti con la geometria e il mondo naturale.
+
+## La regola
+
+Comincia con 0 e 1, e fai di ogni nuovo numero la **somma dei due precedenti**:
+
+\`\`\`
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
+\`\`\`
+
+La successione prende il nome dal matematico italiano **Leonardo da Pisa** (Fibonacci), che la introdusse in Europa nel 1202 con un indovinello sull'allevamento dei conigli, benché fosse già nota nella matematica indiana.
+
+## Il legame con la sezione aurea
+
+Dividi un qualsiasi numero di Fibonacci per quello precedente, e il risultato si avvicina sempre più a circa **1,618** — la **sezione aurea** (spesso indicata con φ). Più avanzi nella successione, più preciso è l'avvicinamento.
+
+## Perché compare in natura
+
+I numeri di Fibonacci compaiono nel conteggio dei petali di molti fiori, nella disposizione dei semi di girasole e nella ramificazione delle piante. La ragione più profonda è l'**impacchettamento efficiente**: disporre foglie o semi ad angoli legati alla sezione aurea permette a una pianta di catturare luce solare o sistemare semi con minima sovrapposizione. Il motivo è quindi meno una firma mistica che una naturale conseguenza dell'ottimizzazione.
+
+## Oltre la biologia
+
+La successione compare anche negli algoritmi informatici, nell'analisi finanziaria e nell'arte, dove la sezione aurea è da tempo associata a proporzioni piacevoli.`,
+  },
+  {
+    title: 'I numeri primi',
+    question: 'Cosa sono i numeri primi e perché sono importanti?',
+    summary:
+      "I numeri primi sono interi maggiori di uno privi di divisori oltre a uno e se stessi; sono i mattoni dell'aritmetica e la base della crittografia moderna.",
+    tags: ['matematica', 'numeri', 'crittografia', 'teoria', 'scienza'],
+    language: 'it',
+    content: `# I numeri primi
+
+Un numero primo è un intero maggiore di 1 divisibile esattamente solo per 1 e per se stesso. I primi numeri primi sono 2, 3, 5, 7, 11 e 13. I numeri con divisori aggiuntivi, come 6 (= 2 × 3), sono detti **composti**.
+
+## Gli atomi dell'aritmetica
+
+I numeri primi sono fondamentali per il **teorema fondamentale dell'aritmetica**: ogni intero maggiore di 1 può essere scritto come prodotto di primi in un solo modo (senza contare l'ordine). Per esempio 60 = 2 × 2 × 3 × 5. In questo senso i primi sono gli «atomi» indivisibili da cui si costruiscono tutti gli altri numeri.
+
+## Infinitamente tanti
+
+Il matematico greco **Euclide** dimostrò oltre duemila anni fa che non esiste un primo massimo — la lista prosegue all'infinito. Eppure i primi si fanno più rari al crescere dei numeri, e prevedere esattamente dove cadano è un campo profondo e ancora irrisolto della matematica, legato alla celebre **ipotesi di Riemann**.
+
+## Perché contano oggi
+
+I numeri primi muovono la **crittografia** moderna. Metodi come RSA poggiano su un'asimmetria pratica: moltiplicare due grandi primi è facile, ma prendere l'enorme numero risultante e recuperare i primi originari (**fattorizzare**) è straordinariamente difficile con i computer attuali. Questa difficoltà mantiene sicuri l'home banking, i messaggi e il commercio.
+
+## Una ricerca continua
+
+Matematici e volontari che usano reti di computer continuano a cercare primi sempre più grandi. I maggiori primi noti oggi contano decine di milioni di cifre.`,
+  },
+  {
+    title: "L'interesse composto",
+    question: "Perché l'interesse composto è così potente nel tempo?",
+    summary:
+      "L'interesse composto è l'interesse guadagnato sia sul capitale iniziale sia sugli interessi già maturati, il che produce una crescita esponenziale che premia il risparmio precoce e di lungo periodo.",
+    tags: ['finanza', 'economia', 'matematica', 'denaro', 'finanza personale'],
+    language: 'it',
+    content: `# L'interesse composto
+
+L'interesse composto è spesso definito la forza più potente della finanza. È il processo di guadagnare interessi non solo sul denaro che investi all'inizio, ma anche sugli interessi che quel denaro ha già fruttato.
+
+## Semplice contro composto
+
+Con l'**interesse semplice** guadagni una somma fissa a ogni periodo, basata solo sulla somma iniziale (il **capitale**). Con l'**interesse composto** gli interessi di ogni periodo si aggiungono al saldo, così gli interessi del periodo successivo si calcolano su una somma maggiore. La crescita quindi accelera nel tempo — è **esponenziale**, non lineare.
+
+## Un esempio rapido
+
+Investi 1000 al 7% annuo:
+
+- Dopo 1 anno: 1070
+- Dopo 10 anni: circa 1967
+- Dopo 30 anni: circa 7612
+
+Il denaro **raddoppia** all'incirca ogni decennio senza aggiungere un centesimo — e più a lungo resta investito, più spettacolare è l'effetto.
+
+## La regola del 72
+
+Una scorciatoia pratica, la **regola del 72**, stima quanto tempo serve a un investimento per raddoppiare: dividi 72 per il tasso d'interesse annuo. All'8% il denaro raddoppia in circa 9 anni (72 ÷ 8).
+
+## Perché il tempo conta più di tutto
+
+Poiché la capitalizzazione si costruisce su se stessa, **cominciare presto** conta di solito più che investire grandi somme più tardi. La stessa logica funziona all'inverso con il debito: i saldi non pagati di prestiti o carte ad alto interesse si compongono contro il debitore, perciò tale debito può crescere a ritmi allarmanti.`,
+  },
+  {
+    title: 'Le funzioni hash',
+    question: "Cos'è una funzione hash e dove si usa?",
+    summary:
+      'Una funzione hash trasforma dati di qualsiasi dimensione in una stringa di lunghezza fissa; le buone funzioni hash crittografiche sono veloci, deterministiche e praticamente impossibili da invertire o falsificare con collisioni.',
+    tags: ['tecnologia', 'informatica', 'crittografia', 'sicurezza', 'dati'],
+    language: 'it',
+    content: `# Le funzioni hash
+
+Una funzione hash è uno strumento piccolo ma essenziale nell'informatica. Prende un input di qualsiasi lunghezza — una parola, un file, un intero database — e produce un output di lunghezza fissa detto **hash** o **digest**.
+
+## Proprietà chiave
+
+Una funzione hash utile è:
+
+- **Deterministica.** Lo stesso input produce sempre lo stesso hash.
+- **Veloce** da calcolare.
+- **A lunghezza fissa.** Un messaggio di un carattere e un file da un gigabyte danno, per esempio, un risultato di 256 bit.
+
+Una funzione hash *crittografica* aggiunge garanzie più forti:
+
+- **A senso unico.** Da un hash non si può recuperare in modo praticabile l'input originale.
+- **Resistente alle collisioni.** È praticamente impossibile trovare due input diversi con lo stesso hash.
+- **Effetto valanga.** Cambiare un solo carattere dell'input rimescola completamente l'output.
+
+## Usi quotidiani
+
+- **Archiviazione delle password.** I sistemi memorizzano l'hash di una password, non la password stessa, così una fuga di dati non rivela direttamente i segreti degli utenti.
+- **Verifiche d'integrità.** I download pubblicano spesso un hash per verificare che un file sia arrivato intatto e non manomesso.
+- **Strutture dati.** Le **tabelle hash** usano l'hashing per trovare elementi quasi istantaneamente, per quanti dati siano archiviati.
+- **Blockchain.** Le criptovalute concatenano i blocchi tramite hash, rendendo il registro a prova di manomissione.
+
+## Algoritmi comuni
+
+I sistemi moderni preferiscono funzioni robuste come **SHA-256**. Quelle più vecchie, come MD5 e SHA-1, sono oggi considerate violate ai fini della sicurezza perché i ricercatori hanno trovato modi di creare collisioni, e non andrebbero usate per proteggere dati sensibili.`,
+  },
+  {
+    title: 'La macchina di Turing',
+    question: "Cos'è la macchina di Turing e perché è fondamentale per il calcolo?",
+    summary:
+      'La macchina di Turing è un semplice modello matematico del calcolo, ideato da Alan Turing nel 1936, che definisce cosa significhi per un problema essere calcolabile e sostiene tutto il calcolo.',
+    tags: ['informatica', 'matematica', 'teoria', 'storia', 'tecnologia'],
+    language: 'it',
+    content: `# La macchina di Turing
+
+La macchina di Turing non è un dispositivo fisico ma un esperimento mentale — un modello matematico che cattura l'idea stessa di calcolo. Proposta da **Alan Turing** nel 1936, resta il fondamento teorico dell'informatica.
+
+## Un progetto ingannevolmente semplice
+
+Una macchina di Turing è composta da:
+
+- Un **nastro** di lunghezza infinita diviso in celle, ciascuna con un simbolo.
+- Una **testina** che può leggere e scrivere il simbolo sottostante e spostarsi a sinistra o a destra.
+- Un insieme di **stati** e una tabella di **regole** che dicono alla macchina cosa fare in base allo stato attuale e al simbolo che legge.
+
+Da queste parti minime la macchina può eseguire qualsiasi procedura passo passo. L'intuizione di Turing fu che questo semplice sistema è abbastanza potente da eseguire **qualsiasi** calcolo descrivibile con un algoritmo.
+
+## Universalità
+
+Turing descrisse anche una macchina **universale** capace di leggere la descrizione di qualsiasi altra macchina di Turing e poi di imitarla. È l'antenato teorico del moderno computer programmabile: una macchina che esegue programmi diversi anziché un dispositivo separato per ogni compito.
+
+## I limiti del calcolo
+
+Il modello rivelò anche dei limiti. Turing dimostrò che alcuni problemi sono **indecidibili**: nessun algoritmo può risolverli. Il più celebre è il **problema della fermata**: non esiste un metodo generale per stabilire, per ogni programma e input, se il programma alla fine si fermerà o girerà per sempre.
+
+## Un'influenza duratura
+
+Tutto ciò che un vero computer può calcolare, lo può calcolare anche una macchina di Turing (dati tempo e nastro sufficienti). Questa equivalenza è il motivo per cui il modello definisce ancora i confini di ciò che i computer possono — e non possono — fare.`,
+  },
+  {
+    title: 'Larghezza di banda e latenza',
+    question: 'Qual è la differenza tra larghezza di banda e latenza?',
+    summary:
+      'La larghezza di banda è quanti dati una connessione può trasportare al secondo, mentre la latenza è il ritardo prima che i dati comincino ad arrivare; entrambe plasmano quanto «veloce» appare una rete, ma non sono la stessa cosa.',
+    tags: ['tecnologia', 'reti', 'internet', 'informatica', 'ingegneria'],
+    language: 'it',
+    content: `# Larghezza di banda e latenza
+
+Si dice spesso che una connessione è «veloce», ma la velocità ha in realtà due dimensioni distinte: la **larghezza di banda** e la **latenza**. Confonderle è una fonte comune di frustrazione con le reti.
+
+## Larghezza di banda: quanto
+
+La **larghezza di banda** è la quantità massima di dati che una connessione può trasferire in un dato tempo, misurata di solito in megabit o gigabit al secondo. Un'analogia utile è la larghezza di un tubo: un tubo più largo lascia passare più acqua in una volta. La larghezza di banda aiuta soprattutto nello spostare **grandi** quantità di dati — trasmettere video ad alta risoluzione, scaricare file grandi o fare backup nel cloud.
+
+## Latenza: quanto presto
+
+La **latenza** è il ritardo tra l'invio di una richiesta e la ricezione della prima risposta, misurato in millisecondi. Nell'analogia del tubo è il tempo che l'acqua impiega ad andare da un capo all'altro. La latenza dipende dalla distanza (i segnali non possono superare la velocità della luce), dal numero di salti di rete e dai ritardi di elaborazione. La latenza conta soprattutto nei compiti **interattivi** — videochiamate, giochi online e richieste web rapide.
+
+## Perché la differenza conta
+
+Una connessione può avere larghezza di banda alta ma latenza alta, o viceversa. Un collegamento satellitare può trasportare molti dati e apparire comunque lento perché ogni segnale percorre decine di migliaia di chilometri. Per questo un video può trasmettersi fluido (larghezza di banda) mentre un gioco appare ancora a scatti (latenza).
+
+## Termini correlati
+
+Il **throughput** è la velocità di trasferimento dati effettivamente raggiunta nella pratica, di solito inferiore alla larghezza di banda teorica. Il **jitter** è la variazione della latenza nel tempo, che può disturbare voce e video anche quando la latenza media è bassa.`,
+  },
+  // ── Batch 4: Mente, salute e quotidiano ──
+  {
+    title: "L'effetto placebo",
+    question: 'Come può un trattamento finto far comunque sentire meglio le persone?',
+    summary:
+      "L'effetto placebo si verifica quando un trattamento privo di principio attivo allevia i sintomi di una persona perché essa si aspetta un aiuto, rivelando il forte legame tra mente e corpo.",
+    tags: ['salute', 'psicologia', 'medicina', 'cervello', 'scienza'],
+    language: 'it',
+    content: `# L'effetto placebo
+
+L'effetto placebo è uno dei fenomeni più affascinanti della medicina: le persone spesso migliorano dopo aver ricevuto un trattamento privo di qualsiasi potere curativo — una pillola di zucchero, un'iniezione di soluzione fisiologica o una procedura fittizia — solo perché credono che le aiuterà.
+
+## Cosa succede
+
+Un placebo è un trattamento simulato. Quando qualcuno lo riceve credendolo reale, l'aspettativa di miglioramento può innescare cambiamenti misurabili: meno dolore riferito, umore migliore, perfino variazioni in segnali corporei. L'effetto è più forte nei sintomi modulati dal cervello, come **dolore, ansia, stanchezza e nausea**.
+
+## Perché accade
+
+Sembrano coinvolti diversi meccanismi:
+
+- **Aspettativa.** Attendersi sollievo può indurre il cervello a rilasciare sostanze naturali come le endorfine.
+- **Condizionamento.** Associazioni apprese (il camice bianco, l'atto di prendere una pillola) possono evocare risposte reali per abitudine.
+- **Riduzione dell'ansia.** Sentirsi accuditi diminuisce lo stress, che da solo può alleviare i sintomi.
+
+È importante notare che i placebo non rimpiccioliscono i tumori né curano le infezioni — cambiano soprattutto la **percezione** e alcune risposte regolate dal cervello.
+
+## Perché conta per la scienza
+
+Poiché i placebo sono così potenti, i nuovi farmaci devono superarli in **sperimentazioni controllate con placebo**. I partecipanti sono divisi tra chi riceve il trattamento reale e chi riceve il placebo, senza sapere quale; solo se il trattamento reale supera nettamente il placebo lo si considera davvero efficace.
+
+## Il cugino oscuro
+
+L'**effetto nocebo** è l'opposto: aspettarsi un danno può produrre sintomi negativi reali, come avvertire effetti collaterali a causa di un avvertimento, anche ricevendo solo una pillola di zucchero.`,
+  },
+  {
+    title: 'Perché dormiamo',
+    question: 'Perché abbiamo bisogno di dormire ogni notte?',
+    summary:
+      'Il sonno è uno stato biologico vitale che sostiene la memoria, la riparazione cellulare, la regolazione ormonale e la pulizia del cervello; la privazione cronica danneggia la salute e le funzioni mentali.',
+    tags: ['salute', 'biologia', 'cervello', 'sonno', 'scienza'],
+    language: 'it',
+    content: `# Perché dormiamo
+
+Trascorriamo circa un terzo della vita dormendo, ma il sonno è ben lontano dall'essere tempo perso. È un processo attivo, accuratamente regolato, essenziale per il corpo e la mente. Benché gli scienziati discutano ancora su tutte le sue funzioni, le prove della sua importanza sono schiaccianti.
+
+## Cosa fa il sonno
+
+Il sonno sembra assolvere diverse funzioni vitali:
+
+- **Consolidamento della memoria.** Il cervello rielabora e rafforza i ricordi della giornata, spostando ciò che abbiamo imparato dalla memoria a breve a quella a lungo termine.
+- **Pulizia cellulare.** Durante il sonno il cervello espelle più velocemente i rifiuti metabolici, tra cui proteine legate a malattie neurodegenerative.
+- **Riparazione e crescita.** Il corpo ripara i tessuti, costruisce osso e muscolo e rilascia ormoni importanti per la crescita.
+- **Regolazione.** Il sonno regola l'appetito, l'umore, la funzione immunitaria e l'equilibrio ormonale.
+
+## Le fasi del sonno
+
+Il sonno si svolge in cicli di circa 90 minuti, alternando sonno **non-REM** (incluso il sonno profondo a onde lente, ottimo per il recupero fisico) e sonno **REM** (in cui avviene la maggior parte dei sogni vividi e che aiuta la memoria e la regolazione emotiva). Una notte sana attraversa diversi di questi cicli completi.
+
+## Il costo di dormire male
+
+La privazione cronica di sonno è legata a problemi di memoria, giudizio compromesso, umore alterato e un rischio maggiore di obesità, diabete, malattie cardiache e deficit immunitario. Anche una perdita moderata di sonno compromette l'attenzione e i tempi di reazione quanto l'alcol.
+
+## Quanto ne serve
+
+La maggior parte degli adulti ha bisogno di 7-9 ore a notte, e gli adolescenti e i bambini di più. Il fabbisogno varia tra le persone, ma pochissimi funzionano davvero bene con poco sonno in modo costante.`,
+  },
+  {
+    title: 'La caffeina e il cervello',
+    question: 'Come ci rende più vigili la caffeina?',
+    summary:
+      "La caffeina blocca l'adenosina, la sostanza chimica del cervello che provoca sonnolenza, riducendo temporaneamente la stanchezza e aumentando la vigilanza — ecco perché è lo stimolante più usato al mondo.",
+    tags: ['salute', 'cervello', 'chimica', 'biologia', 'quotidiano'],
+    language: 'it',
+    content: `# La caffeina e il cervello
+
+La caffeina è la droga psicoattiva più consumata al mondo, presente in caffè, tè, cioccolato, bibite gassate e bevande energetiche. La sua capacità di scacciare il sonno nasce da un preciso trucco biochimico nel cervello.
+
+## Bloccare il segnale del sonno
+
+Durante la giornata di veglia, nel cervello si accumula una sostanza detta **adenosina**. Essa si lega a recettori e produce a poco a poco la sensazione di stanchezza, contribuendo a creare la «pressione del sonno» che alla fine ci fa addormentare.
+
+La caffeina ha una struttura molecolare assai simile a quella dell'adenosina. Si inserisce negli stessi recettori e li **blocca** senza attivarli. Con i segnali di stanchezza dell'adenosina sbarrati, ti senti più vigile e sveglio — ma la stanchezza di fondo è ancora lì sotto, in attesa, quando l'effetto della caffeina svanisce.
+
+## Effetti secondari
+
+Bloccando l'adenosina, la caffeina lascia anche agire più liberamente altri messaggeri chimici come la **dopamina**, il che può migliorare leggermente umore, concentrazione e tempi di reazione. Ecco perché una dose moderata sembra così utile.
+
+## Tolleranza e astinenza
+
+Con l'uso regolare il cervello si adatta creando **più recettori** dell'adenosina, così serve più caffeina per lo stesso effetto — è la **tolleranza**. Se si smette di colpo, tutti quei recettori in più restano aperti all'adenosina, causando mal di testa, stanchezza e irritabilità finché il cervello non si riadatta.
+
+## Tempi e quantità
+
+La caffeina raggiunge il pieno effetto in circa 20-45 minuti e ha un'«emivita» di circa 5 ore, perciò una dose pomeridiana può ancora disturbare il sonno notturno. Dosi moderate sono sicure per la maggior parte, ma l'eccesso può causare ansia, palpitazioni e insonnia.`,
+  },
+  {
+    title: "L'effetto Doppler",
+    question: "Perché la sirena di un'ambulanza cambia tono quando passa?",
+    summary:
+      "L'effetto Doppler è il cambiamento di frequenza di un'onda quando sorgente e osservatore si muovono l'uno rispetto all'altro, udibile nelle sirene di passaggio e usato dal radar all'astronomia.",
+    tags: ['fisica', 'suono', 'onde', 'astronomia', 'scienza'],
+    language: 'it',
+    content: `# L'effetto Doppler
+
+L'effetto Doppler è il cambiamento di frequenza di un'onda quando la sua sorgente e l'osservatore si muovono l'uno rispetto all'altro. È il motivo per cui la sirena di un'ambulanza sembra più acuta quando si avvicina e più grave dopo che è passata.
+
+## Perché accade
+
+Le onde sonore viaggiano attraverso una distanza a un ritmo fisso. Se la sorgente del suono si muove verso di te, ogni onda successiva parte da un punto un po' più vicino, perciò le onde si **comprimono** — frequenza più alta, tono più acuto. Mentre la sorgente si allontana, le onde si **dilatano** — frequenza più bassa, tono più grave. Il passaggio stesso avviene nel momento in cui la sorgente ti sfila accanto.
+
+## Non solo il suono
+
+L'effetto Doppler si applica a tutte le onde, luce compresa. Per la luce, un oggetto in avvicinamento ha le sue onde compresse verso l'estremità **blu** dello spettro (spostamento verso il blu), e uno in allontanamento dilatate verso il **rosso** (spostamento verso il rosso). I cambiamenti sono troppo piccoli per essere visti a velocità quotidiane, ma diventano misurabili su scala astronomica.
+
+## Usi nel mondo reale
+
+- **Radar e autovelox** rimbalzano onde sui veicoli e misurano lo spostamento per calcolarne la velocità.
+- **Le previsioni meteo** usano il radar Doppler per seguire il movimento di pioggia e temporali.
+- **La medicina** usa l'ecografia Doppler per visualizzare il flusso sanguigno.
+- **L'astronomia** usa lo spostamento verso il rosso per misurare la velocità con cui stelle e galassie si muovono.
+
+## Un indizio cosmico
+
+Lo spostamento Doppler della luce è una delle prove principali che l'universo è in espansione: le galassie lontane mostrano uno spostamento verso il rosso, indicando che quasi tutte si allontanano da noi.`,
+  },
+  {
+    title: 'Perché il cielo è blu',
+    question: 'Perché il cielo è blu di giorno e rosso al tramonto?',
+    summary:
+      "Il cielo è blu perché le molecole dell'aria diffondono la luce solare a corta lunghezza d'onda (blu) più fortemente di quella a lunga lunghezza d'onda, un processo detto diffusione di Rayleigh.",
+    tags: ['fisica', 'luce', 'atmosfera', 'colore', 'scienza'],
+    language: 'it',
+    content: `# Perché il cielo è blu
+
+Il colore blu del cielo durante il giorno è il risultato del modo in cui la luce solare interagisce con l'atmosfera terrestre. La spiegazione viene da un processo detto **diffusione di Rayleigh**.
+
+## La luce solare è fatta di molti colori
+
+Pur apparendo bianca, la luce solare è una mescolanza di tutti i colori dell'arcobaleno, ciascuno con la propria lunghezza d'onda. La luce blu e violetta ha lunghezze d'onda **corte**; quella rossa e arancione lunghezze **lunghe**.
+
+## La diffusione favorisce il blu
+
+Entrando nell'atmosfera, la luce solare urta molecole di gas molto più piccole della sua lunghezza d'onda. Queste molecole diffondono le lunghezze d'onda corte molto più di quelle lunghe — la luce blu si diffonde diverse volte più di quella rossa. Di conseguenza la luce blu viene sparsa per tutto il cielo, ed è dalla luce blu diffusa che viene l'azzurro del cielo, ovunque si guardi.
+
+## E il violetto?
+
+Il violetto ha una lunghezza d'onda ancora più corta del blu e si diffonde perfino di più. Ma il cielo non appare violetto perché il Sole emette meno luce violetta e i nostri occhi sono assai meno sensibili a essa, perciò percepiamo il cielo come blu.
+
+## Tramonti rossi
+
+Vicino all'alba e al tramonto, la luce solare attraversa uno strato di atmosfera assai più spesso per raggiungerci. Lungo questo percorso viene diffusa via tanta luce blu che restano soprattutto le lunghezze d'onda più lunghe, inondando il cielo di rossi, arancioni e rosa.
+
+## La stessa fisica altrove
+
+La diffusione di Rayleigh spiega anche perché gli oggetti lontani appaiono bluastri e perché l'atmosfera terrestre vista dallo spazio mostra una sottile linea azzurra all'orizzonte.`,
+  },
+  {
+    title: 'La resistenza agli antibiotici',
+    question: 'Perché gli antibiotici stanno perdendo efficacia?',
+    summary:
+      "La resistenza agli antibiotici emerge quando i batteri evolvono per sopravvivere ai farmaci destinati a ucciderli, accelerata dall'uso eccessivo e improprio, minacciando di rendere di nuovo pericolose le infezioni comuni.",
+    tags: ['salute', 'medicina', 'biologia', 'evoluzione', 'scienza'],
+    language: 'it',
+    content: `# La resistenza agli antibiotici
+
+La resistenza agli antibiotici è una delle minacce più gravi per la salute globale. Si verifica quando i batteri evolvono in modo da non essere più uccisi dagli antibiotici un tempo efficaci contro di essi, rendendo le infezioni più difficili — a volte impossibili — da curare.
+
+## Come emerge la resistenza
+
+Gli antibiotici uccidono i batteri sensibili, ma le popolazioni batteriche sono enormi e varie. Per caso, alcuni portano mutazioni che li aiutano a sopravvivere. Quando un antibiotico elimina i batteri sensibili, quelli resistenti sopravvivono e si moltiplicano — è la **selezione naturale** in azione. I batteri si scambiano anche geni di resistenza direttamente tra loro, diffondendo rapidamente la capacità.
+
+## Cosa accelera il problema
+
+Diversi fattori aggravano la resistenza:
+
+- **Uso eccessivo** di antibiotici, anche per infezioni virali come il raffreddore, contro cui non hanno effetto.
+- **Trattamento incompleto**, quando i pazienti interrompono il farmaco troppo presto lasciando sopravvivere i microbi più resistenti.
+- **Uso massiccio in agricoltura**, dove si danno antibiotici ad animali sani per accelerarne la crescita.
+
+Ogni esposizione dà ai batteri più occasioni di sviluppare difese.
+
+## Perché conta
+
+Gli antibiotici sostengono la medicina moderna — non curano solo le infezioni, ma rendono sicuri la chirurgia, la chemioterapia e il parto. I batteri resistenti, a volte detti «superbatteri», minacciano di vanificare questo progresso, riportandoci a un'epoca in cui graffi e infezioni comuni potevano essere fatali.
+
+## Cosa aiuta
+
+Le soluzioni comprendono usare gli antibiotici solo quando servono, completare le terapie prescritte, migliorare l'igiene e il controllo delle infezioni, limitare l'uso agricolo e investire nella ricerca di nuovi antibiotici e terapie alternative.`,
+  },
+  {
+    title: "Il ciclo dell'azoto",
+    question: "Come si muove l'azoto attraverso gli esseri viventi e l'ambiente?",
+    summary:
+      "Il ciclo dell'azoto converte l'azoto gassoso inerte in forme utilizzabili dagli esseri viventi e lo restituisce all'atmosfera, sostenendo tutta la vita tramite batteri, piante e decomposizione.",
+    tags: ['biologia', 'chimica', 'ecologia', 'scienze della Terra', 'scienza'],
+    language: 'it',
+    content: `# Il ciclo dell'azoto
+
+L'azoto è essenziale per la vita — è un componente chiave delle proteine e del DNA. Benché l'atmosfera terrestre sia per il 78% azoto gassoso, la maggior parte degli esseri viventi non può usare questa forma direttamente. Il ciclo dell'azoto è l'insieme dei processi che convertono l'azoto in forme utilizzabili e infine lo restituiscono all'aria.
+
+## Il problema dell'azoto inerte
+
+L'azoto gassoso atmosferico (N₂) è straordinariamente stabile: i suoi due atomi sono uniti da un triplo legame che richiede molta energia per spezzarsi. Prima che piante e animali possano usare l'azoto, esso deve essere «fissato» in forme più reattive, come l'ammoniaca o il nitrato.
+
+## Le fasi principali
+
+- **Fissazione.** Batteri speciali — molti vivono nelle radici di leguminose come i fagioli — convertono l'N₂ in ammoniaca. Anche i fulmini e i fertilizzanti industriali fissano l'azoto.
+- **Nitrificazione.** Altri batteri trasformano l'ammoniaca in nitriti e poi in nitrati, la forma che le piante assorbono più facilmente.
+- **Assimilazione.** Le piante captano i composti azotati e li usano per costruire proteine; gli animali ottengono azoto mangiando piante.
+- **Ammonificazione.** I decompositori restituiscono l'azoto al suolo come ammoniaca scomponendo rifiuti e organismi morti.
+- **Denitrificazione.** Altri batteri convertono i nitrati di nuovo in azoto gassoso, restituendolo all'atmosfera e chiudendo il ciclo.
+
+## L'impatto umano
+
+L'invenzione della fissazione industriale dell'azoto (il processo Haber-Bosch) ha enormemente aumentato la produzione di cibo, ma l'eccesso di fertilizzante scorre in fiumi e oceani. Lì alimenta una fioritura incontrollata di alghe che esaurisce l'ossigeno e crea «zone morte», mostrando come lo squilibrio di un ciclo naturale porti conseguenze di vasta portata.`,
+  },
+  {
+    title: 'Come funziona la memoria',
+    question: 'Come immagazzina e recupera i ricordi il cervello?',
+    summary:
+      "La memoria è la codifica, l'archiviazione e il recupero delle informazioni da parte del cervello attraverso reti di neuroni; comprende sistemi diversi ed è ricostruttiva, non una registrazione perfetta.",
+    tags: ['cervello', 'psicologia', 'biologia', 'apprendimento', 'scienza'],
+    language: 'it',
+    content: `# Come funziona la memoria
+
+La memoria è la capacità del cervello di codificare, conservare e recuperare informazioni. Ben lontana dall'essere un videoregistratore, è un sistema attivo e ricostruttivo che plasma chi siamo.
+
+## Tre fasi di base
+
+- **Codifica.** Le informazioni in arrivo dai sensi sono convertite in una forma che il cervello può conservare.
+- **Archiviazione.** Tali informazioni sono trattenute nel tempo, da secondi a un'intera vita.
+- **Recupero.** Le informazioni conservate sono riportate alla mente quando servono — è l'atto del ricordare.
+
+## Tipi di memoria
+
+La memoria non è una cosa sola. Gli psicologi la distinguono in sistemi diversi:
+
+- La **memoria sensoriale** trattiene impressioni brevi, della durata di frazioni di secondo.
+- La **memoria a breve termine (o di lavoro)** conserva una piccola quantità di informazioni per secondi mentre la usi.
+- La **memoria a lungo termine** conserva le informazioni per lunghi periodi e ha una capacità vastissima. Comprende ricordi **espliciti** (fatti ed eventi che richiami consapevolmente) e **impliciti** (abilità e abitudini, come andare in bicicletta).
+
+## La base fisica
+
+I ricordi sono conservati come schemi di connessioni tra neuroni. Quando impariamo, le sinapsi tra certi neuroni si rafforzano — un principio spesso riassunto come «i neuroni che si attivano insieme si connettono insieme». Il consolidamento di un ricordo stabile dipende fortemente dal sonno e da una regione del cervello detta **ippocampo**.
+
+## Perché la memoria ci tradisce — e ci inganna
+
+La memoria è ricostruttiva: ogni volta che recuperiamo un ricordo lo riassembliamo, e possiamo alterarlo senza accorgercene. Questo spiega perché i ricordi possono essere vividi e tuttavia errati, perché le testimonianze oculari sono inaffidabili e perché ripetizione e associazioni aiutano a fissare le informazioni.`,
+  },
+  // ── Batch 5: Spazio e astronomia ──
+  {
+    title: 'Le fasi della Luna',
+    question: 'Perché la Luna cambia forma nel corso del mese?',
+    summary:
+      'Le fasi della Luna sono le forme mutevoli della sua parte illuminata viste dalla Terra, causate dal modo in cui la luce solare la colpisce mentre orbita attorno al nostro pianeta.',
+    tags: ['astronomia', 'luna', 'spazio', 'scienza', 'sistema solare'],
+    language: 'it',
+    content: `# Le fasi della Luna
+
+La Luna sembra cambiare forma nel corso di circa un mese, passando da un sottile spicchio alla Luna piena e ritorno. Queste **fasi** non derivano da un'ombra proiettata dalla Terra, ma dalla combinazione tra come la luce solare colpisce la Luna e l'angolo da cui la osserviamo.
+
+## La causa reale
+
+Metà della Luna è sempre illuminata dal Sole, proprio come metà della Terra vive il giorno. Ma mentre la Luna orbita attorno alla Terra, vediamo quantità diverse di quella metà illuminata. Quando la Luna è dal lato opposto al Sole rispetto a noi, vediamo l'intera faccia illuminata — la **Luna piena**. Quando è tra noi e il Sole, la faccia rivolta verso di noi è scura — la **Luna nuova**.
+
+## Il ciclo delle fasi
+
+Il ciclo completo dura circa 29,5 giorni e attraversa otto fasi:
+
+1. **Luna nuova** — quasi invisibile.
+2. **Falce crescente** — comincia ad apparire una sottile striscia.
+3. **Primo quarto** — metà illuminata, in via di riempimento.
+4. **Gibbosa crescente** — più di metà illuminata.
+5. **Luna piena** — intero disco illuminato.
+6. **Gibbosa calante** — comincia a diminuire.
+7. **Ultimo quarto** — di nuovo mezza Luna, dal lato opposto.
+8. **Falce calante** — una sottile striscia prima del ritorno della Luna nuova.
+
+«Crescente» significa che la parte illuminata aumenta; «calante» che diminuisce.
+
+## La stessa faccia
+
+La Luna impiega lo stesso tempo a ruotare una volta sul proprio asse e a orbitare attorno alla Terra, un fenomeno detto **rotazione sincrona**. Per questo ci mostra sempre la stessa faccia, e il «lato nascosto» non è mai visibile dalla Terra.`,
+  },
+  {
+    title: 'Le comete',
+    question: 'Cosa sono le comete e da dove vengono?',
+    summary:
+      'Le comete sono corpi ghiacciati avanzati dalla formazione del sistema solare che sviluppano code luminose quando si avvicinano al Sole e il calore vaporizza il loro ghiaccio.',
+    tags: ['astronomia', 'comete', 'spazio', 'sistema solare', 'scienza'],
+    language: 'it',
+    content: `# Le comete
+
+Le comete sono tra gli oggetti più spettacolari del cielo notturno: palle di ghiaccio e polvere che prendono vita quando si avvicinano al Sole. Spesso dette «palle di neve sporche», sono resti congelati degli albori del sistema solare.
+
+## Di cosa sono fatte
+
+Il cuore di una cometa è il **nucleo**, una miscela solida di ghiaccio, polvere, roccia e composti congelati larga solo pochi chilometri. Per miliardi di anni restano congelate nelle gelide periferie del sistema solare.
+
+## Perché crescono le code
+
+Quando l'orbita di una cometa la avvicina al Sole, il calore fa passare il suo ghiaccio direttamente allo stato gassoso, in un processo detto **sublimazione**. Questo forma un'atmosfera sfumata e luminosa attorno al nucleo, la **chioma**, e libera polvere. La pressione della radiazione solare e il vento solare spingono questo materiale lontano dal Sole, creando una o più **code** che possono estendersi per milioni di chilometri. Per questo la coda di una cometa punta sempre in direzione opposta al Sole, e non dietro al suo moto.
+
+## Da dove vengono
+
+La maggior parte delle comete proviene da due regioni lontane:
+
+- La **fascia di Kuiper**, un disco di corpi ghiacciati oltre Nettuno, fonte di molte comete a periodo breve.
+- La **nube di Oort**, un guscio sferico assai più distante che avvolge il sistema solare, fonte delle comete a periodo lungo.
+
+## Visitatori dal passato
+
+Poiché le comete conservano materiale congelato dei primi giorni del sistema solare, sono come capsule del tempo. Gli scienziati le studiano per conoscere le condizioni di 4,6 miliardi di anni fa, e alcuni sospettano che le comete abbiano contribuito a portare acqua e molecole organiche sulla Terra primordiale.`,
+  },
+  {
+    title: 'Il ciclo di vita di una stella',
+    question: 'Come nascono, vivono e muoiono le stelle?',
+    summary:
+      'Le stelle si formano da nubi di gas in collasso, brillano per milioni o miliardi di anni fondendo elementi e muoiono in modi diversi — da nane bianche a supernove — a seconda della loro massa.',
+    tags: ['astronomia', 'stelle', 'spazio', 'fisica', 'scienza'],
+    language: 'it',
+    content: `# Il ciclo di vita di una stella
+
+Le stelle sembrano eterne, ma nascono, vivono e muoiono nel corso di immense scale di tempo. Il destino di una stella dipende quasi interamente da una proprietà: la sua **massa**.
+
+## La nascita
+
+Le stelle nascono dentro immense nubi di gas e polvere dette **nebulose**. Quando una regione diventa abbastanza densa, la gravità la fa collassare e riscaldare. Quando il nucleo raggiunge circa 10 milioni di gradi, inizia la **fusione nucleare** — gli atomi di idrogeno si fondono in elio, liberando energia. Una stella è nata.
+
+## La mezza età
+
+Per gran parte della vita una stella si trova sulla **sequenza principale**, bilanciando la forza di gravità che la comprime verso l'interno con la pressione della fusione che spinge verso l'esterno. Il nostro Sole è in questa fase stabile da circa 4,6 miliardi di anni e proseguirà per altri 5 miliardi. Le stelle più piccole e fredde bruciano il combustibile lentamente e durano migliaia di miliardi di anni; quelle grandi e calde consumano il loro in soli pochi milioni.
+
+## La morte
+
+La fine di una stella dipende dalla sua massa:
+
+- **Stelle come il Sole** si gonfiano in **giganti rosse**, espellono gli strati esterni e lasciano dietro un nucleo denso e in raffreddamento detto **nana bianca**.
+- **Stelle molto più massicce** finiscono in un'esplosione catastrofica detta **supernova**, che per un breve istante può brillare più di un'intera galassia. Ciò che resta diventa una **stella di neutroni** ultradensa o, se la stella era abbastanza massiccia, un **buco nero**.
+
+## Fucine cosmiche
+
+Le stelle sono le fabbriche dell'universo. La fusione al loro interno, e le esplosioni che le concludono, hanno creato quasi tutti gli elementi più pesanti dell'idrogeno — compresi il carbonio e l'ossigeno in te. Siamo, letteralmente, fatti di polvere di stelle.`,
+  },
+  {
+    title: 'Le aurore',
+    question: 'Cosa causa le luci del nord e del sud?',
+    summary:
+      'Le aurore sono spettacoli di luce colorata presso i poli terrestri, prodotti quando particelle cariche del Sole si scontrano con i gas atmosferici guidate dal campo magnetico del pianeta.',
+    tags: ['astronomia', 'atmosfera', 'fisica', 'spazio', 'scienza'],
+    language: 'it',
+    content: `# Le aurore
+
+Le aurore — le **luci del nord** (aurora boreale) e le **luci del sud** (aurora australe) — sono tra gli spettacoli più magnifici della natura: cortine scintillanti di luce verde, rosa e viola che danzano nei cieli polari.
+
+## La causa: il vento solare
+
+Le aurore nascono dal Sole, che soffia senza sosta un flusso di particelle cariche detto **vento solare**. Quando queste particelle raggiungono la Terra, la maggior parte viene deviata dal **campo magnetico** del pianeta. Ma vicino ai poli magnetici le linee di campo si immergono nell'atmosfera, incanalando alcune particelle verso il basso.
+
+## La creazione della luce
+
+Immergendosi nell'alta atmosfera, queste particelle energetiche urtano atomi e molecole di gas. Gli urti eccitano i gas — spingono i loro elettroni a livelli di energia più alti. Quando gli elettroni tornano alla normalità, liberano l'energia in eccesso come luce. Gas diversi brillano di colori diversi:
+
+- L'**ossigeno** produce il verde (il più comune) e, alle alte quote, il rosso.
+- L'**azoto** produce il blu e il viola.
+
+## Perché vicino ai poli
+
+Poiché la forma del campo magnetico terrestre incanala le particelle verso le regioni polari, le aurore sono più comuni alle alte latitudini, attorno ad anelli detti **ovali aurorali**. Durante forti tempeste solari si possono vedere assai più vicino all'equatore del solito.
+
+## Oltre la Terra
+
+Le aurore non sono esclusive della Terra. Spettacoli simili sono stati osservati su Giove, Saturno e altri pianeti dotati di campi magnetici e atmosfere — un promemoria del fatto che il nostro pianeta fa parte di un sistema solare mosso dal Sole.`,
+  },
+  {
+    title: 'Anni luce e distanze cosmiche',
+    question: "Cos'è un anno luce e come misurano lo spazio gli astronomi?",
+    summary:
+      'Un anno luce è la distanza che la luce percorre in un anno; gli astronomi lo usano insieme a tecniche come la parallasse per misurare le immense distanze tra stelle e galassie.',
+    tags: ['astronomia', 'spazio', 'distanza', 'fisica', 'scienza'],
+    language: 'it',
+    content: `# Anni luce e distanze cosmiche
+
+Le distanze nello spazio sono così immense che i chilometri diventano inutili. Per misurare il cosmo, gli astronomi usano l'**anno luce** — e un'ingegnosa scala di tecniche per stabilire quanto siano davvero lontane le cose.
+
+## Cos'è un anno luce
+
+Un anno luce è una misura di **distanza**, non di tempo: è la distanza che la luce percorre in un anno, circa 9.500 miliardi di chilometri. Poiché la luce viaggia a velocità finita, guardare nello spazio significa guardare nel passato. La stella più vicina oltre al Sole dista circa 4,2 anni luce, perciò la vediamo com'era oltre quattro anni fa. Alcune galassie le vediamo com'erano miliardi di anni fa.
+
+## Misurare distanze vicine: la parallasse
+
+Per le stelle relativamente vicine, gli astronomi usano la **parallasse**. Osservando una stella da lati opposti dell'orbita terrestre (a sei mesi di distanza), essa appare spostarsi leggermente rispetto allo sfondo più lontano. Maggiore lo spostamento, più vicina la stella. È lo stesso effetto del chiudere un occhio per volta e vedere il pollice saltare.
+
+## Misurare distanze maggiori
+
+Oltre la portata della parallasse, gli astronomi usano «candele standard» — oggetti di luminosità reale nota. Confrontando la loro luminosità reale con quanto appaiono fiochi, si deduce la distanza. Le **variabili Cefeidi** e un certo tipo di **supernova** fungono da queste candele e permettono di misurare distanze fino a galassie lontane.
+
+## Una scala che rende umili
+
+Questi strumenti rivelano un universo di una vastità sbalorditiva: miliardi di galassie, ciascuna con miliardi di stelle, sparse su distanze così grandi che la luce che oggi catturiamo è partita molto prima che la Terra esistesse.`,
+  },
+  {
+    title: 'Gli esopianeti',
+    question: 'Cosa sono gli esopianeti e come li troviamo?',
+    summary:
+      'Gli esopianeti sono pianeti che orbitano attorno ad altre stelle; ne sono stati scoperti migliaia con metodi indiretti, alcuni nella zona abitabile dove potrebbe esistere acqua liquida.',
+    tags: ['astronomia', 'esopianeti', 'spazio', 'scienza', 'scoperta'],
+    language: 'it',
+    content: `# Gli esopianeti
+
+Un esopianeta è un pianeta che orbita attorno a una stella diversa dal nostro Sole. Per secoli abbiamo potuto solo immaginare tali mondi; oggi ne conosciamo migliaia, e questa scienza ha trasformato la nostra visione del posto che occupiamo nell'universo.
+
+## Perché sono difficili da vedere
+
+Gli esopianeti sono estremamente difficili da osservare direttamente. Non emettono luce propria e si perdono nel bagliore intenso delle loro stelle — come cercare di vedere una lucciola accanto a un faro. Per questo quasi tutti gli esopianeti sono trovati con mezzi **indiretti**.
+
+## Come li troviamo
+
+Due metodi dominano la ricerca:
+
+- **Il metodo del transito.** Se l'orbita di un pianeta passa tra noi e la sua stella, esso blocca una frazione minuscola della sua luce. Misurare questi piccoli cali regolari di luminosità rivela il pianeta e ne indica le dimensioni. Il telescopio spaziale Kepler ha usato questo metodo per trovare migliaia di mondi.
+- **Il metodo della velocità radiale.** Un pianeta in orbita esercita una lieve attrazione gravitazionale sulla sua stella, facendola oscillare. Questa oscillazione sposta un po' la luce della stella, rivelando la presenza e la massa del pianeta.
+
+## Una diversità sbalorditiva
+
+Gli esopianeti si sono rivelati incredibilmente vari: giganti gassosi «gioviani caldi» che orbitano incollati alle loro stelle, «superterre» rocciose più grandi del nostro pianeta e mondi con due soli. Molti sistemi non somigliano per nulla al nostro.
+
+## La ricerca della vita
+
+Il premio più ambito è trovare pianeti nella **zona abitabile** — la distanza da una stella alla quale potrebbe esistere acqua liquida in superficie. Nuovi telescopi cominciano ad analizzare le atmosfere degli esopianeti in cerca di gas che possano indicare la vita, rendendo finalmente verificabile l'antica domanda «siamo soli?».`,
+  },
+  {
+    title: 'Il Big Bang',
+    question: "Come è cominciato l'universo?",
+    summary:
+      "La teoria del Big Bang descrive l'universo in espansione da uno stato caldo e denso circa 13,8 miliardi di anni fa, sostenuta da prove come il bagliore cosmico residuo e le galassie in allontanamento.",
+    tags: ['astronomia', 'cosmologia', 'universo', 'fisica', 'scienza'],
+    language: 'it',
+    content: `# Il Big Bang
+
+La teoria del Big Bang è la migliore spiegazione scientifica di come è cominciato l'universo. Sostiene che tutto lo spazio, il tempo, la materia e l'energia siano emersi da uno stato straordinariamente caldo e denso circa **13,8 miliardi di anni fa**, e che l'universo si espanda da allora.
+
+## Non fu un'esplosione nello spazio
+
+Nonostante il nome, il Big Bang non fu un'esplosione che scagliò materia in uno spazio vuoto preesistente. Fu la rapida espansione **dello spazio stesso**, da uno stato in cui tutto ciò che oggi vediamo era compresso in un volume incredibilmente piccolo, caldo e denso. Mentre lo spazio si espandeva, si raffreddava, e la materia poté gradualmente formarsi e aggregarsi.
+
+## Le prove
+
+Tre osservazioni principali sostengono la teoria:
+
+- **Le galassie in allontanamento.** Negli anni '20 Edwin Hubble scoprì che le galassie lontane si allontanano da noi, e più sono lontane più velocemente — esattamente ciò che ci si aspetterebbe da un universo in espansione.
+- **La radiazione cosmica di fondo a microonde.** Un debole bagliore a microonde arriva da ogni direzione del cielo — il calore residuo raffreddato dell'universo primordiale, previsto prima di essere scoperto.
+- **L'abbondanza degli elementi leggeri.** Le proporzioni osservate di idrogeno ed elio coincidono con precisione con quanto previsto dalle reazioni nei primi minuti dell'universo.
+
+## Cosa venne dopo
+
+Mentre l'universo si raffreddava, la materia formò atomi, poi stelle, e queste si aggregarono in galassie. Nel corso di miliardi di anni la gravità costruì le strutture che oggi vediamo.
+
+## Cosa il Big Bang non spiega
+
+La teoria descrive come l'universo si sia evoluto da una frazione di secondo dopo l'inizio in poi, ma non dice cosa lo abbia «causato» né cosa ci fosse «prima» — domande che restano tra le più profonde della scienza.`,
+  },
+  {
+    title: 'Le eclissi',
+    question: 'Cosa causa le eclissi solari e lunari?',
+    summary:
+      'Le eclissi avvengono quando Sole, Terra e Luna si allineano, facendo proiettare a un corpo la propria ombra su un altro; le eclissi solari oscurano il Sole e quelle lunari offuscano la Luna piena.',
+    tags: ['astronomia', 'luna', 'sole', 'spazio', 'scienza'],
+    language: 'it',
+    content: `# Le eclissi
+
+Un'eclissi avviene quando Sole, Terra e Luna si allineano in modo che uno proietti la propria ombra su un altro. Questi eventi impressionanti un tempo erano temuti come presagi; oggi li comprendiamo come una bella e prevedibile geometria celeste.
+
+## Eclissi solari
+
+Un'eclissi solare avviene durante la Luna nuova, quando la Luna passa direttamente tra la Terra e il Sole, bloccando la luce solare. Benché la Luna sia molto più piccola del Sole, è circa 400 volte più vicina, perciò i due appaiono in cielo quasi delle stesse dimensioni — una coincidenza notevole.
+
+- In un'eclissi solare **totale**, la Luna copre del tutto il Sole, rivelando per brevi istanti la debole atmosfera esterna del Sole — la **corona** — e trasformando il giorno in crepuscolo.
+- In un'eclissi **parziale**, è oscurata solo una parte del Sole.
+- In un'eclissi **anulare**, la Luna è un po' più lontana e lascia un brillante «anello di fuoco» attorno alla sua sagoma.
+
+## Eclissi lunari
+
+Un'eclissi lunare avviene durante la Luna piena, quando la Terra si trova tra il Sole e la Luna e proietta la propria ombra su di essa. A differenza delle eclissi solari, è sicuro osservarle a occhio nudo e sono visibili da tutto il lato notturno della Terra contemporaneamente.
+
+Durante un'eclissi lunare **totale**, la Luna assume spesso una tinta rossastra — la cosiddetta «Luna di sangue» — perché l'atmosfera terrestre devia la luce solare rossastra sulla sua superficie.
+
+## Perché non avvengono ogni mese
+
+L'orbita della Luna è leggermente inclinata rispetto a quella della Terra, perciò la Luna di solito passa un po' sopra o sotto l'allineamento perfetto. Le eclissi avvengono solo nelle poche occasioni in cui i tre corpi si allineano con precisione, il che rende ognuna un evento speciale.`,
+  },
+  // ── Batch 6: Arti, lingua e cultura ──
+  {
+    title: 'La teoria dei colori',
+    question: 'Come funzionano i colori e perché alcuni si abbinano?',
+    summary:
+      'La teoria dei colori spiega come i colori si relazionano, si mescolano e si abbinano, usando strumenti come la ruota dei colori per guidare artisti, designer e chi lavora con il colore.',
+    tags: ['arte', 'design', 'colore', 'visivo', 'cultura'],
+    language: 'it',
+    content: `# La teoria dei colori
+
+La teoria dei colori è l'insieme dei principi che descrivono come i colori si relazionano tra loro, come si mescolano e come producono effetti diversi quando vengono accostati. Artisti, designer e arredatori la usano per creare immagini armoniose o ricche di contrasto.
+
+## La ruota dei colori
+
+Lo strumento centrale è la **ruota dei colori**, che dispone i colori in un anello per mostrarne le relazioni. È organizzata attorno a tre gruppi:
+
+- I **colori primari** (nel modello tradizionale dei pigmenti: rosso, giallo e blu) non possono essere ottenuti mescolando altri.
+- I **colori secondari** (verde, arancione, viola) nascono dalla mescolanza di due primari.
+- I **colori terziari** nascono dalla mescolanza di un primario con un secondario adiacente.
+
+## Mescolare luce e pigmento
+
+È fondamentale capire che il colore si mescola in modi diversi a seconda del mezzo. Mescolare **luce** (come negli schermi) è **additivo** — combinare rosso, verde e blu produce il bianco. Mescolare **pigmenti** (come le vernici) è **sottrattivo** — combinare molti colori tende allo scuro e al fangoso.
+
+## Schemi di colore
+
+La teoria descrive combinazioni che di solito piacciono all'occhio:
+
+- **Complementari:** colori opposti sulla ruota (come blu e arancione), che creano un contrasto vibrante.
+- **Analoghi:** colori vicini (come blu, blu-verde e verde), che creano armonia.
+- **Triadi:** tre colori equidistanti, che bilanciano varietà ed equilibrio.
+
+## Più dell'estetica
+
+I colori portano anche una **temperatura** (rossi e arancioni caldi; blu e verdi freddi) e associazioni psicologiche che influenzano umore e significato. Comprendere questi effetti aiuta a spiegare perché certe combinazioni ci appaiono energiche, calme o tese.`,
+  },
+  {
+    title: 'La prospettiva lineare',
+    question: "Come creano gli artisti l'illusione della profondità su una superficie piana?",
+    summary:
+      "La prospettiva lineare è una tecnica che usa linee convergenti e punti di fuga per creare l'illusione della profondità tridimensionale su una superficie piana, rivoluzionando l'arte rinascimentale.",
+    tags: ['arte', 'storia', 'tecnica', 'visivo', 'cultura'],
+    language: 'it',
+    content: `# La prospettiva lineare
+
+La prospettiva lineare è un metodo per creare l'illusione della profondità e dello spazio su una superficie piana. Codificata nell'Italia rinascimentale, trasformò la pittura permettendo agli artisti di rappresentare il mondo in modo realistico, come visto da un unico punto di vista.
+
+## L'idea centrale
+
+La prospettiva lineare si basa su un'osservazione semplice: gli oggetti paralleli sembrano avvicinarsi man mano che si allontanano. Pensa ai binari del treno che sembrano congiungersi in lontananza. La tecnica formalizza questo con alcuni elementi chiave:
+
+- La **linea dell'orizzonte**, all'altezza degli occhi dell'osservatore.
+- Uno o più **punti di fuga** su quell'orizzonte, dove le linee parallele che si allontanano sembrano convergere.
+- Le **ortogonali**, le linee che recedono e puntano verso un punto di fuga.
+
+Gli oggetti sono disegnati più piccoli e più vicini al punto di fuga man mano che sono più lontani, creando una profondità convincente.
+
+## Tipi di prospettiva
+
+- La **prospettiva a un punto** usa un solo punto di fuga, ideale per guardare dritto lungo una strada o un corridoio.
+- La **prospettiva a due punti** ne usa due, utile per rappresentare lo spigolo di un edificio.
+- La **prospettiva a tre punti** aggiunge un terzo punto (in alto o in basso) per vedute drammatiche, guardando in su o in giù.
+
+## Una svolta storica
+
+L'architetto **Filippo Brunelleschi** dimostrò la prospettiva matematica intorno al 1420, e divenne presto un pilastro dell'arte occidentale. Per la prima volta i pittori poterono costruire scene spazialmente coerenti, dando alle loro opere un realismo notevole.
+
+## Perché conta
+
+La prospettiva lineare è più di un trucco: riflette il modo in cui luce e visione funzionano davvero. Gli stessi principi sostengono oggi il disegno tecnico, l'architettura, i videogiochi e la grafica al computer.`,
+  },
+  {
+    title: "L'armonia e le scale musicali",
+    question: 'Cosa fa suonare bene insieme le note musicali?',
+    summary:
+      "L'armonia e le scale si basano su relazioni matematiche tra le frequenze del suono; le note con rapporti semplici suonano consonanti e formano i mattoni della musica.",
+    tags: ['musica', 'suono', 'matematica', 'arte', 'cultura'],
+    language: 'it',
+    content: `# L'armonia e le scale musicali
+
+Perché alcune combinazioni di note suonano gradevoli e altre tese? La risposta sta in un'affascinante interazione tra fisica, matematica e percezione umana.
+
+## Il suono è vibrazione
+
+Una nota musicale è prodotta da qualcosa che vibra a una certa frequenza, misurata in hertz (vibrazioni al secondo). Una vibrazione più rapida suona più acuta; una più lenta più grave. Il rapporto tra le frequenze di due note determina come suonano insieme.
+
+## I rapporti semplici suonano consonanti
+
+L'intuizione chiave, che risale all'antica Grecia, è che le note le cui frequenze formano **rapporti semplici** suonano consonanti (stabili e gradevoli):
+
+- L'**ottava** è un rapporto di 2:1 — una frequenza esattamente doppia dell'altra. Le due note suonano così simili da ricevere lo stesso nome.
+- La **quinta giusta** è un rapporto di 3:2, una delle combinazioni più gradevoli.
+- La **quarta giusta** è di 4:3.
+
+I rapporti più complessi tendono a suonare più dissonanti, o tesi — cosa che la musica usa di proposito per creare e poi risolvere la tensione.
+
+## La costruzione delle scale
+
+Una **scala** è una sequenza selezionata di note entro un'ottava. La maggior parte della musica occidentale usa 12 altezze equidistanti, da cui si ricavano scale di sette note come la **maggiore** (di solito allegra e luminosa) e la **minore** (spesso più cupa o malinconica). Altre culture usano scale diverse, con i propri schemi caratteristici.
+
+## L'armonia
+
+L'**armonia** è il suono di più note suonate insieme, di solito in **accordi**. Le progressioni di accordi creano movimento — allontanandosi dalla stabilità verso la tensione e tornando alla risoluzione — il che dà alla musica gran parte della sua forza emotiva.`,
+  },
+  {
+    title: "L'etimologia",
+    question: 'Da dove vengono le parole?',
+    summary:
+      "L'etimologia è lo studio dell'origine delle parole e di come i loro significati e le loro forme siano cambiati nel tempo, rivelando storia, contatti culturali e i legami tra le lingue.",
+    tags: ['lingua', 'parole', 'storia', 'linguistica', 'cultura'],
+    language: 'it',
+    content: `# L'etimologia
+
+L'etimologia è lo studio dell'origine delle parole: da dove vengono, come le loro forme e i loro significati sono cambiati e come si relazionano con parole di altre lingue. Ogni parola porta con sé un frammento di storia.
+
+## Ricostruire il passato delle parole
+
+Gli etimologi ricercano la storia di una parola confrontandola con forme più antiche e con parole affini in lingue imparentate. Per esempio, la parola italiana *madre* e l'inglese *mother* discendono entrambe da una comune radice antica, prova che l'italiano, l'inglese e molte altre appartengono alla famiglia **indoeuropea**.
+
+## Come cambiano le parole
+
+Le parole si trasformano in molti modi nel tempo:
+
+- **Slittamento di significato.** La parola inglese *nice* significava un tempo «sciocco»; il suo senso è scivolato nel corso dei secoli.
+- **Prestito.** Le lingue prendono parole l'una dall'altra. L'italiano ha assorbito termini dall'arabo (*algebra*, *zucchero*), dal francese, dall'inglese e da molte altre lingue.
+- **Mutamento fonetico.** La pronuncia evolve nel corso delle generazioni, a volte in modo regolare e prevedibile.
+- **Composizione e abbreviazione.** Nuove parole nascono dalla combinazione di parole antiche o dall'accorciamento di quelle esistenti.
+
+## False piste
+
+Non ogni somiglianza rivela una parentela. I **falsi affini** sono parole che sembrano collegate ma non lo sono, e le **etimologie popolari** sono storie inventate e accattivanti che spesso si rivelano errate. Gli etimologi seri si basano su prove documentate e su mutamenti fonetici regolari, non su semplici congetture.
+
+## Perché conta
+
+L'etimologia illumina la storia — registrando migrazioni, conquiste, commerci e tecnologie. Approfondisce anche la comprensione della lingua stessa, rivelando i legami nascosti tra parole che altrimenti sembrerebbero estranee.`,
+  },
+  {
+    title: 'Lo scopo della mitologia',
+    question: 'Perché ogni cultura umana crea miti?',
+    summary:
+      'I miti sono racconti tradizionali che spiegano il mondo, trasmettono valori e uniscono le comunità; compaiono in tutte le culture umane e assolvono profonde funzioni psicologiche e sociali.',
+    tags: ['mitologia', 'cultura', 'storia', 'narrazione', 'società'],
+    language: 'it',
+    content: `# Lo scopo della mitologia
+
+Ogni cultura umana nota ha creato miti — racconti tradizionali su dèi, eroi e le origini del mondo. Lungi dall'essere semplici fantasie, i miti assolvono funzioni profonde che aiutano le società a dare senso all'esistenza.
+
+## Cos'è un mito
+
+Un mito è un racconto tradizionale, spesso sacro, ambientato in un passato remoto e che spiega qualcosa di fondamentale sul mondo o sulla natura umana. I miti differiscono dalle favole (brevi insegnamenti) e dalle leggende (radicate in persone o eventi storici), benché le categorie si sovrappongano spesso.
+
+## Le funzioni della mitologia
+
+Gli studiosi individuano diversi ruoli intrecciati:
+
+- **Spiegazione.** I miti rispondono alle grandi domande: come è cominciato il mondo, perché esiste la morte, da dove vengono il tuono o le stagioni. Prima della scienza, davano una struttura all'ignoto.
+- **Guida morale e sociale.** I miti trasmettono i valori, le norme e gli ideali di una cultura, mostrando cosa siano l'onore, il coraggio e il buon comportamento.
+- **Coesione sociale.** I racconti condivisi uniscono le comunità con un'identità e una memoria comuni, legando le generazioni.
+- **Conforto psicologico.** I miti aiutano le persone ad affrontare paura, sofferenza e mistero, collocando le singole vite in un quadro più ampio e dotato di senso.
+
+## Schemi comuni
+
+Le mitologie di culture assai lontane a volte condividono temi sorprendenti — grandi diluvi, creazione dal caos, eroi che affrontano prove. Studiosi come Joseph Campbell hanno sostenuto che molte storie di eroi seguono un comune «viaggio», suggerendo schemi condivisi nell'immaginazione umana.
+
+## I miti oggi
+
+Benché associamo di solito il mito al mondo antico, i racconti assolvono ancora oggi queste funzioni — attraverso la religione, la letteratura nazionale e perfino le saghe di supereroi che veicolano valori condivisi.`,
+  },
+  {
+    title: 'La tipografia',
+    question: "Cos'è la tipografia e perché conta?",
+    summary:
+      "La tipografia è l'arte di disporre il testo per renderlo leggibile, chiaro ed espressivo; plasma il modo in cui leggiamo e influenza il tono e la chiarezza sia su carta sia su schermo.",
+    tags: ['design', 'tipografia', 'comunicazione', 'arte', 'visivo'],
+    language: 'it',
+    content: `# La tipografia
+
+La tipografia è l'arte e la tecnica di disporre il testo. Comprende la scelta dei caratteri, delle dimensioni, delle spaziature e dell'impaginazione, e tutto ciò che rende la parola scritta leggibile, chiara ed espressiva. Una buona tipografia passa spesso inosservata, ma plasma silenziosamente ogni nostra lettura.
+
+## Concetti fondamentali
+
+- Un **carattere tipografico (typeface)** è il disegno di un insieme di segni (come Helvetica o Times New Roman); un **font**, in senso stretto, è una sua specifica variante o dimensione.
+- I caratteri **con grazie (serif)** hanno piccoli tratti alle estremità delle lettere; quelli **senza grazie (sans-serif)** no. I serif appaiono spesso tradizionali; i sans-serif moderni e puliti.
+- La **crenatura (kerning)** è la regolazione dello spazio tra due segni specifici; il **tracking** la spaziatura complessiva; e l'**interlinea (leading)** lo spazio verticale tra le righe.
+
+## Perché la tipografia conta
+
+La tipografia influisce sia sulla **leggibilità** (la facilità di distinguere ogni segno) sia sulla **lievità di lettura** (la facilità di leggere interi brani). Buone scelte riducono l'affaticamento, guidano lo sguardo e aiutano il lettore a cogliere in fretta ciò che conta. Scelte sbagliate — testo serrato, contrasto debole, caratteri goffi — stancano e perfino allontanano il lettore.
+
+## Trasmettere il tono
+
+I caratteri hanno una personalità. Un elegante serif può suggerire tradizione e autorevolezza; un sans-serif tondeggiante può apparire amichevole e accessibile; un carattere corsivo può evocare informalità. I tipografi scelgono in base al tono per rafforzare il messaggio delle parole stesse.
+
+## La gerarchia visiva
+
+La tipografia crea una **gerarchia** — usando dimensione, spessore e spaziatura per mostrare cosa sia titolo, sottotitolo e corpo del testo. Questa struttura aiuta il lettore a scorrere il contenuto e a capire come sono organizzate le informazioni, sia in un libro, sia in un manifesto, sia in una pagina web.`,
+  },
+  {
+    title: 'La struttura narrativa',
+    question: 'Cosa dà forma a una buona storia?',
+    summary:
+      "La struttura narrativa è l'impalcatura che organizza una storia — situazione, conflitto e risoluzione; schemi comuni come l'arco in tre atti aiutano a costruire storie appaganti tra le culture.",
+    tags: ['narrazione', 'scrittura', 'letteratura', 'arte', 'cultura'],
+    language: 'it',
+    content: `# La struttura narrativa
+
+La struttura narrativa è l'impalcatura sottostante che organizza una storia — l'ordine e il modo in cui gli eventi sono presentati. Benché le storie varino immensamente, la maggior parte poggia su schemi condivisi che aiutano il pubblico a seguirle e a sentirle.
+
+## L'arco di base
+
+Molte storie seguono un arco con elementi riconoscibili:
+
+1. **Esposizione.** Si presentano personaggi, ambientazione e situazione.
+2. **Azione crescente.** Sorge un conflitto o un problema, e la tensione aumenta.
+3. **Climax.** Il punto di svolta o il momento di massima intensità.
+4. **Azione calante.** Si dipanano le conseguenze del climax.
+5. **Scioglimento (risoluzione).** La storia giunge alla fine e lega i fili in sospeso.
+
+Questo schema è spesso rappresentato come la «piramide di Freytag».
+
+## Strutture comuni
+
+- L'**arco in tre atti** divide la storia in impostazione, confronto e risoluzione — la spina dorsale di gran parte del cinema e del teatro.
+- Il **viaggio dell'eroe** descrive un protagonista che lascia il mondo ordinario, affronta prove, si trasforma e torna cambiato — uno schema presente nei miti di tutto il mondo.
+
+## Perché la struttura funziona
+
+La struttura crea **attesa e soddisfazione**. Costruendo conflitti e poi risolvendoli, controlla il ritmo dell'interesse e dell'emozione. Un conflitto senza risoluzione frustra; una risoluzione senza conflitto accumulato appare vuota. Una buona struttura tiene i due in equilibrio.
+
+## Infrangere le regole
+
+I narratori esperti giocano spesso con la struttura — cominciando dal mezzo (*in medias res*), usando linee temporali non lineari o più punti di vista. Ma queste varianti sono di solito efficaci proprio perché giocano con la struttura familiare che il pubblico porta, intuitivamente, dentro di sé.`,
+  },
+  {
+    title: 'La comunicazione non verbale',
+    question: 'Quanto comunichiamo senza parole?',
+    summary:
+      'La comunicazione non verbale comprende il linguaggio del corpo, le espressioni del viso, i gesti, il tono e lo spazio; trasmette gran parte del significato e spesso parla più forte delle parole.',
+    tags: ['comunicazione', 'psicologia', 'cultura', 'comportamento', 'società'],
+    language: 'it',
+    content: `# La comunicazione non verbale
+
+Gran parte della comunicazione umana avviene senza una sola parola. La comunicazione non verbale — espressioni del viso, gesti, postura, tono di voce e altro — trasmette emozioni, atteggiamenti e intenzioni, spesso con più forza del parlato stesso.
+
+## I canali del non verbale
+
+La comunicazione non verbale scorre per molti canali contemporaneamente:
+
+- **Espressioni del viso.** Il volto comunica le emozioni rapidamente, e diverse espressioni di base (come felicità, sorpresa e rabbia) sono riconosciute tra le culture.
+- **Gesto e linguaggio del corpo.** I movimenti delle mani, la postura e il modo di muovere il corpo enfatizzano o sostituiscono le parole.
+- **Contatto visivo.** Lo sguardo può mostrare attenzione, sfida o intimità, con un significato che varia molto tra le culture.
+- **Prossemica.** L'uso dello spazio segnala intimità, formalità o gerarchia.
+- **Paralinguaggio.** Tono, ritmo, volume e pause plasmano il significato delle parole — *come* qualcosa è detto, e non solo cosa.
+
+## Perché conta
+
+La comunicazione non verbale plasma potentemente il modo in cui i messaggi vengono recepiti. Uno stesso «sto bene» può suonare sincero, sarcastico o esitante a seconda del tono e dell'espressione. Quando i segnali verbali e non verbali si contraddicono, le persone tendono a fidarsi di più del non verbale.
+
+## Variazione culturale
+
+Benché alcune espressioni siano universali, molti segnali non verbali sono specifici di ciascuna cultura. I gesti, la distanza adeguata per conversare e le regole sul contatto visivo variano ampiamente, e i malintesi possono sorgere facilmente tra le culture.
+
+## Leggere i segnali
+
+Benché sia allettante credere di poter «leggere» qualcuno come un libro aperto, i segnali non verbali sono ambigui e si interpretano meglio insieme e nel contesto, anziché isolati. Eppure la consapevolezza di essi rende la comunicazione più ricca ed efficace.`,
+  },
+  // ── Batch 7: Come funzionano le cose ──
+  {
+    title: 'Come funziona il Wi-Fi',
+    question: "Come invia i dati nell'aria il Wi-Fi?",
+    summary:
+      'Il Wi-Fi usa le onde radio per trasportare dati tra i dispositivi e un router, codificando le informazioni in segnali ad alta frequenza che portano il traffico Internet senza fili.',
+    tags: ['tecnologia', 'reti', 'radio', 'internet', 'ingegneria'],
+    language: 'it',
+    content: `# Come funziona il Wi-Fi
+
+Il Wi-Fi collega i nostri dispositivi a Internet senza cavi, usando le onde radio per trasportare dati tra un dispositivo e un router. È una forma di comunicazione radio bidirezionale ottimizzata per spostare dati rapidamente su brevi distanze.
+
+## Onde radio che trasportano dati
+
+Il Wi-Fi trasmette le informazioni con **onde radio** — lo stesso tipo di onde usate da radio e telefoni cellulari, ma a frequenze più alte, di solito 2,4 GHz e 5 GHz (e più di recente 6 GHz). Il dispositivo e il router convertono i dati digitali (1 e 0) in schemi di onde radio e li riconvertono all'altro capo, in un processo detto **modulazione**.
+
+## Il ruolo del router
+
+Il **router** è il nodo centrale. Si collega a Internet via cavo (di solito da un operatore a banda larga) e rilancia senza fili i dati da e verso tutti i dispositivi connessi. Quando carichi una pagina, il dispositivo invia via radio una richiesta al router, che la inoltra a Internet e riporta indietro la risposta.
+
+## Bande e canali
+
+Le due bande principali offrono un compromesso:
+
+- **2,4 GHz** arriva più lontano e attraversa meglio le pareti, ma è più lenta e più soggetta a interferenze (da forni a microonde, telefoni cordless e reti vicine).
+- **5 GHz** (e 6 GHz) è più veloce e meno congestionata, ma arriva a distanze minori.
+
+Ogni banda è divisa in **canali** per ridurre le interferenze tra dispositivi vicini.
+
+## Portata e interferenze
+
+I segnali Wi-Fi si indeboliscono con la distanza e vengono assorbiti da pareti, acqua e metallo. Per questo la connessione peggiora allontanandosi dal router, e per questo ripetitori o sistemi mesh aiutano a coprire abitazioni più grandi. Nonostante questi limiti, il Wi-Fi è diventato il modo standard di collegare miliardi di dispositivi a Internet.`,
+  },
+  {
+    title: 'Come le batterie immagazzinano energia',
+    question: 'Come immagazzina e rilascia energia una batteria?',
+    summary:
+      'Le batterie immagazzinano energia in forma chimica e la convertono in elettricità tramite reazioni che spostano elettroni tra due elettrodi, fornendo corrente a un circuito.',
+    tags: ['tecnologia', 'energia', 'chimica', 'elettricità', 'ingegneria'],
+    language: 'it',
+    content: `# Come le batterie immagazzinano energia
+
+Le batterie sono ovunque — nei telefoni, nelle auto, nei telecomandi — ma il loro funzionamento è un'elegante prova di chimica. Una batteria immagazzina energia in forma **chimica** e la rilascia come energia **elettrica** su richiesta.
+
+## Le parti essenziali
+
+Ogni batteria ha tre componenti chiave:
+
+- Un **elettrodo negativo** (l'anodo).
+- Un **elettrodo positivo** (il catodo).
+- Un **elettrolita**, la sostanza tra i due che permette il movimento delle particelle cariche.
+
+## Come scorre l'energia
+
+L'energia proviene da una **reazione chimica** che «vuole» avvenire tra i materiali dei due elettrodi. Quando colleghi una batteria a un circuito:
+
+1. All'anodo avviene una reazione che libera elettroni.
+2. Questi elettroni non possono attraversare l'elettrolita; scorrono invece nel circuito esterno — alimentando il dispositivo lungo il cammino.
+3. Allo stesso tempo, particelle cariche (ioni) si muovono attraverso l'elettrolita dentro la batteria per mantenere l'equilibrio.
+
+Questo flusso di elettroni nel circuito esterno è la **corrente elettrica** che fa funzionare il dispositivo. La batteria si «scarica» quando i materiali chimici si esauriscono.
+
+## Ricaricabili o no
+
+Nelle batterie **usa e getta** (come le alcaline), le reazioni chimiche non si invertono facilmente, e la batteria viene buttata quando si esaurisce. Nelle batterie **ricaricabili** (come quelle agli ioni di litio dei telefoni), far passare corrente in senso inverso inverte le reazioni chimiche, riportando i materiali allo stato originale per essere riutilizzati — benché la ripetizione degradi a poco a poco la batteria.
+
+## Perché conta la tensione
+
+Materiali diversi rilasciano quantità diverse di energia per elettrone, il che determina la **tensione** della batteria. Collegare le celle in serie somma le loro tensioni, ecco perché i pacchi di celle alimentano di tutto, dalle torce alle auto elettriche.`,
+  },
+  {
+    title: 'Come funzionano i touchscreen',
+    question: 'Come fa lo schermo del telefono a sapere dove tocchi?',
+    summary:
+      'La maggior parte dei touchscreen rileva il tocco percependo i cambiamenti in un campo elettrico sulla superficie dello schermo, permettendo di localizzare con precisione dita e gesti.',
+    tags: ['tecnologia', 'elettronica', 'interfaccia', 'ingegneria', 'dispositivi'],
+    language: 'it',
+    content: `# Come funzionano i touchscreen
+
+I touchscreen sono diventati il modo principale di interagire con telefoni, tablet e molti altri dispositivi. Benché sembrino magici, si basano sul rilevare esattamente dove il dito tocca il vetro.
+
+## Il tipo capacitivo
+
+La maggior parte dei dispositivi moderni usa schermi **capacitivi**. Sotto il vetro c'è una griglia trasparente di materiale conduttore che mantiene un piccolo campo elettrico sulla superficie. Anche il corpo umano conduce elettricità, perciò quando il dito tocca lo schermo disturba localmente questo campo elettrico. Il dispositivo rileva esattamente dove la carica è cambiata e interpreta quella posizione come un tocco.
+
+Poiché dipendono dalla conduttività del corpo, gli schermi capacitivi di solito non rispondono a una penna comune o a un guanto spesso — da qui i guanti e gli stilo «compatibili con il tocco» fatti di materiali speciali. Il loro grande vantaggio è il supporto al **multitocco**, che rileva più dita contemporaneamente e permette gesti come il pizzico per ingrandire.
+
+## Il tipo resistivo
+
+Un tipo più vecchio, lo schermo **resistivo**, usa due strati flessibili separati da un piccolo spazio. Premendo, gli strati si toccano in quel punto, e il dispositivo registra la posizione. Gli schermi resistivi funzionano con qualsiasi oggetto (dito, penna, guanto), ma di solito sono meno nitidi e non gestiscono bene il multitocco. Sono ancora usati in alcuni apparecchi industriali e dispositivi più vecchi.
+
+## Dal tocco all'azione
+
+In entrambi i casi, l'hardware dello schermo converte il tocco in coordinate che il software interpreta. Il sistema operativo decide cosa si trova sotto il dito — un pulsante, un link, un cursore — e risponde di conseguenza. Tutto questo avviene in millisecondi, creando la sensazione fluida di manipolare direttamente ciò che è sullo schermo.`,
+  },
+  {
+    title: 'Come funziona la refrigerazione',
+    question: 'Come tiene freddo il cibo un frigorifero?',
+    summary:
+      "La refrigerazione tiene freddo il cibo spostando il calore dall'interno all'esterno, usando un refrigerante che circola, evapora e viene compresso in un ciclo continuo.",
+    tags: ['tecnologia', 'fisica', 'calore', 'ingegneria', 'quotidiano'],
+    language: 'it',
+    content: `# Come funziona la refrigerazione
+
+Un frigorifero non «crea» il freddo — **rimuove il calore**. Spostando di continuo il calore dal suo interno alla cucina, mantiene il cibo a una bassa temperatura che rallenta la crescita batterica e il deperimento.
+
+## L'idea centrale
+
+La refrigerazione si basa su un principio semplice: quando un liquido si trasforma in gas (evaporazione), **assorbe calore** dall'ambiente circostante; quando un gas torna liquido (condensazione), **rilascia calore**. Il frigorifero fa passare ripetutamente una sostanza speciale, il **refrigerante**, attraverso queste transizioni in luoghi diversi, trasportando il calore dall'interno all'esterno.
+
+## Il ciclo di refrigerazione
+
+Il ciclo ha quattro fasi principali:
+
+1. **Evaporazione.** Dentro il frigorifero il refrigerante liquido passa attraverso una serpentina ed evapora, assorbendo il calore dal vano e raffreddandolo.
+2. **Compressione.** Un **compressore** comprime il gas refrigerante, alzandone pressione e temperatura.
+3. **Condensazione.** Il gas caldo passa per le serpentine dietro o sotto il frigorifero, rilascia calore nella stanza e torna liquido.
+4. **Espansione.** Il refrigerante passa attraverso una valvola di espansione, la sua pressione cala e si raffredda, pronto a ricominciare il ciclo.
+
+## Perché il retro è caldo
+
+Se tocchi le serpentine dietro un frigorifero, le sentirai calde. È il calore prelevato dall'interno che viene rilasciato all'esterno. Il frigorifero, in sostanza, pompa calore da un luogo freddo a uno più caldo — cosa che non avviene da sé e richiede l'energia fornita dal compressore.
+
+## La stessa tecnologia ovunque
+
+Lo stesso ciclo alimenta i condizionatori d'aria e le pompe di calore. Un condizionatore è in sostanza un frigorifero che raffredda una stanza e butta il calore all'esterno; una pompa di calore può invertire la direzione per riscaldare un ambiente.`,
+  },
+  {
+    title: 'Come funzionano le cuffie a cancellazione del rumore',
+    question: 'Come eliminano il rumore di fondo le cuffie?',
+    summary:
+      "Le cuffie a cancellazione attiva del rumore usano microfoni per captare il suono di fondo e generano un'onda sonora opposta che lo annulla prima che raggiunga le tue orecchie.",
+    tags: ['tecnologia', 'suono', 'onde', 'ingegneria', 'elettronica'],
+    language: 'it',
+    content: `# Come funzionano le cuffie a cancellazione del rumore
+
+Le cuffie a cancellazione del rumore possono far diventare di colpo silenziosi un aereo rumoroso o un ufficio affollato. Lo fanno in due modi: bloccando il suono fisicamente e, in modo più ingegnoso, annullandolo elettronicamente.
+
+## Il suono è onde
+
+Il suono viaggia in onde di pressione attraverso l'aria. Come ogni onda, ha picchi e valli. Se sovrapponi due onde, esse si combinano: picchi allineati con picchi si sommano (più forte), ma un picco allineato con una valle si **annulla**. Questa cancellazione, detta **interferenza distruttiva**, è il segreto della cancellazione attiva del rumore.
+
+## Cancellazione attiva del rumore
+
+Le cuffie a cancellazione **attiva** (ANC) usano:
+
+1. **Microfoni** che captano il rumore di fondo attorno a te.
+2. Un chip che analizza all'istante quest'onda sonora e genera un'onda **speculare (opposta)** — un'«antionda» con picchi dove il rumore ha valli.
+3. **Altoparlanti** che riproducono quest'onda opposta insieme all'audio che vuoi ascoltare.
+
+Quando l'antionda incontra il rumore di fondo, le due si annullano in gran parte a vicenda, e le tue orecchie percepiscono molto meno rumore. Funziona meglio con suoni **bassi e costanti**, come il rombo di un motore.
+
+## Cancellazione passiva del rumore
+
+La cancellazione **passiva** è un semplice blocco fisico: cuscinetti ben aderenti e materiali densi che sigillano il rumore, proprio come i tappi per le orecchie. Gestisce bene i suoni acuti e improvvisi, che la cancellazione attiva fatica a neutralizzare.
+
+## Perché non un silenzio perfetto
+
+La cancellazione attiva non è perfetta. I suoni acuti, complessi e imprevedibili (come le voci) sono difficili da annullare, perché il sistema deve prevedere e ricalcare l'onda quasi all'istante. Per questo le cuffie a cancellazione attenuano magistralmente il rombo costante di un aereo, ma lasciano comunque passare gran parte del parlato vicino.`,
+  },
+  {
+    title: 'Come i LED producono luce',
+    question: 'Come fa un LED a produrre luce con così poca energia?',
+    summary:
+      'I LED producono luce quando la corrente elettrica attraversa un materiale semiconduttore, rilasciando energia direttamente come fotoni — molto più efficiente che scaldare un filamento.',
+    tags: ['tecnologia', 'luce', 'elettronica', 'energia', 'ingegneria'],
+    language: 'it',
+    content: `# Come i LED producono luce
+
+I LED (diodi a emissione di luce) illuminano di tutto, dalle lampadine agli schermi e agli indicatori. Sono notevolmente efficienti perché convertono l'elettricità direttamente in luce con pochissimo spreco di calore.
+
+## Luce da un semiconduttore
+
+Un LED è un tipo di **diodo**, un componente fatto di materiale **semiconduttore** che lascia scorrere la corrente soprattutto in un'unica direzione. Il semiconduttore è «drogato» per creare due regioni: una con un eccesso di elettroni e una con «lacune» dove mancano elettroni.
+
+Quando la corrente attraversa il LED, gli elettroni attraversano la giunzione e riempiono le lacune. A ogni passo un elettrone perde un po' di energia — e in un LED questa energia è rilasciata come particella di luce, un **fotone**. Questo processo, di trasformare l'elettricità direttamente in luce, si chiama **elettroluminescenza**.
+
+## Cosa determina il colore
+
+Il **colore** della luce dipende dall'energia rilasciata a ogni salto di elettrone, che a sua volta dipende dallo specifico materiale semiconduttore. Materiali diversi producono rosso, verde, blu e così via. I LED bianchi sono di solito ottenuti con un LED blu rivestito da uno strato di **fosforo** che converte parte della luce blu in altri colori, sommandosi in luce bianca.
+
+## Perché sono così efficienti
+
+Le vecchie lampadine a incandescenza producevano luce scaldando un filamento fino a farlo brillare, e sprecavano gran parte dell'energia come calore. I LED saltano questo passaggio e generano luce direttamente, perciò usano una frazione dell'energia per la stessa luminosità e durano molto più a lungo. Ecco perché hanno in gran parte sostituito le tecnologie d'illuminazione più vecchie.
+
+## Ovunque
+
+Poiché i LED sono piccoli, durevoli e controllabili, sono ovunque: nell'illuminazione delle case, nei fari, nei giganteschi schermi video e nei milioni di minuscoli LED rossi, verdi e blu che formano l'immagine sullo schermo del tuo telefono.`,
+  },
+  {
+    title: 'Come funzionano i pannelli solari',
+    question: 'Come trasformano la luce del sole in elettricità i pannelli solari?',
+    summary:
+      'I pannelli solari convertono la luce del sole in elettricità usando celle di materiale semiconduttore che rilasciano elettroni quando vengono colpite dalla luce, generando una corrente elettrica.',
+    tags: ['tecnologia', 'energia', 'elettricità', 'ambiente', 'ingegneria'],
+    language: 'it',
+    content: `# Come funzionano i pannelli solari
+
+I pannelli solari convertono la luce del sole direttamente in elettricità, senza parti in movimento né combustibile. Si basano sull'**effetto fotovoltaico**, in cui certi materiali producono una corrente elettrica quando vengono colpiti dalla luce.
+
+## La cella solare
+
+L'unità di base è la **cella solare (fotovoltaica)**, di solito fatta di **silicio**, lo stesso semiconduttore dei chip dei computer. La cella ha due strati trattati (drogati) in modo da creare un campo elettrico nella giunzione tra essi: uno strato ha elettroni in eccesso, l'altro ha «lacune» dove mancano elettroni.
+
+## Dalla luce all'elettricità
+
+La luce è fatta di piccoli pacchetti di energia detti **fotoni**. Quando un fotone di energia sufficiente colpisce la cella, può strappare un elettrone da un atomo di silicio. Il campo elettrico interno spinge questi elettroni liberi in una direzione costante, creando un flusso — una **corrente elettrica**. Fili metallici sulla cella raccolgono questa corrente perché possa alimentare un circuito.
+
+## Dalle celle ai sistemi
+
+Una singola cella produce poca energia, perciò molte vengono collegate per formare un **pannello**, e più pannelli formano un **array**. Le celle generano corrente **continua (CC)**, ma le case e la rete usano corrente **alternata (CA)**, perciò un dispositivo detto **inverter** effettua la conversione. Quando un sistema produce più di quanto si usa, l'eccesso può spesso essere immesso di nuovo nella rete.
+
+## Vantaggi e limiti
+
+L'energia solare è rinnovabile, silenziosa e, una volta installata, produce elettricità senza emissioni né combustibile. I limiti sono che genera solo con la luce e che la sua produzione varia con il tempo, la stagione e l'ora del giorno. Per questo è di solito abbinata a batterie o alla rete per fornire energia in modo costante.`,
+  },
+  {
+    title: 'Come il forno a microonde riscalda il cibo',
+    question: 'Come fa un forno a microonde a riscaldare il cibo così in fretta?',
+    summary:
+      "I forni a microonde riscaldano il cibo con onde radio che fanno vibrare le molecole d'acqua, generando calore direttamente dentro il cibo anziché scaldarlo dall'esterno.",
+    tags: ['tecnologia', 'fisica', 'onde', 'calore', 'quotidiano'],
+    language: 'it',
+    content: `# Come il forno a microonde riscalda il cibo
+
+Il forno a microonde cuoce più in fretta di un forno tradizionale perché riscalda il cibo in un modo fondamentalmente diverso — generando calore dentro il cibo stesso, anziché scaldarlo dall'esterno verso l'interno.
+
+## Le microonde: un tipo di onda radio
+
+Nonostante il nome, le microonde sono una forma di **onda radio** — radiazione elettromagnetica di una specifica frequenza (di solito circa 2,45 GHz). Dentro il forno, un componente detto **magnetron** genera queste onde e le dirige nella camera di cottura, dove rimbalzano sulle pareti metalliche e attraversano il cibo.
+
+## Far oscillare le molecole d'acqua
+
+La chiave è il modo in cui le microonde interagiscono con l'**acqua**. Le molecole d'acqua hanno un'estremità positiva e una negativa. Il campo elettrico delle microonde oscilla avanti e indietro miliardi di volte al secondo, e le molecole d'acqua ruotano rapidamente per allinearsi a esso. Questo attrito molecolare genera calore. Poiché la maggior parte dei cibi contiene acqua, essi si scaldano dall'interno in modo rapido e relativamente uniforme.
+
+## Perché scalda così in fretta — e in modo disuniforme
+
+Poiché le microonde penetrano alcuni centimetri nel cibo, ne scaldano una buona parte in una volta, anziché affidarsi al calore che viaggia lentamente dalla superficie verso l'interno. Ma non penetrano in profondità in modo uniforme, e possono concentrarsi in alcuni punti, creando le note zone fredde. Per questo i forni a microonde hanno un piatto rotante e per questo mescolare o lasciar «riposare» il cibo aiuta a uniformare la temperatura.
+
+## Sicurezza e miti
+
+Le microonde usano radiazione **non ionizzante**, che scalda ma non ha l'energia per danneggiare il DNA come i raggi X. La rete metallica nello sportello blocca l'uscita delle microonde. Il metallo dentro il forno può provocare scintille perché concentra il campo elettrico, ma il forno stesso non rende il cibo «radioattivo» in alcun modo.`,
+  },
+];
