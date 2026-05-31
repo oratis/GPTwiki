@@ -1194,4 +1194,270 @@ Ay tutulması dolunay sırasında, Dünya Güneş ile Ay arasına girip gölgesi
 
 Ayın yörüngesi Dünya'nınkine göre hafifçe eğiktir, bu yüzden Ay genellikle tam hizalanmanın biraz üstünden ya da altından geçer. Tutulmalar yalnızca üç cismin tam olarak hizalandığı birkaç durumda olur; bu da her birini özel bir olay kılar.`,
   },
+  // ── Batch 6: Sanat, dil ve kültür ──
+  {
+    title: 'Renk Kuramı',
+    question: 'Renkler nasıl işler ve bazıları neden uyumludur?',
+    summary:
+      'Renk kuramı; renklerin nasıl ilişkili olduğunu, karıştığını ve uyuştuğunu açıklar ve sanatçılara, tasarımcılara ve renkle çalışanlara yol göstermek için renk çemberi gibi araçlar kullanır.',
+    tags: ['sanat', 'tasarım', 'renk', 'görsel', 'kültür'],
+    language: 'tr',
+    content: `# Renk Kuramı
+
+Renk kuramı; renklerin birbiriyle nasıl ilişkili olduğunu, nasıl karıştığını ve bir araya getirildiğinde nasıl farklı etkiler ürettiğini betimleyen ilkeler bütünüdür. Sanatçılar, tasarımcılar ve dekoratörler bunu uyumlu ya da karşıtlık dolu görüntüler yaratmak için kullanır.
+
+## Renk çemberi
+
+Merkezî araç **renk çemberidir**; renkleri ilişkilerini göstermek için bir halkaya dizer. Üç küme çevresinde örgütlenir:
+
+- **Birincil renkler** (geleneksel pigment modelinde: kırmızı, sarı ve mavi) başkalarını karıştırarak elde edilemez.
+- **İkincil renkler** (yeşil, turuncu, mor) iki birincilin karışımından doğar.
+- **Üçüncül renkler** bir birincilin komşu bir ikincille karışımından doğar.
+
+## Işık ve pigment karıştırmak
+
+Rengin ortama göre farklı biçimlerde karıştığını kavramak çok önemlidir. **Işığı** karıştırmak (ekranlardaki gibi) **toplamsaldır** — kırmızı, yeşil ve maviyi birleştirmek beyaz üretir. **Pigmentleri** karıştırmak (boyalardaki gibi) **çıkarımsaldır** — birçok rengi birleştirmek koyuya ve çamurumsuya kaçar.
+
+## Renk düzenleri
+
+Kuram, çoğu zaman göze hoş gelen birleşimleri betimler:
+
+- **Tamamlayıcı:** çemberde karşılıklı renkler (mavi ve turuncu gibi), canlı bir karşıtlık yaratır.
+- **Komşu (analog):** yakın renkler (mavi, mavi-yeşil ve yeşil gibi), uyum yaratır.
+- **Üçlü (triadik):** eşit aralıklı üç renk, çeşitlilik ile dengeyi gözetir.
+
+## Estetikten fazlası
+
+Renkler ayrıca bir **sıcaklık** (sıcak kırmızılar ve turuncular; soğuk maviler ve yeşiller) ve ruh hâlini ile anlamı etkileyen ruhsal çağrışımlar taşır. Bu etkileri anlamak, kimi birleşimlerin bize neden enerjik, sakin ya da gergin geldiğini açıklamaya yardım eder.`,
+  },
+  {
+    title: 'Çizgisel Perspektif',
+    question: 'Sanatçılar düz bir yüzeyde derinlik yanılsamasını nasıl yaratır?',
+    summary:
+      'Çizgisel perspektif; düz bir yüzeyde üç boyutlu derinlik yanılsaması yaratmak için yakınsayan çizgileri ve kaçış noktalarını kullanan, Rönesans sanatında devrim yaratan bir tekniktir.',
+    tags: ['sanat', 'tarih', 'teknik', 'görsel', 'kültür'],
+    language: 'tr',
+    content: `# Çizgisel Perspektif
+
+Çizgisel perspektif, düz bir yüzeyde derinlik ve uzam yanılsaması yaratmanın bir yöntemidir. Rönesans İtalya'sında kurallaştırılan teknik, sanatçıların dünyayı tek bir bakış noktasından görüldüğü gibi gerçekçi biçimde göstermesine olanak vererek resmi dönüştürdü.
+
+## Temel fikir
+
+Çizgisel perspektif basit bir gözleme dayanır: paralel nesneler uzaklaştıkça birbirine yaklaşıyor gibi görünür. Uzakta birleşiyormuş gibi görünen tren raylarını düşünün. Teknik bunu birkaç anahtar öğeyle kurallaştırır:
+
+- Gözlemcinin göz hizasındaki **ufuk çizgisi**.
+- O ufuk üzerinde, uzaklaşan paralel çizgilerin yakınsıyor gibi göründüğü bir ya da daha çok **kaçış noktası**.
+- **Dikgen çizgiler**, geri çekilip bir kaçış noktasına yönelen çizgiler.
+
+Nesneler uzaklaştıkça daha küçük ve kaçış noktasına daha yakın çizilir; bu da inandırıcı bir derinlik yaratır.
+
+## Perspektif türleri
+
+- **Tek noktalı perspektif** tek bir kaçış noktası kullanır; bir caddeye ya da koridora doğrudan bakmak için idealdir.
+- **İki noktalı perspektif** iki nokta kullanır; bir binanın köşesini göstermekte işe yarar.
+- **Üç noktalı perspektif** (üstte ya da altta) üçüncü bir nokta ekler; yukarı ya da aşağı bakan çarpıcı görünümler için.
+
+## Tarihsel bir atılım
+
+Mimar **Filippo Brunelleschi** yaklaşık 1420'de matematiksel perspektifi gösterdi ve teknik kısa sürede Batı sanatının bir temel taşı oldu. İlk kez ressamlar uzamsal olarak tutarlı sahneler kurabildi ve işlerine dikkat çekici bir gerçekçilik kazandırdı.
+
+## Neden önemli
+
+Çizgisel perspektif bir hileden fazlasıdır: ışığın ve görmenin gerçekte nasıl işlediğini yansıtır. Aynı ilkeler bugün teknik çizimi, mimarlığı, video oyunlarını ve bilgisayar grafiklerini destekler.`,
+  },
+  {
+    title: 'Armoni ve Müzik Dizileri',
+    question: 'Müzik notalarını birlikte güzel kılan nedir?',
+    summary:
+      'Armoni ve diziler, ses frekansları arasındaki matematiksel ilişkilere dayanır; basit oranlı notalar uyumlu duyulur ve müziğin yapı taşlarını oluşturur.',
+    tags: ['müzik', 'ses', 'matematik', 'sanat', 'kültür'],
+    language: 'tr',
+    content: `# Armoni ve Müzik Dizileri
+
+Bazı nota birleşimleri neden hoş, bazıları neden gergin duyulur? Yanıt; fizik, matematik ve insan algısı arasındaki büyüleyici bir etkileşimde yatar.
+
+## Ses titreşimdir
+
+Bir müzik notası, belirli bir frekansta titreşen bir şeyle üretilir; bu frekans hertz (saniyedeki titreşim) ile ölçülür. Daha hızlı titreşim daha tiz; daha yavaşı daha pes duyulur. İki notanın frekansları arasındaki oran, birlikte nasıl duyulduklarını belirler.
+
+## Basit oranlar uyumlu duyulur
+
+Antik Yunan'a dek uzanan anahtar sezgi şudur: frekansları **basit oranlar** oluşturan notalar uyumlu (kararlı ve hoş) duyulur:
+
+- **Oktav**, 2:1 oranıdır — bir frekans diğerinin tam iki katı. İki nota o kadar benzer duyulur ki aynı adı alır.
+- **Tam beşli**, 3:2 oranıdır; en hoş birleşimlerden biri.
+- **Tam dörtlü**, 4:3'tür.
+
+Daha karmaşık oranlar daha uyumsuz, ya da gergin duyulma eğilimindedir — müziğin gerilim yaratmak ve sonra çözmek için bilerek kullandığı bir şey.
+
+## Dizilerin kuruluşu
+
+Bir **dizi**, bir oktav içinde seçilmiş bir nota sırasıdır. Batı müziğinin çoğu, 12 eşit aralıklı perde kullanır; bunlardan **majör** (genellikle neşeli ve aydınlık) ile **minör** (çoğu zaman daha karanlık ya da hüzünlü) gibi yedi notalı diziler türetilir. Başka kültürler, kendi ayırt edici desenleriyle farklı diziler kullanır.
+
+## Armoni
+
+**Armoni**, aynı anda çalınan birden çok notanın sesidir; genellikle **akorlar** hâlinde. Akor ilerleyişleri devinim yaratır — kararlılıktan gerilime ve geri çözüme doğru ilerleyerek — ve bu da müziğe duygusal gücünün büyük bölümünü verir.`,
+  },
+  {
+    title: 'Etimoloji',
+    question: 'Sözcükler nereden gelir?',
+    summary:
+      'Etimoloji; sözcüklerin kökeninin ve anlamları ile biçimlerinin zaman içinde nasıl değiştiğinin incelenmesidir; tarihi, kültürel temasları ve diller arasındaki bağları açığa çıkarır.',
+    tags: ['dil', 'sözcükler', 'tarih', 'dil bilimi', 'kültür'],
+    language: 'tr',
+    content: `# Etimoloji
+
+Etimoloji, sözcüklerin kökeninin incelenmesidir: nereden geldikleri, biçimlerinin ve anlamlarının nasıl değiştiği ve başka dillerin sözcükleriyle nasıl ilişkili oldukları. Her sözcük, içinde tarihin bir parçasını taşır.
+
+## Sözcüklerin geçmişini izlemek
+
+Etimologlar, bir sözcüğün tarihini onu daha eski biçimlerle ve akraba dillerdeki kökteş sözcüklerle karşılaştırarak araştırır. Örneğin İngilizce *mother* ile Almanca *Mutter* sözcüklerinin ikisi de ortak bir eski kökten iner; bu da İngilizcenin, Almancanın ve daha pek çok dilin **Hint-Avrupa** ailesine ait olduğunun kanıtıdır.
+
+## Sözcükler nasıl değişir
+
+Sözcükler zaman içinde birçok yolla dönüşür:
+
+- **Anlam kayması.** İngilizce *nice* sözcüğü bir zamanlar "aptal" anlamına gelirdi; anlamı yüzyıllar içinde kaydı.
+- **Ödünç alma.** Diller birbirinden sözcük alır. Türkçe; Arapçadan (*kitap*, *kalem*), Farsçadan, Fransızcadan ve daha pek çok dilden terimler özümsedi.
+- **Ses değişimi.** Söyleyiş kuşaklar boyunca evrilir, kimi zaman düzenli ve öngörülebilir biçimde.
+- **Birleştirme ve kısaltma.** Yeni sözcükler, eski sözcükleri birleştirmekten ya da var olanları kısaltmaktan doğar.
+
+## Yanıltıcı izler
+
+Her benzerlik bir akrabalığı göstermez. **Sahte kökteşler**, ilişkili görünen ama olmayan sözcüklerdir; **halk etimolojileri** ise uydurma, çekici ama çoğu zaman yanlış çıkan öykülerdir. Ciddi etimologlar, salt tahmine değil belgelenmiş kanıtlara ve düzenli ses örüntülerine dayanır.
+
+## Neden önemli
+
+Etimoloji tarihi aydınlatır — göçleri, fetihleri, ticareti ve teknolojileri kaydederek. Dilin kendisinin anlaşılmasını da derinleştirir; yoksa ilgisiz görünecek sözcükler arasındaki gizli bağları açığa çıkarır.`,
+  },
+  {
+    title: 'Mitolojinin Amacı',
+    question: 'Her insan kültürü neden mit yaratır?',
+    summary:
+      'Mitler; dünyayı açıklayan, değerleri aktaran ve toplulukları birleştiren geleneksel öykülerdir; tüm insan kültürlerinde görülür ve derin ruhsal ve toplumsal işlevler görür.',
+    tags: ['mitoloji', 'kültür', 'tarih', 'öykü anlatımı', 'toplum'],
+    language: 'tr',
+    content: `# Mitolojinin Amacı
+
+Bilinen her insan kültürü mit yaratmıştır — tanrılar, kahramanlar ve dünyanın kökenleri üzerine geleneksel öyküler. Yalnızca düş ürünü olmaktan çok uzak, mitler toplumların varoluşu anlamlandırmasına yardım eden derin işlevler görür.
+
+## Mit nedir
+
+Mit; çoğu zaman kutsal, uzak bir geçmişte geçen ve dünya ya da insan doğası hakkında temel bir şeyi açıklayan geleneksel bir öyküdür. Mitler, fabllardan (kısa dersler) ve efsanelerden (tarihsel kişilere ya da olaylara dayalı) ayrılır; gerçi kategoriler çoğu zaman örtüşür.
+
+## Mitolojinin işlevleri
+
+Bilginler iç içe geçmiş birkaç rol belirler:
+
+- **Açıklama.** Mitler büyük soruları yanıtlar: dünya nasıl başladı, ölüm neden var, gök gürültüsü ya da mevsimler nereden gelir. Bilimden önce bilinmeyene bir yapı verirdi.
+- **Ahlaki ve toplumsal yönlendirme.** Mitler bir kültürün değerlerini, normlarını ve ideallerini aktarır; onurun, cesaretin ve iyi davranışın ne olduğunu gösterir.
+- **Toplumsal bağlılık.** Paylaşılan öyküler toplulukları ortak bir kimlik ve bellekle birleştirir, kuşakları bağlar.
+- **Ruhsal teselli.** Mitler insanların korkuyla, acıyla ve gizemle baş etmesine yardım eder; tek tek yaşamları daha büyük, anlamlı bir çerçeveye yerleştirir.
+
+## Ortak örüntüler
+
+Çok uzak kültürlerin mitolojileri kimi zaman çarpıcı temaları paylaşır — büyük tufanlar, kaostan yaratılış, sınamalardan geçen kahramanlar. Joseph Campbell gibi bilginler, birçok kahraman öyküsünün ortak bir "yolculuğu" izlediğini savunmuş ve insan imgeleminde paylaşılan örüntülere işaret etmiştir.
+
+## Bugün mitler
+
+Miti çoğu zaman antik dünyayla ilişkilendirsek de öyküler bugün de bu işlevleri görür — din, ulusal yazın ve hatta paylaşılan değerleri taşıyan süper kahraman serileri aracılığıyla.`,
+  },
+  {
+    title: 'Tipografi',
+    question: 'Tipografi nedir ve neden önemlidir?',
+    summary:
+      'Tipografi; metni okunabilir, açık ve anlatımlı kılmak için düzenleme sanatıdır; nasıl okuduğumuzu biçimler ve hem baskıda hem ekranda tonu ve açıklığı etkiler.',
+    tags: ['tasarım', 'tipografi', 'iletişim', 'sanat', 'görsel'],
+    language: 'tr',
+    content: `# Tipografi
+
+Tipografi, metni düzenleme sanatı ve tekniğidir. Yazı tiplerinin, boyutların, boşlukların ve mizanpajın seçimini ve yazılı sözü okunabilir, açık ve anlatımlı kılan her şeyi kapsar. İyi tipografi çoğu zaman fark edilmez, ama her okuyuşumuzu sessizce biçimler.
+
+## Temel kavramlar
+
+- Bir **yazı karakteri (typeface)**, bir işaretler kümesinin tasarımıdır (Helvetica ya da Times New Roman gibi); dar anlamda **font**, onun belirli bir biçimi ya da boyutudur.
+- **Tırnaklı (serif)** yazı karakterlerinin harf uçlarında küçük çıkıntılar vardır; **tırnaksız (sans-serif)** olanların yoktur. Tırnaklılar çoğu zaman geleneksel; tırnaksızlar modern ve sade görünür.
+- **Karakter aralama (kerning)**, iki belirli işaret arasındaki boşluğun ayarıdır; **izleme (tracking)** genel boşluktur; **satır arası (leading)** ise satırlar arasındaki dikey boşluktur.
+
+## Tipografi neden önemli
+
+Tipografi, hem **seçilebilirliği** (her işareti ayırt etme kolaylığı) hem de **okunabilirliği** (bütün bölümleri okuma kolaylığı) etkiler. İyi seçimler yorgunluğu azaltır, bakışı yönlendirir ve okurun neyin önemli olduğunu çabuk kavramasına yardım eder. Kötü seçimler — sıkışık metin, zayıf karşıtlık, hantal yazı tipleri — yorar ve okuru hatta uzaklaştırır.
+
+## Tonu aktarmak
+
+Yazı karakterleri bir kişilik taşır. Zarif bir tırnaklı, gelenek ve otorite çağrıştırabilir; yuvarlak bir tırnaksız, dostça ve ulaşılabilir görünebilir; el yazısı bir yazı tipi, gayriresmîlik uyandırabilir. Tipograflar, sözcüklerin iletisini güçlendirmek için tona göre seçer.
+
+## Görsel hiyerarşi
+
+Tipografi bir **hiyerarşi** yaratır — neyin başlık, alt başlık ve gövde metni olduğunu göstermek için boyutu, kalınlığı ve boşluğu kullanarak. Bu yapı, okurun içeriği gözden geçirmesine ve bilginin nasıl örgütlendiğini anlamasına yardım eder; ister bir kitapta, ister bir afişte, ister bir web sayfasında olsun.`,
+  },
+  {
+    title: 'Anlatı Yapısı',
+    question: 'İyi bir öyküye biçimini ne verir?',
+    summary:
+      'Anlatı yapısı, bir öyküyü örgütleyen iskelettir — durum, çatışma ve çözüm; üç perdelik yay gibi yaygın örüntüler, kültürler arasında doyurucu öyküler kurmaya yardım eder.',
+    tags: ['öykü anlatımı', 'yazma', 'edebiyat', 'sanat', 'kültür'],
+    language: 'tr',
+    content: `# Anlatı Yapısı
+
+Anlatı yapısı, bir öyküyü örgütleyen alttaki iskelettir — olayların sırası ve sunuluş biçimi. Öyküler engin ölçüde çeşitlense de çoğu, izleyicinin onları izlemesine ve hissetmesine yardım eden paylaşılan örüntülere dayanır.
+
+## Temel yay
+
+Birçok öykü, tanınabilir öğeler taşıyan bir yayı izler:
+
+1. **Serim.** Karakterler, ortam ve durum sunulur.
+2. **Yükselen eylem.** Bir çatışma ya da sorun doğar ve gerilim artar.
+3. **Doruk.** Dönüm noktası ya da en yoğun an.
+4. **Düşen eylem.** Doruğun sonuçları açılır.
+5. **Çözülme (sonuç).** Öykü sona erer ve gevşek uçları bağlar.
+
+Bu örüntü çoğu zaman "Freytag piramidi" olarak gösterilir.
+
+## Yaygın yapılar
+
+- **Üç perdelik yay**, öyküyü kuruluş, karşılaşma ve çözüme böler — sinemanın ve tiyatronun büyük bölümünün belkemiği.
+- **Kahramanın yolculuğu**, sıradan dünyasını terk eden, sınamalardan geçen, dönüşen ve değişmiş olarak dönen bir başkahramanı betimler — dünyanın her yerindeki mitlerde görülen bir örüntü.
+
+## Yapı neden işler
+
+Yapı, **beklenti ve doyum** yaratır. Çatışmalar kurup sonra onları çözerek, ilginin ve duygunun ritmini denetler. Çözümsüz bir çatışma düş kırıklığı yaratır; biriktirilmiş çatışma olmadan bir çözüm boş gelir. İyi yapı, ikisini dengede tutar.
+
+## Kuralları kırmak
+
+Usta anlatıcılar çoğu zaman yapıyla oynar — ortadan başlayarak (*in medias res*), doğrusal olmayan zaman çizgileri ya da birden çok bakış açısı kullanarak. Ama bu çeşitlemeler genellikle tam da izleyicinin sezgiyle içinde taşıdığı tanıdık yapıyla oynadıkları için etkilidir.`,
+  },
+  {
+    title: 'Sözsüz İletişim',
+    question: 'Sözcükler olmadan ne kadar iletişim kurarız?',
+    summary:
+      'Sözsüz iletişim; beden dilini, yüz ifadelerini, el kol hareketlerini, tonu ve uzamı kapsar; anlamın büyük bölümünü taşır ve çoğu zaman sözcüklerden daha yüksek sesle konuşur.',
+    tags: ['iletişim', 'psikoloji', 'kültür', 'davranış', 'toplum'],
+    language: 'tr',
+    content: `# Sözsüz İletişim
+
+İnsan iletişiminin büyük bölümü tek bir sözcük olmadan gerçekleşir. Sözsüz iletişim — yüz ifadeleri, el kol hareketleri, duruş, ses tonu ve dahası — duyguları, tutumları ve niyetleri, çoğu zaman konuşmanın kendisinden daha güçlü biçimde aktarır.
+
+## Sözsüzün kanalları
+
+Sözsüz iletişim aynı anda birçok kanaldan akar:
+
+- **Yüz ifadeleri.** Yüz, duyguları hızla iletir ve birkaç temel ifade (mutluluk, şaşkınlık ve öfke gibi) kültürler arasında tanınır.
+- **El kol hareketi ve beden dili.** Ellerin hareketleri, duruş ve bedeni kullanma biçimi sözcükleri vurgular ya da onların yerini alır.
+- **Göz teması.** Bakış; dikkat, meydan okuma ya da yakınlık gösterebilir, anlamı kültürler arasında çok değişir.
+- **Yakınlık bilimi (proksemik).** Uzamın kullanımı; yakınlığı, resmiyeti ya da hiyerarşiyi imler.
+- **Dil ötesi (paralinguistik).** Ton, ritim, ses yüksekliği ve duraklar sözcüklerin anlamını biçimler — bir şeyin *nasıl* söylendiği, yalnızca ne söylendiği değil.
+
+## Neden önemli
+
+Sözsüz iletişim, iletilerin nasıl alındığını güçlü biçimde biçimler. Aynı "iyiyim", tona ve ifadeye göre içten, alaycı ya da tereddütlü duyulabilir. Sözel ve sözsüz işaretler çeliştiğinde, insanlar sözsüze daha çok güvenme eğilimindedir.
+
+## Kültürel değişkenlik
+
+Bazı ifadeler evrensel olsa da birçok sözsüz işaret her kültüre özgüdür. El kol hareketleri, konuşma için uygun uzaklık ve göz teması kuralları geniş ölçüde değişir; kültürler arasında yanlış anlamalar kolayca doğabilir.
+
+## İşaretleri okumak
+
+Birini açık bir kitap gibi "okuyabileceğine" inanmak çekici olsa da sözsüz işaretler belirsizdir ve tek başına değil, birlikte ve bağlam içinde daha iyi yorumlanır. Yine de onların farkında olmak iletişimi daha zengin ve etkili kılar.`,
+  },
 ];
