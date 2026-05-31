@@ -952,4 +952,246 @@ Ký ức được lưu dưới dạng các kiểu kết nối giữa các nơ-ro
 
 Trí nhớ mang tính kiến tạo lại: mỗi lần truy hồi một ký ức, ta ráp lại nó, và có thể thay đổi nó mà không hề hay biết. Điều này giải thích vì sao ký ức có thể vừa sống động vừa sai, vì sao lời khai nhân chứng không đáng tin, và vì sao sự lặp lại cùng các liên tưởng giúp ghim thông tin lại.`,
   },
+  // ── Batch 5: Không gian và thiên văn ──
+  {
+    title: 'Các pha của Mặt Trăng',
+    question: 'Vì sao Mặt Trăng đổi hình dạng trong suốt một tháng?',
+    summary:
+      'Các pha của Mặt Trăng là những hình dạng thay đổi của phần được chiếu sáng nhìn từ Trái Đất, do cách ánh sáng mặt trời chiếu lên nó khi nó quay quanh hành tinh của chúng ta.',
+    tags: ['thiên văn học', 'mặt trăng', 'không gian', 'khoa học', 'hệ mặt trời'],
+    language: 'vi',
+    content: `# Các pha của Mặt Trăng
+
+Mặt Trăng dường như đổi hình dạng trong khoảng một tháng, đi từ một lưỡi liềm mảnh đến trăng tròn rồi quay lại. Những **pha** này không đến từ một cái bóng nào do Trái Đất hắt ra, mà từ sự kết hợp giữa cách ánh sáng mặt trời chiếu lên Mặt Trăng và góc mà ta quan sát nó.
+
+## Nguyên nhân thật
+
+Một nửa Mặt Trăng luôn được Mặt Trời chiếu sáng, hệt như một nửa Trái Đất đang là ban ngày. Nhưng khi Mặt Trăng quay quanh Trái Đất, ta thấy những lượng khác nhau của nửa được chiếu sáng ấy. Khi Mặt Trăng ở phía đối diện với Mặt Trời so với ta, ta thấy toàn bộ mặt được chiếu sáng — **trăng tròn**. Khi nó nằm giữa ta và Mặt Trời, mặt hướng về ta thì tối — **trăng non**.
+
+## Chu kỳ các pha
+
+Chu kỳ trọn vẹn kéo dài khoảng 29,5 ngày và đi qua tám pha:
+
+1. **Trăng non** — hầu như không nhìn thấy.
+2. **Lưỡi liềm đầu tháng** — một lát mảnh bắt đầu hiện ra.
+3. **Bán nguyệt đầu (thượng huyền)** — sáng một nửa, đang đầy dần.
+4. **Trăng khuyết đầu** — sáng hơn một nửa.
+5. **Trăng tròn** — toàn bộ đĩa được chiếu sáng.
+6. **Trăng khuyết cuối** — bắt đầu giảm dần.
+7. **Bán nguyệt cuối (hạ huyền)** — lại một nửa, từ phía đối diện.
+8. **Lưỡi liềm cuối tháng** — một lát mảnh trước khi trăng non trở lại.
+
+"Đang đầy" nghĩa là phần được chiếu sáng đang tăng; "đang khuyết" nghĩa là nó đang giảm.
+
+## Cùng một mặt
+
+Mặt Trăng mất cùng khoảng thời gian để tự quay một vòng quanh trục và để quay quanh Trái Đất, một hiện tượng gọi là **quay đồng bộ**. Vì vậy nó luôn hướng về ta cùng một mặt, và "phía xa" không bao giờ nhìn thấy được từ Trái Đất.`,
+  },
+  {
+    title: 'Sao chổi',
+    question: 'Sao chổi là gì và đến từ đâu?',
+    summary:
+      'Sao chổi là những thiên thể băng giá còn sót lại từ sự hình thành hệ mặt trời, mọc ra những cái đuôi sáng khi tới gần Mặt Trời và nhiệt làm bốc hơi băng của chúng.',
+    tags: ['thiên văn học', 'sao chổi', 'không gian', 'hệ mặt trời', 'khoa học'],
+    language: 'vi',
+    content: `# Sao chổi
+
+Sao chổi là một trong những thiên thể ngoạn mục nhất của bầu trời đêm: những quả cầu băng và bụi bừng sống dậy khi tới gần Mặt Trời. Thường được gọi là "những quả cầu tuyết bẩn", chúng là tàn dư đóng băng từ thuở sơ khai của hệ mặt trời.
+
+## Cấu tạo từ gì
+
+Trái tim của một sao chổi là **nhân**, một hỗn hợp rắn gồm băng, bụi, đá và các hợp chất đóng băng chỉ rộng vài kilomet. Trong hàng tỷ năm, chúng vẫn đóng băng ở những vùng rìa giá lạnh của hệ mặt trời.
+
+## Vì sao mọc đuôi
+
+Khi quỹ đạo đưa một sao chổi tới gần Mặt Trời, nhiệt làm băng của nó chuyển thẳng thành khí, một quá trình gọi là **thăng hoa**. Điều này tạo nên một bầu khí quyển mờ, phát sáng quanh nhân, gọi là **coma**, và giải phóng bụi. Áp suất bức xạ mặt trời và gió mặt trời đẩy vật chất này ra xa Mặt Trời, tạo nên một hay nhiều cái **đuôi** có thể trải dài hàng triệu kilomet. Vì vậy đuôi sao chổi luôn chỉ ra xa Mặt Trời, chứ không phải về phía sau chuyển động của nó.
+
+## Đến từ đâu
+
+Phần lớn sao chổi đến từ hai vùng xa xôi:
+
+- **Vành đai Kuiper**, một đĩa các thiên thể băng giá ngoài Sao Hải Vương, nguồn của nhiều sao chổi chu kỳ ngắn.
+- **Đám mây Oort**, một lớp vỏ hình cầu xa hơn nhiều bao quanh hệ mặt trời, nguồn của các sao chổi chu kỳ dài.
+
+## Những vị khách từ quá khứ
+
+Vì sao chổi giữ lại vật chất đóng băng từ những ngày đầu của hệ mặt trời, chúng giống như những viên nang thời gian. Các nhà khoa học nghiên cứu chúng để tìm hiểu điều kiện 4,6 tỷ năm trước, và một số nghi rằng sao chổi đã góp phần mang nước và phân tử hữu cơ đến Trái Đất nguyên thủy.`,
+  },
+  {
+    title: 'Vòng đời của một ngôi sao',
+    question: 'Các ngôi sao ra đời, sống và chết như thế nào?',
+    summary:
+      'Các ngôi sao hình thành từ những đám mây khí co sập, tỏa sáng hàng triệu hay hàng tỷ năm bằng cách hợp nhất các nguyên tố, và chết theo những cách khác nhau — từ sao lùn trắng đến siêu tân tinh — tùy theo khối lượng.',
+    tags: ['thiên văn học', 'ngôi sao', 'không gian', 'vật lý', 'khoa học'],
+    language: 'vi',
+    content: `# Vòng đời của một ngôi sao
+
+Các ngôi sao có vẻ vĩnh hằng, nhưng chúng ra đời, sống và chết qua những thang thời gian khổng lồ. Số phận của một ngôi sao gần như hoàn toàn phụ thuộc vào một tính chất: **khối lượng** của nó.
+
+## Sự ra đời
+
+Các ngôi sao ra đời bên trong những đám mây khí và bụi khổng lồ gọi là **tinh vân**. Khi một vùng trở nên đủ đặc, trọng lực khiến nó co sập và nóng lên. Khi lõi đạt khoảng 10 triệu độ, **phản ứng nhiệt hạch** bắt đầu — các nguyên tử hydro hợp nhất thành heli, giải phóng năng lượng. Một ngôi sao đã ra đời.
+
+## Tuổi trung niên
+
+Trong phần lớn cuộc đời, một ngôi sao nằm trên **dải chính**, cân bằng lực hấp dẫn ép vào trong với áp suất nhiệt hạch đẩy ra ngoài. Mặt Trời của chúng ta đã ở giai đoạn ổn định này khoảng 4,6 tỷ năm và sẽ còn tiếp tục thêm 5 tỷ năm nữa. Các ngôi sao nhỏ hơn, lạnh hơn đốt nhiên liệu chậm và sống hàng nghìn tỷ năm; những ngôi sao lớn, nóng thì tiêu thụ nhiên liệu chỉ trong vài triệu năm.
+
+## Cái chết
+
+Hồi kết của một ngôi sao tùy thuộc vào khối lượng của nó:
+
+- **Các ngôi sao như Mặt Trời** phình lên thành **sao khổng lồ đỏ**, hất bỏ các lớp ngoài và để lại một lõi đặc, đang nguội đi gọi là **sao lùn trắng**.
+- **Các ngôi sao nặng hơn nhiều** kết thúc trong một vụ nổ thảm khốc gọi là **siêu tân tinh**, trong chốc lát có thể sáng hơn cả một thiên hà. Cái còn lại trở thành một **sao neutron** siêu đặc, hoặc, nếu ngôi sao đủ nặng, một **lỗ đen**.
+
+## Những lò luyện vũ trụ
+
+Các ngôi sao là nhà máy của vũ trụ. Phản ứng nhiệt hạch bên trong chúng, và những vụ nổ kết thúc chúng, đã tạo ra gần như mọi nguyên tố nặng hơn hydro — kể cả cacbon và oxy trong bạn. Theo nghĩa đen, chúng ta được làm từ bụi sao.`,
+  },
+  {
+    title: 'Cực quang',
+    question: 'Điều gì gây ra ánh sáng phương bắc và phương nam?',
+    summary:
+      'Cực quang là những màn trình diễn ánh sáng nhiều màu gần các cực của Trái Đất, sinh ra khi các hạt tích điện từ Mặt Trời va chạm với khí khí quyển dưới sự dẫn dắt của từ trường hành tinh.',
+    tags: ['thiên văn học', 'khí quyển', 'vật lý', 'không gian', 'khoa học'],
+    language: 'vi',
+    content: `# Cực quang
+
+Cực quang — **ánh sáng phương bắc** (aurora borealis) và **ánh sáng phương nam** (aurora australis) — là một trong những cảnh tượng tráng lệ nhất của thiên nhiên: những bức màn lung linh bằng ánh sáng xanh lục, hồng và tím nhảy múa trên bầu trời vùng cực.
+
+## Nguyên nhân: gió mặt trời
+
+Cực quang khởi đầu từ Mặt Trời, vốn không ngừng thổi ra một dòng hạt tích điện gọi là **gió mặt trời**. Khi những hạt này tới Trái Đất, phần lớn bị **từ trường** của hành tinh làm lệch hướng. Nhưng gần các cực từ, các đường sức từ chúi vào khí quyển, dẫn một số hạt đi xuống.
+
+## Sự tạo thành ánh sáng
+
+Khi chúi vào tầng khí quyển trên, các hạt giàu năng lượng này va vào các nguyên tử và phân tử khí. Các va chạm kích thích chất khí — đẩy các electron của chúng lên những mức năng lượng cao hơn. Khi các electron trở về bình thường, chúng giải phóng năng lượng dư dưới dạng ánh sáng. Các khí khác nhau phát sáng những màu khác nhau:
+
+- **Oxy** cho màu xanh lục (phổ biến nhất) và, ở độ cao lớn, màu đỏ.
+- **Nitơ** cho màu xanh lam và tím.
+
+## Vì sao gần các cực
+
+Vì hình dạng từ trường Trái Đất dẫn các hạt về phía vùng cực, cực quang phổ biến nhất ở vĩ độ cao, quanh những vòng gọi là **vòng cực quang**. Trong các cơn bão mặt trời mạnh, có thể thấy chúng gần xích đạo hơn nhiều so với thường lệ.
+
+## Vượt ngoài Trái Đất
+
+Cực quang không chỉ riêng của Trái Đất. Những màn trình diễn tương tự đã được quan sát trên Sao Mộc, Sao Thổ và các hành tinh khác có từ trường và khí quyển — một lời nhắc rằng hành tinh của ta là một phần của một hệ mặt trời do Mặt Trời vận hành.`,
+  },
+  {
+    title: 'Năm ánh sáng và khoảng cách vũ trụ',
+    question: 'Năm ánh sáng là gì và các nhà thiên văn đo không gian như thế nào?',
+    summary:
+      'Năm ánh sáng là khoảng cách mà ánh sáng đi được trong một năm; các nhà thiên văn dùng nó cùng những kỹ thuật như thị sai để đo những khoảng cách bao la giữa các sao và thiên hà.',
+    tags: ['thiên văn học', 'không gian', 'khoảng cách', 'vật lý', 'khoa học'],
+    language: 'vi',
+    content: `# Năm ánh sáng và khoảng cách vũ trụ
+
+Khoảng cách trong không gian bao la đến mức kilomet trở nên vô dụng. Để đo vũ trụ, các nhà thiên văn dùng **năm ánh sáng** — và một bậc thang khéo léo gồm các kỹ thuật để xác định mọi thứ thực sự xa đến đâu.
+
+## Năm ánh sáng là gì
+
+Năm ánh sáng là một đơn vị đo **khoảng cách**, không phải thời gian: đó là khoảng cách ánh sáng đi được trong một năm, khoảng 9,5 nghìn tỷ kilomet. Vì ánh sáng đi với tốc độ hữu hạn, nhìn vào không gian là nhìn vào quá khứ. Ngôi sao gần nhất ngoài Mặt Trời cách khoảng 4,2 năm ánh sáng, nên ta thấy nó như nó vốn là hơn bốn năm trước. Một số thiên hà ta thấy như chúng vốn là hàng tỷ năm trước.
+
+## Đo khoảng cách gần: thị sai
+
+Với các sao tương đối gần, các nhà thiên văn dùng **thị sai**. Khi quan sát một ngôi sao từ hai phía đối diện của quỹ đạo Trái Đất (cách nhau sáu tháng), nó có vẻ dịch chuyển một chút so với nền các sao xa hơn. Dịch chuyển càng lớn, ngôi sao càng gần. Đó là cùng hiệu ứng như khi bạn lần lượt nhắm từng mắt và thấy ngón cái nhảy.
+
+## Đo khoảng cách lớn hơn
+
+Vượt ngoài tầm của thị sai, các nhà thiên văn dùng "ngọn nến chuẩn" — những thiên thể có độ sáng thực đã biết. Bằng cách so độ sáng thực của chúng với việc chúng trông mờ đến đâu, người ta suy ra khoảng cách. Các **sao biến quang Cepheid** và một loại **siêu tân tinh** nhất định đóng vai trò những ngọn nến này và cho phép đo khoảng cách đến tận các thiên hà xa.
+
+## Một thang đo khiến ta khiêm nhường
+
+Những công cụ này hé lộ một vũ trụ rộng lớn đến sững sờ: hàng tỷ thiên hà, mỗi thiên hà có hàng tỷ ngôi sao, rải rác qua những khoảng cách lớn đến mức ánh sáng ta thu được hôm nay đã lên đường từ rất lâu trước khi Trái Đất tồn tại.`,
+  },
+  {
+    title: 'Ngoại hành tinh',
+    question: 'Ngoại hành tinh là gì và ta tìm ra chúng như thế nào?',
+    summary:
+      'Ngoại hành tinh là những hành tinh quay quanh các ngôi sao khác; hàng nghìn đã được phát hiện bằng các phương pháp gián tiếp, một số nằm trong vùng ở được nơi có thể có nước lỏng.',
+    tags: ['thiên văn học', 'ngoại hành tinh', 'không gian', 'khoa học', 'khám phá'],
+    language: 'vi',
+    content: `# Ngoại hành tinh
+
+Ngoại hành tinh là một hành tinh quay quanh một ngôi sao không phải Mặt Trời của chúng ta. Suốt nhiều thế kỷ, ta chỉ có thể tưởng tượng về những thế giới như vậy; ngày nay ta biết hàng nghìn cái, và ngành khoa học này đã biến đổi cái nhìn của ta về vị trí của mình trong vũ trụ.
+
+## Vì sao khó thấy
+
+Ngoại hành tinh cực kỳ khó quan sát trực tiếp. Chúng không phát ra ánh sáng riêng và lạc mất trong ánh chói của ngôi sao của chúng — như cố nhìn một con đom đóm cạnh một ngọn đèn pha. Vì vậy gần như mọi ngoại hành tinh được tìm ra bằng những cách **gián tiếp**.
+
+## Ta tìm ra chúng như thế nào
+
+Hai phương pháp thống trị việc tìm kiếm:
+
+- **Phương pháp quá cảnh.** Nếu quỹ đạo một hành tinh đi qua giữa ta và ngôi sao của nó, nó chặn một phần cực nhỏ ánh sáng của ngôi sao. Đo những đợt giảm độ sáng nhỏ, đều đặn này hé lộ hành tinh và cho biết kích thước của nó. Kính thiên văn vũ trụ Kepler đã dùng phương pháp này để tìm hàng nghìn thế giới.
+- **Phương pháp vận tốc xuyên tâm.** Một hành tinh đang quay kéo nhẹ ngôi sao của nó bằng trọng lực, khiến nó lắc lư. Sự lắc lư này làm dịch một chút ánh sáng của ngôi sao, hé lộ sự hiện diện và khối lượng của hành tinh.
+
+## Một sự đa dạng đáng kinh ngạc
+
+Các ngoại hành tinh hóa ra đa dạng đến khó tin: những "Sao Mộc nóng" khí khổng lồ quay sát ngôi sao của chúng, những "siêu Trái Đất" đá lớn hơn hành tinh của ta, và những thế giới có hai mặt trời. Nhiều hệ chẳng giống hệ của ta chút nào.
+
+## Cuộc tìm kiếm sự sống
+
+Phần thưởng được khao khát nhất là tìm ra những hành tinh trong **vùng ở được** — khoảng cách tới một ngôi sao mà ở đó có thể tồn tại nước lỏng trên bề mặt. Các kính thiên văn mới đang bắt đầu phân tích khí quyển ngoại hành tinh để tìm những chất khí có thể chỉ dấu sự sống, khiến câu hỏi xưa "chúng ta có cô đơn không?" cuối cùng có thể kiểm chứng được.`,
+  },
+  {
+    title: 'Vụ Nổ Lớn',
+    question: 'Vũ trụ bắt đầu như thế nào?',
+    summary:
+      'Thuyết Vụ Nổ Lớn mô tả vũ trụ giãn nở từ một trạng thái nóng, đặc khoảng 13,8 tỷ năm trước, được nâng đỡ bởi những bằng chứng như ánh sáng dư vũ trụ và các thiên hà đang ra xa.',
+    tags: ['thiên văn học', 'vũ trụ học', 'vũ trụ', 'vật lý', 'khoa học'],
+    language: 'vi',
+    content: `# Vụ Nổ Lớn
+
+Thuyết Vụ Nổ Lớn là lời giải thích khoa học tốt nhất về cách vũ trụ bắt đầu. Nó cho rằng toàn bộ không gian, thời gian, vật chất và năng lượng đã nảy sinh từ một trạng thái cực kỳ nóng và đặc khoảng **13,8 tỷ năm trước**, và vũ trụ đã giãn nở kể từ đó.
+
+## Đó không phải một vụ nổ trong không gian
+
+Bất chấp cái tên, Vụ Nổ Lớn không phải một vụ nổ phóng vật chất vào một không gian trống đã có sẵn. Đó là sự giãn nở nhanh của **chính không gian**, từ một trạng thái mà mọi thứ ta thấy hôm nay bị nén vào một thể tích nhỏ, nóng và đặc đến khó tưởng tượng. Khi không gian giãn nở, nó nguội đi, và vật chất dần có thể hình thành và kết tụ.
+
+## Bằng chứng
+
+Ba quan sát chính nâng đỡ thuyết này:
+
+- **Các thiên hà đang ra xa.** Vào thập niên 1920, Edwin Hubble phát hiện các thiên hà xa đang ra xa chúng ta, và càng xa thì càng nhanh — đúng điều người ta mong đợi ở một vũ trụ giãn nở.
+- **Bức xạ nền vi sóng vũ trụ.** Một ánh sáng vi sóng mờ đến từ mọi hướng của bầu trời — nhiệt dư đã nguội của vũ trụ sơ khai, được dự đoán trước khi được phát hiện.
+- **Độ phong phú của các nguyên tố nhẹ.** Tỷ lệ hydro và heli quan sát được khớp chính xác với điều mà các phản ứng trong vài phút đầu của vũ trụ dự đoán.
+
+## Điều gì xảy ra sau đó
+
+Khi vũ trụ nguội đi, vật chất hình thành các nguyên tử, rồi các ngôi sao, và những thứ này kết tụ thành các thiên hà. Suốt hàng tỷ năm, trọng lực đã dựng nên những cấu trúc ta thấy ngày nay.
+
+## Điều Vụ Nổ Lớn không giải thích
+
+Thuyết này mô tả cách vũ trụ tiến hóa từ một phần nhỏ của giây sau khởi đầu trở đi, nhưng không nói điều gì đã "gây ra" nó hay có gì "trước đó" — những câu hỏi vẫn nằm trong số sâu xa nhất của khoa học.`,
+  },
+  {
+    title: 'Nhật thực và nguyệt thực',
+    question: 'Điều gì gây ra nhật thực và nguyệt thực?',
+    summary:
+      'Nhật thực và nguyệt thực xảy ra khi Mặt Trời, Trái Đất và Mặt Trăng thẳng hàng, khiến một thiên thể đổ bóng lên thiên thể khác; nhật thực che khuất Mặt Trời còn nguyệt thực làm tối trăng tròn.',
+    tags: ['thiên văn học', 'mặt trăng', 'mặt trời', 'không gian', 'khoa học'],
+    language: 'vi',
+    content: `# Nhật thực và nguyệt thực
+
+Một lần thực xảy ra khi Mặt Trời, Trái Đất và Mặt Trăng thẳng hàng sao cho thiên thể này đổ bóng lên thiên thể kia. Những sự kiện ấn tượng này từng bị sợ hãi như điềm gở; ngày nay ta hiểu chúng như một hình học thiên thể đẹp đẽ và có thể dự đoán.
+
+## Nhật thực
+
+Nhật thực xảy ra vào lúc trăng non, khi Mặt Trăng đi thẳng vào giữa Trái Đất và Mặt Trời, chặn ánh sáng mặt trời. Dù Mặt Trăng nhỏ hơn Mặt Trời rất nhiều, nó gần hơn khoảng 400 lần, nên cả hai trông gần như cùng kích thước trên bầu trời — một sự trùng hợp đáng chú ý.
+
+- Trong nhật thực **toàn phần**, Mặt Trăng che hoàn toàn Mặt Trời, trong chốc lát hé lộ bầu khí quyển ngoài mờ nhạt của Mặt Trời — **vành nhật hoa (corona)** — và biến ban ngày thành hoàng hôn.
+- Trong nhật thực **một phần**, chỉ một phần Mặt Trời bị che.
+- Trong nhật thực **hình khuyên**, Mặt Trăng ở xa hơn một chút và để lại một "vòng lửa" sáng quanh bóng của nó.
+
+## Nguyệt thực
+
+Nguyệt thực xảy ra vào lúc trăng tròn, khi Trái Đất nằm giữa Mặt Trời và Mặt Trăng và đổ bóng lên Mặt Trăng. Khác với nhật thực, có thể nhìn bằng mắt thường an toàn và nhìn thấy được từ toàn bộ phía đêm của Trái Đất cùng lúc.
+
+Trong nguyệt thực **toàn phần**, Mặt Trăng thường mang một sắc đỏ — gọi là "trăng máu" — vì khí quyển Trái Đất bẻ cong ánh sáng mặt trời đỏ lên bề mặt của nó.
+
+## Vì sao không xảy ra mỗi tháng
+
+Quỹ đạo Mặt Trăng nghiêng nhẹ so với quỹ đạo Trái Đất, nên Mặt Trăng thường đi qua hơi cao hơn hoặc thấp hơn sự thẳng hàng hoàn hảo. Thực chỉ xảy ra vào vài dịp khi ba thiên thể thẳng hàng chính xác, khiến mỗi lần thành một sự kiện đặc biệt.`,
+  },
 ];
