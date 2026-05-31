@@ -952,4 +952,246 @@ Anılar, nöronlar arasındaki bağlantı desenleri olarak saklanır. Öğrenirk
 
 Bellek yeniden kurucudur: bir anıyı her geri çağırdığımızda onu yeniden birleştiririz ve farkında olmadan değiştirebiliriz. Bu, anıların neden canlı ama yine de yanlış olabileceğini, görgü tanıklıklarının neden güvenilmez olduğunu ve yinelemenin ile çağrışımların bilgiyi tutmaya neden yardım ettiğini açıklar.`,
   },
+  // ── Batch 5: Uzay ve astronomi ──
+  {
+    title: 'Ayın Evreleri',
+    question: 'Ay neden ay boyunca biçim değiştirir?',
+    summary:
+      "Ayın evreleri; gezegenimizin çevresinde dönerken güneş ışığının ona vurma biçiminden kaynaklanan, Dünya'dan görülen aydınlık kısmının değişen biçimleridir.",
+    tags: ['astronomi', 'ay', 'uzay', 'bilim', 'güneş sistemi'],
+    language: 'tr',
+    content: `# Ayın Evreleri
+
+Ay, yaklaşık bir ay boyunca biçim değiştiriyor gibi görünür; ince bir hilalden dolunaya ve geri döner. Bu **evreler**, Dünya'nın düşürdüğü bir gölgeden değil, güneş ışığının Ay'a nasıl vurduğu ile ona hangi açıdan baktığımızın birleşiminden doğar.
+
+## Gerçek neden
+
+Ayın yarısı her zaman Güneş'le aydınlıktır, tıpkı Dünya'nın yarısının gündüzü yaşaması gibi. Ama Ay, Dünya'nın çevresinde döndükçe o aydınlık yarının farklı miktarlarını görürüz. Ay bize göre Güneş'in karşı tarafındayken, aydınlık yüzün tamamını görürüz — **dolunay**. Bizimle Güneş arasındayken, bize dönük yüz karanlıktır — **yeniay**.
+
+## Evreler döngüsü
+
+Tam döngü yaklaşık 29,5 gün sürer ve sekiz evreden geçer:
+
+1. **Yeniay** — neredeyse görünmez.
+2. **Büyüyen hilal** — ince bir dilim görünmeye başlar.
+3. **İlk dördün** — yarısı aydınlık, dolmayı sürdürür.
+4. **Büyüyen şişkin ay** — yarıdan fazlası aydınlık.
+5. **Dolunay** — tüm disk aydınlık.
+6. **Küçülen şişkin ay** — azalmaya başlar.
+7. **Son dördün** — karşı taraftan, yine yarım ay.
+8. **Küçülen hilal** — yeniayın dönüşünden önce ince bir dilim.
+
+"Büyüyen" aydınlık kısmın arttığı; "küçülen" azaldığı anlamına gelir.
+
+## Aynı yüz
+
+Ayın kendi ekseninde bir kez dönmesi ile Dünya'nın çevresinde dönmesi aynı süreyi alır; bu olguya **eşzamanlı dönme** denir. Bu yüzden bize hep aynı yüzünü gösterir ve "uzak taraf" Dünya'dan hiç görünmez.`,
+  },
+  {
+    title: 'Kuyrukluyıldızlar',
+    question: 'Kuyrukluyıldızlar nedir ve nereden gelir?',
+    summary:
+      "Kuyrukluyıldızlar; güneş sisteminin oluşumundan artakalan, Güneş'e yaklaştıklarında ve ısı buzlarını buharlaştırdığında parlak kuyruklar geliştiren buzlu cisimlerdir.",
+    tags: ['astronomi', 'kuyrukluyıldızlar', 'uzay', 'güneş sistemi', 'bilim'],
+    language: 'tr',
+    content: `# Kuyrukluyıldızlar
+
+Kuyrukluyıldızlar, gece gökyüzünün en görkemli cisimlerinden bazılarıdır: Güneş'e yaklaştıklarında canlanan buz ve toz topları. Çoğu zaman "kirli kar topları" diye anılırlar ve erken güneş sisteminin donmuş kalıntılarıdır.
+
+## Neyden yapılmışlardır
+
+Bir kuyrukluyıldızın kalbi **çekirdektir**; yalnızca birkaç kilometre genişliğinde, buz, toz, kaya ve donmuş bileşiklerden oluşan katı bir karışım. Milyarlarca yıl boyunca güneş sisteminin buzlu kıyılarında donmuş kalırlar.
+
+## Kuyrukları neden büyür
+
+Bir kuyrukluyıldızın yörüngesi onu Güneş'e yaklaştırdığında, ısı buzunu doğrudan gaza çevirir; bu sürece **süblimleşme** denir. Bu, çekirdeğin çevresinde bulanık, parlak bir atmosfer — **koma** — oluşturur ve toz salar. Güneş ışınımının basıncı ve güneş rüzgârı bu maddeyi Güneş'ten uzağa iter ve milyonlarca kilometre uzanabilen bir ya da daha çok **kuyruk** yaratır. Bu yüzden bir kuyrukluyıldızın kuyruğu her zaman hareketinin gerisine değil, Güneş'in karşı yönüne işaret eder.
+
+## Nereden gelirler
+
+Çoğu kuyrukluyıldız iki uzak bölgeden gelir:
+
+- **Kuiper kuşağı**, Neptün'ün ötesinde buzlu cisimlerden oluşan bir disk; birçok kısa dönemli kuyrukluyıldızın kaynağı.
+- **Oort bulutu**, güneş sistemini saran çok daha uzak küresel bir kabuk; uzun dönemli kuyrukluyıldızların kaynağı.
+
+## Geçmişten ziyaretçiler
+
+Kuyrukluyıldızlar güneş sisteminin ilk günlerinden donmuş madde sakladığından, zaman kapsülleri gibidir. Bilim insanları onları 4,6 milyar yıl önceki koşulları öğrenmek için inceler; bazıları kuyrukluyıldızların erken Dünya'ya su ve organik moleküller getirmeye yardım ettiğinden kuşkulanır.`,
+  },
+  {
+    title: 'Bir Yıldızın Yaşam Döngüsü',
+    question: 'Yıldızlar nasıl doğar, yaşar ve ölür?',
+    summary:
+      'Yıldızlar çöken gaz bulutlarından oluşur, elementleri kaynaştırarak milyonlarca ya da milyarlarca yıl parlar ve kütlelerine göre farklı biçimlerde ölür — ak cücelerden süpernovalara dek.',
+    tags: ['astronomi', 'yıldızlar', 'uzay', 'fizik', 'bilim'],
+    language: 'tr',
+    content: `# Bir Yıldızın Yaşam Döngüsü
+
+Yıldızlar sonsuz gibi görünür, ama devasa zaman ölçeklerinde doğar, yaşar ve ölür. Bir yıldızın yazgısı neredeyse tümüyle tek bir özelliğe bağlıdır: **kütlesi**.
+
+## Doğum
+
+Yıldızlar, **bulutsu** denen devasa gaz ve toz bulutlarının içinde doğar. Bir bölge yeterince yoğunlaştığında yerçekimi onu çökertir ve ısıtır. Çekirdek yaklaşık 10 milyon dereceye ulaştığında **çekirdek kaynaşması** başlar — hidrojen atomları helyuma kaynaşır ve enerji salar. Bir yıldız doğmuştur.
+
+## Orta yaş
+
+Yaşamının çoğunda bir yıldız, içe doğru sıkıştıran yerçekimi kuvvetini dışa doğru iten kaynaşma basıncıyla dengeleyerek **anakol** üzerinde bulunur. Güneşimiz yaklaşık 4,6 milyar yıldır bu kararlı evrededir ve 5 milyar yıl daha sürecektir. Daha küçük, daha soğuk yıldızlar yakıtını yavaş yakar ve trilyonlarca yıl yaşar; büyük, sıcak olanlar yakıtını yalnızca birkaç milyon yılda tüketir.
+
+## Ölüm
+
+Bir yıldızın sonu kütlesine bağlıdır:
+
+- **Güneş gibi yıldızlar**, şişerek **kırmızı dev** olur, dış katmanlarını atar ve geride **ak cüce** denen yoğun, soğuyan bir çekirdek bırakır.
+- **Çok daha kütleli yıldızlar**, kısa bir an için koca bir gökadadan daha parlak olabilen **süpernova** denen yıkıcı bir patlamayla son bulur. Geriye kalan, aşırı yoğun bir **nötron yıldızı** ya da yıldız yeterince kütleliyse bir **karadelik** olur.
+
+## Kozmik fırınlar
+
+Yıldızlar evrenin fabrikalarıdır. İçlerindeki kaynaşma ve onları sona erdiren patlamalar, hidrojenden ağır neredeyse tüm elementleri yarattı — içinizdeki karbon ve oksijen dahil. Sözcüğün tam anlamıyla yıldız tozundan yapıldık.`,
+  },
+  {
+    title: 'Kutup Işıkları',
+    question: 'Kuzey ve güney ışıklarına ne yol açar?',
+    summary:
+      "Kutup ışıkları; Güneş'ten gelen yüklü parçacıkların gezegenin manyetik alanıyla yönlendirilerek atmosfer gazlarıyla çarpışmasıyla oluşan, Dünya'nın kutuplarına yakın renkli ışık gösterileridir.",
+    tags: ['astronomi', 'atmosfer', 'fizik', 'uzay', 'bilim'],
+    language: 'tr',
+    content: `# Kutup Işıkları
+
+Kutup ışıkları — **kuzey ışıkları** (aurora borealis) ve **güney ışıkları** (aurora australis) — doğanın en görkemli gösterilerinden biridir: kutup gökyüzünde dans eden yeşil, pembe ve mor ışıktan parıldayan perdeler.
+
+## Neden: güneş rüzgârı
+
+Işıklar Güneş'te başlar; Güneş, **güneş rüzgârı** denen bir yüklü parçacık akışını durmaksızın üfler. Bu parçacıklar Dünya'ya ulaştığında çoğu, gezegenin **manyetik alanıyla** saptırılır. Ama manyetik kutuplara yakın yerlerde alan çizgileri atmosfere dalar ve bazı parçacıkları aşağı doğru kanalize eder.
+
+## Işığın yaratılması
+
+Üst atmosfere dalan bu enerjik parçacıklar, gaz atomlarına ve moleküllerine çarpar. Çarpışmalar gazları uyarır — elektronlarını daha yüksek enerji düzeylerine iter. Elektronlar normale döndüğünde, fazla enerjiyi ışık olarak salar. Farklı gazlar farklı renklerde ışıldar:
+
+- **Oksijen**, yeşil (en yaygın) ve yüksek irtifalarda kırmızı verir.
+- **Azot**, mavi ve mor verir.
+
+## Neden kutuplara yakın
+
+Dünya'nın manyetik alanının biçimi parçacıkları kutup bölgelerine doğru kanalize ettiğinden, ışıklar yüksek enlemlerde, **kutup ışığı ovalleri** denen halkaların çevresinde en yaygındır. Güçlü güneş fırtınaları sırasında olağandan çok daha ekvatora yakın görülebilir.
+
+## Dünya'nın ötesinde
+
+Kutup ışıkları yalnızca Dünya'ya özgü değildir. Manyetik alanları ve atmosferleri olan Jüpiter, Satürn ve başka gezegenlerde de benzer gösteriler gözlendi — gezegenimizin Güneş'le hareket eden bir güneş sisteminin parçası olduğunun bir anımsatıcısı.`,
+  },
+  {
+    title: 'Işık Yılları ve Kozmik Uzaklıklar',
+    question: 'Işık yılı nedir ve astronomlar uzayı nasıl ölçer?',
+    summary:
+      'Işık yılı, ışığın bir yılda kat ettiği uzaklıktır; astronomlar onu ve ıraklık açısı (paralaks) gibi teknikleri yıldızlar ile gökadalar arasındaki uçsuz bucaksız uzaklıkları ölçmek için kullanır.',
+    tags: ['astronomi', 'uzay', 'uzaklık', 'fizik', 'bilim'],
+    language: 'tr',
+    content: `# Işık Yılları ve Kozmik Uzaklıklar
+
+Uzaydaki uzaklıklar o kadar uçsuz bucaksızdır ki kilometreler işe yaramaz olur. Kozmosu ölçmek için astronomlar **ışık yılını** — ve şeylerin gerçekte ne kadar uzak olduğunu belirlemek için ustaca bir teknikler merdivenini — kullanır.
+
+## Işık yılı nedir
+
+Işık yılı bir **uzaklık** ölçüsüdür, zaman değil: ışığın bir yılda kat ettiği uzaklıktır, yaklaşık 9,5 trilyon kilometre. Işık sonlu bir hızda gittiğinden, uzaya bakmak geçmişe bakmaktır. Güneş dışındaki en yakın yıldız yaklaşık 4,2 ışık yılı uzaktadır, bu yüzden onu dört yıldan fazla önceki hâliyle görürüz. Bazı gökadaları milyarlarca yıl önceki hâlleriyle görürüz.
+
+## Yakın uzaklıkları ölçmek: paralaks
+
+Görece yakın yıldızlar için astronomlar **paralaksı** kullanır. Bir yıldıza Dünya'nın yörüngesinin karşıt yanlarından (altı ay arayla) bakıldığında, yıldız daha uzak arka plana göre biraz kayar gibi görünür. Kayma ne kadar büyükse yıldız o kadar yakındır. Bu, sırayla bir gözünüzü kapatıp başparmağınızın zıpladığını görmenizle aynı etkidir.
+
+## Daha büyük uzaklıkları ölçmek
+
+Paralaksın erişiminin ötesinde astronomlar "standart mumlar" kullanır — gerçek parlaklığı bilinen cisimler. Gerçek parlaklıklarını ne kadar sönük göründükleriyle karşılaştırarak uzaklık çıkarılır. **Sefe değişen yıldızları** ve belirli bir **süpernova** türü bu mumlar olarak iş görür ve uzak gökadalara dek uzaklıkları ölçmeyi sağlar.
+
+## Alçaltıcı bir ölçek
+
+Bu araçlar şaşırtıcı genişlikte bir evren açığa çıkarır: milyarlarca gökada, her birinde milyarlarca yıldız, o kadar büyük uzaklıklara serpilmiş ki bugün yakaladığımız ışık, Dünya var olmadan çok önce yola çıkmıştı.`,
+  },
+  {
+    title: 'Ötegezegenler',
+    question: 'Ötegezegenler nedir ve onları nasıl buluruz?',
+    summary:
+      'Ötegezegenler, başka yıldızların çevresinde dönen gezegenlerdir; binlercesi dolaylı yöntemlerle keşfedildi, bazıları sıvı suyun bulunabileceği yaşanabilir bölgede.',
+    tags: ['astronomi', 'ötegezegenler', 'uzay', 'bilim', 'keşif'],
+    language: 'tr',
+    content: `# Ötegezegenler
+
+Ötegezegen, Güneşimiz dışında bir yıldızın çevresinde dönen bir gezegendir. Yüzyıllarca böyle dünyaları yalnızca hayal edebildik; bugün binlercesini biliyoruz ve bu bilim, evrendeki yerimize bakışımızı dönüştürdü.
+
+## Neden görmesi zor
+
+Ötegezegenleri doğrudan gözlemek son derece zordur. Kendi ışıklarını yaymazlar ve yıldızlarının yoğun parıltısında kaybolurlar — bir projektörün yanındaki bir ateş böceğini görmeye çalışmak gibi. Bu yüzden neredeyse tüm ötegezegenler **dolaylı** yollarla bulunur.
+
+## Onları nasıl buluruz
+
+Aramaya iki yöntem egemendir:
+
+- **Geçiş yöntemi.** Bir gezegenin yörüngesi bizimle yıldızı arasından geçerse, yıldızın ışığının küçücük bir kesrini engeller. Parlaklıktaki bu küçük düzenli düşüşleri ölçmek gezegeni açığa çıkarır ve boyutunu gösterir. Kepler uzay teleskobu bu yöntemle binlerce dünya buldu.
+- **Dikine hız yöntemi.** Dönen bir gezegen, yıldızını yerçekimiyle hafifçe çeker ve onu yalpalatır. Bu yalpa, yıldızın ışığını biraz kaydırır ve gezegenin varlığını ile kütlesini açığa çıkarır.
+
+## Şaşırtıcı bir çeşitlilik
+
+Ötegezegenler inanılmaz çeşitli çıktı: yıldızlarına yapışık dönen dev gazlı "sıcak Jüpiterler", gezegenimizden büyük kayalık "süper Dünyalar" ve iki güneşli dünyalar. Birçok sistem bizimkine hiç benzemez.
+
+## Yaşam arayışı
+
+En çok istenen ödül, **yaşanabilir bölgede** — yüzeyde sıvı suyun bulunabileceği, bir yıldıza olan uzaklıkta — gezegenler bulmaktır. Yeni teleskoplar, yaşama işaret edebilecek gazlar için ötegezegenlerin atmosferlerini çözümlemeye başlıyor ve "yalnız mıyız?" sorusunu sonunda sınanabilir kılıyor.`,
+  },
+  {
+    title: 'Büyük Patlama',
+    question: 'Evren nasıl başladı?',
+    summary:
+      'Büyük Patlama kuramı; evrenin yaklaşık 13,8 milyar yıl önce sıcak, yoğun bir durumdan genişlediğini betimler ve kozmik artık parıltı ile uzaklaşan gökadalar gibi kanıtlarla desteklenir.',
+    tags: ['astronomi', 'kozmoloji', 'evren', 'fizik', 'bilim'],
+    language: 'tr',
+    content: `# Büyük Patlama
+
+Büyük Patlama kuramı, evrenin nasıl başladığının en iyi bilimsel açıklamasıdır. Tüm uzayın, zamanın, maddenin ve enerjinin yaklaşık **13,8 milyar yıl önce** olağanüstü sıcak ve yoğun bir durumdan ortaya çıktığını ve evrenin o zamandan beri genişlediğini savunur.
+
+## Uzayda bir patlama değildi
+
+Adına karşın Büyük Patlama, maddeyi önceden var olan boş bir uzaya saçan bir patlama değildi. **Uzayın kendisinin** hızlı genişlemesiydi; bugün gördüğümüz her şeyin akıl almaz ölçüde küçük, sıcak ve yoğun bir hacme sıkıştığı bir durumdan. Uzay genişledikçe soğudu ve madde yavaş yavaş oluşup kümelenebildi.
+
+## Kanıtlar
+
+Kuramı üç temel gözlem destekler:
+
+- **Uzaklaşan gökadalar.** 1920'lerde Edwin Hubble, uzak gökadaların bizden uzaklaştığını ve ne kadar uzaksa o kadar hızlı olduğunu keşfetti — tam da genişleyen bir evrenden beklenecek şey.
+- **Kozmik mikrodalga arka plan ışınımı.** Gökyüzünün her yönünden sönük bir mikrodalga parıltı gelir — erken evrenin soğumuş artık ısısı, keşfedilmeden önce öngörülmüştü.
+- **Hafif elementlerin bolluğu.** Gözlenen hidrojen ve helyum oranları, evrenin ilk birkaç dakikasındaki tepkimelerin öngördüğüyle tam olarak örtüşür.
+
+## Sonra ne oldu
+
+Evren soğudukça madde atomları, sonra yıldızları oluşturdu ve bunlar gökadalarda kümelendi. Milyarlarca yıl boyunca yerçekimi, bugün gördüğümüz yapıları inşa etti.
+
+## Büyük Patlama'nın açıklamadığı
+
+Kuram, evrenin başlangıçtan saniyenin bir kesri sonrasından itibaren nasıl evrildiğini betimler, ama onu neyin "yol açtığını" ya da "öncesinde" ne olduğunu söylemez — bilimin en derin sorularından biri olmayı sürdüren sorular.`,
+  },
+  {
+    title: 'Tutulmalar',
+    question: 'Güneş ve Ay tutulmalarına ne yol açar?',
+    summary:
+      "Tutulmalar; Güneş, Dünya ve Ay hizalandığında bir cismin gölgesini bir diğerinin üzerine düşürmesiyle oluşur; Güneş tutulmaları Güneş'i örter, Ay tutulmaları dolunayı karartır.",
+    tags: ['astronomi', 'ay', 'güneş', 'uzay', 'bilim'],
+    language: 'tr',
+    content: `# Tutulmalar
+
+Bir tutulma; Güneş, Dünya ve Ay öyle hizalandığında olur ki biri gölgesini bir diğerinin üzerine düşürür. Bu etkileyici olaylar bir zamanlar uğursuzluk belirtisi diye korkulurdu; bugün onları güzel ve öngörülebilir bir gök geometrisi olarak anlıyoruz.
+
+## Güneş tutulmaları
+
+Güneş tutulması yeniay sırasında, Ay tam Dünya ile Güneş arasından geçip güneş ışığını engellediğinde olur. Ay Güneş'ten çok daha küçük olsa da yaklaşık 400 kat daha yakındır, bu yüzden ikisi gökyüzünde neredeyse aynı boyutta görünür — dikkat çekici bir rastlantı.
+
+- **Tam** Güneş tutulmasında Ay, Güneş'i tümüyle örter; kısa anlar için Güneş'in sönük dış atmosferini — **taç (korona)** — açığa çıkarır ve gündüzü alacakaranlığa çevirir.
+- **Parçalı** tutulmada Güneş'in yalnızca bir bölümü örtülür.
+- **Halkalı** tutulmada Ay biraz daha uzaktadır ve silüetinin çevresinde parlak bir "ateş halkası" bırakır.
+
+## Ay tutulmaları
+
+Ay tutulması dolunay sırasında, Dünya Güneş ile Ay arasına girip gölgesini Ay'ın üzerine düşürdüğünde olur. Güneş tutulmalarının tersine, çıplak gözle izlemek güvenlidir ve Dünya'nın tüm gece tarafından aynı anda görülür.
+
+**Tam** bir Ay tutulması sırasında Ay, çoğu zaman kızıl bir renk alır — sözde "kanlı Ay" — çünkü Dünya'nın atmosferi kızılımsı güneş ışığını yüzeyine kırar.
+
+## Neden her ay olmaz
+
+Ayın yörüngesi Dünya'nınkine göre hafifçe eğiktir, bu yüzden Ay genellikle tam hizalanmanın biraz üstünden ya da altından geçer. Tutulmalar yalnızca üç cismin tam olarak hizalandığı birkaç durumda olur; bu da her birini özel bir olay kılar.`,
+  },
 ];
