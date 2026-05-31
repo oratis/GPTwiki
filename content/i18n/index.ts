@@ -10,6 +10,7 @@ import { ru } from './ru';
 import { ar } from './ar';
 import { hi } from './hi';
 import { it } from './it';
+import { tr } from './tr';
 
 // Aggregated translations across all languages completed so far. Append new
 // per-language arrays here as each language file is built out. The seeder
@@ -27,6 +28,7 @@ export const allTranslations: DraftArticle[] = [
   ...ar,
   ...hi,
   ...it,
+  ...tr,
 ];
 
-export { zh, ja, ko, es, fr, de, pt, ru, ar, hi, it };
+export { zh, ja, ko, es, fr, de, pt, ru, ar, hi, it, tr };
