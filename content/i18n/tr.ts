@@ -1460,4 +1460,247 @@ Bazı ifadeler evrensel olsa da birçok sözsüz işaret her kültüre özgüdü
 
 Birini açık bir kitap gibi "okuyabileceğine" inanmak çekici olsa da sözsüz işaretler belirsizdir ve tek başına değil, birlikte ve bağlam içinde daha iyi yorumlanır. Yine de onların farkında olmak iletişimi daha zengin ve etkili kılar.`,
   },
+  // ── Batch 7: Şeyler nasıl çalışır ──
+  {
+    title: 'Wi-Fi Nasıl Çalışır',
+    question: 'Wi-Fi veriyi havada nasıl gönderir?',
+    summary:
+      'Wi-Fi; cihazlar ile bir yönlendirici arasında veri taşımak için radyo dalgaları kullanır ve bilgiyi internet trafiğini kablosuz taşıyan yüksek frekanslı sinyallere kodlar.',
+    tags: ['teknoloji', 'ağlar', 'radyo', 'internet', 'mühendislik'],
+    language: 'tr',
+    content: `# Wi-Fi Nasıl Çalışır
+
+Wi-Fi, cihazlarımızı kablosuz olarak internete bağlar; bir cihaz ile bir yönlendirici arasında veri taşımak için radyo dalgaları kullanır. Kısa uzaklıklarda veriyi hızla taşımak için eniyilenmiş, iki yönlü bir radyo iletişimi biçimidir.
+
+## Veri taşıyan radyo dalgaları
+
+Wi-Fi, bilgiyi **radyo dalgalarıyla** iletir — radyonun ve cep telefonlarının kullandığı dalga türünün aynısı, ama daha yüksek frekanslarda — genellikle 2,4 GHz ve 5 GHz (ve son zamanlarda 6 GHz). Cihaz ve yönlendirici, sayısal veriyi (1'ler ve 0'lar) radyo dalgası örüntülerine çevirir ve öteki uçta geri çevirir; bu sürece **kiplenim (modülasyon)** denir.
+
+## Yönlendiricinin rolü
+
+**Yönlendirici** merkez düğümdür. Bir kabloyla (genellikle bir geniş bant sağlayıcısından) internete bağlanır ve bağlı tüm cihazlardan ve cihazlara veriyi kablosuz aktarır. Bir sayfa yüklediğinizde cihaz, yönlendiriciye radyoyla bir istek gönderir; o da bunu internete iletir ve yanıtı geri getirir.
+
+## Bantlar ve kanallar
+
+İki ana bant bir ödünleşme sunar:
+
+- **2,4 GHz** daha uzağa ulaşır ve duvarları daha iyi geçer, ama daha yavaştır ve girişime (mikrodalga fırınlardan, kablosuz telefonlardan ve komşu ağlardan) daha açıktır.
+- **5 GHz** (ve 6 GHz) daha hızlı ve daha az kalabalıktır, ama daha kısa uzaklıklara ulaşır.
+
+Her bant, yakın cihazlar arasındaki girişimi azaltmak için **kanallara** bölünür.
+
+## Erim ve girişim
+
+Wi-Fi sinyalleri uzaklıkla zayıflar ve duvarlar, su ve metal tarafından soğurulur. Bu yüzden yönlendiriciden uzaklaştıkça bağlantı kötüleşir ve bu yüzden yineleyiciler ya da örgü (mesh) sistemleri daha büyük evleri kapsamaya yardım eder. Bu sınırlara karşın Wi-Fi, milyarlarca cihazı internete bağlamanın standart yolu oldu.`,
+  },
+  {
+    title: 'Piller Enerjiyi Nasıl Depolar',
+    question: 'Bir pil enerjiyi nasıl depolar ve salar?',
+    summary:
+      'Piller enerjiyi kimyasal biçimde depolar ve onu, iki elektrot arasında elektron taşıyan tepkimelerle elektriğe çevirerek bir devreye akım sağlar.',
+    tags: ['teknoloji', 'enerji', 'kimya', 'elektrik', 'mühendislik'],
+    language: 'tr',
+    content: `# Piller Enerjiyi Nasıl Depolar
+
+Piller her yerde — telefonlarda, arabalarda, kumandalarda — ama işleyişleri zarif bir kimya parçasıdır. Bir pil, enerjiyi **kimyasal** biçimde depolar ve onu istek üzerine **elektrik** enerjisi olarak salar.
+
+## Temel parçalar
+
+Her pilin üç anahtar bileşeni vardır:
+
+- Bir **eksi elektrot** (anot).
+- Bir **artı elektrot** (katot).
+- İkisi arasında, yüklü parçacıkların hareketini sağlayan **elektrolit**.
+
+## Enerji nasıl akar
+
+Enerji, iki elektrodun malzemeleri arasında "olmak isteyen" bir **kimyasal tepkimeden** gelir. Bir pili bir devreye bağladığınızda:
+
+1. Anotta, elektron salan bir tepkime olur.
+2. Bu elektronlar elektroliti geçemez; bunun yerine dış devreden akar — yol boyunca cihazı besleyerek.
+3. Aynı anda, dengeyi korumak için yüklü parçacıklar (iyonlar) pilin içindeki elektrolitten hareket eder.
+
+Dış devredeki bu elektron akışı, cihazı çalıştıran **elektrik akımıdır**. Kimyasal malzemeler tükendiğinde pil "biter".
+
+## Şarj edilebilir ya da değil
+
+**Tek kullanımlık** pillerde (alkali gibi) kimyasal tepkimeler kolayca tersine dönmez ve pil bittiğinde atılır. **Şarj edilebilir** pillerde (telefonlardaki lityum-iyon gibi) ters yönde akım geçirmek kimyasal tepkimeleri tersine çevirir ve malzemeleri yeniden kullanılmak üzere özgün durumuna döndürür — gerçi yineleme pili yavaş yavaş yıpratır.
+
+## Gerilim neden önemli
+
+Farklı malzemeler elektron başına farklı miktarda enerji salar; bu da pilin **gerilimini** belirler. Hücreleri seri bağlamak gerilimlerini toplar; bu yüzden hücre paketleri el fenerinden elektrikli arabalara dek her şeyi besler.`,
+  },
+  {
+    title: 'Dokunmatik Ekranlar Nasıl Çalışır',
+    question: 'Telefon ekranı nereye dokunduğunuzu nasıl bilir?',
+    summary:
+      'Dokunmatik ekranların çoğu, dokunmayı ekran yüzeyindeki bir elektrik alanındaki değişimleri algılayarak saptar; böylece parmakları ve hareketleri kesinlikle konumlandırır.',
+    tags: ['teknoloji', 'elektronik', 'arayüz', 'mühendislik', 'cihazlar'],
+    language: 'tr',
+    content: `# Dokunmatik Ekranlar Nasıl Çalışır
+
+Dokunmatik ekranlar; telefonlarla, tabletlerle ve daha pek çok cihazla etkileşimin başlıca yolu oldu. Büyülü görünseler de parmağın cama tam olarak nereye dokunduğunu saptamaya dayanır.
+
+## Sığasal tür
+
+Çoğu modern cihaz **sığasal (kapasitif)** ekranlar kullanır. Camın altında, yüzeyde küçük bir elektrik alanı tutan saydam, iletken bir ızgara vardır. İnsan bedeni de elektriği iletir, bu yüzden parmak ekrana dokununca bu elektrik alanını yerel olarak bozar. Cihaz, yükün tam olarak nerede değiştiğini saptar ve o konumu bir dokunma olarak yorumlar.
+
+Bedenin iletkenliğine dayandıklarından, sığasal ekranlar genellikle sıradan bir kaleme ya da kalın bir eldivene yanıt vermez — bu yüzden özel malzemelerden yapılmış "dokunmaya uyumlu" eldivenler ve kalemler vardır. Büyük üstünlüğü, aynı anda birden çok parmağı algılayan ve yakınlaştırmak için sıkıştırma gibi hareketleri olanaklı kılan **çoklu dokunma** desteğidir.
+
+## Direnimli tür
+
+Daha eski bir tür, **direnimli (resistif)** ekran, küçük bir boşlukla ayrılmış iki esnek katman kullanır. Bastırıldığında katmanlar o noktada birbirine değer ve cihaz konumu kaydeder. Direnimli ekranlar herhangi bir nesneyle (parmak, kalem, eldiven) çalışır, ama genellikle daha az nettir ve çoklu dokunmayı iyi yönetmez. Hâlâ bazı sanayi donanımlarında ve eski cihazlarda kullanılır.
+
+## Dokunmadan eyleme
+
+Her iki durumda da ekranın donanımı, dokunmayı yazılımın yorumladığı koordinatlara çevirir. İşletim sistemi, parmağın altında ne olduğuna — bir düğme, bir bağlantı, bir kaydırıcı — karar verir ve buna göre yanıt verir. Tüm bunlar milisaniyeler içinde olur ve ekrandakini doğrudan elle yönetiyormuş gibi akıcı bir duygu yaratır.`,
+  },
+  {
+    title: 'Soğutma Nasıl Çalışır',
+    question: 'Bir buzdolabı yiyecekleri nasıl soğuk tutar?',
+    summary:
+      'Soğutma; sürekli bir döngüde dolaşan, buharlaşan ve sıkıştırılan bir soğutucu akışkan kullanarak ısıyı içeriden dışarıya taşıyıp yiyecekleri soğuk tutar.',
+    tags: ['teknoloji', 'fizik', 'ısı', 'mühendislik', 'gündelik'],
+    language: 'tr',
+    content: `# Soğutma Nasıl Çalışır
+
+Bir buzdolabı soğuğu "yaratmaz" — **ısıyı uzaklaştırır**. İçinden mutfağa sürekli ısı taşıyarak yiyecekleri, bakteri üremesini ve bozulmayı yavaşlatan düşük bir sıcaklıkta tutar.
+
+## Temel fikir
+
+Soğutma basit bir ilkeye dayanır: bir sıvı gaza dönüştüğünde (buharlaşma), çevresinden **ısı soğurur**; bir gaz yeniden sıvıya döndüğünde (yoğuşma), **ısı salar**. Buzdolabı, **soğutucu akışkan** adlı özel bir maddeyi farklı yerlerde bu geçişlerden tekrar tekrar geçirir ve ısıyı içeriden dışarıya taşır.
+
+## Soğutma döngüsü
+
+Döngünün dört ana aşaması vardır:
+
+1. **Buharlaşma.** Buzdolabının içinde sıvı soğutucu bir borudan geçer ve buharlaşır; bölmeden ısı soğurarak onu soğutur.
+2. **Sıkıştırma.** Bir **kompresör**, gaz soğutucuyu sıkıştırarak basıncını ve sıcaklığını yükseltir.
+3. **Yoğuşma.** Sıcak gaz, buzdolabının arkasındaki ya da altındaki borulardan geçer, odaya ısı salar ve yeniden sıvıya döner.
+4. **Genleşme.** Soğutucu bir genleşme valfinden geçer, basıncı düşer ve soğur; döngüye yeniden başlamaya hazırdır.
+
+## Arka kısım neden sıcak
+
+Bir buzdolabının arkasındaki borulara dokunursanız sıcak olduğunu fark edersiniz. Bu, içeriden alınıp dışarıya salınan ısıdır. Buzdolabı özünde ısıyı soğuk bir yerden daha sıcak bir yere pompalar — kendiliğinden olmayan ve kompresörün sağladığı enerjiyi gerektiren bir şey.
+
+## Aynı teknoloji her yerde
+
+Aynı döngü, klimaları ve ısı pompalarını da çalıştırır. Bir klima özünde bir odayı soğutan ve ısıyı dışarı atan bir buzdolabıdır; bir ısı pompası, bir alanı ısıtmak için yönü tersine çevirebilir.`,
+  },
+  {
+    title: 'Gürültü Engelleyen Kulaklıklar Nasıl Çalışır',
+    question: 'Kulaklıklar arka plan gürültüsünü nasıl yok eder?',
+    summary:
+      'Etkin gürültü engelleyen kulaklıklar, arka plan sesini yakalamak için mikrofonlar kullanır ve onu kulaklarınıza ulaşmadan önce iptal eden ters bir ses dalgası üretir.',
+    tags: ['teknoloji', 'ses', 'dalgalar', 'mühendislik', 'elektronik'],
+    language: 'tr',
+    content: `# Gürültü Engelleyen Kulaklıklar Nasıl Çalışır
+
+Gürültü engelleyen kulaklıklar, gürültülü bir uçağı ya da kalabalık bir ofisi birden sessiz kılabilir. Bunu iki yolla yaparlar: sesi fiziksel olarak engelleyerek ve daha ustaca, onu elektronik olarak iptal ederek.
+
+## Ses dalgadır
+
+Ses, hava boyunca basınç dalgaları hâlinde gider. Her dalga gibi tepeleri ve çukurları vardır. İki dalgayı üst üste koyarsanız birleşirler: tepeyle hizalanan tepeler toplanır (daha yüksek), ama çukurla hizalanan bir tepe **iptal olur**. **Yıkıcı girişim** denen bu iptal, etkin gürültü engellemenin sırrıdır.
+
+## Etkin gürültü engelleme
+
+**Etkin** gürültü engelleyen (ANC) kulaklıklar şunları kullanır:
+
+1. Çevrenizdeki arka plan gürültüsünü yakalayan **mikrofonlar**.
+2. Bu ses dalgasını anında çözümleyip bir **ayna görüntüsü (ters)** dalga — gürültünün çukurları olan yerde tepeleri olan bir "karşı dalga" — üreten bir yonga.
+3. Bu ters dalgayı, duymak istediğiniz sesle birlikte çalan **hoparlörler**.
+
+Karşı dalga arka plan gürültüsüyle buluştuğunda, ikisi büyük ölçüde birbirini iptal eder ve kulaklarınız çok daha az gürültü algılar. Bu en iyi, bir motorun uğultusu gibi **alçak, sürekli** seslerle çalışır.
+
+## Edilgen gürültü engelleme
+
+**Edilgen** gürültü engelleme yalnızca fiziksel engellemedir: iyi oturan yastıklar ve gürültüyü mühürleyen yoğun malzemeler, tıpkı kulak tıkaçları gibi. Etkin engellemenin etkisizleştirmekte zorlandığı yüksek, ani sesleri iyi yönetir.
+
+## Neden tam sessizlik değil
+
+Etkin gürültü engelleme kusursuz değildir. Yüksek, karmaşık ve öngörülemez sesler (sesler gibi) iptal edilmesi zordur, çünkü sistemin dalgayı neredeyse anında öngörüp eşleştirmesi gerekir. Bu yüzden gürültü engelleyen kulaklıklar bir uçağın sürekli uğultusunu ustaca bastırır, ama yakındaki konuşmanın büyük bölümünü yine de geçirir.`,
+  },
+  {
+    title: "LED'ler Işığı Nasıl Üretir",
+    question: 'Bir LED bu kadar az enerjiyle ışığı nasıl üretir?',
+    summary:
+      "LED'ler, elektrik akımı bir yarı iletken malzemeden geçtiğinde enerjiyi doğrudan foton olarak salarak ışık üretir — bir teli ısıtmaktan çok daha verimli.",
+    tags: ['teknoloji', 'ışık', 'elektronik', 'enerji', 'mühendislik'],
+    language: 'tr',
+    content: `# LED'ler Işığı Nasıl Üretir
+
+LED'ler (ışık yayan diyotlar), lambalardan ekranlara ve göstergelere dek her şeyi aydınlatır. Olağanüstü verimlidirler, çünkü elektriği çok az ısı israfıyla doğrudan ışığa çevirir.
+
+## Bir yarı iletkenden ışık
+
+LED bir **diyot** türüdür; akımın çoğunlukla tek bir yönde akmasına izin veren **yarı iletken** malzemeden yapılmış bir bileşen. Yarı iletken, iki bölge oluşturmak için "katkılanır": biri fazladan elektronlu, diğeri elektronların eksik olduğu "deliklerle".
+
+Akım LED'den geçtiğinde, elektronlar bağlantıyı geçip delikleri doldurur. Her adımda bir elektron biraz enerji yitirir — ve bir LED'de bu enerji bir ışık parçacığı, bir **foton** olarak salınır. Elektriği doğrudan ışığa çevirme sürecine **elektrolüminesans** denir.
+
+## Rengi ne belirler
+
+Işığın **rengi**, her elektron sıçramasında salınan enerjiye bağlıdır; o da kendi başına belirli yarı iletken malzemeye bağlıdır. Farklı malzemeler kırmızı, yeşil, mavi vb. üretir. Beyaz LED'ler genellikle, mavi ışığın bir kısmını başka renklere çeviren bir **fosfor** katmanıyla kaplı bir mavi LED'le elde edilir; bunlar toplanarak beyaz ışık verir.
+
+## Neden bu kadar verimli
+
+Eski akkor ampuller, bir teli kor hâline gelene dek ısıtarak ışık üretirdi ve enerjinin çoğunu ısı olarak israf ederdi. LED'ler bu adımı atlar ve ışığı doğrudan üretir, bu yüzden aynı parlaklık için enerjinin bir kesrini kullanır ve çok daha uzun dayanır. Bu yüzden eski aydınlatma teknolojilerinin yerini büyük ölçüde aldılar.
+
+## Her yerde
+
+LED'ler küçük, dayanıklı ve denetlenebilir olduğundan her yerdedir: evlerin aydınlatmasında, farlarda, devasa video ekranlarında ve telefonunuzun ekranındaki görüntüyü oluşturan milyonlarca küçücük kırmızı, yeşil ve mavi LED'de.`,
+  },
+  {
+    title: 'Güneş Panelleri Nasıl Çalışır',
+    question: 'Güneş panelleri güneş ışığını elektriğe nasıl çevirir?',
+    summary:
+      'Güneş panelleri; ışık çarptığında elektron salan yarı iletken malzemeden hücreler kullanarak güneş ışığını elektriğe çevirir ve bir elektrik akımı üretir.',
+    tags: ['teknoloji', 'enerji', 'elektrik', 'çevre', 'mühendislik'],
+    language: 'tr',
+    content: `# Güneş Panelleri Nasıl Çalışır
+
+Güneş panelleri, hareketli parça ya da yakıt olmadan güneş ışığını doğrudan elektriğe çevirir. Belirli malzemelerin ışık çarptığında bir elektrik akımı ürettiği **fotovoltaik etkiye** dayanır.
+
+## Güneş hücresi
+
+Temel birim, genellikle **silisyumdan** — bilgisayar yongalarındaki yarı iletkenin aynısı — yapılan **güneş (fotovoltaik) hücresidir**. Hücrenin, aralarındaki bağlantıda bir elektrik alanı oluşturacak biçimde işlenmiş (katkılanmış) iki katmanı vardır: bir katmanda fazladan elektron, diğerinde elektronların eksik olduğu "delikler" bulunur.
+
+## Işıktan elektriğe
+
+Işık, **foton** denen küçük enerji paketlerinden oluşur. Yeterli enerjili bir foton hücreye çarptığında, bir silisyum atomundan bir elektron koparabilir. İçteki elektrik alanı bu serbest elektronları tutarlı bir yönde iter ve bir akış — bir **elektrik akımı** — yaratır. Hücredeki metal teller bu akımı toplar; böylece bir devreyi besleyebilir.
+
+## Hücrelerden sistemlere
+
+Tek bir hücre az enerji üretir, bu yüzden birçoğu bir **panel** oluşturmak için bağlanır ve birçok panel bir **dizi** oluşturur. Hücreler **doğru akım (DC)** üretir, ama evler ve şebeke **alternatif akım (AC)** kullanır, bu yüzden **inverter** denen bir aygıt dönüşümü yapar. Bir sistem kullanılandan fazlasını ürettiğinde, fazlası çoğu zaman şebekeye geri verilebilir.
+
+## Üstünlükler ve sınırlar
+
+Güneş enerjisi yenilenebilir, sessizdir ve kurulduktan sonra salım ya da yakıt olmadan elektrik üretir. Sınırları; yalnızca ışıkla üretmesi ve üretiminin havaya, mevsime ve günün saatine göre değişmesidir. Bu yüzden enerjiyi düzenli sağlamak için genellikle pillerle ya da şebekeyle birlikte kullanılır.`,
+  },
+  {
+    title: 'Mikrodalga Fırın Yiyeceği Nasıl Isıtır',
+    question: 'Bir mikrodalga fırın yiyeceği bu kadar hızlı nasıl ısıtır?',
+    summary:
+      'Mikrodalga fırınlar; su moleküllerini titreştiren radyo dalgalarıyla yiyeceği ısıtır ve ısıyı dışarıdan değil doğrudan yiyeceğin içinde üretir.',
+    tags: ['teknoloji', 'fizik', 'dalgalar', 'ısı', 'gündelik'],
+    language: 'tr',
+    content: `# Mikrodalga Fırın Yiyeceği Nasıl Isıtır
+
+Mikrodalga fırın, geleneksel bir fırından daha hızlı pişirir, çünkü yiyeceği temelden farklı bir biçimde ısıtır — onu dışarıdan içeriye değil, yiyeceğin kendi içinde ısı üreterek.
+
+## Mikrodalgalar: bir radyo dalgası türü
+
+Adına karşın mikrodalgalar bir **radyo dalgası** biçimidir — belirli bir frekansta (genellikle yaklaşık 2,45 GHz) elektromanyetik ışınım. Fırının içinde **magnetron** denen bir bileşen bu dalgaları üretir ve pişirme bölmesine yöneltir; orada metal duvarlardan sekerek yiyecekten geçer.
+
+## Su moleküllerini sallamak
+
+Anahtar, mikrodalgaların **suyla** nasıl etkileştiğindedir. Su moleküllerinin bir artı ve bir eksi ucu vardır. Mikrodalgaların elektrik alanı saniyede milyarlarca kez ileri geri salınır ve su molekülleri ona hizalanmak için hızla döner. Bu moleküler sürtünme ısı üretir. Çoğu yiyecek su içerdiğinden, içeriden hızlı ve görece düzgün ısınır.
+
+## Neden bu kadar hızlı — ve düzensiz — ısınır
+
+Mikrodalgalar yiyeceğe birkaç santimetre işlediğinden, ısının yüzeyden içeriye yavaşça gitmesine güvenmek yerine büyük bir bölümü bir seferde ısıtır. Ama düzgün biçimde derine işlemez ve bazı noktalarda yoğunlaşabilir; bu da bildik soğuk bölgeleri yaratır. Bu yüzden mikrodalgaların döner bir tablası vardır ve bu yüzden yiyeceği karıştırmak ya da "dinlendirmek" sıcaklığı eşitlemeye yardım eder.
+
+## Güvenlik ve mitler
+
+Mikrodalgalar **iyonlaştırıcı olmayan** ışınım kullanır; bu, ısıtır ama X-ışınları gibi DNA'ya zarar verecek enerjiye sahip değildir. Kapaktaki metal ızgara, mikrodalgaların dışarı çıkmasını engeller. Fırının içindeki metal, elektrik alanını yoğunlaştırdığı için kıvılcım çıkarabilir, ama fırının kendisi yiyeceği hiçbir biçimde "radyoaktif" yapmaz.`,
+  },
 ];
