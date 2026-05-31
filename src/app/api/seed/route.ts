@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
 import { isAuthorizedSeedRequest } from '@/lib/seed-auth';
+import { allDrafts } from '../../../../content';
+import { allTranslations } from '../../../../content/i18n';
 
 const entries = [
   { title: 'JavaScript', question: 'What is JavaScript?', content: '# JavaScript\n\nJavaScript is a high-level, interpreted programming language that conforms to the ECMAScript specification. It is one of the core technologies of the World Wide Web.\n\n## Key Features\n\n- **Dynamic typing** - Variables are not bound to a specific data type\n- **First-class functions** - Functions can be assigned to variables, passed as arguments\n- **Prototype-based OOP** - Objects can inherit directly from other objects\n- **Event-driven** - Code execution triggered by events\n- **Asynchronous programming** - Promises and async/await\n\n## Modern JavaScript (ES6+)\n\n- Arrow functions, template literals, destructuring\n- Modules (import/export), classes\n- let/const, spread/rest operators\n\n## Runtimes\n\n- Browser (V8, SpiderMonkey), Node.js, Deno, Bun', summary: 'JavaScript is a high-level programming language and one of the core technologies of the World Wide Web.', tags: ['javascript', 'programming', 'web development'] },
@@ -27,14 +29,23 @@ export async function POST(req: NextRequest) {
   }
 
   const now = Date.now();
-  let count = 0;
 
+  // De-dup by title: read existing titles once rather than one query per item,
+  // so seeding the full editorial corpus stays well within the request timeout.
+  const snap = await db.collection('wikis').select('title').get();
+  const existing = new Set<string>();
+  snap.forEach((d) => {
+    const t = d.get('title');
+    if (typeof t === 'string') existing.add(t);
+  });
+
+  const pending: Record<string, unknown>[] = [];
+
+  // 1) Legacy demo topics — kept for backward compatibility with the original seed.
   for (const entry of entries) {
-    // Check if already exists
-    const existing = await db.collection('wikis').where('title', '==', entry.title).limit(1).get();
-    if (!existing.empty) continue;
-
-    await db.collection('wikis').add({
+    if (existing.has(entry.title)) continue;
+    existing.add(entry.title);
+    pending.push({
       ...entry,
       authorId: 'system',
       authorName: 'GPTwiki Bot',
@@ -49,8 +60,51 @@ export async function POST(req: NextRequest) {
       updatedAt: now,
       source: 'seed',
     });
-    count++;
   }
 
-  return NextResponse.json({ success: true, seeded: count, total: entries.length });
+  // 2) Editorial corpus: 56 English originals + 784 translations (15 languages).
+  // Each carries its own `language` code for per-locale filtering. Titles are
+  // language-specific, so title-based de-dup is safe across languages.
+  for (const draft of [...allDrafts, ...allTranslations]) {
+    if (existing.has(draft.title)) continue;
+    existing.add(draft.title);
+    pending.push({
+      title: draft.title,
+      question: draft.question,
+      content: draft.content,
+      summary: draft.summary,
+      tags: draft.tags,
+      authorId: 'system',
+      authorName: 'GPTwiki Editorial',
+      authorImage: '',
+      aiModel: 'claude',
+      conversation: [
+        { id: 'q1', role: 'user', content: draft.question, timestamp: now },
+        { id: 'a1', role: 'assistant', content: draft.content, timestamp: now },
+      ],
+      views: 0,
+      createdAt: now,
+      updatedAt: now,
+      source: 'editorial-draft',
+      language: draft.language,
+    });
+  }
+
+  // Firestore allows up to 500 writes per batch; 450 leaves headroom.
+  let seeded = 0;
+  for (let i = 0; i < pending.length; i += 450) {
+    const slice = pending.slice(i, i + 450);
+    const batch = db.batch();
+    for (const doc of slice) batch.set(db.collection('wikis').doc(), doc);
+    await batch.commit();
+    seeded += slice.length;
+  }
+
+  const candidates = entries.length + allDrafts.length + allTranslations.length;
+  return NextResponse.json({
+    success: true,
+    seeded,
+    candidates,
+    alreadyPresent: candidates - seeded,
+  });
 }
