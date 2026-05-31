@@ -703,4 +703,253 @@ Una connessione può avere larghezza di banda alta ma latenza alta, o viceversa.
 
 Il **throughput** è la velocità di trasferimento dati effettivamente raggiunta nella pratica, di solito inferiore alla larghezza di banda teorica. Il **jitter** è la variazione della latenza nel tempo, che può disturbare voce e video anche quando la latenza media è bassa.`,
   },
+  // ── Batch 4: Mente, salute e quotidiano ──
+  {
+    title: "L'effetto placebo",
+    question: 'Come può un trattamento finto far comunque sentire meglio le persone?',
+    summary:
+      "L'effetto placebo si verifica quando un trattamento privo di principio attivo allevia i sintomi di una persona perché essa si aspetta un aiuto, rivelando il forte legame tra mente e corpo.",
+    tags: ['salute', 'psicologia', 'medicina', 'cervello', 'scienza'],
+    language: 'it',
+    content: `# L'effetto placebo
+
+L'effetto placebo è uno dei fenomeni più affascinanti della medicina: le persone spesso migliorano dopo aver ricevuto un trattamento privo di qualsiasi potere curativo — una pillola di zucchero, un'iniezione di soluzione fisiologica o una procedura fittizia — solo perché credono che le aiuterà.
+
+## Cosa succede
+
+Un placebo è un trattamento simulato. Quando qualcuno lo riceve credendolo reale, l'aspettativa di miglioramento può innescare cambiamenti misurabili: meno dolore riferito, umore migliore, perfino variazioni in segnali corporei. L'effetto è più forte nei sintomi modulati dal cervello, come **dolore, ansia, stanchezza e nausea**.
+
+## Perché accade
+
+Sembrano coinvolti diversi meccanismi:
+
+- **Aspettativa.** Attendersi sollievo può indurre il cervello a rilasciare sostanze naturali come le endorfine.
+- **Condizionamento.** Associazioni apprese (il camice bianco, l'atto di prendere una pillola) possono evocare risposte reali per abitudine.
+- **Riduzione dell'ansia.** Sentirsi accuditi diminuisce lo stress, che da solo può alleviare i sintomi.
+
+È importante notare che i placebo non rimpiccioliscono i tumori né curano le infezioni — cambiano soprattutto la **percezione** e alcune risposte regolate dal cervello.
+
+## Perché conta per la scienza
+
+Poiché i placebo sono così potenti, i nuovi farmaci devono superarli in **sperimentazioni controllate con placebo**. I partecipanti sono divisi tra chi riceve il trattamento reale e chi riceve il placebo, senza sapere quale; solo se il trattamento reale supera nettamente il placebo lo si considera davvero efficace.
+
+## Il cugino oscuro
+
+L'**effetto nocebo** è l'opposto: aspettarsi un danno può produrre sintomi negativi reali, come avvertire effetti collaterali a causa di un avvertimento, anche ricevendo solo una pillola di zucchero.`,
+  },
+  {
+    title: 'Perché dormiamo',
+    question: 'Perché abbiamo bisogno di dormire ogni notte?',
+    summary:
+      'Il sonno è uno stato biologico vitale che sostiene la memoria, la riparazione cellulare, la regolazione ormonale e la pulizia del cervello; la privazione cronica danneggia la salute e le funzioni mentali.',
+    tags: ['salute', 'biologia', 'cervello', 'sonno', 'scienza'],
+    language: 'it',
+    content: `# Perché dormiamo
+
+Trascorriamo circa un terzo della vita dormendo, ma il sonno è ben lontano dall'essere tempo perso. È un processo attivo, accuratamente regolato, essenziale per il corpo e la mente. Benché gli scienziati discutano ancora su tutte le sue funzioni, le prove della sua importanza sono schiaccianti.
+
+## Cosa fa il sonno
+
+Il sonno sembra assolvere diverse funzioni vitali:
+
+- **Consolidamento della memoria.** Il cervello rielabora e rafforza i ricordi della giornata, spostando ciò che abbiamo imparato dalla memoria a breve a quella a lungo termine.
+- **Pulizia cellulare.** Durante il sonno il cervello espelle più velocemente i rifiuti metabolici, tra cui proteine legate a malattie neurodegenerative.
+- **Riparazione e crescita.** Il corpo ripara i tessuti, costruisce osso e muscolo e rilascia ormoni importanti per la crescita.
+- **Regolazione.** Il sonno regola l'appetito, l'umore, la funzione immunitaria e l'equilibrio ormonale.
+
+## Le fasi del sonno
+
+Il sonno si svolge in cicli di circa 90 minuti, alternando sonno **non-REM** (incluso il sonno profondo a onde lente, ottimo per il recupero fisico) e sonno **REM** (in cui avviene la maggior parte dei sogni vividi e che aiuta la memoria e la regolazione emotiva). Una notte sana attraversa diversi di questi cicli completi.
+
+## Il costo di dormire male
+
+La privazione cronica di sonno è legata a problemi di memoria, giudizio compromesso, umore alterato e un rischio maggiore di obesità, diabete, malattie cardiache e deficit immunitario. Anche una perdita moderata di sonno compromette l'attenzione e i tempi di reazione quanto l'alcol.
+
+## Quanto ne serve
+
+La maggior parte degli adulti ha bisogno di 7-9 ore a notte, e gli adolescenti e i bambini di più. Il fabbisogno varia tra le persone, ma pochissimi funzionano davvero bene con poco sonno in modo costante.`,
+  },
+  {
+    title: 'La caffeina e il cervello',
+    question: 'Come ci rende più vigili la caffeina?',
+    summary:
+      "La caffeina blocca l'adenosina, la sostanza chimica del cervello che provoca sonnolenza, riducendo temporaneamente la stanchezza e aumentando la vigilanza — ecco perché è lo stimolante più usato al mondo.",
+    tags: ['salute', 'cervello', 'chimica', 'biologia', 'quotidiano'],
+    language: 'it',
+    content: `# La caffeina e il cervello
+
+La caffeina è la droga psicoattiva più consumata al mondo, presente in caffè, tè, cioccolato, bibite gassate e bevande energetiche. La sua capacità di scacciare il sonno nasce da un preciso trucco biochimico nel cervello.
+
+## Bloccare il segnale del sonno
+
+Durante la giornata di veglia, nel cervello si accumula una sostanza detta **adenosina**. Essa si lega a recettori e produce a poco a poco la sensazione di stanchezza, contribuendo a creare la «pressione del sonno» che alla fine ci fa addormentare.
+
+La caffeina ha una struttura molecolare assai simile a quella dell'adenosina. Si inserisce negli stessi recettori e li **blocca** senza attivarli. Con i segnali di stanchezza dell'adenosina sbarrati, ti senti più vigile e sveglio — ma la stanchezza di fondo è ancora lì sotto, in attesa, quando l'effetto della caffeina svanisce.
+
+## Effetti secondari
+
+Bloccando l'adenosina, la caffeina lascia anche agire più liberamente altri messaggeri chimici come la **dopamina**, il che può migliorare leggermente umore, concentrazione e tempi di reazione. Ecco perché una dose moderata sembra così utile.
+
+## Tolleranza e astinenza
+
+Con l'uso regolare il cervello si adatta creando **più recettori** dell'adenosina, così serve più caffeina per lo stesso effetto — è la **tolleranza**. Se si smette di colpo, tutti quei recettori in più restano aperti all'adenosina, causando mal di testa, stanchezza e irritabilità finché il cervello non si riadatta.
+
+## Tempi e quantità
+
+La caffeina raggiunge il pieno effetto in circa 20-45 minuti e ha un'«emivita» di circa 5 ore, perciò una dose pomeridiana può ancora disturbare il sonno notturno. Dosi moderate sono sicure per la maggior parte, ma l'eccesso può causare ansia, palpitazioni e insonnia.`,
+  },
+  {
+    title: "L'effetto Doppler",
+    question: "Perché la sirena di un'ambulanza cambia tono quando passa?",
+    summary:
+      "L'effetto Doppler è il cambiamento di frequenza di un'onda quando sorgente e osservatore si muovono l'uno rispetto all'altro, udibile nelle sirene di passaggio e usato dal radar all'astronomia.",
+    tags: ['fisica', 'suono', 'onde', 'astronomia', 'scienza'],
+    language: 'it',
+    content: `# L'effetto Doppler
+
+L'effetto Doppler è il cambiamento di frequenza di un'onda quando la sua sorgente e l'osservatore si muovono l'uno rispetto all'altro. È il motivo per cui la sirena di un'ambulanza sembra più acuta quando si avvicina e più grave dopo che è passata.
+
+## Perché accade
+
+Le onde sonore viaggiano attraverso una distanza a un ritmo fisso. Se la sorgente del suono si muove verso di te, ogni onda successiva parte da un punto un po' più vicino, perciò le onde si **comprimono** — frequenza più alta, tono più acuto. Mentre la sorgente si allontana, le onde si **dilatano** — frequenza più bassa, tono più grave. Il passaggio stesso avviene nel momento in cui la sorgente ti sfila accanto.
+
+## Non solo il suono
+
+L'effetto Doppler si applica a tutte le onde, luce compresa. Per la luce, un oggetto in avvicinamento ha le sue onde compresse verso l'estremità **blu** dello spettro (spostamento verso il blu), e uno in allontanamento dilatate verso il **rosso** (spostamento verso il rosso). I cambiamenti sono troppo piccoli per essere visti a velocità quotidiane, ma diventano misurabili su scala astronomica.
+
+## Usi nel mondo reale
+
+- **Radar e autovelox** rimbalzano onde sui veicoli e misurano lo spostamento per calcolarne la velocità.
+- **Le previsioni meteo** usano il radar Doppler per seguire il movimento di pioggia e temporali.
+- **La medicina** usa l'ecografia Doppler per visualizzare il flusso sanguigno.
+- **L'astronomia** usa lo spostamento verso il rosso per misurare la velocità con cui stelle e galassie si muovono.
+
+## Un indizio cosmico
+
+Lo spostamento Doppler della luce è una delle prove principali che l'universo è in espansione: le galassie lontane mostrano uno spostamento verso il rosso, indicando che quasi tutte si allontanano da noi.`,
+  },
+  {
+    title: 'Perché il cielo è blu',
+    question: 'Perché il cielo è blu di giorno e rosso al tramonto?',
+    summary:
+      "Il cielo è blu perché le molecole dell'aria diffondono la luce solare a corta lunghezza d'onda (blu) più fortemente di quella a lunga lunghezza d'onda, un processo detto diffusione di Rayleigh.",
+    tags: ['fisica', 'luce', 'atmosfera', 'colore', 'scienza'],
+    language: 'it',
+    content: `# Perché il cielo è blu
+
+Il colore blu del cielo durante il giorno è il risultato del modo in cui la luce solare interagisce con l'atmosfera terrestre. La spiegazione viene da un processo detto **diffusione di Rayleigh**.
+
+## La luce solare è fatta di molti colori
+
+Pur apparendo bianca, la luce solare è una mescolanza di tutti i colori dell'arcobaleno, ciascuno con la propria lunghezza d'onda. La luce blu e violetta ha lunghezze d'onda **corte**; quella rossa e arancione lunghezze **lunghe**.
+
+## La diffusione favorisce il blu
+
+Entrando nell'atmosfera, la luce solare urta molecole di gas molto più piccole della sua lunghezza d'onda. Queste molecole diffondono le lunghezze d'onda corte molto più di quelle lunghe — la luce blu si diffonde diverse volte più di quella rossa. Di conseguenza la luce blu viene sparsa per tutto il cielo, ed è dalla luce blu diffusa che viene l'azzurro del cielo, ovunque si guardi.
+
+## E il violetto?
+
+Il violetto ha una lunghezza d'onda ancora più corta del blu e si diffonde perfino di più. Ma il cielo non appare violetto perché il Sole emette meno luce violetta e i nostri occhi sono assai meno sensibili a essa, perciò percepiamo il cielo come blu.
+
+## Tramonti rossi
+
+Vicino all'alba e al tramonto, la luce solare attraversa uno strato di atmosfera assai più spesso per raggiungerci. Lungo questo percorso viene diffusa via tanta luce blu che restano soprattutto le lunghezze d'onda più lunghe, inondando il cielo di rossi, arancioni e rosa.
+
+## La stessa fisica altrove
+
+La diffusione di Rayleigh spiega anche perché gli oggetti lontani appaiono bluastri e perché l'atmosfera terrestre vista dallo spazio mostra una sottile linea azzurra all'orizzonte.`,
+  },
+  {
+    title: 'La resistenza agli antibiotici',
+    question: 'Perché gli antibiotici stanno perdendo efficacia?',
+    summary:
+      "La resistenza agli antibiotici emerge quando i batteri evolvono per sopravvivere ai farmaci destinati a ucciderli, accelerata dall'uso eccessivo e improprio, minacciando di rendere di nuovo pericolose le infezioni comuni.",
+    tags: ['salute', 'medicina', 'biologia', 'evoluzione', 'scienza'],
+    language: 'it',
+    content: `# La resistenza agli antibiotici
+
+La resistenza agli antibiotici è una delle minacce più gravi per la salute globale. Si verifica quando i batteri evolvono in modo da non essere più uccisi dagli antibiotici un tempo efficaci contro di essi, rendendo le infezioni più difficili — a volte impossibili — da curare.
+
+## Come emerge la resistenza
+
+Gli antibiotici uccidono i batteri sensibili, ma le popolazioni batteriche sono enormi e varie. Per caso, alcuni portano mutazioni che li aiutano a sopravvivere. Quando un antibiotico elimina i batteri sensibili, quelli resistenti sopravvivono e si moltiplicano — è la **selezione naturale** in azione. I batteri si scambiano anche geni di resistenza direttamente tra loro, diffondendo rapidamente la capacità.
+
+## Cosa accelera il problema
+
+Diversi fattori aggravano la resistenza:
+
+- **Uso eccessivo** di antibiotici, anche per infezioni virali come il raffreddore, contro cui non hanno effetto.
+- **Trattamento incompleto**, quando i pazienti interrompono il farmaco troppo presto lasciando sopravvivere i microbi più resistenti.
+- **Uso massiccio in agricoltura**, dove si danno antibiotici ad animali sani per accelerarne la crescita.
+
+Ogni esposizione dà ai batteri più occasioni di sviluppare difese.
+
+## Perché conta
+
+Gli antibiotici sostengono la medicina moderna — non curano solo le infezioni, ma rendono sicuri la chirurgia, la chemioterapia e il parto. I batteri resistenti, a volte detti «superbatteri», minacciano di vanificare questo progresso, riportandoci a un'epoca in cui graffi e infezioni comuni potevano essere fatali.
+
+## Cosa aiuta
+
+Le soluzioni comprendono usare gli antibiotici solo quando servono, completare le terapie prescritte, migliorare l'igiene e il controllo delle infezioni, limitare l'uso agricolo e investire nella ricerca di nuovi antibiotici e terapie alternative.`,
+  },
+  {
+    title: "Il ciclo dell'azoto",
+    question: "Come si muove l'azoto attraverso gli esseri viventi e l'ambiente?",
+    summary:
+      "Il ciclo dell'azoto converte l'azoto gassoso inerte in forme utilizzabili dagli esseri viventi e lo restituisce all'atmosfera, sostenendo tutta la vita tramite batteri, piante e decomposizione.",
+    tags: ['biologia', 'chimica', 'ecologia', 'scienze della Terra', 'scienza'],
+    language: 'it',
+    content: `# Il ciclo dell'azoto
+
+L'azoto è essenziale per la vita — è un componente chiave delle proteine e del DNA. Benché l'atmosfera terrestre sia per il 78% azoto gassoso, la maggior parte degli esseri viventi non può usare questa forma direttamente. Il ciclo dell'azoto è l'insieme dei processi che convertono l'azoto in forme utilizzabili e infine lo restituiscono all'aria.
+
+## Il problema dell'azoto inerte
+
+L'azoto gassoso atmosferico (N₂) è straordinariamente stabile: i suoi due atomi sono uniti da un triplo legame che richiede molta energia per spezzarsi. Prima che piante e animali possano usare l'azoto, esso deve essere «fissato» in forme più reattive, come l'ammoniaca o il nitrato.
+
+## Le fasi principali
+
+- **Fissazione.** Batteri speciali — molti vivono nelle radici di leguminose come i fagioli — convertono l'N₂ in ammoniaca. Anche i fulmini e i fertilizzanti industriali fissano l'azoto.
+- **Nitrificazione.** Altri batteri trasformano l'ammoniaca in nitriti e poi in nitrati, la forma che le piante assorbono più facilmente.
+- **Assimilazione.** Le piante captano i composti azotati e li usano per costruire proteine; gli animali ottengono azoto mangiando piante.
+- **Ammonificazione.** I decompositori restituiscono l'azoto al suolo come ammoniaca scomponendo rifiuti e organismi morti.
+- **Denitrificazione.** Altri batteri convertono i nitrati di nuovo in azoto gassoso, restituendolo all'atmosfera e chiudendo il ciclo.
+
+## L'impatto umano
+
+L'invenzione della fissazione industriale dell'azoto (il processo Haber-Bosch) ha enormemente aumentato la produzione di cibo, ma l'eccesso di fertilizzante scorre in fiumi e oceani. Lì alimenta una fioritura incontrollata di alghe che esaurisce l'ossigeno e crea «zone morte», mostrando come lo squilibrio di un ciclo naturale porti conseguenze di vasta portata.`,
+  },
+  {
+    title: 'Come funziona la memoria',
+    question: 'Come immagazzina e recupera i ricordi il cervello?',
+    summary:
+      "La memoria è la codifica, l'archiviazione e il recupero delle informazioni da parte del cervello attraverso reti di neuroni; comprende sistemi diversi ed è ricostruttiva, non una registrazione perfetta.",
+    tags: ['cervello', 'psicologia', 'biologia', 'apprendimento', 'scienza'],
+    language: 'it',
+    content: `# Come funziona la memoria
+
+La memoria è la capacità del cervello di codificare, conservare e recuperare informazioni. Ben lontana dall'essere un videoregistratore, è un sistema attivo e ricostruttivo che plasma chi siamo.
+
+## Tre fasi di base
+
+- **Codifica.** Le informazioni in arrivo dai sensi sono convertite in una forma che il cervello può conservare.
+- **Archiviazione.** Tali informazioni sono trattenute nel tempo, da secondi a un'intera vita.
+- **Recupero.** Le informazioni conservate sono riportate alla mente quando servono — è l'atto del ricordare.
+
+## Tipi di memoria
+
+La memoria non è una cosa sola. Gli psicologi la distinguono in sistemi diversi:
+
+- La **memoria sensoriale** trattiene impressioni brevi, della durata di frazioni di secondo.
+- La **memoria a breve termine (o di lavoro)** conserva una piccola quantità di informazioni per secondi mentre la usi.
+- La **memoria a lungo termine** conserva le informazioni per lunghi periodi e ha una capacità vastissima. Comprende ricordi **espliciti** (fatti ed eventi che richiami consapevolmente) e **impliciti** (abilità e abitudini, come andare in bicicletta).
+
+## La base fisica
+
+I ricordi sono conservati come schemi di connessioni tra neuroni. Quando impariamo, le sinapsi tra certi neuroni si rafforzano — un principio spesso riassunto come «i neuroni che si attivano insieme si connettono insieme». Il consolidamento di un ricordo stabile dipende fortemente dal sonno e da una regione del cervello detta **ippocampo**.
+
+## Perché la memoria ci tradisce — e ci inganna
+
+La memoria è ricostruttiva: ogni volta che recuperiamo un ricordo lo riassembliamo, e possiamo alterarlo senza accorgercene. Questo spiega perché i ricordi possono essere vividi e tuttavia errati, perché le testimonianze oculari sono inaffidabili e perché ripetizione e associazioni aiutano a fissare le informazioni.`,
+  },
 ];
