@@ -453,4 +453,254 @@ Chính sự cứng nhắc ấy lại là điểm yếu của nó. Cung tiền b�
 
 Các quốc gia rời bỏ vàng theo từng giai đoạn. Hệ thống sụp đổ hoàn toàn vào năm 1971, khi Hoa Kỳ chấm dứt việc đổi đô la ra vàng. Ngày nay thế giới dùng **tiền pháp định**, mà giá trị dựa trên niềm tin vào các chính phủ và ngân hàng trung ương, chứ không phải một loại hàng hóa vật chất.`,
   },
+  // ── Batch 3: Công nghệ và toán học ──
+  {
+    title: 'GPS hoạt động như thế nào',
+    question: 'Làm sao GPS biết chính xác bạn đang ở đâu?',
+    summary:
+      'GPS xác định vị trí bằng cách đo thời gian truyền tín hiệu từ nhiều vệ tinh và dùng phép định vị tam giác; các đồng hồ nguyên tử chính xác và những hiệu chỉnh tương đối tính giúp nó chính xác đến vài mét.',
+    tags: ['công nghệ', 'định vị', 'vệ tinh', 'vật lý', 'kỹ thuật'],
+    language: 'vi',
+    content: `# GPS hoạt động như thế nào
+
+Hệ thống Định vị Toàn cầu (GPS) cho phép một máy thu — trong điện thoại, ô tô hay đồng hồ của bạn — biết được nó đang ở đâu trên bất kỳ điểm nào của Trái Đất, thường với sai số vài mét. Nó dựa vào một chòm vệ tinh và một số vật lý tài tình.
+
+## Vệ tinh và tín hiệu
+
+GPS dùng khoảng 30 vệ tinh quay quanh ở độ cao chừng 20.000 km, bố trí sao cho luôn có vài vệ tinh nhìn thấy được từ bất kỳ điểm nào trên hành tinh. Mỗi vệ tinh liên tục phát một tín hiệu vô tuyến mang theo **thời điểm** chính xác lúc phát và **vị trí** của vệ tinh.
+
+## Định vị tam giác
+
+Máy thu đo xem mỗi tín hiệu mất bao lâu để tới. Vì sóng vô tuyến đi với tốc độ ánh sáng, thời gian truyền cho biết **khoảng cách** tới vệ tinh đó. Biết khoảng cách tới một vệ tinh đặt bạn ở đâu đó trên một mặt cầu quanh nó; kết hợp khoảng cách tới nhiều vệ tinh thu hẹp vị trí của bạn về một điểm duy nhất. Kỹ thuật hình học này gọi là **định vị tam giác (trilateration)**. Cần tín hiệu từ ít nhất bốn vệ tinh — ba để xác định vị trí và một thứ tư để giải sai số đồng hồ của máy thu.
+
+## Vì sao đồng hồ và thuyết tương đối quan trọng
+
+Sự đồng bộ phải cực kỳ chính xác: một sai số một phần triệu giây sẽ làm lệch vị trí hàng trăm mét. Các vệ tinh mang **đồng hồ nguyên tử**, và hệ thống còn hiệu chỉnh cả **thuyết tương đối của Einstein** — tốc độ của vệ tinh và trọng lực yếu hơn khiến đồng hồ của chúng chạy với nhịp hơi khác đồng hồ dưới mặt đất. Nếu không có những hiệu chỉnh này, GPS sẽ lệch hàng kilomet mỗi ngày.
+
+## Vượt ngoài định vị
+
+Chính sự đồng bộ chính xác ấy nâng đỡ các mạng tài chính, lưới điện và viễn thông, khiến GPS thành một xương sống thầm lặng của hạ tầng hiện đại.`,
+  },
+  {
+    title: 'Mật mã khóa công khai',
+    question: 'Hai người lạ có thể liên lạc an toàn trên internet mở như thế nào?',
+    summary:
+      'Mật mã khóa công khai dùng các cặp khóa liên kết toán học — một công khai và một riêng tư — để con người mã hóa thông điệp và xác minh danh tính mà không bao giờ phải chia sẻ một bí mật từ trước.',
+    tags: ['công nghệ', 'mật mã', 'an ninh', 'toán học', 'internet'],
+    language: 'vi',
+    content: `# Mật mã khóa công khai
+
+Mật mã khóa công khai là bước đột phá làm cho việc liên lạc an toàn giữa những người chưa từng gặp nhau trở nên khả thi. Nó nâng đỡ HTTPS, nhắn tin bảo mật, chữ ký số và tiền mã hóa.
+
+## Ý tưởng cặp khóa
+
+Mã hóa truyền thống ("đối xứng") dùng một khóa chung duy nhất để khóa và mở một thông điệp — điều này tạo ra một vấn đề: làm sao chia sẻ khóa đó một cách an toàn ngay từ đầu? Mật mã khóa công khai (hay **bất đối xứng**) giải quyết bằng một **cặp** khóa:
+
+- Một **khóa công khai**, mà ai cũng có thể thấy.
+- Một **khóa riêng tư**, mà chủ sở hữu giữ bí mật.
+
+Hai khóa liên kết toán học sao cho cái mà một khóa khóa lại thì chỉ khóa kia mới mở được — nhưng biết khóa công khai không cho phép tính ra khóa riêng tư.
+
+## Hai công dụng chính
+
+- **Mã hóa.** Để gửi cho ai đó một thông điệp bí mật, bạn mã hóa nó bằng *khóa công khai của họ*; chỉ khóa riêng tư của họ mới giải mã được.
+- **Chữ ký số.** Để chứng minh một thông điệp thực sự là của bạn, bạn ký nó bằng *khóa riêng tư của mình*; bất kỳ ai cũng có thể xác minh bằng khóa công khai của bạn, qua đó khẳng định tính xác thực và rằng nó không bị thay đổi.
+
+## Toán học đằng sau
+
+An ninh dựa trên những bài toán dễ tính theo một chiều nhưng cực khó đảo ngược — như **phân tích thừa số** các số khổng lồ (RSA) hay giải logarit rời rạc trên **đường cong elliptic**. Đảo ngược chúng sẽ đòi hỏi một lượng tính toán bất khả thi.
+
+## Trong đời thường
+
+Khi trình duyệt của bạn hiện một ổ khóa, nó đã dùng mật mã khóa công khai để xác minh trang web và thiết lập một khóa chung nhanh cho phần còn lại của phiên.`,
+  },
+  {
+    title: 'Dãy Fibonacci',
+    question: 'Dãy Fibonacci là gì và vì sao nó xuất hiện trong tự nhiên?',
+    summary:
+      'Dãy Fibonacci là một chuỗi trong đó mỗi số là tổng của hai số liền trước; nó liên hệ với tỷ lệ vàng và xuất hiện trong các kiểu mẫu như cánh hoa và vỏ ốc xoắn.',
+    tags: ['toán học', 'kiểu mẫu', 'tự nhiên', 'hình học', 'khoa học'],
+    language: 'vi',
+    content: `# Dãy Fibonacci
+
+Dãy Fibonacci là một trong những kiểu mẫu nổi tiếng nhất của toán học: một quy tắc đơn giản tạo ra những liên hệ đáng kinh ngạc với hình học và thế giới tự nhiên.
+
+## Quy tắc
+
+Bắt đầu với 0 và 1, và cho mỗi số mới là **tổng của hai số liền trước**:
+
+\`\`\`
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
+\`\`\`
+
+Dãy mang tên nhà toán học người Ý **Leonardo thành Pisa** (Fibonacci), người đã giới thiệu nó vào châu Âu năm 1202 qua một câu đố về việc nuôi thỏ, dù nó đã được biết đến trước đó trong toán học Ấn Độ.
+
+## Liên hệ với tỷ lệ vàng
+
+Lấy bất kỳ số Fibonacci nào chia cho số liền trước, kết quả ngày càng tiến gần khoảng **1,618** — **tỷ lệ vàng** (thường ký hiệu là φ). Càng tiến xa trong dãy, sự xấp xỉ càng chính xác.
+
+## Vì sao xuất hiện trong tự nhiên
+
+Các số Fibonacci xuất hiện trong số cánh của nhiều loài hoa, trong cách sắp xếp hạt hướng dương và trong sự phân nhánh của cây cối. Lý do sâu xa hơn là sự **sắp xếp hiệu quả**: bố trí lá hay hạt theo những góc liên hệ với tỷ lệ vàng cho phép cây thu được ánh sáng mặt trời hay nhồi hạt với sự chồng lấp tối thiểu. Vậy nên kiểu mẫu này không hẳn là một chữ ký huyền bí mà là một hệ quả tự nhiên của tối ưu hóa.
+
+## Vượt ngoài sinh học
+
+Dãy này cũng nảy sinh trong các thuật toán máy tính, phân tích tài chính và nghệ thuật, nơi tỷ lệ vàng từ lâu được gắn với những tỷ lệ dễ chịu.`,
+  },
+  {
+    title: 'Số nguyên tố',
+    question: 'Số nguyên tố là gì và vì sao chúng quan trọng?',
+    summary:
+      'Số nguyên tố là những số nguyên lớn hơn một không có ước nào ngoài một và chính nó; chúng là viên gạch xây dựng của số học và là nền tảng của mật mã hiện đại.',
+    tags: ['toán học', 'số', 'mật mã', 'lý thuyết', 'khoa học'],
+    language: 'vi',
+    content: `# Số nguyên tố
+
+Số nguyên tố là một số nguyên lớn hơn 1 chỉ chia hết đúng cho 1 và cho chính nó. Những số nguyên tố đầu tiên là 2, 3, 5, 7, 11 và 13. Những số có thêm ước, như 6 (= 2 × 3), được gọi là **hợp số**.
+
+## Những nguyên tử của số học
+
+Số nguyên tố là nền tảng nhờ **định lý cơ bản của số học**: mọi số nguyên lớn hơn 1 đều có thể viết thành tích các số nguyên tố theo đúng một cách (không kể thứ tự). Chẳng hạn 60 = 2 × 2 × 3 × 5. Theo nghĩa này, số nguyên tố là những "nguyên tử" không chia tách được mà từ đó mọi số khác được dựng nên.
+
+## Vô hạn
+
+Nhà toán học Hy Lạp **Euclid** đã chứng minh hơn hai nghìn năm trước rằng không có số nguyên tố lớn nhất — danh sách kéo dài mãi mãi. Vậy mà số nguyên tố trở nên thưa thớt hơn khi các số lớn lên, và dự đoán chính xác chúng rơi vào đâu là một lĩnh vực sâu sắc và vẫn chưa được giải của toán học, gắn với **giả thuyết Riemann** nổi tiếng.
+
+## Vì sao ngày nay quan trọng
+
+Số nguyên tố vận hành **mật mã** hiện đại. Các phương pháp như RSA dựa trên một sự bất đối xứng thực dụng: nhân hai số nguyên tố lớn thì dễ, nhưng lấy số khổng lồ kết quả và khôi phục các số nguyên tố ban đầu (**phân tích thừa số**) thì cực kỳ khó với máy tính ngày nay. Cái khó này giữ an toàn cho ngân hàng trực tuyến, nhắn tin và thương mại.
+
+## Một cuộc tìm kiếm không ngừng
+
+Các nhà toán học và tình nguyện viên dùng những mạng máy tính tiếp tục tìm những số nguyên tố ngày càng lớn. Các số nguyên tố lớn nhất được biết đến ngày nay có hàng chục triệu chữ số.`,
+  },
+  {
+    title: 'Lãi kép',
+    question: 'Vì sao lãi kép lại mạnh mẽ đến vậy theo thời gian?',
+    summary:
+      'Lãi kép là lãi kiếm được trên cả vốn gốc ban đầu lẫn lãi đã tích lũy, tạo ra sự tăng trưởng theo hàm mũ tưởng thưởng cho việc tiết kiệm sớm và dài hạn.',
+    tags: ['tài chính', 'kinh tế học', 'toán học', 'tiền tệ', 'tài chính cá nhân'],
+    language: 'vi',
+    content: `# Lãi kép
+
+Lãi kép thường được gọi là lực mạnh nhất trong tài chính. Đó là quá trình kiếm lãi không chỉ trên số tiền bạn đầu tư ban đầu, mà còn trên cả phần lãi mà số tiền đó đã sinh ra.
+
+## Lãi đơn so với lãi kép
+
+Với **lãi đơn**, bạn kiếm một khoản cố định mỗi kỳ, chỉ dựa trên số tiền ban đầu (**vốn gốc**). Với **lãi kép**, lãi của mỗi kỳ được cộng vào số dư, nên lãi của kỳ tiếp theo được tính trên một số tiền lớn hơn. Vì vậy sự tăng trưởng tăng tốc theo thời gian — nó theo **hàm mũ**, không phải tuyến tính.
+
+## Một ví dụ nhanh
+
+Đầu tư 1000 với lãi suất 7% mỗi năm:
+
+- Sau 1 năm: 1070
+- Sau 10 năm: khoảng 1967
+- Sau 30 năm: khoảng 7612
+
+Tiền **gấp đôi** xấp xỉ mỗi thập niên mà không cần thêm một xu — và càng giữ lâu, kết quả càng ngoạn mục.
+
+## Quy tắc 72
+
+Một mẹo thực dụng, **quy tắc 72**, ước lượng một khoản đầu tư mất bao lâu để gấp đôi: chia 72 cho lãi suất hằng năm. Ở mức 8%, tiền gấp đôi trong khoảng 9 năm (72 ÷ 8).
+
+## Vì sao thời gian quan trọng nhất
+
+Vì lãi kép tự xây trên chính nó, **bắt đầu sớm** thường quan trọng hơn việc đầu tư những khoản lớn về sau. Cùng logic ấy vận hành ngược lại với nợ: số dư chưa trả của các khoản vay hay thẻ lãi suất cao cũng dồn lãi kép chống lại người vay, nên loại nợ ấy có thể phình to với tốc độ đáng sợ.`,
+  },
+  {
+    title: 'Hàm băm',
+    question: 'Hàm băm là gì và được dùng ở đâu?',
+    summary:
+      'Hàm băm biến dữ liệu có kích thước bất kỳ thành một chuỗi có độ dài cố định; các hàm băm mật mã tốt thì nhanh, tất định và gần như không thể đảo ngược hay giả mạo va chạm.',
+    tags: ['công nghệ', 'khoa học máy tính', 'mật mã', 'an ninh', 'dữ liệu'],
+    language: 'vi',
+    content: `# Hàm băm
+
+Hàm băm là một công cụ nhỏ nhưng thiết yếu trong máy tính. Nó nhận một đầu vào có độ dài bất kỳ — một từ, một tập tin, cả một cơ sở dữ liệu — và tạo ra một đầu ra có độ dài cố định gọi là **giá trị băm** hay **bản tóm lược (digest)**.
+
+## Các tính chất then chốt
+
+Một hàm băm hữu ích thì:
+
+- **Tất định.** Cùng một đầu vào luôn cho cùng một giá trị băm.
+- **Nhanh** để tính.
+- **Độ dài cố định.** Một thông điệp một ký tự và một tập tin một gigabyte, chẳng hạn, đều cho một kết quả 256 bit.
+
+Một hàm băm *mật mã* bổ sung những bảo đảm mạnh hơn:
+
+- **Một chiều.** Từ một giá trị băm, không thể khôi phục đầu vào ban đầu một cách khả thi.
+- **Kháng va chạm.** Gần như không thể tìm hai đầu vào khác nhau có cùng giá trị băm.
+- **Hiệu ứng tuyết lở.** Thay đổi một ký tự của đầu vào làm xáo trộn hoàn toàn đầu ra.
+
+## Công dụng thường ngày
+
+- **Lưu mật khẩu.** Các hệ thống lưu giá trị băm của mật khẩu chứ không phải bản thân mật khẩu, nên một vụ rò rỉ cơ sở dữ liệu không trực tiếp tiết lộ bí mật của người dùng.
+- **Kiểm tra toàn vẹn.** Các bản tải về thường công bố một giá trị băm để xác minh rằng tập tin đến nguyên vẹn và không bị giả mạo.
+- **Cấu trúc dữ liệu.** Các **bảng băm** dùng việc băm để tìm các phần tử gần như tức thì, bất kể lưu trữ bao nhiêu dữ liệu.
+- **Chuỗi khối.** Tiền mã hóa nối các khối qua các giá trị băm, khiến sổ cái chống giả mạo.
+
+## Các thuật toán phổ biến
+
+Các hệ thống hiện đại ưa chuộng những hàm mạnh như **SHA-256**. Những hàm cũ hơn như MD5 và SHA-1 nay bị coi là đã bị phá vỡ về mặt an ninh vì các nhà nghiên cứu đã tìm ra cách tạo va chạm, và không nên dùng để bảo vệ dữ liệu nhạy cảm.`,
+  },
+  {
+    title: 'Máy Turing',
+    question: 'Máy Turing là gì và vì sao nó nền tảng cho tính toán?',
+    summary:
+      'Máy Turing là một mô hình toán học đơn giản về tính toán, do Alan Turing hình dung năm 1936, định nghĩa thế nào là một bài toán có thể tính được và nâng đỡ toàn bộ ngành tính toán.',
+    tags: ['khoa học máy tính', 'toán học', 'lý thuyết', 'lịch sử', 'công nghệ'],
+    language: 'vi',
+    content: `# Máy Turing
+
+Máy Turing không phải một thiết bị vật lý mà là một thí nghiệm tư duy — một mô hình toán học nắm bắt chính ý niệm về tính toán. Được **Alan Turing** đề xuất năm 1936, nó vẫn là nền tảng lý thuyết của khoa học máy tính.
+
+## Một thiết kế đơn giản đến đánh lừa
+
+Một máy Turing gồm:
+
+- Một **băng** dài vô hạn chia thành các ô, mỗi ô chứa một ký hiệu.
+- Một **đầu đọc** có thể đọc và ghi ký hiệu bên dưới nó, và di chuyển sang trái hoặc phải.
+- Một tập **trạng thái** và một bảng **quy tắc** cho máy biết phải làm gì tùy theo trạng thái hiện tại và ký hiệu nó đang đọc.
+
+Từ những bộ phận tối thiểu ấy, máy có thể thực hiện bất kỳ thủ tục từng bước nào. Trực giác của Turing là hệ thống đơn giản này đủ mạnh để thực hiện **bất kỳ** phép tính nào có thể mô tả bằng một thuật toán.
+
+## Tính phổ quát
+
+Turing còn mô tả một máy **phổ quát** có khả năng đọc mô tả của bất kỳ máy Turing nào khác rồi mô phỏng nó. Đó là tổ tiên lý thuyết của máy tính lập trình được hiện đại: một cỗ máy chạy nhiều chương trình khác nhau thay vì một thiết bị riêng cho mỗi nhiệm vụ.
+
+## Giới hạn của tính toán
+
+Mô hình cũng phơi bày những giới hạn. Turing chứng minh rằng một số bài toán là **không quyết định được**: không thuật toán nào giải được chúng. Nổi tiếng nhất là **bài toán dừng**: không có phương pháp tổng quát nào xác định, với mọi chương trình và đầu vào, liệu chương trình rốt cuộc sẽ dừng hay chạy mãi mãi.
+
+## Một ảnh hưởng lâu bền
+
+Mọi thứ một máy tính thực có thể tính được thì một máy Turing cũng tính được (nếu có đủ thời gian và băng). Sự tương đương này là lý do mô hình vẫn định nghĩa các ranh giới của những gì máy tính có thể — và không thể — làm.`,
+  },
+  {
+    title: 'Băng thông và độ trễ',
+    question: 'Băng thông và độ trễ khác nhau ở điểm nào?',
+    summary:
+      'Băng thông là lượng dữ liệu một kết nối có thể tải mỗi giây, còn độ trễ là khoảng chờ trước khi dữ liệu bắt đầu đến; cả hai định hình mức độ "nhanh" cảm nhận được của một mạng, nhưng không phải là một.',
+    tags: ['công nghệ', 'mạng', 'internet', 'khoa học máy tính', 'kỹ thuật'],
+    language: 'vi',
+    content: `# Băng thông và độ trễ
+
+Người ta thường nói một kết nối là "nhanh", nhưng tốc độ thực ra có hai chiều khác biệt: **băng thông** và **độ trễ**. Lẫn lộn chúng là một nguồn bực bội phổ biến với mạng.
+
+## Băng thông: bao nhiêu
+
+**Băng thông** là lượng dữ liệu tối đa mà một kết nối có thể truyền trong một khoảng thời gian cho trước, thường đo bằng megabit hay gigabit mỗi giây. Một phép so sánh hữu ích là độ rộng của ống nước: ống rộng hơn cho nhiều nước đi qua một lúc hơn. Băng thông hữu ích nhất khi di chuyển những lượng dữ liệu **lớn** — truyền video độ phân giải cao, tải các tập tin lớn hay sao lưu lên đám mây.
+
+## Độ trễ: sớm cỡ nào
+
+**Độ trễ** là khoảng chờ giữa lúc gửi một yêu cầu và lúc nhận phản hồi đầu tiên, đo bằng mili giây. Trong phép so sánh ống nước, đó là thời gian nước đi từ đầu này sang đầu kia. Độ trễ phụ thuộc vào khoảng cách (tín hiệu không thể vượt tốc độ ánh sáng), số chặng mạng và các trễ xử lý. Độ trễ quan trọng nhất trong các tác vụ **tương tác** — gọi video, chơi game trực tuyến và các yêu cầu web nhanh.
+
+## Vì sao sự khác biệt quan trọng
+
+Một kết nối có thể băng thông cao nhưng độ trễ cao, hoặc ngược lại. Một đường truyền vệ tinh có thể tải nhiều dữ liệu mà vẫn có vẻ chậm vì mỗi tín hiệu đi hàng chục nghìn kilomet. Vì vậy một video có thể phát mượt (băng thông) trong khi một game vẫn thấy giật (độ trễ).
+
+## Các thuật ngữ liên quan
+
+**Thông lượng (throughput)** là tốc độ dữ liệu thực sự đạt được trong thực tế, thường thấp hơn băng thông lý thuyết. **Độ rung (jitter)** là sự dao động của độ trễ theo thời gian, có thể làm hỏng âm thanh và video ngay cả khi độ trễ trung bình thấp.`,
+  },
 ];
