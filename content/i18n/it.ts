@@ -453,4 +453,254 @@ Questa stessa rigidità era la sua debolezza. L'offerta di moneta era vincolata 
 
 Le nazioni si sganciarono dall'oro per gradi. Il sistema crollò del tutto nel 1971, quando gli Stati Uniti posero fine alla convertibilità del dollaro in oro. Oggi il mondo usa la **moneta fiat**, il cui valore poggia sulla fiducia nei governi e nelle banche centrali, e non su una merce fisica.`,
   },
+  // ── Batch 3: Tecnologia e matematica ──
+  {
+    title: 'Come funziona il GPS',
+    question: 'Come fa il GPS a sapere esattamente dove ti trovi?',
+    summary:
+      'Il GPS determina la posizione misurando il tempo di viaggio dei segnali di più satelliti e usando la trilaterazione; orologi atomici precisi e correzioni relativistiche lo rendono accurato a pochi metri.',
+    tags: ['tecnologia', 'navigazione', 'satelliti', 'fisica', 'ingegneria'],
+    language: 'it',
+    content: `# Come funziona il GPS
+
+Il Sistema di Posizionamento Globale (GPS) permette a un ricevitore — nel tuo telefono, auto o orologio — di scoprire dove si trova in qualsiasi punto della Terra, di solito con un margine di pochi metri. Si basa su una costellazione di satelliti e su un po' di fisica ingegnosa.
+
+## Satelliti e segnali
+
+Il GPS usa circa 30 satelliti in orbita a circa 20.000 km di quota, disposti in modo che ce ne siano sempre diversi visibili da qualsiasi punto del pianeta. Ciascuno trasmette di continuo un segnale radio che porta l'**ora** esatta dell'invio e la **posizione** del satellite.
+
+## Trilaterazione
+
+Il ricevitore misura quanto tempo ha impiegato ciascun segnale ad arrivare. Poiché le onde radio viaggiano alla velocità della luce, il tempo di viaggio rivela la **distanza** da quel satellite. Conoscere la distanza da un satellite ti colloca da qualche parte su una sfera attorno a esso; combinare le distanze da più satelliti restringe la tua posizione a un unico punto. Questa tecnica geometrica si chiama **trilaterazione**. Servono segnali da almeno quattro satelliti — tre per fissare la posizione e un quarto per risolvere l'errore dell'orologio del ricevitore.
+
+## Perché contano orologi e relatività
+
+La sincronizzazione deve essere straordinariamente precisa: un errore di un milionesimo di secondo sposterebbe la posizione di centinaia di metri. I satelliti portano **orologi atomici**, e il sistema corregge perfino la **relatività di Einstein** — la velocità dei satelliti e la loro gravità più debole fanno scorrere i loro orologi a un ritmo un po' diverso da quelli a terra. Senza queste correzioni il GPS sbaglierebbe di chilometri al giorno.
+
+## Oltre il posizionamento
+
+La stessa sincronizzazione precisa sostiene le reti finanziarie, le reti elettriche e le telecomunicazioni, facendo del GPS una spina dorsale silenziosa dell'infrastruttura moderna.`,
+  },
+  {
+    title: 'La crittografia a chiave pubblica',
+    question: 'Come possono due estranei comunicare in modo sicuro su Internet aperta?',
+    summary:
+      'La crittografia a chiave pubblica usa coppie di chiavi legate matematicamente — una pubblica e una privata — perché le persone cifrino i messaggi e verifichino le identità senza mai condividere prima un segreto.',
+    tags: ['tecnologia', 'crittografia', 'sicurezza', 'matematica', 'internet'],
+    language: 'it',
+    content: `# La crittografia a chiave pubblica
+
+La crittografia a chiave pubblica è la svolta che rende possibile la comunicazione sicura tra persone che non si sono mai incontrate. È alla base di HTTPS, della messaggistica sicura, delle firme digitali e delle criptovalute.
+
+## L'idea della coppia di chiavi
+
+La cifratura tradizionale («simmetrica») usa un'unica chiave condivisa per chiudere e aprire un messaggio — il che crea un problema: come condividere quella chiave in modo sicuro all'inizio? La crittografia a chiave pubblica (o **asimmetrica**) lo risolve con una **coppia** di chiavi:
+
+- Una **chiave pubblica**, che chiunque può vedere.
+- Una **chiave privata**, che il proprietario tiene segreta.
+
+Le due sono legate matematicamente in modo che ciò che una chiave chiude solo l'altra può aprire — ma conoscere la chiave pubblica non permette di calcolare quella privata.
+
+## Due usi principali
+
+- **Cifratura.** Per inviare a qualcuno un messaggio riservato, lo cifri con *la sua chiave pubblica*; solo la sua chiave privata può decifrarlo.
+- **Firme digitali.** Per provare che un messaggio è davvero tuo, lo firmi con *la tua chiave privata*; chiunque può verificarlo con la tua chiave pubblica, il che conferma l'autenticità e l'assenza di manomissioni.
+
+## La matematica dietro
+
+La sicurezza poggia su problemi facili da calcolare in un senso ma estremamente difficili da invertire — come **fattorizzare** numeri enormi (RSA) o risolvere logaritmi discreti su **curve ellittiche**. Invertirli richiederebbe quantità di calcolo impraticabili.
+
+## Nella vita quotidiana
+
+Quando il tuo browser mostra un lucchetto, ha già usato la crittografia a chiave pubblica per verificare il sito e stabilire una rapida chiave condivisa per il resto della sessione.`,
+  },
+  {
+    title: 'La successione di Fibonacci',
+    question: "Cos'è la successione di Fibonacci e perché compare in natura?",
+    summary:
+      'La successione di Fibonacci è una serie in cui ogni numero è la somma dei due precedenti; è legata alla sezione aurea e compare in motivi come i petali dei fiori e le conchiglie a spirale.',
+    tags: ['matematica', 'motivi', 'natura', 'geometria', 'scienza'],
+    language: 'it',
+    content: `# La successione di Fibonacci
+
+La successione di Fibonacci è uno dei motivi più famosi della matematica: una regola semplice che produce connessioni sorprendenti con la geometria e il mondo naturale.
+
+## La regola
+
+Comincia con 0 e 1, e fai di ogni nuovo numero la **somma dei due precedenti**:
+
+\`\`\`
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
+\`\`\`
+
+La successione prende il nome dal matematico italiano **Leonardo da Pisa** (Fibonacci), che la introdusse in Europa nel 1202 con un indovinello sull'allevamento dei conigli, benché fosse già nota nella matematica indiana.
+
+## Il legame con la sezione aurea
+
+Dividi un qualsiasi numero di Fibonacci per quello precedente, e il risultato si avvicina sempre più a circa **1,618** — la **sezione aurea** (spesso indicata con φ). Più avanzi nella successione, più preciso è l'avvicinamento.
+
+## Perché compare in natura
+
+I numeri di Fibonacci compaiono nel conteggio dei petali di molti fiori, nella disposizione dei semi di girasole e nella ramificazione delle piante. La ragione più profonda è l'**impacchettamento efficiente**: disporre foglie o semi ad angoli legati alla sezione aurea permette a una pianta di catturare luce solare o sistemare semi con minima sovrapposizione. Il motivo è quindi meno una firma mistica che una naturale conseguenza dell'ottimizzazione.
+
+## Oltre la biologia
+
+La successione compare anche negli algoritmi informatici, nell'analisi finanziaria e nell'arte, dove la sezione aurea è da tempo associata a proporzioni piacevoli.`,
+  },
+  {
+    title: 'I numeri primi',
+    question: 'Cosa sono i numeri primi e perché sono importanti?',
+    summary:
+      "I numeri primi sono interi maggiori di uno privi di divisori oltre a uno e se stessi; sono i mattoni dell'aritmetica e la base della crittografia moderna.",
+    tags: ['matematica', 'numeri', 'crittografia', 'teoria', 'scienza'],
+    language: 'it',
+    content: `# I numeri primi
+
+Un numero primo è un intero maggiore di 1 divisibile esattamente solo per 1 e per se stesso. I primi numeri primi sono 2, 3, 5, 7, 11 e 13. I numeri con divisori aggiuntivi, come 6 (= 2 × 3), sono detti **composti**.
+
+## Gli atomi dell'aritmetica
+
+I numeri primi sono fondamentali per il **teorema fondamentale dell'aritmetica**: ogni intero maggiore di 1 può essere scritto come prodotto di primi in un solo modo (senza contare l'ordine). Per esempio 60 = 2 × 2 × 3 × 5. In questo senso i primi sono gli «atomi» indivisibili da cui si costruiscono tutti gli altri numeri.
+
+## Infinitamente tanti
+
+Il matematico greco **Euclide** dimostrò oltre duemila anni fa che non esiste un primo massimo — la lista prosegue all'infinito. Eppure i primi si fanno più rari al crescere dei numeri, e prevedere esattamente dove cadano è un campo profondo e ancora irrisolto della matematica, legato alla celebre **ipotesi di Riemann**.
+
+## Perché contano oggi
+
+I numeri primi muovono la **crittografia** moderna. Metodi come RSA poggiano su un'asimmetria pratica: moltiplicare due grandi primi è facile, ma prendere l'enorme numero risultante e recuperare i primi originari (**fattorizzare**) è straordinariamente difficile con i computer attuali. Questa difficoltà mantiene sicuri l'home banking, i messaggi e il commercio.
+
+## Una ricerca continua
+
+Matematici e volontari che usano reti di computer continuano a cercare primi sempre più grandi. I maggiori primi noti oggi contano decine di milioni di cifre.`,
+  },
+  {
+    title: "L'interesse composto",
+    question: "Perché l'interesse composto è così potente nel tempo?",
+    summary:
+      "L'interesse composto è l'interesse guadagnato sia sul capitale iniziale sia sugli interessi già maturati, il che produce una crescita esponenziale che premia il risparmio precoce e di lungo periodo.",
+    tags: ['finanza', 'economia', 'matematica', 'denaro', 'finanza personale'],
+    language: 'it',
+    content: `# L'interesse composto
+
+L'interesse composto è spesso definito la forza più potente della finanza. È il processo di guadagnare interessi non solo sul denaro che investi all'inizio, ma anche sugli interessi che quel denaro ha già fruttato.
+
+## Semplice contro composto
+
+Con l'**interesse semplice** guadagni una somma fissa a ogni periodo, basata solo sulla somma iniziale (il **capitale**). Con l'**interesse composto** gli interessi di ogni periodo si aggiungono al saldo, così gli interessi del periodo successivo si calcolano su una somma maggiore. La crescita quindi accelera nel tempo — è **esponenziale**, non lineare.
+
+## Un esempio rapido
+
+Investi 1000 al 7% annuo:
+
+- Dopo 1 anno: 1070
+- Dopo 10 anni: circa 1967
+- Dopo 30 anni: circa 7612
+
+Il denaro **raddoppia** all'incirca ogni decennio senza aggiungere un centesimo — e più a lungo resta investito, più spettacolare è l'effetto.
+
+## La regola del 72
+
+Una scorciatoia pratica, la **regola del 72**, stima quanto tempo serve a un investimento per raddoppiare: dividi 72 per il tasso d'interesse annuo. All'8% il denaro raddoppia in circa 9 anni (72 ÷ 8).
+
+## Perché il tempo conta più di tutto
+
+Poiché la capitalizzazione si costruisce su se stessa, **cominciare presto** conta di solito più che investire grandi somme più tardi. La stessa logica funziona all'inverso con il debito: i saldi non pagati di prestiti o carte ad alto interesse si compongono contro il debitore, perciò tale debito può crescere a ritmi allarmanti.`,
+  },
+  {
+    title: 'Le funzioni hash',
+    question: "Cos'è una funzione hash e dove si usa?",
+    summary:
+      'Una funzione hash trasforma dati di qualsiasi dimensione in una stringa di lunghezza fissa; le buone funzioni hash crittografiche sono veloci, deterministiche e praticamente impossibili da invertire o falsificare con collisioni.',
+    tags: ['tecnologia', 'informatica', 'crittografia', 'sicurezza', 'dati'],
+    language: 'it',
+    content: `# Le funzioni hash
+
+Una funzione hash è uno strumento piccolo ma essenziale nell'informatica. Prende un input di qualsiasi lunghezza — una parola, un file, un intero database — e produce un output di lunghezza fissa detto **hash** o **digest**.
+
+## Proprietà chiave
+
+Una funzione hash utile è:
+
+- **Deterministica.** Lo stesso input produce sempre lo stesso hash.
+- **Veloce** da calcolare.
+- **A lunghezza fissa.** Un messaggio di un carattere e un file da un gigabyte danno, per esempio, un risultato di 256 bit.
+
+Una funzione hash *crittografica* aggiunge garanzie più forti:
+
+- **A senso unico.** Da un hash non si può recuperare in modo praticabile l'input originale.
+- **Resistente alle collisioni.** È praticamente impossibile trovare due input diversi con lo stesso hash.
+- **Effetto valanga.** Cambiare un solo carattere dell'input rimescola completamente l'output.
+
+## Usi quotidiani
+
+- **Archiviazione delle password.** I sistemi memorizzano l'hash di una password, non la password stessa, così una fuga di dati non rivela direttamente i segreti degli utenti.
+- **Verifiche d'integrità.** I download pubblicano spesso un hash per verificare che un file sia arrivato intatto e non manomesso.
+- **Strutture dati.** Le **tabelle hash** usano l'hashing per trovare elementi quasi istantaneamente, per quanti dati siano archiviati.
+- **Blockchain.** Le criptovalute concatenano i blocchi tramite hash, rendendo il registro a prova di manomissione.
+
+## Algoritmi comuni
+
+I sistemi moderni preferiscono funzioni robuste come **SHA-256**. Quelle più vecchie, come MD5 e SHA-1, sono oggi considerate violate ai fini della sicurezza perché i ricercatori hanno trovato modi di creare collisioni, e non andrebbero usate per proteggere dati sensibili.`,
+  },
+  {
+    title: 'La macchina di Turing',
+    question: "Cos'è la macchina di Turing e perché è fondamentale per il calcolo?",
+    summary:
+      'La macchina di Turing è un semplice modello matematico del calcolo, ideato da Alan Turing nel 1936, che definisce cosa significhi per un problema essere calcolabile e sostiene tutto il calcolo.',
+    tags: ['informatica', 'matematica', 'teoria', 'storia', 'tecnologia'],
+    language: 'it',
+    content: `# La macchina di Turing
+
+La macchina di Turing non è un dispositivo fisico ma un esperimento mentale — un modello matematico che cattura l'idea stessa di calcolo. Proposta da **Alan Turing** nel 1936, resta il fondamento teorico dell'informatica.
+
+## Un progetto ingannevolmente semplice
+
+Una macchina di Turing è composta da:
+
+- Un **nastro** di lunghezza infinita diviso in celle, ciascuna con un simbolo.
+- Una **testina** che può leggere e scrivere il simbolo sottostante e spostarsi a sinistra o a destra.
+- Un insieme di **stati** e una tabella di **regole** che dicono alla macchina cosa fare in base allo stato attuale e al simbolo che legge.
+
+Da queste parti minime la macchina può eseguire qualsiasi procedura passo passo. L'intuizione di Turing fu che questo semplice sistema è abbastanza potente da eseguire **qualsiasi** calcolo descrivibile con un algoritmo.
+
+## Universalità
+
+Turing descrisse anche una macchina **universale** capace di leggere la descrizione di qualsiasi altra macchina di Turing e poi di imitarla. È l'antenato teorico del moderno computer programmabile: una macchina che esegue programmi diversi anziché un dispositivo separato per ogni compito.
+
+## I limiti del calcolo
+
+Il modello rivelò anche dei limiti. Turing dimostrò che alcuni problemi sono **indecidibili**: nessun algoritmo può risolverli. Il più celebre è il **problema della fermata**: non esiste un metodo generale per stabilire, per ogni programma e input, se il programma alla fine si fermerà o girerà per sempre.
+
+## Un'influenza duratura
+
+Tutto ciò che un vero computer può calcolare, lo può calcolare anche una macchina di Turing (dati tempo e nastro sufficienti). Questa equivalenza è il motivo per cui il modello definisce ancora i confini di ciò che i computer possono — e non possono — fare.`,
+  },
+  {
+    title: 'Larghezza di banda e latenza',
+    question: 'Qual è la differenza tra larghezza di banda e latenza?',
+    summary:
+      'La larghezza di banda è quanti dati una connessione può trasportare al secondo, mentre la latenza è il ritardo prima che i dati comincino ad arrivare; entrambe plasmano quanto «veloce» appare una rete, ma non sono la stessa cosa.',
+    tags: ['tecnologia', 'reti', 'internet', 'informatica', 'ingegneria'],
+    language: 'it',
+    content: `# Larghezza di banda e latenza
+
+Si dice spesso che una connessione è «veloce», ma la velocità ha in realtà due dimensioni distinte: la **larghezza di banda** e la **latenza**. Confonderle è una fonte comune di frustrazione con le reti.
+
+## Larghezza di banda: quanto
+
+La **larghezza di banda** è la quantità massima di dati che una connessione può trasferire in un dato tempo, misurata di solito in megabit o gigabit al secondo. Un'analogia utile è la larghezza di un tubo: un tubo più largo lascia passare più acqua in una volta. La larghezza di banda aiuta soprattutto nello spostare **grandi** quantità di dati — trasmettere video ad alta risoluzione, scaricare file grandi o fare backup nel cloud.
+
+## Latenza: quanto presto
+
+La **latenza** è il ritardo tra l'invio di una richiesta e la ricezione della prima risposta, misurato in millisecondi. Nell'analogia del tubo è il tempo che l'acqua impiega ad andare da un capo all'altro. La latenza dipende dalla distanza (i segnali non possono superare la velocità della luce), dal numero di salti di rete e dai ritardi di elaborazione. La latenza conta soprattutto nei compiti **interattivi** — videochiamate, giochi online e richieste web rapide.
+
+## Perché la differenza conta
+
+Una connessione può avere larghezza di banda alta ma latenza alta, o viceversa. Un collegamento satellitare può trasportare molti dati e apparire comunque lento perché ogni segnale percorre decine di migliaia di chilometri. Per questo un video può trasmettersi fluido (larghezza di banda) mentre un gioco appare ancora a scatti (latenza).
+
+## Termini correlati
+
+Il **throughput** è la velocità di trasferimento dati effettivamente raggiunta nella pratica, di solito inferiore alla larghezza di banda teorica. Il **jitter** è la variazione della latenza nel tempo, che può disturbare voce e video anche quando la latenza media è bassa.`,
+  },
 ];
