@@ -1194,4 +1194,270 @@ Trong nguyệt thực **toàn phần**, Mặt Trăng thường mang một sắc 
 
 Quỹ đạo Mặt Trăng nghiêng nhẹ so với quỹ đạo Trái Đất, nên Mặt Trăng thường đi qua hơi cao hơn hoặc thấp hơn sự thẳng hàng hoàn hảo. Thực chỉ xảy ra vào vài dịp khi ba thiên thể thẳng hàng chính xác, khiến mỗi lần thành một sự kiện đặc biệt.`,
   },
+  // ── Batch 6: Nghệ thuật, ngôn ngữ và văn hóa ──
+  {
+    title: 'Lý thuyết màu sắc',
+    question: 'Màu sắc vận hành như thế nào và vì sao một số màu hợp nhau?',
+    summary:
+      'Lý thuyết màu sắc giải thích cách các màu liên hệ, pha trộn và phối hợp với nhau, dùng những công cụ như bánh xe màu để dẫn dắt nghệ sĩ, nhà thiết kế và những người làm việc với màu.',
+    tags: ['nghệ thuật', 'thiết kế', 'màu sắc', 'thị giác', 'văn hóa'],
+    language: 'vi',
+    content: `# Lý thuyết màu sắc
+
+Lý thuyết màu sắc là tập hợp các nguyên tắc mô tả cách các màu liên hệ với nhau, cách chúng pha trộn và cách chúng tạo ra những hiệu ứng khác nhau khi được đặt cạnh nhau. Nghệ sĩ, nhà thiết kế và người trang trí dùng nó để tạo những hình ảnh hài hòa hoặc đầy tương phản.
+
+## Bánh xe màu
+
+Công cụ trung tâm là **bánh xe màu**, sắp xếp các màu thành một vòng để cho thấy các mối liên hệ của chúng. Nó được tổ chức quanh ba nhóm:
+
+- **Màu cơ bản** (trong mô hình sắc tố truyền thống: đỏ, vàng và lam) không thể tạo ra bằng cách trộn các màu khác.
+- **Màu thứ cấp** (lục, cam, tím) đến từ việc trộn hai màu cơ bản.
+- **Màu cấp ba** đến từ việc trộn một màu cơ bản với một màu thứ cấp liền kề.
+
+## Trộn ánh sáng và sắc tố
+
+Điều quan trọng là phải hiểu rằng màu pha trộn theo những cách khác nhau tùy môi trường. Trộn **ánh sáng** (như trên màn hình) là **cộng** — kết hợp đỏ, lục và lam tạo ra trắng. Trộn **sắc tố** (như sơn) là **trừ** — kết hợp nhiều màu thì ngả về tối và xỉn.
+
+## Các sơ đồ màu
+
+Lý thuyết mô tả những kết hợp thường làm vui mắt:
+
+- **Bổ túc:** các màu đối nhau trên bánh xe (như lam và cam), tạo tương phản sống động.
+- **Tương đồng:** các màu lân cận (như lam, lam-lục và lục), tạo sự hài hòa.
+- **Bộ ba:** ba màu cách đều nhau, cân bằng giữa đa dạng và quân bình.
+
+## Hơn cả thẩm mỹ
+
+Màu sắc còn mang một **nhiệt độ** (đỏ và cam ấm; lam và lục lạnh) và những liên tưởng tâm lý ảnh hưởng đến tâm trạng và ý nghĩa. Hiểu những hiệu ứng này giúp giải thích vì sao một số kết hợp khiến ta thấy tràn năng lượng, an tĩnh hay căng thẳng.`,
+  },
+  {
+    title: 'Phối cảnh tuyến tính',
+    question: 'Các nghệ sĩ tạo ảo giác chiều sâu trên một mặt phẳng như thế nào?',
+    summary:
+      'Phối cảnh tuyến tính là một kỹ thuật dùng các đường hội tụ và điểm tụ để tạo ảo giác về chiều sâu ba chiều trên một mặt phẳng, đã cách mạng hóa nghệ thuật thời Phục hưng.',
+    tags: ['nghệ thuật', 'lịch sử', 'kỹ thuật', 'thị giác', 'văn hóa'],
+    language: 'vi',
+    content: `# Phối cảnh tuyến tính
+
+Phối cảnh tuyến tính là một phương pháp tạo ảo giác về chiều sâu và không gian trên một mặt phẳng. Được hệ thống hóa ở nước Ý thời Phục hưng, kỹ thuật này đã biến đổi hội họa bằng cách cho phép các nghệ sĩ biểu hiện thế giới một cách chân thực, như nhìn từ một điểm nhìn duy nhất.
+
+## Ý tưởng cốt lõi
+
+Phối cảnh tuyến tính dựa trên một quan sát đơn giản: các vật song song dường như tiến lại gần nhau khi chúng ra xa. Hãy nghĩ đến đường ray xe lửa có vẻ chụm lại ở phía xa. Kỹ thuật hệ thống hóa điều này bằng vài yếu tố then chốt:
+
+- **Đường chân trời**, ngang tầm mắt người quan sát.
+- Một hoặc nhiều **điểm tụ** trên đường chân trời ấy, nơi các đường song song ra xa dường như hội tụ.
+- **Các đường trực giao**, những đường lùi vào trong và hướng về một điểm tụ.
+
+Các vật được vẽ nhỏ hơn và gần điểm tụ hơn khi chúng ở xa hơn, tạo nên một chiều sâu thuyết phục.
+
+## Các loại phối cảnh
+
+- **Phối cảnh một điểm** dùng một điểm tụ duy nhất, lý tưởng để nhìn thẳng dọc một con phố hay hành lang.
+- **Phối cảnh hai điểm** dùng hai điểm, hữu ích để biểu hiện góc của một tòa nhà.
+- **Phối cảnh ba điểm** thêm một điểm thứ ba (ở trên hoặc dưới) cho những góc nhìn ấn tượng, nhìn lên hoặc xuống.
+
+## Một bước đột phá lịch sử
+
+Kiến trúc sư **Filippo Brunelleschi** đã chứng minh phối cảnh toán học vào khoảng năm 1420, và nó nhanh chóng trở thành một trụ cột của nghệ thuật phương Tây. Lần đầu tiên các họa sĩ có thể dựng những cảnh nhất quán về không gian, mang lại cho tác phẩm của họ một sự chân thực đáng kể.
+
+## Vì sao quan trọng
+
+Phối cảnh tuyến tính hơn cả một mẹo: nó phản ánh cách ánh sáng và thị giác thực sự vận hành. Cùng những nguyên tắc ấy ngày nay nâng đỡ vẽ kỹ thuật, kiến trúc, trò chơi điện tử và đồ họa máy tính.`,
+  },
+  {
+    title: 'Hòa âm và các âm giai',
+    question: 'Điều gì khiến các nốt nhạc nghe hay khi đi cùng nhau?',
+    summary:
+      'Hòa âm và âm giai dựa trên những quan hệ toán học giữa các tần số âm thanh; những nốt có tỷ lệ đơn giản nghe hòa hợp và tạo thành những viên gạch xây dựng của âm nhạc.',
+    tags: ['âm nhạc', 'âm thanh', 'toán học', 'nghệ thuật', 'văn hóa'],
+    language: 'vi',
+    content: `# Hòa âm và các âm giai
+
+Vì sao một số kết hợp nốt nghe dễ chịu còn một số khác nghe căng thẳng? Câu trả lời nằm ở một sự tương tác mê hoặc giữa vật lý, toán học và tri giác con người.
+
+## Âm thanh là dao động
+
+Một nốt nhạc được tạo ra bởi một vật dao động ở một tần số nào đó, đo bằng hertz (số dao động mỗi giây). Dao động nhanh hơn nghe cao hơn; chậm hơn nghe trầm hơn. Tỷ lệ giữa tần số của hai nốt quyết định chúng nghe ra sao khi đi cùng nhau.
+
+## Tỷ lệ đơn giản nghe hòa hợp
+
+Trực giác then chốt, có từ thời Hy Lạp cổ, là những nốt mà tần số tạo thành **tỷ lệ đơn giản** thì nghe hòa hợp (ổn định và dễ chịu):
+
+- **Quãng tám** là tỷ lệ 2:1 — một tần số đúng gấp đôi tần số kia. Hai nốt nghe giống nhau đến mức được đặt cùng tên.
+- **Quãng năm đúng** là tỷ lệ 3:2, một trong những kết hợp dễ chịu nhất.
+- **Quãng bốn đúng** là 4:3.
+
+Những tỷ lệ phức tạp hơn có xu hướng nghe nghịch tai hơn, hay căng hơn — điều mà âm nhạc dùng có chủ ý để tạo rồi giải tỏa sự căng thẳng.
+
+## Việc dựng các âm giai
+
+Một **âm giai** là một chuỗi nốt được chọn trong một quãng tám. Phần lớn âm nhạc phương Tây dùng 12 cao độ cách đều, từ đó rút ra những âm giai bảy nốt như **trưởng (major)** (thường vui tươi và sáng) và **thứ (minor)** (thường u tối hay buồn hơn). Các nền văn hóa khác dùng những âm giai khác, với những kiểu mẫu đặc trưng riêng.
+
+## Hòa âm
+
+**Hòa âm** là âm thanh của nhiều nốt vang lên cùng lúc, thường trong các **hợp âm**. Những chuỗi hợp âm tạo ra chuyển động — rời khỏi sự ổn định về phía căng thẳng rồi trở lại sự giải tỏa — và điều này mang lại cho âm nhạc phần lớn sức mạnh cảm xúc của nó.`,
+  },
+  {
+    title: 'Từ nguyên học',
+    question: 'Các từ ngữ đến từ đâu?',
+    summary:
+      'Từ nguyên học là ngành nghiên cứu nguồn gốc của các từ và cách nghĩa cùng hình thức của chúng thay đổi theo thời gian, hé lộ lịch sử, những tiếp xúc văn hóa và mối liên hệ giữa các ngôn ngữ.',
+    tags: ['ngôn ngữ', 'từ ngữ', 'lịch sử', 'ngôn ngữ học', 'văn hóa'],
+    language: 'vi',
+    content: `# Từ nguyên học
+
+Từ nguyên học là ngành nghiên cứu nguồn gốc của các từ: chúng đến từ đâu, hình thức và nghĩa của chúng đã thay đổi ra sao, và chúng liên hệ thế nào với các từ của những ngôn ngữ khác. Mỗi từ mang trong mình một mảnh lịch sử.
+
+## Truy tìm quá khứ của các từ
+
+Các nhà từ nguyên học tìm hiểu lịch sử một từ bằng cách so sánh nó với những hình thức cổ hơn và với các từ cùng họ trong những ngôn ngữ có quan hệ. Chẳng hạn, từ tiếng Anh *mother* và tiếng Đức *Mutter* đều bắt nguồn từ một gốc cổ chung, bằng chứng rằng tiếng Anh, tiếng Đức và nhiều thứ tiếng khác thuộc ngữ hệ **Ấn-Âu**.
+
+## Các từ thay đổi như thế nào
+
+Các từ biến đổi theo nhiều cách qua thời gian:
+
+- **Dịch chuyển nghĩa.** Từ tiếng Anh *nice* từng có nghĩa "ngốc nghếch"; nghĩa của nó đã trôi dạt qua nhiều thế kỷ.
+- **Vay mượn.** Các ngôn ngữ mượn từ của nhau. Tiếng Việt đã hấp thu nhiều thuật ngữ từ tiếng Hán (*học*, *quốc*), tiếng Pháp (*ga*, *cà phê*) và nhiều ngôn ngữ khác.
+- **Biến đổi âm.** Cách phát âm tiến hóa qua các thế hệ, đôi khi một cách đều đặn và có thể dự đoán.
+- **Ghép và rút gọn.** Các từ mới nảy sinh từ việc ghép các từ cũ hoặc rút gọn những từ đã có.
+
+## Những manh mối đánh lừa
+
+Không phải mọi sự giống nhau đều cho thấy quan hệ họ hàng. **Từ tương tự giả** là những từ có vẻ liên quan nhưng không phải, còn **từ nguyên dân gian** là những câu chuyện bịa đặt, hấp dẫn nhưng thường sai. Các nhà từ nguyên nghiêm túc dựa vào bằng chứng được ghi chép và những kiểu biến đổi âm đều đặn, chứ không phải phỏng đoán suông.
+
+## Vì sao quan trọng
+
+Từ nguyên học soi sáng lịch sử — ghi lại các cuộc di cư, chinh phục, buôn bán và công nghệ. Nó cũng làm sâu sắc thêm sự hiểu biết về chính ngôn ngữ, hé lộ những liên hệ ẩn giữa các từ mà nếu không thì có vẻ chẳng liên quan.`,
+  },
+  {
+    title: 'Mục đích của thần thoại',
+    question: 'Vì sao mọi nền văn hóa của con người đều tạo ra thần thoại?',
+    summary:
+      'Thần thoại là những câu chuyện truyền thống giải thích thế giới, truyền tải giá trị và gắn kết các cộng đồng; chúng xuất hiện trong mọi nền văn hóa của con người và đảm nhận những chức năng tâm lý và xã hội sâu xa.',
+    tags: ['thần thoại', 'văn hóa', 'lịch sử', 'kể chuyện', 'xã hội'],
+    language: 'vi',
+    content: `# Mục đích của thần thoại
+
+Mọi nền văn hóa của con người được biết đến đều đã tạo ra thần thoại — những câu chuyện truyền thống về các vị thần, anh hùng và nguồn gốc của thế giới. Khác xa với chỉ là tưởng tượng, thần thoại đảm nhận những chức năng sâu xa giúp các xã hội tìm ý nghĩa cho sự tồn tại.
+
+## Thần thoại là gì
+
+Thần thoại là một câu chuyện truyền thống, thường thiêng liêng, diễn ra trong một quá khứ xa xôi và giải thích điều gì đó căn bản về thế giới hay bản tính con người. Thần thoại khác với ngụ ngôn (những bài học ngắn) và truyền thuyết (bám rễ vào người hay sự kiện lịch sử), dù các phạm trù thường chồng lấn.
+
+## Các chức năng của thần thoại
+
+Các học giả nhận ra nhiều vai trò đan xen:
+
+- **Giải thích.** Thần thoại trả lời những câu hỏi lớn: thế giới bắt đầu ra sao, vì sao có cái chết, sấm sét hay các mùa từ đâu mà có. Trước khoa học, chúng mang lại một cấu trúc cho cái chưa biết.
+- **Định hướng đạo đức và xã hội.** Thần thoại truyền tải các giá trị, chuẩn mực và lý tưởng của một nền văn hóa, cho thấy danh dự, lòng dũng cảm và hành vi tốt đẹp là gì.
+- **Sự gắn kết xã hội.** Những câu chuyện chung gắn kết các cộng đồng bằng một bản sắc và ký ức chung, nối liền các thế hệ.
+- **An ủi tâm lý.** Thần thoại giúp con người đối diện với sợ hãi, đau khổ và bí ẩn, đặt từng cuộc đời vào một khuôn khổ lớn hơn, đầy ý nghĩa.
+
+## Những kiểu mẫu chung
+
+Thần thoại của những nền văn hóa rất xa cách nhau đôi khi chia sẻ những đề tài nổi bật — những trận đại hồng thủy, sự sáng tạo từ hỗn mang, những anh hùng vượt qua thử thách. Các học giả như Joseph Campbell lập luận rằng nhiều câu chuyện anh hùng đi theo một "hành trình" chung, gợi ý những kiểu mẫu chung trong trí tưởng tượng của con người.
+
+## Thần thoại ngày nay
+
+Dù ta thường gắn thần thoại với thế giới cổ đại, các câu chuyện ngày nay vẫn đảm nhận những chức năng ấy — qua tôn giáo, văn học dân tộc, và cả những loạt phim siêu anh hùng truyền tải những giá trị chung.`,
+  },
+  {
+    title: 'Nghệ thuật chữ (Typography)',
+    question: 'Nghệ thuật chữ là gì và vì sao nó quan trọng?',
+    summary:
+      'Nghệ thuật chữ là nghệ thuật sắp đặt văn bản để nó dễ đọc, rõ ràng và biểu cảm; nó định hình cách ta đọc và ảnh hưởng đến giọng điệu cùng sự rõ ràng cả trên giấy in lẫn màn hình.',
+    tags: ['thiết kế', 'nghệ thuật chữ', 'giao tiếp', 'nghệ thuật', 'thị giác'],
+    language: 'vi',
+    content: `# Nghệ thuật chữ (Typography)
+
+Nghệ thuật chữ là nghệ thuật và kỹ thuật sắp đặt văn bản. Nó bao gồm việc chọn phông chữ, cỡ chữ, khoảng cách và bố cục, cùng mọi thứ khiến chữ viết dễ đọc, rõ ràng và biểu cảm. Nghệ thuật chữ tốt thường không được để ý, nhưng lặng lẽ định hình mỗi lần ta đọc.
+
+## Các khái niệm nền tảng
+
+- Một **kiểu chữ (typeface)** là thiết kế của một bộ ký tự (như Helvetica hay Times New Roman); một **phông (font)**, theo nghĩa hẹp, là một biến thể hay cỡ cụ thể của nó.
+- Kiểu chữ **có chân (serif)** có những nét nhỏ ở đầu mút các chữ cái; loại **không chân (sans-serif)** thì không. Loại có chân thường trông truyền thống; loại không chân thì hiện đại và sạch sẽ.
+- **Kerning** là việc điều chỉnh khoảng cách giữa hai ký tự cụ thể; **tracking** là khoảng cách tổng thể; còn **leading** là khoảng cách dọc giữa các dòng.
+
+## Vì sao nghệ thuật chữ quan trọng
+
+Nghệ thuật chữ ảnh hưởng đến cả **tính dễ phân biệt** (sự dễ dàng phân biệt từng ký tự) lẫn **tính dễ đọc** (sự dễ dàng đọc những đoạn trọn vẹn). Những lựa chọn tốt làm giảm mỏi mắt, dẫn dắt ánh nhìn và giúp người đọc nhanh chóng nắm bắt điều quan trọng. Những lựa chọn tồi — chữ chen chúc, tương phản yếu, phông vụng về — gây mệt mỏi và thậm chí đẩy người đọc ra xa.
+
+## Truyền tải giọng điệu
+
+Các kiểu chữ mang một cá tính. Một kiểu có chân thanh lịch có thể gợi truyền thống và uy quyền; một kiểu không chân bo tròn có thể trông thân thiện và dễ gần; một kiểu chữ viết tay có thể gợi sự không trang trọng. Người làm nghệ thuật chữ chọn lựa theo giọng điệu để củng cố thông điệp của chính các từ ngữ.
+
+## Phân cấp thị giác
+
+Nghệ thuật chữ tạo nên một **phân cấp** — dùng cỡ chữ, độ đậm và khoảng cách để cho thấy đâu là tiêu đề, tiểu đề và thân bài. Cấu trúc này giúp người đọc lướt qua nội dung và hiểu cách thông tin được tổ chức, dù trong một cuốn sách, một tấm áp phích hay một trang web.`,
+  },
+  {
+    title: 'Cấu trúc tự sự',
+    question: 'Điều gì tạo nên hình hài cho một câu chuyện hay?',
+    summary:
+      'Cấu trúc tự sự là khung sườn tổ chức một câu chuyện — tình huống, xung đột và giải quyết; những kiểu mẫu chung như cung ba hồi giúp dựng nên những câu chuyện thỏa mãn xuyên các nền văn hóa.',
+    tags: ['kể chuyện', 'viết lách', 'văn học', 'nghệ thuật', 'văn hóa'],
+    language: 'vi',
+    content: `# Cấu trúc tự sự
+
+Cấu trúc tự sự là khung sườn ngầm tổ chức một câu chuyện — thứ tự và cách thức các sự kiện được trình bày. Dù các câu chuyện vô cùng đa dạng, phần lớn đều dựa trên những kiểu mẫu chung giúp khán giả theo dõi và cảm nhận chúng.
+
+## Cung cơ bản
+
+Nhiều câu chuyện đi theo một cung với những yếu tố nhận ra được:
+
+1. **Mở đầu.** Giới thiệu nhân vật, bối cảnh và tình huống.
+2. **Hành động dâng lên.** Một xung đột hay vấn đề nảy sinh, và sự căng thẳng tăng lên.
+3. **Cao trào.** Bước ngoặt hay khoảnh khắc căng thẳng nhất.
+4. **Hành động lắng xuống.** Hệ quả của cao trào dần mở ra.
+5. **Kết (giải quyết).** Câu chuyện đi đến hồi kết và buộc lại những đầu mối còn lỏng.
+
+Kiểu mẫu này thường được biểu diễn như "kim tự tháp Freytag".
+
+## Các cấu trúc thường gặp
+
+- **Cung ba hồi** chia câu chuyện thành thiết lập, đối đầu và giải quyết — xương sống của phần lớn điện ảnh và sân khấu.
+- **Hành trình của người hùng** mô tả một nhân vật chính rời thế giới quen thuộc, đối mặt thử thách, biến đổi và trở về đã đổi khác — một kiểu mẫu xuất hiện trong thần thoại khắp thế giới.
+
+## Vì sao cấu trúc hiệu quả
+
+Cấu trúc tạo nên **sự chờ đợi và thỏa mãn**. Bằng cách dựng các xung đột rồi giải quyết chúng, nó điều khiển nhịp điệu của sự quan tâm và cảm xúc. Một xung đột không có giải quyết thì gây hẫng; một giải quyết mà không có xung đột tích lũy thì thấy trống rỗng. Cấu trúc tốt giữ cả hai ở thế cân bằng.
+
+## Phá vỡ quy tắc
+
+Những người kể chuyện lão luyện thường đùa giỡn với cấu trúc — mở đầu từ giữa (*in medias res*), dùng dòng thời gian phi tuyến tính hay nhiều điểm nhìn. Nhưng những biến tấu này thường hiệu quả chính vì chúng đùa giỡn với cái cấu trúc quen thuộc mà khán giả mang theo, một cách trực giác, ở bên trong.`,
+  },
+  {
+    title: 'Giao tiếp phi ngôn ngữ',
+    question: 'Chúng ta truyền đạt được bao nhiêu mà không cần lời nói?',
+    summary:
+      'Giao tiếp phi ngôn ngữ bao gồm ngôn ngữ cơ thể, biểu cảm khuôn mặt, cử chỉ, giọng điệu và không gian; nó mang phần lớn ý nghĩa và thường nói to hơn cả lời nói.',
+    tags: ['giao tiếp', 'tâm lý học', 'văn hóa', 'hành vi', 'xã hội'],
+    language: 'vi',
+    content: `# Giao tiếp phi ngôn ngữ
+
+Phần lớn giao tiếp của con người diễn ra mà không cần một lời nào. Giao tiếp phi ngôn ngữ — biểu cảm khuôn mặt, cử chỉ, tư thế, giọng điệu và hơn thế — truyền tải cảm xúc, thái độ và ý định, thường với sức mạnh lớn hơn cả lời nói.
+
+## Các kênh của giao tiếp phi ngôn ngữ
+
+Giao tiếp phi ngôn ngữ tuôn chảy qua nhiều kênh cùng lúc:
+
+- **Biểu cảm khuôn mặt.** Khuôn mặt truyền cảm xúc rất nhanh, và vài biểu cảm cơ bản (như vui, ngạc nhiên và giận) được nhận ra xuyên các nền văn hóa.
+- **Cử chỉ và ngôn ngữ cơ thể.** Chuyển động của tay, tư thế và cách cử động cơ thể nhấn mạnh hay thay thế lời nói.
+- **Giao tiếp bằng mắt.** Ánh nhìn có thể thể hiện sự chú ý, thách thức hay sự thân mật, với ý nghĩa thay đổi nhiều giữa các nền văn hóa.
+- **Khoảng cách học (proxemics).** Việc dùng không gian báo hiệu sự thân mật, tính trang trọng hay thứ bậc.
+- **Cận ngôn (paralanguage).** Giọng điệu, nhịp điệu, âm lượng và những khoảng lặng định hình nghĩa của lời nói — một điều được nói *như thế nào*, chứ không chỉ là nói gì.
+
+## Vì sao quan trọng
+
+Giao tiếp phi ngôn ngữ định hình mạnh mẽ cách các thông điệp được tiếp nhận. Cùng một câu "tôi ổn" có thể nghe chân thành, mỉa mai hay do dự tùy theo giọng điệu và biểu cảm. Khi tín hiệu ngôn ngữ và phi ngôn ngữ mâu thuẫn, người ta có xu hướng tin vào phi ngôn ngữ hơn.
+
+## Sự khác biệt văn hóa
+
+Dù một số biểu cảm là phổ quát, nhiều tín hiệu phi ngôn ngữ lại đặc thù cho từng nền văn hóa. Cử chỉ, khoảng cách thích hợp để trò chuyện và quy tắc về giao tiếp bằng mắt khác nhau rất rộng, và hiểu lầm có thể dễ dàng nảy sinh giữa các nền văn hóa.
+
+## Đọc các tín hiệu
+
+Dù thật hấp dẫn khi tin rằng có thể "đọc" một người như một cuốn sách mở, các tín hiệu phi ngôn ngữ là mơ hồ và được diễn giải tốt nhất khi đặt cùng nhau và trong ngữ cảnh, chứ không phải riêng lẻ. Tuy vậy, ý thức về chúng làm cho giao tiếp phong phú và hiệu quả hơn.`,
+  },
 ];
