@@ -703,4 +703,253 @@ Uma conexão pode ter largura de banda alta mas latência alta, ou o contrário.
 
 A **taxa de transferência (throughput)** é a taxa de dados realmente alcançada na prática, em geral menor do que a largura de banda teórica. O **jitter** é a variação da latência ao longo do tempo, que pode perturbar a voz e o vídeo mesmo quando a latência média é baixa.`,
   },
+  // ── Batch 4: Mente, saúde e cotidiano ──
+  {
+    title: 'O efeito placebo',
+    question: 'Como um tratamento falso pode mesmo assim fazer as pessoas se sentirem melhor?',
+    summary:
+      'O efeito placebo ocorre quando um tratamento sem ingrediente ativo melhora os sintomas de uma pessoa porque ela espera ajuda, revelando o forte vínculo entre mente e corpo.',
+    tags: ['saúde', 'psicologia', 'medicina', 'cérebro', 'ciência'],
+    language: 'pt',
+    content: `# O efeito placebo
+
+O efeito placebo é um dos fenômenos mais fascinantes da medicina: as pessoas muitas vezes melhoram depois de receber um tratamento sem qualquer poder terapêutico — uma pílula de açúcar, uma injeção de soro fisiológico ou um procedimento de fachada — simplesmente porque acreditam que ele vai ajudar.
+
+## O que acontece
+
+Um placebo é um tratamento simulado. Quando alguém o recebe achando que é real, a expectativa de melhora pode desencadear mudanças mensuráveis: menos dor relatada, melhor humor, até alterações em sinais corporais. O efeito é mais forte em sintomas modulados pelo cérebro, como **dor, ansiedade, fadiga e náusea**.
+
+## Por que acontece
+
+Vários mecanismos parecem estar envolvidos:
+
+- **Expectativa.** Esperar alívio pode levar o cérebro a liberar substâncias naturais como as endorfinas.
+- **Condicionamento.** Associações aprendidas (jaleco branco, o ato de tomar um comprimido) podem provocar respostas reais por hábito.
+- **Redução da ansiedade.** Sentir-se cuidado diminui o estresse, que por si só pode aliviar sintomas.
+
+É importante notar que os placebos não encolhem tumores nem curam infecções — mudam sobretudo a **percepção** e algumas respostas reguladas pelo cérebro.
+
+## Por que importa para a ciência
+
+Como os placebos são tão poderosos, os novos medicamentos devem superá-los em **ensaios controlados por placebo**. Dividem-se os participantes em quem recebe o tratamento real e quem recebe o placebo, sem que saibam qual; só se o tratamento real supera de forma clara o placebo é que se considera que tem efeito genuíno.
+
+## O primo sombrio
+
+O **efeito nocebo** é o oposto: esperar dano pode produzir sintomas reais negativos, como sentir efeitos colaterais por causa de um aviso, ainda que se receba apenas uma pílula de açúcar.`,
+  },
+  {
+    title: 'Por que dormimos',
+    question: 'Por que precisamos dormir todas as noites?',
+    summary:
+      'O sono é um estado biológico vital que sustenta a memória, a reparação celular, a regulação hormonal e a limpeza cerebral; a privação crônica prejudica a saúde e a função mental.',
+    tags: ['saúde', 'biologia', 'cérebro', 'sono', 'ciência'],
+    language: 'pt',
+    content: `# Por que dormimos
+
+Passamos cerca de um terço da vida dormindo, mas o sono está longe de ser tempo perdido. É um processo ativo e cuidadosamente regulado, essencial para o corpo e a mente. Embora os cientistas ainda debatam todas as suas funções, as provas de sua importância são esmagadoras.
+
+## O que o sono faz
+
+O sono parece cumprir várias funções vitais:
+
+- **Consolidação da memória.** O cérebro reprocessa e fortalece as memórias do dia, mudando o que aprendemos do armazenamento de curto para o de longo prazo.
+- **Limpeza celular.** Durante o sono, o cérebro elimina mais rápido os resíduos metabólicos, entre eles proteínas ligadas a doenças neurodegenerativas.
+- **Reparação e crescimento.** O corpo conserta tecidos, constrói osso e músculo e libera hormônios importantes para o crescimento.
+- **Regulação.** O sono ajusta o apetite, o humor, a função imunológica e o equilíbrio hormonal.
+
+## Os estágios do sono
+
+O sono se desenrola em ciclos de cerca de 90 minutos, alternando entre o sono **não-REM** (incluindo o sono profundo de ondas lentas, ótimo para a recuperação física) e o sono **REM** (em que ocorre a maioria dos sonhos vívidos e que ajuda a memória e a regulação emocional). Uma noite saudável passa por vários desses ciclos completos.
+
+## O custo de dormir mal
+
+A privação crônica de sono está ligada a problemas de memória, juízo prejudicado, humor abalado e um risco maior de obesidade, diabetes, doença cardíaca e deficiência imunológica. Mesmo a perda moderada de sono prejudica a atenção e o tempo de reação tanto quanto o álcool.
+
+## Quanto é necessário
+
+A maioria dos adultos precisa de 7 a 9 horas por noite, e os adolescentes e as crianças, mais. A necessidade varia entre as pessoas, mas raríssimas funcionam de verdade com pouco sono de forma constante.`,
+  },
+  {
+    title: 'A cafeína e o cérebro',
+    question: 'Como a cafeína nos deixa mais alertas?',
+    summary:
+      'A cafeína bloqueia a adenosina, a substância química do cérebro que provoca sono, reduzindo temporariamente o cansaço e aumentando o estado de alerta — eis por que é o estimulante mais usado do mundo.',
+    tags: ['saúde', 'cérebro', 'química', 'biologia', 'cotidiano'],
+    language: 'pt',
+    content: `# A cafeína e o cérebro
+
+A cafeína é a droga psicoativa mais consumida do mundo, presente no café, no chá, no chocolate, nos refrigerantes e nas bebidas energéticas. Seu efeito de afastar o sono vem de um truque bioquímico preciso no cérebro.
+
+## Bloquear o sinal de sono
+
+Ao longo do dia em vigília, uma substância chamada **adenosina** se acumula no cérebro. Ela se liga a receptores e produz aos poucos a sensação de cansaço, ajudando a criar a "pressão de sono" que por fim nos faz dormir.
+
+A cafeína tem uma estrutura molecular bastante parecida com a da adenosina. Ela cabe nos mesmos receptores e os **bloqueia** sem ativá-los. Com os sinais de cansaço da adenosina barrados, você se sente mais alerta e desperto — mas o cansaço subjacente continua lá embaixo, à espera, quando a cafeína passa.
+
+## Efeitos secundários
+
+Ao bloquear a adenosina, a cafeína também deixa outros mensageiros químicos como a **dopamina** atuarem com mais liberdade, o que pode melhorar levemente o humor, a concentração e o tempo de reação. É por isso que uma dose moderada parece tão útil.
+
+## Tolerância e abstinência
+
+Com o uso regular, o cérebro se adapta criando **mais receptores** de adenosina, de modo que é preciso mais cafeína para o mesmo efeito — é a **tolerância**. Se a pessoa para de repente, todos esses receptores extras ficam abertos à adenosina, causando dores de cabeça, fadiga e irritabilidade até o cérebro reajustar.
+
+## Tempo e quantidade
+
+A cafeína leva cerca de 20 a 45 minutos para fazer pleno efeito e tem uma "meia-vida" de aproximadamente 5 horas, então uma dose à tarde ainda pode atrapalhar o sono à noite. Doses moderadas são seguras para a maioria, mas o excesso pode causar ansiedade, palpitações e insônia.`,
+  },
+  {
+    title: 'O efeito Doppler',
+    question: 'Por que a sirene de uma ambulância muda de tom ao passar?',
+    summary:
+      'O efeito Doppler é a mudança de frequência de uma onda quando a fonte e o observador se movem um em relação ao outro, ouvido nas sirenes que passam e usado do radar à astronomia.',
+    tags: ['física', 'som', 'ondas', 'astronomia', 'ciência'],
+    language: 'pt',
+    content: `# O efeito Doppler
+
+O efeito Doppler é a mudança da frequência de uma onda quando sua fonte e o observador se movem um em relação ao outro. É o motivo de a sirene de uma ambulância parecer mais aguda ao se aproximar e mais grave depois de passar.
+
+## Por que acontece
+
+As ondas sonoras viajam por uma distância a um ritmo fixo. Se a fonte do som se move em sua direção, cada onda sucessiva parte de um ponto um pouco mais próximo, então as ondas se **comprimem** — frequência maior, tom mais agudo. À medida que a fonte se afasta, as ondas se **esticam** — frequência menor, tom mais grave. A própria mudança ocorre no momento em que a fonte passa por você.
+
+## Não só som
+
+O efeito Doppler se aplica a todas as ondas, incluindo a luz. Para a luz, um objeto que se aproxima tem suas ondas comprimidas em direção à extremidade **azul** do espectro (desvio para o azul), e um que se afasta, esticadas para o **vermelho** (desvio para o vermelho). As mudanças são pequenas demais para se ver a velocidades cotidianas, mas tornam-se mensuráveis em escala astronômica.
+
+## Usos no mundo real
+
+- **Radar e radares de velocidade** ricocheteiam ondas em veículos e medem o desvio para calcular a velocidade.
+- **A previsão do tempo** usa o radar Doppler para acompanhar o movimento de chuva e tempestades.
+- **A medicina** usa o ultrassom Doppler para visualizar o fluxo de sangue.
+- **A astronomia** usa o desvio para o vermelho para medir a velocidade com que as estrelas e galáxias se movem.
+
+## Uma pista cósmica
+
+O desvio Doppler da luz é uma das principais provas de que o universo está em expansão: galáxias distantes mostram desvio para o vermelho, indicando que quase todas se afastam de nós.`,
+  },
+  {
+    title: 'Por que o céu é azul',
+    question: 'Por que o céu é azul durante o dia e vermelho ao pôr do sol?',
+    summary:
+      'O céu é azul porque as moléculas de ar dispersam a luz solar de comprimento de onda curto (azul) com mais força do que a de comprimento longo, um processo chamado espalhamento de Rayleigh.',
+    tags: ['física', 'luz', 'atmosfera', 'cor', 'ciência'],
+    language: 'pt',
+    content: `# Por que o céu é azul
+
+A cor azul do céu durante o dia é resultado da maneira como a luz do sol interage com a atmosfera da Terra. A explicação vem de um processo chamado **espalhamento de Rayleigh**.
+
+## A luz solar é feita de muitas cores
+
+Embora pareça branca, a luz do sol é uma mistura de todas as cores do arco-íris, cada uma com seu próprio comprimento de onda. A luz azul e violeta tem comprimentos de onda **curtos**; a vermelha e a laranja, comprimentos **longos**.
+
+## O espalhamento favorece o azul
+
+Ao entrar na atmosfera, a luz solar colide com moléculas de gás muito menores que seu comprimento de onda. Essas moléculas espalham os comprimentos de onda curtos com muito mais força do que os longos — a luz azul se espalha várias vezes mais que a vermelha. Como resultado, a luz azul é lançada por todo o céu, e é da luz azul espalhada que vem o céu, venha de onde vier o olhar.
+
+## E o violeta?
+
+O violeta tem comprimento de onda ainda mais curto que o azul e se espalha até mais. Mas o céu não parece violeta porque o Sol emite menos luz violeta e nossos olhos são bem menos sensíveis a ela, de modo que percebemos o céu como azul.
+
+## Pores do sol vermelhos
+
+Perto do nascer e do pôr do sol, a luz do sol percorre uma fatia muito maior de atmosfera para chegar até nós. Tanta luz azul é espalhada para fora do caminho ao longo dessa trajetória que restam sobretudo os comprimentos de onda mais longos, banhando o céu de vermelhos, laranjas e rosas.
+
+## A mesma física noutros lugares
+
+O espalhamento de Rayleigh também explica por que objetos distantes parecem azulados e por que a atmosfera da Terra vista do espaço mostra uma fina linha azul no horizonte.`,
+  },
+  {
+    title: 'A resistência aos antibióticos',
+    question: 'Por que os antibióticos estão perdendo a eficácia?',
+    summary:
+      'A resistência aos antibióticos surge quando as bactérias evoluem para sobreviver aos medicamentos pensados para matá-las, acelerada pelo uso excessivo e indevido, ameaçando tornar infecções comuns perigosas de novo.',
+    tags: ['saúde', 'medicina', 'biologia', 'evolução', 'ciência'],
+    language: 'pt',
+    content: `# A resistência aos antibióticos
+
+A resistência aos antibióticos é uma das ameaças mais sérias à saúde global. Acontece quando as bactérias evoluem de modo a não serem mais mortas pelos antibióticos antes eficazes contra elas, tornando as infecções mais difíceis — às vezes impossíveis — de tratar.
+
+## Como surge a resistência
+
+Os antibióticos matam bactérias suscetíveis, mas as populações bacterianas são imensas e variadas. Por acaso, algumas portam mutações que as ajudam a sobreviver. Quando um antibiótico elimina as bactérias suscetíveis, as resistentes sobrevivem e se multiplicam — um caso de **seleção natural** em ação. As bactérias também trocam genes de resistência diretamente entre si, espalhando depressa a capacidade.
+
+## O que acelera o problema
+
+Vários fatores agravam a resistência:
+
+- **Uso excessivo** de antibióticos, inclusive para infecções virais como resfriados, contra as quais não fazem efeito.
+- **Tratamento incompleto**, quando os pacientes param o remédio cedo demais e deixam sobreviver os micróbios mais resistentes.
+- **Uso pesado na agricultura**, em que se dão antibióticos a animais saudáveis para acelerar o crescimento.
+
+Cada exposição dá às bactérias mais chances de evoluir defesas.
+
+## Por que importa
+
+Os antibióticos sustentam a medicina moderna — não só tratam infecções, mas tornam seguros a cirurgia, a quimioterapia e os partos. Bactérias resistentes, às vezes chamadas de "superbactérias", ameaçam desfazer esse progresso, devolvendo-nos a um tempo em que arranhões e infecções comuns podiam ser fatais.
+
+## O que ajuda
+
+As soluções incluem usar antibióticos só quando necessário, completar os tratamentos prescritos, melhorar a higiene e o controle de infecções, limitar o uso agrícola e investir em pesquisa de novos antibióticos e tratamentos alternativos.`,
+  },
+  {
+    title: 'O ciclo do nitrogênio',
+    question: 'Como o nitrogênio se move pelos seres vivos e pelo ambiente?',
+    summary:
+      'O ciclo do nitrogênio converte o gás nitrogênio inerte em formas que os seres vivos podem usar e o devolve à atmosfera, sustentando toda a vida por meio de bactérias, plantas e decomposição.',
+    tags: ['biologia', 'química', 'ecologia', 'ciências da terra', 'ciência'],
+    language: 'pt',
+    content: `# O ciclo do nitrogênio
+
+O nitrogênio é essencial à vida — é um componente-chave das proteínas e do DNA. Embora a atmosfera da Terra seja 78% gás nitrogênio, a maioria dos seres vivos não pode usar essa forma diretamente. O ciclo do nitrogênio é o conjunto de processos que converte o nitrogênio em formas utilizáveis e por fim o devolve ao ar.
+
+## O problema do nitrogênio inerte
+
+O gás nitrogênio atmosférico (N₂) é extraordinariamente estável: os dois átomos estão unidos por uma ligação tripla que custa muita energia para romper. Antes que as plantas e os animais possam usar o nitrogênio, ele precisa ser "fixado" em formas mais reativas, como a amônia ou o nitrato.
+
+## As etapas principais
+
+- **Fixação.** Bactérias especiais — muitas vivendo nas raízes de leguminosas como o feijão — convertem o N₂ em amônia. Os relâmpagos e os fertilizantes industriais também fixam nitrogênio.
+- **Nitrificação.** Outras bactérias transformam a amônia em nitritos e depois em nitratos, a forma que as plantas absorvem mais facilmente.
+- **Assimilação.** As plantas captam os compostos de nitrogênio e os usam para formar proteínas; os animais obtêm nitrogênio ao comer plantas.
+- **Amonificação.** Os decompositores devolvem o nitrogênio ao solo como amônia ao quebrar os resíduos e os organismos mortos.
+- **Desnitrificação.** Mais bactérias convertem os nitratos de volta em gás nitrogênio, devolvendo-o à atmosfera e fechando o ciclo.
+
+## O impacto humano
+
+A invenção da fixação industrial de nitrogênio (o processo Haber-Bosch) aumentou enormemente a produção de alimentos, mas o excesso de fertilizante escorre para rios e oceanos. Ali alimenta uma proliferação descontrolada de algas que esgota o oxigênio e cria "zonas mortas", mostrando como o desequilíbrio de um ciclo natural traz consequências de longo alcance.`,
+  },
+  {
+    title: 'Como funciona a memória',
+    question: 'Como o cérebro armazena e recupera lembranças?',
+    summary:
+      'A memória é a codificação, o armazenamento e a recuperação de informação pelo cérebro através de redes de neurônios; abrange diferentes sistemas e é reconstrutiva, não uma gravação perfeita.',
+    tags: ['cérebro', 'psicologia', 'biologia', 'aprendizagem', 'ciência'],
+    language: 'pt',
+    content: `# Como funciona a memória
+
+A memória é a capacidade do cérebro de codificar, guardar e recuperar informação. Longe de ser um gravador de vídeo, é um sistema ativo e reconstrutivo que molda quem somos.
+
+## Três etapas básicas
+
+- **Codificação.** A informação que chega dos sentidos é convertida numa forma que o cérebro pode armazenar.
+- **Armazenamento.** Essa informação é mantida ao longo do tempo, de segundos a uma vida inteira.
+- **Recuperação.** A informação guardada é trazida de volta quando necessário — o ato de lembrar.
+
+## Tipos de memória
+
+A memória não é uma coisa só. Os psicólogos a distinguem em diferentes sistemas:
+
+- A **memória sensorial** retém impressões breves, com duração de fração de segundo.
+- A **memória de curto prazo (ou de trabalho)** guarda uma pequena quantidade de informação por segundos enquanto você a usa.
+- A **memória de longo prazo** armazena informação por longos períodos e tem capacidade vastíssima. Inclui as memórias **explícitas** (fatos e acontecimentos que você evoca conscientemente) e as **implícitas** (habilidades e hábitos, como andar de bicicleta).
+
+## A base física
+
+As memórias são guardadas como padrões de conexões entre os neurônios. Quando aprendemos, as sinapses entre certos neurônios se fortalecem — um princípio muitas vezes resumido como "neurônios que disparam juntos se conectam". A consolidação de uma memória estável depende fortemente do sono e de uma região do cérebro chamada **hipocampo**.
+
+## Por que a memória falha — e nos engana
+
+A memória é reconstrutiva: cada vez que recuperamos uma lembrança, nós a remontamos, e podemos alterá-la sem perceber. Isso explica por que as memórias podem ser vívidas e ainda assim erradas, por que os relatos de testemunhas são pouco confiáveis e por que repetições e associações ajudam a fixar a informação.`,
+  },
 ];
