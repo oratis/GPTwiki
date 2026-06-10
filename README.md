@@ -50,8 +50,8 @@ Wikipedia requires expert editors. ChatGPT answers vanish after each session. GP
 
 ```bash
 # Clone the repo
-git clone https://github.com/anthropics/gptwiki.git
-cd gptwiki
+git clone https://github.com/oratis/GPTwiki.git
+cd GPTwiki
 
 # Install dependencies
 npm install
