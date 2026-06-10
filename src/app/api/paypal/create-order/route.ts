@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { checkRateLimit, getClientId, rateLimited } from '@/lib/rate-limit';
 
 const PAYPAL_API = process.env.NODE_ENV === 'production'
   ? 'https://api-m.paypal.com'
@@ -24,6 +25,13 @@ async function getAccessToken(): Promise<string> {
 }
 
 export async function POST(req: NextRequest) {
+  const rl = checkRateLimit({
+    key: `paypal-create:${getClientId(req)}`,
+    max: 10,
+    windowSec: 60,
+  });
+  if (!rl.ok) return rateLimited(rl);
+
   try {
     const body = await req.json();
     const amount = parseFloat(body.amount);

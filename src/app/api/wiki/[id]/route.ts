@@ -3,7 +3,8 @@ import { auth } from '@/lib/auth';
 import { getWikiById, updateWiki } from '@/lib/search';
 import { generateWikiContent } from '@/lib/ai/provider';
 import { resolveApiKeyForUser } from '@/lib/ai/resolve-key';
-import type { Message } from '@/types';
+import { parseJsonBody, wikiUpdateSchema } from '@/lib/validation';
+import { checkRateLimit, getClientId, rateLimited } from '@/lib/rate-limit';
 
 export async function GET(
   _req: NextRequest,
@@ -33,6 +34,13 @@ export async function PUT(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  const rl = checkRateLimit({
+    key: `wiki-update:${getClientId(req, session.user.id)}`,
+    max: 10,
+    windowSec: 300,
+  });
+  if (!rl.ok) return rateLimited(rl);
+
   try {
     const { id } = await params;
     const wiki = await getWikiById(id);
@@ -45,15 +53,13 @@ export async function PUT(
       return NextResponse.json({ error: 'Only the author can update this wiki' }, { status: 403 });
     }
 
-    const body = await req.json();
-    const conversation: Message[] = body.conversation;
+    const parsed = await parseJsonBody(req, wikiUpdateSchema);
+    if (parsed.error) return parsed.error;
+    const { conversation } = parsed.data;
 
-    if (!conversation?.length) {
-      return NextResponse.json({ error: 'Missing conversation' }, { status: 400 });
-    }
-
-    // Regenerate wiki content from extended conversation
-    const { apiKey } = await resolveApiKeyForUser('claude', session.user.id!);
+    // Regenerate wiki content from extended conversation, with the key for
+    // the wiki's own model — not hardcoded to claude.
+    const { apiKey } = await resolveApiKeyForUser(wiki.aiModel, session.user.id!);
     const generated = await generateWikiContent(wiki.aiModel, conversation, apiKey || undefined);
 
     await updateWiki(id, {
