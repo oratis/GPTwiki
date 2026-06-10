@@ -2,6 +2,14 @@ import type { Locale } from './locales';
 
 const translations: Record<Locale, Record<string, string>> = {
   en: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'You\'ve used today\'s free messages. Add your own API key in your profile to continue, or come back tomorrow.',
+    'common.retry': 'Retry',
+    'thread.loadError': 'Failed to load discussions.',
+    'wiki.references': 'References',
+    'wiki.wikipediaAttribution': 'This article is based on content from Wikipedia and is available under the CC BY-SA license.',
+    'wiki.wikipediaViewOriginal': 'View the original on Wikipedia',
+
     // Header
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Browse Wiki',
@@ -179,6 +187,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   zh: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': '今日免费额度已用完。可在个人主页添加自己的 API key 继续使用，或明天再来。',
+    'common.retry': '重试',
+    'thread.loadError': '加载讨论失败。',
+    'wiki.references': '参考来源',
+    'wiki.wikipediaAttribution': '本文内容源自维基百科，遵循 CC BY-SA 许可协议。',
+    'wiki.wikipediaViewOriginal': '在维基百科查看原文',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': '浏览Wiki',
     'header.newWiki': '新建Wiki',
@@ -335,6 +351,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   ja: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': '本日の無料利用枠を使い切りました。プロフィールでご自身のAPIキーを追加するか、明日再度お試しください。',
+    'common.retry': '再試行',
+    'thread.loadError': 'ディスカッションの読み込みに失敗しました。',
+    'wiki.references': '参考文献',
+    'wiki.wikipediaAttribution': 'この記事はWikipediaのコンテンツに基づいており、CC BY-SAライセンスの下で提供されています。',
+    'wiki.wikipediaViewOriginal': 'Wikipediaで原文を見る',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Wiki一覧',
     'header.newWiki': '新規Wiki',
@@ -491,6 +515,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   ko: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': '오늘의 무료 사용량을 모두 사용했습니다. 프로필에서 본인의 API 키를 추가하거나 내일 다시 이용해 주세요.',
+    'common.retry': '다시 시도',
+    'thread.loadError': '토론을 불러오지 못했습니다.',
+    'wiki.references': '참고 문헌',
+    'wiki.wikipediaAttribution': '이 문서는 위키백과의 콘텐츠를 기반으로 하며 CC BY-SA 라이선스에 따라 제공됩니다.',
+    'wiki.wikipediaViewOriginal': '위키백과에서 원문 보기',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Wiki 둘러보기',
     'header.newWiki': '새 Wiki',
@@ -647,6 +679,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   es: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Has agotado tus mensajes gratuitos de hoy. Añade tu propia clave de API en tu perfil para continuar, o vuelve mañana.',
+    'common.retry': 'Reintentar',
+    'thread.loadError': 'No se pudieron cargar las discusiones.',
+    'wiki.references': 'Referencias',
+    'wiki.wikipediaAttribution': 'Este artículo se basa en contenido de Wikipedia y está disponible bajo la licencia CC BY-SA.',
+    'wiki.wikipediaViewOriginal': 'Ver el original en Wikipedia',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Explorar Wiki',
     'header.newWiki': 'Nuevo Wiki',
@@ -803,6 +843,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   fr: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Vous avez utilisé vos messages gratuits du jour. Ajoutez votre propre clé API dans votre profil pour continuer, ou revenez demain.',
+    'common.retry': 'Réessayer',
+    'thread.loadError': 'Échec du chargement des discussions.',
+    'wiki.references': 'Références',
+    'wiki.wikipediaAttribution': 'Cet article est basé sur du contenu de Wikipédia et est disponible sous licence CC BY-SA.',
+    'wiki.wikipediaViewOriginal': 'Voir l\'original sur Wikipédia',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Parcourir le Wiki',
     'header.newWiki': 'Nouveau Wiki',
@@ -959,6 +1007,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   de: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Du hast deine kostenlosen Nachrichten für heute aufgebraucht. Füge in deinem Profil einen eigenen API-Schlüssel hinzu oder komm morgen wieder.',
+    'common.retry': 'Erneut versuchen',
+    'thread.loadError': 'Diskussionen konnten nicht geladen werden.',
+    'wiki.references': 'Quellen',
+    'wiki.wikipediaAttribution': 'Dieser Artikel basiert auf Inhalten aus Wikipedia und ist unter der CC-BY-SA-Lizenz verfügbar.',
+    'wiki.wikipediaViewOriginal': 'Original auf Wikipedia ansehen',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Wiki durchsuchen',
     'header.newWiki': 'Neues Wiki',
@@ -1115,6 +1171,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   pt: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Você usou suas mensagens gratuitas de hoje. Adicione sua própria chave de API no seu perfil para continuar, ou volte amanhã.',
+    'common.retry': 'Tentar novamente',
+    'thread.loadError': 'Falha ao carregar as discussões.',
+    'wiki.references': 'Referências',
+    'wiki.wikipediaAttribution': 'Este artigo é baseado em conteúdo da Wikipédia e está disponível sob a licença CC BY-SA.',
+    'wiki.wikipediaViewOriginal': 'Ver o original na Wikipédia',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Explorar Wiki',
     'header.newWiki': 'Novo Wiki',
@@ -1271,6 +1335,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   ru: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Вы использовали бесплатные сообщения на сегодня. Добавьте свой API-ключ в профиле, чтобы продолжить, или возвращайтесь завтра.',
+    'common.retry': 'Повторить',
+    'thread.loadError': 'Не удалось загрузить обсуждения.',
+    'wiki.references': 'Источники',
+    'wiki.wikipediaAttribution': 'Эта статья основана на материалах Википедии и доступна по лицензии CC BY-SA.',
+    'wiki.wikipediaViewOriginal': 'Посмотреть оригинал в Википедии',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Обзор Wiki',
     'header.newWiki': 'Новый Wiki',
@@ -1427,6 +1499,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   ar: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'لقد استخدمت رسائلك المجانية لهذا اليوم. أضف مفتاح API الخاص بك في ملفك الشخصي للمتابعة، أو عد غدًا.',
+    'common.retry': 'إعادة المحاولة',
+    'thread.loadError': 'فشل تحميل المناقشات.',
+    'wiki.references': 'المراجع',
+    'wiki.wikipediaAttribution': 'تستند هذه المقالة إلى محتوى من ويكيبيديا وهي متاحة بموجب رخصة CC BY-SA.',
+    'wiki.wikipediaViewOriginal': 'عرض المقالة الأصلية على ويكيبيديا',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'تصفح الويكي',
     'header.newWiki': 'ويكي جديد',
@@ -1583,6 +1663,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   hi: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'आज के मुफ़्त संदेश समाप्त हो गए हैं। जारी रखने के लिए अपनी प्रोफ़ाइल में अपनी API कुंजी जोड़ें, या कल फिर आएं।',
+    'common.retry': 'पुनः प्रयास करें',
+    'thread.loadError': 'चर्चाएँ लोड नहीं हो सकीं।',
+    'wiki.references': 'संदर्भ',
+    'wiki.wikipediaAttribution': 'यह लेख विकिपीडिया की सामग्री पर आधारित है और CC BY-SA लाइसेंस के अंतर्गत उपलब्ध है।',
+    'wiki.wikipediaViewOriginal': 'विकिपीडिया पर मूल लेख देखें',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'विकी ब्राउज़ करें',
     'header.newWiki': 'नया विकी',
@@ -1739,6 +1827,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   it: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Hai esaurito i messaggi gratuiti di oggi. Aggiungi la tua chiave API nel profilo per continuare, oppure torna domani.',
+    'common.retry': 'Riprova',
+    'thread.loadError': 'Impossibile caricare le discussioni.',
+    'wiki.references': 'Riferimenti',
+    'wiki.wikipediaAttribution': 'Questo articolo si basa su contenuti di Wikipedia ed è disponibile con licenza CC BY-SA.',
+    'wiki.wikipediaViewOriginal': 'Vedi l\'originale su Wikipedia',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Sfoglia Wiki',
     'header.newWiki': 'Nuovo Wiki',
@@ -1895,6 +1991,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   tr: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Bugünkü ücretsiz mesaj hakkınızı kullandınız. Devam etmek için profilinize kendi API anahtarınızı ekleyin veya yarın tekrar gelin.',
+    'common.retry': 'Tekrar dene',
+    'thread.loadError': 'Tartışmalar yüklenemedi.',
+    'wiki.references': 'Kaynaklar',
+    'wiki.wikipediaAttribution': 'Bu makale Wikipedia içeriğine dayanmaktadır ve CC BY-SA lisansı altında sunulmaktadır.',
+    'wiki.wikipediaViewOriginal': 'Orijinalini Wikipedia\'da görüntüle',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Wiki Göz At',
     'header.newWiki': 'Yeni Wiki',
@@ -2051,6 +2155,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   vi: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Bạn đã dùng hết số tin nhắn miễn phí hôm nay. Hãy thêm API key của riêng bạn trong hồ sơ để tiếp tục, hoặc quay lại vào ngày mai.',
+    'common.retry': 'Thử lại',
+    'thread.loadError': 'Không thể tải thảo luận.',
+    'wiki.references': 'Tài liệu tham khảo',
+    'wiki.wikipediaAttribution': 'Bài viết này dựa trên nội dung từ Wikipedia và được cung cấp theo giấy phép CC BY-SA.',
+    'wiki.wikipediaViewOriginal': 'Xem bản gốc trên Wikipedia',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Duyệt Wiki',
     'header.newWiki': 'Wiki Mới',
@@ -2207,6 +2319,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   th: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'คุณใช้ข้อความฟรีของวันนี้หมดแล้ว เพิ่ม API key ของคุณเองในโปรไฟล์เพื่อใช้งานต่อ หรือกลับมาใหม่พรุ่งนี้',
+    'common.retry': 'ลองอีกครั้ง',
+    'thread.loadError': 'โหลดการสนทนาไม่สำเร็จ',
+    'wiki.references': 'อ้างอิง',
+    'wiki.wikipediaAttribution': 'บทความนี้อ้างอิงเนื้อหาจากวิกิพีเดีย และเผยแพร่ภายใต้สัญญาอนุญาต CC BY-SA',
+    'wiki.wikipediaViewOriginal': 'ดูต้นฉบับบนวิกิพีเดีย',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'เรียกดูวิกิ',
     'header.newWiki': 'วิกิใหม่',

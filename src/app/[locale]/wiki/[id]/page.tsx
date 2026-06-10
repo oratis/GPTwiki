@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { ArrowLeft, Eye, Bot, Clock, Tag, User } from 'lucide-react';
+import { ArrowLeft, Eye, Bot, Clock, Tag, User, BookOpen, ExternalLink } from 'lucide-react';
 import WikiContent from '@/components/wiki/WikiContent';
 import ShareButtons from '@/components/wiki/ShareButtons';
 import EmbedCodeButton from '@/components/wiki/EmbedCodeButton';
@@ -92,13 +92,31 @@ export async function generateMetadata({
   };
 }
 
+/** True for articles mirrored from Wikipedia, which require CC BY-SA attribution. */
+function isWikipediaSourced(wiki: { source?: string }): boolean {
+  return typeof wiki.source === 'string' && wiki.source.startsWith('wikipedia');
+}
+
+/** Link to the original Wikipedia article in the article's own language. */
+function wikipediaOriginalUrl(wiki: { title: string; language?: string }): string {
+  const lang = wiki.language || 'en';
+  return `https://${lang}.wikipedia.org/wiki/${encodeURIComponent(wiki.title.replace(/ /g, '_'))}`;
+}
+
 function buildJsonLd(
   wiki: NonNullable<Awaited<ReturnType<typeof getWikiById>>>,
   locale: Locale,
   id: string
 ) {
   const url = `https://gptwiki.net/${locale}/wiki/${id}`;
+  const attribution = isWikipediaSourced(wiki)
+    ? {
+        license: 'https://creativecommons.org/licenses/by-sa/4.0/',
+        isBasedOn: wikipediaOriginalUrl(wiki),
+      }
+    : {};
   return {
+    ...attribution,
     '@context': 'https://schema.org',
     '@type': 'Article',
     '@id': url,
@@ -222,6 +240,55 @@ export default async function WikiDetailPage({
         </div>
 
         <WikiContent content={wiki.content} />
+
+        {(wiki.sources?.length ?? 0) > 0 && (
+          <section className="mt-8 border-t border-gray-100 pt-6">
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-gray-900">
+              <BookOpen className="h-5 w-5 text-gray-500" />
+              {t('wiki.references')}
+            </h2>
+            <ol className="list-decimal space-y-1 pl-5 text-sm">
+              {wiki.sources!.map((src, i) => (
+                <li key={i} className="text-gray-600">
+                  <a
+                    href={src.url}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="inline-flex items-center gap-1 text-blue-600 hover:underline"
+                  >
+                    {src.title}
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+
+        {isWikipediaSourced(wiki) && (
+          <aside className="mt-8 rounded-lg border border-gray-200 bg-gray-50 p-4 text-xs text-gray-600">
+            <p>
+              {t('wiki.wikipediaAttribution')}{' '}
+              <a
+                href={wikipediaOriginalUrl(wiki)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-blue-600 hover:underline"
+              >
+                {t('wiki.wikipediaViewOriginal')}
+              </a>{' '}
+              ·{' '}
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline"
+              >
+                CC BY-SA 4.0
+              </a>
+            </p>
+          </aside>
+        )}
       </article>
 
       <WikiInteractive wiki={wiki} />

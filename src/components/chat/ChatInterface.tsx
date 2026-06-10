@@ -59,12 +59,14 @@ export default function ChatInterface() {
       if (!res.ok) {
         if (res.status === 403) {
           const err = await res.json();
-          if (err.error === 'API_KEY_REQUIRED') {
+          if (err.error === 'API_KEY_REQUIRED' || err.error === 'QUOTA_EXHAUSTED') {
             const profileUrl = session?.user?.id ? `/profile/${session.user.id}` : '/login';
+            const text =
+              err.error === 'QUOTA_EXHAUSTED' ? t('chat.quotaExhausted') : t('apiKeys.required');
             const errorMsg: Message = {
               id: generateId(),
               role: 'assistant',
-              content: `${t('apiKeys.required')}\n\n[${t('apiKeys.configureHint')}](${profileUrl})`,
+              content: `${text}\n\n[${t('apiKeys.configureHint')}](${profileUrl})`,
               timestamp: Date.now(),
             };
             setMessages([...newMessages, errorMsg]);

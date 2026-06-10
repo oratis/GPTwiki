@@ -11,6 +11,7 @@ import {
   wikiListQuerySchema,
 } from '@/lib/validation';
 import { checkRateLimit, getClientId, rateLimited } from '@/lib/rate-limit';
+import type { WikiSource } from '@/types';
 
 export async function GET(req: NextRequest) {
   const parsed = parseSearchParams(new URL(req.url), wikiListQuerySchema);
@@ -46,9 +47,26 @@ export async function POST(req: NextRequest) {
   const body = parsed.data;
 
   try {
-    let wikiData = body;
+    let wikiData: typeof body & { sources?: WikiSource[] } = body;
     if (!body.content && body.conversation.length > 0) {
-      const { apiKey } = await resolveApiKeyForUser(body.aiModel, session.user.id!);
+      const { apiKey, needsConfig, quotaExhausted } = await resolveApiKeyForUser(
+        body.aiModel,
+        session.user.id!
+      );
+      // Without an entitled key, don't fall through to the provider's silent
+      // env-key default — that would bypass the free-tier metering entirely.
+      if (quotaExhausted) {
+        return NextResponse.json(
+          { error: 'QUOTA_EXHAUSTED', message: 'Daily free message quota used up. Add your own API key to continue.' },
+          { status: 403 }
+        );
+      }
+      if (needsConfig) {
+        return NextResponse.json(
+          { error: 'API_KEY_REQUIRED', message: 'Please configure your API key in Profile settings.' },
+          { status: 403 }
+        );
+      }
       const generated = await generateWikiContent(body.aiModel, body.conversation, apiKey || undefined);
       wikiData = {
         ...body,
@@ -56,6 +74,7 @@ export async function POST(req: NextRequest) {
         content: generated.content,
         summary: generated.summary,
         tags: generated.tags,
+        sources: generated.sources,
       };
     }
 

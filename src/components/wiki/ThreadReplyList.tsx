@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { MessageSquarePlus, Loader2, Send, ChevronDown } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
+import { useToast } from '@/components/ui/Toast';
 import ThreadReplyCard from './ThreadReplyCard';
 import ModelSelector from '@/components/chat/ModelSelector';
 import type { ThreadReply, AIModel } from '@/types';
@@ -15,9 +16,11 @@ interface ThreadReplyListProps {
 
 export default function ThreadReplyList({ wikiId, threadCount = 0 }: ThreadReplyListProps) {
   const { t } = useI18n();
+  const { toast } = useToast();
   const { data: session } = useSession();
   const [threads, setThreads] = useState<ThreadReply[]>([]);
   const [loading, setLoading] = useState(false);
+  const [loadError, setLoadError] = useState(false);
   const [nextCursor, setNextCursor] = useState<number | null>(null);
   const [hasLoaded, setHasLoaded] = useState(false);
 
@@ -29,6 +32,7 @@ export default function ThreadReplyList({ wikiId, threadCount = 0 }: ThreadReply
 
   const loadThreads = useCallback(async (cursor?: number) => {
     setLoading(true);
+    setLoadError(false);
     try {
       const url = cursor
         ? `/api/wiki/${wikiId}/threads?cursor=${cursor}&limit=10`
@@ -39,7 +43,7 @@ export default function ThreadReplyList({ wikiId, threadCount = 0 }: ThreadReply
       setThreads((prev) => cursor ? [...prev, ...data.threads] : data.threads);
       setNextCursor(data.nextCursor);
     } catch {
-      // silently fail
+      setLoadError(true);
     } finally {
       setLoading(false);
       setHasLoaded(true);
@@ -69,7 +73,11 @@ export default function ThreadReplyList({ wikiId, threadCount = 0 }: ThreadReply
       if (!res.ok) {
         const err = await res.json();
         if (err.error === 'API_KEY_REQUIRED') {
-          alert(t('apiKeys.required'));
+          toast(t('apiKeys.required'));
+          return;
+        }
+        if (err.error === 'QUOTA_EXHAUSTED') {
+          toast(t('chat.quotaExhausted'));
           return;
         }
         throw new Error('Failed to post');
@@ -81,7 +89,7 @@ export default function ThreadReplyList({ wikiId, threadCount = 0 }: ThreadReply
       setShowCompose(false);
     } catch (error) {
       console.error('Post thread error:', error);
-      alert(t('errors.replyFailed'));
+      toast(t('errors.replyFailed'));
     } finally {
       setPosting(false);
     }
@@ -115,7 +123,17 @@ export default function ThreadReplyList({ wikiId, threadCount = 0 }: ThreadReply
       </div>
 
       {/* Thread list */}
-      {threads.length > 0 ? (
+      {loadError && threads.length === 0 ? (
+        <div className="py-8 text-center">
+          <p className="mb-3 text-sm text-gray-500">{t('thread.loadError')}</p>
+          <button
+            onClick={() => loadThreads()}
+            className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            {t('common.retry')}
+          </button>
+        </div>
+      ) : threads.length > 0 ? (
         <div className="space-y-4">
           {threads.map((reply) => (
             <ThreadReplyCard key={reply.id} reply={reply} />

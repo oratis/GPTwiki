@@ -2,39 +2,24 @@ import { db } from './firebase';
 import { FieldValue, type QueryDocumentSnapshot } from 'firebase-admin/firestore';
 import type { Wiki, UserProfile, PublicUserProfile, UserApiKeys } from '@/types';
 import { encryptSecret, decryptSecret } from './crypto';
+import {
+  SEARCH_STOPWORDS,
+  tokenize,
+  scriptAwareTokens,
+  buildSearchKeywords,
+} from './search-keywords';
 
 /** A wiki "has a header image" when imageUrl is a non-empty string. */
 function hasHeaderImage(data: FirebaseFirestore.DocumentData): boolean {
   return typeof data.imageUrl === 'string' && data.imageUrl.trim().length > 0;
 }
 
-// Common words carry no search signal and — because the old substring match
-// did `title.includes(kw)` — caused "the"/"is"/"what" to match nearly every
-// article (e.g. a "photic sneeze reflex" query surfaced "The Roche Limit").
-const SEARCH_STOPWORDS = new Set([
-  'the', 'a', 'an', 'and', 'or', 'but', 'of', 'to', 'in', 'on', 'at', 'for',
-  'is', 'are', 'was', 'were', 'be', 'been', 'being', 'am', 'as', 'by', 'from',
-  'with', 'about', 'into', 'than', 'then', 'this', 'that', 'these', 'those',
-  'it', 'its', 'i', 'you', 'he', 'she', 'we', 'they', 'do', 'does', 'did',
-  'can', 'could', 'would', 'should', 'will', 'what', 'who', 'whom', 'whose',
-  'which', 'how', 'why', 'when', 'where', 'there', 'here', 'my', 'your',
-]);
-
-function tokenize(s: string): string[] {
-  return s
-    .toLowerCase()
-    .split(/\s+/)
-    .map((t) => t.replace(/[^\p{L}\p{N}]+/gu, ''))
-    .filter(Boolean);
-}
-
 /**
  * Keyword search over wikis, ranked by relevance.
  *
- * NOTE: this is not a full-text index — it gathers candidates from exact tag
- * matches plus a bounded window of recent docs, then scores them in memory.
- * Recall across all ~280k articles still needs a dedicated index
- * (Typesense/Algolia, or a tokenized keyword array on each doc); see #14.
+ * Candidates come from the per-doc `keywords` index (whole-collection recall;
+ * see search-keywords.ts and scripts/backfill-keywords.ts), exact tag matches,
+ * and a recent-doc window, then get scored in memory.
  */
 export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
   if (!query.trim()) return [];
@@ -44,19 +29,38 @@ export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
   // the raw tokens so we still return something rather than nothing.
   let keywords = tokens.filter((w) => !SEARCH_STOPWORDS.has(w));
   if (keywords.length === 0) keywords = tokens;
-  if (keywords.length === 0) return [];
+  // Script-aware tokens (CJK/Thai bigrams + latin words) drive the indexed
+  // keyword lookup; the whitespace tokens above drive in-memory scoring.
+  const indexTokens = scriptAwareTokens(query);
+  if (keywords.length === 0 && indexTokens.length === 0) return [];
+  if (keywords.length === 0) keywords = indexTokens;
   const phrase = keywords.join(' ');
 
-  // Candidate set: exact tag matches (high precision) + a recent-doc pool for
-  // title/question substring hits. De-duplicated by id.
+  // Candidate set, de-duplicated by id:
+  // 1. keywords-index matches — whole-collection recall for any doc whose
+  //    indexed tokens overlap the query (docs written before the backfill
+  //    simply lack the field and fall through to the other two pools)
+  // 2. exact tag matches (high precision)
+  // 3. a recent-doc pool for title/question substring hits
   const candidates = new Map<string, FirebaseFirestore.DocumentData>();
+
+  if (indexTokens.length > 0) {
+    const kwSnap = await db
+      .collection('wikis')
+      .where('keywords', 'array-contains-any', indexTokens.slice(0, 10))
+      .limit(100)
+      .get();
+    kwSnap.docs.forEach((doc) => candidates.set(doc.id, doc.data()));
+  }
 
   const tagSnap = await db
     .collection('wikis')
     .where('tags', 'array-contains-any', keywords.slice(0, 10))
     .limit(50)
     .get();
-  tagSnap.docs.forEach((doc) => candidates.set(doc.id, doc.data()));
+  tagSnap.docs.forEach((doc) => {
+    if (!candidates.has(doc.id)) candidates.set(doc.id, doc.data());
+  });
 
   const recentSnap = await db
     .collection('wikis')
@@ -214,6 +218,7 @@ export async function createWiki(
 ): Promise<string> {
   const ref = await db.collection('wikis').add({
     ...data,
+    keywords: buildSearchKeywords([data.title, data.question, data.tags?.join(' '), data.summary]),
     views: 0,
     createdAt: Date.now(),
     updatedAt: Date.now(),
@@ -389,12 +394,24 @@ export async function getWikisByTag(tag: string, limit = 20): Promise<Wiki[]> {
 
 export async function updateWiki(
   id: string,
-  data: Partial<Pick<Wiki, 'title' | 'content' | 'summary' | 'tags' | 'conversation'>>
+  data: Partial<Pick<Wiki, 'title' | 'content' | 'summary' | 'tags' | 'sources' | 'conversation'>>
 ): Promise<void> {
-  await db.collection('wikis').doc(id).update({
-    ...data,
-    updatedAt: Date.now(),
-  });
+  const update: Record<string, unknown> = { ...data, updatedAt: Date.now() };
+
+  // Keep the keywords index in sync when searchable fields change. One extra
+  // read per update — updates are rare relative to searches.
+  if (data.title !== undefined || data.summary !== undefined || data.tags !== undefined) {
+    const doc = await db.collection('wikis').doc(id).get();
+    const existing = doc.data() ?? {};
+    update.keywords = buildSearchKeywords([
+      data.title ?? existing.title,
+      existing.question,
+      (data.tags ?? existing.tags)?.join(' '),
+      data.summary ?? existing.summary,
+    ]);
+  }
+
+  await db.collection('wikis').doc(id).update(update);
 }
 
 // ─── Thread Replies ───

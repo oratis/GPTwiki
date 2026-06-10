@@ -1,38 +1,53 @@
 import type { AIModel, UserApiKeys } from '@/types';
 import { getUserApiKeys, getUserEmail } from '@/lib/search';
+import { consumeFreeQuota } from './free-quota';
 
-const FALLBACK_EMAIL = 'wangharp@gmail.com';
+const OWNER_EMAIL = process.env.PLATFORM_OWNER_EMAIL || 'wangharp@gmail.com';
+
+export interface ResolvedKey {
+  apiKey: string | null;
+  /** No key available for this model at all — the user must add their own. */
+  needsConfig: boolean;
+  /** A platform key exists but the user's free daily quota is used up. */
+  quotaExhausted: boolean;
+}
 
 /**
  * Resolves the API key for a given model and user.
  * Priority:
- * 1. User's own API key
- * 2. System env var (only for wangharp@gmail.com)
- * 3. null (user must configure their own key)
+ * 1. User's own API key (unlimited)
+ * 2. Platform env key — unlimited for the owner account, metered by the
+ *    free daily quota (see free-quota.ts) for everyone else
+ * 3. None — either needsConfig (no platform key for this model) or
+ *    quotaExhausted (free tier used up for today)
  */
 export async function resolveApiKeyForUser(
   model: AIModel,
   userId: string
-): Promise<{ apiKey: string | null; needsConfig: boolean }> {
+): Promise<ResolvedKey> {
   // Check user's own keys first
   const userKeys = await getUserApiKeys(userId);
   const userKey = getKeyForModel(model, userKeys);
-
   if (userKey) {
-    return { apiKey: userKey, needsConfig: false };
+    return { apiKey: userKey, needsConfig: false, quotaExhausted: false };
   }
 
-  // Check if this is the fallback user
-  const email = await getUserEmail(userId);
-  if (email === FALLBACK_EMAIL) {
-    const envKey = getEnvKeyForModel(model);
-    if (envKey) {
-      return { apiKey: envKey, needsConfig: false };
+  const envKey = getEnvKeyForModel(model);
+  if (envKey) {
+    const email = await getUserEmail(userId);
+    if (email === OWNER_EMAIL) {
+      return { apiKey: envKey, needsConfig: false, quotaExhausted: false };
     }
+
+    const quota = await consumeFreeQuota(userId);
+    if (quota.ok) {
+      return { apiKey: envKey, needsConfig: false, quotaExhausted: false };
+    }
+    return { apiKey: null, needsConfig: false, quotaExhausted: true };
   }
 
   // No key available
-  return { apiKey: null, needsConfig: true };
+  return { apiKey: null, needsConfig: true, quotaExhausted: false };
 }
 
 function getKeyForModel(model: AIModel, keys?: UserApiKeys | null): string | undefined {

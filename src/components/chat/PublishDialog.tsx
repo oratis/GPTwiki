@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { X, BookPlus, Loader2 } from 'lucide-react';
 import type { Message, AIModel } from '@/types';
 import { useI18n } from '@/lib/i18n/context';
+import { useToast } from '@/components/ui/Toast';
 import LocaleLink from '@/components/LocaleLink';
 
 interface PublishDialogProps {
@@ -15,6 +16,7 @@ interface PublishDialogProps {
 
 export default function PublishDialog({ open, onClose, messages, model }: PublishDialogProps) {
   const { t } = useI18n();
+  const { toast } = useToast();
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState('');
   const [publishing, setPublishing] = useState(false);
@@ -34,6 +36,7 @@ export default function PublishDialog({ open, onClose, messages, model }: Publis
   if (!open) return null;
 
   const handlePublish = async () => {
+    if (!title.trim()) return;
     setPublishing(true);
     try {
       const question = messages.find((m) => m.role === 'user')?.content || '';
@@ -41,7 +44,7 @@ export default function PublishDialog({ open, onClose, messages, model }: Publis
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          title,
+          title: title.trim(),
           question,
           content: '',
           summary: '',
@@ -51,13 +54,24 @@ export default function PublishDialog({ open, onClose, messages, model }: Publis
         }),
       });
 
-      if (!res.ok) throw new Error('Failed to publish');
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        if (err?.error === 'QUOTA_EXHAUSTED') {
+          toast(t('chat.quotaExhausted'));
+          return;
+        }
+        if (err?.error === 'API_KEY_REQUIRED') {
+          toast(t('apiKeys.required'));
+          return;
+        }
+        throw new Error('Failed to publish');
+      }
       const data = await res.json();
       setWikiId(data.id);
       setPublished(true);
     } catch (error) {
       console.error('Publish error:', error);
-      alert(t('errors.publishFailed'));
+      toast(t('errors.publishFailed'));
     } finally {
       setPublishing(false);
     }
@@ -103,14 +117,16 @@ export default function PublishDialog({ open, onClose, messages, model }: Publis
         ) : (
           <>
             <div className="mb-4">
-              <label className="mb-1 block text-sm font-medium text-gray-700">
+              <label htmlFor="publish-title" className="mb-1 block text-sm font-medium text-gray-700">
                 {t('publish.titleLabel')}
               </label>
               <input
+                id="publish-title"
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder={t('publish.titlePlaceholder')}
+                required
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
             </div>
@@ -143,7 +159,7 @@ export default function PublishDialog({ open, onClose, messages, model }: Publis
               </button>
               <button
                 onClick={handlePublish}
-                disabled={publishing}
+                disabled={publishing || !title.trim()}
                 className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
               >
                 {publishing ? (

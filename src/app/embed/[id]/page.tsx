@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { BookOpen, Eye, Bot } from 'lucide-react';
 import { getWikiById, getPopularWikis } from '@/lib/search';
 import { getModelDisplayName } from '@/lib/models';
+import { hasLocale } from '@/lib/i18n/server';
 
 export const revalidate = 3600;
 
@@ -18,10 +19,13 @@ export async function generateStaticParams(): Promise<Array<{ id: string }>> {
 
 export default async function EmbedPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ lang?: string }>;
 }) {
   const { id } = await params;
+  const { lang } = await searchParams;
   const wiki = await getWikiById(id);
   if (!wiki) notFound();
 
@@ -29,7 +33,11 @@ export default async function EmbedPage({
   const imageMatch = wiki.content.match(/!\[[^\]]*\]\((https?:\/\/[^\s)]+)\)/);
   const imageUrl = wiki.imageUrl || imageMatch?.[1] || null;
 
-  const targetUrl = `https://gptwiki.net/en/wiki/${id}`;
+  // Link back in the embedder's locale (?lang=), else the article's own
+  // language, else English — not hardcoded /en/ for everyone.
+  const targetLocale =
+    lang && hasLocale(lang) ? lang : wiki.language && hasLocale(wiki.language) ? wiki.language : 'en';
+  const targetUrl = `https://gptwiki.net/${targetLocale}/wiki/${id}`;
   const description = wiki.summary || wiki.content.replace(/[#*`_[\]!()]/g, '').slice(0, 180);
 
   return (

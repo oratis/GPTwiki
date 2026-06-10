@@ -59,7 +59,22 @@ export async function PUT(
 
     // Regenerate wiki content from extended conversation, with the key for
     // the wiki's own model — not hardcoded to claude.
-    const { apiKey } = await resolveApiKeyForUser(wiki.aiModel, session.user.id!);
+    const { apiKey, needsConfig, quotaExhausted } = await resolveApiKeyForUser(
+      wiki.aiModel,
+      session.user.id!
+    );
+    if (quotaExhausted) {
+      return NextResponse.json(
+        { error: 'QUOTA_EXHAUSTED', message: 'Daily free message quota used up. Add your own API key to continue.' },
+        { status: 403 }
+      );
+    }
+    if (needsConfig) {
+      return NextResponse.json(
+        { error: 'API_KEY_REQUIRED', message: 'Please configure your API key in Profile settings.' },
+        { status: 403 }
+      );
+    }
     const generated = await generateWikiContent(wiki.aiModel, conversation, apiKey || undefined);
 
     await updateWiki(id, {
@@ -67,6 +82,7 @@ export async function PUT(
       content: generated.content,
       summary: generated.summary,
       tags: generated.tags.length > 0 ? generated.tags : wiki.tags,
+      sources: generated.sources.length > 0 ? generated.sources : wiki.sources ?? [],
       conversation,
     });
 

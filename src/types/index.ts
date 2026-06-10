@@ -12,6 +12,12 @@ export interface Conversation {
   model: AIModel;
 }
 
+/** A cited reference attached to a wiki article. */
+export interface WikiSource {
+  title: string;
+  url: string;
+}
+
 export interface Wiki {
   id: string;
   title: string;
@@ -34,6 +40,14 @@ export interface Wiki {
   originalImageUrl?: string;
   /** ISO 639-1 code of the article's content language (e.g. "en", "zh"). */
   language?: string;
+  /**
+   * Where the article came from: "user" (default), "seed",
+   * "editorial-draft", or "wikipedia-{lang}-dump" / "wikipedia-{lang}-rich"
+   * for mirrored Wikipedia content (which must show CC BY-SA attribution).
+   */
+  source?: string;
+  /** References cited by the article, rendered as a References section. */
+  sources?: WikiSource[];
 }
 
 export interface ThreadReply {

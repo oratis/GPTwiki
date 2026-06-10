@@ -97,7 +97,7 @@ export default function RecentWikisSection({ initialWikis }: Props = {}) {
           )}
 
           {!loadingMore && nextCursor === null && wikis.length > 0 && (
-            <p className="mt-6 text-center text-sm text-gray-500">No more wikis</p>
+            <p className="mt-6 text-center text-sm text-gray-500">{t('home.noMoreWikis')}</p>
           )}
 
           <div ref={sentinelRef} className="h-4" />
