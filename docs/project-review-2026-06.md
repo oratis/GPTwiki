@@ -111,3 +111,32 @@ Wikipedia 复制内容降级为"冷启动脚手架"，把"对话沉淀 + 接力�
 ## 六、一句话总结
 
 工程质量配得上一个认真生意，但先在 24 小时内处理飞书 secret 泄漏；然后把产品重心从"复制出来的 10 万篇"挪到"独有的对话→文章→追问闭环"上，用免费额度打开漏斗——否则这是一个没人能用核心功能的协作产品。
+
+---
+
+## 附录：实施状态（2026-06-10，分支 `review-improvements`）
+
+### 已完成
+
+| 项 | 提交 | 说明 |
+|---|---|---|
+| 仓库止血 | `8524697` | write-*.py 移出 git 追踪并 ignore；pipeline 断点/日志/shard/translations 全部 .gitignore；README clone 地址修正 |
+| 端点加固 | `995ee13` | PUT /api/wiki/[id] 过 zod + 限流 + 用原 aiModel 的 key（原先 GPT/Gemini 文章更新会错拿 Anthropic key）；seed/PayPal 限流；捐赠台账 3 次重试；typecheck 全仓库归零（sax 类型） |
+| 免费额度 | `c25cfc4` | FREE_DAILY_MESSAGES（默认 10/天）平台 key 免费层，用户文档 `freeQuota` 字段事务计量；chat/threads/wiki 创建/更新四条路径统一走授权检查（原先发布/更新会静默烧平台 key）；15 语言 QUOTA_EXHAUSTED 提示 |
+| 引用来源 | `c25cfc4` | 生成时请求 sources[]，消毒后入库，详情页渲染 References 区 |
+| Wikipedia 署名 | `c25cfc4` | wikipedia-* 来源文章渲染 CC BY-SA 署名 + 原文链接；JSON-LD 加 license/isBasedOn |
+| 搜索 v2 | `c25cfc4` | 每篇文档 keywords 倒排字段（拉丁词 + CJK/泰文 bigram），全集合召回；scripts/backfill-keywords.ts 回填存量（dry-run 默认、可断点续传）|
+| UX | `c25cfc4` | alert() → Toast 组件；讨论加载失败可重试；发布标题必填；embed 卡片 locale 感知 |
+
+### 待用户操作（无法代劳）
+
+1. **轮换飞书 APP_SECRET**（飞书开放平台后台）——secret 仍在公开 git 历史里。
+2. 轮换后（可选）`git filter-repo` 清历史 + force push。
+3. 部署后跑一次 `npx tsx scripts/backfill-keywords.ts --apply` 回填搜索索引。
+
+### 已规划未实施
+
+- Thread 合并进正文 + 版本历史（已建独立任务）
+- Typesense/Algolia 全文搜索（关键词字段为过渡方案）
+- 纯 Wikipedia 复制页 noindex / 内容分层（重大 SEO 决策，需拍板）
+- Freemium 订阅（免费额度是其地基）
