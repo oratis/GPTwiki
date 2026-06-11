@@ -2,6 +2,12 @@ import type { Locale } from './locales';
 
 const translations: Record<Locale, Record<string, string>> = {
   en: {
+    // Pro waitlist (willingness-to-pay probe)
+    'waitlist.title': 'GPTwiki Pro — coming soon',
+    'waitlist.description': 'Hosted AI quota, no API key of your own needed. Join the waitlist and we\'ll email you at launch.',
+    'waitlist.join': 'Join the waitlist',
+    'waitlist.joined': 'You\'re on the list — we\'ll be in touch!',
+
     // Free quota, references, Wikipedia attribution, misc states
     'chat.quotaExhausted': 'You\'ve used today\'s free messages. Add your own API key in your profile to continue, or come back tomorrow.',
     'common.retry': 'Retry',
@@ -194,6 +200,12 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   zh: {
+    // Pro waitlist (willingness-to-pay probe)
+    'waitlist.title': 'GPTwiki Pro 即将推出',
+    'waitlist.description': '托管 AI 额度，无需自己的 API key。加入等待名单，上线后第一时间通知你。',
+    'waitlist.join': '加入等待名单',
+    'waitlist.joined': '已加入名单，上线后会通知你！',
+
     // Free quota, references, Wikipedia attribution, misc states
     'chat.quotaExhausted': '今日免费额度已用完。可在个人主页添加自己的 API key 继续使用，或明天再来。',
     'common.retry': '重试',
@@ -365,6 +377,12 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   ja: {
+    // Pro waitlist (willingness-to-pay probe)
+    'waitlist.title': 'GPTwiki Pro — 近日公開',
+    'waitlist.description': 'ご自身のAPIキー不要のホスト型AI利用枠。ウェイトリストに登録すると、リリース時にメールでお知らせします。',
+    'waitlist.join': 'ウェイトリストに登録',
+    'waitlist.joined': '登録済みです。リリース時にご連絡します！',
+
     // Free quota, references, Wikipedia attribution, misc states
     'chat.quotaExhausted': '本日の無料利用枠を使い切りました。プロフィールでご自身のAPIキーを追加するか、明日再度お試しください。',
     'common.retry': '再試行',
@@ -536,6 +554,12 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   ko: {
+    // Pro waitlist (willingness-to-pay probe)
+    'waitlist.title': 'GPTwiki Pro — 곧 출시',
+    'waitlist.description': '본인의 API 키 없이 사용하는 호스팅 AI 사용량. 대기자 명단에 등록하면 출시 시 이메일로 알려드립니다.',
+    'waitlist.join': '대기자 명단 등록',
+    'waitlist.joined': '등록되었습니다. 출시되면 연락드릴게요!',
+
     // Free quota, references, Wikipedia attribution, misc states
     'chat.quotaExhausted': '오늘의 무료 사용량을 모두 사용했습니다. 프로필에서 본인의 API 키를 추가하거나 내일 다시 이용해 주세요.',
     'common.retry': '다시 시도',
@@ -707,6 +731,12 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   es: {
+    // Pro waitlist (willingness-to-pay probe)
+    'waitlist.title': 'GPTwiki Pro — próximamente',
+    'waitlist.description': 'Cuota de IA gestionada, sin necesidad de tu propia clave de API. Únete a la lista de espera y te avisaremos por correo en el lanzamiento.',
+    'waitlist.join': 'Unirme a la lista de espera',
+    'waitlist.joined': '¡Estás en la lista! Te avisaremos.',
+
     // Free quota, references, Wikipedia attribution, misc states
     'chat.quotaExhausted': 'Has agotado tus mensajes gratuitos de hoy. Añade tu propia clave de API en tu perfil para continuar, o vuelve mañana.',
     'common.retry': 'Reintentar',
@@ -878,6 +908,12 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   fr: {
+    // Pro waitlist (willingness-to-pay probe)
+    'waitlist.title': 'GPTwiki Pro — bientôt disponible',
+    'waitlist.description': 'Quota d\'IA hébergé, sans clé API personnelle. Rejoignez la liste d\'attente et nous vous préviendrons par e-mail au lancement.',
+    'waitlist.join': 'Rejoindre la liste d\'attente',
+    'waitlist.joined': 'Vous êtes inscrit — nous vous tiendrons informé !',
+
     // Free quota, references, Wikipedia attribution, misc states
     'chat.quotaExhausted': 'Vous avez utilisé vos messages gratuits du jour. Ajoutez votre propre clé API dans votre profil pour continuer, ou revenez demain.',
     'common.retry': 'Réessayer',
@@ -1049,6 +1085,12 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   de: {
+    // Pro waitlist (willingness-to-pay probe)
+    'waitlist.title': 'GPTwiki Pro — demnächst',
+    'waitlist.description': 'Gehostetes KI-Kontingent ohne eigenen API-Schlüssel. Trag dich in die Warteliste ein und wir benachrichtigen dich zum Start per E-Mail.',
+    'waitlist.join': 'Auf die Warteliste',
+    'waitlist.joined': 'Du stehst auf der Liste — wir melden uns!',
+
     // Free quota, references, Wikipedia attribution, misc states
     'chat.quotaExhausted': 'Du hast deine kostenlosen Nachrichten für heute aufgebraucht. Füge in deinem Profil einen eigenen API-Schlüssel hinzu oder komm morgen wieder.',
     'common.retry': 'Erneut versuchen',
@@ -1220,6 +1262,12 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   pt: {
+    // Pro waitlist (willingness-to-pay probe)
+    'waitlist.title': 'GPTwiki Pro — em breve',
+    'waitlist.description': 'Cota de IA hospedada, sem precisar da sua própria chave de API. Entre na lista de espera e avisaremos por e-mail no lançamento.',
+    'waitlist.join': 'Entrar na lista de espera',
+    'waitlist.joined': 'Você está na lista — entraremos em contato!',
+
     // Free quota, references, Wikipedia attribution, misc states
     'chat.quotaExhausted': 'Você usou suas mensagens gratuitas de hoje. Adicione sua própria chave de API no seu perfil para continuar, ou volte amanhã.',
     'common.retry': 'Tentar novamente',
@@ -1391,6 +1439,12 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   ru: {
+    // Pro waitlist (willingness-to-pay probe)
+    'waitlist.title': 'GPTwiki Pro — скоро',
+    'waitlist.description': 'Размещённая квота ИИ без собственного API-ключа. Запишитесь в лист ожидания, и мы сообщим вам о запуске по почте.',
+    'waitlist.join': 'В лист ожидания',
+    'waitlist.joined': 'Вы в списке — мы свяжемся с вами!',
+
     // Free quota, references, Wikipedia attribution, misc states
     'chat.quotaExhausted': 'Вы использовали бесплатные сообщения на сегодня. Добавьте свой API-ключ в профиле, чтобы продолжить, или возвращайтесь завтра.',
     'common.retry': 'Повторить',
@@ -1562,6 +1616,12 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   ar: {
+    // Pro waitlist (willingness-to-pay probe)
+    'waitlist.title': 'GPTwiki Pro — قريبًا',
+    'waitlist.description': 'حصة ذكاء اصطناعي مستضافة دون الحاجة إلى مفتاح API خاص بك. انضم إلى قائمة الانتظار وسنراسلك عند الإطلاق.',
+    'waitlist.join': 'الانضمام إلى قائمة الانتظار',
+    'waitlist.joined': 'أنت في القائمة — سنتواصل معك!',
+
     // Free quota, references, Wikipedia attribution, misc states
     'chat.quotaExhausted': 'لقد استخدمت رسائلك المجانية لهذا اليوم. أضف مفتاح API الخاص بك في ملفك الشخصي للمتابعة، أو عد غدًا.',
     'common.retry': 'إعادة المحاولة',
@@ -1733,6 +1793,12 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   hi: {
+    // Pro waitlist (willingness-to-pay probe)
+    'waitlist.title': 'GPTwiki Pro — जल्द आ रहा है',
+    'waitlist.description': 'होस्टेड AI कोटा, अपनी API कुंजी की ज़रूरत नहीं। प्रतीक्षा सूची में शामिल हों, लॉन्च पर हम आपको ईमेल करेंगे।',
+    'waitlist.join': 'प्रतीक्षा सूची में शामिल हों',
+    'waitlist.joined': 'आप सूची में हैं — हम संपर्क करेंगे!',
+
     // Free quota, references, Wikipedia attribution, misc states
     'chat.quotaExhausted': 'आज के मुफ़्त संदेश समाप्त हो गए हैं। जारी रखने के लिए अपनी प्रोफ़ाइल में अपनी API कुंजी जोड़ें, या कल फिर आएं।',
     'common.retry': 'पुनः प्रयास करें',
@@ -1904,6 +1970,12 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   it: {
+    // Pro waitlist (willingness-to-pay probe)
+    'waitlist.title': 'GPTwiki Pro — in arrivo',
+    'waitlist.description': 'Quota IA gestita, senza bisogno di una tua chiave API. Iscriviti alla lista d\'attesa e ti avviseremo via email al lancio.',
+    'waitlist.join': 'Iscrivimi alla lista d\'attesa',
+    'waitlist.joined': 'Sei in lista — ti contatteremo!',
+
     // Free quota, references, Wikipedia attribution, misc states
     'chat.quotaExhausted': 'Hai esaurito i messaggi gratuiti di oggi. Aggiungi la tua chiave API nel profilo per continuare, oppure torna domani.',
     'common.retry': 'Riprova',
@@ -2075,6 +2147,12 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   tr: {
+    // Pro waitlist (willingness-to-pay probe)
+    'waitlist.title': 'GPTwiki Pro — çok yakında',
+    'waitlist.description': 'Kendi API anahtarınız olmadan barındırılan yapay zeka kotası. Bekleme listesine katılın, lansmanda size e-posta gönderelim.',
+    'waitlist.join': 'Bekleme listesine katıl',
+    'waitlist.joined': 'Listedesiniz — sizinle iletişime geçeceğiz!',
+
     // Free quota, references, Wikipedia attribution, misc states
     'chat.quotaExhausted': 'Bugünkü ücretsiz mesaj hakkınızı kullandınız. Devam etmek için profilinize kendi API anahtarınızı ekleyin veya yarın tekrar gelin.',
     'common.retry': 'Tekrar dene',
@@ -2246,6 +2324,12 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   vi: {
+    // Pro waitlist (willingness-to-pay probe)
+    'waitlist.title': 'GPTwiki Pro — sắp ra mắt',
+    'waitlist.description': 'Hạn mức AI được lưu trữ sẵn, không cần API key của riêng bạn. Tham gia danh sách chờ và chúng tôi sẽ email cho bạn khi ra mắt.',
+    'waitlist.join': 'Tham gia danh sách chờ',
+    'waitlist.joined': 'Bạn đã có trong danh sách — chúng tôi sẽ liên hệ!',
+
     // Free quota, references, Wikipedia attribution, misc states
     'chat.quotaExhausted': 'Bạn đã dùng hết số tin nhắn miễn phí hôm nay. Hãy thêm API key của riêng bạn trong hồ sơ để tiếp tục, hoặc quay lại vào ngày mai.',
     'common.retry': 'Thử lại',
@@ -2417,6 +2501,12 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   th: {
+    // Pro waitlist (willingness-to-pay probe)
+    'waitlist.title': 'GPTwiki Pro — เร็วๆ นี้',
+    'waitlist.description': 'โควต้า AI แบบโฮสต์ ไม่ต้องใช้ API key ของคุณเอง เข้าร่วมรายชื่อรอ แล้วเราจะส่งอีเมลแจ้งเมื่อเปิดตัว',
+    'waitlist.join': 'เข้าร่วมรายชื่อรอ',
+    'waitlist.joined': 'คุณอยู่ในรายชื่อแล้ว — เราจะติดต่อไป!',
+
     // Free quota, references, Wikipedia attribution, misc states
     'chat.quotaExhausted': 'คุณใช้ข้อความฟรีของวันนี้หมดแล้ว เพิ่ม API key ของคุณเองในโปรไฟล์เพื่อใช้งานต่อ หรือกลับมาใหม่พรุ่งนี้',
     'common.retry': 'ลองอีกครั้ง',

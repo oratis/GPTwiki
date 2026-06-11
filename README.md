@@ -5,25 +5,26 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
 [![Google Cloud](https://img.shields.io/badge/Google%20Cloud-Run-4285F4)](https://cloud.google.com/run)
 
-**The AI-powered collaborative encyclopedia.** Create wiki articles through conversations with Claude, GPT-4o, and Gemini. 100,000+ articles in 15 languages.
+**The living Q&A encyclopedia.** Every good AI conversation becomes a persistent, searchable article that the next person can find — and keep asking. Built on conversations with Claude, GPT-4o, and Gemini, in 15 languages.
 
 **[gptwiki.net](https://gptwiki.net)**
 
 ## Why GPTwiki?
 
-Wikipedia requires expert editors. ChatGPT answers vanish after each session. GPTwiki bridges the gap: **ask AI a question, get a wiki article that persists and grows**.
+Wikipedia can't answer your question — it requires expert editors and only covers what's already written. ChatGPT can answer, but the answer vanishes when the session ends. GPTwiki closes the loop: **ask AI a question, get an article that persists, and let anyone pick up the conversation where you left off**.
 
-- Ask a question in any of 15 languages
-- AI generates a structured, citable article
-- The community can continue the conversation and improve the content
+- **Ask** a question in any of 15 languages — the AI answers with citations
+- **Publish** the conversation as a structured wiki article
+- **Grow** — every article carries its conversation; anyone can ask a follow-up thread, and good follow-ups become part of the article
 - Knowledge compounds over time instead of disappearing
 
 ## Features
 
 - **Multi-Model AI** - Choose between Claude (Anthropic), GPT-4o (OpenAI), or Gemini 2.0 Flash (Google)
-- **Free Daily Quota** - Signed-in users get free platform-keyed messages every day (configurable via `FREE_DAILY_MESSAGES`)
-- **Bring Your Own Key** - Add your own API keys for unlimited usage
+- **Bring Your Own Key** - Add your own API keys in your profile; they're encrypted at rest (AES-256-GCM)
+- **Optional Free Tier** - Self-hosters can grant users free platform-keyed messages per day (`FREE_DAILY_MESSAGES`, off by default)
 - **Citations** - AI-generated articles include a References section with supporting sources
+- **Conversation Threads** - Every article carries its conversation; readers ask follow-ups that grow the article
 - **Wikipedia Attribution** - Mirrored Wikipedia content carries CC BY-SA attribution and links to the original
 - **Conversation to Wiki** - Publish AI conversations as structured, searchable wiki articles
 - **15 Languages** - Built-in i18n with auto browser detection: EN, ZH, JA, KO, ES, FR, DE, PT, RU, AR, HI, IT, TR, VI, TH
@@ -84,7 +85,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `ANTHROPIC_API_KEY` | Optional | Anthropic API key (Claude) |
 | `OPENAI_API_KEY` | Optional | OpenAI API key (GPT-4o) |
 | `GOOGLE_AI_API_KEY` | Optional | Google AI API key (Gemini) |
-| `FREE_DAILY_MESSAGES` | Optional | Free platform-keyed messages per user per day (default 10, 0 = BYOK-only) |
+| `FREE_DAILY_MESSAGES` | Optional | Free platform-keyed messages per user per day (default 0 = BYOK-only) |
 | `PLATFORM_OWNER_EMAIL` | Optional | Account exempt from the free-tier metering |
 | `NEXT_PUBLIC_PAYPAL_CLIENT_ID` | Optional | PayPal Client ID for donations |
 | `PAYPAL_CLIENT_SECRET` | Optional | PayPal Client Secret |

@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import { User, Calendar, BookOpen, Loader2, ArrowLeft } from 'lucide-react';
 import WikiCard from '@/components/wiki/WikiCard';
 import ApiKeyManager from '@/components/profile/ApiKeyManager';
+import ProWaitlistCard from '@/components/profile/ProWaitlistCard';
 import FollowButton from '@/components/profile/FollowButton';
 import { useI18n } from '@/lib/i18n/context';
 import { timeAgo } from '@/lib/utils';
@@ -121,10 +122,11 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
         </div>
       </div>
 
-      {/* API Key Manager - only for own profile */}
+      {/* API Key Manager + Pro waitlist - only for own profile */}
       {isOwnProfile && (
-        <div className="mb-8">
+        <div className="mb-8 space-y-4">
           <ApiKeyManager />
+          <ProWaitlistCard />
         </div>
       )}
 
