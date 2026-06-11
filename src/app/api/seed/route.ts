@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
 import { isAuthorizedSeedRequest } from '@/lib/seed-auth';
+import { checkRateLimit, getClientId, rateLimited } from '@/lib/rate-limit';
 import { allDrafts } from '../../../../content';
 import { allTranslations } from '../../../../content/i18n';
 
@@ -27,6 +28,11 @@ export async function POST(req: NextRequest) {
   if (!isAuthorizedSeedRequest(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+
+  // Even with a valid secret, cap how often this can run: a leaked secret
+  // shouldn't allow hammering the dedup scan and batch writes.
+  const rl = checkRateLimit({ key: `seed:${getClientId(req)}`, max: 3, windowSec: 60 });
+  if (!rl.ok) return rateLimited(rl);
 
   const now = Date.now();
 

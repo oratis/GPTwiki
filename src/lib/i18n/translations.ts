@@ -2,6 +2,14 @@ import type { Locale } from './locales';
 
 const translations: Record<Locale, Record<string, string>> = {
   en: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'You\'ve used today\'s free messages. Add your own API key in your profile to continue, or come back tomorrow.',
+    'common.retry': 'Retry',
+    'thread.loadError': 'Failed to load discussions.',
+    'wiki.references': 'References',
+    'wiki.wikipediaAttribution': 'This article is based on content from Wikipedia and is available under the CC BY-SA license.',
+    'wiki.wikipediaViewOriginal': 'View the original on Wikipedia',
+
     // Header
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Browse Wiki',
@@ -79,6 +87,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'thread.loadMore': 'Load more',
     'thread.generating': 'AI is generating an answer...',
     'thread.replyPosted': 'Reply posted',
+    'thread.mergeIntoArticle': 'Merge into article',
+    'thread.merging': 'Merging...',
+    'thread.mergeSuccess': 'Thread merged into the article',
+    'thread.mergeFailed': 'Failed to merge thread.',
+    'thread.merged': 'Merged into article',
+    'wiki.editHistory': 'Edit history',
+    'wiki.contributors': 'Contributors',
     'common.cancel': 'Cancel',
 
     // Login
@@ -179,6 +194,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   zh: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': '今日免费额度已用完。可在个人主页添加自己的 API key 继续使用，或明天再来。',
+    'common.retry': '重试',
+    'thread.loadError': '加载讨论失败。',
+    'wiki.references': '参考来源',
+    'wiki.wikipediaAttribution': '本文内容源自维基百科，遵循 CC BY-SA 许可协议。',
+    'wiki.wikipediaViewOriginal': '在维基百科查看原文',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': '浏览Wiki',
     'header.newWiki': '新建Wiki',
@@ -247,6 +270,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'thread.loadMore': '加载更多',
     'thread.generating': 'AI 正在生成回答...',
     'thread.replyPosted': '回复已发布',
+    'thread.mergeIntoArticle': '合并进正文',
+    'thread.merging': '合并中...',
+    'thread.mergeSuccess': '讨论已合并进正文',
+    'thread.mergeFailed': '合并失败。',
+    'thread.merged': '已合并进正文',
+    'wiki.editHistory': '编辑历史',
+    'wiki.contributors': '贡献者',
     'common.cancel': '取消',
     'login.title': '登录GPTwiki',
     'login.subtitle': '登录后即可通过AI对话创建Wiki文章。',
@@ -335,6 +365,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   ja: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': '本日の無料利用枠を使い切りました。プロフィールでご自身のAPIキーを追加するか、明日再度お試しください。',
+    'common.retry': '再試行',
+    'thread.loadError': 'ディスカッションの読み込みに失敗しました。',
+    'wiki.references': '参考文献',
+    'wiki.wikipediaAttribution': 'この記事はWikipediaのコンテンツに基づいており、CC BY-SAライセンスの下で提供されています。',
+    'wiki.wikipediaViewOriginal': 'Wikipediaで原文を見る',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Wiki一覧',
     'header.newWiki': '新規Wiki',
@@ -403,6 +441,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'thread.loadMore': 'もっと読み込む',
     'thread.generating': 'AIが回答を生成中...',
     'thread.replyPosted': '返信が投稿されました',
+    'thread.mergeIntoArticle': '記事に統合',
+    'thread.merging': '統合中...',
+    'thread.mergeSuccess': 'スレッドを記事に統合しました',
+    'thread.mergeFailed': '統合に失敗しました。',
+    'thread.merged': '記事に統合済み',
+    'wiki.editHistory': '編集履歴',
+    'wiki.contributors': '貢献者',
     'common.cancel': 'キャンセル',
     'login.title': 'GPTwikiにログイン',
     'login.subtitle': 'ログインしてAI会話でWiki記事を作成しましょう。',
@@ -491,6 +536,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   ko: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': '오늘의 무료 사용량을 모두 사용했습니다. 프로필에서 본인의 API 키를 추가하거나 내일 다시 이용해 주세요.',
+    'common.retry': '다시 시도',
+    'thread.loadError': '토론을 불러오지 못했습니다.',
+    'wiki.references': '참고 문헌',
+    'wiki.wikipediaAttribution': '이 문서는 위키백과의 콘텐츠를 기반으로 하며 CC BY-SA 라이선스에 따라 제공됩니다.',
+    'wiki.wikipediaViewOriginal': '위키백과에서 원문 보기',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Wiki 둘러보기',
     'header.newWiki': '새 Wiki',
@@ -559,6 +612,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'thread.loadMore': '더 보기',
     'thread.generating': 'AI가 답변을 생성 중...',
     'thread.replyPosted': '답변이 게시되었습니다',
+    'thread.mergeIntoArticle': '본문에 병합',
+    'thread.merging': '병합 중...',
+    'thread.mergeSuccess': '스레드가 본문에 병합되었습니다',
+    'thread.mergeFailed': '병합에 실패했습니다.',
+    'thread.merged': '본문에 병합됨',
+    'wiki.editHistory': '편집 기록',
+    'wiki.contributors': '기여자',
     'common.cancel': '취소',
     'login.title': 'GPTwiki 로그인',
     'login.subtitle': '로그인하여 AI 대화로 Wiki 기사를 만들어 보세요.',
@@ -647,6 +707,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   es: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Has agotado tus mensajes gratuitos de hoy. Añade tu propia clave de API en tu perfil para continuar, o vuelve mañana.',
+    'common.retry': 'Reintentar',
+    'thread.loadError': 'No se pudieron cargar las discusiones.',
+    'wiki.references': 'Referencias',
+    'wiki.wikipediaAttribution': 'Este artículo se basa en contenido de Wikipedia y está disponible bajo la licencia CC BY-SA.',
+    'wiki.wikipediaViewOriginal': 'Ver el original en Wikipedia',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Explorar Wiki',
     'header.newWiki': 'Nuevo Wiki',
@@ -715,6 +783,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'thread.loadMore': 'Cargar más',
     'thread.generating': 'La IA está generando una respuesta...',
     'thread.replyPosted': 'Respuesta publicada',
+    'thread.mergeIntoArticle': 'Fusionar con el artículo',
+    'thread.merging': 'Fusionando...',
+    'thread.mergeSuccess': 'Hilo fusionado con el artículo',
+    'thread.mergeFailed': 'No se pudo fusionar el hilo.',
+    'thread.merged': 'Fusionado con el artículo',
+    'wiki.editHistory': 'Historial de ediciones',
+    'wiki.contributors': 'Colaboradores',
     'common.cancel': 'Cancelar',
     'login.title': 'Iniciar sesión en GPTwiki',
     'login.subtitle': 'Inicia sesión para crear artículos wiki a través de conversaciones con IA.',
@@ -803,6 +878,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   fr: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Vous avez utilisé vos messages gratuits du jour. Ajoutez votre propre clé API dans votre profil pour continuer, ou revenez demain.',
+    'common.retry': 'Réessayer',
+    'thread.loadError': 'Échec du chargement des discussions.',
+    'wiki.references': 'Références',
+    'wiki.wikipediaAttribution': 'Cet article est basé sur du contenu de Wikipédia et est disponible sous licence CC BY-SA.',
+    'wiki.wikipediaViewOriginal': 'Voir l\'original sur Wikipédia',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Parcourir le Wiki',
     'header.newWiki': 'Nouveau Wiki',
@@ -871,6 +954,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'thread.loadMore': 'Charger plus',
     'thread.generating': "L'IA génère une réponse...",
     'thread.replyPosted': 'Réponse publiée',
+    'thread.mergeIntoArticle': "Fusionner dans l'article",
+    'thread.merging': 'Fusion en cours...',
+    'thread.mergeSuccess': "Discussion fusionnée dans l'article",
+    'thread.mergeFailed': 'Échec de la fusion.',
+    'thread.merged': "Fusionné dans l'article",
+    'wiki.editHistory': 'Historique des modifications',
+    'wiki.contributors': 'Contributeurs',
     'common.cancel': 'Annuler',
     'login.title': 'Se connecter à GPTwiki',
     'login.subtitle': 'Connectez-vous pour créer des articles wiki via des conversations IA.',
@@ -959,6 +1049,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   de: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Du hast deine kostenlosen Nachrichten für heute aufgebraucht. Füge in deinem Profil einen eigenen API-Schlüssel hinzu oder komm morgen wieder.',
+    'common.retry': 'Erneut versuchen',
+    'thread.loadError': 'Diskussionen konnten nicht geladen werden.',
+    'wiki.references': 'Quellen',
+    'wiki.wikipediaAttribution': 'Dieser Artikel basiert auf Inhalten aus Wikipedia und ist unter der CC-BY-SA-Lizenz verfügbar.',
+    'wiki.wikipediaViewOriginal': 'Original auf Wikipedia ansehen',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Wiki durchsuchen',
     'header.newWiki': 'Neues Wiki',
@@ -1027,6 +1125,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'thread.loadMore': 'Mehr laden',
     'thread.generating': 'KI generiert eine Antwort...',
     'thread.replyPosted': 'Antwort veröffentlicht',
+    'thread.mergeIntoArticle': 'In den Artikel übernehmen',
+    'thread.merging': 'Wird übernommen...',
+    'thread.mergeSuccess': 'Diskussion in den Artikel übernommen',
+    'thread.mergeFailed': 'Übernahme fehlgeschlagen.',
+    'thread.merged': 'In den Artikel übernommen',
+    'wiki.editHistory': 'Bearbeitungsverlauf',
+    'wiki.contributors': 'Mitwirkende',
     'common.cancel': 'Abbrechen',
     'login.title': 'Bei GPTwiki anmelden',
     'login.subtitle': 'Melde dich an, um Wiki-Artikel durch KI-Gespräche zu erstellen.',
@@ -1115,6 +1220,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   pt: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Você usou suas mensagens gratuitas de hoje. Adicione sua própria chave de API no seu perfil para continuar, ou volte amanhã.',
+    'common.retry': 'Tentar novamente',
+    'thread.loadError': 'Falha ao carregar as discussões.',
+    'wiki.references': 'Referências',
+    'wiki.wikipediaAttribution': 'Este artigo é baseado em conteúdo da Wikipédia e está disponível sob a licença CC BY-SA.',
+    'wiki.wikipediaViewOriginal': 'Ver o original na Wikipédia',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Explorar Wiki',
     'header.newWiki': 'Novo Wiki',
@@ -1183,6 +1296,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'thread.loadMore': 'Carregar mais',
     'thread.generating': 'IA gerando resposta...',
     'thread.replyPosted': 'Resposta publicada',
+    'thread.mergeIntoArticle': 'Mesclar com o artigo',
+    'thread.merging': 'Mesclando...',
+    'thread.mergeSuccess': 'Discussão mesclada com o artigo',
+    'thread.mergeFailed': 'Falha ao mesclar a discussão.',
+    'thread.merged': 'Mesclado com o artigo',
+    'wiki.editHistory': 'Histórico de edições',
+    'wiki.contributors': 'Colaboradores',
     'common.cancel': 'Cancelar',
     'login.title': 'Entrar no GPTwiki',
     'login.subtitle': 'Entre para criar artigos wiki através de conversas com IA.',
@@ -1271,6 +1391,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   ru: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Вы использовали бесплатные сообщения на сегодня. Добавьте свой API-ключ в профиле, чтобы продолжить, или возвращайтесь завтра.',
+    'common.retry': 'Повторить',
+    'thread.loadError': 'Не удалось загрузить обсуждения.',
+    'wiki.references': 'Источники',
+    'wiki.wikipediaAttribution': 'Эта статья основана на материалах Википедии и доступна по лицензии CC BY-SA.',
+    'wiki.wikipediaViewOriginal': 'Посмотреть оригинал в Википедии',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Обзор Wiki',
     'header.newWiki': 'Новый Wiki',
@@ -1339,6 +1467,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'thread.loadMore': 'Загрузить ещё',
     'thread.generating': 'ИИ генерирует ответ...',
     'thread.replyPosted': 'Ответ опубликован',
+    'thread.mergeIntoArticle': 'Объединить со статьёй',
+    'thread.merging': 'Объединение...',
+    'thread.mergeSuccess': 'Обсуждение добавлено в статью',
+    'thread.mergeFailed': 'Не удалось объединить обсуждение.',
+    'thread.merged': 'Добавлено в статью',
+    'wiki.editHistory': 'История правок',
+    'wiki.contributors': 'Соавторы',
     'common.cancel': 'Отмена',
     'login.title': 'Войти в GPTwiki',
     'login.subtitle': 'Войдите, чтобы создавать вики-статьи через разговоры с ИИ.',
@@ -1427,6 +1562,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   ar: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'لقد استخدمت رسائلك المجانية لهذا اليوم. أضف مفتاح API الخاص بك في ملفك الشخصي للمتابعة، أو عد غدًا.',
+    'common.retry': 'إعادة المحاولة',
+    'thread.loadError': 'فشل تحميل المناقشات.',
+    'wiki.references': 'المراجع',
+    'wiki.wikipediaAttribution': 'تستند هذه المقالة إلى محتوى من ويكيبيديا وهي متاحة بموجب رخصة CC BY-SA.',
+    'wiki.wikipediaViewOriginal': 'عرض المقالة الأصلية على ويكيبيديا',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'تصفح الويكي',
     'header.newWiki': 'ويكي جديد',
@@ -1495,6 +1638,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'thread.loadMore': 'تحميل المزيد',
     'thread.generating': 'الذكاء الاصطناعي يولد إجابة...',
     'thread.replyPosted': 'تم نشر الرد',
+    'thread.mergeIntoArticle': 'دمج في المقالة',
+    'thread.merging': 'جارٍ الدمج...',
+    'thread.mergeSuccess': 'تم دمج النقاش في المقالة',
+    'thread.mergeFailed': 'فشل دمج النقاش.',
+    'thread.merged': 'تم الدمج في المقالة',
+    'wiki.editHistory': 'سجل التعديلات',
+    'wiki.contributors': 'المساهمون',
     'common.cancel': 'إلغاء',
     'login.title': 'تسجيل الدخول إلى GPTwiki',
     'login.subtitle': 'سجل الدخول لإنشاء مقالات ويكي من خلال محادثات الذكاء الاصطناعي.',
@@ -1583,6 +1733,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   hi: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'आज के मुफ़्त संदेश समाप्त हो गए हैं। जारी रखने के लिए अपनी प्रोफ़ाइल में अपनी API कुंजी जोड़ें, या कल फिर आएं।',
+    'common.retry': 'पुनः प्रयास करें',
+    'thread.loadError': 'चर्चाएँ लोड नहीं हो सकीं।',
+    'wiki.references': 'संदर्भ',
+    'wiki.wikipediaAttribution': 'यह लेख विकिपीडिया की सामग्री पर आधारित है और CC BY-SA लाइसेंस के अंतर्गत उपलब्ध है।',
+    'wiki.wikipediaViewOriginal': 'विकिपीडिया पर मूल लेख देखें',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'विकी ब्राउज़ करें',
     'header.newWiki': 'नया विकी',
@@ -1651,6 +1809,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'thread.loadMore': 'और लोड करें',
     'thread.generating': 'AI उत्तर बना रहा है...',
     'thread.replyPosted': 'उत्तर पोस्ट किया गया',
+    'thread.mergeIntoArticle': 'लेख में मर्ज करें',
+    'thread.merging': 'मर्ज हो रहा है...',
+    'thread.mergeSuccess': 'चर्चा लेख में मर्ज हो गई',
+    'thread.mergeFailed': 'मर्ज विफल रहा।',
+    'thread.merged': 'लेख में मर्ज किया गया',
+    'wiki.editHistory': 'संपादन इतिहास',
+    'wiki.contributors': 'योगदानकर्ता',
     'common.cancel': 'रद्द करें',
     'login.title': 'GPTwiki में साइन इन करें',
     'login.subtitle': 'AI बातचीत के माध्यम से विकी लेख बनाने के लिए साइन इन करें।',
@@ -1739,6 +1904,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   it: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Hai esaurito i messaggi gratuiti di oggi. Aggiungi la tua chiave API nel profilo per continuare, oppure torna domani.',
+    'common.retry': 'Riprova',
+    'thread.loadError': 'Impossibile caricare le discussioni.',
+    'wiki.references': 'Riferimenti',
+    'wiki.wikipediaAttribution': 'Questo articolo si basa su contenuti di Wikipedia ed è disponibile con licenza CC BY-SA.',
+    'wiki.wikipediaViewOriginal': 'Vedi l\'originale su Wikipedia',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Sfoglia Wiki',
     'header.newWiki': 'Nuovo Wiki',
@@ -1807,6 +1980,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'thread.loadMore': 'Carica altro',
     'thread.generating': "L'IA sta generando una risposta...",
     'thread.replyPosted': 'Risposta pubblicata',
+    'thread.mergeIntoArticle': "Unisci all'articolo",
+    'thread.merging': 'Unione in corso...',
+    'thread.mergeSuccess': "Discussione unita all'articolo",
+    'thread.mergeFailed': 'Unione non riuscita.',
+    'thread.merged': "Unito all'articolo",
+    'wiki.editHistory': 'Cronologia delle modifiche',
+    'wiki.contributors': 'Collaboratori',
     'common.cancel': 'Annulla',
     'login.title': 'Accedi a GPTwiki',
     'login.subtitle': 'Accedi per creare articoli wiki tramite conversazioni IA.',
@@ -1895,6 +2075,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   tr: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Bugünkü ücretsiz mesaj hakkınızı kullandınız. Devam etmek için profilinize kendi API anahtarınızı ekleyin veya yarın tekrar gelin.',
+    'common.retry': 'Tekrar dene',
+    'thread.loadError': 'Tartışmalar yüklenemedi.',
+    'wiki.references': 'Kaynaklar',
+    'wiki.wikipediaAttribution': 'Bu makale Wikipedia içeriğine dayanmaktadır ve CC BY-SA lisansı altında sunulmaktadır.',
+    'wiki.wikipediaViewOriginal': 'Orijinalini Wikipedia\'da görüntüle',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Wiki Göz At',
     'header.newWiki': 'Yeni Wiki',
@@ -1963,6 +2151,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'thread.loadMore': 'Daha fazla yükle',
     'thread.generating': 'AI yanıt oluşturuyor...',
     'thread.replyPosted': 'Yanıt gönderildi',
+    'thread.mergeIntoArticle': 'Makaleyle birleştir',
+    'thread.merging': 'Birleştiriliyor...',
+    'thread.mergeSuccess': 'Tartışma makaleyle birleştirildi',
+    'thread.mergeFailed': 'Birleştirme başarısız oldu.',
+    'thread.merged': 'Makaleyle birleştirildi',
+    'wiki.editHistory': 'Düzenleme geçmişi',
+    'wiki.contributors': 'Katkıda bulunanlar',
     'common.cancel': 'İptal',
     'login.title': "GPTwiki'ye Giriş Yap",
     'login.subtitle': 'AI sohbetleriyle wiki makaleleri oluşturmak için giriş yapın.',
@@ -2051,6 +2246,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   vi: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'Bạn đã dùng hết số tin nhắn miễn phí hôm nay. Hãy thêm API key của riêng bạn trong hồ sơ để tiếp tục, hoặc quay lại vào ngày mai.',
+    'common.retry': 'Thử lại',
+    'thread.loadError': 'Không thể tải thảo luận.',
+    'wiki.references': 'Tài liệu tham khảo',
+    'wiki.wikipediaAttribution': 'Bài viết này dựa trên nội dung từ Wikipedia và được cung cấp theo giấy phép CC BY-SA.',
+    'wiki.wikipediaViewOriginal': 'Xem bản gốc trên Wikipedia',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'Duyệt Wiki',
     'header.newWiki': 'Wiki Mới',
@@ -2119,6 +2322,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'thread.loadMore': 'Tải thêm',
     'thread.generating': 'AI đang tạo câu trả lời...',
     'thread.replyPosted': 'Đã đăng câu trả lời',
+    'thread.mergeIntoArticle': 'Gộp vào bài viết',
+    'thread.merging': 'Đang gộp...',
+    'thread.mergeSuccess': 'Đã gộp thảo luận vào bài viết',
+    'thread.mergeFailed': 'Gộp thất bại.',
+    'thread.merged': 'Đã gộp vào bài viết',
+    'wiki.editHistory': 'Lịch sử chỉnh sửa',
+    'wiki.contributors': 'Người đóng góp',
     'common.cancel': 'Hủy',
     'login.title': 'Đăng nhập GPTwiki',
     'login.subtitle': 'Đăng nhập để tạo bài viết wiki qua trò chuyện AI.',
@@ -2207,6 +2417,14 @@ const translations: Record<Locale, Record<string, string>> = {
   },
 
   th: {
+    // Free quota, references, Wikipedia attribution, misc states
+    'chat.quotaExhausted': 'คุณใช้ข้อความฟรีของวันนี้หมดแล้ว เพิ่ม API key ของคุณเองในโปรไฟล์เพื่อใช้งานต่อ หรือกลับมาใหม่พรุ่งนี้',
+    'common.retry': 'ลองอีกครั้ง',
+    'thread.loadError': 'โหลดการสนทนาไม่สำเร็จ',
+    'wiki.references': 'อ้างอิง',
+    'wiki.wikipediaAttribution': 'บทความนี้อ้างอิงเนื้อหาจากวิกิพีเดีย และเผยแพร่ภายใต้สัญญาอนุญาต CC BY-SA',
+    'wiki.wikipediaViewOriginal': 'ดูต้นฉบับบนวิกิพีเดีย',
+
     'header.brandName': 'GPTwiki',
     'header.browseWiki': 'เรียกดูวิกิ',
     'header.newWiki': 'วิกิใหม่',
@@ -2275,6 +2493,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'thread.loadMore': 'โหลดเพิ่มเติม',
     'thread.generating': 'AI กำลังสร้างคำตอบ...',
     'thread.replyPosted': 'โพสต์คำตอบแล้ว',
+    'thread.mergeIntoArticle': 'รวมเข้ากับบทความ',
+    'thread.merging': 'กำลังรวม...',
+    'thread.mergeSuccess': 'รวมการสนทนาเข้ากับบทความแล้ว',
+    'thread.mergeFailed': 'รวมไม่สำเร็จ',
+    'thread.merged': 'รวมเข้ากับบทความแล้ว',
+    'wiki.editHistory': 'ประวัติการแก้ไข',
+    'wiki.contributors': 'ผู้ร่วมเขียน',
     'common.cancel': 'ยกเลิก',
     'login.title': 'เข้าสู่ระบบ GPTwiki',
     'login.subtitle': 'เข้าสู่ระบบเพื่อสร้างบทความวิกิผ่านการสนทนา AI',

@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { auth } from '@/lib/auth';
-import { getWikiById, updateWiki } from '@/lib/search';
+import { supportedLocales } from '@/lib/i18n/server';
+import { getWikiById, updateWiki, pushWikiRevision } from '@/lib/search';
 import { generateWikiContent } from '@/lib/ai/provider';
 import { resolveApiKeyForUser } from '@/lib/ai/resolve-key';
-import type { Message } from '@/types';
+import { parseJsonBody, wikiUpdateSchema } from '@/lib/validation';
+import { checkRateLimit, getClientId, rateLimited } from '@/lib/rate-limit';
 
 export async function GET(
   _req: NextRequest,
@@ -33,6 +36,13 @@ export async function PUT(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  const rl = checkRateLimit({
+    key: `wiki-update:${getClientId(req, session.user.id)}`,
+    max: 10,
+    windowSec: 300,
+  });
+  if (!rl.ok) return rateLimited(rl);
+
   try {
     const { id } = await params;
     const wiki = await getWikiById(id);
@@ -45,24 +55,45 @@ export async function PUT(
       return NextResponse.json({ error: 'Only the author can update this wiki' }, { status: 403 });
     }
 
-    const body = await req.json();
-    const conversation: Message[] = body.conversation;
+    const parsed = await parseJsonBody(req, wikiUpdateSchema);
+    if (parsed.error) return parsed.error;
+    const { conversation } = parsed.data;
 
-    if (!conversation?.length) {
-      return NextResponse.json({ error: 'Missing conversation' }, { status: 400 });
+    // Regenerate wiki content from extended conversation, with the key for
+    // the wiki's own model — not hardcoded to claude.
+    const { apiKey, needsConfig, quotaExhausted } = await resolveApiKeyForUser(
+      wiki.aiModel,
+      session.user.id!
+    );
+    if (quotaExhausted) {
+      return NextResponse.json(
+        { error: 'QUOTA_EXHAUSTED', message: 'Daily free message quota used up. Add your own API key to continue.' },
+        { status: 403 }
+      );
     }
-
-    // Regenerate wiki content from extended conversation
-    const { apiKey } = await resolveApiKeyForUser('claude', session.user.id!);
+    if (needsConfig) {
+      return NextResponse.json(
+        { error: 'API_KEY_REQUIRED', message: 'Please configure your API key in Profile settings.' },
+        { status: 403 }
+      );
+    }
     const generated = await generateWikiContent(wiki.aiModel, conversation, apiKey || undefined);
+
+    // Snapshot the outgoing version before overwriting it (edit history).
+    await pushWikiRevision(id, session.user.id!, session.user.name || 'Anonymous');
 
     await updateWiki(id, {
       title: generated.title || wiki.title,
       content: generated.content,
       summary: generated.summary,
       tags: generated.tags.length > 0 ? generated.tags : wiki.tags,
+      sources: generated.sources.length > 0 ? generated.sources : wiki.sources ?? [],
       conversation,
     });
+
+    // Drop the ISR cache for this wiki in every locale so other visitors see
+    // the updated article on their next visit instead of up to an hour later.
+    for (const loc of supportedLocales) revalidatePath(`/${loc}/wiki/${id}`);
 
     return NextResponse.json({ success: true });
   } catch (error) {

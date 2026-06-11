@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { ArrowLeft, Eye, Bot, Clock, Tag, User } from 'lucide-react';
+import { ArrowLeft, Eye, Bot, Clock, Tag, User, Users, BookOpen, ExternalLink, History } from 'lucide-react';
 import WikiContent from '@/components/wiki/WikiContent';
 import ShareButtons from '@/components/wiki/ShareButtons';
 import EmbedCodeButton from '@/components/wiki/EmbedCodeButton';
 import ThreadReplyList from '@/components/wiki/ThreadReplyList';
 import WikiInteractive from '@/components/wiki/WikiInteractive';
 import RelatedWikis from '@/components/wiki/RelatedWikis';
-import { getWikiById, getPopularWikis, incrementWikiViews } from '@/lib/search';
+import { getWikiById, getPopularWikiIds, getWikiRevisions, incrementWikiViews } from '@/lib/search';
 import { timeAgo } from '@/lib/utils';
 import { getModelDisplayName } from '@/lib/models';
 import {
@@ -26,11 +26,15 @@ type RouteParams = { locale: string; id: string };
 
 /** Pre-render the top popular wikis at build time, for every locale. */
 export async function generateStaticParams(): Promise<Array<{ locale: Locale; id: string }>> {
+  // next dev runs this on first navigation to the route, which would block
+  // the request on a Firestore scan. Dev renders on demand anyway
+  // (dynamicParams = true), so skip it there.
+  if (process.env.NODE_ENV === 'development') return [];
   try {
-    const popular = await getPopularWikis(50);
+    const ids = await getPopularWikiIds(50);
     const out: Array<{ locale: Locale; id: string }> = [];
     for (const loc of supportedLocales) {
-      for (const w of popular) out.push({ locale: loc, id: w.id });
+      for (const id of ids) out.push({ locale: loc, id });
     }
     return out;
   } catch {
@@ -92,13 +96,31 @@ export async function generateMetadata({
   };
 }
 
+/** True for articles mirrored from Wikipedia, which require CC BY-SA attribution. */
+function isWikipediaSourced(wiki: { source?: string }): boolean {
+  return typeof wiki.source === 'string' && wiki.source.startsWith('wikipedia');
+}
+
+/** Link to the original Wikipedia article in the article's own language. */
+function wikipediaOriginalUrl(wiki: { title: string; language?: string }): string {
+  const lang = wiki.language || 'en';
+  return `https://${lang}.wikipedia.org/wiki/${encodeURIComponent(wiki.title.replace(/ /g, '_'))}`;
+}
+
 function buildJsonLd(
   wiki: NonNullable<Awaited<ReturnType<typeof getWikiById>>>,
   locale: Locale,
   id: string
 ) {
   const url = `https://gptwiki.net/${locale}/wiki/${id}`;
+  const attribution = isWikipediaSourced(wiki)
+    ? {
+        license: 'https://creativecommons.org/licenses/by-sa/4.0/',
+        isBasedOn: wikipediaOriginalUrl(wiki),
+      }
+    : {};
   return {
+    ...attribution,
     '@context': 'https://schema.org',
     '@type': 'Article',
     '@id': url,
@@ -144,6 +166,9 @@ export default async function WikiDetailPage({
   // Count one view per page render (not in generateMetadata / API reads).
   void incrementWikiViews(id);
 
+  // Edit history — empty for never-edited wikis, so the query is cheap.
+  const revisions = await getWikiRevisions(id).catch(() => []);
+
   const t = getTranslations(locale);
   const jsonLd = buildJsonLd(wiki, locale, id);
 
@@ -173,6 +198,23 @@ export default async function WikiDetailPage({
             <User className="h-4 w-4" />
             {wiki.authorName}
           </Link>
+          {(wiki.contributors?.length ?? 0) > 0 && (
+            <span className="flex items-center gap-1">
+              <Users className="h-4 w-4" />
+              {t('wiki.contributors')}:{' '}
+              {wiki.contributors!.map((c, i) => (
+                <span key={c.id}>
+                  {i > 0 && ', '}
+                  <Link
+                    href={localeHref(locale, `/profile/${c.id}`)}
+                    className="hover:text-blue-600"
+                  >
+                    {c.name}
+                  </Link>
+                </span>
+              ))}
+            </span>
+          )}
           <span className="flex items-center gap-1">
             <Bot className="h-4 w-4" />
             {getModelDisplayName(wiki.aiModel)}
@@ -222,11 +264,84 @@ export default async function WikiDetailPage({
         </div>
 
         <WikiContent content={wiki.content} />
+
+        {(wiki.sources?.length ?? 0) > 0 && (
+          <section className="mt-8 border-t border-gray-100 pt-6">
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-gray-900">
+              <BookOpen className="h-5 w-5 text-gray-500" />
+              {t('wiki.references')}
+            </h2>
+            <ol className="list-decimal space-y-1 pl-5 text-sm">
+              {wiki.sources!.map((src, i) => (
+                <li key={i} className="text-gray-600">
+                  <a
+                    href={src.url}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="inline-flex items-center gap-1 text-blue-600 hover:underline"
+                  >
+                    {src.title}
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+
+        {revisions.length > 0 && (
+          <section className="mt-8 border-t border-gray-100 pt-6">
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-gray-900">
+              <History className="h-5 w-5 text-gray-500" />
+              {t('wiki.editHistory')}
+            </h2>
+            <ul className="space-y-1 text-sm text-gray-600">
+              {revisions.map((rev) => (
+                <li key={rev.id} className="flex items-center gap-2">
+                  <User className="h-3.5 w-3.5 text-gray-400" />
+                  <Link
+                    href={localeHref(locale, `/profile/${rev.editorId}`)}
+                    className="font-medium text-gray-700 hover:text-blue-600"
+                  >
+                    {rev.editorName}
+                  </Link>
+                  <span className="text-gray-400">·</span>
+                  <span>{timeAgo(rev.updatedAt, locale)}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {isWikipediaSourced(wiki) && (
+          <aside className="mt-8 rounded-lg border border-gray-200 bg-gray-50 p-4 text-xs text-gray-600">
+            <p>
+              {t('wiki.wikipediaAttribution')}{' '}
+              <a
+                href={wikipediaOriginalUrl(wiki)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-blue-600 hover:underline"
+              >
+                {t('wiki.wikipediaViewOriginal')}
+              </a>{' '}
+              ·{' '}
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline"
+              >
+                CC BY-SA 4.0
+              </a>
+            </p>
+          </aside>
+        )}
       </article>
 
       <WikiInteractive wiki={wiki} />
 
-      <ThreadReplyList wikiId={wiki.id} threadCount={wiki.threadCount} />
+      <ThreadReplyList wikiId={wiki.id} threadCount={wiki.threadCount} wikiAuthorId={wiki.authorId} />
 
       <RelatedWikis currentWikiId={wiki.id} tags={wiki.tags} locale={locale} />
     </div>

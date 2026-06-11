@@ -24,8 +24,14 @@ export async function POST(req: NextRequest) {
   const { messages, model } = parsed.data;
 
   try {
-    const { apiKey, needsConfig } = await resolveApiKeyForUser(model, session.user.id!);
+    const { apiKey, needsConfig, quotaExhausted } = await resolveApiKeyForUser(model, session.user.id!);
 
+    if (quotaExhausted) {
+      return new Response(
+        JSON.stringify({ error: 'QUOTA_EXHAUSTED', message: 'Daily free message quota used up. Add your own API key to continue.' }),
+        { status: 403, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
     if (needsConfig) {
       return new Response(
         JSON.stringify({ error: 'API_KEY_REQUIRED', message: 'Please configure your API key in Profile settings.' }),

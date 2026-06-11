@@ -40,3 +40,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# pipeline checkpoints, logs, and scratch space (operational artifacts, never commit)
+.img-*.ckpt
+.img-*.log
+*.ckpt
+.tmpwork/
+shard*.json
+/_gap.ts
+/scripts/_*
+
+# translation working tree (imported via scripts/translate-wikis.ts, not deployed code)
+/translations/
+
+# internal ops/marketing scripts (contain credentials; keep out of the public repo)
+/scripts/write-*.py

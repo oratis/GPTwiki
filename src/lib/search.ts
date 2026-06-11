@@ -1,40 +1,33 @@
 import { db } from './firebase';
 import { FieldValue, type QueryDocumentSnapshot } from 'firebase-admin/firestore';
-import type { Wiki, UserProfile, PublicUserProfile, UserApiKeys } from '@/types';
+import type {
+  Wiki,
+  UserProfile,
+  PublicUserProfile,
+  UserApiKeys,
+  ThreadReply,
+  WikiContributor,
+  WikiRevision,
+} from '@/types';
 import { encryptSecret, decryptSecret } from './crypto';
+import {
+  SEARCH_STOPWORDS,
+  tokenize,
+  scriptAwareTokens,
+  buildSearchKeywords,
+} from './search-keywords';
 
 /** A wiki "has a header image" when imageUrl is a non-empty string. */
 function hasHeaderImage(data: FirebaseFirestore.DocumentData): boolean {
   return typeof data.imageUrl === 'string' && data.imageUrl.trim().length > 0;
 }
 
-// Common words carry no search signal and — because the old substring match
-// did `title.includes(kw)` — caused "the"/"is"/"what" to match nearly every
-// article (e.g. a "photic sneeze reflex" query surfaced "The Roche Limit").
-const SEARCH_STOPWORDS = new Set([
-  'the', 'a', 'an', 'and', 'or', 'but', 'of', 'to', 'in', 'on', 'at', 'for',
-  'is', 'are', 'was', 'were', 'be', 'been', 'being', 'am', 'as', 'by', 'from',
-  'with', 'about', 'into', 'than', 'then', 'this', 'that', 'these', 'those',
-  'it', 'its', 'i', 'you', 'he', 'she', 'we', 'they', 'do', 'does', 'did',
-  'can', 'could', 'would', 'should', 'will', 'what', 'who', 'whom', 'whose',
-  'which', 'how', 'why', 'when', 'where', 'there', 'here', 'my', 'your',
-]);
-
-function tokenize(s: string): string[] {
-  return s
-    .toLowerCase()
-    .split(/\s+/)
-    .map((t) => t.replace(/[^\p{L}\p{N}]+/gu, ''))
-    .filter(Boolean);
-}
-
 /**
  * Keyword search over wikis, ranked by relevance.
  *
- * NOTE: this is not a full-text index — it gathers candidates from exact tag
- * matches plus a bounded window of recent docs, then scores them in memory.
- * Recall across all ~280k articles still needs a dedicated index
- * (Typesense/Algolia, or a tokenized keyword array on each doc); see #14.
+ * Candidates come from the per-doc `keywords` index (whole-collection recall;
+ * see search-keywords.ts and scripts/backfill-keywords.ts), exact tag matches,
+ * and a recent-doc window, then get scored in memory.
  */
 export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
   if (!query.trim()) return [];
@@ -44,19 +37,38 @@ export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
   // the raw tokens so we still return something rather than nothing.
   let keywords = tokens.filter((w) => !SEARCH_STOPWORDS.has(w));
   if (keywords.length === 0) keywords = tokens;
-  if (keywords.length === 0) return [];
+  // Script-aware tokens (CJK/Thai bigrams + latin words) drive the indexed
+  // keyword lookup; the whitespace tokens above drive in-memory scoring.
+  const indexTokens = scriptAwareTokens(query);
+  if (keywords.length === 0 && indexTokens.length === 0) return [];
+  if (keywords.length === 0) keywords = indexTokens;
   const phrase = keywords.join(' ');
 
-  // Candidate set: exact tag matches (high precision) + a recent-doc pool for
-  // title/question substring hits. De-duplicated by id.
+  // Candidate set, de-duplicated by id:
+  // 1. keywords-index matches — whole-collection recall for any doc whose
+  //    indexed tokens overlap the query (docs written before the backfill
+  //    simply lack the field and fall through to the other two pools)
+  // 2. exact tag matches (high precision)
+  // 3. a recent-doc pool for title/question substring hits
   const candidates = new Map<string, FirebaseFirestore.DocumentData>();
+
+  if (indexTokens.length > 0) {
+    const kwSnap = await db
+      .collection('wikis')
+      .where('keywords', 'array-contains-any', indexTokens.slice(0, 10))
+      .limit(100)
+      .get();
+    kwSnap.docs.forEach((doc) => candidates.set(doc.id, doc.data()));
+  }
 
   const tagSnap = await db
     .collection('wikis')
     .where('tags', 'array-contains-any', keywords.slice(0, 10))
     .limit(50)
     .get();
-  tagSnap.docs.forEach((doc) => candidates.set(doc.id, doc.data()));
+  tagSnap.docs.forEach((doc) => {
+    if (!candidates.has(doc.id)) candidates.set(doc.id, doc.data());
+  });
 
   const recentSnap = await db
     .collection('wikis')
@@ -127,7 +139,27 @@ export async function getPopularWikis(limit = 12, language?: string): Promise<Wi
 }
 
 async function collectPopularWikis(limit: number, language?: string): Promise<Wiki[]> {
-  const results: Wiki[] = [];
+  const docs = await scanTopImageWikis(limit, language);
+  return docs.map((doc) => ({ id: doc.id, ...doc.data() } as Wiki));
+}
+
+/**
+ * IDs of the wikis `getPopularWikis(limit)` would return. For callers that
+ * only need ids (generateStaticParams), the scan is projected down to
+ * `imageUrl` (the filter) and `views` (the cursor) — full docs carry whole
+ * conversation payloads, which makes the unprojected window scan take ~70s.
+ */
+export async function getPopularWikiIds(limit = 50): Promise<string[]> {
+  const docs = await scanTopImageWikis(limit, undefined, ['imageUrl', 'views']);
+  return docs.map((doc) => doc.id);
+}
+
+async function scanTopImageWikis(
+  limit: number,
+  language?: string,
+  fields?: string[]
+): Promise<QueryDocumentSnapshot[]> {
+  const results: QueryDocumentSnapshot[] = [];
   // Wide pages keep this to one Firestore round-trip in the common case.
   const pageSize = Math.max(limit * 16, 200);
   const maxScan = Math.max(limit * 50, 2400);
@@ -135,9 +167,10 @@ async function collectPopularWikis(limit: number, language?: string): Promise<Wi
   let cursor: QueryDocumentSnapshot | undefined;
 
   while (results.length < limit && scanned < maxScan) {
-    let query = language
+    let query: FirebaseFirestore.Query = language
       ? db.collection('wikis').where('language', '==', language).orderBy('views', 'desc')
       : db.collection('wikis').orderBy('views', 'desc');
+    if (fields) query = query.select(...fields);
     query = query.limit(pageSize);
     if (cursor) query = query.startAfter(cursor);
 
@@ -145,9 +178,8 @@ async function collectPopularWikis(limit: number, language?: string): Promise<Wi
     if (snapshot.empty) break;
 
     for (const doc of snapshot.docs) {
-      const data = doc.data();
-      if (hasHeaderImage(data)) {
-        results.push({ id: doc.id, ...data } as Wiki);
+      if (hasHeaderImage(doc.data())) {
+        results.push(doc);
         if (results.length >= limit) break;
       }
     }
@@ -214,6 +246,7 @@ export async function createWiki(
 ): Promise<string> {
   const ref = await db.collection('wikis').add({
     ...data,
+    keywords: buildSearchKeywords([data.title, data.question, data.tags?.join(' '), data.summary]),
     views: 0,
     createdAt: Date.now(),
     updatedAt: Date.now(),
@@ -389,12 +422,89 @@ export async function getWikisByTag(tag: string, limit = 20): Promise<Wiki[]> {
 
 export async function updateWiki(
   id: string,
-  data: Partial<Pick<Wiki, 'title' | 'content' | 'summary' | 'tags' | 'conversation'>>
+  data: Partial<Pick<Wiki, 'title' | 'content' | 'summary' | 'tags' | 'sources' | 'conversation'>>
 ): Promise<void> {
-  await db.collection('wikis').doc(id).update({
-    ...data,
-    updatedAt: Date.now(),
+  const update: Record<string, unknown> = { ...data, updatedAt: Date.now() };
+
+  // Keep the keywords index in sync when searchable fields change. One extra
+  // read per update — updates are rare relative to searches.
+  if (data.title !== undefined || data.summary !== undefined || data.tags !== undefined) {
+    const doc = await db.collection('wikis').doc(id).get();
+    const existing = doc.data() ?? {};
+    update.keywords = buildSearchKeywords([
+      data.title ?? existing.title,
+      existing.question,
+      (data.tags ?? existing.tags)?.join(' '),
+      data.summary ?? existing.summary,
+    ]);
+  }
+
+  await db.collection('wikis').doc(id).update(update);
+}
+
+// ─── Revisions ───
+
+/** How many past versions to keep per wiki. */
+const REVISION_CAP = 20;
+
+/**
+ * Snapshot the wiki's current content into the `revisions` subcollection.
+ * Called before each merge/update so the previous version is never lost.
+ * Keeps only the last REVISION_CAP snapshots.
+ */
+export async function pushWikiRevision(
+  wikiId: string,
+  editorId: string,
+  editorName: string
+): Promise<void> {
+  const wikiRef = db.collection('wikis').doc(wikiId);
+  const doc = await wikiRef.get();
+  if (!doc.exists) return;
+  const data = doc.data()!;
+
+  await wikiRef.collection('revisions').add({
+    title: data.title ?? '',
+    content: data.content ?? '',
+    summary: data.summary ?? '',
+    updatedAt: data.updatedAt ?? data.createdAt ?? Date.now(),
+    editorId,
+    editorName,
   });
+
+  // updatedAt is strictly increasing per edit, so it doubles as the
+  // revision order. Drop everything past the cap.
+  const overflow = await wikiRef
+    .collection('revisions')
+    .orderBy('updatedAt', 'desc')
+    .offset(REVISION_CAP)
+    .get();
+  if (!overflow.empty) {
+    const batch = db.batch();
+    overflow.docs.forEach((d) => batch.delete(d.ref));
+    await batch.commit();
+  }
+}
+
+/**
+ * Revision metadata for the "edit history" list — content is excluded via a
+ * field mask since the list only shows who edited and when.
+ */
+export async function getWikiRevisions(
+  wikiId: string,
+  limit = REVISION_CAP
+): Promise<Array<Omit<WikiRevision, 'content'>>> {
+  const snapshot = await db
+    .collection('wikis')
+    .doc(wikiId)
+    .collection('revisions')
+    .orderBy('updatedAt', 'desc')
+    .select('title', 'summary', 'updatedAt', 'editorId', 'editorName')
+    .limit(limit)
+    .get();
+
+  return snapshot.docs.map(
+    (doc) => ({ id: doc.id, ...doc.data() } as Omit<WikiRevision, 'content'>)
+  );
 }
 
 // ─── Thread Replies ───
@@ -447,4 +557,51 @@ export async function getThreadReplies(
   const nextCursor = hasMore ? (threads[threads.length - 1].createdAt as number) : null;
 
   return { threads, nextCursor };
+}
+
+export async function getThreadReply(
+  wikiId: string,
+  threadId: string
+): Promise<ThreadReply | null> {
+  const doc = await db
+    .collection('wikis')
+    .doc(wikiId)
+    .collection('threads')
+    .doc(threadId)
+    .get();
+  if (!doc.exists) return null;
+  return { id: doc.id, ...doc.data() } as ThreadReply;
+}
+
+/**
+ * Record a successful thread→article merge: stamp the thread so it can't be
+ * merged twice, and credit the thread author on the wiki doc (unless they're
+ * the wiki author or already credited).
+ */
+export async function recordThreadMerge(
+  wikiId: string,
+  threadId: string,
+  mergedBy: string,
+  contributor: WikiContributor | null
+): Promise<void> {
+  const wikiRef = db.collection('wikis').doc(wikiId);
+
+  await wikiRef.collection('threads').doc(threadId).update({
+    mergedAt: Date.now(),
+    mergedBy,
+  });
+
+  if (contributor) {
+    // arrayUnion dedupes the id list; the object list is guarded by the
+    // caller checking contributorIds first (merges are author-only and
+    // serial, so a read-then-write race is not a practical concern).
+    await wikiRef.update({
+      contributorIds: FieldValue.arrayUnion(contributor.id),
+      contributors: FieldValue.arrayUnion(
+        contributor.image
+          ? { id: contributor.id, name: contributor.name, image: contributor.image }
+          : { id: contributor.id, name: contributor.name }
+      ),
+    });
+  }
 }

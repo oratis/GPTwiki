@@ -7,6 +7,7 @@ import type { AIModel, Message } from '@/types';
 import { generateId } from '@/lib/utils';
 import { useI18n } from '@/lib/i18n/context';
 import { localeHref } from '@/lib/i18n/links';
+import { useToast } from '@/components/ui/Toast';
 import MessageBubble from '@/components/chat/MessageBubble';
 
 interface WikiContinueChatProps {
@@ -25,6 +26,7 @@ export default function WikiContinueChat({
   onWikiUpdated,
 }: WikiContinueChatProps) {
   const { t, locale } = useI18n();
+  const { toast } = useToast();
   const router = useRouter();
   const [newMessages, setNewMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -106,11 +108,18 @@ export default function WikiContinueChat({
         body: JSON.stringify({ conversation: allMessages }),
       });
 
-      if (!res.ok) throw new Error('Update failed');
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        if (err?.error === 'QUOTA_EXHAUSTED') {
+          toast(t('chat.quotaExhausted'));
+          return;
+        }
+        throw new Error('Update failed');
+      }
       onWikiUpdated();
     } catch (error) {
       console.error('Update wiki error:', error);
-      alert(t('errors.updateWikiFailed'));
+      toast(t('errors.updateWikiFailed'));
     } finally {
       setUpdating(false);
     }
@@ -134,12 +143,19 @@ export default function WikiContinueChat({
         }),
       });
 
-      if (!res.ok) throw new Error('Create failed');
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        if (err?.error === 'QUOTA_EXHAUSTED') {
+          toast(t('chat.quotaExhausted'));
+          return;
+        }
+        throw new Error('Create failed');
+      }
       const data = await res.json();
       router.push(localeHref(locale, `/wiki/${data.id}`));
     } catch (error) {
       console.error('Create wiki error:', error);
-      alert(t('errors.createWikiFailed'));
+      toast(t('errors.createWikiFailed'));
     } finally {
       setCreating(false);
     }

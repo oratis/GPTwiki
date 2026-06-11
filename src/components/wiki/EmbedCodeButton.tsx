@@ -13,7 +13,7 @@ interface Props {
  * third-party blogs/forums can paste to render a GPTwiki card.
  */
 export default function EmbedCodeButton({ wikiId }: Props) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -28,7 +28,7 @@ export default function EmbedCodeButton({ wikiId }: Props) {
   }, [open]);
 
   const snippet = `<iframe
-  src="https://gptwiki.net/embed/${wikiId}"
+  src="https://gptwiki.net/embed/${wikiId}?lang=${locale}"
   width="100%"
   height="220"
   frameborder="0"

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
+import { checkRateLimit, getClientId, rateLimited } from '@/lib/rate-limit';
 
 const PAYPAL_API = process.env.NODE_ENV === 'production'
   ? 'https://api-m.paypal.com'
@@ -37,6 +38,13 @@ async function getAccessToken(): Promise<string> {
 }
 
 export async function POST(req: NextRequest) {
+  const rl = checkRateLimit({
+    key: `paypal-capture:${getClientId(req)}`,
+    max: 20,
+    windowSec: 60,
+  });
+  if (!rl.ok) return rateLimited(rl);
+
   try {
     const body = await req.json();
     const { orderId } = body;
@@ -76,20 +84,25 @@ export async function POST(req: NextRequest) {
     const amount = extractCapturedAmount(capture);
 
     // Fire-and-forget donation ledger entry from PayPal's settled amount
-    // (source of truth). Wrapped so a Firestore hiccup never breaks the
-    // donor's confirmation.
+    // (source of truth). Retried so a transient Firestore hiccup doesn't lose
+    // the record, but never breaks the donor's confirmation. PayPal reports
+    // remain the recovery path if all attempts fail.
     (async () => {
-      try {
-        await db.collection('donations').doc(orderId).set({
-          orderId,
-          captureId: capture.id ?? null,
-          amount: amount?.value ?? null,
-          currency: amount?.currency ?? null,
-          status: capture.status,
-          createdAt: Date.now(),
-        });
-      } catch (e) {
-        console.error('Failed to record donation ledger:', e);
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+          await db.collection('donations').doc(orderId).set({
+            orderId,
+            captureId: capture.id ?? null,
+            amount: amount?.value ?? null,
+            currency: amount?.currency ?? null,
+            status: capture.status,
+            createdAt: Date.now(),
+          });
+          return;
+        } catch (e) {
+          console.error(`Failed to record donation ledger (attempt ${attempt}/3):`, e);
+          if (attempt < 3) await new Promise((r) => setTimeout(r, 1000 * 2 ** attempt));
+        }
       }
     })();
 

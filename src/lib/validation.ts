@@ -22,6 +22,10 @@ export const wikiCreateSchema = z.object({
   conversation: z.array(messageSchema).max(100).default([]),
 });
 
+export const wikiUpdateSchema = z.object({
+  conversation: z.array(messageSchema).min(1).max(100),
+});
+
 export const chatRequestSchema = z.object({
   messages: z.array(messageSchema).min(1).max(100),
   model: aiModelSchema,
@@ -30,6 +34,10 @@ export const chatRequestSchema = z.object({
 export const threadCreateSchema = z.object({
   question: z.string().trim().min(1).max(2000),
   aiModel: aiModelSchema,
+});
+
+export const threadMergeSchema = z.object({
+  threadId: z.string().trim().min(1).max(128),
 });
 
 export const threadListQuerySchema = z.object({

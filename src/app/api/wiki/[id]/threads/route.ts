@@ -66,7 +66,13 @@ export async function POST(
     }
 
     // Resolve API key
-    const { apiKey, needsConfig } = await resolveApiKeyForUser(aiModel, session.user.id!);
+    const { apiKey, needsConfig, quotaExhausted } = await resolveApiKeyForUser(aiModel, session.user.id!);
+    if (quotaExhausted) {
+      return NextResponse.json(
+        { error: 'QUOTA_EXHAUSTED', message: 'Daily free message quota used up. Add your own API key to continue.' },
+        { status: 403 }
+      );
+    }
     if (needsConfig) {
       return NextResponse.json(
         { error: 'API_KEY_REQUIRED', message: 'Please configure your API key in Profile settings.' },

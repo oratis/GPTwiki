@@ -12,6 +12,35 @@ export interface Conversation {
   model: AIModel;
 }
 
+/** A cited reference attached to a wiki article. */
+export interface WikiSource {
+  title: string;
+  url: string;
+}
+
+/** A user credited for content merged into a wiki (denormalised for display). */
+export interface WikiContributor {
+  id: string;
+  name: string;
+  image?: string;
+}
+
+/**
+ * Snapshot of a wiki's previous content, written to the `revisions`
+ * subcollection before each merge/update (capped at the last 20).
+ */
+export interface WikiRevision {
+  id: string;
+  title: string;
+  content: string;
+  summary: string;
+  /** updatedAt of the snapshotted version (when that version was written). */
+  updatedAt: number;
+  /** User who performed the edit that superseded this version. */
+  editorId: string;
+  editorName: string;
+}
+
 export interface Wiki {
   id: string;
   title: string;
@@ -34,6 +63,18 @@ export interface Wiki {
   originalImageUrl?: string;
   /** ISO 639-1 code of the article's content language (e.g. "en", "zh"). */
   language?: string;
+  /**
+   * Where the article came from: "user" (default), "seed",
+   * "editorial-draft", or "wikipedia-{lang}-dump" / "wikipedia-{lang}-rich"
+   * for mirrored Wikipedia content (which must show CC BY-SA attribution).
+   */
+  source?: string;
+  /** References cited by the article, rendered as a References section. */
+  sources?: WikiSource[];
+  /** Users whose thread questions were merged into the article (canonical ids). */
+  contributorIds?: string[];
+  /** Denormalised contributor display data, kept in sync with contributorIds. */
+  contributors?: WikiContributor[];
 }
 
 export interface ThreadReply {
@@ -46,6 +87,9 @@ export interface ThreadReply {
   authorImage?: string;
   conversation: Message[];
   createdAt: number;
+  /** Set when the wiki author merged this thread into the article. */
+  mergedAt?: number;
+  mergedBy?: string;
 }
 
 export interface ThreadReplyCreateInput {

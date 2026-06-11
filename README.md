@@ -21,7 +21,10 @@ Wikipedia requires expert editors. ChatGPT answers vanish after each session. GP
 ## Features
 
 - **Multi-Model AI** - Choose between Claude (Anthropic), GPT-4o (OpenAI), or Gemini 2.0 Flash (Google)
-- **Bring Your Own Key** - Use your own API keys, or use the platform's shared keys
+- **Free Daily Quota** - Signed-in users get free platform-keyed messages every day (configurable via `FREE_DAILY_MESSAGES`)
+- **Bring Your Own Key** - Add your own API keys for unlimited usage
+- **Citations** - AI-generated articles include a References section with supporting sources
+- **Wikipedia Attribution** - Mirrored Wikipedia content carries CC BY-SA attribution and links to the original
 - **Conversation to Wiki** - Publish AI conversations as structured, searchable wiki articles
 - **15 Languages** - Built-in i18n with auto browser detection: EN, ZH, JA, KO, ES, FR, DE, PT, RU, AR, HI, IT, TR, VI, TH
 - **100K+ Articles** - Pre-seeded with Wikipedia content across all supported languages
@@ -50,8 +53,8 @@ Wikipedia requires expert editors. ChatGPT answers vanish after each session. GP
 
 ```bash
 # Clone the repo
-git clone https://github.com/anthropics/gptwiki.git
-cd gptwiki
+git clone https://github.com/oratis/GPTwiki.git
+cd GPTwiki
 
 # Install dependencies
 npm install
@@ -81,6 +84,8 @@ Open [http://localhost:3000](http://localhost:3000).
 | `ANTHROPIC_API_KEY` | Optional | Anthropic API key (Claude) |
 | `OPENAI_API_KEY` | Optional | OpenAI API key (GPT-4o) |
 | `GOOGLE_AI_API_KEY` | Optional | Google AI API key (Gemini) |
+| `FREE_DAILY_MESSAGES` | Optional | Free platform-keyed messages per user per day (default 10, 0 = BYOK-only) |
+| `PLATFORM_OWNER_EMAIL` | Optional | Account exempt from the free-tier metering |
 | `NEXT_PUBLIC_PAYPAL_CLIENT_ID` | Optional | PayPal Client ID for donations |
 | `PAYPAL_CLIENT_SECRET` | Optional | PayPal Client Secret |
 
