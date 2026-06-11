@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { auth } from '@/lib/auth';
-import { getWikiById, updateWiki } from '@/lib/search';
+import { supportedLocales } from '@/lib/i18n/server';
+import { getWikiById, updateWiki, pushWikiRevision } from '@/lib/search';
 import { generateWikiContent } from '@/lib/ai/provider';
 import { resolveApiKeyForUser } from '@/lib/ai/resolve-key';
 import { parseJsonBody, wikiUpdateSchema } from '@/lib/validation';
@@ -77,6 +79,9 @@ export async function PUT(
     }
     const generated = await generateWikiContent(wiki.aiModel, conversation, apiKey || undefined);
 
+    // Snapshot the outgoing version before overwriting it (edit history).
+    await pushWikiRevision(id, session.user.id!, session.user.name || 'Anonymous');
+
     await updateWiki(id, {
       title: generated.title || wiki.title,
       content: generated.content,
@@ -85,6 +90,10 @@ export async function PUT(
       sources: generated.sources.length > 0 ? generated.sources : wiki.sources ?? [],
       conversation,
     });
+
+    // Drop the ISR cache for this wiki in every locale so other visitors see
+    // the updated article on their next visit instead of up to an hour later.
+    for (const loc of supportedLocales) revalidatePath(`/${loc}/wiki/${id}`);
 
     return NextResponse.json({ success: true });
   } catch (error) {

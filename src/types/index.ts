@@ -18,6 +18,29 @@ export interface WikiSource {
   url: string;
 }
 
+/** A user credited for content merged into a wiki (denormalised for display). */
+export interface WikiContributor {
+  id: string;
+  name: string;
+  image?: string;
+}
+
+/**
+ * Snapshot of a wiki's previous content, written to the `revisions`
+ * subcollection before each merge/update (capped at the last 20).
+ */
+export interface WikiRevision {
+  id: string;
+  title: string;
+  content: string;
+  summary: string;
+  /** updatedAt of the snapshotted version (when that version was written). */
+  updatedAt: number;
+  /** User who performed the edit that superseded this version. */
+  editorId: string;
+  editorName: string;
+}
+
 export interface Wiki {
   id: string;
   title: string;
@@ -48,6 +71,10 @@ export interface Wiki {
   source?: string;
   /** References cited by the article, rendered as a References section. */
   sources?: WikiSource[];
+  /** Users whose thread questions were merged into the article (canonical ids). */
+  contributorIds?: string[];
+  /** Denormalised contributor display data, kept in sync with contributorIds. */
+  contributors?: WikiContributor[];
 }
 
 export interface ThreadReply {
@@ -60,6 +87,9 @@ export interface ThreadReply {
   authorImage?: string;
   conversation: Message[];
   createdAt: number;
+  /** Set when the wiki author merged this thread into the article. */
+  mergedAt?: number;
+  mergedBy?: string;
 }
 
 export interface ThreadReplyCreateInput {

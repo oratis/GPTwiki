@@ -1,6 +1,14 @@
 import { db } from './firebase';
 import { FieldValue, type QueryDocumentSnapshot } from 'firebase-admin/firestore';
-import type { Wiki, UserProfile, PublicUserProfile, UserApiKeys } from '@/types';
+import type {
+  Wiki,
+  UserProfile,
+  PublicUserProfile,
+  UserApiKeys,
+  ThreadReply,
+  WikiContributor,
+  WikiRevision,
+} from '@/types';
 import { encryptSecret, decryptSecret } from './crypto';
 import {
   SEARCH_STOPWORDS,
@@ -131,7 +139,27 @@ export async function getPopularWikis(limit = 12, language?: string): Promise<Wi
 }
 
 async function collectPopularWikis(limit: number, language?: string): Promise<Wiki[]> {
-  const results: Wiki[] = [];
+  const docs = await scanTopImageWikis(limit, language);
+  return docs.map((doc) => ({ id: doc.id, ...doc.data() } as Wiki));
+}
+
+/**
+ * IDs of the wikis `getPopularWikis(limit)` would return. For callers that
+ * only need ids (generateStaticParams), the scan is projected down to
+ * `imageUrl` (the filter) and `views` (the cursor) — full docs carry whole
+ * conversation payloads, which makes the unprojected window scan take ~70s.
+ */
+export async function getPopularWikiIds(limit = 50): Promise<string[]> {
+  const docs = await scanTopImageWikis(limit, undefined, ['imageUrl', 'views']);
+  return docs.map((doc) => doc.id);
+}
+
+async function scanTopImageWikis(
+  limit: number,
+  language?: string,
+  fields?: string[]
+): Promise<QueryDocumentSnapshot[]> {
+  const results: QueryDocumentSnapshot[] = [];
   // Wide pages keep this to one Firestore round-trip in the common case.
   const pageSize = Math.max(limit * 16, 200);
   const maxScan = Math.max(limit * 50, 2400);
@@ -139,9 +167,10 @@ async function collectPopularWikis(limit: number, language?: string): Promise<Wi
   let cursor: QueryDocumentSnapshot | undefined;
 
   while (results.length < limit && scanned < maxScan) {
-    let query = language
+    let query: FirebaseFirestore.Query = language
       ? db.collection('wikis').where('language', '==', language).orderBy('views', 'desc')
       : db.collection('wikis').orderBy('views', 'desc');
+    if (fields) query = query.select(...fields);
     query = query.limit(pageSize);
     if (cursor) query = query.startAfter(cursor);
 
@@ -149,9 +178,8 @@ async function collectPopularWikis(limit: number, language?: string): Promise<Wi
     if (snapshot.empty) break;
 
     for (const doc of snapshot.docs) {
-      const data = doc.data();
-      if (hasHeaderImage(data)) {
-        results.push({ id: doc.id, ...data } as Wiki);
+      if (hasHeaderImage(doc.data())) {
+        results.push(doc);
         if (results.length >= limit) break;
       }
     }
@@ -414,6 +442,71 @@ export async function updateWiki(
   await db.collection('wikis').doc(id).update(update);
 }
 
+// ─── Revisions ───
+
+/** How many past versions to keep per wiki. */
+const REVISION_CAP = 20;
+
+/**
+ * Snapshot the wiki's current content into the `revisions` subcollection.
+ * Called before each merge/update so the previous version is never lost.
+ * Keeps only the last REVISION_CAP snapshots.
+ */
+export async function pushWikiRevision(
+  wikiId: string,
+  editorId: string,
+  editorName: string
+): Promise<void> {
+  const wikiRef = db.collection('wikis').doc(wikiId);
+  const doc = await wikiRef.get();
+  if (!doc.exists) return;
+  const data = doc.data()!;
+
+  await wikiRef.collection('revisions').add({
+    title: data.title ?? '',
+    content: data.content ?? '',
+    summary: data.summary ?? '',
+    updatedAt: data.updatedAt ?? data.createdAt ?? Date.now(),
+    editorId,
+    editorName,
+  });
+
+  // updatedAt is strictly increasing per edit, so it doubles as the
+  // revision order. Drop everything past the cap.
+  const overflow = await wikiRef
+    .collection('revisions')
+    .orderBy('updatedAt', 'desc')
+    .offset(REVISION_CAP)
+    .get();
+  if (!overflow.empty) {
+    const batch = db.batch();
+    overflow.docs.forEach((d) => batch.delete(d.ref));
+    await batch.commit();
+  }
+}
+
+/**
+ * Revision metadata for the "edit history" list — content is excluded via a
+ * field mask since the list only shows who edited and when.
+ */
+export async function getWikiRevisions(
+  wikiId: string,
+  limit = REVISION_CAP
+): Promise<Array<Omit<WikiRevision, 'content'>>> {
+  const snapshot = await db
+    .collection('wikis')
+    .doc(wikiId)
+    .collection('revisions')
+    .orderBy('updatedAt', 'desc')
+    .select('title', 'summary', 'updatedAt', 'editorId', 'editorName')
+    .limit(limit)
+    .get();
+
+  return snapshot.docs.map(
+    (doc) => ({ id: doc.id, ...doc.data() } as Omit<WikiRevision, 'content'>)
+  );
+}
+
 // ─── Thread Replies ───
 
 export async function createThreadReply(
@@ -464,4 +557,51 @@ export async function getThreadReplies(
   const nextCursor = hasMore ? (threads[threads.length - 1].createdAt as number) : null;
 
   return { threads, nextCursor };
+}
+
+export async function getThreadReply(
+  wikiId: string,
+  threadId: string
+): Promise<ThreadReply | null> {
+  const doc = await db
+    .collection('wikis')
+    .doc(wikiId)
+    .collection('threads')
+    .doc(threadId)
+    .get();
+  if (!doc.exists) return null;
+  return { id: doc.id, ...doc.data() } as ThreadReply;
+}
+
+/**
+ * Record a successful thread→article merge: stamp the thread so it can't be
+ * merged twice, and credit the thread author on the wiki doc (unless they're
+ * the wiki author or already credited).
+ */
+export async function recordThreadMerge(
+  wikiId: string,
+  threadId: string,
+  mergedBy: string,
+  contributor: WikiContributor | null
+): Promise<void> {
+  const wikiRef = db.collection('wikis').doc(wikiId);
+
+  await wikiRef.collection('threads').doc(threadId).update({
+    mergedAt: Date.now(),
+    mergedBy,
+  });
+
+  if (contributor) {
+    // arrayUnion dedupes the id list; the object list is guarded by the
+    // caller checking contributorIds first (merges are author-only and
+    // serial, so a read-then-write race is not a practical concern).
+    await wikiRef.update({
+      contributorIds: FieldValue.arrayUnion(contributor.id),
+      contributors: FieldValue.arrayUnion(
+        contributor.image
+          ? { id: contributor.id, name: contributor.name, image: contributor.image }
+          : { id: contributor.id, name: contributor.name }
+      ),
+    });
+  }
 }

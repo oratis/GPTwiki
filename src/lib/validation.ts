@@ -36,6 +36,10 @@ export const threadCreateSchema = z.object({
   aiModel: aiModelSchema,
 });
 
+export const threadMergeSchema = z.object({
+  threadId: z.string().trim().min(1).max(128),
+});
+
 export const threadListQuerySchema = z.object({
   cursor: z.coerce.number().int().nonnegative().optional(),
   limit: z.coerce.number().int().min(1).max(50).default(10),

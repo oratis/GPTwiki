@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { BookOpen, Eye, Bot } from 'lucide-react';
-import { getWikiById, getPopularWikis } from '@/lib/search';
+import { getWikiById, getPopularWikiIds } from '@/lib/search';
 import { getModelDisplayName } from '@/lib/models';
 import { hasLocale } from '@/lib/i18n/server';
 
@@ -9,9 +9,12 @@ export const revalidate = 3600;
 
 // Pre-render the same top 50 popular wikis for embed cards.
 export async function generateStaticParams(): Promise<Array<{ id: string }>> {
+  // Skip in next dev — it runs this on first navigation to the route,
+  // blocking the request on a Firestore scan (dev renders on demand).
+  if (process.env.NODE_ENV === 'development') return [];
   try {
-    const popular = await getPopularWikis(50);
-    return popular.map((w) => ({ id: w.id }));
+    const ids = await getPopularWikiIds(50);
+    return ids.map((id) => ({ id }));
   } catch {
     return [];
   }
