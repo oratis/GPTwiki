@@ -16,6 +16,12 @@ import {
   scriptAwareTokens,
   buildSearchKeywords,
 } from './search-keywords';
+import {
+  isTypesenseEnabled,
+  searchWikiIdsTypesense,
+  upsertWikiToTypesense,
+  toTypesenseDoc,
+} from './typesense';
 
 /** A wiki "has a header image" when imageUrl is a non-empty string. */
 function hasHeaderImage(data: FirebaseFirestore.DocumentData): boolean {
@@ -31,6 +37,26 @@ function hasHeaderImage(data: FirebaseFirestore.DocumentData): boolean {
  */
 export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
   if (!query.trim()) return [];
+
+  // Primary path: Typesense (typo tolerance, whole-collection ranking).
+  // Any error or zero-hit result falls through to the Firestore flow, so a
+  // down/unsynced search server degrades quality, never availability.
+  if (isTypesenseEnabled()) {
+    try {
+      const ids = await searchWikiIdsTypesense(query.trim(), limit);
+      if (ids.length > 0) {
+        const refs = ids.map((id) => db.collection('wikis').doc(id));
+        const snaps = await db.getAll(...refs);
+        const byId = new Map(
+          snaps.filter((s) => s.exists).map((s) => [s.id, { id: s.id, ...s.data() } as Wiki])
+        );
+        const hits = ids.map((id) => byId.get(id)).filter((w): w is Wiki => !!w);
+        if (hits.length > 0) return hits;
+      }
+    } catch (e) {
+      console.error('Typesense search failed, falling back to Firestore:', e);
+    }
+  }
 
   const tokens = tokenize(query).filter((w) => w.length > 1);
   // Drop stopwords for signal; if the query is *only* stopwords, fall back to
@@ -244,13 +270,21 @@ export async function incrementWikiViews(id: string): Promise<void> {
 export async function createWiki(
   data: Omit<Wiki, 'id' | 'views' | 'createdAt' | 'updatedAt'>
 ): Promise<string> {
+  const createdAt = Date.now();
   const ref = await db.collection('wikis').add({
     ...data,
     keywords: buildSearchKeywords([data.title, data.question, data.tags?.join(' '), data.summary]),
     views: 0,
-    createdAt: Date.now(),
-    updatedAt: Date.now(),
+    createdAt,
+    updatedAt: createdAt,
   });
+
+  // Best-effort search indexing — never blocks or fails the write.
+  if (isTypesenseEnabled()) {
+    upsertWikiToTypesense(
+      toTypesenseDoc(ref.id, { ...data, views: 0, createdAt })
+    ).catch((e) => console.error('Typesense index (create) failed:', e));
+  }
 
   // Increment user wiki count
   const userRef = db.collection('users').doc(data.authorId);
@@ -440,6 +474,17 @@ export async function updateWiki(
   }
 
   await db.collection('wikis').doc(id).update(update);
+
+  // Best-effort search re-indexing with the merged doc state.
+  if (isTypesenseEnabled()) {
+    db.collection('wikis')
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) return upsertWikiToTypesense(toTypesenseDoc(id, doc.data()!));
+      })
+      .catch((e) => console.error('Typesense index (update) failed:', e));
+  }
 }
 
 // ─── Revisions ───
