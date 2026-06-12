@@ -140,3 +140,17 @@ Wikipedia 复制内容降级为"冷启动脚手架"，把"对话沉淀 + 接力�
 - Typesense/Algolia 全文搜索（关键词字段为过渡方案）
 - 纯 Wikipedia 复制页 noindex / 内容分层（重大 SEO 决策，需拍板）
 - Freemium 订阅（免费额度是其地基）
+
+---
+
+## 附录 2：产品决策记录（2026-06-11，所有者拍板）
+
+| # | 决策 | 结论 | 影响 |
+|---|---|---|---|
+| 1 | Wikipedia 复制页 SEO 处置 | **A — 维持全部可索引** | 不做 noindex/分层；接受 scaled-content 算法风险；CC BY-SA 署名保留 |
+| 2 | Wikipedia 导入扩量 | **继续** | dump 管线照常推进 |
+| 3 | 免费额度 | **BYOK-only，平台零成本** | `FREE_DAILY_MESSAGES` 默认改为 0；免费层成为自部署可选项；关闭时提示"请配置 API key"而非"额度用完" |
+| 4 | 商业化 | **D — 暂不收费 + waitlist 埋点** | Pro 等待名单已上线（个人主页一键加入，`waitlist` 集合收集付费意向） |
+| 5 | 站内搜索 | **B — Typesense 自托管** | 需先 provision 服务器（见任务）；keywords 字段为过渡 |
+| 6 | git 历史 | **不清洗** | 仅轮换飞书 secret；推广计划/KOL 名单留在历史中可接受 |
+| 7 | 对外叙事 | **现在切换** | README 已改为 "Living Q&A Encyclopedia" 叙事 |

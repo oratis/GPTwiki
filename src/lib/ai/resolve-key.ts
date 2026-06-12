@@ -1,6 +1,6 @@
 import type { AIModel, UserApiKeys } from '@/types';
 import { getUserApiKeys, getUserEmail } from '@/lib/search';
-import { consumeFreeQuota } from './free-quota';
+import { consumeFreeQuota, freeDailyLimit } from './free-quota';
 
 const OWNER_EMAIL = process.env.PLATFORM_OWNER_EMAIL || 'wangharp@gmail.com';
 
@@ -37,6 +37,12 @@ export async function resolveApiKeyForUser(
     const email = await getUserEmail(userId);
     if (email === OWNER_EMAIL) {
       return { apiKey: envKey, needsConfig: false, quotaExhausted: false };
+    }
+
+    // Free tier disabled → behave as BYOK-only: "add your key", not
+    // "quota used up" (the user never had a quota to use).
+    if (freeDailyLimit() <= 0) {
+      return { apiKey: null, needsConfig: true, quotaExhausted: false };
     }
 
     const quota = await consumeFreeQuota(userId);

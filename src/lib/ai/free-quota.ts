@@ -1,11 +1,12 @@
 import { db } from '@/lib/firebase';
 
-const DEFAULT_DAILY_LIMIT = 10;
+// Off by default: the platform bears no AI cost unless the operator
+// explicitly enables a free tier (product decision 2026-06: BYOK-only).
+const DEFAULT_DAILY_LIMIT = 0;
 
 /**
  * Daily number of platform-keyed AI generations each signed-in user gets for
- * free. Configurable via FREE_DAILY_MESSAGES; set to 0 to disable the free
- * tier entirely (BYOK-only).
+ * free. Disabled (0) unless FREE_DAILY_MESSAGES is set to a positive number.
  */
 export function freeDailyLimit(): number {
   const raw = Number(process.env.FREE_DAILY_MESSAGES);
