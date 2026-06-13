@@ -21,7 +21,49 @@ Hand-authored, original encyclopedia-style articles for GPTwiki, ready to review
 
 `index.ts` re-exports everything as `allDrafts`.
 
-## Publishing them
+## Quality-tier batches (editorial v2)
+
+Newer clusters answer practical decision/how-to questions, ship with a
+Seedream-generated hero image per topic, and are written natively in
+multiple languages (not translated). They are **not** registered in
+`allDrafts` — the legacy seeders de-dup by reading every existing title,
+which is unusable at the current corpus size.
+
+| File | Theme | Articles |
+|------|-------|----------|
+| `ai-in-practice.{en,zh}.ts` | AI decision/how-to: RAG vs fine-tuning, agents, MCP, local LLMs, tokens… | 10 topics × en/zh = 20 |
+| `personal-finance.{en,zh}.ts` | Money basics: compound interest, index funds, inflation, DCA, risk… | 12 topics × en/zh = 24 |
+| `digital-buying.{en,zh}.ts` | Gadget tech explained: OLED vs LCD, ANC, SSD, megapixels, USB-C… | 10 topics × en/zh = 20 |
+| `health-basics.{en,zh}.ts` | Health/nutrition myths: caffeine, sleep, protein, metabolism, hydration… | 9 topics × en/zh = 18 |
+| `dev-practices.{en,zh}.ts` | Dev concepts: rebase vs merge, REST vs GraphQL, SQL vs NoSQL, HTTPS, Docker, Big-O… | 9 topics × en/zh = 18 |
+| **Total** | | **50 topics × en/zh = 100 docs** |
+
+Shared bits: `editorial-style.ts` holds the one Seedream visual style every
+batch appends to its per-topic image prompt. Each batch's `*.ts` barrel
+(`personal-finance.ts` etc.) re-exports `[...En, ...Zh]` and registers in the
+`BATCHES` map of `scripts/seed-editorial.ts`.
+
+Seed them with `scripts/seed-editorial.ts` (per-draft `(title, language)`
+point-query de-dup, hero generation idempotent per `topicKey`, Typesense
+upsert at write time):
+
+```bash
+npx tsx scripts/seed-editorial.ts --batch=personal-finance           # dry-run
+npx tsx scripts/seed-editorial.ts --batch=personal-finance --apply   # write
+npx tsx scripts/seed-editorial.ts --apply --only=mcp-explained       # one topic
+```
+
+Adding a new cluster: create `content/<name>.{en,zh}.ts` (zh imports the en
+image prompts via a `promptOf` helper so a topic's hero is shared across
+languages), a `content/<name>.ts` barrel, and one line in the `BATCHES` map.
+
+Requires `ARK_API_KEY` (Seedream via Volcengine Ark) plus the usual
+Firebase/GCS creds in `.env.local`. Published articles are attributed to
+the dedicated **`gptwiki-editorial`** identity (`authorName: 'GPTwiki
+Editorial'`), `source: 'editorial'`, with `imageUrl/imageWidth/imageHeight`
+set and the hero injected into the markdown after the title.
+
+## Publishing them (legacy batches)
 
 A ready-to-run seeder lives at `scripts/seed-drafts.ts`. It de-dupes by title (skips any title already in `wikis`).
 

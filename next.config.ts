@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
     // Required in Next 16. No component requests a non-default quality, so
     // the single allowed value keeps the optimizer surface minimal.
     qualities: [75],
+    // Dev machines behind a fake-IP proxy (Clash/Surge enhanced mode)
+    // resolve every hostname to 198.18.x.x, tripping the optimizer's
+    // private-IP SSRF guard and 400-ing ALL remote images locally.
+    // Dev-only escape hatch; production keeps the guard.
+    dangerouslyAllowLocalIP: process.env.NODE_ENV === "development",
   },
   async headers() {
     return [

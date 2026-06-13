@@ -16,6 +16,22 @@ export interface DraftArticle {
   tags: string[];
   /** ISO 639-1 content language (one of the 15 supported locales). */
   language: DraftLanguage;
+  /**
+   * Stable key shared by all language variants of one topic. The editorial
+   * seeder (scripts/seed-editorial.ts) generates ONE hero image per topicKey
+   * and reuses it across variants — mirrors how translate-wikis.ts copies
+   * image fields verbatim.
+   */
+  topicKey?: string;
+  /** Seedream hero-image spec; `alt` doubles as the rendered caption. */
+  image?: {
+    /** English text-to-image prompt (shared per topicKey; first one wins). */
+    prompt: string;
+    /** Alt/caption text in the article's own language. */
+    alt: string;
+  };
+  /** External references rendered as the article's References section. */
+  sources?: { title: string; url: string }[];
 }
 
 export type DraftLanguage =
