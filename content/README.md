@@ -31,17 +31,17 @@ which is unusable at the current corpus size.
 
 | File | Theme | Articles |
 |------|-------|----------|
-All six clusters are at **7 languages** (en, zh, ja, ko, es, fr, de):
+Supported locales: en, zh, ja, ko, es, fr, de, pt, it, ru, ar, hi, tr, vi, th (15).
 
-| File (`<name>.{en,zh,ja,ko,es,fr,de}.ts`) | Theme | Articles |
-|------|-------|----------|
-| `ai-in-practice` | AI decision/how-to: RAG vs fine-tuning, agents, MCP, local LLMs, tokens… | 10 topics × 7 = 70 |
-| `personal-finance` | Money basics: compound interest, index funds, inflation, DCA, risk… | 12 topics × 7 = 84 |
-| `digital-buying` | Gadget tech explained: OLED vs LCD, ANC, SSD, megapixels, USB-C… | 10 topics × 7 = 70 |
-| `digital-security` | Privacy & security: password managers, 2FA, passkeys, phishing, VPN, E2EE… | 9 topics × 7 = 63 |
-| `health-basics` | Health/nutrition myths: caffeine, sleep, protein, metabolism, hydration… | 9 topics × 7 = 63 |
-| `dev-practices` | Dev concepts: rebase vs merge, REST vs GraphQL, SQL vs NoSQL, HTTPS, Docker, Big-O… | 9 topics × 7 = 63 |
-| **Total** | | **50 topics, 413 docs** |
+| Cluster | Topics | Locales | Docs |
+|------|-------|---------|------|
+| `ai-in-practice` | 10 | **all 15** | 150 |
+| `personal-finance` | 12 | **all 15** | 180 |
+| `digital-buying` | 10 | en/zh/ja/ko/es/fr/de (7) | 70 |
+| `digital-security` | 9 | en/zh/ja/ko/es/fr/de (7) | 63 |
+| `health-basics` | 9 | en/zh/ja/ko/es/fr/de (7) | 63 |
+| `dev-practices` | 9 | en/zh/ja/ko/es/fr/de (7) | 63 |
+| **Total** | **50** | | **589 docs** |
 
 **Phase 2 (language expansion).** Because heroes are cached per `topicKey`,
 adding a language variant reuses the existing image at **zero** generation
@@ -50,8 +50,17 @@ cost. To add a new locale to a cluster: create `content/<name>.<lang>.ts`
 `personal-finance`/`health-basics` also append a localized `NOTE` disclaimer),
 append it to the `<name>.ts` barrel, run full `tsc`, then
 `--batch=<name> --apply` (existing locales are skipped by the
-`(title, language)` de-dup). Locales beyond en/zh/ja/ko/es/fr/de
-(pt/it/ru/ar/hi/tr/vi/th) remain for future expansion.
+`(title, language)` de-dup). The two flagship clusters are at all 15 locales;
+`digital-buying`/`digital-security`/`health-basics`/`dev-practices` still need
+pt/it/ru/ar/hi/tr/vi/th.
+
+Parallel-localization recipe (used for the wave-2 expansion): spawn one
+general-purpose agent per locale, each given `<name>.en.ts` (source) +
+an existing `<name>.<lang>.ts` (format template), instructed to self-validate
+with `npx tsc --noEmit | grep <file>`. Watch-outs: summaries must stay ≤320
+chars (Romance/German/Turkish run long — agents trim); French/Italian/Turkish
+need the typographic apostrophe ’ in single-quoted fields; Arabic is RTL
+natural text (the app handles direction); keep inline-code backticks escaped.
 
 Shared bits: `editorial-style.ts` holds the one Seedream visual style every
 batch appends to its per-topic image prompt. Each batch's `*.ts` barrel
