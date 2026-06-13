@@ -31,28 +31,39 @@ which is unusable at the current corpus size.
 
 | File | Theme | Articles |
 |------|-------|----------|
-Supported locales: en, zh, ja, ko, es, fr, de, pt, it, ru, ar, hi, tr, vi, th (15).
+Every cluster is at **all 15 supported locales**: en, zh, ja, ko, es, fr, de,
+pt, it, ru, ar, hi, tr, vi, th.
 
-| Cluster | Topics | Locales | Docs |
-|------|-------|---------|------|
-| `ai-in-practice` | 10 | **all 15** | 150 |
-| `personal-finance` | 12 | **all 15** | 180 |
-| `digital-buying` | 10 | en/zh/ja/ko/es/fr/de (7) | 70 |
-| `digital-security` | 9 | en/zh/ja/ko/es/fr/de (7) | 63 |
-| `health-basics` | 9 | en/zh/ja/ko/es/fr/de (7) | 63 |
-| `dev-practices` | 9 | en/zh/ja/ko/es/fr/de (7) | 63 |
-| **Total** | **50** | | **589 docs** |
+| Cluster | Topics | Docs (×15) |
+|------|-------|------|
+| `ai-in-practice` | 10 | 150 |
+| `personal-finance` | 12 | 180 |
+| `digital-buying` | 10 | 150 |
+| `digital-security` | 9 | 135 |
+| `health-basics` | 9 | 135 |
+| `dev-practices` | 9 | 135 |
+| **Total** | **59** | **885 docs** |
 
-**Phase 2 (language expansion).** Because heroes are cached per `topicKey`,
-adding a language variant reuses the existing image at **zero** generation
-cost. To add a new locale to a cluster: create `content/<name>.<lang>.ts`
-(mirror an existing variant — `promptOf()` shares the en image prompts;
-`personal-finance`/`health-basics` also append a localized `NOTE` disclaimer),
+Each `<name>.<lang>.ts` file holds one language's variants; `<name>.ts` is the
+barrel that spreads all 15 and registers in the `BATCHES` map of
+`scripts/seed-editorial.ts`. Every variant shares the per-`topicKey` hero image
+via the `promptOf()` helper, so the whole matrix cost ~one image generation per
+topic (59 images), reused across all 885 docs.
+
+**Adding more locales** (the matrix is full for the current 15, but the recipe
+is reusable): create `content/<name>.<lang>.ts` (mirror an existing variant;
+`personal-finance`/`health-basics` append a localized `NOTE` disclaimer),
 append it to the `<name>.ts` barrel, run full `tsc`, then
 `--batch=<name> --apply` (existing locales are skipped by the
-`(title, language)` de-dup). The two flagship clusters are at all 15 locales;
-`digital-buying`/`digital-security`/`health-basics`/`dev-practices` still need
-pt/it/ru/ar/hi/tr/vi/th.
+`(title, language)` de-dup, and cached heroes mean zero image cost).
+
+Parallel-localization recipe (used for the wave-2 expansion): spawn one
+general-purpose agent per locale, each given `<name>.en.ts` (source) +
+an existing `<name>.<lang>.ts` (format template), instructed to self-validate
+with `npx tsc --noEmit | grep <file>`. Watch-outs: summaries must stay ≤320
+chars (Romance/German/Turkish run long — agents trim); French/Italian/Turkish
+need the typographic apostrophe ’ in single-quoted fields; Arabic is RTL
+natural text (the app handles direction); keep inline-code backticks escaped.
 
 Parallel-localization recipe (used for the wave-2 expansion): spawn one
 general-purpose agent per locale, each given `<name>.en.ts` (source) +
