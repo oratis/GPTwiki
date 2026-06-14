@@ -84,6 +84,7 @@ const BATCHES: Record<string, () => Promise<DraftArticle[]>> = {
   'health-basics': () => import('../content/health-basics').then((m) => m.healthBasics),
   'dev-practices': () => import('../content/dev-practices').then((m) => m.devPractices),
   'learning-productivity': () => import('../content/learning-productivity').then((m) => m.learningProductivity),
+  'careers-work': () => import('../content/careers-work').then((m) => m.careersWork),
 };
 
 // ─── Init ────────────────────────────────────────────────────────────────
