@@ -29,20 +29,20 @@ multiple languages (not translated). They are **not** registered in
 `allDrafts` — the legacy seeders de-dup by reading every existing title,
 which is unusable at the current corpus size.
 
-Seven clusters are at **all 15 supported locales** (en, zh, ja, ko, es, fr, de,
-pt, it, ru, ar, hi, tr, vi, th); newer clusters start at en+zh and expand later.
+All eight clusters are at **all 15 supported locales** (en, zh, ja, ko, es, fr,
+de, pt, it, ru, ar, hi, tr, vi, th).
 
-| Cluster | Topics | Locales | Docs |
-|------|-------|------|------|
-| `ai-in-practice` | 10 | 15 | 150 |
-| `personal-finance` | 12 | 15 | 180 |
-| `digital-buying` | 10 | 15 | 150 |
-| `digital-security` | 9 | 15 | 135 |
-| `health-basics` | 9 | 15 | 135 |
-| `dev-practices` | 9 | 15 | 135 |
-| `learning-productivity` | 10 | 15 | 150 |
-| `careers-work` | 10 | en/zh (2) | 20 |
-| **Total** | **79** | | **1,055 docs** |
+| Cluster | Topics | Docs (×15) |
+|------|-------|------|
+| `ai-in-practice` | 10 | 150 |
+| `personal-finance` | 12 | 180 |
+| `digital-buying` | 10 | 150 |
+| `digital-security` | 9 | 135 |
+| `health-basics` | 9 | 135 |
+| `dev-practices` | 9 | 135 |
+| `learning-productivity` | 10 | 150 |
+| `careers-work` | 10 | 150 |
+| **Total** | **79** | **1,185 docs** |
 
 Each `<name>.<lang>.ts` file holds one language's variants; `<name>.ts` is the
 barrel that spreads all 15 and registers in the `BATCHES` map of
