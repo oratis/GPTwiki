@@ -42,7 +42,8 @@ de, pt, it, ru, ar, hi, tr, vi, th).
 | `dev-practices` | 9 | 135 |
 | `learning-productivity` | 10 | 150 |
 | `careers-work` | 10 | 150 |
-| **Total** | **79** | **1,185 docs** |
+| `everyday-science` | 10 | en/zh (2) | 20 |
+| **Total** | **89** | **1,205 docs** |
 
 Each `<name>.<lang>.ts` file holds one language's variants; `<name>.ts` is the
 barrel that spreads all 15 and registers in the `BATCHES` map of
