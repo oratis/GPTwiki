@@ -29,7 +29,7 @@ multiple languages (not translated). They are **not** registered in
 `allDrafts` — the legacy seeders de-dup by reading every existing title,
 which is unusable at the current corpus size.
 
-Nine clusters are at **all 15 supported locales** (en, zh, ja, ko, es, fr, de,
+All ten clusters are at **all 15 supported locales** (en, zh, ja, ko, es, fr, de,
 pt, it, ru, ar, hi, tr, vi, th); newer clusters start at en+zh and expand later.
 
 | Cluster | Topics | Locales | Docs |
@@ -43,8 +43,8 @@ pt, it, ru, ar, hi, tr, vi, th); newer clusters start at en+zh and expand later.
 | `learning-productivity` | 10 | 15 | 150 |
 | `careers-work` | 10 | 15 | 150 |
 | `everyday-science` | 10 | 15 | 150 |
-| `home-energy` | 10 | en/zh (2) | 20 |
-| **Total** | **99** | | **1,355 docs** |
+| `home-energy` | 10 | 15 | 150 |
+| **Total** | **99** | | **1,485 docs** |
 
 Each `<name>.<lang>.ts` file holds one language's variants; `<name>.ts` is the
 barrel that spreads every locale and registers in the `BATCHES` map of
