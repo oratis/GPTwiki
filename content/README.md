@@ -43,36 +43,31 @@ pt, it, ru, ar, hi, tr, vi, th); newer clusters start at en+zh and expand later.
 | `learning-productivity` | 10 | 15 | 150 |
 | `careers-work` | 10 | 15 | 150 |
 | `everyday-science` | 10 | 15 | 150 |
-| **Total** | **89** | | **1,335 docs** |
+| `home-energy` | 10 | en/zh (2) | 20 |
+| **Total** | **99** | | **1,355 docs** |
 
 Each `<name>.<lang>.ts` file holds one language's variants; `<name>.ts` is the
-barrel that spreads all 15 and registers in the `BATCHES` map of
+barrel that spreads every locale and registers in the `BATCHES` map of
 `scripts/seed-editorial.ts`. Every variant shares the per-`topicKey` hero image
-via the `promptOf()` helper, so the whole matrix cost ~one image generation per
-topic (59 images), reused across all 885 docs.
+via the `promptOf()` helper, so each topic costs ~one image generation
+(~99 heroes total), reused across all 1,355 docs.
 
-**Adding more locales** (the matrix is full for the current 15, but the recipe
-is reusable): create `content/<name>.<lang>.ts` (mirror an existing variant;
-`personal-finance`/`health-basics` append a localized `NOTE` disclaimer),
-append it to the `<name>.ts` barrel, run full `tsc`, then
-`--batch=<name> --apply` (existing locales are skipped by the
-`(title, language)` de-dup, and cached heroes mean zero image cost).
+**Adding more locales** to a cluster that's still en/zh: create
+`content/<name>.<lang>.ts` (mirror an existing variant; `personal-finance`/
+`health-basics` append a localized `NOTE` disclaimer), append it to the
+`<name>.ts` barrel, run full `tsc`, then `--batch=<name> --apply` (existing
+locales are skipped by the `(title, language)` de-dup, and cached heroes mean
+zero image cost).
 
-Parallel-localization recipe (used for the wave-2 expansion): spawn one
-general-purpose agent per locale, each given `<name>.en.ts` (source) +
-an existing `<name>.<lang>.ts` (format template), instructed to self-validate
-with `npx tsc --noEmit | grep <file>`. Watch-outs: summaries must stay ≤320
-chars (Romance/German/Turkish run long — agents trim); French/Italian/Turkish
-need the typographic apostrophe ’ in single-quoted fields; Arabic is RTL
-natural text (the app handles direction); keep inline-code backticks escaped.
-
-Parallel-localization recipe (used for the wave-2 expansion): spawn one
-general-purpose agent per locale, each given `<name>.en.ts` (source) +
-an existing `<name>.<lang>.ts` (format template), instructed to self-validate
-with `npx tsc --noEmit | grep <file>`. Watch-outs: summaries must stay ≤320
-chars (Romance/German/Turkish run long — agents trim); French/Italian/Turkish
-need the typographic apostrophe ’ in single-quoted fields; Arabic is RTL
-natural text (the app handles direction); keep inline-code backticks escaped.
+Parallel-localization recipe: spawn one general-purpose agent **per locale**
+(emit one Agent call per language — describing "5 languages" but emitting one
+silently drops the rest; the integrity check catches it), each given
+`<name>.en.ts` (source) + an existing `<name>.<lang>.ts` (format template),
+instructed to self-validate with `npx tsc --noEmit | grep <file>`. Watch-outs:
+summaries must stay ≤320 chars (Romance/German/Turkish run long — agents trim);
+French/Italian/Turkish need the typographic apostrophe ’ in single-quoted
+fields; Arabic is RTL natural text (the app handles direction); keep inline-code
+backticks escaped.
 
 Shared bits: `editorial-style.ts` holds the one Seedream visual style every
 batch appends to its per-topic image prompt. Each batch's `*.ts` barrel
