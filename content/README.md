@@ -43,7 +43,8 @@ pt, it, ru, ar, hi, tr, vi, th); newer clusters start at en+zh and expand later.
 | `learning-productivity` | 10 | 15 | 150 |
 | `careers-work` | 10 | 15 | 150 |
 | `everyday-science` | 10 | 15 | 150 |
-| **Total** | **89** | | **1,335 docs** |
+| `home-energy` | 10 | en/zh (2) | 20 |
+| **Total** | **99** | | **1,355 docs** |
 
 Each `<name>.<lang>.ts` file holds one language's variants; `<name>.ts` is the
 barrel that spreads all 15 and registers in the `BATCHES` map of
