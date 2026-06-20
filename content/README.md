@@ -45,7 +45,8 @@ pt, it, ru, ar, hi, tr, vi, th); newer clusters start at en+zh and expand later.
 | `everyday-science` | 10 | 15 | 150 |
 | `home-energy` | 10 | 15 | 150 |
 | `cooking-science` | 10 | 15 | 150 |
-| **Total** | **109** | | **1,635 docs** |
+| `travel-smart` | 10 | en/zh (2) | 20 |
+| **Total** | **119** | | **1,655 docs** |
 
 Each `<name>.<lang>.ts` file holds one language's variants; `<name>.ts` is the
 barrel that spreads every locale and registers in the `BATCHES` map of
