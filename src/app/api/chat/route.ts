@@ -24,11 +24,11 @@ export async function POST(req: NextRequest) {
   const { messages, model } = parsed.data;
 
   try {
-    const { apiKey, needsConfig, quotaExhausted } = await resolveApiKeyForUser(model, session.user.id!);
+    const { apiKey, model: resolvedModel, needsConfig, quotaExhausted } = await resolveApiKeyForUser(model, session.user.id!);
 
     if (quotaExhausted) {
       return new Response(
-        JSON.stringify({ error: 'QUOTA_EXHAUSTED', message: 'Daily free message quota used up. Add your own API key to continue.' }),
+        JSON.stringify({ error: 'QUOTA_EXHAUSTED', message: "You've used all of today's free messages. Add your own API key to keep going, or join the Pro waitlist." }),
         { status: 403, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const stream = getAIStream(model, messages, apiKey || undefined);
+    const stream = getAIStream(resolvedModel, messages, apiKey || undefined);
 
     return new Response(stream, {
       headers: {

@@ -71,13 +71,13 @@ export async function POST(
       );
     }
 
-    const { apiKey, needsConfig, quotaExhausted } = await resolveApiKeyForUser(
+    const { apiKey, model: resolvedModel, needsConfig, quotaExhausted } = await resolveApiKeyForUser(
       wiki.aiModel,
       session.user.id!
     );
     if (quotaExhausted) {
       return NextResponse.json(
-        { error: 'QUOTA_EXHAUSTED', message: 'Daily free message quota used up. Add your own API key to continue.' },
+        { error: 'QUOTA_EXHAUSTED', message: "You've used all of today's free messages. Add your own API key to keep going, or join the Pro waitlist." },
         { status: 403 }
       );
     }
@@ -100,7 +100,7 @@ export async function POST(
           ];
     const conversation = [...wiki.conversation, ...threadMessages];
 
-    const generated = await generateWikiContent(wiki.aiModel, conversation, apiKey || undefined);
+    const generated = await generateWikiContent(resolvedModel, conversation, apiKey || undefined);
 
     // Snapshot the outgoing version before overwriting it.
     await pushWikiRevision(id, session.user.id!, session.user.name || 'Anonymous');

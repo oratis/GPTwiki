@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
   try {
     let wikiData: typeof body & { sources?: WikiSource[] } = body;
     if (!body.content && body.conversation.length > 0) {
-      const { apiKey, needsConfig, quotaExhausted } = await resolveApiKeyForUser(
+      const { apiKey, model: resolvedModel, needsConfig, quotaExhausted } = await resolveApiKeyForUser(
         body.aiModel,
         session.user.id!
       );
@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
       // env-key default — that would bypass the free-tier metering entirely.
       if (quotaExhausted) {
         return NextResponse.json(
-          { error: 'QUOTA_EXHAUSTED', message: 'Daily free message quota used up. Add your own API key to continue.' },
+          { error: 'QUOTA_EXHAUSTED', message: "You've used all of today's free messages. Add your own API key to keep going, or join the Pro waitlist." },
           { status: 403 }
         );
       }
@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
           { status: 403 }
         );
       }
-      const generated = await generateWikiContent(body.aiModel, body.conversation, apiKey || undefined);
+      const generated = await generateWikiContent(resolvedModel, body.conversation, apiKey || undefined);
       wikiData = {
         ...body,
         title: body.title || generated.title,

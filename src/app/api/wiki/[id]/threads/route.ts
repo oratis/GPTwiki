@@ -66,10 +66,10 @@ export async function POST(
     }
 
     // Resolve API key
-    const { apiKey, needsConfig, quotaExhausted } = await resolveApiKeyForUser(aiModel, session.user.id!);
+    const { apiKey, model: resolvedModel, needsConfig, quotaExhausted } = await resolveApiKeyForUser(aiModel, session.user.id!);
     if (quotaExhausted) {
       return NextResponse.json(
-        { error: 'QUOTA_EXHAUSTED', message: 'Daily free message quota used up. Add your own API key to continue.' },
+        { error: 'QUOTA_EXHAUSTED', message: "You've used all of today's free messages. Add your own API key to keep going, or join the Pro waitlist." },
         { status: 403 }
       );
     }
@@ -86,8 +86,10 @@ export async function POST(
       { id: generateId(), role: 'user' as const, content: question, timestamp: Date.now() },
     ];
 
-    // Get AI response (non-streaming for thread replies)
-    const stream = getAIStream(aiModel, contextMessages, apiKey || undefined);
+    // Get AI response (non-streaming for thread replies). Use the resolved
+    // model — free-tier replies are generated on the cheap model, and the
+    // stored record below should reflect what actually answered.
+    const stream = getAIStream(resolvedModel, contextMessages, apiKey || undefined);
     const reader = stream.getReader();
     const decoder = new TextDecoder();
     let answer = '';
@@ -112,7 +114,7 @@ export async function POST(
     const threadId = await createThreadReply(wikiId, {
       question,
       answer,
-      aiModel,
+      aiModel: resolvedModel,
       authorId: session.user.id!,
       authorName: session.user.name || 'Anonymous',
       authorImage: session.user.image || undefined,
@@ -125,7 +127,7 @@ export async function POST(
         id: threadId,
         question,
         answer,
-        aiModel,
+        aiModel: resolvedModel,
         authorId: session.user.id,
         authorName: session.user.name || 'Anonymous',
         authorImage: session.user.image,
