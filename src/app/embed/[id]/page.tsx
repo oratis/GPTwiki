@@ -4,6 +4,7 @@ import { BookOpen, Eye, Bot } from 'lucide-react';
 import { getWikiById, getPopularWikiIds } from '@/lib/search';
 import { getModelDisplayName } from '@/lib/models';
 import { hasLocale } from '@/lib/i18n/server';
+import EmbedImpressionBeacon from './EmbedImpressionBeacon';
 
 export const revalidate = 3600;
 
@@ -50,6 +51,7 @@ export default async function EmbedPage({
       rel="noopener noreferrer"
       className="group flex h-full min-h-[140px] w-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white font-sans text-gray-900 shadow-sm transition-all hover:border-blue-300 hover:shadow-md sm:flex-row"
     >
+      <EmbedImpressionBeacon wikiId={id} />
       {imageUrl && (
         <div className="relative h-40 w-full flex-shrink-0 overflow-hidden bg-gray-100 sm:h-auto sm:w-48">
           <Image
