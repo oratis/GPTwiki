@@ -18,6 +18,13 @@ import {
   type Locale,
 } from '@/lib/i18n/server';
 import { localeHref } from '@/lib/i18n/links';
+import {
+  mirrorPagesNoindexed,
+  isWikipediaSourced as isWikipediaSource,
+  extractFaq,
+  buildFaqJsonLd,
+  buildBreadcrumbJsonLd,
+} from '@/lib/seo';
 
 export const revalidate = 3600;
 export const dynamicParams = true;
@@ -69,11 +76,20 @@ export async function generateMetadata({
   for (const loc of supportedLocales) languages[loc] = `https://gptwiki.net/${loc}/wiki/${id}`;
   languages['x-default'] = `https://gptwiki.net/en/wiki/${id}`;
 
+  // Emergency hedge: if the site gets flagged for scaled-content abuse, the
+  // owner can noindex every Wikipedia mirror at once via an env flag, without
+  // touching content. Off by default (mirrors stay indexed per the GTM plan).
+  const robots =
+    isWikipediaSourced(wiki) && mirrorPagesNoindexed()
+      ? { index: false, follow: true }
+      : undefined;
+
   return {
     title: wiki.title,
     description,
     keywords: wiki.tags,
     alternates: { canonical, languages },
+    ...(robots ? { robots } : {}),
     openGraph: {
       type: 'article',
       title: wiki.title,
@@ -98,7 +114,7 @@ export async function generateMetadata({
 
 /** True for articles mirrored from Wikipedia, which require CC BY-SA attribution. */
 function isWikipediaSourced(wiki: { source?: string }): boolean {
-  return typeof wiki.source === 'string' && wiki.source.startsWith('wikipedia');
+  return isWikipediaSource(wiki.source);
 }
 
 /** Link to the original Wikipedia article in the article's own language. */
@@ -171,6 +187,12 @@ export default async function WikiDetailPage({
 
   const t = getTranslations(locale);
   const jsonLd = buildJsonLd(wiki, locale, id);
+  // Structured-data hedge (GTM §5.1): give Google/answer-engines a richer,
+  // differentiated signal than the bare Article — FAQPage from the article's
+  // own FAQ section, plus a BreadcrumbList. extractFaq returns [] for mirrors
+  // and freeform articles, so FAQPage only appears where it's real.
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd(locale, id, wiki.title);
+  const faqJsonLd = buildFaqJsonLd(extractFaq(wiki.content));
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
@@ -178,6 +200,16 @@ export default async function WikiDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <Link
         href={localeHref(locale, '/wiki')}
