@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { unstable_cache } from 'next/cache';
 import { MessageSquarePlus, TrendingUp, Clock } from 'lucide-react';
 import WikiCard from '@/components/wiki/WikiCard';
 import HomeSearchIsland from '@/components/wiki/HomeSearchIsland';
@@ -13,14 +14,40 @@ import {
 } from '@/lib/i18n/server';
 import { localeHref } from '@/lib/i18n/links';
 
-// Render on demand at request time (where Firebase credentials exist) and
-// cache for 60s downstream. We deliberately skip generateStaticParams here
-// — the Docker build environment has no Firestore credentials, so a
-// build-time pre-render would lock in an empty "No wikis yet" HTML for
-// the entire revalidate window after every deploy.
+// Render on demand at request time (where Firebase credentials exist). We
+// deliberately skip generateStaticParams / static prerender here — the Docker
+// build environment has no Firestore credentials, so a build-time pre-render
+// would lock in an empty "No wikis yet" HTML after every deploy. The Firestore
+// reads themselves are cached for 60s (see getCachedHomeData) so this staying
+// dynamic doesn't mean re-reading the database on every request.
 export const dynamic = 'force-dynamic';
 
 type RouteParams = { locale: string };
+
+/**
+ * The home page is the #1 landing target for a launch spike (HN front page ≈
+ * 50 UV/min). It stays force-dynamic (so a credential-less Docker build can't
+ * bake in an empty "no wikis" state), but its Firestore reads are cached for
+ * 60s per locale via unstable_cache — so a traffic flood is served from the
+ * data cache instead of hammering Firestore on every request. This caps origin
+ * cost without changing the rendered HTML's freshness much (60s lag on the
+ * popular/recent lists is fine).
+ */
+function getCachedHomeData(locale: string) {
+  return unstable_cache(
+    async () => {
+      // Failures fall back to empty arrays — the page renders without that
+      // section rather than 500-ing on a transient Firestore error.
+      const [popular, recent] = await Promise.all([
+        getPopularWikis(9, locale).catch(() => []),
+        getRecentWikis(12, locale).catch(() => []),
+      ]);
+      return { popular, recent };
+    },
+    ['home-data', locale], // locale in the key → one cache entry per locale
+    { revalidate: 60, tags: ['wikis'] }
+  )();
+}
 
 export async function generateMetadata({
   params,
@@ -63,15 +90,9 @@ export default async function HomePage({
   if (!hasLocale(locale)) notFound();
   const t = getTranslations(locale);
 
-  // Fetch in parallel on the server so crawlers see populated HTML.
-  // Failures fall back to empty arrays — the page renders without that
-  // section rather than 500-ing on a transient Firestore error.
-  // Filter by the current locale so /en shows English wikis, /zh Chinese,
-  // etc. (with fallback to unfiltered if the composite index is missing).
-  const [popular, recent] = await Promise.all([
-    getPopularWikis(9, locale).catch(() => []),
-    getRecentWikis(12, locale).catch(() => []),
-  ]);
+  // Locale-filtered, 60s-cached on the server so crawlers see populated HTML
+  // and a launch spike doesn't re-read Firestore on every request.
+  const { popular, recent } = await getCachedHomeData(locale);
 
   return (
     <div>
