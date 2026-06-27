@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Code, Check, Copy } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
+import { track } from '@/lib/analytics';
 
 interface Props {
   wikiId: string;
@@ -39,6 +40,7 @@ export default function EmbedCodeButton({ wikiId }: Props) {
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(snippet);
+      track('embed_copy', { wiki_id: wikiId });
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch {

@@ -3,6 +3,7 @@
 import { Share2 } from 'lucide-react';
 import { useState } from 'react';
 import { useI18n } from '@/lib/i18n/context';
+import { track } from '@/lib/analytics';
 
 interface ShareButtonsProps {
   url: string;
@@ -62,6 +63,7 @@ export default function ShareButtons({ url, title }: ShareButtonsProps) {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(url);
+      track('share_click', { network: 'copy', url });
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -78,6 +80,7 @@ export default function ShareButtons({ url, title }: ShareButtonsProps) {
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => track('share_click', { network: link.name.toLowerCase(), url })}
           title={t('share.on', { name: link.name })}
           aria-label={t('share.on', { name: link.name })}
           className={`inline-flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition-colors ${link.color}`}

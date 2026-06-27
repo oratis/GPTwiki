@@ -118,6 +118,13 @@ const translations: Record<Locale, Record<string, string>> = {
     // Footer
     'footer.description': 'AI-powered collaborative knowledge base. Ask questions, create wikis, share knowledge.',
 
+    // Newsletter (footer email capture). Other locales fall back to English.
+    'newsletter.title': 'Get the best new articles weekly',
+    'newsletter.placeholder': 'you@example.com',
+    'newsletter.button': 'Subscribe',
+    'newsletter.success': "You're subscribed — watch your inbox!",
+    'newsletter.error': 'Something went wrong. Please try again.',
+
     // New features
     'header.categories': 'Categories',
     'home.recentWikis': 'Recent Wikis',

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { X, BookPlus, Loader2 } from 'lucide-react';
 import type { Message, AIModel } from '@/types';
 import { useI18n } from '@/lib/i18n/context';
+import { track } from '@/lib/analytics';
 import { useToast } from '@/components/ui/Toast';
 import LocaleLink from '@/components/LocaleLink';
 
@@ -67,6 +68,8 @@ export default function PublishDialog({ open, onClose, messages, model }: Publis
         throw new Error('Failed to publish');
       }
       const data = await res.json();
+      // Funnel: a conversation became a UGC article.
+      track('wiki_published', { wiki_id: data.id, model });
       setWikiId(data.id);
       setPublished(true);
     } catch (error) {

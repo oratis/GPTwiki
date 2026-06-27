@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { MessageSquarePlus, Loader2, Send, ChevronDown } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
+import { track } from '@/lib/analytics';
 import { useToast } from '@/components/ui/Toast';
 import ThreadReplyCard from './ThreadReplyCard';
 import ModelSelector from '@/components/chat/ModelSelector';
@@ -91,6 +92,8 @@ export default function ThreadReplyList({ wikiId, threadCount = 0, wikiAuthorId 
       }
 
       const data = await res.json();
+      // Funnel: a follow-up thread is the UGC growth loop in action.
+      track('thread_created', { wiki_id: wikiId });
       setThreads((prev) => [...prev, data.thread]);
       setQuestion('');
       setShowCompose(false);

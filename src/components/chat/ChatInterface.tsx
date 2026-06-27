@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { Send, BookPlus, Loader2 } from 'lucide-react';
 import type { AIModel, Message } from '@/types';
 import { generateId } from '@/lib/utils';
+import { track } from '@/lib/analytics';
 import { useI18n } from '@/lib/i18n/context';
 import ModelSelector from './ModelSelector';
 import MessageBubble from './MessageBubble';
@@ -31,8 +32,12 @@ export default function ChatInterface() {
     const trimmed = input.trim();
     if (!trimmed || loading) return;
 
+    const isFirst = messages.length === 0;
+    // Funnel: activation is the user's first question of the session.
+    track('question_asked', { model, is_first: isFirst });
+
     // Show suggestions on first message
-    if (messages.length === 0) {
+    if (isFirst) {
       setSearchQuery(trimmed);
       setShowSuggestions(true);
     }

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Sparkles, Check, Loader2 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
+import { track } from '@/lib/analytics';
 import { useToast } from '@/components/ui/Toast';
 
 /**
@@ -39,6 +40,7 @@ export default function ProWaitlistCard() {
     try {
       const res = await fetch('/api/waitlist', { method: 'POST' });
       if (!res.ok) throw new Error('join failed');
+      track('waitlist_join');
       setJoined(true);
     } catch {
       toast(t('chat.error'));
