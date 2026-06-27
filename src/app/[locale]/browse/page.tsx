@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Folder, Tag } from 'lucide-react';
 import WikiCard from '@/components/wiki/WikiCard';
-import { getAllTags, getWikisByTag } from '@/lib/search';
+import { getCachedAllTags, getCachedWikisByTag } from '@/lib/cached-reads';
 import {
   hasLocale,
   supportedLocales,
@@ -72,13 +72,11 @@ export default async function BrowsePage({
   if (!hasLocale(locale)) notFound();
   const t = getTranslations(locale);
 
-  const tags = await getAllTags(locale).catch(() => []);
+  const tags = await getCachedAllTags(locale);
   // Default to the most popular tag so the page never renders empty for crawlers.
   const selectedTag = rawTag?.trim() || tags[0]?.name;
 
-  const wikis = selectedTag
-    ? await getWikisByTag(selectedTag, 30).catch(() => [])
-    : [];
+  const wikis = selectedTag ? await getCachedWikisByTag(selectedTag, 30) : [];
 
   return (
     <div className="min-h-screen bg-gray-50">

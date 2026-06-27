@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Tag } from 'lucide-react';
 import WikiCard from '@/components/wiki/WikiCard';
-import { getWikisByTag } from '@/lib/search';
+import { getCachedWikisByTag } from '@/lib/cached-reads';
 import {
   hasLocale,
   supportedLocales,
@@ -57,7 +57,7 @@ export default async function TagPage({
   const tag = decodeURIComponent(rawTag);
   const t = getTranslations(locale);
 
-  const wikis = await getWikisByTag(tag, 30).catch(() => []);
+  const wikis = await getCachedWikisByTag(tag, 30);
   if (wikis.length === 0) notFound();
 
   // CollectionPage + ItemList schema — gives Google a structured view of

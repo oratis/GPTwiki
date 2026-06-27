@@ -3,7 +3,8 @@ import { notFound } from 'next/navigation';
 import { BookOpen } from 'lucide-react';
 import WikiCard from '@/components/wiki/WikiCard';
 import HomeSearchIsland from '@/components/wiki/HomeSearchIsland';
-import { searchWikis, getRecentWikis } from '@/lib/search';
+import { searchWikis } from '@/lib/search';
+import { getCachedRecentWikis } from '@/lib/cached-reads';
 import {
   hasLocale,
   supportedLocales,
@@ -67,9 +68,11 @@ export default async function WikiListPage({
   const t = getTranslations(locale);
 
   const query = q?.trim() ?? '';
+  // Search results stay uncached (unbounded query space); the default recent
+  // list — the crawlable/floodable view — is 60s-cached.
   const wikis = query
     ? await searchWikis(query, 30).catch(() => [])
-    : await getRecentWikis(30).catch(() => []);
+    : await getCachedRecentWikis(30);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
