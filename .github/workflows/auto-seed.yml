@@ -1,0 +1,63 @@
+name: auto-seed
+
+# Seed-on-merge. When a drafts PR lands on main (the carrier changes), publish
+# it to Firestore (en+zh + one hero image per topic) and mark those topics
+# seeded in the backlog. Your MERGE of the drafts PR is the review gate — this
+# only automates the mechanical `seed` step, so nothing reaches the live,
+# Google-indexed corpus that you didn't merge.
+#
+# Requires repo secrets FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY, ARK_API_KEY
+# (the service account also needs Storage access to the gptwiki-images bucket).
+# Until FIREBASE_CLIENT_EMAIL is set the job self-skips (stays green).
+on:
+  push:
+    branches: [main]
+    paths: ['content/auto-draft.en.ts']
+
+permissions:
+  contents: write
+
+concurrency: auto-seed   # never seed two merges at once
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Guard on secrets
+        id: guard
+        run: |
+          if [ -n "${{ secrets.FIREBASE_CLIENT_EMAIL }}" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::auto-seed skipped — add FIREBASE_CLIENT_EMAIL / FIREBASE_PRIVATE_KEY / ARK_API_KEY to enable."
+          fi
+      - if: steps.guard.outputs.ready == 'true'
+        uses: actions/checkout@v4
+      - if: steps.guard.outputs.ready == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - if: steps.guard.outputs.ready == 'true'
+        run: npm ci
+      - name: Seed en+zh + hero images
+        if: steps.guard.outputs.ready == 'true'
+        env:
+          FIREBASE_PROJECT_ID: gptwiki
+          FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
+          FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+          ARK_API_KEY: ${{ secrets.ARK_API_KEY }}
+        run: npx tsx scripts/seed-editorial.ts --batch=auto-draft --apply
+      - name: Mark seeded topics in backlog
+        if: steps.guard.outputs.ready == 'true'
+        run: |
+          npx tsx scripts/mark-seeded-from-carrier.ts
+          if git diff --quiet -- content/backlog.ts; then
+            echo "backlog unchanged"; exit 0
+          fi
+          git config user.name "gptwiki-bot"
+          git config user.email "bot@gptwiki.net"
+          # Only backlog.ts changes here, and that path isn't in the trigger's
+          # paths filter, so this push does NOT re-fire auto-seed (no loop).
+          git commit --no-verify -m "backlog: mark auto-seeded topics [skip ci]" -- content/backlog.ts
+          git push
