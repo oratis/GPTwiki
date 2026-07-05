@@ -25,13 +25,14 @@ export interface BacklogTopic {
 }
 
 export const backlog: BacklogTopic[] = [
-  // Pending, ordered by priority — auto-author picks top-down. High-intent,
-  // broadly-searched evergreen decision/how-to topics lead.
-  { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'pending' },
-  { topicKey: 'git-rebase-vs-merge', question: 'Rebase vs merge — which should I use, and when?', cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
-  { topicKey: 'microwave-nutrients', question: 'Does microwaving food destroy its nutrients or make it unsafe?', cluster: 'everyday-science', locales: ['en', 'zh'], status: 'pending' },
-  { topicKey: 'cast-iron-seasoning', question: 'How does seasoning a cast-iron pan actually work?', cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
+  // Pending — ADD NEW TOPICS HERE as { ..., status: 'pending' }, priority first.
+  // Currently empty (all seeded), so the daily cron idles until you add more.
+  //
   // Seeded to production (auto-author skips anything not `pending`).
+  { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
+  { topicKey: 'git-rebase-vs-merge', question: 'Rebase vs merge — which should I use, and when?', cluster: 'dev-practices', locales: ['en', 'zh'], status: 'seeded' },
+  { topicKey: 'microwave-nutrients', question: 'Does microwaving food destroy its nutrients or make it unsafe?', cluster: 'everyday-science', locales: ['en', 'zh'], status: 'seeded' },
+  { topicKey: 'cast-iron-seasoning', question: 'How does seasoning a cast-iron pan actually work?', cluster: 'cooking-science', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'emergency-fund-size', question: 'How big should my emergency fund really be?', cluster: 'personal-finance', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'salary-negotiation', question: 'How do I negotiate a job offer without blowing it?', cluster: 'careers-work', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'heat-pump-worth-it', question: 'Is a heat pump actually worth switching to?', cluster: 'home-energy', locales: ['en', 'zh'], status: 'seeded' },
