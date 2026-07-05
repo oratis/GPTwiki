@@ -101,33 +101,47 @@ async function translate(en: {
   content: string;
   tags: string[];
 }): Promise<Zh> {
-  const system = `You are a professional encyclopedia translator. Translate the following wiki article from English into Simplified Chinese (zh). Preserve all Markdown structure exactly (headings, tables, lists, inline code, links). Keep technical terms accurate; keep well-known acronyms (USB-C, VPN, ETF) as-is where natural. Do NOT translate URLs. Keep the summary under 300 Chinese characters.
+  // Marker-delimited (NOT JSON): the article body is long Markdown with tables,
+  // quotes and newlines that routinely break JSON string escaping.
+  const system = `You are a professional encyclopedia translator. Translate the article below from English into Simplified Chinese (zh). Preserve all Markdown structure exactly (headings, tables, lists, inline code, links). Keep technical terms accurate; keep well-known acronyms (USB-C, VPN, ETF) as-is where natural. Do NOT translate URLs. Keep the summary under 300 Chinese characters.
 
-Return ONLY a valid JSON object, no markdown fences:
-{"title": "...", "question": "...", "summary": "...", "content": "...", "tags": ["...", "..."]}`;
+Return your translation in EXACTLY this format, nothing else — no preamble, no code fences:
+<<<TITLE>>>
+(translated title, one line)
+<<<QUESTION>>>
+(translated question, one line)
+<<<SUMMARY>>>
+(translated summary)
+<<<TAGS>>>
+(comma-separated translated tags)
+<<<CONTENT>>>
+(the full translated Markdown article, starting with "# ")`;
 
-  const payload = JSON.stringify({
-    title: en.title,
-    question: en.question,
-    summary: en.summary,
-    content: en.content,
-    tags: en.tags,
-  });
+  const payload = `Title: ${en.title}\nQuestion: ${en.question}\nSummary: ${en.summary}\nTags: ${en.tags.join(', ')}\n\nArticle:\n${en.content}`;
   const messages: Message[] = [
-    { id: 't', role: 'user', content: `${system}\n\nArticle to translate:\n${payload}`, timestamp: Date.now() },
+    { id: 't', role: 'user', content: `${system}\n\n---\n${payload}`, timestamp: Date.now() },
   ];
   const raw = await collect(getAIStream('claude', messages));
-  const m = raw.match(/\{[\s\S]*\}/);
-  if (!m) throw new Error('no JSON in translation response');
-  const obj = JSON.parse(m[0]) as Partial<Zh>;
-  if (!obj.title || !obj.content || !obj.summary) throw new Error('translation missing fields');
-  if (!obj.content.startsWith('# ')) throw new Error('translated content lost its H1');
+  const pick = (a: string, b: string): string => {
+    const i = raw.indexOf(a);
+    if (i < 0) return '';
+    const start = i + a.length;
+    const end = b ? raw.indexOf(b, start) : -1;
+    return raw.slice(start, end < 0 ? raw.length : end).trim();
+  };
+  const title = pick('<<<TITLE>>>', '<<<QUESTION>>>');
+  const question = pick('<<<QUESTION>>>', '<<<SUMMARY>>>');
+  const summary = pick('<<<SUMMARY>>>', '<<<TAGS>>>');
+  const tags = pick('<<<TAGS>>>', '<<<CONTENT>>>').split(',').map((t) => t.trim()).filter(Boolean).slice(0, 8);
+  const content = pick('<<<CONTENT>>>', '');
+  if (!title || !content || !summary) throw new Error('translation missing markers');
+  if (!content.startsWith('# ')) throw new Error('translated content lost its H1');
   return {
-    title: obj.title,
-    question: obj.question || en.question,
-    summary: obj.summary.slice(0, 320),
-    content: obj.content,
-    tags: Array.isArray(obj.tags) && obj.tags.length ? obj.tags.slice(0, 8) : en.tags,
+    title,
+    question: question || en.question,
+    summary: summary.slice(0, 320),
+    content,
+    tags: tags.length ? tags : en.tags,
   };
 }
 
