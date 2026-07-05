@@ -29,6 +29,7 @@ export const backlog: BacklogTopic[] = [
   // Currently empty (all seeded), so the daily cron idles until you add more.
   //
   // Seeded to production (auto-author skips anything not `pending`).
+  { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'git-rebase-vs-merge', question: 'Rebase vs merge — which should I use, and when?', cluster: 'dev-practices', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'microwave-nutrients', question: 'Does microwaving food destroy its nutrients or make it unsafe?', cluster: 'everyday-science', locales: ['en', 'zh'], status: 'seeded' },
