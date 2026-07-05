@@ -1,18 +1,17 @@
 name: auto-author
 
-# Manual-first by design. The plan's for/against review
-# (docs/auto-content-cron-plan.md §7) concluded the scheduler stays
-# operator-triggered until draft quality is trusted — an unattended daily cron
-# that writes to a Google-indexed corpus is a site-wide SEO risk. To go
-# unattended LATER, uncomment `schedule:` below as a deliberate, reviewed step.
+# Daily schedule enabled after draft quality was verified across two batches
+# (docs/auto-content-cron-plan.md §7). The cron only DRAFTS + opens a PR — it
+# never writes to Firestore. Publishing stays a human step (merge + seed), so a
+# scheduled run cannot push unreviewed content into the Google-indexed corpus.
 on:
   workflow_dispatch:
     inputs:
       limit:
         description: 'Max topics to draft this run (hard cap 5)'
         default: '3'
-  # schedule:
-  #   - cron: '17 3 * * *'   # 03:17 UTC daily — enable ONLY after trusted runs
+  schedule:
+    - cron: '17 3 * * *'   # 03:17 UTC daily; scheduled runs use the default limit (3)
 
 permissions:
   contents: write
