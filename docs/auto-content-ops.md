@@ -7,7 +7,7 @@ that shaped it, see [auto-content-cron-plan.md](./auto-content-cron-plan.md).
 ## What it does
 
 ```
-add a topic to content/backlog.ts (status: 'pending')
+suggest-topics (daily 03:07 UTC) tops content/backlog.ts up to N pending topics
         │
         ▼  daily cron 03:17 UTC  (.github/workflows/auto-author.yml)
 auto-author.ts:  English draft → zh translation → image prompt  → opens a PR (en+zh)
@@ -22,21 +22,25 @@ mark-seeded-from-carrier.ts:  flips those topics to 'seeded' in the backlog
 live on gptwiki.net (en + zh, illustrated), cron advances to the next topics
 ```
 
-After setup, the only recurring human actions are: **add topics** and **merge the
-daily PR**. Everything else is automatic. Publishing is deliberately gated on your
-merge — nothing reaches the live, Google-indexed corpus that you didn't merge.
+After setup, the only recurring human action is **merging the daily content PR** —
+the backlog refills itself. Everything else is automatic. Publishing is
+deliberately gated on your merge — nothing reaches the live, Google-indexed corpus
+that you didn't merge. (You can still hand-add or prune topics in
+`content/backlog.ts` any time.)
 
 ## Components
 
 | File | Role |
 |------|------|
-| [`content/backlog.ts`](../content/backlog.ts) | Topic queue. `pending` → drafted → `seeded`. Cron drafts `pending` top-down. |
+| [`content/backlog.ts`](../content/backlog.ts) | Topic queue. `pending` → drafted → `seeded`. Cron drafts `pending` top-down. Refilled automatically. |
+| [`scripts/suggest-topics.ts`](../scripts/suggest-topics.ts) | Tops the backlog up to a target of `pending` topics with fresh, de-duplicated AI-suggested questions. Self-capping (no-op when full). |
 | [`scripts/auto-author.ts`](../scripts/auto-author.ts) | Per topic: generate EN (reuses `generateWikiContent`), translate to zh, attach an editorial image prompt. Quality-gates weak generations. Writes the carrier. |
 | [`content/auto-draft.en.ts`](../content/auto-draft.en.ts) | Transient carrier — the `auto-draft` batch. Overwritten each run; holds en+zh. |
 | [`scripts/seed-editorial.ts`](../scripts/seed-editorial.ts) | Publisher. `--batch=auto-draft --apply` seeds en+zh + one hero image per `topicKey`. `(title, language)` de-dup; idempotent GCS image path `editorial/<topicKey>.jpg`. |
 | [`scripts/mark-seeded-from-carrier.ts`](../scripts/mark-seeded-from-carrier.ts) | Flips carrier topics `pending`→`seeded` in the backlog. Pure text edit. |
 | [`.github/workflows/auto-author.yml`](../.github/workflows/auto-author.yml) | Daily cron + manual `workflow_dispatch`. Generates drafts, opens a PR. |
 | [`.github/workflows/auto-seed.yml`](../.github/workflows/auto-seed.yml) | Seed-on-merge. Keyless (WIF). Self-skips until `GCP_WIF_PROVIDER` is set. |
+| [`.github/workflows/suggest-topics.yml`](../.github/workflows/suggest-topics.yml) | Daily 03:07 UTC (before auto-author). Tops up + commits the backlog. |
 
 One-off backfills used to bootstrap the first batch (not needed for new topics —
 `auto-author` now does en+zh+image inline): `scripts/translate-live.ts`,
@@ -99,18 +103,25 @@ gh variable set GCP_SEED_SA --repo $REPO --body "$SA"
 
 ## Daily operation
 
-1. **Add topics** to `content/backlog.ts` under the pending section:
-   ```ts
-   { topicKey: 'my-slug', question: 'A specific decision/how-to question?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'pending' },
-   ```
-   Keep questions specific and decision/how-to shaped. Order = priority (cron picks top-down).
-2. **Merge the daily PR.** Review facts + sources first — this merge is the only
-   gate before content goes live and into the sitemap. On merge, `auto-seed`
-   publishes en+zh+images and marks the topics seeded.
+**Merge the daily content PR.** That's the whole recurring loop — the backlog
+refills itself (`suggest-topics`, 03:07 UTC), the drafter turns pending topics
+into an en+zh PR (`auto-author`, 03:17 UTC), and merging publishes + advances the
+queue. Review facts + sources before merging — that merge is the only gate before
+content goes live and into the sitemap.
 
-That's the whole loop. With 0 pending topics the cron runs and produces nothing
-(idle) — add topics to restart it. Scheduled runs use the default limit (3);
-manual runs cap at 5 (`HARD_CAP` in `auto-author.ts`).
+Optional curation, any time:
+- **Hand-add** a specific topic — append to the pending section:
+  ```ts
+  { topicKey: 'my-slug', question: 'A specific decision/how-to question?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'pending' },
+  ```
+- **Prune**: delete a queued topic you don't want.
+- **Target**: `suggest-topics` keeps the backlog at 12 pending (`--target=N`,
+  hard cap 10 added/run); it's a no-op when already full. Trigger a top-up now
+  with `gh workflow run suggest-topics.yml`.
+
+Scheduled draft runs use limit 3; manual runs cap at 5 (`HARD_CAP` in
+`auto-author.ts`). With 0 pending the drafter idles — but `suggest-topics`
+normally prevents that.
 
 ## Manual / local operation (fallback)
 
