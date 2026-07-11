@@ -38,6 +38,8 @@ export const backlog: BacklogTopic[] = [
   { topicKey: 'monitor-resolution-guide', question: "Do I actually need a 4K monitor, or is 1440p the better practical choice for most people?", cluster: 'digital-buying', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'sleep-debt-real', question: "Is sleep debt a real thing, and can you actually recover from it by sleeping in on weekends?", cluster: 'everyday-science', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'note-taking-methods', question: "Which note-taking method is most effective for actually retaining and using what you learn?", cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'credit-score-factors', question: "What actually affects my credit score the most, and which habits move the needle fastest?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'maillard-vs-caramelization', question: "What is the difference between the Maillard reaction and caramelization, and why does it matter for how I cook?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
   // Seeded to production (auto-author skips anything not `pending`).
   { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
