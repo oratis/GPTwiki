@@ -4,28 +4,37 @@ import { supportedLocales, defaultLocale } from '@/lib/i18n/server';
 
 const BASE_URL = 'https://gptwiki.net';
 const BATCH_SIZE = 2000;
+const DAY_MS = 24 * 60 * 60 * 1000;
+const RECENT_DAYS = 60;       // recent content is sharded into this many daily buckets
+const EDITORIAL_CAP = 20000;  // all original (source: 'editorial') docs in one shard
 
 /**
- * Sitemap index + per-page wiki sitemaps.
+ * Sitemap index + per-page sitemaps, built to scale to ~19M docs.
  *
- * Why the shape it has:
- *  - Each wiki is emitted ONCE (under the default locale URL) with
- *    `xhtml:link` alternates for every supported locale. Per Google,
- *    the alternate annotation only needs to live on one `<url>`
- *    (https://developers.google.com/search/docs/specialized/international/localized-versions#sitemap).
- *    Emitting one URL per locale was multiplying output 15x and OOMing
- *    Cloud Run on every wiki sub-page (all returning 503).
- *  - Pagination uses `__name__` (Firestore document ID) cursors instead
- *    of `offset()`. `offset(N)` is O(N) in Firestore — page 79 was
- *    scanning ~395K docs before yielding anything.
- *  - The index pre-computes cursors by streaming all wiki IDs once
- *    (single-field projection, ~8 MB at 400K docs) and caches the
- *    result in-process for 1h; HTTP `s-maxage` extends that across
- *    instances via the CDN.
+ * The old design streamed EVERY wiki id to precompute pagination cursors — an
+ * O(N) walk that, at 19M docs, streams for minutes and times out the request
+ * (even a 50k-capped scan measured ~57s). So the index NEVER scans the
+ * collection now. It is computed arithmetically and lists:
+ *   - static  → home / list / browse / tag pages
+ *   - editorial → ALL original ('editorial') docs (the rankable content,
+ *                 including the auto-content pipeline) — guaranteed coverage
+ *                 regardless of age, via a bounded where(source) query.
+ *   - recent-<dayStartMs> × RECENT_DAYS → each a bounded createdAt-range query
+ *                 for one UTC day of freshly created/updated docs.
  *
- *   GET /api/sitemap                     → sitemap index
- *   GET /api/sitemap?page=static         → home, wiki list, browse, tag pages
- *   GET /api/sitemap?page=<docId|0>      → up to BATCH_SIZE wikis starting after cursor
+ * Every sub-page is a single bounded query (≤ BATCH_SIZE, or ≤ EDITORIAL_CAP),
+ * so nothing in the request path is O(collection). The ~19M Wikipedia-mirror
+ * long-tail beyond the recent window is intentionally not enumerated here (it's
+ * duplicate-of-Wikipedia content, and a 19M-URL sitemap is an anti-pattern);
+ * add a precomputed-shard job if full long-tail coverage is ever wanted.
+ *
+ * Legacy `?page=<docId>` requests still work via a __name__-cursor fallback.
+ *
+ *   GET /api/sitemap                      → sitemap index
+ *   GET /api/sitemap?page=static          → static + tag pages
+ *   GET /api/sitemap?page=editorial       → all original docs
+ *   GET /api/sitemap?page=recent-<ms>     → one UTC day of docs by createdAt
+ *   GET /api/sitemap?page=<docId|0>       → legacy __name__-cursor page
  */
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -34,117 +43,101 @@ export async function GET(req: NextRequest) {
   return generateSitemapIndex();
 }
 
-// ─── In-process cursor cache ───────────────────────────────────────────────
+// ─── Index (no DB reads — computed arithmetically) ──────────────────────────
 
-type Checkpoint = { startAfter: string | null };
-type CursorCache = { computedAt: number; checkpoints: Checkpoint[] };
-
-const CURSOR_TTL_MS = 60 * 60 * 1000; // 1h
-let _cursorCache: CursorCache | null = null;
-
-async function getCheckpoints(): Promise<Checkpoint[]> {
-  const now = Date.now();
-  if (_cursorCache && now - _cursorCache.computedAt < CURSOR_TTL_MS) {
-    return _cursorCache.checkpoints;
-  }
-
-  // Stream all wiki IDs ordered by document ID, picking every BATCH_SIZE-th
-  // ID as a cursor boundary. We use `select()` with no args to fetch
-  // document references only (no field data).
-  const checkpoints: Checkpoint[] = [{ startAfter: null }];
-  const stream = db.collection('wikis').orderBy('__name__').select().stream();
-  let count = 0;
-  for await (const doc of stream as AsyncIterable<FirebaseFirestore.QueryDocumentSnapshot>) {
-    count++;
-    if (count % BATCH_SIZE === 0) {
-      checkpoints.push({ startAfter: doc.id });
-    }
-  }
-  // The last checkpoint may have nothing after it; drop it if its cursor
-  // would yield zero docs (i.e., total is an exact multiple of BATCH_SIZE).
-  if (count % BATCH_SIZE === 0 && checkpoints.length > 1) {
-    checkpoints.pop();
-  }
-
-  _cursorCache = { computedAt: now, checkpoints };
-  return checkpoints;
-}
-
-// ─── Index ─────────────────────────────────────────────────────────────────
-
-async function generateSitemapIndex() {
-  let checkpoints: Checkpoint[];
-  try {
-    checkpoints = await getCheckpoints();
-  } catch (err) {
-    console.error('Sitemap checkpoint scan failed:', err);
-    // Fall back to a static-only index rather than 500 — robots still gets
-    // *something* and Google will retry later.
-    checkpoints = [];
-  }
-
+function generateSitemapIndex() {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-  xml += `  <sitemap><loc>${BASE_URL}/api/sitemap?page=static</loc></sitemap>\n`;
-  for (const cp of checkpoints) {
-    const pageKey = cp.startAfter ?? '0';
-    xml += `  <sitemap><loc>${BASE_URL}/api/sitemap?page=${encodeURIComponent(pageKey)}</loc></sitemap>\n`;
+  const shard = (page: string) => {
+    xml += `  <sitemap><loc>${BASE_URL}/api/sitemap?page=${page}</loc></sitemap>\n`;
+  };
+  shard('static');
+  shard('editorial');
+  // One shard per recent UTC day, newest first.
+  const todayStart = Math.floor(Date.now() / DAY_MS) * DAY_MS;
+  for (let i = 0; i < RECENT_DAYS; i++) {
+    shard(`recent-${todayStart - i * DAY_MS}`);
   }
   xml += '</sitemapindex>';
   return xmlResponse(xml);
 }
 
-// ─── Sub-pages ─────────────────────────────────────────────────────────────
+// ─── Sub-pages ──────────────────────────────────────────────────────────────
 
 async function generateSitemapPage(pageKey: string) {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n';
 
-  if (pageKey === 'static') {
-    const staticPaths: Array<{ path: string; freq: string; prio: number }> = [
-      { path: '', freq: 'daily', prio: 1.0 },
-      { path: '/wiki', freq: 'daily', prio: 0.9 },
-      { path: '/browse', freq: 'daily', prio: 0.8 },
-      { path: '/donate', freq: 'monthly', prio: 0.3 },
-    ];
-    for (const { path, freq, prio } of staticPaths) {
-      xml += urlWithAlternates(path, freq, prio);
-    }
-
-    xml += urlNoLocale(`${BASE_URL}/api/feed`, 'daily', 0.3);
-
-    // Tag landing pages now live at /tags/[tag] (real SSR routes) instead
-    // of /browse?tag=... query shells.
-    const tags = [
-      'science', 'technology', 'history', 'geography', 'arts', 'medicine',
-      'sports', 'politics', 'nature', 'philosophy', 'economics', 'engineering',
-      'mathematics', 'literature', 'culture', 'religion', 'biology', 'physics',
-      'art', 'biography', 'architecture', 'design', 'music', 'astronomy',
-    ];
-    for (const tag of tags) {
-      xml += urlWithAlternates(`/tags/${encodeURIComponent(tag)}`, 'weekly', 0.6);
-    }
-  } else {
-    try {
+  try {
+    if (pageKey === 'static') {
+      xml += staticUrls();
+    } else if (pageKey === 'editorial') {
+      const snap = await db
+        .collection('wikis')
+        .where('source', '==', 'editorial')
+        .limit(EDITORIAL_CAP)
+        .select('createdAt', 'updatedAt')
+        .get();
+      xml += wikiUrls(snap);
+    } else if (pageKey.startsWith('recent-')) {
+      const start = Number(pageKey.slice('recent-'.length));
+      if (!Number.isFinite(start)) {
+        return new NextResponse('Bad recent bucket', { status: 400 });
+      }
+      const snap = await db
+        .collection('wikis')
+        .where('createdAt', '>=', start)
+        .where('createdAt', '<', start + DAY_MS)
+        .orderBy('createdAt', 'desc')
+        .limit(BATCH_SIZE)
+        .select('createdAt', 'updatedAt')
+        .get();
+      xml += wikiUrls(snap);
+    } else {
+      // Legacy __name__-cursor page (keeps previously-submitted URLs working).
       let q = db.collection('wikis').orderBy('__name__');
-      if (pageKey !== '0') {
-        q = q.startAfter(pageKey);
-      }
-      const snapshot = await q.limit(BATCH_SIZE).select('createdAt', 'updatedAt').get();
-      for (const doc of snapshot.docs) {
-        const data = doc.data() as { createdAt?: number; updatedAt?: number };
-        const ts = data.updatedAt ?? data.createdAt;
-        const lastmod = ts ? new Date(ts).toISOString() : undefined;
-        xml += urlWithAlternates(`/wiki/${doc.id}`, 'weekly', 0.7, lastmod);
-      }
-    } catch (err) {
-      console.error('Sitemap page query failed:', { pageKey, err });
-      return new NextResponse('Sitemap page generation failed', { status: 500 });
+      if (pageKey !== '0') q = q.startAfter(pageKey);
+      const snap = await q.limit(BATCH_SIZE).select('createdAt', 'updatedAt').get();
+      xml += wikiUrls(snap);
     }
+  } catch (err) {
+    console.error('Sitemap page query failed:', { pageKey, err: (err as Error).message });
+    return new NextResponse('Sitemap page generation failed', { status: 500 });
   }
 
   xml += '</urlset>';
   return xmlResponse(xml);
+}
+
+function staticUrls(): string {
+  let xml = '';
+  const staticPaths: Array<{ path: string; freq: string; prio: number }> = [
+    { path: '', freq: 'daily', prio: 1.0 },
+    { path: '/wiki', freq: 'daily', prio: 0.9 },
+    { path: '/browse', freq: 'daily', prio: 0.8 },
+    { path: '/donate', freq: 'monthly', prio: 0.3 },
+  ];
+  for (const { path, freq, prio } of staticPaths) xml += urlWithAlternates(path, freq, prio);
+  xml += urlNoLocale(`${BASE_URL}/api/feed`, 'daily', 0.3);
+  const tags = [
+    'science', 'technology', 'history', 'geography', 'arts', 'medicine',
+    'sports', 'politics', 'nature', 'philosophy', 'economics', 'engineering',
+    'mathematics', 'literature', 'culture', 'religion', 'biology', 'physics',
+    'art', 'biography', 'architecture', 'design', 'music', 'astronomy',
+  ];
+  for (const tag of tags) xml += urlWithAlternates(`/tags/${encodeURIComponent(tag)}`, 'weekly', 0.6);
+  return xml;
+}
+
+function wikiUrls(snap: FirebaseFirestore.QuerySnapshot): string {
+  let xml = '';
+  for (const doc of snap.docs) {
+    const data = doc.data() as { createdAt?: number; updatedAt?: number };
+    const ts = data.updatedAt ?? data.createdAt;
+    const lastmod = ts ? new Date(ts).toISOString() : undefined;
+    xml += urlWithAlternates(`/wiki/${doc.id}`, 'weekly', 0.7, lastmod);
+  }
+  return xml;
 }
 
 // ─── XML helpers ───────────────────────────────────────────────────────────
