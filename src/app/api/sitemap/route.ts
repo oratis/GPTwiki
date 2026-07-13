@@ -43,9 +43,9 @@ export async function GET(req: NextRequest) {
   return generateSitemapIndex();
 }
 
-// ─── Index (no DB reads — computed arithmetically) ──────────────────────────
+// ─── Index (arithmetic + a small meta-doc read for the long-tail) ───────────
 
-function generateSitemapIndex() {
+async function generateSitemapIndex() {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
   const shard = (page: string) => {
@@ -57,6 +57,20 @@ function generateSitemapIndex() {
   const todayStart = Math.floor(Date.now() / DAY_MS) * DAY_MS;
   for (let i = 0; i < RECENT_DAYS; i++) {
     shard(`recent-${todayStart - i * DAY_MS}`);
+  }
+  // Full long-tail (optional): if scripts/build-sitemap-shards.ts has
+  // precomputed cursors, enumerate the whole corpus via legacy __name__ pages.
+  // Absent → index stays static+editorial+recent. Either way, no
+  // full-collection scan happens in the request.
+  try {
+    const meta = await db.doc('_meta/sitemap_shards').get();
+    if (meta.exists) {
+      const cps = (meta.data()?.checkpoints as string[] | undefined) ?? [];
+      shard('0');
+      for (const id of cps) shard(encodeURIComponent(id));
+    }
+  } catch (err) {
+    console.error('sitemap shards read failed:', (err as Error).message);
   }
   xml += '</sitemapindex>';
   return xmlResponse(xml);
