@@ -147,6 +147,33 @@ Dry-run (omit `--apply`) previews without writing. `--only=slug1,slug2` scopes.
   rubber-stamp. (Fully-unattended auto-publish is intentionally NOT built — it
   would need a sitemap `status`/`source` filter first; see the plan doc.)
 
+## Sitemap (content discoverability)
+
+`src/app/api/sitemap/route.ts` serves Google's sitemap for the ~19M-doc corpus.
+The index is computed with **no in-request collection scan** (the old full-id
+scan timed out at this scale — a 50k-capped scan alone measured ~57s):
+
+- `page=static` — home / list / browse / tag pages.
+- `page=editorial` — ALL original docs (`source: 'editorial'`, incl. the
+  auto-content pipeline). Guaranteed coverage of the rankable content.
+- `page=recent-<ms>` — 60 daily buckets of freshly created/updated docs.
+
+**Default tradeoff:** covers original + recent content, *not* the ~19M
+Wikipedia-mirror long-tail (duplicate content; a 19M-URL sitemap is an
+anti-pattern, and it was serving nothing before).
+
+**Full long-tail (optional):** `scripts/build-sitemap-shards.ts` precomputes
+per-shard cursors into Firestore `_meta/sitemap_shards`; the index then also
+enumerates every doc via legacy `?page=<cursor>` pages. The `sitemap-shards`
+workflow runs it weekly (keyless — same WIF as auto-seed). Dormant until that
+job populates the meta doc. Caveat: the full ~19M stream can be slow off-region;
+if the workflow nears its timeout, move it to a Cloud Run Job in the Firestore
+region (`Dockerfile.backfill` is the existing pattern) triggered by Cloud
+Scheduler.
+
+Route changes need a **deploy** to take effect: `gcloud builds submit --config
+cloudbuild.yaml`.
+
 ## Troubleshooting
 
 | Symptom | Cause / fix |
@@ -158,3 +185,5 @@ Dry-run (omit `--apply`) previews without writing. `--only=slug1,slug2` scopes.
 | Cron re-drafts already-live topics | A topic stayed `pending` after seeding — `mark-seeded-from-carrier` (run by `auto-seed`) normally prevents this; mark it `seeded` by hand. |
 | Model 404 (`not_found_error`) | A retired model id in `src/lib/ai/*.ts`; update to a current one (see the `claude-api` reference). |
 | `auto-author` can't open a PR | Enable “Allow GitHub Actions to create and approve pull requests” in repo Actions settings. |
+| `/api/sitemap` slow / times out | Should be fixed (arithmetic index). If the optional `sitemap-shards` job is enabled and slow, that's the ~19M stream — move it to a Cloud Run Job. Remember route changes need a Cloud Build deploy. |
+| Sitemap missing the mirror long-tail | Expected by default. Enable it: set WIF, then `gh workflow run sitemap-shards.yml` to populate `_meta/sitemap_shards`. |
