@@ -29,6 +29,31 @@ const BYPASS_EXACT = new Set<string>([]);
 // before the CF Transform Rule is created.
 const ORIGIN_AUTH_SECRET = process.env.ORIGIN_AUTH_SECRET;
 
+/**
+ * Constant-time string comparison.
+ *
+ * `a !== b` short-circuits on the first differing byte, so the time it takes
+ * leaks how much of the secret a guess got right. That is the standard way
+ * shared secrets are recovered byte-by-byte. The margin is small over a
+ * network and Cloudflare sits in front, but this is a header compared on
+ * EVERY request — the cheapest possible place to get it right.
+ *
+ * Written by hand rather than with node:crypto's timingSafeEqual because Next
+ * middleware runs on the Edge runtime, where node:crypto is unavailable.
+ * Compares over a fixed number of iterations and folds the length difference
+ * into the accumulator so neither the loop count nor an early return depends
+ * on the secret.
+ */
+function timingSafeEqual(provided: string | null, expected: string): boolean {
+  if (provided === null) return false;
+  let diff = provided.length ^ expected.length;
+  const n = Math.max(provided.length, expected.length);
+  for (let i = 0; i < n; i++) {
+    diff |= (provided.charCodeAt(i) || 0) ^ (expected.charCodeAt(i) || 0);
+  }
+  return diff === 0;
+}
+
 function shouldBypass(pathname: string): boolean {
   if (BYPASS_EXACT.has(pathname)) return true;
   for (const p of BYPASS_PREFIXES) if (pathname.startsWith(p)) return true;
@@ -53,7 +78,7 @@ export function proxy(request: NextRequest) {
   // Cloud Run URL directly.
   if (ORIGIN_AUTH_SECRET) {
     const provided = request.headers.get('x-origin-auth');
-    if (provided !== ORIGIN_AUTH_SECRET) {
+    if (!timingSafeEqual(provided, ORIGIN_AUTH_SECRET)) {
       return new NextResponse('Forbidden: direct origin access blocked', {
         status: 403,
       });
