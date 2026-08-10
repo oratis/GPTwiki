@@ -157,9 +157,27 @@ arenaRatings/{scope} 聚合快照：{ models: [{model, score, ciLow, ciHigh, vot
 1. **构造测试数据时把「胜者」固定放在 A 位，拟合会（正确地）把整个效应算成位置偏差**，实测 δ = 5.876 而模型分被拉平。这不是 bug 而是位置项在起作用——但它说明**任何对战数据生成器都必须随机化 A/B 顺序**，否则榜单会把「先出现」当成「更强」。测试里的 `matchup()` 辅助函数因此把每一类结果都在两个位次上对半分。
 2. **单一对阵 + 固定位次时，强度与位置完全共线，强度方差会因数值抵消变成非正数**。此时若照常输出，CI 宽度是 ±0——「精确到点的确定性」，是这个榜单能公布的最糟糕的数字。代码因此改为：**协方差算不出来时该行退回 provisional**，而不是显示 ±0。
 
-### Phase 1 — 对战与投票（BYOK 闸门后）
+### Phase 1 — 对战与投票（BYOK 闸门后）✅ 已落地
 
-`POST /api/arena/battle` 并发两路 `getAIStream`，模型对从**用户已有 key 的厂商**中随机抽取；`POST /api/arena/vote` 落票；`/arena/b/[id]` 揭示页（noindex）。去重、身份泄露、异常降权三道过滤在写票时执行。`scripts/compute-arena-ratings.ts` 手动触发重算。
+`POST /api/arena/battle` 用**单条 SSE 流**并发推送两路回答（`meta` / `chunk` / `fail` / `done`），模型对从**用户已有 key 的厂商**中随机抽取并随机化 A/B 位次；`POST /api/arena/vote` 落票并**在此刻且仅在此刻**揭示身份；`/arena/b/[id]` 永久链接（noindex）。`scripts/compute-arena-ratings.ts` 手动触发重算，同时写 `overall` / `locale:*` / `category:*` 三类 scope。
+
+实现中做出的几个非显然决定：
+
+| 决定 | 原因 |
+|---|---|
+| **不复用 `resolveApiKeyForUser`**，新写 `battle-keys.ts` | 该函数把「有没有 key」和「扣一次配额」耦合在一起。对战需要先知道能用哪些模型再选对，且必须**两边一起解析**——逐个解析会在第一个模型上扣掉配额、然后在第二个上失败，用户为一场没发生的对战付了钱。 |
+| 战斗文档**只在两路都成功后写一次** | Firestore 可以先拿 id 不写盘。因此不存在「一场只有半个回答的对战」被投票的窗口。 |
+| `answersReadyAt` **由服务端写入**，不接受客户端传入 | 否则「三秒阅读时间」检查一行代码就能绕过。 |
+| 投票文档 id 取 `${battleId}_${voterId}` + `create()` | 一场一票靠 ALREADY_EXISTS 原子拒绝，比 read-then-write 无竞态。 |
+| `promptHash` 反范式化到投票文档上 | 去重查询变成一次 `arenaVotes` 查询，而不是「查票 + 扇出查战斗」。 |
+| 每场对战按**场**计一次平台配额，而非按回答计两次 | 用户问了一个问题；为他没选的那两边各扣一次，配额数字会变得没法读。 |
+| **不做「谁总投同一边」的过滤** | 这种规则在某个模型确实明显更好时会惩罚诚实投票者，且无法与刷票区分。所有过滤只针对「读两份回答的人不可能做出的行为」。 |
+| 分类在 Phase 1 就写入 | 代码关键词匹配（非 LLM——AI HOT 的教训），零延迟零成本，且避免 Phase 2 回填。 |
+
+### Phase 1.5 — 上线前必须做的运维项
+
+- `firestore.indexes.json` 已加 `arenaVotes (voterId, createdAt)`，**部署前需 `firebase deploy --only firestore:indexes`**，否则去重查询会报缺索引。
+- `scripts/compute-arena-ratings.ts` 默认 dry-run；观察数轮干净输出后再考虑上 schedule。
 
 ### Phase 2 — 分类与视图
 

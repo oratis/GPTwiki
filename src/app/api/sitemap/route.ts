@@ -135,6 +135,7 @@ function staticUrls(): string {
     // content, and letting it into a hreflang sitemap is the scaled-content
     // signal that would put the existing corpus at risk.
     { path: '/arena', freq: 'daily', prio: 0.7 },
+    { path: '/arena/battle', freq: 'weekly', prio: 0.6 },
     { path: '/arena/leaderboard', freq: 'daily', prio: 0.7 },
     { path: '/arena/rules', freq: 'monthly', prio: 0.5 },
     { path: '/arena/contributors', freq: 'weekly', prio: 0.4 },

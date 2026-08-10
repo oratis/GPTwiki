@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx scripts/test-arena-scoring.ts",
+    "test": "tsx scripts/test-arena-scoring.ts && tsx scripts/test-arena-filters.ts",
     "typecheck": "tsc --noEmit",
     "prepare": "husky || true"
   },

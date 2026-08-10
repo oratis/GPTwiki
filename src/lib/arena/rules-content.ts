@@ -16,6 +16,8 @@ export interface RulesSection {
   body: string[];
   /** Optional bullet list rendered after the paragraphs. */
   bullets?: string[];
+  /** Optional paragraphs rendered after the bullet list. */
+  afterBullets?: string[];
 }
 
 export interface RulesContent {
@@ -110,12 +112,25 @@ const en: RulesContent = {
           'fit:',
       ],
       bullets: [
-        'Votes from visitors who are not signed in.',
-        'A repeat of a question the same voter already ran, within the deduplication ' +
-          'window.',
-        'Battles where an answer named its own model and broke the anonymity the vote ' +
-          'depended on.',
-        'Votes flagged by the voting-pattern filter.',
+        'A repeat of a question the same voter already ran, within the last 24 hours.',
+        'Battles where an answer identified itself in the first person — "I am Claude" ' +
+          'and the like — which breaks the anonymity the vote depended on. Ordinary ' +
+          'third-person mentions of a model do not count; this is an encyclopedia, and ' +
+          'articles name models all the time.',
+        'Votes cast less than three seconds after both answers finished, which is not ' +
+          'enough time to have read them.',
+        'Every vote from an account exceeding 60 votes in any one-hour window — a rate ' +
+          'no one reading two answers can sustain.',
+        'Votes arriving without a signed-in session. Battles require signing in, so ' +
+          'this is a backstop rather than a common case.',
+      ],
+      afterBullets: [
+        'Notice what is not on that list: there is no rule about which model a voter ' +
+          'picks. A filter like "flag anyone who votes one way almost every time" would ' +
+          'punish an honest voter whenever one model genuinely is much better, and it ' +
+          'cannot tell that case apart from abuse. Every rule above keys on behaviour ' +
+          'that is implausible for a human reading two answers, never on the answer ' +
+          'they chose.',
       ],
     },
     {
@@ -206,10 +221,18 @@ const zh: RulesContent = {
       heading: '会被记录但不计入的票',
       body: ['这些票会存下来以便排除过程可审计，并在拟合中赋权重 0：'],
       bullets: [
-        '未登录访客投出的票。',
-        '同一投票者在去重窗口内重复同一道题。',
-        '回答中自报模型身份、破坏了该票所依赖的匿名性的对战。',
-        '被投票模式过滤器标记的票。',
+        '同一投票者在过去 24 小时内重复同一道题。',
+        '回答中以第一人称自报身份（诸如「我是 Claude」）的对战——这破坏了该票所依赖的匿名性。' +
+          '普通的第三人称提及不算：这里是一个百科站，文章本来就会大量提到各个模型。',
+        '两份回答生成完毕后不足三秒就投出的票——这点时间读不完它们。',
+        '任一小时窗口内投出超过 60 票的账号，其全部票——读两份回答的人达不到这个速率。',
+        '不带登录会话到达的票。对战本身要求登录，所以这条是兜底而非常见情况。',
+      ],
+      afterBullets: [
+        '注意这张清单上没有什么：这里没有任何一条规则是关于投票者选了哪个模型的。像「标记那些几乎' +
+          '总投同一边的人」这样的规则，会在某个模型确实明显更好时惩罚诚实的投票者，而且它无法把这' +
+          '种情形与刷票区分开。上面每一条规则针对的都是「读两份回答的人不可能做出的行为」，而绝不' +
+          '是他们选出的那个答案。',
       ],
     },
     {

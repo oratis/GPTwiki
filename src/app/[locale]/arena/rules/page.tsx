@@ -76,6 +76,11 @@ export default async function ArenaRulesPage({
                   ))}
                 </ul>
               )}
+              {section.afterBullets?.map((paragraph) => (
+                <p key={paragraph} className="mt-3 text-sm leading-relaxed text-gray-700">
+                  {paragraph}
+                </p>
+              ))}
             </section>
           ))}
         </div>

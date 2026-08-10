@@ -33,6 +33,11 @@ export type ArenaVoteFlag =
 export interface ArenaVote {
   id: string;
   battleId: string;
+  /**
+   * Denormalised from the battle so the per-voter dedup check is a single
+   * query instead of a vote query plus a fan-out of battle reads.
+   */
+  promptHash: string;
   outcome: ArenaOutcome;
   voterId: string;
   /** 1 = counts toward rankings, 0 = recorded only. Never anything else today. */

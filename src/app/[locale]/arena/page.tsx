@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowRight, ScrollText, Swords, Users } from 'lucide-react';
+import { ArrowRight, ScrollText, Swords, Trophy, Users } from 'lucide-react';
 import ArenaNav from '@/components/arena/ArenaNav';
 import LeaderboardTable from '@/components/arena/LeaderboardTable';
 import { arenaMetadata } from '@/lib/arena/metadata';
@@ -45,11 +45,18 @@ export default async function ArenaHubPage({
 
         <p className="max-w-2xl text-base leading-relaxed text-gray-700">{t('arena.subtitle')}</p>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <Card
+            locale={locale}
+            href="/arena/battle"
+            icon={<Swords className="h-5 w-5 text-blue-600" />}
+            title={t('arena.battle.title')}
+            body={t('arena.battle.description')}
+          />
           <Card
             locale={locale}
             href="/arena/leaderboard"
-            icon={<Swords className="h-5 w-5 text-blue-600" />}
+            icon={<Trophy className="h-5 w-5 text-blue-600" />}
             title={t('arena.leaderboard.title')}
             body={t('arena.leaderboard.description')}
           />

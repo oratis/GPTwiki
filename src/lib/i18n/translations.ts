@@ -160,6 +160,7 @@ const translations: Record<Locale, Record<string, string>> = {
       'Ask one question, get two answers from models you cannot see, and vote for the better one. ' +
       'The votes rank the models — and unlike every other arena, the conversation does not vanish afterwards.',
     'arena.nav.overview': 'Overview',
+    'arena.nav.battle': 'Battle',
     'arena.nav.leaderboard': 'Model Leaderboard',
     'arena.nav.rules': 'Rules',
     'arena.nav.contributors': 'Contributors',
@@ -188,6 +189,39 @@ const translations: Record<Locale, Record<string, string>> = {
     'arena.meta.excluded': 'Recorded, not counted',
     'arena.meta.positionBias': 'Slot bias (log-odds)',
     'arena.meta.updated': 'Snapshot',
+
+    // Arena battle
+    'arena.battle.title': 'Battle',
+    'arena.battle.description':
+      'Ask a question. Two models answer without telling you who they are. Pick the better answer, and the models are revealed.',
+    'arena.battle.placeholder': 'Ask anything — both models get the same question',
+    'arena.battle.start': 'Battle',
+    'arena.battle.thinking': 'thinking',
+    'arena.battle.modelA': 'Model A',
+    'arena.battle.modelB': 'Model B',
+    'arena.battle.votePrompt': 'Which answer is better?',
+    'arena.battle.voteA': 'A is better',
+    'arena.battle.voteB': 'B is better',
+    'arena.battle.voteTie': 'Tie',
+    'arena.battle.voteBothBad': 'Both are bad',
+    'arena.battle.revealed': 'A was {modelA}. B was {modelB}.',
+    'arena.battle.voteCounted': 'Your vote counts toward the leaderboard.',
+    'arena.battle.voteNotCounted':
+      'Recorded, but not counted toward rankings ({flags}). See the rules for why.',
+    'arena.battle.permalink': 'Permanent link to this battle',
+    'arena.battle.startFailed': 'Could not start the battle. Please try again.',
+    'arena.battle.voteFailed': 'Could not record your vote. Please try again.',
+    'arena.battle.incomplete':
+      'One side did not finish, so this battle cannot be voted on. Try again.',
+    'arena.battle.slotFailed': 'This model failed to answer.',
+    'arena.battle.signInTitle': 'Sign in to battle',
+    'arena.battle.signInBody':
+      'A battle runs two models on your question, billed to your own API keys — so it needs an account. Voting is anonymous either way: you never see which model is which until after you vote.',
+    'arena.permalink.title': 'Arena battle',
+    'arena.permalink.noindexNote':
+      'Battle pages are not indexed by search engines. Publish an article if you want it to be findable.',
+    'arena.permalink.notRevealed':
+      'The models stay hidden until this battle has been voted on.',
 
     'browse.title': 'Browse by Category',
     'browse.selectCategory': 'Select a category to browse wikis',
@@ -380,6 +414,7 @@ const translations: Record<Locale, Record<string, string>> = {
       '问一个问题，拿到两份来自匿名模型的回答，投票选出更好的那一份。这些票用来给模型排名——' +
       '而与其他所有擂台不同，这里的对话不会在投完票之后消失。',
     'arena.nav.overview': '概览',
+    'arena.nav.battle': '对战',
     'arena.nav.leaderboard': '模型榜',
     'arena.nav.rules': '榜单规则',
     'arena.nav.contributors': '贡献者榜',
@@ -405,6 +440,35 @@ const translations: Record<Locale, Record<string, string>> = {
     'arena.meta.excluded': '已记录但不计入',
     'arena.meta.positionBias': '位次偏差（对数几率）',
     'arena.meta.updated': '快照时间',
+
+    // Arena battle
+    'arena.battle.title': '对战',
+    'arena.battle.description':
+      '提一个问题。两个模型在不告诉你身份的情况下各答一份。选出更好的那一份，模型身份随即揭示。',
+    'arena.battle.placeholder': '随便问——两个模型拿到同一个问题',
+    'arena.battle.start': '开始对战',
+    'arena.battle.thinking': '生成中',
+    'arena.battle.modelA': '模型 A',
+    'arena.battle.modelB': '模型 B',
+    'arena.battle.votePrompt': '哪一份回答更好？',
+    'arena.battle.voteA': 'A 更好',
+    'arena.battle.voteB': 'B 更好',
+    'arena.battle.voteTie': '平局',
+    'arena.battle.voteBothBad': '两个都差',
+    'arena.battle.revealed': 'A 是 {modelA}，B 是 {modelB}。',
+    'arena.battle.voteCounted': '你这一票计入榜单。',
+    'arena.battle.voteNotCounted': '已记录，但不计入排名（{flags}）。原因见榜单规则。',
+    'arena.battle.permalink': '这场对战的永久链接',
+    'arena.battle.startFailed': '无法开始对战，请重试。',
+    'arena.battle.voteFailed': '无法记录你的投票，请重试。',
+    'arena.battle.incomplete': '有一方没有生成完，这场对战无法投票。请重试。',
+    'arena.battle.slotFailed': '该模型未能作答。',
+    'arena.battle.signInTitle': '登录后开始对战',
+    'arena.battle.signInBody':
+      '一场对战会用你的问题跑两个模型，费用记在你自己的 API key 上，因此需要账号。无论如何投票都是匿名的：在你投票之前，你不会看到哪个是哪个模型。',
+    'arena.permalink.title': 'Arena 对战',
+    'arena.permalink.noindexNote': '对战页不会被搜索引擎索引。想被检索到，请发布成文章。',
+    'arena.permalink.notRevealed': '这场对战被投票之前，模型身份保持隐藏。',
 
     'browse.title': '分类浏览',
     'browse.selectCategory': '选择分类查看Wiki',
