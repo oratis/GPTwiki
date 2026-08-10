@@ -223,6 +223,30 @@ const translations: Record<Locale, Record<string, string>> = {
     'arena.permalink.notRevealed':
       'The models stay hidden until this battle has been voted on.',
 
+    // Arena scopes, views, categories
+    'arena.scope.overall': 'Overall',
+    'arena.scope.thisLocale': 'This language',
+    'arena.scope.sliceNote':
+      'This is a slice of the same votes, so it has fewer of them — expect more provisional rows here than on the overall board.',
+    'arena.view.ranking': 'Ranking',
+    'arena.view.pareto': 'Rating vs cost',
+    'arena.category.coding': 'Coding',
+    'arena.category.math': 'Math',
+    'arena.category.science': 'Science',
+    'arena.category.writing': 'Writing',
+    'arena.category.history': 'History',
+    'arena.category.practical': 'Practical',
+    'arena.category.general': 'General',
+    'arena.pareto.title': 'Rating against cost',
+    'arena.pareto.xAxis': 'Blended cost (USD per million tokens)',
+    'arena.pareto.yAxis': 'Rating',
+    'arena.pareto.frontierNote':
+      'Highlighted models are on the efficient frontier: nothing here is both cheaper and better rated. Cost blends input and output prices 1:3, since a battle is a short question and a long answer.',
+    'arena.pareto.notConfigured':
+      'This view needs per-model token prices, which this site has not configured. Prices change often enough that they are set by the operator rather than shipped in the code.',
+    'arena.pareto.noScores':
+      'No model has both a published rating and a configured price yet, so there is nothing to plot.',
+
     'browse.title': 'Browse by Category',
     'browse.selectCategory': 'Select a category to browse wikis',
     'browse.noWikis': 'No wikis in this category',
@@ -469,6 +493,29 @@ const translations: Record<Locale, Record<string, string>> = {
     'arena.permalink.title': 'Arena 对战',
     'arena.permalink.noindexNote': '对战页不会被搜索引擎索引。想被检索到，请发布成文章。',
     'arena.permalink.notRevealed': '这场对战被投票之前，模型身份保持隐藏。',
+
+    // Arena scopes, views, categories
+    'arena.scope.overall': '总榜',
+    'arena.scope.thisLocale': '本语言',
+    'arena.scope.sliceNote':
+      '这是同一批票的一个切片，因此票数更少——这里出现「暂定」行的比例会高于总榜。',
+    'arena.view.ranking': '排名',
+    'arena.view.pareto': '评分 / 成本',
+    'arena.category.coding': '编程',
+    'arena.category.math': '数学',
+    'arena.category.science': '科学',
+    'arena.category.writing': '写作',
+    'arena.category.history': '历史',
+    'arena.category.practical': '实用',
+    'arena.category.general': '综合',
+    'arena.pareto.title': '评分对成本',
+    'arena.pareto.xAxis': '混合成本（美元 / 百万 token）',
+    'arena.pareto.yAxis': '评分',
+    'arena.pareto.frontierNote':
+      '高亮的模型位于有效前沿：没有任何模型同时比它更便宜且评分更高。成本按输入:输出 1:3 混合计算——一场对战是短问题配长回答。',
+    'arena.pareto.notConfigured':
+      '此视图需要各模型的 token 价格，而本站尚未配置。价格变动频繁，因此由运营方设置而不写死在代码里。',
+    'arena.pareto.noScores': '目前还没有模型同时具备已公布的评分和已配置的价格，因此无从作图。',
 
     'browse.title': '分类浏览',
     'browse.selectCategory': '选择分类查看Wiki',
