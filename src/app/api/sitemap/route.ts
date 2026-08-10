@@ -129,6 +129,15 @@ function staticUrls(): string {
     { path: '', freq: 'daily', prio: 1.0 },
     { path: '/wiki', freq: 'daily', prio: 0.9 },
     { path: '/browse', freq: 'daily', prio: 0.8 },
+    // Arena: only the hub, the board, and the published methodology. Battle
+    // permalinks (/arena/b/<id>) are noindex and deliberately never listed —
+    // two AI answers to one prompt is thin, near-duplicate, mass-producible
+    // content, and letting it into a hreflang sitemap is the scaled-content
+    // signal that would put the existing corpus at risk.
+    { path: '/arena', freq: 'daily', prio: 0.7 },
+    { path: '/arena/leaderboard', freq: 'daily', prio: 0.7 },
+    { path: '/arena/rules', freq: 'monthly', prio: 0.5 },
+    { path: '/arena/contributors', freq: 'weekly', prio: 0.4 },
     { path: '/donate', freq: 'monthly', prio: 0.3 },
   ];
   for (const { path, freq, prio } of staticPaths) xml += urlWithAlternates(path, freq, prio);

@@ -30,12 +30,15 @@ Arena 给它一个家。
 ## 2. 信息架构
 
 ```
-/[locale]/arena                  对战：一个问题 → 两个匿名模型 → 投票 → 揭示
+/[locale]/arena                  概览页：定位说明 + 榜单快照 + 三个入口
+/[locale]/arena/battle           对战：一个问题 → 两个匿名模型 → 投票 → 揭示（Phase 1）
 /[locale]/arena/leaderboard      模型榜（BT 分 ±CI、票数、Pareto 视图）
 /[locale]/arena/rules            方法论公开页（可索引、可引用）
 /[locale]/arena/contributors     贡献者榜（收养孤儿端点）
-/[locale]/arena/b/[id]           对战永久链接（noindex，仅供分享）
+/[locale]/arena/b/[id]           对战永久链接（noindex，仅供分享，Phase 1）
 ```
+
+> `/arena` 定为概览页而非对战页：Phase 0 不含任何 AI 调用，若把 `/arena` 留给对战，导航目标在 Phase 0 就是 404 或「敬请期待」占位。概览页本身有实质内容（定位、榜单、规则入口），对战另开 `/arena/battle`。
 
 API：
 
@@ -128,21 +131,31 @@ arenaRatings/{scope} 聚合快照：{ models: [{model, score, ciLow, ciHigh, vot
 
 ## 5. 分阶段实施
 
-### Phase 0 — 透明度与骨架（无 AI 成本、无滥用面）
+### Phase 0 — 透明度与骨架（无 AI 成本、无滥用面）✅ 已落地
 
 纯只读页面 + 纯函数 + 测试。**这一阶段一行 AI 调用都没有。**
 
 | 文件 | 作用 |
 |---|---|
-| `src/lib/arena/scoring.ts` | BT MLE + 闭式 CI + rank-with-spread + 反比重加权 + 位置项。**纯函数，零 I/O** |
-| `scripts/test-arena-scoring.ts` | 本仓库第一批单测（`node:assert`，`npm test`） |
+| `src/lib/arena/scoring.ts` | BT MLE + 闭式夹心 CI + rank-with-spread + 按对归一化 + 位置项。**纯函数，零 I/O** |
+| `scripts/test-arena-scoring.ts` | 本仓库第一批单测，16 例（`node:assert` + 既有 `tsx`，零新依赖，`npm test`） |
 | `src/lib/arena/ratings.ts` | `arenaRatings/{scope}` 快照读写 |
-| `src/types/arena.ts` | `ArenaBattle` / `ArenaVote` / `ArenaRatingSnapshot` |
-| `src/app/[locale]/arena/rules/page.tsx` | 方法论公开页（可索引） |
+| `src/lib/arena/rules-content.ts` | 规则页正文（en 撰写 + zh 撰写，其余回落 en） |
+| `src/lib/arena/metadata.ts` | arena 可索引页的 canonical + 15 语种 hreflang |
+| `src/types/arena.ts` | `ArenaBattle` / `ArenaVote` / `ArenaModelRating` / `ArenaRatingSnapshot` |
+| `src/app/[locale]/arena/page.tsx` | 概览页 + 榜单快照 |
 | `src/app/[locale]/arena/leaderboard/page.tsx` | 榜单页，读快照；无快照时诚实空状态 |
-| `src/app/[locale]/arena/contributors/page.tsx` | 收养 `/api/leaderboard` |
-| sitemap `static` shard | 加入三个可索引 arena 路由 |
-| i18n keys | en + zh 撰写，其余回落 |
+| `src/app/[locale]/arena/rules/page.tsx` | 方法论公开页（可索引、全静态） |
+| `src/app/[locale]/arena/contributors/page.tsx` | 收养 `getTopContributors` 与白翻 15 语种的 `leaderboard.*` |
+| `src/components/arena/{ArenaNav,LeaderboardTable}.tsx` | 二级导航 + 榜单表格 |
+| sitemap `static` shard | 加入 4 个可索引 arena 路由；`/arena/b/*` 明确排除 |
+| i18n keys | `arena.*` + `header.arena`，en + zh 撰写，其余回落 |
+| `src/lib/models.ts` | 顺手修掉 `gpt` → `GPT-4` 的展示名漂移（改为 `GPT-4o`） |
+
+落地过程中被测试抓到的两件事，都记在这里以免复发：
+
+1. **构造测试数据时把「胜者」固定放在 A 位，拟合会（正确地）把整个效应算成位置偏差**，实测 δ = 5.876 而模型分被拉平。这不是 bug 而是位置项在起作用——但它说明**任何对战数据生成器都必须随机化 A/B 顺序**，否则榜单会把「先出现」当成「更强」。测试里的 `matchup()` 辅助函数因此把每一类结果都在两个位次上对半分。
+2. **单一对阵 + 固定位次时，强度与位置完全共线，强度方差会因数值抵消变成非正数**。此时若照常输出，CI 宽度是 ±0——「精确到点的确定性」，是这个榜单能公布的最糟糕的数字。代码因此改为：**协方差算不出来时该行退回 provisional**，而不是显示 ±0。
 
 ### Phase 1 — 对战与投票（BYOK 闸门后）
 
@@ -173,14 +186,23 @@ arenaRatings/{scope} 聚合快照：{ models: [{model, score, ciLow, ciHigh, vot
 
 ## 7. 验收标准
 
-- [ ] `npm run typecheck` 与 `npm run lint` 干净
-- [ ] `npm test` 通过（BT 已知答案用例）
-- [ ] `/arena/leaderboard` 在**无任何数据**时渲染诚实空状态，不显示任何 BT 分
-- [ ] 任一模型票数 < 100 时该行显示 `provisional`，无 BT 分
-- [ ] `/arena/b/[id]` 响应头/meta 含 `noindex`，且不出现在任何 sitemap shard
-- [ ] 三个可索引 arena 路由出现在 `/api/sitemap?page=static`，带 15 语种 hreflang
-- [ ] 规则页明确声明排名范围为「GPTwiki 所服务的三个模型」
-- [ ] 排名链路中没有任何 LLM 调用
+Phase 0 实测结果：
+
+- [x] `npm run typecheck` 干净；`npm run lint` 仅剩 1 条既有告警（`donate/page.tsx`，与本次无关）
+- [x] `npm test` 16/16 通过
+- [x] `/arena/leaderboard` 在**无任何数据**时渲染诚实空状态（本地无 Firestore 凭据，实测走的正是这条路径）
+- [x] 任一模型票数 < 100，或协方差算不出时，该行显示 `provisional` 且无 BT 分
+- [x] 四个可索引 arena 路由出现在 `/api/sitemap?page=static`，各带 16 条 alternates（15 语种 + `x-default`），与既有 `/browse` 一致
+- [x] `/arena/b/*` 不出现在任何 sitemap shard
+- [x] `/zh/arena/rules` 渲染中文正文；`/ja/arena/rules` 回落英文并显示回落提示
+- [x] 规则页第一段声明排名范围为「GPTwiki 所服务的三个模型」
+- [x] 排名链路中没有任何 LLM 调用
+
+Phase 1 追加：
+
+- [ ] `/arena/b/[id]` 响应 meta 含 `noindex, nofollow`
+- [ ] 对战 API 随机化 A/B 位次（见 §5 Phase 0 教训 1）
+- [ ] 去重 / 身份泄露 / 异常降权三道过滤在写票时执行
 
 ---
 
