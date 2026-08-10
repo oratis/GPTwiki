@@ -33,3 +33,33 @@ export async function writeRatingSnapshot(snapshot: ArenaRatingSnapshot): Promis
   const { scope, ...rest } = snapshot;
   await db.collection(COLLECTION).doc(scope).set(rest);
 }
+
+/** One row of the article hot list. */
+export interface HotSnapshotItem {
+  id: string;
+  title: string;
+  language: string | null;
+  tier: 'editorial' | 'user' | 'mirror';
+  score: number;
+  views: number;
+  threadCount: number;
+  updatedAt: number;
+}
+
+export interface HotSnapshot {
+  items: HotSnapshotItem[];
+  windowDays: number;
+  candidatesConsidered: number;
+  computedAt: number;
+}
+
+/**
+ * Load the article hot list, or `null` when the batch job has not run.
+ *
+ * Shares the ratings collection so every arena page is a single point read.
+ */
+export async function getHotSnapshot(): Promise<HotSnapshot | null> {
+  const snap = await db.collection(COLLECTION).doc('hot').get();
+  if (!snap.exists) return null;
+  return snap.data() as HotSnapshot;
+}

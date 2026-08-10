@@ -247,6 +247,31 @@ const translations: Record<Locale, Record<string, string>> = {
     'arena.pareto.noScores':
       'No model has both a published rating and a configured price yet, so there is nothing to plot.',
 
+    // Arena hot list
+    'arena.nav.hot': 'Hot Articles',
+    'arena.hot.title': 'Hot Articles',
+    'arena.hot.description':
+      'The most alive articles on the site right now, ranked by reader engagement, follow-up discussion, freshness, and where the article came from.',
+    'arena.hot.empty.title': 'The hot list has not been built yet',
+    'arena.hot.empty.body':
+      'A batch job ranks recent articles and writes a snapshot. Until it runs, nothing is shown — the list is never guessed at.',
+    'arena.hot.tier.editorial': 'Editorial',
+    'arena.hot.tier.user': 'Community',
+    'arena.hot.tier.mirror': 'Wikipedia mirror',
+    'arena.hot.method':
+      'Every number here is arithmetic over stored fields: views and follow-up threads (compressed, so one viral article cannot swamp the list), a freshness term that halves every 14 days, and a weight for where the article came from. A follow-up question counts for more than a page view, because it is better evidence the article was worth reading.',
+    'arena.hot.thresholds':
+      'Each source tier has its own bar to clear — {editorial} for editorial, {user} for community articles, {mirror} for mirrored Wikipedia pages. The mirror is most of the corpus by count, so an equal bar would bury everything original.',
+    'arena.hot.window': 'window: last {days} days',
+    'arena.battle.publish': 'Publish the winning answer',
+    'arena.battle.publishing': 'Publishing…',
+    'arena.battle.published': 'Published — open the article',
+    'arena.battle.publishHint':
+      'The winning answer becomes a searchable article, exactly as you read it. This is what the arena is for: elsewhere the conversation is thrown away once the vote is counted.',
+    'arena.battle.publishFailed': 'Could not publish. Please try again.',
+    'arena.battle.publishNoWinner':
+      'A tie or a "both bad" vote has no winning answer to publish.',
+
     'browse.title': 'Browse by Category',
     'browse.selectCategory': 'Select a category to browse wikis',
     'browse.noWikis': 'No wikis in this category',
@@ -516,6 +541,30 @@ const translations: Record<Locale, Record<string, string>> = {
     'arena.pareto.notConfigured':
       '此视图需要各模型的 token 价格，而本站尚未配置。价格变动频繁，因此由运营方设置而不写死在代码里。',
     'arena.pareto.noScores': '目前还没有模型同时具备已公布的评分和已配置的价格，因此无从作图。',
+
+    // Arena hot list
+    'arena.nav.hot': '文章热榜',
+    'arena.hot.title': '文章热榜',
+    'arena.hot.description':
+      '当前站内最「活」的文章，按读者互动、跟帖讨论、新鲜度以及文章来源综合排序。',
+    'arena.hot.empty.title': '热榜尚未生成',
+    'arena.hot.empty.body':
+      '由批处理任务对近期文章排序并写出快照。在它跑起来之前这里什么都不显示——热榜从不靠猜。',
+    'arena.hot.tier.editorial': '编辑部',
+    'arena.hot.tier.user': '社区',
+    'arena.hot.tier.mirror': 'Wikipedia 镜像',
+    'arena.hot.method':
+      '这里的每个数字都是对已存字段做的算术：浏览量与跟帖数（经过压缩，因此单篇爆款无法淹没整张榜）、每 14 天减半的新鲜度项，以及文章来源的权重。一次跟帖提问比一次页面浏览权重更高——它是「这篇值得读」的更强证据。',
+    'arena.hot.thresholds':
+      '每个来源等级有各自的入榜门槛——编辑部 {editorial}，社区文章 {user}，Wikipedia 镜像 {mirror}。镜像按篇数占语料的绝大多数，门槛若相同会把所有原创内容埋掉。',
+    'arena.hot.window': '窗口：最近 {days} 天',
+    'arena.battle.publish': '发布胜方回答',
+    'arena.battle.publishing': '发布中…',
+    'arena.battle.published': '已发布 — 打开文章',
+    'arena.battle.publishHint':
+      '胜方回答会原样成为一篇可检索的文章。这正是本擂台存在的意义：在别处，投完票对话就被丢掉了。',
+    'arena.battle.publishFailed': '发布失败，请重试。',
+    'arena.battle.publishNoWinner': '平局或「两个都差」没有可发布的胜方回答。',
 
     'browse.title': '分类浏览',
     'browse.selectCategory': '选择分类查看Wiki',
