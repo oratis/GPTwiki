@@ -152,6 +152,43 @@ const translations: Record<Locale, Record<string, string>> = {
     'errors.paypalLoad': 'Failed to load PayPal. Please try again.',
     'leaderboard.title': 'Top Contributors',
     'leaderboard.wikis': 'wikis',
+
+    // Arena
+    'header.arena': 'Arena',
+    'arena.title': 'GPTwiki Arena',
+    'arena.subtitle':
+      'Ask one question, get two answers from models you cannot see, and vote for the better one. ' +
+      'The votes rank the models — and unlike every other arena, the conversation does not vanish afterwards.',
+    'arena.nav.overview': 'Overview',
+    'arena.nav.leaderboard': 'Model Leaderboard',
+    'arena.nav.rules': 'Rules',
+    'arena.nav.contributors': 'Contributors',
+    'arena.leaderboard.title': 'Model Leaderboard',
+    'arena.leaderboard.description':
+      'Bradley-Terry ratings from anonymous head-to-head votes, shown with the confidence the sample size actually supports.',
+    'arena.rules.teaser':
+      'The full method: what counts as a vote, how ratings and intervals are computed, and what this board cannot tell you.',
+    'arena.rules.englishFallback':
+      'This page has not been translated into your language yet, so it is shown in English. The methodology is identical.',
+    'arena.contributors.description': 'Members ranked by the number of articles they have published.',
+    'arena.contributors.empty': 'No contributors yet.',
+    'arena.provisional': 'provisional',
+    'arena.provisionalNote':
+      'Rows marked provisional have fewer than {minVotes} counted votes, or statistics that cannot be estimated from the votes so far. They show raw counts instead of a rating — a score here would not mean anything yet.',
+    'arena.empty.title': 'No battles have been counted yet',
+    'arena.empty.body':
+      'Ratings appear once anonymous votes have been recorded and the batch job has written a snapshot. Nothing is estimated in the meantime.',
+    'arena.table.rank': 'Rank',
+    'arena.table.model': 'Model',
+    'arena.table.score': 'Score',
+    'arena.table.record': 'W / L / T',
+    'arena.table.bothBad': 'Both bad',
+    'arena.table.votes': 'Votes',
+    'arena.meta.counted': 'Battles counted',
+    'arena.meta.excluded': 'Recorded, not counted',
+    'arena.meta.positionBias': 'Slot bias (log-odds)',
+    'arena.meta.updated': 'Snapshot',
+
     'browse.title': 'Browse by Category',
     'browse.selectCategory': 'Select a category to browse wikis',
     'browse.noWikis': 'No wikis in this category',
@@ -335,6 +372,40 @@ const translations: Record<Locale, Record<string, string>> = {
     'errors.paypalLoad': '加载PayPal失败，请重试。',
     'leaderboard.title': '贡献排行榜',
     'leaderboard.wikis': '篇',
+
+    // Arena
+    'header.arena': '擂台',
+    'arena.title': 'GPTwiki 擂台',
+    'arena.subtitle':
+      '问一个问题，拿到两份来自匿名模型的回答，投票选出更好的那一份。这些票用来给模型排名——' +
+      '而与其他所有擂台不同，这里的对话不会在投完票之后消失。',
+    'arena.nav.overview': '概览',
+    'arena.nav.leaderboard': '模型榜',
+    'arena.nav.rules': '榜单规则',
+    'arena.nav.contributors': '贡献者榜',
+    'arena.leaderboard.title': '模型榜',
+    'arena.leaderboard.description':
+      '基于匿名一对一投票的 Bradley-Terry 评分，并按样本量真正支撑得起的置信度展示。',
+    'arena.rules.teaser': '完整方法：什么样的票算数、评分与区间如何计算，以及这个榜单说明不了什么。',
+    'arena.rules.englishFallback': '本页尚未翻译成你的语言，因此以英文展示。方法论完全一致。',
+    'arena.contributors.description': '按已发布文章数排名的成员。',
+    'arena.contributors.empty': '暂无贡献者。',
+    'arena.provisional': '暂定',
+    'arena.provisionalNote':
+      '标记为「暂定」的行，其计入票数不足 {minVotes} 张，或以现有票数还算不出可用的统计量。这些行只显示原始计数而不显示评分——此时给出分数没有任何意义。',
+    'arena.empty.title': '还没有计入任何对战',
+    'arena.empty.body': '等到匿名票被记录、批处理任务写出快照之后，评分才会出现。在此之前不做任何估计。',
+    'arena.table.rank': '排名',
+    'arena.table.model': '模型',
+    'arena.table.score': '评分',
+    'arena.table.record': '胜 / 负 / 平',
+    'arena.table.bothBad': '两个都差',
+    'arena.table.votes': '票数',
+    'arena.meta.counted': '计入对战',
+    'arena.meta.excluded': '已记录但不计入',
+    'arena.meta.positionBias': '位次偏差（对数几率）',
+    'arena.meta.updated': '快照时间',
+
     'browse.title': '分类浏览',
     'browse.selectCategory': '选择分类查看Wiki',
     'browse.noWikis': '该分类暂无Wiki',
