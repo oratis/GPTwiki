@@ -246,6 +246,10 @@ const translations: Record<Locale, Record<string, string>> = {
       'This view needs per-model token prices, which this site has not configured. Prices change often enough that they are set by the operator rather than shipped in the code.',
     'arena.pareto.noScores':
       'No model has both a published rating and a configured price yet, so there is nothing to plot.',
+    'arena.pareto.omitted':
+      'Showing {plotted} of the models on this board. {unrated} have no published rating yet and {unpriced} have no price configured, so they have no position on one of the axes — this plot is not the whole board.',
+    'arena.pareto.singlePoint':
+      'Only one model can be plotted, so there is nothing to compare it against and no frontier to be on.',
 
     'browse.title': 'Browse by Category',
     'browse.selectCategory': 'Select a category to browse wikis',
@@ -516,6 +520,9 @@ const translations: Record<Locale, Record<string, string>> = {
     'arena.pareto.notConfigured':
       '此视图需要各模型的 token 价格，而本站尚未配置。价格变动频繁，因此由运营方设置而不写死在代码里。',
     'arena.pareto.noScores': '目前还没有模型同时具备已公布的评分和已配置的价格，因此无从作图。',
+    'arena.pareto.omitted':
+      '图中只显示了本榜 {plotted} 个模型。另有 {unrated} 个尚无已公布评分、{unpriced} 个未配置价格，在某一条轴上没有坐标——此图并非完整榜单。',
+    'arena.pareto.singlePoint': '只有一个模型可作图，没有可比较的对象，也就无所谓「前沿」。',
 
     'browse.title': '分类浏览',
     'browse.selectCategory': '选择分类查看Wiki',
