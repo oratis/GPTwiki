@@ -179,17 +179,9 @@ arenaRatings/{scope} 聚合快照：{ models: [{model, score, ciLow, ciHigh, vot
 - `firestore.indexes.json` 已加 `arenaVotes (voterId, createdAt)`，**部署前需 `firebase deploy --only firestore:indexes`**，否则去重查询会报缺索引。
 - `scripts/compute-arena-ratings.ts` 默认 dry-run；观察数轮干净输出后再考虑上 schedule。
 
-### Phase 2 — 分类与视图 ✅ 已落地
+### Phase 2 — 分类与视图
 
-`?scope=` 切片（`overall` / `locale:*` / `category:*`）+ `?view=pareto`（评分 × 混合成本，含有效前沿高亮）。分类在 Phase 1 已随对战写入，因此本阶段纯 UI + 纯函数，无需回填。
-
-两个非显然决定：
-
-| 决定 | 原因 |
-|---|---|
-| **模型价格走 `ARENA_MODEL_PRICING` 环境变量，不写进代码** | 两条理由，第二条是关键：(1) 各家价格按自己的节奏变，写死的表在任何一家调价后即刻过期而 CI 不会察觉；(2) GPTwiki 服务三家厂商，把三家价格都写进仓库意味着**提交本仓库没有权威来源的数字**——而一个 x 轴错了的 Pareto 图比没有这个图更糟，因为错的图看起来仍然像图。未配置时视图显示「未配置」而不是猜。 |
-| **成本轴按输入:输出 = 1:3 混合** | 一场对战是「短问题 + 长回答」。只按输入 token 计价，等于按模型最便宜的那件事给它排名。 |
-| `normalizeScope` **重建**返回值而非回显输入 | scope 会成为 Firestore 文档 id。`split(':', 2)` 是**截断**而非保留余部，因此 `category:coding:extra` 会通过分类校验、然后把原样字符串当 id 传下去——测试抓到了这一点。现在要求恰好两段，且返回值由校验过的部件重新拼出。 |
+按 arena 的演化规律：**先总榜，等票量撑得起子榜 CI 再拆**。分类在建对战时由代码按 tag 归类（不是让 LLM 分类——aihot 的教训）。加 Pareto 视图（分数 × 价格），三模型时反而好读。
 
 ### Phase 3 — 闭环与文章热榜
 
