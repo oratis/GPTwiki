@@ -40,6 +40,8 @@ export default function BattleArena() {
   const [failedSlots, setFailedSlots] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [reveal, setReveal] = useState<Reveal | null>(null);
+  const [publishState, setPublishState] = useState<'idle' | 'busy' | 'done'>('idle');
+  const [publishedWikiId, setPublishedWikiId] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
   const startBattle = useCallback(async () => {
@@ -56,6 +58,8 @@ export default function BattleArena() {
     setReveal(null);
     setError(null);
     setBattleId(null);
+    setPublishState('idle');
+    setPublishedWikiId(null);
 
     try {
       const res = await fetch('/api/arena/battle', {
@@ -150,6 +154,34 @@ export default function BattleArena() {
     },
     [battleId, phase, t]
   );
+
+  const publishWinner = useCallback(async () => {
+    if (!battleId || publishState !== 'idle') return;
+    setPublishState('busy');
+    try {
+      const res = await fetch('/api/arena/publish', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ battleId }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(
+          data?.error === 'NO_WINNER'
+            ? t('arena.battle.publishNoWinner')
+            : data?.message || t('arena.battle.publishFailed')
+        );
+        setPublishState('idle');
+        return;
+      }
+      setPublishedWikiId(data.wikiId as string);
+      setPublishState('done');
+    } catch (err) {
+      console.error('Arena publish error:', err);
+      setError(t('arena.battle.publishFailed'));
+      setPublishState('idle');
+    }
+  }, [battleId, publishState, t]);
 
   if (status === 'unauthenticated') {
     return (
@@ -261,6 +293,35 @@ export default function BattleArena() {
               ? t('arena.battle.voteCounted')
               : t('arena.battle.voteNotCounted', { flags: reveal.flags.join(', ') })}
           </p>
+          {/* Publish is offered only when a single answer actually won — a tie
+              or "both bad" has no winner, and the API rejects it anyway. */}
+          {(reveal.outcome === 'a' || reveal.outcome === 'b') && (
+            <div className="mt-4 border-t border-gray-100 pt-4">
+              {publishState === 'done' && publishedWikiId ? (
+                <Link
+                  href={`/wiki/${publishedWikiId}`}
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700"
+                >
+                  {t('arena.battle.published')} →
+                </Link>
+              ) : (
+                <button
+                  onClick={() => void publishWinner()}
+                  disabled={publishState === 'busy'}
+                  className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {publishState === 'busy' && <Loader2 className="h-4 w-4 animate-spin" />}
+                  {publishState === 'busy'
+                    ? t('arena.battle.publishing')
+                    : t('arena.battle.publish')}
+                </button>
+              )}
+              <p className="mt-2 max-w-lg text-xs text-gray-500">
+                {t('arena.battle.publishHint')}
+              </p>
+            </div>
+          )}
+
           {battleId && (
             <Link
               href={`/arena/b/${battleId}`}

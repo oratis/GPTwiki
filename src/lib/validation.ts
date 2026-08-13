@@ -45,6 +45,10 @@ export const arenaVoteSchema = z.object({
   outcome: z.enum(['a', 'b', 'tie', 'both_bad']),
 });
 
+export const arenaPublishSchema = z.object({
+  battleId: z.string().trim().min(1).max(128),
+});
+
 export const threadCreateSchema = z.object({
   question: z.string().trim().min(1).max(2000),
   aiModel: aiModelSchema,

@@ -3,7 +3,7 @@ import { Trophy } from 'lucide-react';
 import { localeHref } from '@/lib/i18n/links';
 import { getTranslations, type Locale } from '@/lib/i18n/server';
 
-type ArenaSection = 'hub' | 'battle' | 'leaderboard' | 'rules' | 'contributors';
+type ArenaSection = 'hub' | 'battle' | 'leaderboard' | 'hot' | 'rules' | 'contributors';
 
 /**
  * Shared header + sub-navigation for the /arena section. Server component —
@@ -22,6 +22,7 @@ export default function ArenaNav({
     { key: 'hub', path: '/arena', label: t('arena.nav.overview') },
     { key: 'battle', path: '/arena/battle', label: t('arena.nav.battle') },
     { key: 'leaderboard', path: '/arena/leaderboard', label: t('arena.nav.leaderboard') },
+    { key: 'hot', path: '/arena/hot', label: t('arena.nav.hot') },
     { key: 'rules', path: '/arena/rules', label: t('arena.nav.rules') },
     { key: 'contributors', path: '/arena/contributors', label: t('arena.nav.contributors') },
   ];

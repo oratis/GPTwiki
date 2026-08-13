@@ -18,6 +18,15 @@ export function reserveBattleId(): string {
   return db.collection(BATTLES).doc().id;
 }
 
+/**
+ * Reserve a wiki id without writing. Lets the publish flow record which article
+ * a battle produced *before* the article exists, so the claim is what decides
+ * the race rather than the write.
+ */
+export function reserveWikiId(): string {
+  return db.collection('wikis').doc().id;
+}
+
 export interface BattleWriteInput {
   id: string;
   prompt: string;
@@ -86,6 +95,31 @@ export async function writeVote(input: VoteWriteInput): Promise<boolean> {
     if ((err as { code?: number }).code === 6) return false;
     throw err;
   }
+}
+
+/**
+ * Claim the right to publish a battle, or report who already did.
+ *
+ * The claim lives on the vote document because that is exactly the thing that
+ * is one-per-battle-per-voter, and it is written in a transaction so two
+ * concurrent publishes (a double-click, or a retry racing its own response)
+ * cannot both decide they are first. Returns the existing wiki id when the
+ * battle was already published, so the caller can hand back the original
+ * article rather than minting a duplicate.
+ */
+export async function claimPublish(
+  battleId: string,
+  voterId: string,
+  wikiId: string
+): Promise<{ claimed: true } | { claimed: false; existingWikiId: string }> {
+  const ref = db.collection(VOTES).doc(`${battleId}_${voterId}`);
+  return db.runTransaction(async (tx) => {
+    const snap = await tx.get(ref);
+    const existing = snap.get('publishedWikiId') as string | undefined;
+    if (existing) return { claimed: false as const, existingWikiId: existing };
+    tx.set(ref, { publishedWikiId: wikiId, publishedAt: Date.now() }, { merge: true });
+    return { claimed: true as const };
+  });
 }
 
 export async function hasVote(battleId: string, voterId: string): Promise<boolean> {
