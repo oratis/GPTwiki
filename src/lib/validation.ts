@@ -31,6 +31,20 @@ export const chatRequestSchema = z.object({
   model: aiModelSchema,
 });
 
+export const arenaBattleSchema = z.object({
+  prompt: z.string().trim().min(3).max(2_000),
+  /** Validated against supportedLocales by the route, which owns that list. */
+  locale: z.string().trim().min(2).max(8).optional(),
+});
+
+export const arenaVoteSchema = z.object({
+  battleId: z.string().trim().min(1).max(128),
+  // `answersReadyAt` is deliberately NOT accepted from the client: the
+  // reading-time check would be trivially forgeable. The battle document
+  // carries a server-set timestamp instead.
+  outcome: z.enum(['a', 'b', 'tie', 'both_bad']),
+});
+
 export const threadCreateSchema = z.object({
   question: z.string().trim().min(1).max(2000),
   aiModel: aiModelSchema,
