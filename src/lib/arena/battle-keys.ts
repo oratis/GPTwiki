@@ -1,6 +1,10 @@
 import type { AIModel, UserApiKeys } from '@/types';
 import { getUserApiKeys, getUserEmail } from '@/lib/search';
-import { arenaDailyBattleLimit, consumeArenaBattleQuota } from '@/lib/ai/free-quota';
+import {
+  arenaDailyBattleLimit,
+  consumeArenaBattleQuota,
+  refundArenaBattleQuota,
+} from '@/lib/ai/free-quota';
 import type { ModelPair } from './pairing';
 
 /**
@@ -46,6 +50,12 @@ export interface BattleAvailability {
   ownKeyModels: AIModel[];
   /** True when the platform would fund at least one side of a battle. */
   usesPlatformKey: boolean;
+  /**
+   * The user document's contents, carried so `resolveBattleKeys` does not have
+   * to read `users/{userId}` all over again.
+   */
+  userKeys: UserApiKeys | null;
+  email: string | null;
 }
 
 /**
@@ -67,6 +77,8 @@ export async function getBattleAvailability(userId: string): Promise<BattleAvail
     models: [...ownKeyModels, ...platformModels],
     ownKeyModels,
     usesPlatformKey: platformModels.length > 0,
+    userKeys,
+    email,
   };
 }
 
@@ -75,7 +87,14 @@ export type BattleKeyFailure =
   | 'QUOTA_EXHAUSTED';   // arena free tier enabled but used up today
 
 export type BattleKeyResult =
-  | { ok: true; keyA: string; keyB: string; platformFunded: boolean }
+  | {
+      ok: true;
+      keyA: string;
+      keyB: string;
+      platformFunded: boolean;
+      /** True when a quota unit was actually charged, so it can be refunded. */
+      metered: boolean;
+    }
   | { ok: false; reason: BattleKeyFailure };
 
 /**
@@ -84,15 +103,19 @@ export type BattleKeyResult =
  */
 export async function resolveBattleKeys(
   userId: string,
-  pair: ModelPair
+  pair: ModelPair,
+  availability: BattleAvailability
 ): Promise<BattleKeyResult> {
-  const availability = await getBattleAvailability(userId);
+  // `availability` is passed in rather than re-fetched. Both `getUserApiKeys`
+  // and `getUserEmail` read the same `users/{userId}` document, so recomputing
+  // it here cost six reads of one doc per battle (and three AES-GCM decrypt
+  // passes over the stored keys) on the feature's most latency-sensitive path.
   const usable = new Set(availability.models);
   if (!usable.has(pair.modelA) || !usable.has(pair.modelB)) {
     return { ok: false, reason: 'NOT_ENOUGH_MODELS' };
   }
 
-  const userKeys = await getUserApiKeys(userId);
+  const { userKeys, email } = availability;
   const resolve = (model: AIModel) => userKeyFor(model, userKeys) ?? envKeyFor(model);
 
   const keyA = resolve(pair.modelA);
@@ -104,13 +127,24 @@ export async function resolveBattleKeys(
 
   // Charge once per battle, and only when the platform is footing a side. The
   // owner account is exempt, matching resolveApiKeyForUser.
-  if (platformFunded && arenaDailyBattleLimit() > 0) {
-    const email = await getUserEmail(userId);
-    if (email !== OWNER_EMAIL) {
-      const quota = await consumeArenaBattleQuota(userId);
-      if (!quota.ok) return { ok: false, reason: 'QUOTA_EXHAUSTED' };
-    }
+  const metered = platformFunded && arenaDailyBattleLimit() > 0 && email !== OWNER_EMAIL;
+  if (metered) {
+    const quota = await consumeArenaBattleQuota(userId);
+    if (!quota.ok) return { ok: false, reason: 'QUOTA_EXHAUSTED' };
   }
 
-  return { ok: true, keyA, keyB, platformFunded };
+  return { ok: true, keyA, keyB, platformFunded, metered };
+}
+
+/**
+ * Give back a battle charged by `resolveBattleKeys` that produced nothing.
+ *
+ * The meter is debited before generation starts, because that is the only point
+ * at which refusing is still cheap. When the battle then fails or the reader
+ * walks away, no document is written and the user has nothing to show for the
+ * unit — so it goes back. Safe to call when `metered` was false; it is a no-op.
+ */
+export async function refundBattle(userId: string, metered: boolean): Promise<void> {
+  if (!metered) return;
+  await refundArenaBattleQuota(userId);
 }
