@@ -1,4 +1,17 @@
 import { DEFAULT_MIN_VOTES } from './scoring';
+import { hasArenaCopy } from './locales';
+import { SERVED_MODELS } from '@/lib/models';
+
+/**
+ * The models named in the scope disclaimer, built from the served-model table
+ * rather than typed out. The disclaimer's whole job is to say exactly which
+ * models this board ranks, so it must not be able to drift from the versions the
+ * providers are actually called with — which is precisely how "GPT-4" survived
+ * long after the call moved to `gpt-4o`.
+ */
+const MODEL_LIST = Object.values(SERVED_MODELS)
+  .map((m) => m.displayName)
+  .join(', ');
 
 /**
  * Prose for /arena/rules.
@@ -29,9 +42,9 @@ export interface RulesContent {
 const en: RulesContent = {
   title: 'How the Arena leaderboard works',
   scope:
-    'This board ranks the three models GPTwiki itself serves — Claude, GPT-4o and ' +
-    'Gemini. It is not a general-purpose model ranking, and it is not comparable to ' +
-    'boards built from millions of votes across dozens of models.',
+    'This board ranks the three models GPTwiki itself serves — ' +
+    `${MODEL_LIST}. It is not a general-purpose model ranking, and it is not ` +
+    'comparable to boards built from millions of votes across dozens of models.',
   updated: 'Last reviewed 2026-08-10',
   sections: [
     {
@@ -146,7 +159,7 @@ const en: RulesContent = {
 const zh: RulesContent = {
   title: 'Arena 榜单规则',
   scope:
-    '本榜排的是 GPTwiki 自己提供的三个模型——Claude、GPT-4o、Gemini。它不是通用模型排名，' +
+    `本榜排的是 GPTwiki 自己提供的三个模型——${MODEL_LIST}。它不是通用模型排名，` +
     '也不能与那些由数十个模型、数百万张票撑起来的榜单相提并论。',
   updated: '最后审阅：2026-08-10',
   sections: [
@@ -240,7 +253,13 @@ export function pickRulesContent(locale: string): RulesContent {
   return byLocale[locale] ?? en;
 }
 
-/** True when `locale` reads the English fallback rather than its own prose. */
+/**
+ * True when `locale` reads the English fallback rather than its own prose.
+ *
+ * Delegates to the shared authored-locale list so the reader-facing notice, the
+ * hreflang alternates, and the sitemap can never disagree about which locales
+ * are really translated.
+ */
 export function isRulesFallback(locale: string): boolean {
-  return !(locale in byLocale);
+  return !hasArenaCopy(locale);
 }
