@@ -1,0 +1,39 @@
+name: CI
+
+# Runs the three gates on every pull request and on main.
+#
+# This exists because the arena work put the first statistics into the repo, and
+# statistics is the first code here that returns *plausible* numbers when it is
+# wrong — a mis-signed gradient still produces a leaderboard-shaped leaderboard.
+# The plan's own verdict was "no merge without tests"; before this workflow the
+# only automation was husky → lint-staged → `eslint --fix` on staged files,
+# which runs neither the tests nor tsc, so that verdict was enforced by
+# convention alone and the suite would have rotted at the first change.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      # `npm ci` respects the lockfile; `--ignore-scripts` skips husky's
+      # `prepare`, which has no job in CI.
+      - run: npm ci --ignore-scripts
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test

@@ -1,11 +1,18 @@
 import type { Metadata } from 'next';
-import { supportedLocales, type Locale } from '@/lib/i18n/server';
+import type { Locale } from '@/lib/i18n/server';
+import { ARENA_LOCALES } from './locales';
 
 const BASE_URL = 'https://gptwiki.net';
 
 /**
  * Metadata for an indexable /arena page: canonical plus one hreflang alternate
- * per locale, matching the pattern the rest of the site uses.
+ * per *authored* locale.
+ *
+ * Not per supported locale, unlike the rest of the site. Arena copy exists in
+ * English and Chinese only (see `./locales`), so the other 13 URLs serve
+ * identical English — claiming them as translations would present 13 duplicate
+ * pages to search engines as a 15-way hreflang cluster. The page already tells
+ * the reader it is untranslated; the head must not tell crawlers otherwise.
  *
  * Battle permalinks deliberately do NOT go through here — they are noindex and
  * excluded from every sitemap shard, because a page holding two AI answers to
@@ -27,7 +34,7 @@ export function arenaMetadata({
 }): Metadata {
   const canonical = `${BASE_URL}/${locale}${path}`;
   const languages: Record<string, string> = {};
-  for (const loc of supportedLocales) languages[loc] = `${BASE_URL}/${loc}${path}`;
+  for (const loc of ARENA_LOCALES) languages[loc] = `${BASE_URL}/${loc}${path}`;
   languages['x-default'] = `${BASE_URL}/en${path}`;
 
   return {
