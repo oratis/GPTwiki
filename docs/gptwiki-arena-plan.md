@@ -179,32 +179,13 @@ arenaRatings/{scope} 聚合快照：{ models: [{model, score, ciLow, ciHigh, vot
 - `firestore.indexes.json` 已加 `arenaVotes (voterId, createdAt)`，**部署前需 `firebase deploy --only firestore:indexes`**，否则去重查询会报缺索引。
 - `scripts/compute-arena-ratings.ts` 默认 dry-run；观察数轮干净输出后再考虑上 schedule。
 
-### Phase 2 — 分类与视图 ✅ 已落地
+### Phase 2 — 分类与视图
 
-`?scope=` 切片（`overall` / `locale:*` / `category:*`）+ `?view=pareto`（评分 × 混合成本，含有效前沿高亮）。分类在 Phase 1 已随对战写入，因此本阶段纯 UI + 纯函数，无需回填。
+按 arena 的演化规律：**先总榜，等票量撑得起子榜 CI 再拆**。分类在建对战时由代码按 tag 归类（不是让 LLM 分类——aihot 的教训）。加 Pareto 视图（分数 × 价格），三模型时反而好读。
 
-两个非显然决定：
+### Phase 3 — 闭环与文章热榜
 
-| 决定 | 原因 |
-|---|---|
-| **模型价格走 `ARENA_MODEL_PRICING` 环境变量，不写进代码** | 两条理由，第二条是关键：(1) 各家价格按自己的节奏变，写死的表在任何一家调价后即刻过期而 CI 不会察觉；(2) GPTwiki 服务三家厂商，把三家价格都写进仓库意味着**提交本仓库没有权威来源的数字**——而一个 x 轴错了的 Pareto 图比没有这个图更糟，因为错的图看起来仍然像图。未配置时视图显示「未配置」而不是猜。 |
-| **成本轴按输入:输出 = 1:3 混合** | 一场对战是「短问题 + 长回答」。只按输入 token 计价，等于按模型最便宜的那件事给它排名。 |
-| `normalizeScope` **重建**返回值而非回显输入 | scope 会成为 Firestore 文档 id。`split(':', 2)` 是**截断**而非保留余部，因此 `category:coding:extra` 会通过分类校验、然后把原样字符串当 id 传下去——测试抓到了这一点。现在要求恰好两段，且返回值由校验过的部件重新拼出。 |
-
-### Phase 3 — 闭环与文章热榜 ✅ 已落地
-
-`POST /api/arena/publish`：胜方回答走既有 `createWiki` 路径，打 `source: 'arena'`。`/arena/hot`：把 aihot 的分工原则用在 GPTwiki 自有语料上——代码用 `views` / `threadCount` / 新鲜度 / `source` 三级权重算总分与分级阈值。
-
-| 决定 | 原因 |
-|---|---|
-| 发布**不做任何 AI 调用** | 胜方回答已经存在。再送进 `generateWikiContent` 改写一遍，是花 token 让「发布出来的文章」和「投票者当时判断的那段文字」不一致。 |
-| 发布前置条件：**必须已投票**（且不是平局/两个都差） | 否则这个端点就成了「不投票也能知道哪一边赢、进而知道模型身份」的旁路——把投票才揭示的匿名性绕开了。 |
-| `source: 'arena'` 在热榜里归为 **user 档**，不落到 mirror 默认档 | 是读者自己跑的对战、自己投的票、自己点的发布——人为发起的内容。测试专门钉住了这一点。 |
-| 热榜的 LLM 分项**接口留好但本期不接** | 那是要花钱的批处理步骤。没有它热榜依然可用（纯互动 + 出处），而且组合公式的正确性可以完全离线测。 |
-| 阈值按来源分级：editorial 12 / user 18 / mirror 45 | 直接对应 aihot 的动态阈值（其例：OpenAI 官方 60 分即入选，独立博主需更高）。镜像内容按篇数占语料绝大多数，门槛相同会把原创全埋掉。 |
-| 批处理**扫近期窗口 + 硬上限**，并在触顶时明确 log | 语料十万级，热榜没有理由读全量；静默截断会被读成「已全覆盖」。 |
-
-组合公式的性质由测试钉住：互动量取 `log1p`（单篇爆款无法淹没整榜）、跟帖权重高于浏览、新鲜度 14 天减半、模型给的分项一律 clamp 到 0–1（防止一个畸形值主导排序）、并列按 id 破——**同样输入必须给出同样顺序，否则「热榜」会在什么都没变的情况下肉眼可见地抖动**。
+`POST /api/arena/publish`：胜方回答走既有 wiki 创建路径，文章上标注「产自 Arena 对战 #id」。`/arena/hot`：把 aihot 的分工原则用在 GPTwiki 自有语料上——LLM 出分项，代码用 `views` / `threadCount` / 新鲜度 / `source` 三级权重（`editorial` > 用户 UGC > `wikipedia-*`）算总分与阈值。
 
 ---
 
