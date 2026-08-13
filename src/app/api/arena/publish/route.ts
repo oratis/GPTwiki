@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import { getBattle } from '@/lib/arena/store';
+import { claimPublish, getBattle, reserveWikiId } from '@/lib/arena/store';
 import { db } from '@/lib/firebase';
 import { createWiki, getUserProfile } from '@/lib/search';
 import { checkRateLimit, getClientId, rateLimited } from '@/lib/rate-limit';
-import { arenaPublishSchema, parseJsonBody } from '@/lib/validation';
+import { arenaPublishSchema, parseJsonBody, wikiCreateSchema } from '@/lib/validation';
 import type { AIModel, Message } from '@/types';
 
 /**
@@ -23,6 +23,13 @@ import type { AIModel, Message } from '@/types';
 /** Longest prompt we'll use verbatim as a title before truncating. */
 const MAX_TITLE = 120;
 const MAX_SUMMARY = 300;
+/**
+ * A battle prompt may be 2000 characters, but `wikiCreateSchema` caps
+ * `question` at 500. Writing the untruncated prompt would put documents in the
+ * corpus that `POST /api/wiki` would refuse, so the two paths are held to the
+ * same limit.
+ */
+const MAX_QUESTION = 500;
 
 export async function POST(req: NextRequest) {
   const session = await auth();
@@ -78,7 +85,11 @@ export async function POST(req: NextRequest) {
     }
 
     const profile = await getUserProfile(userId).catch(() => null);
-    const question = battle.prompt.trim();
+    const rawQuestion = battle.prompt.trim();
+    const question =
+      rawQuestion.length > MAX_QUESTION
+        ? `${rawQuestion.slice(0, MAX_QUESTION - 1)}…`
+        : rawQuestion;
     const title = question.length > MAX_TITLE ? `${question.slice(0, MAX_TITLE - 1)}…` : question;
 
     const conversation: Message[] = [
@@ -95,21 +106,51 @@ export async function POST(req: NextRequest) {
       (tag): tag is string => Boolean(tag)
     );
 
-    const wikiId = await createWiki({
+    const draft = {
       title,
       question,
       content: winner.answer,
       summary: winner.answer.slice(0, MAX_SUMMARY),
       tags,
-      authorId: userId,
-      authorName: profile?.name ?? session.user?.name ?? 'Anonymous',
-      authorImage: profile?.image ?? session.user?.image ?? undefined,
       aiModel: winner.model as AIModel,
       conversation,
-      language: battle.locale,
-      // Traceable provenance, and the hot list ranks it as community content.
-      source: 'arena',
-    });
+    };
+
+    // Held to the same schema as POST /api/wiki. This path writes through
+    // `createWiki` directly, so without an explicit check it could produce
+    // documents the normal endpoint would reject.
+    const validated = wikiCreateSchema.safeParse(draft);
+    if (!validated.success) {
+      console.error('Arena publish produced an invalid wiki:', validated.error.issues);
+      return NextResponse.json({ error: 'Could not build a valid article' }, { status: 422 });
+    }
+
+    // Reserve the id, then claim it against this vote in a transaction. Two
+    // concurrent publishes — a double-click, or a retry racing its own
+    // response — cannot both win, so a repeat returns the original article
+    // instead of minting a duplicate into the corpus and the sitemap.
+    const reservedId = reserveWikiId();
+    const claim = await claimPublish(battleId, userId, reservedId);
+    if (!claim.claimed) {
+      return NextResponse.json({
+        wikiId: claim.existingWikiId,
+        model: winner.model,
+        alreadyPublished: true,
+      });
+    }
+
+    const wikiId = await createWiki(
+      {
+        ...validated.data,
+        authorId: userId,
+        authorName: profile?.name ?? session.user?.name ?? 'Anonymous',
+        authorImage: profile?.image ?? session.user?.image ?? undefined,
+        language: battle.locale,
+        // Traceable provenance, and the hot list ranks it as community content.
+        source: 'arena',
+      },
+      reservedId
+    );
 
     return NextResponse.json({ wikiId, model: winner.model });
   } catch (error) {

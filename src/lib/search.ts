@@ -268,16 +268,27 @@ export async function incrementWikiViews(id: string): Promise<void> {
 }
 
 export async function createWiki(
-  data: Omit<Wiki, 'id' | 'views' | 'createdAt' | 'updatedAt'>
+  data: Omit<Wiki, 'id' | 'views' | 'createdAt' | 'updatedAt'>,
+  /**
+   * Write at a caller-chosen id instead of letting Firestore pick one.
+   *
+   * Used where the id has to exist before the document does — the arena's
+   * publish flow reserves an id, records it as the battle's published article
+   * in a transaction, and only then writes here, so a concurrent second
+   * publish finds the claim already taken rather than minting a duplicate.
+   */
+  id?: string
 ): Promise<string> {
   const createdAt = Date.now();
-  const ref = await db.collection('wikis').add({
+  const payload = {
     ...data,
     keywords: buildSearchKeywords([data.title, data.question, data.tags?.join(' '), data.summary]),
     views: 0,
     createdAt,
     updatedAt: createdAt,
-  });
+  };
+  const ref = id ? db.collection('wikis').doc(id) : db.collection('wikis').doc();
+  await ref.set(payload);
 
   // Best-effort search indexing — never blocks or fails the write.
   if (isTypesenseEnabled()) {
