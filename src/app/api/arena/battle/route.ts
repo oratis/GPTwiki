@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { getAIStream } from '@/lib/ai/provider';
-import { getBattleAvailability, resolveBattleKeys } from '@/lib/arena/battle-keys';
+import { getBattleAvailability, refundBattle, resolveBattleKeys } from '@/lib/arena/battle-keys';
 import { mergeBattleStreams } from '@/lib/arena/battle-stream';
 import { categorizePrompt } from '@/lib/arena/categories';
 import { pickModelPair } from '@/lib/arena/pairing';
@@ -57,7 +57,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const keys = await resolveBattleKeys(userId, pair);
+    // Reuses the availability already computed above rather than re-reading
+    // the user document.
+    const keys = await resolveBattleKeys(userId, pair, availability);
     if (!keys.ok) {
       const quota = keys.reason === 'QUOTA_EXHAUSTED';
       return NextResponse.json(
@@ -82,6 +84,13 @@ export async function POST(req: NextRequest) {
       b: getAIStream(pair.modelB, messages, keys.keyB),
       // Written once, complete, only if both sides succeeded — so a battle can
       // never be voted on with half an answer in it.
+      // A battle that produced nothing gives the metered unit back — the debit
+      // happens before generation, so without this a failed or abandoned battle
+      // costs the user a free battle and leaves no article or vote behind.
+      onAbandon: async (reason) => {
+        console.warn(`[arena] battle ${battleId} abandoned (${reason})`);
+        await refundBattle(userId, keys.metered);
+      },
       onComplete: async (answers) => {
         await writeBattle({
           id: battleId,

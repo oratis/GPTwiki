@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
 import { supportedLocales, defaultLocale } from '@/lib/i18n/server';
+import { ARENA_LOCALES } from '@/lib/arena/locales';
 
 const BASE_URL = 'https://gptwiki.net';
 const BATCH_SIZE = 2000;
@@ -125,7 +126,15 @@ async function generateSitemapPage(pageKey: string) {
 
 function staticUrls(): string {
   let xml = '';
-  const staticPaths: Array<{ path: string; freq: string; prio: number }> = [
+  // `locales` narrows the hreflang cluster for a path. Only the arena needs it:
+  // its copy is authored in en+zh only, so listing the other 13 would present
+  // duplicate English pages to crawlers as translations.
+  const staticPaths: Array<{
+    path: string;
+    freq: string;
+    prio: number;
+    locales?: readonly string[];
+  }> = [
     { path: '', freq: 'daily', prio: 1.0 },
     { path: '/wiki', freq: 'daily', prio: 0.9 },
     { path: '/browse', freq: 'daily', prio: 0.8 },
@@ -134,14 +143,16 @@ function staticUrls(): string {
     // two AI answers to one prompt is thin, near-duplicate, mass-producible
     // content, and letting it into a hreflang sitemap is the scaled-content
     // signal that would put the existing corpus at risk.
-    { path: '/arena', freq: 'daily', prio: 0.7 },
-    { path: '/arena/battle', freq: 'weekly', prio: 0.6 },
-    { path: '/arena/leaderboard', freq: 'daily', prio: 0.7 },
-    { path: '/arena/rules', freq: 'monthly', prio: 0.5 },
-    { path: '/arena/contributors', freq: 'weekly', prio: 0.4 },
+    { path: '/arena', freq: 'daily', prio: 0.7, locales: ARENA_LOCALES },
+    { path: '/arena/battle', freq: 'weekly', prio: 0.6, locales: ARENA_LOCALES },
+    { path: '/arena/leaderboard', freq: 'daily', prio: 0.7, locales: ARENA_LOCALES },
+    { path: '/arena/rules', freq: 'monthly', prio: 0.5, locales: ARENA_LOCALES },
+    { path: '/arena/contributors', freq: 'weekly', prio: 0.4, locales: ARENA_LOCALES },
     { path: '/donate', freq: 'monthly', prio: 0.3 },
   ];
-  for (const { path, freq, prio } of staticPaths) xml += urlWithAlternates(path, freq, prio);
+  for (const { path, freq, prio, locales } of staticPaths) {
+    xml += urlWithAlternates(path, freq, prio, undefined, locales);
+  }
   xml += urlNoLocale(`${BASE_URL}/api/feed`, 'daily', 0.3);
   const tags = [
     'science', 'technology', 'history', 'geography', 'arts', 'medicine',
@@ -168,17 +179,27 @@ function wikiUrls(snap: FirebaseFirestore.QuerySnapshot): string {
 
 /**
  * Emit a single `<url>` for `path`, using the default locale as the loc and
- * attaching xhtml:link alternates for every supported locale + x-default.
- * This is Google's documented format and yields 15× less XML than the
- * one-url-per-locale pattern.
+ * attaching xhtml:link alternates + x-default. This is Google's documented
+ * format and yields 15× less XML than the one-url-per-locale pattern.
+ *
+ * `locales` defaults to every supported locale. Pass a narrower set for paths
+ * that are not actually translated across all of them — an alternate is a claim
+ * that the URL is that language's version of the page, so listing a locale that
+ * serves fallback English asserts something untrue.
  */
-function urlWithAlternates(path: string, freq: string, prio: number, lastmod?: string): string {
+function urlWithAlternates(
+  path: string,
+  freq: string,
+  prio: number,
+  lastmod?: string,
+  locales: readonly string[] = supportedLocales
+): string {
   const normalized = path === '' ? '' : path.startsWith('/') ? path : `/${path}`;
   const canonical = `${BASE_URL}/${defaultLocale}${normalized}`;
   let block = `  <url>\n    <loc>${escapeXml(canonical)}</loc>\n`;
   if (lastmod) block += `    <lastmod>${lastmod}</lastmod>\n`;
   block += `    <changefreq>${freq}</changefreq>\n    <priority>${prio}</priority>\n`;
-  for (const alt of supportedLocales) {
+  for (const alt of locales) {
     const altUrl = `${BASE_URL}/${alt}${normalized}`;
     block += `    <xhtml:link rel="alternate" hreflang="${alt}" href="${escapeXml(altUrl)}"/>\n`;
   }
