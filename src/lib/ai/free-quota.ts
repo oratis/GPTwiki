@@ -81,3 +81,32 @@ export async function consumeArenaBattleQuota(
 ): Promise<{ ok: boolean; remaining: number }> {
   return consumeDailyQuota(userId, 'arenaQuota', arenaDailyBattleLimit());
 }
+
+/**
+ * Give back one Arena battle that was charged but produced nothing.
+ *
+ * The debit has to happen before generation starts — that is the only moment
+ * where declining is still free — so a battle that then fails, or whose reader
+ * disconnects mid-stream, would otherwise cost the user a unit for an article
+ * and a vote they never got.
+ *
+ * Only refunds within the same UTC day the charge was made: if the day already
+ * rolled over the counter has reset and decrementing it would hand back a unit
+ * that was never spent from today's allowance. Clamped at zero for the same
+ * reason. Failures are logged, not thrown — losing a refund is a far smaller
+ * problem than failing the request that is trying to report an earlier failure.
+ */
+export async function refundArenaBattleQuota(userId: string): Promise<void> {
+  const ref = db.collection('users').doc(userId);
+  try {
+    await db.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      const quota = (snap.get('arenaQuota') ?? {}) as { date?: string; used?: number };
+      if (quota.date !== todayStamp()) return;
+      const used = Math.max(0, (quota.used ?? 0) - 1);
+      tx.set(ref, { arenaQuota: { date: quota.date, used } }, { merge: true });
+    });
+  } catch (e) {
+    console.error('Arena battle refund failed:', e);
+  }
+}

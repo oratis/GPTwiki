@@ -23,6 +23,19 @@ export default function ParetoView({
   const pricing = getModelPricing();
   const points = buildParetoPoints(models, pricing);
 
+  // Which models could not be plotted, and why. Saying so matters: the ranking
+  // view shows provisional rows rather than hiding them, and a chart that
+  // quietly drops two of three models still looks like a complete comparison.
+  const unrated = models.filter((m) => m.score === null).length;
+  const unpriced = models.filter(
+    (m) => m.score !== null && !pricing[m.model as AIModel]
+  ).length;
+
+  // With a single point nothing has been compared, so the frontier highlight
+  // would be an artefact of the others having no coordinate rather than a
+  // finding about this model.
+  const frontierMeaningful = points.length > 1;
+
   if (points.length === 0) {
     const anyPriced = Object.keys(pricing).length > 0;
     return (
@@ -98,8 +111,10 @@ export default function ParetoView({
               <circle
                 cx={x(point.cost)}
                 cy={y(point.score)}
-                r={point.onFrontier ? 7 : 5}
-                className={point.onFrontier ? 'fill-blue-600' : 'fill-gray-300'}
+                r={frontierMeaningful && point.onFrontier ? 7 : 5}
+                className={
+                  frontierMeaningful && point.onFrontier ? 'fill-blue-600' : 'fill-gray-400'
+                }
               />
               <text
                 x={x(point.cost)}
@@ -124,7 +139,15 @@ export default function ParetoView({
         </svg>
       </div>
 
-      <p className="mt-3 text-xs text-gray-500">{t('arena.pareto.frontierNote')}</p>
+      {(unrated > 0 || unpriced > 0) && (
+        <p className="mt-3 text-xs text-amber-700">
+          {t('arena.pareto.omitted', { unrated, unpriced, plotted: points.length })}
+        </p>
+      )}
+
+      <p className="mt-3 text-xs text-gray-500">
+        {frontierMeaningful ? t('arena.pareto.frontierNote') : t('arena.pareto.singlePoint')}
+      </p>
     </div>
   );
 }
