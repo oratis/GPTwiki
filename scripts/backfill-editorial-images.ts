@@ -162,6 +162,9 @@ async function main(): Promise<void> {
         imageUrl: publicUrl,
         imageWidth: IMG_W,
         imageHeight: IMG_H,
+        // Only docs without an image reach here, so the flag always flips
+        // (see src/lib/header-image.ts).
+        hasHeaderImage: true,
         content: injectHero(data.content, data.title, publicUrl),
         updatedAt: Date.now(),
       });

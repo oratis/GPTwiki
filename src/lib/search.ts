@@ -10,12 +10,14 @@ import type {
   WikiRevision,
 } from '@/types';
 import { encryptSecret, decryptSecret } from './crypto';
+import { hasHeaderImage } from './header-image';
 import {
   SEARCH_STOPWORDS,
   tokenize,
   scriptAwareTokens,
   buildSearchKeywords,
 } from './search-keywords';
+import { cachedForTTL } from './ttl-cache';
 import {
   isTypesenseEnabled,
   searchWikiIdsTypesense,
@@ -86,10 +88,15 @@ function logSearchFallback(
   );
 }
 
-/** A wiki "has a header image" when imageUrl is a non-empty string. */
-function hasHeaderImage(data: FirebaseFirestore.DocumentData): boolean {
-  return typeof data.imageUrl === 'string' && data.imageUrl.trim().length > 0;
-}
+/**
+ * How long whole-site query results (popular wikis, the tag cloud) stay
+ * memoized. Both are identical for every visitor and only drift as views
+ * accumulate, so five minutes of staleness is invisible — while turning a
+ * per-request Firestore scan into at most one query per instance per window.
+ * Both feed request-scoped, rate-limited routes, so the caching has to sit
+ * here rather than on the routes; see ttl-cache.ts.
+ */
+const SITEWIDE_TTL_MS = 5 * 60_000;
 
 /**
  * Keyword search over wikis, ranked by relevance.
@@ -211,48 +218,115 @@ export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
 /**
  * Top wikis by view count, restricted to entries that have a header image.
  *
+ * Served off the `(hasHeaderImage ASC, views DESC)` index, so the query
+ * reads exactly `limit` documents regardless of how sparse header images
+ * are. It used to page `views desc` and filter `imageUrl` in memory —
  * Firestore can't combine `where('imageUrl', '!=', null)` with
- * `orderBy('views')` without a composite index — and docs with no image
- * omit the field entirely rather than storing null. So we page through
- * `views desc` and filter in memory until `limit` image-bearing wikis are
- * collected, capped by `maxScan` to bound the work.
+ * `orderBy('views')`, and image-less docs omit the field entirely rather
+ * than storing null — which made the read count a function of the corpus's
+ * image density rather than of `limit`: up to 2,400 reads per call, on
+ * paths that run per request. `hasHeaderImage` is the same predicate
+ * denormalised onto the doc so an index can answer it (header-image.ts).
  *
- * When `language` is supplied we narrow the scan to that locale via a
- * composite index on `(language ASC, views DESC)` — without it, the
- * one-in-15 hit rate would push the in-memory filter well past `maxScan`
- * and return too few results. If the index hasn't been created yet (e.g.
- * fresh project), Firestore throws FAILED_PRECONDITION; we log it and
- * fall back to the unfiltered query so the page still renders.
+ * When `language` is supplied we narrow to that locale via
+ * `(language ASC, hasHeaderImage ASC, views DESC)`. If that index hasn't
+ * been created yet (e.g. fresh project), Firestore throws
+ * FAILED_PRECONDITION; we log it and fall back to the unfiltered query so
+ * the page still renders.
  */
 export async function getPopularWikis(limit = 12, language?: string): Promise<Wiki[]> {
-  try {
-    return await collectPopularWikis(limit, language);
-  } catch (err) {
-    if (language && isMissingIndexError(err)) {
-      console.warn(
-        `[getPopularWikis] Composite index (language, views desc) missing — falling back to unfiltered. Create it at the URL in the error log to enable per-locale popular wikis.`
-      );
-      return collectPopularWikis(limit);
+  return cachedForTTL(`popular:${limit}:${language ?? '*'}`, SITEWIDE_TTL_MS, async () => {
+    try {
+      return await collectPopularWikis(limit, language);
+    } catch (err) {
+      if (language && isMissingIndexError(err)) {
+        console.warn(
+          `[getPopularWikis] Composite index (language, hasHeaderImage, views desc) missing — falling back to unfiltered. Create it at the URL in the error log to enable per-locale popular wikis.`
+        );
+        return collectPopularWikis(limit);
+      }
+      throw err;
     }
-    throw err;
-  }
+  });
 }
 
 async function collectPopularWikis(limit: number, language?: string): Promise<Wiki[]> {
-  const docs = await scanTopImageWikis(limit, language);
+  const docs = await topImageWikis(limit, language);
   return docs.map((doc) => ({ id: doc.id, ...doc.data() } as Wiki));
 }
 
 /**
  * IDs of the wikis `getPopularWikis(limit)` would return. For callers that
- * only need ids (generateStaticParams), the scan is projected down to
- * `imageUrl` (the filter) and `views` (the cursor) — full docs carry whole
- * conversation payloads, which makes the unprojected window scan take ~70s.
+ * only need ids (generateStaticParams), the query is projected down to
+ * `imageUrl` (the legacy top-up's filter) and `views` (its cursor) — full
+ * docs carry whole conversation payloads, which made the unprojected
+ * window scan take ~70s.
  */
 export async function getPopularWikiIds(limit = 50): Promise<string[]> {
-  const docs = await scanTopImageWikis(limit, undefined, ['imageUrl', 'views']);
+  const docs = await topImageWikis(limit, undefined, ['imageUrl', 'views']);
   return docs.map((doc) => doc.id);
 }
+
+async function topImageWikis(
+  limit: number,
+  language?: string,
+  fields?: string[]
+): Promise<QueryDocumentSnapshot[]> {
+  let docs: QueryDocumentSnapshot[] = [];
+
+  try {
+    let query: FirebaseFirestore.Query = db
+      .collection('wikis')
+      .where('hasHeaderImage', '==', true);
+    if (language) query = query.where('language', '==', language);
+    query = query.orderBy('views', 'desc');
+    if (fields) query = query.select(...fields);
+
+    // Copied because the top-up below appends to it and `.docs` hands back
+    // the snapshot's own array.
+    docs = (await query.limit(limit).get()).docs.slice();
+  } catch (err) {
+    // A language-scoped miss is worth reporting upward: getPopularWikis
+    // retries unfiltered, which is still index-backed. An unfiltered miss
+    // has nowhere left to go, so degrade to the scan rather than 500 the
+    // home page while firestore.indexes.json is being deployed.
+    if (!isMissingIndexError(err) || language) throw err;
+    console.warn(
+      `[getPopularWikis] Composite index (hasHeaderImage, views desc) missing — degrading to the bounded scan. Deploy firestore.indexes.json to restore the constant-read path.`
+    );
+  }
+
+  if (docs.length >= limit) return docs;
+
+  // ─── Transition-period top-up — delete once the backfill has run ───
+  // Docs written before `hasHeaderImage` existed don't match the filter, so
+  // a partially backfilled corpus comes back short. Top up from the old
+  // scan and de-dup, then drop this branch (and scanTopImageWikis) once
+  // scripts/backfill-header-image-flag.ts has covered the collection.
+  const seen = new Set(docs.map((doc) => doc.id));
+  for (const doc of await scanTopImageWikis(limit, language, fields)) {
+    if (seen.has(doc.id)) continue;
+    docs.push(doc);
+    if (docs.length >= limit) break;
+  }
+
+  // Each source is views-ordered on its own but they interleave, so the
+  // concatenation isn't. Re-sort so a half-backfilled corpus still ranks.
+  docs.sort((a, b) => (b.get('views') || 0) - (a.get('views') || 0));
+
+  return docs;
+}
+
+/**
+ * Legacy path: page `views desc` and filter `imageUrl` in memory.
+ *
+ * The cap is deliberately far below the old `limit * 50` (2,400). That
+ * number is what turned a sparse run of header images among the top-viewed
+ * wikis into thousands of reads per request — and why read volume tracked
+ * the corpus's image density rather than traffic. Bounded at 200, even a
+ * fully un-backfilled corpus costs one page per call.
+ */
+const LEGACY_SCAN_CAP = 200;
 
 async function scanTopImageWikis(
   limit: number,
@@ -260,13 +334,13 @@ async function scanTopImageWikis(
   fields?: string[]
 ): Promise<QueryDocumentSnapshot[]> {
   const results: QueryDocumentSnapshot[] = [];
-  // Wide pages keep this to one Firestore round-trip in the common case.
-  const pageSize = Math.max(limit * 16, 200);
-  const maxScan = Math.max(limit * 50, 2400);
   let scanned = 0;
   let cursor: QueryDocumentSnapshot | undefined;
 
-  while (results.length < limit && scanned < maxScan) {
+  while (results.length < limit && scanned < LEGACY_SCAN_CAP) {
+    // Wide pages keep this to one Firestore round-trip, clamped so the loop
+    // can never read past the cap.
+    const pageSize = Math.min(Math.max(limit * 16, 200), LEGACY_SCAN_CAP - scanned);
     let query: FirebaseFirestore.Query = language
       ? db.collection('wikis').where('language', '==', language).orderBy('views', 'desc')
       : db.collection('wikis').orderBy('views', 'desc');
@@ -357,6 +431,9 @@ export async function createWiki(
   const payload = {
     ...data,
     keywords: buildSearchKeywords([data.title, data.question, data.tags?.join(' '), data.summary]),
+    // Derived after the spread so a caller can't hand us a flag that
+    // disagrees with imageUrl and poison the popular-wikis index.
+    hasHeaderImage: hasHeaderImage(data),
     views: 0,
     createdAt,
     updatedAt: createdAt,
@@ -371,14 +448,15 @@ export async function createWiki(
     ).catch((e) => console.error('Typesense index (create) failed:', e));
   }
 
-  // Increment user wiki count
-  const userRef = db.collection('users').doc(data.authorId);
-  const userDoc = await userRef.get();
-  if (userDoc.exists) {
-    await userRef.update({
-      wikisCount: (userDoc.data()!.wikisCount || 0) + 1,
-    });
-  }
+  // Increment user wiki count. Atomic: the read-then-write it replaces both
+  // cost an extra document read per publish and lost updates when the same
+  // author published twice concurrently. update() still rejects on a missing
+  // user doc, which is the old `if (userDoc.exists)` guard without the read.
+  await db
+    .collection('users')
+    .doc(data.authorId)
+    .update({ wikisCount: FieldValue.increment(1) })
+    .catch((e) => console.error('Failed to increment wikisCount:', e));
 
   return ref.id;
 }
@@ -491,39 +569,49 @@ export async function getTopContributors(limit = 20): Promise<UserProfile[]> {
 
 // ─── Tags / Categories ───
 
+/**
+ * Tag cloud, counted over the 500 most recent wikis.
+ *
+ * There is no aggregate query for this shape, so the count is unavoidably a
+ * 500-document read — which is why it's memoized rather than run per
+ * request: /api/tags and the browse page are both whole-site, request-time
+ * callers, and the answer is the same for everyone.
+ */
 export async function getAllTags(
   language?: string
 ): Promise<{ name: string; count: number }[]> {
-  try {
-    const base = db.collection('wikis');
-    const query = (
-      language
-        ? base.where('language', '==', language).orderBy('createdAt', 'desc')
-        : base.orderBy('createdAt', 'desc')
-    ).limit(500);
+  return cachedForTTL(`tags:${language ?? '*'}`, SITEWIDE_TTL_MS, async () => {
+    try {
+      const base = db.collection('wikis');
+      const query = (
+        language
+          ? base.where('language', '==', language).orderBy('createdAt', 'desc')
+          : base.orderBy('createdAt', 'desc')
+      ).limit(500);
 
-    const snapshot = await query.get();
+      const snapshot = await query.get();
 
-    const tagCounts: Record<string, number> = {};
-    snapshot.docs.forEach((doc) => {
-      const tags = doc.data().tags as string[] | undefined;
-      tags?.forEach((tag) => {
-        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+      const tagCounts: Record<string, number> = {};
+      snapshot.docs.forEach((doc) => {
+        const tags = doc.data().tags as string[] | undefined;
+        tags?.forEach((tag) => {
+          tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+        });
       });
-    });
 
-    return Object.entries(tagCounts)
-      .map(([name, count]) => ({ name, count }))
-      .sort((a, b) => b.count - a.count);
-  } catch (err) {
-    if (language && isMissingIndexError(err)) {
-      console.warn(
-        `[getAllTags] Composite index (language, createdAt desc) missing — falling back to unfiltered.`
-      );
-      return getAllTags();
+      return Object.entries(tagCounts)
+        .map(([name, count]) => ({ name, count }))
+        .sort((a, b) => b.count - a.count);
+    } catch (err) {
+      if (language && isMissingIndexError(err)) {
+        console.warn(
+          `[getAllTags] Composite index (language, createdAt desc) missing — falling back to unfiltered.`
+        );
+        return getAllTags();
+      }
+      throw err;
     }
-    throw err;
-  }
+  });
 }
 
 export async function getWikisByTag(tag: string, limit = 20): Promise<Wiki[]> {
@@ -539,6 +627,9 @@ export async function getWikisByTag(tag: string, limit = 20): Promise<Wiki[]> {
 
 // ─── Update Wiki ───
 
+// The updatable field list deliberately excludes `imageUrl`: nothing here
+// can invalidate `hasHeaderImage`. Widening it means recomputing the flag
+// alongside (see header-image.ts).
 export async function updateWiki(
   id: string,
   data: Partial<Pick<Wiki, 'title' | 'content' | 'summary' | 'tags' | 'sources' | 'conversation'>>

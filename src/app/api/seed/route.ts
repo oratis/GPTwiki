@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
+import { hasHeaderImage } from '@/lib/header-image';
 import { isAuthorizedSeedRequest } from '@/lib/seed-auth';
 import { checkRateLimit, getClientId, rateLimited } from '@/lib/rate-limit';
 import { allDrafts } from '../../../../content';
@@ -144,7 +145,11 @@ export async function POST(req: NextRequest) {
   for (let i = 0; i < pending.length; i += 450) {
     const slice = pending.slice(i, i + 450);
     const batch = db.batch();
-    for (const doc of slice) batch.set(db.collection('wikis').doc(), doc);
+    // Seeded docs carry no header image, but the flag is written anyway so
+    // every wiki has a value for the popular-wikis index (see header-image.ts).
+    for (const doc of slice) {
+      batch.set(db.collection('wikis').doc(), { ...doc, hasHeaderImage: hasHeaderImage(doc) });
+    }
     await batch.commit();
     seeded += slice.length;
   }
