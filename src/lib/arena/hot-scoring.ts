@@ -41,6 +41,12 @@ export function sourceTier(source: string | undefined): SourceTier {
   // on — human-initiated, so it belongs with community content and must not
   // fall through to the mirror default below.
   if (!source || source === 'user' || source === 'arena') return 'user';
+  // 'hand-authored' is the legacy stamp on the original cluster articles — the
+  // oldest and, by views, the most-read original writing on the site. No script
+  // in the tree writes it any more (`translate-live.ts` stamps their
+  // translations 'editorial'), so it only appears on those early documents, and
+  // omitting it here dropped the site's best originals into the mirror tier.
+  if (source === 'hand-authored') return 'editorial';
   if (source === 'editorial' || source.startsWith('editorial')) return 'editorial';
   if (source.startsWith('wikipedia-')) return 'mirror';
   // 'seed' and anything unrecognised: treat as mirror rather than promote it.
@@ -53,12 +59,35 @@ export function sourceTier(source: string | undefined): SourceTier {
  * example: an OpenAI post clears at 60 while an independent blogger needs more).
  * Same intent here — a mirrored Wikipedia page has to be substantially more
  * engaging than an editorial piece to earn the same slot.
+ *
+ * Compared against the RAW score, before the tier weight is applied. That split
+ * is load-bearing: `SOURCE_TIERS` already discounts a mirror to 0.35, so
+ * comparing a discounted score against a *higher* bar charged the same article
+ * for its provenance twice. It did not merely make the list strict, it made two
+ * of the three tiers unreachable by any input — `raw` is dominated by
+ * `log1p(views)`, which grows so slowly that 0.35 x raw could not reach 45 even
+ * at a million views. The list was empty by arithmetic, not by editorial
+ * standard. The weight now decides *ordering* on the merged list; the threshold
+ * decides *admission*, and `assertThresholdsReachable` below keeps the two from
+ * drifting back into that state.
+ *
+ * Calibration, in the units the raw score is actually made of: the recency term
+ * alone maxes out at 4, so every bar sits above it — freshness by itself can
+ * never qualify an article that nobody read. What each tier needs beyond that,
+ * on a freshly-updated article with no follow-up threads:
+ *
+ *   editorial  6  →  ~7 views, or a single follow-up thread
+ *   user       7  →  ~19 views, or one thread plus a handful of views
+ *   mirror     9  →  ~150 views while fresh; ~8,100 once the recency term decays
  */
 export const TIER_THRESHOLDS: Record<SourceTier, number> = {
-  editorial: 12,
-  user: 18,
-  mirror: 45,
+  editorial: 6,
+  user: 7,
+  mirror: 9,
 };
+
+/** Largest value the recency term can contribute. Thresholds must exceed it. */
+export const MAX_RECENCY = 4;
 
 /** Half-life of the recency term, in days. */
 const RECENCY_HALF_LIFE_DAYS = 14;
@@ -90,8 +119,11 @@ export interface HotCandidate {
 
 export interface HotScored extends HotCandidate {
   tier: SourceTier;
+  /** Tier-weighted score. Decides ranking. */
   score: number;
-  /** True when `score` clears this article's tier threshold. */
+  /** Un-weighted sum of the parts. Decides admission. */
+  raw: number;
+  /** True when `raw` clears this article's tier threshold. */
   featured: boolean;
   /** Component breakdown, so a rank is explainable rather than a bare number. */
   parts: {
@@ -118,7 +150,7 @@ export function scoreCandidate(candidate: HotCandidate, now: number): HotScored 
   const discussion = 3 * Math.log1p(Math.max(0, candidate.threadCount ?? 0));
 
   const ageDays = Math.max(0, (now - candidate.updatedAt) / 86_400_000);
-  const recency = 4 * Math.pow(0.5, ageDays / RECENCY_HALF_LIFE_DAYS);
+  const recency = MAX_RECENCY * Math.pow(0.5, ageDays / RECENCY_HALF_LIFE_DAYS);
 
   const q = candidate.quality;
   const quality = q
@@ -133,7 +165,9 @@ export function scoreCandidate(candidate: HotCandidate, now: number): HotScored 
     ...candidate,
     tier,
     score,
-    featured: score >= TIER_THRESHOLDS[tier],
+    raw,
+    // Admission is judged on `raw`, ranking on `score` — see TIER_THRESHOLDS.
+    featured: raw >= TIER_THRESHOLDS[tier],
     parts: { engagement, discussion, recency, quality },
   };
 }
@@ -141,6 +175,56 @@ export function scoreCandidate(candidate: HotCandidate, now: number): HotScored 
 function clamp01(value: number | undefined): number {
   if (typeof value !== 'number' || !Number.isFinite(value)) return 0;
   return Math.min(1, Math.max(0, value));
+}
+
+/**
+ * How many views a fresh article of this tier needs to be admitted, given no
+ * follow-up threads and no model sub-scores. Returns 0 when the recency term
+ * alone already clears the bar — which would mean freshness qualifies unread
+ * articles, so it is a calibration error in the other direction.
+ *
+ * Exists to make the thresholds auditable in the units an operator thinks in.
+ * "Editorial needs 6" is meaningless on its own; "editorial needs ~7 views"
+ * is a claim someone can check against the corpus.
+ */
+export function viewsNeededWhenFresh(tier: SourceTier): number {
+  const gap = TIER_THRESHOLDS[tier] - MAX_RECENCY;
+  if (gap <= 0) return 0;
+  return Math.ceil(Math.expm1(gap));
+}
+
+/**
+ * Assert every tier's bar can actually be cleared by some real article.
+ *
+ * The failure this guards against is silent by construction: an unreachable
+ * threshold does not throw, it just yields an empty list, which is exactly what
+ * a correctly-working hot list looks like on a quiet day. Shipping 12/18/45
+ * against a discounted score emptied two tiers permanently and nothing caught
+ * it, because every test fixture asserted relative ordering rather than whether
+ * the numbers were attainable at all.
+ *
+ * `maxViews` is the ceiling a single article could plausibly reach on this site.
+ * Called from the test suite, not at runtime.
+ */
+export function assertThresholdsReachable(maxViews = 1_000_000): void {
+  for (const tier of Object.keys(TIER_THRESHOLDS) as SourceTier[]) {
+    const bar = TIER_THRESHOLDS[tier];
+    // Best case for admission: fresh, heavily read, and fully quality-scored.
+    const best = Math.log1p(maxViews) + MAX_RECENCY + QUALITY_WEIGHT;
+    if (bar > best) {
+      throw new Error(
+        `TIER_THRESHOLDS.${tier} = ${bar} is unreachable: the raw score maxes ` +
+          `at ${best.toFixed(2)} even at ${maxViews.toLocaleString('en')} views. ` +
+          `The list would be empty for this tier no matter what readers do.`
+      );
+    }
+    if (bar <= MAX_RECENCY) {
+      throw new Error(
+        `TIER_THRESHOLDS.${tier} = ${bar} is at or below the recency ceiling ` +
+          `(${MAX_RECENCY}), so simply touching an article would feature it.`
+      );
+    }
+  }
 }
 
 export interface HotListOptions {

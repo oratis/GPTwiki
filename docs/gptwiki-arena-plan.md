@@ -1,6 +1,6 @@
 # GPTwiki Arena 建设方案（二级页面）
 
-> 起草日期：2026-08-10 · 状态：已裁决，Phase 0 落地中（含正反辩论）
+> 起草日期：2026-08-10 · 最后复核：2026-08-21 · 状态：Phase 0–3 代码全部落地；快照调度与冷启动未解决（见 §5 Phase 1.5 与 §9）
 > 调研依据见 [arena-research.md](./arena-research.md)
 
 ## 0. 一句话方案
@@ -174,18 +174,30 @@ arenaRatings/{scope} 聚合快照：{ models: [{model, score, ciLow, ciHigh, vot
 | **不做「谁总投同一边」的过滤** | 这种规则在某个模型确实明显更好时会惩罚诚实投票者，且无法与刷票区分。所有过滤只针对「读两份回答的人不可能做出的行为」。 |
 | 分类在 Phase 1 就写入 | 代码关键词匹配（非 LLM——AI HOT 的教训），零延迟零成本，且避免 Phase 2 回填。 |
 
-### Phase 1.5 — 上线前必须做的运维项
+### Phase 1.5 — 上线前必须做的运维项 ⚠️ 未完成
 
-- `firestore.indexes.json` 已加 `arenaVotes (voterId, createdAt)`，**部署前需 `firebase deploy --only firestore:indexes`**，否则去重查询会报缺索引。
-- `scripts/compute-arena-ratings.ts` 默认 dry-run；观察数轮干净输出后再考虑上 schedule。
+- [ ] `firestore.indexes.json` 已加 `arenaVotes (voterId, createdAt)`，**部署前需 `firebase deploy --only firestore:indexes`**，否则去重查询会报缺索引。**截至 2026-08-21 无执行证据。**
+- [x] `scripts/compute-arena-ratings.ts` 默认 dry-run；观察数轮干净输出后再考虑上 schedule。
+- [x] **调度本身**。Phase 1/3 落地了两个 compute 脚本却**没有任何调用方**——`grep -rn "compute-arena"` 只命中它们自己的注释。`arenaRatings/*` 因此一个文档都没写过，榜单与热榜永久停在空状态。2026-08-21 补 `.github/workflows/arena-snapshots.yml`（`workflow_dispatch` 起步，schedule 段注释掉）。
+- [ ] **WIF 仓库变量未配置**。`gh variable list` 为空 ⇒ `GCP_WIF_PROVIDER` / `GCP_SEED_SA` 都没设，所以 `auto-seed`（**从未运行过**，`gh run list` 返回 `[]`）、`sitemap-shards`（每周"成功"实为自跳过）与新加的 `arena-snapshots` **全部会自跳过**。在配好之前，两个快照只能本地用 ADC 跑。
 
-### Phase 2 — 分类与视图
+### Phase 2 — 分类与视图 ✅ 已落地
 
 按 arena 的演化规律：**先总榜，等票量撑得起子榜 CI 再拆**。分类在建对战时由代码按 tag 归类（不是让 LLM 分类——aihot 的教训）。加 Pareto 视图（分数 × 价格），三模型时反而好读。
 
-### Phase 3 — 闭环与文章热榜
+落地物：`scopes.ts` / `ScopePicker.tsx` / `ParetoView.tsx` / `pricing.ts`。**遗留缺口**：Pareto 视图依赖 `ARENA_MODEL_PRICING`，该变量此前未写入 `.env.example`（2026-08-21 已补），生产未设 ⇒ 即使榜单有分，"Rating vs cost" 页签也是空的。
+
+### Phase 3 — 闭环与文章热榜 ✅ 已落地
 
 `POST /api/arena/publish`：胜方回答走既有 wiki 创建路径，文章上标注「产自 Arena 对战 #id」。`/arena/hot`：把 aihot 的分工原则用在 GPTwiki 自有语料上——LLM 出分项，代码用 `views` / `threadCount` / 新鲜度 / `source` 三级权重（`editorial` > 用户 UGC > `wikipedia-*`）算总分与阈值。
+
+**热榜上线后实测抓到的三件事**（2026-08-21，全部已修）：
+
+1. **`sourceTier()` 把站内最好的原创判成了镜像。** 语料里 34 篇 `source: 'hand-authored'` 的早期原创（浏览量全站最高，`书信` 2,210）不匹配任何已知前缀，落进 `mirror` 默认分支——0.35 权重 + 镜像门槛。`translate-live.ts` 给它们的译文打的是 `editorial`，原文却漏了。已加映射。
+2. **三档门槛里有两档在数学上不可达。** 12/18/45 抄自 AI HOT 的示例数值，但那是**原始互动量**的量纲，这里的分数经过 `log1p` 压缩且**已经**被 tier 权重打过折。拿打折后的分去比更高的门槛 = 同一件事罚两遍：`mirror` 的 raw 上限（百万浏览 + 满新鲜度 + 满质量分）只有 8.34，永远够不到 45；`user` 上限 17.86 也够不到 18。**榜是被算术清空的，不是被编辑标准清空的。** 已改为门槛比 raw（权重前），并重标为 6/7/9——tier 权重继续决定**排序**，门槛只决定**准入**。
+3. **默认窗口比站点自身的更新节奏还窄。** `--days=60` 对线上语料返回 0 行，因为那批最该上榜的原创最后更新在 60–90 天前。默认改为 90。
+
+三件事**测试全绿也没抓到**：原有 fixture 用的是 `views: 4000, threadCount: 3` 这类真实语料达不到的数字，且只断言**相对排序**，从不断言门槛**是否够得到**。已补 `assertThresholdsReachable()` + 五条用例（可达性、准入不重复罚 provenance、纯新鲜度不得上榜、门槛换算成浏览量后必须可信）。这类失败是无声的：够不到的门槛不会抛错，只会返回空列表，而空列表和"今天没热点"长得一模一样。
 
 ---
 
@@ -216,11 +228,19 @@ Phase 0 实测结果：
 - [x] 规则页第一段声明排名范围为「GPTwiki 所服务的三个模型」
 - [x] 排名链路中没有任何 LLM 调用
 
-Phase 1 追加：
+Phase 1 追加（2026-08-21 复核，三项代码里均已实现）：
 
-- [ ] `/arena/b/[id]` 响应 meta 含 `noindex, nofollow`
-- [ ] 对战 API 随机化 A/B 位次（见 §5 Phase 0 教训 1）
-- [ ] 去重 / 身份泄露 / 异常降权三道过滤在写票时执行
+- [x] `/arena/b/[id]` 响应 meta 含 `noindex, nofollow` — [page.tsx:35](../src/app/[locale]/arena/b/[id]/page.tsx#L35) `robots: { index: false, follow: false, nocache: true }`
+- [x] 对战 API 随机化 A/B 位次（见 §5 Phase 0 教训 1）— [pairing.ts:33](../src/lib/arena/pairing.ts#L33) 抛硬币定 slot
+- [x] 去重 / 身份泄露 / 异常降权三道过滤在写票时执行 — [vote/route.ts:49](../src/app/api/arena/vote/route.ts#L49) 调 `evaluateVote`；每小时上限规则因需要完整历史，放在重算脚本里（`flagAnomalousVoters`）
+
+Phase 2/3 追加：
+
+- [x] `npm test` 5 个套件全绿（热榜套件 2026-08-21 由 16 例扩到 24 例）
+- [x] 六个可索引 arena 路由进 `/api/sitemap?page=static`，alternates 收窄到 `ARENA_LOCALES`（en + zh），不把 13 个英文副本谎报成译文
+- [x] `/arena/hot` 在真实语料上产出**非空**列表（47 行，全部为站内原创；实测见 §5 Phase 3）
+- [ ] Pareto 视图有数据 — 阻塞于生产未设 `ARENA_MODEL_PRICING`
+- [ ] 榜单有数据 — 阻塞于零对战、零投票（见 §9）
 
 ---
 
@@ -232,3 +252,19 @@ Phase 1 追加：
 - 不建外部信源采集管线
 - 不把对战永久链接送进索引
 - 不机器翻译方法论页到 15 语种
+
+---
+
+## 9. 冷启动：这个方案没有回答的问题
+
+计划全文没有任何一节说明**第一批 100 张票从哪来**，而 §3.5 的门槛是每模型 100 张有效匿名票。2026-08-21 实测：`arenaBattles` 与 `arenaVotes` 均为空集合，`/arena/leaderboard` 自上线起从未离开空状态。
+
+反方第 2 点预言过这件事。裁决用「只从用户已有 key 的厂商中抽取」化解了它——但那只解决了**报错**，没有解决**没人能对战**：一场对战仍需登录 + 两个不同厂商的 key，而 `ARENA_FREE_DAILY_BATTLES` 默认 0。三个模型都过 100 票需要约 150 场来自**不同用户**的对战。
+
+已知的三条路，都要付代价，尚未裁决：
+
+1. **自费开闸**：设 `ARENA_FREE_DAILY_BATTLES` 为正数。代价是推翻 2026-06 的 BYOK-only 产品决定，且成本随流量线性增长（每场 2× 生成）。
+2. **降低 `DEFAULT_MIN_VOTES`**。代价最大：`/arena/rules` 已公开承诺了这个门槛，降门槛等于公布统计上撑不起的数字——正是反方第 1 点说的「承诺了做不到的严谨」。
+3. **接受榜单长期 provisional**，把重心放在 `/arena/hot`、`/arena/rules`、`/arena/contributors` 这三个**不依赖投票**的面上。代价是模型榜作为产品长期不成立，但零成本、零失信。
+
+注意**不能**靠 owner 账号自己刷票：[battle-keys.ts:31](../src/lib/arena/battle-keys.ts#L31) 确实让 owner 免费使用平台 key，但一人投满 100 票恰恰是 `/arena/rules` 向读者承诺要防的事。那条路只适合验证链路通不通。

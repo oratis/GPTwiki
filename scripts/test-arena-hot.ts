@@ -11,9 +11,11 @@ import assert from 'node:assert/strict';
 import {
   SOURCE_TIERS,
   TIER_THRESHOLDS,
+  assertThresholdsReachable,
   buildHotList,
   scoreCandidate,
   sourceTier,
+  viewsNeededWhenFresh,
   type HotCandidate,
 } from '../src/lib/arena/hot-scoring';
 
@@ -56,6 +58,13 @@ test('raw source strings map onto the intended tier', () => {
   assert.equal(sourceTier('user'), 'user');
   assert.equal(sourceTier('wikipedia-en-dump'), 'mirror');
   assert.equal(sourceTier('wikipedia-zh-rich'), 'mirror');
+});
+
+test("the legacy 'hand-authored' stamp is original writing, not a mirror", () => {
+  // These are the site's oldest and most-read originals. Letting them fall
+  // through to the mirror default buried the best content on the site under a
+  // 0.35 weight and a bar meant for copied Wikipedia pages.
+  assert.equal(sourceTier('hand-authored'), 'editorial');
 });
 
 test('arena-published articles rank as community content, not as mirror', () => {
@@ -173,10 +182,53 @@ test('the mirror has to clear a much higher bar than editorial', () => {
   assert.ok(TIER_THRESHOLDS.user > TIER_THRESHOLDS.editorial);
 });
 
-test('featured is exactly "score clears this row\'s own tier threshold"', () => {
+test('featured is exactly "raw clears this row\'s own tier threshold"', () => {
   for (const source of ['editorial', 'user', 'wikipedia-en-dump']) {
     const row = scoreCandidate(candidate({ source, views: 4000, threadCount: 3 }), NOW);
-    assert.equal(row.featured, row.score >= TIER_THRESHOLDS[row.tier], source);
+    assert.equal(row.featured, row.raw >= TIER_THRESHOLDS[row.tier], source);
+  }
+});
+
+test('admission is judged before the tier weight, so provenance is not charged twice', () => {
+  // The bug this pins: comparing the *discounted* score against a *higher* bar
+  // penalised a mirror for its provenance in both directions at once, which is
+  // what made the mirror tier unreachable at any view count.
+  const mirror = scoreCandidate(
+    candidate({ source: 'wikipedia-en-dump', views: 50_000, threadCount: 4 }),
+    NOW
+  );
+  assert.ok(mirror.raw > mirror.score, 'the weight must still discount the ranking score');
+  assert.ok(mirror.featured, 'a heavily-read, discussed mirror page must be admissible');
+});
+
+test('every tier threshold is actually reachable', () => {
+  // The failure mode is silent: an unreachable bar yields an empty list, which
+  // is indistinguishable from a correctly-working list on a quiet day. Shipping
+  // 12/18/45 against the discounted score emptied two tiers permanently.
+  assertThresholdsReachable();
+});
+
+test('the published bar, restated in views, is small enough to be real', () => {
+  // Guards the same miscalibration from the operator's side: whatever the
+  // constants say, a fresh article must not need an implausible readership.
+  assert.ok(viewsNeededWhenFresh('editorial') <= 50, 'editorial bar must be modest');
+  assert.ok(viewsNeededWhenFresh('user') <= 200, 'community bar must be attainable');
+  assert.ok(viewsNeededWhenFresh('mirror') <= 5000, 'mirror bar must be attainable');
+  // And strictly ordered, so the copy on /arena/hot stays true.
+  assert.ok(viewsNeededWhenFresh('mirror') > viewsNeededWhenFresh('user'));
+  assert.ok(viewsNeededWhenFresh('user') > viewsNeededWhenFresh('editorial'));
+});
+
+test('freshness alone never features an article nobody read', () => {
+  // A just-touched article with no views and no threads scores only the recency
+  // term. If any bar sat at or below that ceiling, re-saving a document would
+  // put it on the hot list.
+  for (const source of ['editorial', 'user', 'wikipedia-en-dump']) {
+    const untouched = scoreCandidate(
+      candidate({ source, views: 0, threadCount: 0, updatedAt: NOW }),
+      NOW
+    );
+    assert.equal(untouched.featured, false, source);
   }
 });
 

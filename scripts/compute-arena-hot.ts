@@ -34,7 +34,16 @@ const numArg = (name: string, fallback: number) => {
   const value = Number(raw.slice(name.length + 3));
   return Number.isFinite(value) && value > 0 ? Math.floor(value) : fallback;
 };
-const DAYS = numArg('days', 60);
+/**
+ * Default window. 90 rather than 60 because at 60 this job returned an empty
+ * list against the live corpus: the site's most-read original articles were last
+ * touched 60-90 days ago, so the window excluded exactly the content the list
+ * exists to surface. Note that `MAX_SCAN`, not this number, is usually the
+ * binding constraint — once the window covers more than MAX_SCAN documents,
+ * widening it further changes nothing, which is why 90, 120 and 365 all produce
+ * the same list today.
+ */
+const DAYS = numArg('days', 90);
 const LIMIT = numArg('limit', 30);
 /** Hard ceiling on documents read, so a wide window can't turn into a full scan. */
 const MAX_SCAN = numArg('max-scan', 5000);

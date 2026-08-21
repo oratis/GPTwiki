@@ -265,7 +265,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'arena.hot.method':
       'Every number here is arithmetic over stored fields: views and follow-up threads (compressed, so one viral article cannot swamp the list), a freshness term that halves every 14 days, and a weight for where the article came from. A follow-up question counts for more than a page view, because it is better evidence the article was worth reading.',
     'arena.hot.thresholds':
-      'Each source tier has its own bar to clear — {editorial} for editorial, {user} for community articles, {mirror} for mirrored Wikipedia pages. The mirror is most of the corpus by count, so an equal bar would bury everything original.',
+      'Each source tier has its own bar to clear. On a recently-updated article with no follow-up threads, that bar is roughly {editorial} views for editorial writing, {user} for community articles, and {mirror} for mirrored Wikipedia pages — and much higher once an article is no longer fresh. The mirror is most of the corpus by count, so an equal bar would bury everything original.',
     'arena.hot.window': 'window: last {days} days',
     'arena.battle.publish': 'Publish the winning answer',
     'arena.battle.publishing': 'Publishing…',
@@ -563,7 +563,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'arena.hot.method':
       '这里的每个数字都是对已存字段做的算术：浏览量与跟帖数（经过压缩，因此单篇爆款无法淹没整张榜）、每 14 天减半的新鲜度项，以及文章来源的权重。一次跟帖提问比一次页面浏览权重更高——它是「这篇值得读」的更强证据。',
     'arena.hot.thresholds':
-      '每个来源等级有各自的入榜门槛——编辑部 {editorial}，社区文章 {user}，Wikipedia 镜像 {mirror}。镜像按篇数占语料的绝大多数，门槛若相同会把所有原创内容埋掉。',
+      '每个来源等级有各自的入榜门槛。对一篇近期更新且无跟帖的文章而言，这个门槛大致是：编辑部内容 {editorial} 次浏览，社区文章 {user} 次，Wikipedia 镜像 {mirror} 次；文章不再新鲜后门槛还会显著提高。镜像按篇数占语料的绝大多数，门槛若相同会把所有原创内容埋掉。',
     'arena.hot.window': '窗口：最近 {days} 天',
     'arena.battle.publish': '发布胜方回答',
     'arena.battle.publishing': '发布中…',

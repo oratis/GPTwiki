@@ -5,7 +5,7 @@ import { Flame, MessageSquare, Eye } from 'lucide-react';
 import ArenaNav from '@/components/arena/ArenaNav';
 import { arenaMetadata } from '@/lib/arena/metadata';
 import { getHotSnapshot } from '@/lib/arena/ratings';
-import { TIER_THRESHOLDS } from '@/lib/arena/hot-scoring';
+import { viewsNeededWhenFresh } from '@/lib/arena/hot-scoring';
 import { localeHref } from '@/lib/i18n/links';
 import { hasLocale, getTranslations } from '@/lib/i18n/server';
 
@@ -95,10 +95,13 @@ export default async function ArenaHotPage({
         <div className="mt-6 space-y-2 border-t border-gray-200 pt-4 text-xs text-gray-500">
           <p>{t('arena.hot.method')}</p>
           <p>
+            {/* Stated in views rather than in raw score points: "editorial
+                needs 6" is unfalsifiable to a reader, while "editorial needs
+                about 7 views" is a claim they can check against the list. */}
             {t('arena.hot.thresholds', {
-              editorial: TIER_THRESHOLDS.editorial,
-              user: TIER_THRESHOLDS.user,
-              mirror: TIER_THRESHOLDS.mirror,
+              editorial: viewsNeededWhenFresh('editorial').toLocaleString(locale),
+              user: viewsNeededWhenFresh('user').toLocaleString(locale),
+              mirror: viewsNeededWhenFresh('mirror').toLocaleString(locale),
             })}
           </p>
           {snapshot && (
