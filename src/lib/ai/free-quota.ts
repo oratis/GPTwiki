@@ -46,9 +46,115 @@ export function arenaAnonDailyBattleLimit(): number {
   return readLimit('ARENA_ANON_DAILY_BATTLES');
 }
 
+/**
+ * Platform-wide ceiling on free AI generations per UTC day — the backstop the
+ * three meters above cannot be.
+ *
+ * Each of them bounds one *identity*: a user id, or an address hash. Neither
+ * bounds how many identities exist. The anonymous arena meter is the sharp
+ * edge: at ARENA_ANON_DAILY_BATTLES=2 a single address gets two battles, but
+ * nothing caps the number of addresses, and every anonymous battle spends
+ * platform keys by definition. This counter is the one number that does not
+ * scale with how many callers show up.
+ *
+ * Returns null when the variable is unset or empty, meaning *no global cap* —
+ * deliberately not the 0-means-off convention its siblings use. 0 there
+ * disables a free tier that was already off by default; 0 here would switch
+ * off a free tier that is on in production, so an unset variable has to leave
+ * behaviour exactly as it is. Arming the cap is an explicit act:
+ *
+ *   gcloud run services update gptwiki \
+ *     --update-env-vars FREE_GLOBAL_DAILY_GENERATIONS=2000
+ *
+ * Counted in *generations*, not per-meter units, because the meters do not
+ * agree on what a unit is: a chat message is one generation, an arena battle
+ * is two. A budget has to be denominated in the thing that costs money.
+ */
+export function globalDailyGenerationLimit(): number | null {
+  const raw = process.env.FREE_GLOBAL_DAILY_GENERATIONS?.trim();
+  if (!raw) return null;
+  const n = Number(raw);
+  return Number.isFinite(n) && n >= 0 ? Math.floor(n) : null;
+}
+
+/** An arena battle answers the same question twice — two generations, one unit. */
+export const GENERATIONS_PER_BATTLE = 2;
+
+/** Where the platform-wide daily counter lives. One document, one field. */
+function globalQuotaRef(): FirebaseFirestore.DocumentReference {
+  return db.collection('meta').doc('freeQuota');
+}
+
+/**
+ * Why a consumption was refused. `meter` is the caller's own daily allowance;
+ * `global` is the platform-wide cap, which says nothing about this caller and
+ * is the operator's problem, not theirs; `error` is a failed transaction,
+ * which fails closed.
+ */
+export type QuotaDenial = 'meter' | 'global' | 'error';
+
+export interface QuotaResult {
+  ok: boolean;
+  /** Units left on the *caller's* meter, unchanged by a global refusal. */
+  remaining: number;
+  reason?: QuotaDenial;
+}
+
 // UTC day stamp, e.g. "2026-06-10" — quota resets at midnight UTC.
 function todayStamp(): string {
   return new Date().toISOString().slice(0, 10);
+}
+
+/** A stored meter: the day it belongs to, and how much of it is spent. */
+export interface StoredQuota {
+  date?: string;
+  used?: number;
+}
+
+/**
+ * Decide a consumption against both meters — pure, so it can be tested without
+ * a Firestore emulator. `consumeDailyQuota` does the reads, applies this, and
+ * writes back whatever it returns.
+ *
+ * A stamp from a previous day counts as zero rather than being cleared: the
+ * reset is implicit in the comparison, so no scheduled job has to run at
+ * midnight for the quota to roll over.
+ */
+export function decideConsumption(input: {
+  today: string;
+  meter: StoredQuota;
+  meterLimit: number;
+  units: number;
+  global: StoredQuota | null;
+  globalLimit: number | null;
+  generations: number;
+}): { ok: true; meterUsed: number; globalUsed: number | null; remaining: number } | {
+  ok: false;
+  remaining: number;
+  reason: QuotaDenial;
+} {
+  const { today, meter, meterLimit, units, global, globalLimit, generations } = input;
+
+  if (meterLimit <= 0 || units <= 0) return { ok: false, remaining: 0, reason: 'meter' };
+
+  const used = meter.date === today ? meter.used ?? 0 : 0;
+  if (used + units > meterLimit) {
+    return { ok: false, remaining: Math.max(0, meterLimit - used), reason: 'meter' };
+  }
+
+  const remaining = meterLimit - used - units;
+
+  if (globalLimit === null || global === null) {
+    return { ok: true, meterUsed: used + units, globalUsed: null, remaining };
+  }
+
+  const gUsed = global.date === today ? global.used ?? 0 : 0;
+  if (gUsed + generations > globalLimit) {
+    // The caller's own meter is untouched — this refusal is about the platform.
+    return { ok: false, remaining: Math.max(0, meterLimit - used), reason: 'global' };
+  }
+
+  return { ok: true, meterUsed: used + units, globalUsed: gUsed + generations, remaining };
 }
 
 /**
@@ -66,30 +172,59 @@ async function consumeDailyQuota(
   ref: FirebaseFirestore.DocumentReference,
   field: string,
   limit: number,
-  units = 1
-): Promise<{ ok: boolean; remaining: number }> {
-  if (limit <= 0 || units <= 0) return { ok: false, remaining: 0 };
+  units = 1,
+  generations = units
+): Promise<QuotaResult> {
+  if (limit <= 0 || units <= 0) return { ok: false, remaining: 0, reason: 'meter' };
+
+  const globalLimit = globalDailyGenerationLimit();
 
   try {
     return await db.runTransaction(async (tx) => {
+      // Both reads first: Firestore transactions forbid a read after a write.
+      // The global document is not read at all when no cap is configured, so
+      // an uncapped deployment pays nothing for this.
       const snap = await tx.get(ref);
-      const quota = (snap.get(field) ?? {}) as { date?: string; used?: number };
+      const globalRef = globalLimit === null ? null : globalQuotaRef();
+      const globalSnap = globalRef ? await tx.get(globalRef) : null;
+
       const today = todayStamp();
-      const used = quota.date === today ? quota.used ?? 0 : 0;
-      if (used + units > limit) return { ok: false, remaining: Math.max(0, limit - used) };
-      tx.set(ref, { [field]: { date: today, used: used + units } }, { merge: true });
-      return { ok: true, remaining: limit - used - units };
+      const decision = decideConsumption({
+        today,
+        meter: (snap.get(field) ?? {}) as StoredQuota,
+        meterLimit: limit,
+        units,
+        global: globalSnap ? ((globalSnap.get('global') ?? {}) as StoredQuota) : null,
+        globalLimit,
+        generations,
+      });
+
+      if (!decision.ok) {
+        if (decision.reason === 'global') {
+          // The operator needs to see this; nothing in the response tells the
+          // caller apart from someone who simply used up their own allowance.
+          console.warn(
+            `[free-quota] Global daily cap of ${globalLimit} generations reached — ` +
+              `refusing a ${field} request for ${generations}. Free generations resume after ${today} (UTC).`
+          );
+        }
+        return decision;
+      }
+
+      if (globalRef && decision.globalUsed !== null) {
+        tx.set(globalRef, { global: { date: today, used: decision.globalUsed } }, { merge: true });
+      }
+      tx.set(ref, { [field]: { date: today, used: decision.meterUsed } }, { merge: true });
+      return { ok: true, remaining: decision.remaining };
     });
   } catch (e) {
     console.error(`Daily quota transaction failed (${field}):`, e);
-    return { ok: false, remaining: 0 };
+    return { ok: false, remaining: 0, reason: 'error' };
   }
 }
 
 /** Consume one platform-keyed chat generation from the user's free tier. */
-export async function consumeFreeQuota(
-  userId: string
-): Promise<{ ok: boolean; remaining: number }> {
+export async function consumeFreeQuota(userId: string): Promise<QuotaResult> {
   return consumeDailyQuota(db.collection('users').doc(userId), 'freeQuota', freeDailyLimit());
 }
 
@@ -98,13 +233,13 @@ export async function consumeFreeQuota(
  * answer — the user asked one question, and charging them twice for the two
  * sides they did not choose would make the meter unreadable.
  */
-export async function consumeArenaBattleQuota(
-  userId: string
-): Promise<{ ok: boolean; remaining: number }> {
+export async function consumeArenaBattleQuota(userId: string): Promise<QuotaResult> {
   return consumeDailyQuota(
     db.collection('users').doc(userId),
     'arenaQuota',
-    arenaDailyBattleLimit()
+    arenaDailyBattleLimit(),
+    1,
+    GENERATIONS_PER_BATTLE
   );
 }
 
@@ -124,13 +259,13 @@ const ANON_QUOTA = 'arenaAnonQuota';
  *
  * `ipKey` is the salted hash from `arena/anon.ts`, never a raw address.
  */
-export async function consumeAnonArenaBattleQuota(
-  ipKey: string
-): Promise<{ ok: boolean; remaining: number }> {
+export async function consumeAnonArenaBattleQuota(ipKey: string): Promise<QuotaResult> {
   return consumeDailyQuota(
     db.collection(ANON_QUOTA).doc(ipKey),
     'arenaQuota',
-    arenaAnonDailyBattleLimit()
+    arenaAnonDailyBattleLimit(),
+    1,
+    GENERATIONS_PER_BATTLE
   );
 }
 
@@ -158,11 +293,28 @@ export async function refundAnonArenaBattleQuota(ipKey: string): Promise<void> {
 }
 
 async function refundBattleAt(ref: FirebaseFirestore.DocumentReference): Promise<void> {
+  const globalLimit = globalDailyGenerationLimit();
   try {
     await db.runTransaction(async (tx) => {
       const snap = await tx.get(ref);
+      // Reads before writes, and only when a cap is configured.
+      const globalRef = globalLimit === null ? null : globalQuotaRef();
+      const globalSnap = globalRef ? await tx.get(globalRef) : null;
+
+      const today = todayStamp();
       const quota = (snap.get('arenaQuota') ?? {}) as { date?: string; used?: number };
-      if (quota.date !== todayStamp()) return;
+      if (quota.date !== today) return;
+
+      // The global counter is given back too, or a day of failed battles
+      // would eat the platform's budget without producing anything.
+      if (globalRef && globalSnap) {
+        const g = (globalSnap.get('global') ?? {}) as { date?: string; used?: number };
+        if (g.date === today) {
+          const gUsed = Math.max(0, (g.used ?? 0) - GENERATIONS_PER_BATTLE);
+          tx.set(globalRef, { global: { date: today, used: gUsed } }, { merge: true });
+        }
+      }
+
       const used = Math.max(0, (quota.used ?? 0) - 1);
       tx.set(ref, { arenaQuota: { date: quota.date, used } }, { merge: true });
     });
