@@ -24,6 +24,48 @@ const entries = [
   { title: 'Blockchain', question: 'What is Blockchain?', content: '# Blockchain\n\nA distributed, immutable ledger recording transactions across a network.\n\n## How It Works\n\nTransaction → Broadcast → Verify → Block → Chain\n\n## Consensus\n\nProof of Work, Proof of Stake\n\n## Applications\n\nCryptocurrency, smart contracts, DeFi, NFTs', summary: 'Blockchain is a distributed, immutable ledger for recording transactions across a network.', tags: ['blockchain', 'cryptocurrency', 'decentralized'] },
 ];
 
+/** Firestore caps the `in` operator at 30 comparison values per query. */
+const IN_QUERY_MAX = 30;
+
+/**
+ * Which of `titles` already exist in `wikis`.
+ *
+ * Deliberately not `db.collection('wikis').select('title').get()`. That read
+ * the entire collection to answer a question about ~850 known titles: at the
+ * current corpus size it is roughly 19M document reads per call, which blows
+ * the request timeout and bills for every document in the collection.
+ * `.select()` trims the bytes returned but not the documents read, and reads
+ * are what Firestore charges for.
+ *
+ * A bare `.limit()` was not an option either: this set drives de-duplication,
+ * so a truncated answer silently re-seeds titles that already exist. Asking for
+ * exactly the titles we are about to write keeps the answer complete and the
+ * cost proportional to the seed list (at most one read per candidate that is
+ * already present) rather than to the corpus.
+ */
+async function findExistingTitles(titles: string[]): Promise<Set<string>> {
+  const unique = [...new Set(titles)];
+  const chunks: string[][] = [];
+  for (let i = 0; i < unique.length; i += IN_QUERY_MAX) {
+    chunks.push(unique.slice(i, i + IN_QUERY_MAX));
+  }
+
+  const snaps = await Promise.all(
+    chunks.map((chunk) =>
+      db.collection('wikis').where('title', 'in', chunk).select('title').get()
+    )
+  );
+
+  const found = new Set<string>();
+  for (const snap of snaps) {
+    snap.forEach((d) => {
+      const t = d.get('title');
+      if (typeof t === 'string') found.add(t);
+    });
+  }
+  return found;
+}
+
 export async function POST(req: NextRequest) {
   if (!isAuthorizedSeedRequest(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -36,14 +78,15 @@ export async function POST(req: NextRequest) {
 
   const now = Date.now();
 
-  // De-dup by title: read existing titles once rather than one query per item,
-  // so seeding the full editorial corpus stays well within the request timeout.
-  const snap = await db.collection('wikis').select('title').get();
-  const existing = new Set<string>();
-  snap.forEach((d) => {
-    const t = d.get('title');
-    if (typeof t === 'string') existing.add(t);
-  });
+  // De-dup by title, asking only about the titles this route can write. The
+  // candidate list is fixed and small (legacy demo topics + the editorial
+  // corpus and its translations), so this is a bounded number of `in` queries
+  // regardless of how large the `wikis` collection grows.
+  const existing = await findExistingTitles([
+    ...entries.map((e) => e.title),
+    ...allDrafts.map((d) => d.title),
+    ...allTranslations.map((d) => d.title),
+  ]);
 
   const pending: Record<string, unknown>[] = [];
 

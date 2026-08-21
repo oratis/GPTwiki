@@ -13,7 +13,13 @@ export const messageSchema = z.object({
 
 // ─── Request bodies ──────────────────────────────────────────────────────
 export const wikiCreateSchema = z.object({
-  title: z.string().trim().min(1).max(200),
+  // Optional on purpose: `POST /api/wiki` does `title: body.title || generated.title`
+  // (route.ts), i.e. an empty title means "let the model name it". Requiring
+  // min(1) here contradicted that and rejected the article page's
+  // "continue → create a new article" button, which posts `title: ''`, at the
+  // schema before any of that logic ran — a 400 on every single click, with no
+  // server-side log because the 400 branch below doesn't write one.
+  title: z.string().trim().max(200).default(''),
   question: z.string().trim().min(1).max(500),
   content: z.string().max(100_000).default(''),
   summary: z.string().max(1_000).default(''),

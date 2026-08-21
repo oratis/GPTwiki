@@ -275,8 +275,11 @@ GPTwiki/
 ### API Key Resolution
 
 1. Check if user has their own API key for the selected model
-2. If not, check if user email is `wangharp@gmail.com` (system fallback)
-3. If neither, return error prompting user to configure API key
+2. If not, and `PLATFORM_OWNER_EMAIL` is configured, check whether the user's
+   email matches it — that account uses the platform key unmetered. There is no
+   default: when the variable is unset, nobody qualifies.
+3. Otherwise fall to the free daily quota, and if that is off or spent, return
+   an error prompting the user to configure their own API key
 
 ***
 
