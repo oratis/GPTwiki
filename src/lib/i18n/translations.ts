@@ -118,6 +118,13 @@ const translations: Record<Locale, Record<string, string>> = {
     // Footer
     'footer.description': 'AI-powered collaborative knowledge base. Ask questions, create wikis, share knowledge.',
 
+    // Newsletter (footer email capture).
+    'newsletter.title': "Get the best new articles weekly",
+    'newsletter.placeholder': "you@example.com",
+    'newsletter.button': "Subscribe",
+    'newsletter.success': "You're subscribed — watch your inbox!",
+    'newsletter.error': "Something went wrong. Please try again.",
+
     // New features
     'header.categories': 'Categories',
     'home.recentWikis': 'Recent Wikis',
@@ -453,6 +460,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'login.checkInbox': '请查收邮件',
     'login.checkInboxMsg': '我们已向你发送了一个登录链接，请在邮件中点击它以完成登录。',
     'footer.description': 'AI驱动的协作知识库。提问、创建Wiki、分享知识。',
+
+    // Newsletter (footer email capture).
+    'newsletter.title': "每周精选新词条，直接送到邮箱",
+    'newsletter.placeholder': "you@example.com",
+    'newsletter.button': "订阅",
+    'newsletter.success': "订阅成功，请查收邮件！",
+    'newsletter.error': "出了点问题，请重试。",
     'header.categories': '分类',
     'home.recentWikis': '最新Wiki',
     'home.noMoreWikis': '没有更多了',
@@ -770,6 +784,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'login.checkInbox': '受信トレイをご確認ください',
     'login.checkInboxMsg': 'ログインリンクを送信しました。メール内のリンクをクリックしてログインを完了してください。',
     'footer.description': 'AI駆動の協同ナレッジベース。質問して、Wikiを作成し、知識を共有。',
+
+    // Newsletter (footer email capture).
+    'newsletter.title': "毎週の新着記事をメールで",
+    'newsletter.placeholder': "you@example.com",
+    'newsletter.button': "購読する",
+    'newsletter.success': "購読しました。メールをご確認ください。",
+    'newsletter.error': "エラーが発生しました。もう一度お試しください。",
     'header.categories': 'カテゴリ',
     'home.recentWikis': '最新Wiki',
     'home.noMoreWikis': 'これ以上ありません',
@@ -947,6 +968,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'login.checkInbox': '받은편지함을 확인하세요',
     'login.checkInboxMsg': '로그인 링크를 보냈습니다. 이메일에서 링크를 클릭하여 로그인을 완료하세요.',
     'footer.description': 'AI 기반 협업 지식 베이스. 질문하고, Wiki를 만들고, 지식을 공유하세요.',
+
+    // Newsletter (footer email capture).
+    'newsletter.title': "매주 새 글을 메일로 받아보세요",
+    'newsletter.placeholder': "you@example.com",
+    'newsletter.button': "구독",
+    'newsletter.success': "구독되었습니다. 메일함을 확인하세요!",
+    'newsletter.error': "문제가 발생했습니다. 다시 시도해 주세요.",
     'header.categories': '카테고리',
     'home.recentWikis': '최근 Wiki',
     'home.noMoreWikis': '더 이상 없습니다',
@@ -1124,6 +1152,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'login.checkInbox': 'Revisa tu bandeja de entrada',
     'login.checkInboxMsg': 'Te enviamos un enlace de inicio de sesión. Haz clic en él desde tu correo para completar el acceso.',
     'footer.description': 'Base de conocimiento colaborativa impulsada por IA. Pregunta, crea wikis, comparte conocimiento.',
+
+    // Newsletter (footer email capture).
+    'newsletter.title': "Recibe los mejores artículos cada semana",
+    'newsletter.placeholder': "tu@ejemplo.com",
+    'newsletter.button': "Suscribirse",
+    'newsletter.success': "¡Suscripción confirmada! Revisa tu correo.",
+    'newsletter.error': "Algo salió mal. Inténtalo de nuevo.",
     'header.categories': 'Categorías',
     'home.recentWikis': 'Wikis recientes',
     'home.noMoreWikis': 'No hay más wikis',
@@ -1301,6 +1336,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'login.checkInbox': 'Consultez votre boîte de réception',
     'login.checkInboxMsg': 'Nous vous avons envoyé un lien de connexion. Cliquez dessus depuis votre e-mail pour terminer la connexion.',
     'footer.description': "Base de connaissances collaborative alimentée par l'IA. Posez des questions, créez des wikis, partagez vos connaissances.",
+
+    // Newsletter (footer email capture).
+    'newsletter.title': "Recevez les meilleurs articles chaque semaine",
+    'newsletter.placeholder': "vous@exemple.com",
+    'newsletter.button': "S'abonner",
+    'newsletter.success': "Abonnement confirmé — surveillez votre boîte mail !",
+    'newsletter.error': "Une erreur est survenue. Veuillez réessayer.",
     'header.categories': 'Catégories',
     'home.recentWikis': 'Wikis récents',
     'home.noMoreWikis': 'Plus de wikis à charger',
@@ -1478,6 +1520,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'login.checkInbox': 'Überprüfe deinen Posteingang',
     'login.checkInboxMsg': 'Wir haben dir einen Anmeldelink gesendet. Klicke ihn in deiner E-Mail an, um die Anmeldung abzuschließen.',
     'footer.description': 'KI-gestützte kollaborative Wissensbasis. Fragen stellen, Wikis erstellen, Wissen teilen.',
+
+    // Newsletter (footer email capture).
+    'newsletter.title': "Die besten neuen Artikel, wöchentlich",
+    'newsletter.placeholder': "du@beispiel.de",
+    'newsletter.button': "Abonnieren",
+    'newsletter.success': "Abonniert — schau in dein Postfach!",
+    'newsletter.error': "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
     'header.categories': 'Kategorien',
     'home.recentWikis': 'Neueste Wikis',
     'home.noMoreWikis': 'Keine weiteren Wikis',
@@ -1655,6 +1704,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'login.checkInbox': 'Verifique sua caixa de entrada',
     'login.checkInboxMsg': 'Enviamos um link de acesso. Clique nele no seu e-mail para concluir o login.',
     'footer.description': 'Base de conhecimento colaborativa com IA. Pergunte, crie wikis, compartilhe conhecimento.',
+
+    // Newsletter (footer email capture).
+    'newsletter.title': "Receba os melhores artigos toda semana",
+    'newsletter.placeholder': "voce@exemplo.com",
+    'newsletter.button': "Inscrever-se",
+    'newsletter.success': "Inscrição confirmada — fique de olho no e-mail!",
+    'newsletter.error': "Algo deu errado. Tente novamente.",
     'header.categories': 'Categorias',
     'home.recentWikis': 'Wikis recentes',
     'home.noMoreWikis': 'Não há mais wikis',
@@ -1832,6 +1888,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'login.checkInbox': 'Проверьте почту',
     'login.checkInboxMsg': 'Мы отправили вам ссылку для входа. Нажмите на неё в письме, чтобы завершить вход.',
     'footer.description': 'Совместная база знаний на основе ИИ. Задавайте вопросы, создавайте вики, делитесь знаниями.',
+
+    // Newsletter (footer email capture).
+    'newsletter.title': "Лучшие новые статьи — каждую неделю",
+    'newsletter.placeholder': "vy@primer.ru",
+    'newsletter.button': "Подписаться",
+    'newsletter.success': "Подписка оформлена — проверьте почту!",
+    'newsletter.error': "Что-то пошло не так. Попробуйте ещё раз.",
     'header.categories': 'Категории',
     'home.recentWikis': 'Последние Wiki',
     'home.noMoreWikis': 'Больше нет вики',
@@ -2009,6 +2072,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'login.checkInbox': 'تحقق من بريدك الوارد',
     'login.checkInboxMsg': 'لقد أرسلنا لك رابط تسجيل الدخول. انقر عليه من بريدك الإلكتروني لإكمال تسجيل الدخول.',
     'footer.description': 'قاعدة معرفة تعاونية بالذكاء الاصطناعي. اطرح الأسئلة، أنشئ الويكي، شارك المعرفة.',
+
+    // Newsletter (footer email capture).
+    'newsletter.title': "أفضل المقالات الجديدة أسبوعياً",
+    'newsletter.placeholder': "you@example.com",
+    'newsletter.button': "اشترك",
+    'newsletter.success': "تم الاشتراك — تحقق من بريدك!",
+    'newsletter.error': "حدث خطأ ما. حاول مرة أخرى.",
     'header.categories': 'التصنيفات',
     'home.recentWikis': 'أحدث الويكي',
     'home.noMoreWikis': 'لا مزيد من الويكي',
@@ -2186,6 +2256,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'login.checkInbox': 'अपना इनबॉक्स देखें',
     'login.checkInboxMsg': 'हमने आपको एक साइन-इन लिंक भेजा है। साइन इन पूरा करने के लिए इसे अपने ईमेल से क्लिक करें।',
     'footer.description': 'AI-संचालित सहयोगी ज्ञान आधार। सवाल पूछें, विकी बनाएं, ज्ञान साझा करें।',
+
+    // Newsletter (footer email capture).
+    'newsletter.title': "हर हफ़्ते बेहतरीन नए लेख पाएं",
+    'newsletter.placeholder': "you@example.com",
+    'newsletter.button': "सदस्यता लें",
+    'newsletter.success': "सदस्यता ले ली गई — अपना इनबॉक्स देखें!",
+    'newsletter.error': "कुछ गलत हो गया। कृपया पुनः प्रयास करें।",
     'header.categories': 'श्रेणियां',
     'home.recentWikis': 'हाल के विकी',
     'home.noMoreWikis': 'और विकी नहीं हैं',
@@ -2363,6 +2440,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'login.checkInbox': 'Controlla la tua casella di posta',
     'login.checkInboxMsg': 'Ti abbiamo inviato un link di accesso. Cliccalo dalla tua email per completare l’accesso.',
     'footer.description': "Base di conoscenza collaborativa basata sull'IA. Fai domande, crea wiki, condividi conoscenza.",
+
+    // Newsletter (footer email capture).
+    'newsletter.title': "Ogni settimana i migliori articoli nuovi",
+    'newsletter.placeholder': "tu@esempio.com",
+    'newsletter.button': "Iscriviti",
+    'newsletter.success': "Iscrizione confermata — controlla la posta!",
+    'newsletter.error': "Qualcosa è andato storto. Riprova.",
     'header.categories': 'Categorie',
     'home.recentWikis': 'Wiki recenti',
     'home.noMoreWikis': 'Nessun altro wiki da caricare',
@@ -2540,6 +2624,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'login.checkInbox': 'Gelen kutunu kontrol et',
     'login.checkInboxMsg': 'Sana bir giriş bağlantısı gönderdik. Girişi tamamlamak için e-postandaki bağlantıya tıkla.',
     'footer.description': 'AI destekli işbirlikçi bilgi tabanı. Soru sorun, wiki oluşturun, bilgi paylaşın.',
+
+    // Newsletter (footer email capture).
+    'newsletter.title': "En iyi yeni yazılar, her hafta",
+    'newsletter.placeholder': "siz@ornek.com",
+    'newsletter.button': "Abone ol",
+    'newsletter.success': "Abone oldunuz — gelen kutunuzu kontrol edin!",
+    'newsletter.error': "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
     'header.categories': 'Kategoriler',
     'home.recentWikis': 'Son Wikiler',
     'home.noMoreWikis': 'Daha fazla wiki yok',
@@ -2717,6 +2808,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'login.checkInbox': 'Kiểm tra hộp thư của bạn',
     'login.checkInboxMsg': 'Chúng tôi đã gửi cho bạn một liên kết đăng nhập. Nhấp vào liên kết đó trong email để hoàn tất đăng nhập.',
     'footer.description': 'Cơ sở tri thức cộng tác được hỗ trợ bởi AI. Đặt câu hỏi, tạo wiki, chia sẻ kiến thức.',
+
+    // Newsletter (footer email capture).
+    'newsletter.title': "Bài viết mới hay nhất, mỗi tuần",
+    'newsletter.placeholder': "ban@vidu.com",
+    'newsletter.button': "Đăng ký",
+    'newsletter.success': "Đã đăng ký — hãy kiểm tra hộp thư!",
+    'newsletter.error': "Đã xảy ra lỗi. Vui lòng thử lại.",
     'header.categories': 'Danh mục',
     'home.recentWikis': 'Wiki gần đây',
     'home.noMoreWikis': 'Không còn wiki nào',
@@ -2894,6 +2992,13 @@ const translations: Record<Locale, Record<string, string>> = {
     'login.checkInbox': 'ตรวจสอบกล่องจดหมายของคุณ',
     'login.checkInboxMsg': 'เราได้ส่งลิงก์เข้าสู่ระบบให้คุณแล้ว คลิกลิงก์จากอีเมลของคุณเพื่อเข้าสู่ระบบให้เสร็จสมบูรณ์',
     'footer.description': 'ฐานความรู้ร่วมมือที่ขับเคลื่อนด้วย AI ถามคำถาม สร้างวิกิ แบ่งปันความรู้',
+
+    // Newsletter (footer email capture).
+    'newsletter.title': "บทความใหม่ที่ดีที่สุด ทุกสัปดาห์",
+    'newsletter.placeholder': "you@example.com",
+    'newsletter.button': "สมัครรับข่าว",
+    'newsletter.success': "สมัครเรียบร้อย — โปรดตรวจสอบอีเมล!",
+    'newsletter.error': "เกิดข้อผิดพลาด กรุณาลองใหม่",
     'header.categories': 'หมวดหมู่',
     'home.recentWikis': 'วิกิล่าสุด',
     'home.noMoreWikis': 'ไม่มีวิกิเพิ่มเติม',

@@ -70,6 +70,16 @@ export const threadListQuerySchema = z.object({
 });
 
 // ─── Query params ────────────────────────────────────────────────────────
+/**
+ * Newsletter signup body. The email is trimmed and lowercased *by the schema*
+ * because the normalized value is also the Firestore document id — so
+ * "A@x.com " and "a@x.com" have to converge before the write, or the same
+ * person subscribes twice. 254 is the RFC 5321 address ceiling.
+ */
+export const subscribeSchema = z.object({
+  email: z.string().trim().toLowerCase().pipe(z.email().max(254)),
+});
+
 export const searchQuerySchema = z.object({
   q: z.string().trim().max(200).optional(),
 });
