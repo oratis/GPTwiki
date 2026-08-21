@@ -110,6 +110,13 @@ export default function WikiContinueChat({
 
       if (!res.ok) {
         const err = await res.json().catch(() => null);
+        // Same as the create path below: PUT /api/wiki/[id] returns
+        // API_KEY_REQUIRED whenever the user has no key and the free tier is
+        // off, which is the default configuration.
+        if (err?.error === 'API_KEY_REQUIRED') {
+          toast(t('apiKeys.required'));
+          return;
+        }
         if (err?.error === 'QUOTA_EXHAUSTED') {
           toast(t('chat.quotaExhausted'));
           return;
@@ -145,6 +152,16 @@ export default function WikiContinueChat({
 
       if (!res.ok) {
         const err = await res.json().catch(() => null);
+        // API_KEY_REQUIRED is the branch that actually fires here. With
+        // FREE_DAILY_MESSAGES defaulting to 0, resolveApiKeyForUser returns
+        // needsConfig for every user without a key of their own, so the route
+        // answers 403 API_KEY_REQUIRED and QUOTA_EXHAUSTED never happens.
+        // Handling only the latter turned the one actionable error in this
+        // flow ("add your API key") into the generic createWikiFailed toast.
+        if (err?.error === 'API_KEY_REQUIRED') {
+          toast(t('apiKeys.required'));
+          return;
+        }
         if (err?.error === 'QUOTA_EXHAUSTED') {
           toast(t('chat.quotaExhausted'));
           return;

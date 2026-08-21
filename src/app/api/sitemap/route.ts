@@ -14,8 +14,11 @@ const EDITORIAL_CAP = 20000;  // all original (source: 'editorial') docs in one 
  *
  * The old design streamed EVERY wiki id to precompute pagination cursors — an
  * O(N) walk that, at 19M docs, streams for minutes and times out the request
- * (even a 50k-capped scan measured ~57s). So the index NEVER scans the
- * collection now. It is computed arithmetically and lists:
+ * (a 50k-capped scan alone measured ~57s — a HISTORICAL figure, measured
+ * against the pre-7bdcf24 design in July 2026 and NOT a property of the code
+ * below; it has already been re-quoted downstream as if it were current).
+ * So the index NEVER scans the collection now. It is computed arithmetically
+ * and lists:
  *   - static  → home / list / browse / tag pages
  *   - editorial → ALL original ('editorial') docs (the rankable content,
  *                 including the auto-content pipeline) — guaranteed coverage

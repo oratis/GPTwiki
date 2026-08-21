@@ -183,7 +183,10 @@ Dry-run (omit `--apply`) previews without writing. `--only=slug1,slug2` scopes.
 
 `src/app/api/sitemap/route.ts` serves Google's sitemap for the ~19M-doc corpus.
 The index is computed with **no in-request collection scan** (the old full-id
-scan timed out at this scale — a 50k-capped scan alone measured ~57s):
+scan timed out at this scale — a 50k-capped scan alone measured ~57s). That
+~57s is a **historical** measurement of the design `7bdcf24` replaced on
+2026-07-11, not a current cost: the index below does arithmetic plus a single
+`_meta/sitemap_shards` document read, and every sub-page is a bounded query.
 
 - `page=static` — home / list / browse / tag pages.
 - `page=editorial` — ALL original docs (`source: 'editorial'`, incl. the
