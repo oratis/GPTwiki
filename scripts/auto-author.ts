@@ -40,6 +40,7 @@ import { dirname, join } from 'node:path';
 import { config } from 'dotenv';
 import { generateWikiContent, getAIStream } from '../src/lib/ai/provider';
 import { pendingTopics, setTopicStatus, type BacklogTopic } from '../content/backlog';
+import { verifySources } from './lib/source-health';
 import { EDITORIAL_STYLE as STYLE } from '../content/editorial-style';
 import type { DraftArticle } from '../content/types';
 import type { AIModel, Message } from '../src/types';
@@ -57,6 +58,10 @@ function flag(name: string): string | undefined {
 // Hard cost cap: a leaked trigger or a bad --limit must not fan out. Each draft
 // is one model call; keep runs small and reviewable.
 const HARD_CAP = 5;
+// Minimum citations that must survive the dead-link check for a draft to ship.
+// GPTwiki's premise is "AI answers, with citations"; an article whose sources
+// all 404 is worse than no article, because it reads as sourced.
+const MIN_LIVE_SOURCES = 2;
 const LIMIT = Math.min(HARD_CAP, Math.max(1, Number(flag('limit') ?? 3) || 3));
 const MODEL = (flag('model') ?? 'claude') as AIModel;
 
@@ -80,7 +85,9 @@ function ensureH1(content: string, title: string): string {
   return /^#\s/.test(t) ? t : `# ${title}\n\n${t}`;
 }
 
-/** Reject weak/garbage generations (incl. provider's raw-dump fallback path). */
+/** Reject weak/garbage generations (incl. provider's raw-dump fallback path).
+ *  Structural only — citation health is checked separately in main(), because
+ *  it needs the network. */
 function isWeak(g: { title: string; content: string; summary: string }, topic: BacklogTopic): string | null {
   if (!/(^|\n)#{1,3}\s/.test(g.content)) return 'no markdown headings';
   if (g.content.trim().length < 400) return 'content too short';
@@ -234,6 +241,27 @@ async function main(): Promise<void> {
       continue;
     }
 
+    // Citations are checked against the live web before the draft can ship.
+    // The model invents plausible-looking URLs: PR #138 shipped 7 dead links
+    // out of 14, including one article whose every source 404'd. Only servers
+    // that positively disclaim the resource (404/410) count against it —
+    // paywalls and bot-blocks are real pages and are kept.
+    let sources = g.sources;
+    if (sources.length) {
+      const { kept, dropped } = await verifySources(sources);
+      if (dropped.length) {
+        console.log(`  ⚠ ${topic.topicKey}: dropped ${dropped.length} dead source(s):`);
+        for (const d of dropped) console.log(`      ✗ ${d.url}`);
+      }
+      sources = kept;
+    }
+    if (sources.length < MIN_LIVE_SOURCES) {
+      console.log(
+        `  ⏭  ${topic.topicKey}: skipped (only ${sources.length} live source(s), need ${MIN_LIVE_SOURCES})`
+      );
+      continue;
+    }
+
     const prompt = imagePrompt(g.title);
     const en: DraftArticle = {
       topicKey: topic.topicKey,
@@ -244,7 +272,7 @@ async function main(): Promise<void> {
       language: 'en',
       content: ensureH1(g.content, g.title),
       image: { prompt, alt: g.title },
-      ...(g.sources.length ? { sources: g.sources } : {}),
+      ...(sources.length ? { sources } : {}),
     };
     drafts.push(en);
 
@@ -262,10 +290,10 @@ async function main(): Promise<void> {
         language: 'zh',
         content: zh.content,
         image: { prompt, alt: zh.title },
-        ...(g.sources.length ? { sources: g.sources } : {}),
+        ...(sources.length ? { sources } : {}),
       });
       zhCount++;
-      console.log(`  ✓ ${topic.topicKey}: "${g.title}" (+zh, ${g.sources.length} sources)`);
+      console.log(`  ✓ ${topic.topicKey}: "${g.title}" (+zh, ${sources.length} live sources)`);
     } catch (err) {
       console.log(`  ✓ ${topic.topicKey}: "${g.title}" (en only — zh failed: ${(err as Error).message?.slice(0, 60)})`);
     }
