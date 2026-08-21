@@ -37,3 +37,10 @@ jobs:
 
       - name: Test
         run: npm test
+
+      # Cheap, deterministic guard against re-committing the credential-bearing
+      # ops scripts (docs/security/feishu-secret-rotation.md). .gitignore does
+      # not stop that: a branch forked before the untrack commit still has the
+      # files in its index, which is exactly how they came back on 2026-08-08.
+      - name: Secret guard
+        run: npm run check:secrets
