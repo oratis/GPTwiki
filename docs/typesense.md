@@ -10,9 +10,10 @@ Site search runs on a self-hosted [Typesense](https://typesense.org/) instance
 
 - GCE VM `typesense-1` (e2-small, us-central1-a, project `gptwiki`),
   container `typesense/typesense:27.1`, data on the host at `/var/typesense`,
-  run via cloud-init ([`deploy/typesense-cloud-init.yaml`](../deploy/typesense-cloud-init.yaml)).
-  ⚠️ The live VM was created with the deprecated `create-with-container` agent
-  and must be migrated before **2026-07-31** (see the migration section below).
+  run via cloud-init ([`deploy/typesense-cloud-init.yaml`](../deploy/typesense-cloud-init.yaml))
+  on Container-Optimized OS. Recreated **2026-06-30** off the deprecated
+  `create-with-container` agent (see the migration record below); its metadata
+  carries only `user-data` + `google-logging-enabled`, no `gce-container-declaration`.
 - Static IP `typesense-ip` (us-central1), port 8108 open via firewall rule
   `allow-typesense`; requests authenticate with `X-TYPESENSE-API-KEY`.
 - Future hardening: move traffic onto the VPC (Serverless VPC Access
@@ -47,13 +48,16 @@ New and updated wikis are indexed automatically at write time
 The container runs as a systemd unit defined in
 [`deploy/typesense-cloud-init.yaml`](../deploy/typesense-cloud-init.yaml) —
 **not** `create-with-container`, whose `gce-container-declaration` agent Google
-retires on 2026-07-31 (see the migration section below).
+retired on 2026-07-31 (see the migration record below).
 
 ```bash
 KEY=<api-key>   # same value as TYPESENSE_API_KEY
 
-# substitute the key into the cloud-init (never commit the real key)
-sed "s/__TYPESENSE_API_KEY__/$KEY/" deploy/typesense-cloud-init.yaml > /tmp/typesense-user-data.yaml
+# substitute the key into the cloud-init (never commit the real key).
+# Anchored to the --api-key= line: an unanchored sed also rewrites any line
+# that mentions the placeholder, and the key ends up in a YAML comment too.
+sed "/--api-key=/s/__TYPESENSE_API_KEY__/$KEY/" deploy/typesense-cloud-init.yaml > /tmp/typesense-user-data.yaml
+grep -c "$KEY" /tmp/typesense-user-data.yaml   # → 1, exactly
 
 gcloud compute addresses create typesense-ip --region us-central1 --project gptwiki
 
@@ -69,13 +73,22 @@ gcloud compute firewall-rules create allow-typesense --project gptwiki \
 curl http://<IP>:8108/health   # → {"ok":true}  (allow ~30s for the pull/start)
 ```
 
-## Migrating the live VM off the deprecated container agent (before 2026-07-31)
+## Migration record — off the deprecated container agent (done 2026-06-30)
 
-`typesense-1` was created with `gcloud compute instances create-with-container`,
-so it carries the deprecated `gce-container-declaration` metadata. Google
-disables the Container Startup Agent on **2026-07-31**; migrate before then.
-(The Cloud Run app and backfill jobs are unaffected — this VM is the only
-impacted resource in the `gptwiki` project.)
+`typesense-1` was originally created with `gcloud compute instances
+create-with-container`, which carried the deprecated `gce-container-declaration`
+metadata that Google's Container Startup Agent stopped honouring on 2026-07-31.
+It was recreated in place on **2026-06-30** using the procedure below, one month
+ahead of the deadline. Nothing else in the `gptwiki` project used the agent.
+
+**This section is a record, not a to-do.** The live VM is already the cloud-init
+one; re-running the steps would only delete and recreate a correct VM. Keep it
+for the next forced recreation (image rotation, zone move, disk resize).
+
+Known wart from the 2026-06-30 run: the `sed` used then was unanchored, so the
+live VM's `user-data` contains the API key twice — once on `--api-key=` and once
+in the header comment. It is the same metadata blob with the same readers, so it
+widens nothing, but the anchored `sed` above fixes it on the next recreation.
 
 Safety net: site search falls back to Firestore whenever Typesense is
 unreachable (see the top of this doc), and the index rebuilds from Firestore
@@ -83,12 +96,12 @@ via `scripts/sync-typesense.ts`. Firestore is the source of truth, so the
 cutover risks no permanent data loss and search keeps serving (degraded)
 throughout.
 
-Recommended cutover — recreate in place, keeping the same name + static IP so
-no env vars change:
+Procedure used — recreate in place, keeping the same name + static IP so no
+env vars change:
 
 ```bash
 KEY=<api-key>   # current TYPESENSE_API_KEY
-sed "s/__TYPESENSE_API_KEY__/$KEY/" deploy/typesense-cloud-init.yaml > /tmp/typesense-user-data.yaml
+sed "/--api-key=/s/__TYPESENSE_API_KEY__/$KEY/" deploy/typesense-cloud-init.yaml > /tmp/typesense-user-data.yaml
 
 # (optional rollback safety) snapshot the old data disk first
 gcloud compute disks snapshot typesense-1 --zone us-central1-a --project gptwiki \
@@ -115,16 +128,15 @@ gcloud compute instances describe typesense-1 --zone us-central1-a --project gpt
   --format='value(metadata.items)' | grep gce-container-declaration || echo "clean ✓"
 ```
 
-Want zero search degradation instead? Bring up a second VM on an ephemeral IP
+For zero search degradation next time: bring up a second VM on an ephemeral IP
 with the same cloud-init, sync and verify it, then move `typesense-ip` over and
 delete the old VM.
 
-### Prevent regressions (optional, org-level)
+### Prevent regressions (optional, org-level, not yet enabled)
 
-After the VM is migrated, enforce the Organization Policy from the deprecation
-notice so the deprecated agent can't be reintroduced. The cloud-init VM above
-does not use the agent, so this is safe to enable post-cutover (requires
-`orgpolicy.policyAdmin`):
+Enforcing the Organization Policy from the deprecation notice stops the
+deprecated agent being reintroduced. The cloud-init VM does not use the agent,
+so this is safe to enable (requires `orgpolicy.policyAdmin`):
 
 ```bash
 gcloud resource-manager org-policies enable-enforce \

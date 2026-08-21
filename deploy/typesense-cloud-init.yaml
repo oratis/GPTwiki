@@ -11,8 +11,9 @@
 # Data persists on the host boot disk at /var/typesense (stateful across
 # reboots), matching the previous host-path mount.
 #
-# The __TYPESENSE_API_KEY__ placeholder is substituted at provision time;
-# see docs/typesense.md. Do NOT commit a real key here.
+# The API-key placeholder on the `--api-key=` line below is substituted at
+# provision time (docs/typesense.md anchors the sed to that line so the key
+# lands nowhere else). Do NOT commit a real key here.
 
 write_files:
 - path: /etc/systemd/system/typesense.service
