@@ -40,6 +40,12 @@ export const backlog: BacklogTopic[] = [
   { topicKey: 'note-taking-methods', question: "Which note-taking method is most effective for actually retaining and using what you learn?", cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'credit-score-factors', question: "What actually affects my credit score the most, and which habits move the needle fastest?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'maillard-vs-caramelization', question: "What is the difference between the Maillard reaction and caramelization, and why does it matter for how I cook?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'term-vs-whole-life-insurance', question: "Should I buy term life insurance or whole life insurance, and is whole life ever actually worth the extra cost?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'cold-water-vs-hot-water-washing', question: "Should I wash my clothes in cold or hot water, and does it really make a difference for cleaning and fabric care?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'resume-one-page-rule', question: "Does my resume really need to be one page, or is that advice outdated?", cluster: 'careers-work', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'solar-panel-payback', question: "How long does it actually take for home solar panels to pay for themselves?", cluster: 'home-energy', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'two-factor-authentication', question: "Which type of two-factor authentication is actually most secure, and is SMS 2FA good enough?", cluster: 'digital-security', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'organic-food-worth-it', question: "Is organic food actually healthier or safer than conventional, and is it worth the extra cost?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
   // Seeded to production (auto-author skips anything not `pending`).
   { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
