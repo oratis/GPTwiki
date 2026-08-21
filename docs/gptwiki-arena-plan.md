@@ -59,6 +59,10 @@ arenaVotes/{id}     battleId, winner, voterId, weight, anonymous, flags[], creat
 arenaRatings/{scope} 聚合快照：{ models: [{model, score, ciLow, ciHigh, votes,
                     wins, losses, ties, rankLow, rankHigh, provisional}],
                     totalVotes, computedAt, method }
+arenaRatings/reference  外部参考榜（见 arena-reference-boards.md），与自有榜物理隔离
+arenaRatings/hot        文章热榜快照
+arenaAnonQuota/{ipHash} 匿名访客日配额：{ arenaQuota: { date, used } }。文档 id 是
+                    加盐哈希，**不存原始 IP**
 ```
 
 `scope` 起步只有 `overall` 一个文档。**页面永远只读一个 doc**，读放大恒定为 1。
@@ -299,19 +303,24 @@ Phase 2/3 追加：
 
 **裁决：走第 3 条。** 模型榜作为产品在可预见的将来不成立；它的页面继续以诚实空态存在，旁边挂 LMArena 的署名外部榜（见 [arena-reference-boards.md](./arena-reference-boards.md)）。
 
-### 9.4 由此暴露的一处「裁决与实现不一致」
+### 9.4 已修复：一处「裁决与实现不一致」
 
-§4 裁决表里「匿名访客投票」一行写的是：**「匿名访客可对战、可看揭示，票以 `weight: 0` 落库」**。
+§4 裁决表里「匿名访客投票」一行写的是：**「匿名访客可对战、可看揭示，票以 `weight: 0` 落库」**。而 Phase 1 的实现是硬 401，代码注释给的理由是「a battle is two generations, and with the default BYOK posture the keys that pay for them are the user's own」——**§9.1 证明这个前提在本部署上不成立**：付钱的是平台。
 
-而 Phase 1 的实现是硬 401：
+2026-08-21 按裁决恢复。设计要点：
 
-```ts
-// src/app/api/arena/battle/route.ts
-const session = await auth();
-const userId = session?.user?.id;
-if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-```
+| 关注点 | 做法 | 为什么不能反过来 |
+|---|---|---|
+| **谁是投票人** | HttpOnly cookie 里的随机不透明 token（`anon:<32 hex>`） | 用 IP 当投票身份会让同一 NAT 后的两个人互相挤掉「一场一票」，且等于给每个访客建一条可识别记录 |
+| **谁在花钱** | `cf-connecting-ip` 的**加盐哈希**，落在 `arenaAnonQuota/{ipHash}` | 用 cookie 当配额键**根本不是配额**——清一下 cookie 就重置了。IP 是匿名访客唯一不能随手更换的把手 |
+| **限流** | 内存滑窗（每实例）+ Firestore 日配额（跨实例） | 内存限流器是 per-instance 的，Cloud Run 可扩到 10 个实例；真正兜住账单的是 Firestore 那层 |
+| **开关** | `ARENA_ANON_DAILY_BATTLES`，**代码默认 0** | 与另两个计量器同一姿态：没有账号在前面挡着的花钱路径，必须由运营方显式打开 |
 
-代码注释给出的理由是「a battle is two generations, and with the default BYOK posture the keys that pay for them are the user's own」——**但 §9.1 证明这个前提在本部署上不成立**：付钱的是平台，不是用户自己的 key。所以那条裁决被一个已经失效的理由推翻了，且至今没有恢复。
+配套决定：
 
-放开匿名对战会让漏斗从「3 个注册用户」变成「所有访客」，是目前唯一可能改变量级的动作。**但它同时打开一个真实的成本敞口**：配额是按 `userId` 计的，匿名用户没有 `userId`，只能退化成按 IP 限流。**这是一个花钱的产品决定，不在本次工程范围内，留给运营方裁决。** 若要做，`checkRateLimit` / `getClientId` 已具备按 IP 限流的能力。
+- **匿名票 `weight: 0`**，`evaluateVote` 的 `anonymous` flag 本来就这么做——缺的只是让这种票有机会到达。**排行榜不受影响，开这个口子只花 token，不扭曲排名。**
+- **发布文章仍需登录**：文章要有署名，匿名会话给不出。但**授权发布的那张票可以是匿名票**——读者可以匿名对战、投票，然后登录把结果留下来。否则登录这个动作会静悄悄地作废他刚投的票，而那正是他决定「这个回答值得留下」的时刻。
+- **不存原始 IP**。只需要一个稳定的键，不需要地址；存一份访客 IP 清单是这个功能没有理由制造的负债。
+- **不做验证码、不做指纹**，与 §4 裁决一致。
+
+> 注意这**不会**让 §9.3 的裁决改变：匿名票权重为 0，所以模型榜依然不会有分。这一步买到的是**漏斗**（从 3 个注册用户变成所有访客）与**文章产出**，不是榜单。榜单要有分，仍然需要有人**注册并投票**——匿名对战只是让那件事第一次变得可能被人发现。

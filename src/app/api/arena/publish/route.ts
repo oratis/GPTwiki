@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { claimPublish, getBattle, reserveWikiId } from '@/lib/arena/store';
 import { db } from '@/lib/firebase';
 import { createWiki, getUserProfile } from '@/lib/search';
+import { anonVoterId, readAnonToken } from '@/lib/arena/anon';
 import { checkRateLimit, getClientId, rateLimited } from '@/lib/rate-limit';
 import { arenaPublishSchema, parseJsonBody, wikiCreateSchema } from '@/lib/validation';
 import type { AIModel, Message } from '@/types';
@@ -18,6 +19,14 @@ import type { AIModel, Message } from '@/types';
  * Deliberately makes no AI call. The winning answer already exists — running it
  * back through `generateWikiContent` to reword it would spend tokens to make the
  * published article differ from the text the voter actually judged.
+ *
+ * Signing in is still required here, unlike battling and voting: an article
+ * needs an author, and a byline is not something an anonymous session can
+ * supply. But the *vote* that authorises the publish may be an anonymous one —
+ * a reader can battle signed out, vote, then sign in to keep the answer. Without
+ * that, signing in would silently orphan the vote they just cast, and every
+ * anonymous battle would be a dead end at exactly the moment the reader decided
+ * the result was worth keeping.
  */
 
 /** Longest prompt we'll use verbatim as a title before truncating. */
@@ -58,8 +67,24 @@ export async function POST(req: NextRequest) {
     // Only the voter may publish, and only after voting. Without this the
     // endpoint would be a way to read a battle's winning side — and therefore
     // its model identity — without ever casting the vote that reveals it.
-    const voteSnap = await db.collection('arenaVotes').doc(`${battleId}_${userId}`).get();
-    if (!voteSnap.exists) {
+    //
+    // Two identities can satisfy that: the signed-in account, or the anonymous
+    // token this same browser voted with before signing in. The cookie is proof
+    // the vote came from here, which is exactly what the rule is checking; the
+    // byline still comes from the account either way.
+    const anonToken = readAnonToken(req);
+    const voterIds = [userId, ...(anonToken ? [anonVoterId(anonToken)] : [])];
+    let voterId: string | null = null;
+    let voteSnap = null;
+    for (const candidate of voterIds) {
+      const snap = await db.collection('arenaVotes').doc(`${battleId}_${candidate}`).get();
+      if (snap.exists) {
+        voterId = candidate;
+        voteSnap = snap;
+        break;
+      }
+    }
+    if (!voteSnap || !voterId) {
       return NextResponse.json(
         { error: 'VOTE_REQUIRED', message: 'Vote on this battle before publishing it.' },
         { status: 403 }
@@ -130,7 +155,9 @@ export async function POST(req: NextRequest) {
     // response — cannot both win, so a repeat returns the original article
     // instead of minting a duplicate into the corpus and the sitemap.
     const reservedId = reserveWikiId();
-    const claim = await claimPublish(battleId, userId, reservedId);
+    // Claimed against whichever vote authorised this publish, so the
+    // one-article-per-battle guard still lives on the document it guards.
+    const claim = await claimPublish(battleId, voterId, reservedId);
     if (!claim.claimed) {
       return NextResponse.json({
         wikiId: claim.existingWikiId,

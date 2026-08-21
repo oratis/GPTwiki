@@ -241,9 +241,9 @@ const translations: Record<Locale, Record<string, string>> = {
     'arena.battle.incomplete':
       'One side did not finish, so this battle cannot be voted on. Try again.',
     'arena.battle.slotFailed': 'This model failed to answer.',
-    'arena.battle.signInTitle': 'Sign in to battle',
-    'arena.battle.signInBody':
-      'A battle runs two models on your question, billed to your own API keys — so it needs an account. Voting is anonymous either way: you never see which model is which until after you vote.',
+    'arena.battle.anonNotice':
+      'You can battle and vote without an account. Anonymous votes are recorded but do not count toward the leaderboard, and publishing an answer needs a byline.',
+    'arena.battle.publishSignIn': 'Sign in to publish this answer',
     'arena.permalink.title': 'Arena battle',
     'arena.permalink.noindexNote':
       'Battle pages are not indexed by search engines. Publish an article if you want it to be findable.',
@@ -569,9 +569,9 @@ const translations: Record<Locale, Record<string, string>> = {
     'arena.battle.voteFailed': '无法记录你的投票，请重试。',
     'arena.battle.incomplete': '有一方没有生成完，这场对战无法投票。请重试。',
     'arena.battle.slotFailed': '该模型未能作答。',
-    'arena.battle.signInTitle': '登录后开始对战',
-    'arena.battle.signInBody':
-      '一场对战会用你的问题跑两个模型，费用记在你自己的 API key 上，因此需要账号。无论如何投票都是匿名的：在你投票之前，你不会看到哪个是哪个模型。',
+    'arena.battle.anonNotice':
+      '不登录也可以对战和投票。匿名票会被记录，但不计入排行榜；把回答发布成文章需要一个署名。',
+    'arena.battle.publishSignIn': '登录后发布这个回答',
     'arena.permalink.title': 'Arena 对战',
     'arena.permalink.noindexNote': '对战页不会被搜索引擎索引。想被检索到，请发布成文章。',
     'arena.permalink.notRevealed': '这场对战被投票之前，模型身份保持隐藏。',

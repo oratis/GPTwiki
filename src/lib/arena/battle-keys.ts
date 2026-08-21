@@ -1,8 +1,11 @@
 import type { AIModel, UserApiKeys } from '@/types';
 import { getUserApiKeys, getUserEmail } from '@/lib/search';
 import {
+  arenaAnonDailyBattleLimit,
   arenaDailyBattleLimit,
+  consumeAnonArenaBattleQuota,
   consumeArenaBattleQuota,
+  refundAnonArenaBattleQuota,
   refundArenaBattleQuota,
 } from '@/lib/ai/free-quota';
 import { isPlatformOwner } from '@/lib/ai/platform-owner';
@@ -81,9 +84,63 @@ export async function getBattleAvailability(userId: string): Promise<BattleAvail
   };
 }
 
+/**
+ * What an unauthenticated visitor may battle with.
+ *
+ * Platform keys only — an anonymous visitor has no stored keys of their own, by
+ * definition. So unlike the signed-in path, this is entirely gated on the
+ * operator having opted in: with `ARENA_ANON_DAILY_BATTLES` unset the model
+ * list is empty and no battle can start, which is the same posture the other
+ * two meters take.
+ */
+export function getAnonBattleAvailability(): BattleAvailability {
+  const enabled = arenaAnonDailyBattleLimit() > 0;
+  return {
+    models: enabled ? ALL_MODELS.filter((m) => Boolean(envKeyFor(m))) : [],
+    // Nothing here is covered by the visitor's own key, so every battle they
+    // run is platform-funded and therefore always metered.
+    ownKeyModels: [],
+    usesPlatformKey: enabled,
+    userKeys: null,
+    email: null,
+  };
+}
+
+/**
+ * Resolve both sides of an anonymous battle, charging the address-keyed meter.
+ *
+ * Separate from `resolveBattleKeys` rather than a flag on it, because the two
+ * differ in the one place that matters: what gets charged. The signed-in path
+ * skips metering when the user's own keys pay and exempts the owner account;
+ * neither can apply here, so an anonymous battle is *always* metered and there
+ * is no branch that could accidentally let one through free.
+ */
+export async function resolveAnonBattleKeys(
+  ipKey: string,
+  pair: ModelPair
+): Promise<BattleKeyResult> {
+  if (arenaAnonDailyBattleLimit() <= 0) return { ok: false, reason: 'ANON_DISABLED' };
+
+  const keyA = envKeyFor(pair.modelA);
+  const keyB = envKeyFor(pair.modelB);
+  if (!keyA || !keyB) return { ok: false, reason: 'NOT_ENOUGH_MODELS' };
+
+  const quota = await consumeAnonArenaBattleQuota(ipKey);
+  if (!quota.ok) return { ok: false, reason: 'QUOTA_EXHAUSTED' };
+
+  return { ok: true, keyA, keyB, platformFunded: true, metered: true };
+}
+
+/** Give back an anonymous battle that produced nothing. */
+export async function refundAnonBattle(ipKey: string, metered: boolean): Promise<void> {
+  if (!metered) return;
+  await refundAnonArenaBattleQuota(ipKey);
+}
+
 export type BattleKeyFailure =
   | 'NOT_ENOUGH_MODELS'  // fewer than two providers reachable
-  | 'QUOTA_EXHAUSTED';   // arena free tier enabled but used up today
+  | 'QUOTA_EXHAUSTED'    // arena free tier enabled but used up today
+  | 'ANON_DISABLED';     // operator has not opened battles to signed-out visitors
 
 export type BattleKeyResult =
   | {
