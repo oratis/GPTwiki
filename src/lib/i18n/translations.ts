@@ -152,6 +152,157 @@ const translations: Record<Locale, Record<string, string>> = {
     'errors.paypalLoad': 'Failed to load PayPal. Please try again.',
     'leaderboard.title': 'Top Contributors',
     'leaderboard.wikis': 'wikis',
+
+    // Arena
+    'header.arena': 'Arena',
+    'arena.title': 'GPTwiki Arena',
+    'arena.subtitle':
+      'Ask one question, get two answers from models you cannot see, and vote for the better one. ' +
+      'The votes rank the models — and unlike every other arena, the conversation does not vanish afterwards.',
+    'arena.nav.overview': 'Overview',
+    'arena.nav.battle': 'Battle',
+    'arena.nav.leaderboard': 'Model Leaderboard',
+    'arena.nav.reference': 'Reference Boards',
+    'arena.reference.title': 'Reference Boards',
+    'arena.reference.description':
+      'While this site gathers its own votes, here is a leaderboard someone else already has the votes for. ' +
+      'It is reproduced exactly as published, under its own licence, and it is not the GPTwiki board — different models, ' +
+      'different voters, a different methodology.',
+    'arena.reference.heading': '{source} leaderboard',
+    'arena.reference.notOurs':
+      'Published by {source} from their own votes. Reproduced here unchanged — no rescaling, no re-ranking.',
+    'arena.reference.org': 'Organisation',
+    'arena.reference.served': 'served here',
+    'arena.reference.seeAll': 'See all {count} models',
+    'arena.reference.unranked':
+      '{source} does not rank these models that GPTwiki serves: {models}. Their absence is the source\u2019s coverage, not an omission here.',
+    'arena.reference.credit': 'Data by',
+    'arena.reference.dataset': 'dataset',
+    'arena.reference.published': 'Published by source',
+    'arena.reference.retrieved': 'Retrieved',
+    'arena.reference.meanwhile': 'In the meantime, a board that does have votes',
+    'arena.reference.meanwhileBody':
+      'This is not the GPTwiki leaderboard and does not feed it. It is shown because an empty page helps nobody, ' +
+      'and because a board built on hundreds of thousands of votes is worth reading while ours has none.',
+    'arena.reference.disclaimer':
+      'Nothing on this page counts toward the GPTwiki leaderboard, and no rating here was computed by GPTwiki.',
+    'arena.reference.empty.title': 'No reference board has been fetched yet',
+    'arena.reference.empty.body':
+      'A batch job retrieves the published leaderboard and stores it with its attribution. Until it runs, nothing is shown.',
+    'arena.nav.rules': 'Rules',
+    'arena.nav.contributors': 'Contributors',
+    'arena.leaderboard.title': 'Model Leaderboard',
+    'arena.leaderboard.description':
+      'Bradley-Terry ratings from anonymous head-to-head votes, shown with the confidence the sample size actually supports.',
+    'arena.rules.teaser':
+      'The full method: what counts as a vote, how ratings and intervals are computed, and what this board cannot tell you.',
+    'arena.rules.englishFallback':
+      'This page has not been translated into your language yet, so it is shown in English. The methodology is identical.',
+    'arena.contributors.description': 'Members ranked by the number of articles they have published.',
+    'arena.contributors.empty': 'No contributors yet.',
+    'arena.provisional': 'provisional',
+    'arena.provisionalNote':
+      'Rows marked provisional have fewer than {minVotes} counted votes, or statistics that cannot be estimated from the votes so far. They show raw counts instead of a rating — a score here would not mean anything yet.',
+    'arena.empty.title': 'No battles have been counted yet',
+    'arena.empty.body':
+      'Ratings appear once anonymous votes have been recorded and the batch job has written a snapshot. Nothing is estimated in the meantime.',
+    'arena.table.rank': 'Rank',
+    'arena.table.model': 'Model',
+    'arena.table.score': 'Score',
+    'arena.table.record': 'W / L / T',
+    'arena.table.bothBad': 'Both bad',
+    'arena.table.votes': 'Votes',
+    'arena.meta.counted': 'Battles counted',
+    'arena.meta.excluded': 'Recorded, not counted',
+    'arena.meta.positionBias': 'Slot bias (log-odds)',
+    'arena.meta.updated': 'Snapshot',
+
+    // Arena battle
+    'arena.battle.title': 'Battle',
+    'arena.battle.description':
+      'Ask a question. Two models answer without telling you who they are. Pick the better answer, and the models are revealed.',
+    'arena.battle.placeholder': 'Ask anything — both models get the same question',
+    'arena.battle.start': 'Battle',
+    'arena.battle.thinking': 'thinking',
+    'arena.battle.modelA': 'Model A',
+    'arena.battle.modelB': 'Model B',
+    'arena.battle.votePrompt': 'Which answer is better?',
+    'arena.battle.voteA': 'A is better',
+    'arena.battle.voteB': 'B is better',
+    'arena.battle.voteTie': 'Tie',
+    'arena.battle.voteBothBad': 'Both are bad',
+    'arena.battle.revealed': 'A was {modelA}. B was {modelB}.',
+    'arena.battle.voteCounted': 'Your vote counts toward the leaderboard.',
+    'arena.battle.voteNotCounted':
+      'Recorded, but not counted toward rankings ({flags}). See the rules for why.',
+    'arena.battle.permalink': 'Permanent link to this battle',
+    'arena.battle.startFailed': 'Could not start the battle. Please try again.',
+    'arena.battle.voteFailed': 'Could not record your vote. Please try again.',
+    'arena.battle.incomplete':
+      'One side did not finish, so this battle cannot be voted on. Try again.',
+    'arena.battle.slotFailed': 'This model failed to answer.',
+    'arena.battle.anonNotice':
+      'You can battle and vote without an account. Anonymous votes are recorded but do not count toward the leaderboard, and publishing an answer needs a byline.',
+    'arena.battle.publishSignIn': 'Sign in to publish this answer',
+    'arena.permalink.title': 'Arena battle',
+    'arena.permalink.noindexNote':
+      'Battle pages are not indexed by search engines. Publish an article if you want it to be findable.',
+    'arena.permalink.notRevealed':
+      'The models stay hidden until this battle has been voted on.',
+
+    // Arena scopes, views, categories
+    'arena.scope.overall': 'Overall',
+    'arena.scope.thisLocale': 'This language',
+    'arena.scope.sliceNote':
+      'This is a slice of the same votes, so it has fewer of them — expect more provisional rows here than on the overall board.',
+    'arena.view.ranking': 'Ranking',
+    'arena.view.pareto': 'Rating vs cost',
+    'arena.category.coding': 'Coding',
+    'arena.category.math': 'Math',
+    'arena.category.science': 'Science',
+    'arena.category.writing': 'Writing',
+    'arena.category.history': 'History',
+    'arena.category.practical': 'Practical',
+    'arena.category.general': 'General',
+    'arena.pareto.title': 'Rating against cost',
+    'arena.pareto.xAxis': 'Blended cost (USD per million tokens)',
+    'arena.pareto.yAxis': 'Rating',
+    'arena.pareto.frontierNote':
+      'Highlighted models are on the efficient frontier: nothing here is both cheaper and better rated. Cost blends input and output prices 1:3, since a battle is a short question and a long answer.',
+    'arena.pareto.notConfigured':
+      'This view needs per-model token prices, which this site has not configured. Prices change often enough that they are set by the operator rather than shipped in the code.',
+    'arena.pareto.noScores':
+      'No model has both a published rating and a configured price yet, so there is nothing to plot.',
+    'arena.pareto.omitted':
+      'Showing {plotted} of the models on this board. {unrated} have no published rating yet and {unpriced} have no price configured, so they have no position on one of the axes — this plot is not the whole board.',
+    'arena.pareto.singlePoint':
+      'Only one model can be plotted, so there is nothing to compare it against and no frontier to be on.',
+
+    // Arena hot list
+    'arena.nav.hot': 'Hot Articles',
+    'arena.hot.title': 'Hot Articles',
+    'arena.hot.description':
+      'The most alive articles on the site right now, ranked by reader engagement, follow-up discussion, freshness, and where the article came from.',
+    'arena.hot.empty.title': 'The hot list has not been built yet',
+    'arena.hot.empty.body':
+      'A batch job ranks recent articles and writes a snapshot. Until it runs, nothing is shown — the list is never guessed at.',
+    'arena.hot.tier.editorial': 'Editorial',
+    'arena.hot.tier.user': 'Community',
+    'arena.hot.tier.mirror': 'Wikipedia mirror',
+    'arena.hot.method':
+      'Every number here is arithmetic over stored fields: views and follow-up threads (compressed, so one viral article cannot swamp the list), a freshness term that halves every 14 days, and a weight for where the article came from. A follow-up question counts for more than a page view, because it is better evidence the article was worth reading.',
+    'arena.hot.thresholds':
+      'Each source tier has its own bar to clear. On a recently-updated article with no follow-up threads, that bar is roughly {editorial} views for editorial writing, {user} for community articles, and {mirror} for mirrored Wikipedia pages — and much higher once an article is no longer fresh. The mirror is most of the corpus by count, so an equal bar would bury everything original.',
+    'arena.hot.window': 'window: last {days} days',
+    'arena.battle.publish': 'Publish the winning answer',
+    'arena.battle.publishing': 'Publishing…',
+    'arena.battle.published': 'Published — open the article',
+    'arena.battle.publishHint':
+      'The winning answer becomes a searchable article, exactly as you read it. This is what the arena is for: elsewhere the conversation is thrown away once the vote is counted.',
+    'arena.battle.publishFailed': 'Could not publish. Please try again.',
+    'arena.battle.publishNoWinner':
+      'A tie or a "both bad" vote has no winning answer to publish.',
+
     'browse.title': 'Browse by Category',
     'browse.selectCategory': 'Select a category to browse wikis',
     'browse.noWikis': 'No wikis in this category',
@@ -335,6 +486,146 @@ const translations: Record<Locale, Record<string, string>> = {
     'errors.paypalLoad': '加载PayPal失败，请重试。',
     'leaderboard.title': '贡献排行榜',
     'leaderboard.wikis': '篇',
+
+    // Arena
+    'header.arena': '擂台',
+    'arena.title': 'GPTwiki 擂台',
+    'arena.subtitle':
+      '问一个问题，拿到两份来自匿名模型的回答，投票选出更好的那一份。这些票用来给模型排名——' +
+      '而与其他所有擂台不同，这里的对话不会在投完票之后消失。',
+    'arena.nav.overview': '概览',
+    'arena.nav.battle': '对战',
+    'arena.nav.leaderboard': '模型榜',
+    'arena.nav.reference': '外部参考榜',
+    'arena.reference.title': '外部参考榜',
+    'arena.reference.description':
+      '在本站攒够自己的票之前，先展示一张别人已经有足够票量的榜。它按原样复制，遵循其自有授权，' +
+      '并且它不是 GPTwiki 的榜——模型不同、投票人不同、方法论也不同。',
+    'arena.reference.heading': '{source} 榜单',
+    'arena.reference.notOurs':
+      '由 {source} 根据其自有投票发布。此处原样转载——不重标定、不重排序。',
+    'arena.reference.org': '机构',
+    'arena.reference.served': '本站也提供',
+    'arena.reference.seeAll': '查看全部 {count} 个模型',
+    'arena.reference.unranked':
+      '{source} 未将 GPTwiki 提供的以下模型纳入榜单：{models}。这是该榜单的覆盖范围所致，不是本页的遗漏。',
+    'arena.reference.credit': '数据来源',
+    'arena.reference.dataset': '数据集',
+    'arena.reference.published': '榜单发布日',
+    'arena.reference.retrieved': '本站抓取于',
+    'arena.reference.meanwhile': '在那之前，先看一张真有票的榜',
+    'arena.reference.meanwhileBody':
+      '这不是 GPTwiki 的榜单，也不会流入 GPTwiki 的榜单。展示它是因为空页面对谁都没用，' +
+      '而一张建立在几十万票之上的榜在我们还一票没有时值得一读。',
+    'arena.reference.disclaimer':
+      '本页任何内容都不计入 GPTwiki 榜单，且此处没有任何一个分数是由 GPTwiki 计算的。',
+    'arena.reference.empty.title': '尚未抓取外部榜单',
+    'arena.reference.empty.body':
+      '一个批处理任务会取回已发布的榜单并连同其署名一起存储。在它跑起来之前，什么都不显示。',
+    'arena.nav.rules': '榜单规则',
+    'arena.nav.contributors': '贡献者榜',
+    'arena.leaderboard.title': '模型榜',
+    'arena.leaderboard.description':
+      '基于匿名一对一投票的 Bradley-Terry 评分，并按样本量真正支撑得起的置信度展示。',
+    'arena.rules.teaser': '完整方法：什么样的票算数、评分与区间如何计算，以及这个榜单说明不了什么。',
+    'arena.rules.englishFallback': '本页尚未翻译成你的语言，因此以英文展示。方法论完全一致。',
+    'arena.contributors.description': '按已发布文章数排名的成员。',
+    'arena.contributors.empty': '暂无贡献者。',
+    'arena.provisional': '暂定',
+    'arena.provisionalNote':
+      '标记为「暂定」的行，其计入票数不足 {minVotes} 张，或以现有票数还算不出可用的统计量。这些行只显示原始计数而不显示评分——此时给出分数没有任何意义。',
+    'arena.empty.title': '还没有计入任何对战',
+    'arena.empty.body': '等到匿名票被记录、批处理任务写出快照之后，评分才会出现。在此之前不做任何估计。',
+    'arena.table.rank': '排名',
+    'arena.table.model': '模型',
+    'arena.table.score': '评分',
+    'arena.table.record': '胜 / 负 / 平',
+    'arena.table.bothBad': '两个都差',
+    'arena.table.votes': '票数',
+    'arena.meta.counted': '计入对战',
+    'arena.meta.excluded': '已记录但不计入',
+    'arena.meta.positionBias': '位次偏差（对数几率）',
+    'arena.meta.updated': '快照时间',
+
+    // Arena battle
+    'arena.battle.title': '对战',
+    'arena.battle.description':
+      '提一个问题。两个模型在不告诉你身份的情况下各答一份。选出更好的那一份，模型身份随即揭示。',
+    'arena.battle.placeholder': '随便问——两个模型拿到同一个问题',
+    'arena.battle.start': '开始对战',
+    'arena.battle.thinking': '生成中',
+    'arena.battle.modelA': '模型 A',
+    'arena.battle.modelB': '模型 B',
+    'arena.battle.votePrompt': '哪一份回答更好？',
+    'arena.battle.voteA': 'A 更好',
+    'arena.battle.voteB': 'B 更好',
+    'arena.battle.voteTie': '平局',
+    'arena.battle.voteBothBad': '两个都差',
+    'arena.battle.revealed': 'A 是 {modelA}，B 是 {modelB}。',
+    'arena.battle.voteCounted': '你这一票计入榜单。',
+    'arena.battle.voteNotCounted': '已记录，但不计入排名（{flags}）。原因见榜单规则。',
+    'arena.battle.permalink': '这场对战的永久链接',
+    'arena.battle.startFailed': '无法开始对战，请重试。',
+    'arena.battle.voteFailed': '无法记录你的投票，请重试。',
+    'arena.battle.incomplete': '有一方没有生成完，这场对战无法投票。请重试。',
+    'arena.battle.slotFailed': '该模型未能作答。',
+    'arena.battle.anonNotice':
+      '不登录也可以对战和投票。匿名票会被记录，但不计入排行榜；把回答发布成文章需要一个署名。',
+    'arena.battle.publishSignIn': '登录后发布这个回答',
+    'arena.permalink.title': 'Arena 对战',
+    'arena.permalink.noindexNote': '对战页不会被搜索引擎索引。想被检索到，请发布成文章。',
+    'arena.permalink.notRevealed': '这场对战被投票之前，模型身份保持隐藏。',
+
+    // Arena scopes, views, categories
+    'arena.scope.overall': '总榜',
+    'arena.scope.thisLocale': '本语言',
+    'arena.scope.sliceNote':
+      '这是同一批票的一个切片，因此票数更少——这里出现「暂定」行的比例会高于总榜。',
+    'arena.view.ranking': '排名',
+    'arena.view.pareto': '评分 / 成本',
+    'arena.category.coding': '编程',
+    'arena.category.math': '数学',
+    'arena.category.science': '科学',
+    'arena.category.writing': '写作',
+    'arena.category.history': '历史',
+    'arena.category.practical': '实用',
+    'arena.category.general': '综合',
+    'arena.pareto.title': '评分对成本',
+    'arena.pareto.xAxis': '混合成本（美元 / 百万 token）',
+    'arena.pareto.yAxis': '评分',
+    'arena.pareto.frontierNote':
+      '高亮的模型位于有效前沿：没有任何模型同时比它更便宜且评分更高。成本按输入:输出 1:3 混合计算——一场对战是短问题配长回答。',
+    'arena.pareto.notConfigured':
+      '此视图需要各模型的 token 价格，而本站尚未配置。价格变动频繁，因此由运营方设置而不写死在代码里。',
+    'arena.pareto.noScores': '目前还没有模型同时具备已公布的评分和已配置的价格，因此无从作图。',
+    'arena.pareto.omitted':
+      '图中只显示了本榜 {plotted} 个模型。另有 {unrated} 个尚无已公布评分、{unpriced} 个未配置价格，在某一条轴上没有坐标——此图并非完整榜单。',
+    'arena.pareto.singlePoint': '只有一个模型可作图，没有可比较的对象，也就无所谓「前沿」。',
+
+    // Arena hot list
+    'arena.nav.hot': '文章热榜',
+    'arena.hot.title': '文章热榜',
+    'arena.hot.description':
+      '当前站内最「活」的文章，按读者互动、跟帖讨论、新鲜度以及文章来源综合排序。',
+    'arena.hot.empty.title': '热榜尚未生成',
+    'arena.hot.empty.body':
+      '由批处理任务对近期文章排序并写出快照。在它跑起来之前这里什么都不显示——热榜从不靠猜。',
+    'arena.hot.tier.editorial': '编辑部',
+    'arena.hot.tier.user': '社区',
+    'arena.hot.tier.mirror': 'Wikipedia 镜像',
+    'arena.hot.method':
+      '这里的每个数字都是对已存字段做的算术：浏览量与跟帖数（经过压缩，因此单篇爆款无法淹没整张榜）、每 14 天减半的新鲜度项，以及文章来源的权重。一次跟帖提问比一次页面浏览权重更高——它是「这篇值得读」的更强证据。',
+    'arena.hot.thresholds':
+      '每个来源等级有各自的入榜门槛。对一篇近期更新且无跟帖的文章而言，这个门槛大致是：编辑部内容 {editorial} 次浏览，社区文章 {user} 次，Wikipedia 镜像 {mirror} 次；文章不再新鲜后门槛还会显著提高。镜像按篇数占语料的绝大多数，门槛若相同会把所有原创内容埋掉。',
+    'arena.hot.window': '窗口：最近 {days} 天',
+    'arena.battle.publish': '发布胜方回答',
+    'arena.battle.publishing': '发布中…',
+    'arena.battle.published': '已发布 — 打开文章',
+    'arena.battle.publishHint':
+      '胜方回答会原样成为一篇可检索的文章。这正是本擂台存在的意义：在别处，投完票对话就被丢掉了。',
+    'arena.battle.publishFailed': '发布失败，请重试。',
+    'arena.battle.publishNoWinner': '平局或「两个都差」没有可发布的胜方回答。',
+
     'browse.title': '分类浏览',
     'browse.selectCategory': '选择分类查看Wiki',
     'browse.noWikis': '该分类暂无Wiki',

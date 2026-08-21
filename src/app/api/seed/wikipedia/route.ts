@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
 import { mirrorImageToGCS } from '@/lib/gcs';
+import { hasHeaderImage } from '@/lib/header-image';
 import { isAuthorizedSeedRequest } from '@/lib/seed-auth';
 
 const WIKI_API = (lang: string) =>
@@ -255,6 +256,9 @@ async function storeArticles(lang: string, articles: WikiArticle[]): Promise<num
       if (article.originalimage) {
         doc.originalImageUrl = article.originalimage.source;
       }
+      // Derived last so it always agrees with whatever imageUrl ended up
+      // surviving the mirror step (see header-image.ts).
+      doc.hasHeaderImage = hasHeaderImage(doc);
 
       batch.set(db.collection('wikis').doc(), doc);
     }

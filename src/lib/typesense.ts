@@ -1,10 +1,16 @@
 /**
  * Minimal Typesense client over plain fetch — no SDK dependency.
  *
- * Self-hosted Typesense is the primary search backend (product decision #5,
- * 2026-06-11); the per-doc Firestore `keywords` index remains the automatic
- * fallback when TYPESENSE_* env is unset or the server errors. See
+ * Self-hosted Typesense is the intended primary search backend (product
+ * decision #5, 2026-06-11); the per-doc Firestore `keywords` index remains the
+ * automatic fallback when TYPESENSE_* env is unset or the server errors. See
  * docs/typesense.md for provisioning and bootstrap.
+ *
+ * "Intended" because a deployment with no TYPESENSE_* configured runs entirely
+ * on the fallback — which is the supported, documented posture, not a failure,
+ * but is easy to misread as "we are running Typesense" when reading this file
+ * alone. `searchWikis` logs one `search_backend` line per process so the answer
+ * for a given environment comes from its logs rather than from this comment.
  */
 
 const COLLECTION = 'wikis';

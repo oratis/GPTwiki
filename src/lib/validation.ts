@@ -13,7 +13,13 @@ export const messageSchema = z.object({
 
 // ─── Request bodies ──────────────────────────────────────────────────────
 export const wikiCreateSchema = z.object({
-  title: z.string().trim().min(1).max(200),
+  // Optional on purpose: `POST /api/wiki` does `title: body.title || generated.title`
+  // (route.ts), i.e. an empty title means "let the model name it". Requiring
+  // min(1) here contradicted that and rejected the article page's
+  // "continue → create a new article" button, which posts `title: ''`, at the
+  // schema before any of that logic ran — a 400 on every single click, with no
+  // server-side log because the 400 branch below doesn't write one.
+  title: z.string().trim().max(200).default(''),
   question: z.string().trim().min(1).max(500),
   content: z.string().max(100_000).default(''),
   summary: z.string().max(1_000).default(''),
@@ -29,6 +35,24 @@ export const wikiUpdateSchema = z.object({
 export const chatRequestSchema = z.object({
   messages: z.array(messageSchema).min(1).max(100),
   model: aiModelSchema,
+});
+
+export const arenaBattleSchema = z.object({
+  prompt: z.string().trim().min(3).max(2_000),
+  /** Validated against supportedLocales by the route, which owns that list. */
+  locale: z.string().trim().min(2).max(8).optional(),
+});
+
+export const arenaVoteSchema = z.object({
+  battleId: z.string().trim().min(1).max(128),
+  // `answersReadyAt` is deliberately NOT accepted from the client: the
+  // reading-time check would be trivially forgeable. The battle document
+  // carries a server-set timestamp instead.
+  outcome: z.enum(['a', 'b', 'tie', 'both_bad']),
+});
+
+export const arenaPublishSchema = z.object({
+  battleId: z.string().trim().min(1).max(128),
 });
 
 export const threadCreateSchema = z.object({
