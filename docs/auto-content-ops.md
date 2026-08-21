@@ -39,7 +39,8 @@ that you didn't merge. (You can still hand-add or prune topics in
 | [`scripts/auto-author.ts`](../scripts/auto-author.ts) | Per topic: generate EN (reuses `generateWikiContent`), translate to zh, attach an editorial image prompt. Quality-gates weak generations. Writes the carrier **and advances the backlog** (`pending`→`drafted`) for the topics that passed. |
 | [`content/auto-draft.en.ts`](../content/auto-draft.en.ts) | Transient carrier — the `auto-draft` batch. Overwritten each run; holds en+zh. |
 | [`scripts/seed-editorial.ts`](../scripts/seed-editorial.ts) | Publisher. `--batch=auto-draft --apply` seeds en+zh + one hero image per `topicKey`. `(title, language)` de-dup; idempotent GCS image path `editorial/<topicKey>.jpg`. |
-| [`scripts/mark-seeded-from-carrier.ts`](../scripts/mark-seeded-from-carrier.ts) | Flips carrier topics `pending`/`drafted`→`seeded` in the backlog. Pure text edit. |
+| [`scripts/mark-seeded-from-carrier.ts`](../scripts/mark-seeded-from-carrier.ts) | Flips carrier topics `pending`/`drafted`→`seeded` in the backlog. Pure text edit. Runs on MERGE. |
+| [`scripts/requeue-drafted.ts`](../scripts/requeue-drafted.ts) | The other half: flips `drafted`→`pending` when a drafts PR is **closed** rather than merged, so its topics return to the queue instead of being stranded. |
 | [`.github/workflows/auto-author.yml`](../.github/workflows/auto-author.yml) | Daily cron + manual `workflow_dispatch`. Runs the gates, opens a PR, pushes the backlog advance to main. Self-skips above `MAX_OPEN_DRAFT_PRS` unmerged drafts PRs. |
 | [`.github/workflows/auto-seed.yml`](../.github/workflows/auto-seed.yml) | Seed-on-merge. Keyless (WIF). Self-skips until `GCP_WIF_PROVIDER` is set. |
 | [`.github/workflows/suggest-topics.yml`](../.github/workflows/suggest-topics.yml) | Daily 03:07 UTC (before auto-author). Tops up + commits the backlog. |
@@ -217,6 +218,7 @@ cloudbuild.yaml`.
 | `auto-author` skipped with a backpressure warning | ≥ `MAX_OPEN_DRAFT_PRS` open `auto-draft/*` PRs. Merge or close them (`gh pr list --search 'head:auto-draft'`). |
 | Every drafts PR has the same topics | The queue pointer isn't moving. `auto-author` must push its `content/backlog.ts` change to **main**, not into the PR — the next run checks out main. Ran unnoticed 2026-07-11→08-21. |
 | Drafts PRs show no CI checks at all | Expected: GitHub suppresses workflows on PRs authored by `GITHUB_TOKEN` (runs land `action_required` and never execute). The gates therefore run inside `auto-author` itself, before the PR opens. To get real PR checks instead, create the PR with a PAT or GitHub App token. |
+| A closed drafts PR's topics never come back | `drafted` is only cleared on merge. Run `npx tsx scripts/requeue-drafted.ts --apply` to return them to `pending`. |
 | Cron re-drafts already-live topics | A topic stayed `pending` after seeding — `mark-seeded-from-carrier` (run by `auto-seed`) normally prevents this; mark it `seeded` by hand. |
 | Model 404 (`not_found_error`) | A retired model id in `src/lib/ai/*.ts`; update to a current one (see the `claude-api` reference). |
 | `auto-author` can't open a PR | Enable “Allow GitHub Actions to create and approve pull requests” in repo Actions settings. |
