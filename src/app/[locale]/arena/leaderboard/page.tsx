@@ -3,9 +3,10 @@ import { notFound } from 'next/navigation';
 import ArenaNav from '@/components/arena/ArenaNav';
 import LeaderboardTable from '@/components/arena/LeaderboardTable';
 import ParetoView from '@/components/arena/ParetoView';
+import ReferenceBoard from '@/components/arena/ReferenceBoard';
 import ScopePicker from '@/components/arena/ScopePicker';
 import { arenaMetadata } from '@/lib/arena/metadata';
-import { getRatingSnapshot } from '@/lib/arena/ratings';
+import { getRatingSnapshot, getReferenceBoard } from '@/lib/arena/ratings';
 import { OVERALL_SCOPE, normalizeScope } from '@/lib/arena/scopes';
 import { hasLocale, getTranslations } from '@/lib/i18n/server';
 
@@ -51,7 +52,15 @@ export default async function ArenaLeaderboardPage({
 
   // A missing snapshot is the normal pre-launch state, and a Firestore hiccup
   // should degrade to the empty state rather than 500 a static-ish page.
-  const snapshot = await getRatingSnapshot(scope).catch(() => null);
+  //
+  // The reference board is fetched alongside it, but only *shown* when our own
+  // board has nothing: while this page has real votes to report, a second table
+  // of someone else's numbers underneath it is a distraction, not context.
+  const [snapshot, reference] = await Promise.all([
+    getRatingSnapshot(scope).catch(() => null),
+    getReferenceBoard().catch(() => null),
+  ]);
+  const ownBoardEmpty = !snapshot || snapshot.models.length === 0;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -71,6 +80,25 @@ export default async function ArenaLeaderboardPage({
           <ParetoView locale={locale} models={snapshot?.models ?? []} />
         ) : (
           <LeaderboardTable locale={locale} snapshot={snapshot} />
+        )}
+
+        {/*
+          Below the empty state, never inside it. The empty state's text is a
+          promise about THIS board — that nothing is estimated while it waits for
+          votes — so it is reproduced unchanged, and the external board arrives
+          under its own heading with its own attribution. See
+          `docs/arena-reference-boards.md` §4.
+        */}
+        {ownBoardEmpty && reference && (
+          <div className="mt-8">
+            <h3 className="mb-1 text-lg font-semibold text-gray-900">
+              {t('arena.reference.meanwhile')}
+            </h3>
+            <p className="mb-4 max-w-3xl text-sm text-gray-600">
+              {t('arena.reference.meanwhileBody')}
+            </p>
+            <ReferenceBoard locale={locale} board={reference} compact />
+          </div>
         )}
       </div>
     </div>
