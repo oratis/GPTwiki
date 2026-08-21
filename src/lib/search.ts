@@ -258,9 +258,8 @@ async function collectPopularWikis(limit: number, language?: string): Promise<Wi
 /**
  * IDs of the wikis `getPopularWikis(limit)` would return. For callers that
  * only need ids (generateStaticParams), the query is projected down to
- * `imageUrl` (the legacy top-up's filter) and `views` (its cursor) — full
- * docs carry whole conversation payloads, which made the unprojected
- * window scan take ~70s.
+ * `imageUrl` and `views` — full docs carry whole conversation payloads,
+ * which made the unprojected window scan take ~70s.
  */
 export async function getPopularWikiIds(limit = 50): Promise<string[]> {
   const docs = await topImageWikis(limit, undefined, ['imageUrl', 'views']);
@@ -272,8 +271,6 @@ async function topImageWikis(
   language?: string,
   fields?: string[]
 ): Promise<QueryDocumentSnapshot[]> {
-  let docs: QueryDocumentSnapshot[] = [];
-
   try {
     let query: FirebaseFirestore.Query = db
       .collection('wikis')
@@ -281,89 +278,19 @@ async function topImageWikis(
     if (language) query = query.where('language', '==', language);
     query = query.orderBy('views', 'desc');
     if (fields) query = query.select(...fields);
-
-    // Copied because the top-up below appends to it and `.docs` hands back
-    // the snapshot's own array.
-    docs = (await query.limit(limit).get()).docs.slice();
+    return (await query.limit(limit).get()).docs;
   } catch (err) {
     // A language-scoped miss is worth reporting upward: getPopularWikis
     // retries unfiltered, which is still index-backed. An unfiltered miss
-    // has nowhere left to go, so degrade to the scan rather than 500 the
-    // home page while firestore.indexes.json is being deployed.
+    // has nowhere left to go (the transition-period scan is gone now that
+    // the corpus is backfilled), so render without the section rather than
+    // 500 the home page of a fresh project.
     if (!isMissingIndexError(err) || language) throw err;
-    console.warn(
-      `[getPopularWikis] Composite index (hasHeaderImage, views desc) missing — degrading to the bounded scan. Deploy firestore.indexes.json to restore the constant-read path.`
+    console.error(
+      `[getPopularWikis] Composite index (hasHeaderImage, views desc) missing — returning empty. Deploy firestore.indexes.json.`
     );
+    return [];
   }
-
-  if (docs.length >= limit) return docs;
-
-  // ─── Transition-period top-up — delete once the backfill has run ───
-  // Docs written before `hasHeaderImage` existed don't match the filter, so
-  // a partially backfilled corpus comes back short. Top up from the old
-  // scan and de-dup, then drop this branch (and scanTopImageWikis) once
-  // scripts/backfill-header-image-flag.ts has covered the collection.
-  const seen = new Set(docs.map((doc) => doc.id));
-  for (const doc of await scanTopImageWikis(limit, language, fields)) {
-    if (seen.has(doc.id)) continue;
-    docs.push(doc);
-    if (docs.length >= limit) break;
-  }
-
-  // Each source is views-ordered on its own but they interleave, so the
-  // concatenation isn't. Re-sort so a half-backfilled corpus still ranks.
-  docs.sort((a, b) => (b.get('views') || 0) - (a.get('views') || 0));
-
-  return docs;
-}
-
-/**
- * Legacy path: page `views desc` and filter `imageUrl` in memory.
- *
- * The cap is deliberately far below the old `limit * 50` (2,400). That
- * number is what turned a sparse run of header images among the top-viewed
- * wikis into thousands of reads per request — and why read volume tracked
- * the corpus's image density rather than traffic. Bounded at 200, even a
- * fully un-backfilled corpus costs one page per call.
- */
-const LEGACY_SCAN_CAP = 200;
-
-async function scanTopImageWikis(
-  limit: number,
-  language?: string,
-  fields?: string[]
-): Promise<QueryDocumentSnapshot[]> {
-  const results: QueryDocumentSnapshot[] = [];
-  let scanned = 0;
-  let cursor: QueryDocumentSnapshot | undefined;
-
-  while (results.length < limit && scanned < LEGACY_SCAN_CAP) {
-    // Wide pages keep this to one Firestore round-trip, clamped so the loop
-    // can never read past the cap.
-    const pageSize = Math.min(Math.max(limit * 16, 200), LEGACY_SCAN_CAP - scanned);
-    let query: FirebaseFirestore.Query = language
-      ? db.collection('wikis').where('language', '==', language).orderBy('views', 'desc')
-      : db.collection('wikis').orderBy('views', 'desc');
-    if (fields) query = query.select(...fields);
-    query = query.limit(pageSize);
-    if (cursor) query = query.startAfter(cursor);
-
-    const snapshot = await query.get();
-    if (snapshot.empty) break;
-
-    for (const doc of snapshot.docs) {
-      if (hasHeaderImage(doc.data())) {
-        results.push(doc);
-        if (results.length >= limit) break;
-      }
-    }
-
-    scanned += snapshot.size;
-    cursor = snapshot.docs[snapshot.docs.length - 1];
-    if (snapshot.size < pageSize) break;
-  }
-
-  return results.slice(0, limit);
 }
 
 export async function getRecentWikis(limit = 12, language?: string): Promise<Wiki[]> {
