@@ -1,6 +1,6 @@
 # GPTwiki Arena 建设方案（二级页面）
 
-> 起草日期：2026-08-10 · 最后复核：2026-08-21 · 状态：Phase 0–3 代码全部落地；快照调度与冷启动未解决（见 §5 Phase 1.5 与 §9）
+> 起草日期：2026-08-10 · 最后复核：2026-08-21 · 状态：Phase 0–3 代码全部落地，快照调度已接通；**冷启动已诊断清楚，但结论是它不是一个工程问题**（见 §9）
 > 调研依据见 [arena-research.md](./arena-research.md) · 外部榜单接入见 [arena-reference-boards.md](./arena-reference-boards.md)
 
 ## 0. 一句话方案
@@ -174,12 +174,14 @@ arenaRatings/{scope} 聚合快照：{ models: [{model, score, ciLow, ciHigh, vot
 | **不做「谁总投同一边」的过滤** | 这种规则在某个模型确实明显更好时会惩罚诚实投票者，且无法与刷票区分。所有过滤只针对「读两份回答的人不可能做出的行为」。 |
 | 分类在 Phase 1 就写入 | 代码关键词匹配（非 LLM——AI HOT 的教训），零延迟零成本，且避免 Phase 2 回填。 |
 
-### Phase 1.5 — 上线前必须做的运维项 ⚠️ 未完成
+### Phase 1.5 — 上线前必须做的运维项 ✅ 2026-08-21 全部完成
 
-- [ ] `firestore.indexes.json` 已加 `arenaVotes (voterId, createdAt)`，**部署前需 `firebase deploy --only firestore:indexes`**，否则去重查询会报缺索引。**截至 2026-08-21 无执行证据。**
+- [x] `arenaVotes (voterId, createdAt)` 索引。**实测已是 `READY`**——`gcloud firestore indexes composite list` 查到它早就建好了。此前记为「无执行证据」是准确的（确实没有执行记录），但事情本身已经做过。本仓库没有 firebase CLI，用 `gcloud` 查证即可。
 - [x] `scripts/compute-arena-ratings.ts` 默认 dry-run；观察数轮干净输出后再考虑上 schedule。
-- [x] **调度本身**。Phase 1/3 落地了两个 compute 脚本却**没有任何调用方**——`grep -rn "compute-arena"` 只命中它们自己的注释。`arenaRatings/*` 因此一个文档都没写过，榜单与热榜永久停在空状态。2026-08-21 补 `.github/workflows/arena-snapshots.yml`（`workflow_dispatch` 起步，schedule 段注释掉）。
-- [ ] **WIF 仓库变量未配置**。`gh variable list` 为空 ⇒ `GCP_WIF_PROVIDER` / `GCP_SEED_SA` 都没设，所以 `auto-seed`（**从未运行过**，`gh run list` 返回 `[]`）、`sitemap-shards`（每周"成功"实为自跳过）与新加的 `arena-snapshots` **全部会自跳过**。在配好之前，两个快照只能本地用 ADC 跑。
+- [x] **调度本身**。Phase 1/3 落地了两个 compute 脚本却**没有任何调用方**——`grep -rn "compute-arena"` 只命中它们自己的注释。`arenaRatings/*` 因此一个文档都没写过。已补 `.github/workflows/arena-snapshots.yml`（`workflow_dispatch` 起步，`schedule:` 段注释掉）。
+- [x] **WIF 仓库变量**。这是真正的阻塞点，而且是整套基建里**唯一**缺的一块：GCP 侧其实早就建齐了——pool `github-pool`、provider `github-provider`（attribute condition 限定 `assertion.repository=='oratis/GPTwiki'`）、SA `gptwiki-server@`（持 `roles/datastore.user`，且被授予 `roles/iam.workloadIdentityUser`）、`gs://gptwiki-images` 上的 `roles/storage.objectAdmin` 一应俱全。**只差 GitHub 那两个仓库变量没设**，于是三个 workflow 全部自跳过：`auto-seed` 从未运行过一次，`sitemap-shards` 每周「成功」实为空转。2026-08-21 设好 `GCP_WIF_PROVIDER` / `GCP_SEED_SA` 后实测：`arena-snapshots` 的 dry-run 与 `--apply` 两种模式都跑通，keyless 写入 `arenaRatings/hot` 与 `arenaRatings/reference` 成功。
+
+> 教训：**「基建没建」和「基建建好了但没接上」看起来完全一样**——都是 workflow 显示绿色、什么也没发生。自跳过守卫（`if vars.X == '' then skip`）让流水线永远不红，代价是它也永远不告诉你它没干活。`::warning::` 在 Actions 首页并不显眼。下次加这类守卫时，值得让它在**手动触发**时直接失败，只在 `schedule:` 触发时才安静跳过。
 
 ### Phase 2 — 分类与视图 ✅ 已落地
 
@@ -236,11 +238,11 @@ Phase 1 追加（2026-08-21 复核，三项代码里均已实现）：
 
 Phase 2/3 追加：
 
-- [x] `npm test` 5 个套件全绿（热榜套件 2026-08-21 由 16 例扩到 24 例）
+- [x] `npm test` 全绿（2026-08-21 于 main 实测全部套件通过；热榜套件由 16 例扩到 24 例，新增 reference 套件 16 例）
 - [x] 六个可索引 arena 路由进 `/api/sitemap?page=static`，alternates 收窄到 `ARENA_LOCALES`（en + zh），不把 13 个英文副本谎报成译文
 - [x] `/arena/hot` 在真实语料上产出**非空**列表（47 行，全部为站内原创；实测见 §5 Phase 3）
-- [ ] Pareto 视图有数据 — 阻塞于生产未设 `ARENA_MODEL_PRICING`
-- [ ] 榜单有数据 — 阻塞于零对战、零投票（见 §9）。**空态期间已由外部参考榜占位**，见 [arena-reference-boards.md](./arena-reference-boards.md)：LMArena 的 CC-BY-4.0 榜单以独立文档 `arenaRatings/reference`、独立页面 `/arena/reference` 呈现，**不并入本榜**
+- [ ] Pareto 视图有数据 — 生产未设 `ARENA_MODEL_PRICING`（实测确认）。**但它依赖榜单分数，而榜单按 §9 长期无分，所以设了也仍是空的**——先修 §9 才轮得到它
+- [x] ~~榜单有数据~~ — **不再作为验收项**。§9 实测：全站 3 个注册账号，0 场对战；这不是工程问题，裁决为长期 provisional。
 
 ---
 
@@ -255,16 +257,57 @@ Phase 2/3 追加：
 
 ---
 
-## 9. 冷启动：这个方案没有回答的问题
+## 9. 冷启动：诊断结果是「这不是一个工程问题」
 
-计划全文没有任何一节说明**第一批 100 张票从哪来**，而 §3.5 的门槛是每模型 100 张有效匿名票。2026-08-21 实测：`arenaBattles` 与 `arenaVotes` 均为空集合，`/arena/leaderboard` 自上线起从未离开空状态。
+计划全文没有任何一节说明**第一批 100 张票从哪来**，而 §3.5 的门槛是每模型 100 张有效匿名票。2026-08-21 把生产环境查了个底朝天，结论推翻了本文此前的假设。
 
-反方第 2 点预言过这件事。裁决用「只从用户已有 key 的厂商中抽取」化解了它——但那只解决了**报错**，没有解决**没人能对战**：一场对战仍需登录 + 两个不同厂商的 key，而 `ARENA_FREE_DAILY_BATTLES` 默认 0。三个模型都过 100 票需要约 150 场来自**不同用户**的对战。
+### 9.1 此前的假设是错的
 
-已知的三条路，都要付代价，尚未裁决：
+本文原先（以及 §4 反方第 2 点）认为瓶颈是 BYOK：一场对战要两个厂商的 key，用户不会去粘贴。**实测表明这个闸门在生产上从来没关过。**
 
-1. **自费开闸**：设 `ARENA_FREE_DAILY_BATTLES` 为正数。代价是推翻 2026-06 的 BYOK-only 产品决定，且成本随流量线性增长（每场 2× 生成）。
-2. **降低 `DEFAULT_MIN_VOTES`**。代价最大：`/arena/rules` 已公开承诺了这个门槛，降门槛等于公布统计上撑不起的数字——正是反方第 1 点说的「承诺了做不到的严谨」。
-3. **接受榜单长期 provisional**，把重心放在 `/arena/hot`、`/arena/rules`、`/arena/contributors`、`/arena/reference` 这四个**不依赖投票**的面上。代价是模型榜作为产品长期不成立，但零成本、零失信。2026-08-21 已按这条路补上 `/arena/reference`——它让空态期间的页面有内容可读，但**不能**替代自有票量：外部榜排的是另一批模型（`gemini-2.0-flash` 根本不在上面），所以本条决策依然待裁。
+| 事实 | 证据 |
+|---|---|
+| 平台免费对战**一直是开的** | Cloud Run 上 `ARENA_FREE_DAILY_BATTLES = 3`，自 revision `gptwiki-00054`（**2026-08-14 03:17**）起生效——即 arena 合并的次日 |
+| 三个厂商 key 全部配齐 | `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` / `GOOGLE_AI_API_KEY` 均在服务环境变量中 |
+| 所以任何登录用户每天有 3 场平台买单的对战 | 无需自带任何 key |
 
-注意**不能**靠 owner 账号自己刷票：[battle-keys.ts:31](../src/lib/arena/battle-keys.ts#L31) 确实让 owner 免费使用平台 key，但一人投满 100 票恰恰是 `/arena/rules` 向读者承诺要防的事。那条路只适合验证链路通不通。
+也就是说：**代码里的 `DEFAULT_DAILY_LIMIT = 0` 是默认值，不是生产实况。** 分析部署过的系统时，读代码默认值当结论是一类系统性错误——这次它让整整一节的推理建立在假前提上。
+
+### 9.2 真实数据
+
+| 指标 | 值 |
+|---|---|
+| `authjs_accounts`（真实完成过 OAuth 登录的账号） | **3**（GitHub 1，Google 2） |
+| `users` 文档 | 7（含 seed 脚本为署名创建的虚拟作者） |
+| `arenaBattles` / `arenaVotes` | **0 / 0** |
+| `/api/arena/battle` 历史请求总数 | **5 次，全部返回 401**，且全部集中在 2026-08-13/14 上线当天（形似冒烟测试） |
+| `/arena/battle` 页面浏览 | 每天都有，但请求形态是 `?_rsc=` 预取且语种轮换（tr/it/en），**特征像爬虫而非人** |
+
+### 9.3 结论
+
+**这个站点总共有 3 个注册用户。** 一个需要约 150 场**来自不同用户**的对战才能让三个模型都过 100 票的榜单，在 3 人的用户基数上不可能靠任何开关达成。
+
+因此三条路重新裁决：
+
+1. ~~**自费开闸**~~ —— **已经开了 7 天，零效果。这不是杠杆。** 保留 `ARENA_FREE_DAILY_BATTLES=3` 无害（没人用，就没有成本），但它解决不了任何问题。
+2. ~~**降低 `DEFAULT_MIN_VOTES`**~~ —— 除了违背 `/arena/rules` 的公开承诺之外，**在 3 个用户的基数上它在统计上也依然无意义**：同一个人投的票不是独立样本，降门槛只会把「样本不足」换成「样本不独立」。**否决。**
+3. ✅ **接受榜单长期 provisional**，重心放在 `/arena/hot`、`/arena/rules`、`/arena/contributors`、`/arena/reference` 这四个**不依赖投票**的面上。**这是唯一诚实的路，且现在有证据支撑，不再是成本厌恶。**
+
+**裁决：走第 3 条。** 模型榜作为产品在可预见的将来不成立；它的页面继续以诚实空态存在，旁边挂 LMArena 的署名外部榜（见 [arena-reference-boards.md](./arena-reference-boards.md)）。
+
+### 9.4 由此暴露的一处「裁决与实现不一致」
+
+§4 裁决表里「匿名访客投票」一行写的是：**「匿名访客可对战、可看揭示，票以 `weight: 0` 落库」**。
+
+而 Phase 1 的实现是硬 401：
+
+```ts
+// src/app/api/arena/battle/route.ts
+const session = await auth();
+const userId = session?.user?.id;
+if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+```
+
+代码注释给出的理由是「a battle is two generations, and with the default BYOK posture the keys that pay for them are the user's own」——**但 §9.1 证明这个前提在本部署上不成立**：付钱的是平台，不是用户自己的 key。所以那条裁决被一个已经失效的理由推翻了，且至今没有恢复。
+
+放开匿名对战会让漏斗从「3 个注册用户」变成「所有访客」，是目前唯一可能改变量级的动作。**但它同时打开一个真实的成本敞口**：配额是按 `userId` 计的，匿名用户没有 `userId`，只能退化成按 IP 限流。**这是一个花钱的产品决定，不在本次工程范围内，留给运营方裁决。** 若要做，`checkRateLimit` / `getClientId` 已具备按 IP 限流的能力。
