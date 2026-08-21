@@ -99,6 +99,19 @@ function logSearchFallback(
 const SITEWIDE_TTL_MS = 5 * 60_000;
 
 /**
+ * Shorter window for the lists whose whole point is being current: "recent
+ * wikis" and a tag's articles. A freshly published wiki is invisible in
+ * those lists for up to this long, which is the entire cost of caching them
+ * — so it is a minute rather than five.
+ *
+ * Evicting on write instead would not remove that lag: this memo is
+ * per-instance (ttl-cache.ts) and the service runs up to 10 instances, so a
+ * write only clears the one instance that served it. A short TTL bounds the
+ * staleness for every instance without pretending to be an invalidation.
+ */
+const RECENT_TTL_MS = 60_000;
+
+/**
  * Keyword search over wikis, ranked by relevance.
  *
  * Candidates come from the per-doc `keywords` index (whole-collection recall;
@@ -293,7 +306,22 @@ async function topImageWikis(
   }
 }
 
+/**
+ * The newest wikis, memoized for RECENT_TTL_MS.
+ *
+ * Three request-time callers share this: the home page, /[locale]/wiki, and
+ * `GET /api/wiki` — which has no rate limiter, so an uncached version is one
+ * Firestore query per request for anyone who cares to loop. The value is the
+ * same for every visitor, so one query per instance per minute serves all of
+ * them.
+ */
 export async function getRecentWikis(limit = 12, language?: string): Promise<Wiki[]> {
+  return cachedForTTL(`recent:${limit}:${language ?? '*'}`, RECENT_TTL_MS, () =>
+    collectRecentWikis(limit, language)
+  );
+}
+
+async function collectRecentWikis(limit: number, language?: string): Promise<Wiki[]> {
   try {
     const query = language
       ? db.collection('wikis').where('language', '==', language).orderBy('createdAt', 'desc')
@@ -305,7 +333,7 @@ export async function getRecentWikis(limit = 12, language?: string): Promise<Wik
       console.warn(
         `[getRecentWikis] Composite index (language, createdAt desc) missing — falling back to unfiltered.`
       );
-      return getRecentWikis(limit);
+      return collectRecentWikis(limit);
     }
     throw err;
   }
@@ -541,7 +569,35 @@ export async function getAllTags(
   });
 }
 
+/**
+ * Articles carrying `tag`, memoized for RECENT_TTL_MS — but only for tags
+ * that exist.
+ *
+ * The tag is caller-supplied (a URL segment on /tags/[tag], a query param on
+ * /api/wiki/by-tag), so caching every value asked for would let a crawler
+ * mint an unbounded number of entries, each holding up to `limit` whole wiki
+ * documents — conversation payloads included. Only tags present in the
+ * memoized tag cloud are cached; anything else still answers correctly, just
+ * from a fresh (index-backed, bounded) query. If the tag cloud itself is
+ * unavailable we do the same rather than trusting the input.
+ */
 export async function getWikisByTag(tag: string, limit = 20): Promise<Wiki[]> {
+  if (!(await isKnownTag(tag))) return collectWikisByTag(tag, limit);
+  return cachedForTTL(`by-tag:${limit}:${tag}`, RECENT_TTL_MS, () =>
+    collectWikisByTag(tag, limit)
+  );
+}
+
+/** Whether `tag` appears in the (memoized) tag cloud. False if it can't be read. */
+async function isKnownTag(tag: string): Promise<boolean> {
+  try {
+    return (await getAllTags()).some((t) => t.name === tag);
+  } catch {
+    return false;
+  }
+}
+
+async function collectWikisByTag(tag: string, limit: number): Promise<Wiki[]> {
   const snapshot = await db
     .collection('wikis')
     .where('tags', 'array-contains', tag)
