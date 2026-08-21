@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
+import { anonVoterId, readAnonToken } from '@/lib/arena/anon';
 import { countVotes, getBattle } from '@/lib/arena/store';
 
 /**
@@ -10,7 +11,7 @@ import { countVotes, getBattle } from '@/lib/arena/store';
  * battle in a second tab, read who is who, then go back and vote.
  */
 export async function GET(
-  _req: NextRequest,
+  req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
@@ -22,7 +23,14 @@ export async function GET(
 
     const revealed = (await countVotes(id)) > 0;
     const session = await auth();
-    const isCreator = Boolean(session?.user?.id && session.user.id === battle.creatorId);
+    // A battle started signed-out has an `anon:` creator id, so recognising its
+    // own reader takes the cookie as well as the session — otherwise anyone who
+    // battled anonymously would be a stranger to their own permalink.
+    const anonToken = readAnonToken(req);
+    const isCreator = Boolean(
+      (session?.user?.id && session.user.id === battle.creatorId) ||
+        (anonToken && anonVoterId(anonToken) === battle.creatorId)
+    );
 
     return NextResponse.json({
       id: battle.id,

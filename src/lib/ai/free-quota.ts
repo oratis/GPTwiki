@@ -27,27 +27,49 @@ export function arenaDailyBattleLimit(): number {
   return readLimit('ARENA_FREE_DAILY_BATTLES');
 }
 
+/**
+ * Daily platform-funded Arena battles per client address, for visitors who are
+ * not signed in.
+ *
+ * A third meter rather than a reuse of the one above, because the two carry
+ * different risk. A signed-in user is one person who went through OAuth; an
+ * address is a weaker claim about identity, and it is the only handle an
+ * anonymous visitor cannot change by clearing a cookie. Keeping the limits
+ * separate lets the operator open anonymous battles at a lower ceiling — or
+ * close them alone — without touching what signed-in users get.
+ *
+ * Off by default, like its two siblings: opening a path that spends provider
+ * keys with no sign-in in front of it is a decision the operator makes
+ * explicitly.
+ */
+export function arenaAnonDailyBattleLimit(): number {
+  return readLimit('ARENA_ANON_DAILY_BATTLES');
+}
+
 // UTC day stamp, e.g. "2026-06-10" — quota resets at midnight UTC.
 function todayStamp(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
 /**
- * Atomically consume `units` from one of the user's daily meters.
+ * Atomically consume `units` from one daily meter.
  *
- * Stored on the user doc under `field: { date, used }` so it is shared across
- * Cloud Run instances (unlike the in-memory rate limiter). Fails closed: if the
+ * Takes the document rather than a user id because the same meter shape now
+ * lives in two places: on `users/{id}` for signed-in quotas, and on
+ * `arenaAnonQuota/{ipHash}` for visitors who have no user document at all.
+ *
+ * Stored under `field: { date, used }` so it is shared across Cloud Run
+ * instances (unlike the in-memory rate limiter). Fails closed: if the
  * transaction errors we don't burn the platform key.
  */
 async function consumeDailyQuota(
-  userId: string,
+  ref: FirebaseFirestore.DocumentReference,
   field: string,
   limit: number,
   units = 1
 ): Promise<{ ok: boolean; remaining: number }> {
   if (limit <= 0 || units <= 0) return { ok: false, remaining: 0 };
 
-  const ref = db.collection('users').doc(userId);
   try {
     return await db.runTransaction(async (tx) => {
       const snap = await tx.get(ref);
@@ -68,7 +90,7 @@ async function consumeDailyQuota(
 export async function consumeFreeQuota(
   userId: string
 ): Promise<{ ok: boolean; remaining: number }> {
-  return consumeDailyQuota(userId, 'freeQuota', freeDailyLimit());
+  return consumeDailyQuota(db.collection('users').doc(userId), 'freeQuota', freeDailyLimit());
 }
 
 /**
@@ -79,7 +101,37 @@ export async function consumeFreeQuota(
 export async function consumeArenaBattleQuota(
   userId: string
 ): Promise<{ ok: boolean; remaining: number }> {
-  return consumeDailyQuota(userId, 'arenaQuota', arenaDailyBattleLimit());
+  return consumeDailyQuota(
+    db.collection('users').doc(userId),
+    'arenaQuota',
+    arenaDailyBattleLimit()
+  );
+}
+
+/**
+ * Where an anonymous visitor's daily battle count lives.
+ *
+ * A collection of its own rather than a field on some user document, because
+ * there is no user. One document per distinct client-address hash, reused every
+ * day — so the collection grows with the number of addresses ever seen, not
+ * with traffic. If that ever becomes a real number, put a Firestore TTL policy
+ * on a stored expiry field; nothing here needs the history.
+ */
+const ANON_QUOTA = 'arenaAnonQuota';
+
+/**
+ * Consume one platform-funded battle for an unauthenticated visitor.
+ *
+ * `ipKey` is the salted hash from `arena/anon.ts`, never a raw address.
+ */
+export async function consumeAnonArenaBattleQuota(
+  ipKey: string
+): Promise<{ ok: boolean; remaining: number }> {
+  return consumeDailyQuota(
+    db.collection(ANON_QUOTA).doc(ipKey),
+    'arenaQuota',
+    arenaAnonDailyBattleLimit()
+  );
 }
 
 /**
@@ -97,7 +149,15 @@ export async function consumeArenaBattleQuota(
  * problem than failing the request that is trying to report an earlier failure.
  */
 export async function refundArenaBattleQuota(userId: string): Promise<void> {
-  const ref = db.collection('users').doc(userId);
+  return refundBattleAt(db.collection('users').doc(userId));
+}
+
+/** The anonymous counterpart, against the address-keyed meter. */
+export async function refundAnonArenaBattleQuota(ipKey: string): Promise<void> {
+  return refundBattleAt(db.collection(ANON_QUOTA).doc(ipKey));
+}
+
+async function refundBattleAt(ref: FirebaseFirestore.DocumentReference): Promise<void> {
   try {
     await db.runTransaction(async (tx) => {
       const snap = await tx.get(ref);

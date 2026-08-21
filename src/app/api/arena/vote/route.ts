@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { getBattle, getRecentPromptHashes, writeVote } from '@/lib/arena/store';
 import { evaluateVote } from '@/lib/arena/vote-filters';
+import { anonVoterId, readAnonToken } from '@/lib/arena/anon';
 import { checkRateLimit, getClientId, rateLimited } from '@/lib/rate-limit';
 import { arenaVoteSchema, parseJsonBody } from '@/lib/validation';
 
@@ -13,16 +14,26 @@ import { arenaVoteSchema, parseJsonBody } from '@/lib/validation';
  * the filters in `vote-filters.ts` decide whether it carries weight — the
  * response says which, so the exclusion is visible to the voter rather than
  * silent.
+ *
+ * Signed-out visitors may vote, and their votes are recorded at `weight: 0` —
+ * the `anonymous` flag in `evaluateVote` has always done this; what was missing
+ * was any way for such a vote to arrive. They see the reveal, their answer can
+ * be published once they sign in, and the leaderboard is untouched.
  */
 export async function POST(req: NextRequest) {
   const session = await auth();
-  const userId = session?.user?.id;
-  if (!userId) {
+  const signedInId = session?.user?.id ?? null;
+  // No token means no battle was ever started from this browser, so there is
+  // nothing to attribute a vote to. Not minted here: issuing an identity on the
+  // vote path would let a fresh cookie vote on someone else's battle.
+  const anonToken = signedInId ? null : readAnonToken(req);
+  const voterId = signedInId ?? (anonToken ? anonVoterId(anonToken) : null);
+  if (!voterId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   const rl = checkRateLimit({
-    key: `arena-vote:${getClientId(req, userId)}`,
+    key: `arena-vote:${getClientId(req, signedInId)}`,
     max: 30,
     windowSec: 300,
   });
@@ -44,10 +55,10 @@ export async function POST(req: NextRequest) {
     }
 
     const now = Date.now();
-    const recentPromptHashes = await getRecentPromptHashes(userId, now);
+    const recentPromptHashes = await getRecentPromptHashes(voterId, now);
 
     const { weight, flags } = evaluateVote({
-      signedIn: true,
+      signedIn: Boolean(signedInId),
       promptHash: battle.promptHash,
       recentPromptHashes,
       // Server-set, so the reading-time check cannot be forged by a client.
@@ -61,7 +72,7 @@ export async function POST(req: NextRequest) {
       battleId,
       promptHash: battle.promptHash,
       outcome,
-      voterId: userId,
+      voterId,
       weight,
       flags,
     });

@@ -183,28 +183,29 @@ export default function BattleArena() {
     }
   }, [battleId, publishState, t]);
 
-  if (status === 'unauthenticated') {
-    return (
-      <div className="rounded-lg border border-gray-200 bg-white p-8 text-center">
-        <p className="mb-1 font-medium text-gray-900">{t('arena.battle.signInTitle')}</p>
-        <p className="mx-auto mb-4 max-w-lg text-sm text-gray-500">
-          {t('arena.battle.signInBody')}
-        </p>
-        <Link
-          href="/login"
-          className="inline-block rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
-        >
-          {t('header.signIn')}
-        </Link>
-      </div>
-    );
-  }
-
   const streaming = phase === 'streaming';
   const votable = phase === 'ready';
+  const signedOut = status === 'unauthenticated';
 
   return (
     <div>
+      {/*
+        A notice, not a gate. Signed-out readers can battle and vote; what they
+        cannot do is move the leaderboard, so that is the one thing said up
+        front — before they spend time on an answer, not after they vote.
+      */}
+      {signedOut && (
+        <div className="mb-4 flex gap-3 rounded-lg border border-blue-200 bg-blue-50 p-3">
+          <Info className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600" />
+          <p className="text-xs text-blue-900">
+            {t('arena.battle.anonNotice')}{' '}
+            <Link href="/login" className="font-medium underline hover:no-underline">
+              {t('header.signIn')}
+            </Link>
+          </p>
+        </div>
+      )}
+
       <div className="flex gap-2">
         <input
           value={prompt}
@@ -303,6 +304,17 @@ export default function BattleArena() {
                   className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700"
                 >
                   {t('arena.battle.published')} →
+                </Link>
+              ) : signedOut ? (
+                /* Publishing needs a byline, so this is the one step that still
+                   requires an account. The vote already cast stays valid — the
+                   API accepts the anonymous cookie as proof of it — so signing
+                   in here continues the flow rather than restarting it. */
+                <Link
+                  href="/login"
+                  className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+                >
+                  {t('arena.battle.publishSignIn')}
                 </Link>
               ) : (
                 <button

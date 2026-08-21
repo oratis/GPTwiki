@@ -1,7 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { getAIStream } from '@/lib/ai/provider';
-import { getBattleAvailability, refundBattle, resolveBattleKeys } from '@/lib/arena/battle-keys';
+import {
+  getAnonBattleAvailability,
+  getBattleAvailability,
+  refundAnonBattle,
+  refundBattle,
+  resolveAnonBattleKeys,
+  resolveBattleKeys,
+} from '@/lib/arena/battle-keys';
+import {
+  anonCookieHeader,
+  anonVoterId,
+  clientIpKey,
+  issueAnonToken,
+  readAnonToken,
+} from '@/lib/arena/anon';
 import { mergeBattleStreams } from '@/lib/arena/battle-stream';
 import { categorizePrompt } from '@/lib/arena/categories';
 import { pickModelPair } from '@/lib/arena/pairing';
@@ -15,22 +29,37 @@ import type { Message } from '@/types';
 /**
  * Start a battle: one prompt, two anonymous models, streamed side by side.
  *
- * Signing in is required. That is not a gate for its own sake — a battle is two
- * generations, and with the default BYOK posture the keys that pay for them are
- * the user's own.
+ * Open to visitors who are not signed in, which is what
+ * `docs/gptwiki-arena-plan.md` §4 ruled and Phase 1 did not implement. The
+ * comment that used to sit here justified a hard 401 with "with the default
+ * BYOK posture the keys that pay for them are the user's own" — but this
+ * deployment funds battles from platform keys, so that premise was false, and
+ * §9 measured what the gate cost: three registered accounts and zero battles in
+ * the feature's entire life.
+ *
+ * Anonymous battles are still gated, just on something other than identity:
+ * `ARENA_ANON_DAILY_BATTLES` must be set, and spend is metered per client
+ * address rather than per account. Their votes are recorded at `weight: 0` and
+ * never reach the ratings — see `evaluateVote`.
  */
 export async function POST(req: NextRequest) {
   const session = await auth();
-  const userId = session?.user?.id;
-  if (!userId) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
+  const userId = session?.user?.id ?? null;
+
+  // For signed-out visitors the address is both the rate-limit key and the
+  // spend meter, so it is resolved before anything expensive happens.
+  const ipKey = userId ? null : clientIpKey(req);
+  const existingToken = userId ? null : readAnonToken(req);
+  const anonToken = userId ? null : existingToken ?? issueAnonToken();
 
   // Tighter than /api/chat's 20/min: each battle is two generations, and a
-  // human cannot read two answers faster than this anyway.
+  // human cannot read two answers faster than this anyway. Signed-out traffic
+  // gets a lower ceiling — it is spending the platform's keys with no account
+  // behind it, and the in-memory limiter is only per-instance, so the Firestore
+  // meter below is what actually bounds the bill.
   const rl = checkRateLimit({
     key: `arena-battle:${getClientId(req, userId)}`,
-    max: 10,
+    max: userId ? 10 : 4,
     windowSec: 300,
   });
   if (!rl.ok) return rateLimited(rl);
@@ -43,14 +72,19 @@ export async function POST(req: NextRequest) {
     : defaultLocale;
 
   try {
-    const availability = await getBattleAvailability(userId);
+    // Signed-in visitors may draw on their own keys; signed-out ones can only
+    // ever use the platform's, and only if the operator opened that door.
+    const availability = userId
+      ? await getBattleAvailability(userId)
+      : getAnonBattleAvailability();
     const pair = pickModelPair(availability.models);
     if (!pair) {
       return NextResponse.json(
         {
-          error: 'ARENA_NEEDS_TWO_MODELS',
-          message:
-            'A battle compares two providers, so it needs API keys for two of them. Add a second key in your profile.',
+          error: userId ? 'ARENA_NEEDS_TWO_MODELS' : 'ARENA_ANON_DISABLED',
+          message: userId
+            ? 'A battle compares two providers, so it needs API keys for two of them. Add a second key in your profile.'
+            : 'Battles are not open to signed-out visitors on this deployment. Sign in to battle.',
           available: availability.models,
         },
         { status: 403 }
@@ -59,14 +93,18 @@ export async function POST(req: NextRequest) {
 
     // Reuses the availability already computed above rather than re-reading
     // the user document.
-    const keys = await resolveBattleKeys(userId, pair, availability);
+    const keys = userId
+      ? await resolveBattleKeys(userId, pair, availability)
+      : await resolveAnonBattleKeys(ipKey!, pair);
     if (!keys.ok) {
       const quota = keys.reason === 'QUOTA_EXHAUSTED';
       return NextResponse.json(
         {
           error: keys.reason,
           message: quota
-            ? "Today's free battles are used up. Add your own API keys to keep going, or come back tomorrow."
+            ? userId
+              ? "Today's free battles are used up. Add your own API keys to keep going, or come back tomorrow."
+              : "Today's free battles for this network are used up. Sign in to keep going, or come back tomorrow."
             : 'A battle compares two providers, so it needs API keys for two of them.',
         },
         { status: 403 }
@@ -89,7 +127,11 @@ export async function POST(req: NextRequest) {
       // costs the user a free battle and leaves no article or vote behind.
       onAbandon: async (reason) => {
         console.warn(`[arena] battle ${battleId} abandoned (${reason})`);
-        await refundBattle(userId, keys.metered);
+        // Refund whichever meter was actually charged. Crossing these would
+        // credit a stranger's allowance and silently leak the real one.
+        await (userId
+          ? refundBattle(userId, keys.metered)
+          : refundAnonBattle(ipKey!, keys.metered));
       },
       onComplete: async (answers) => {
         await writeBattle({
@@ -102,19 +144,27 @@ export async function POST(req: NextRequest) {
           modelB: pair.modelB,
           answerA: answers.a,
           answerB: answers.b,
-          creatorId: userId,
+          // The anonymous token, not the address: `creatorId` is compared
+          // against a voter id, and the address hash is a spend key that must
+          // never become an identity anyone can be recognised by.
+          creatorId: userId ?? anonVoterId(anonToken!),
           answersReadyAt: Date.now(),
         });
       },
     });
 
-    return new Response(body, {
-      headers: {
-        'Content-Type': 'text/event-stream; charset=utf-8',
-        'Cache-Control': 'no-cache, no-transform',
-        Connection: 'keep-alive',
-      },
+    const headers = new Headers({
+      'Content-Type': 'text/event-stream; charset=utf-8',
+      'Cache-Control': 'no-cache, no-transform',
+      Connection: 'keep-alive',
     });
+    // Issue the voter token on the response that starts the battle, so the
+    // vote that follows can be attributed to the same reader. Only when it is
+    // new — re-sending an unchanged cookie on every battle is pure noise.
+    if (anonToken && !existingToken) {
+      headers.set('Set-Cookie', anonCookieHeader(anonToken));
+    }
+    return new Response(body, { headers });
   } catch (error) {
     console.error('Arena battle error:', error);
     return NextResponse.json({ error: 'Failed to start battle' }, { status: 500 });
