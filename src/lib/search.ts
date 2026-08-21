@@ -23,6 +23,69 @@ import {
   toTypesenseDoc,
 } from './typesense';
 
+/**
+ * Which backend is answering searches, logged once per process.
+ *
+ * The unconfigured case was the silent one. `typesense.ts` returns `null` from
+ * `config()` when TYPESENSE_HOST/TYPESENSE_API_KEY are missing and `searchWikis`
+ * simply skips the whole block, so a deployment running entirely on the
+ * Firestore keyword fallback looked identical in the logs to one running on
+ * Typesense. Production is in exactly that state today, which is fine as a
+ * design — it is documented as an optional backend — but "fine" and "invisible"
+ * are different things, and it should be answerable from Cloud Logging rather
+ * than by reading the service's env vars.
+ *
+ * Deliberately once per process, not per query: this is a startup fact, and
+ * `searchWikis` is a hot path.
+ */
+let searchBackendLogged = false;
+function logSearchBackendOnce(): void {
+  if (searchBackendLogged) return;
+  searchBackendLogged = true;
+  console.log(
+    JSON.stringify({
+      msg: 'search_backend',
+      backend: isTypesenseEnabled() ? 'typesense' : 'firestore',
+    })
+  );
+}
+
+/**
+ * Structured record of a Typesense query that did not serve the result.
+ *
+ * `reason` is the part that matters. "Typesense returned nothing" and
+ * "Typesense is broken" both ended up on the Firestore path, so from the
+ * outside a degraded backend was indistinguishable from a genuinely empty
+ * result set — which also makes any "queries with zero results" content-gap
+ * metric unreliable, since it silently mixes the two.
+ *
+ * The query text itself is not logged, only its length: search terms are user
+ * content and do not belong in operational logs.
+ */
+function logSearchFallback(
+  reason: 'zero_hits' | 'ids_not_hydrated' | 'error',
+  queryLength: number,
+  startedAt: number,
+  error?: unknown
+): void {
+  console.log(
+    JSON.stringify({
+      msg: 'search_fallback',
+      from: 'typesense',
+      to: 'firestore',
+      reason,
+      queryLength,
+      durationMs: Date.now() - startedAt,
+      ...(error !== undefined
+        ? {
+            error: error instanceof Error ? error.message : String(error),
+            errorName: error instanceof Error ? error.name : undefined,
+          }
+        : {}),
+    })
+  );
+}
+
 /** A wiki "has a header image" when imageUrl is a non-empty string. */
 function hasHeaderImage(data: FirebaseFirestore.DocumentData): boolean {
   return typeof data.imageUrl === 'string' && data.imageUrl.trim().length > 0;
@@ -37,11 +100,15 @@ function hasHeaderImage(data: FirebaseFirestore.DocumentData): boolean {
  */
 export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
   if (!query.trim()) return [];
+  logSearchBackendOnce();
 
   // Primary path: Typesense (typo tolerance, whole-collection ranking).
   // Any error or zero-hit result falls through to the Firestore flow, so a
-  // down/unsynced search server degrades quality, never availability.
+  // down/unsynced search server degrades quality, never availability. Each way
+  // of falling through is now logged with its reason — the fallthrough itself
+  // is unchanged, only its visibility.
   if (isTypesenseEnabled()) {
+    const startedAt = Date.now();
     try {
       const ids = await searchWikiIdsTypesense(query.trim(), limit);
       if (ids.length > 0) {
@@ -52,9 +119,16 @@ export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
         );
         const hits = ids.map((id) => byId.get(id)).filter((w): w is Wiki => !!w);
         if (hits.length > 0) return hits;
+        // Typesense matched ids that no longer resolve to documents — the
+        // index is stale relative to Firestore, which is worth distinguishing
+        // from an honestly empty result.
+        logSearchFallback('ids_not_hydrated', query.trim().length, startedAt);
+      } else {
+        logSearchFallback('zero_hits', query.trim().length, startedAt);
       }
     } catch (e) {
       console.error('Typesense search failed, falling back to Firestore:', e);
+      logSearchFallback('error', query.trim().length, startedAt, e);
     }
   }
 
