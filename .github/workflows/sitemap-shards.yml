@@ -1,0 +1,58 @@
+name: sitemap-shards
+
+# Precompute full-corpus sitemap cursors (scripts/build-sitemap-shards.ts) into
+# Firestore _meta/sitemap_shards, so /api/sitemap can enumerate ALL ~19M docs
+# without an in-request scan. The route serves the long-tail only once this has
+# populated the meta doc; until then it stays static + editorial + recent.
+#
+# Weekly is plenty — the long-tail changes slowly. Keyless via Workload Identity
+# Federation (the same GCP_WIF_PROVIDER / GCP_SEED_SA as auto-seed; the SA needs
+# Firestore write). Self-skips (stays green) until WIF is configured.
+#
+# CAVEAT: streaming ~19M refs can be slow off-region. If this job approaches the
+# timeout, move it to a Cloud Run Job in the Firestore region (Dockerfile.backfill
+# is the existing pattern) and trigger it from Cloud Scheduler instead.
+on:
+  schedule:
+    - cron: '23 4 * * 0'   # Sundays 04:23 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write   # WIF
+
+concurrency: sitemap-shards
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - name: Guard on WIF config
+        id: guard
+        run: |
+          if [ -n "${{ vars.GCP_WIF_PROVIDER }}" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::sitemap-shards skipped — set repo variables GCP_WIF_PROVIDER + GCP_SEED_SA (Workload Identity Federation)."
+          fi
+      - if: steps.guard.outputs.ready == 'true'
+        uses: actions/checkout@v4
+      - name: Authenticate to GCP (keyless, WIF)
+        if: steps.guard.outputs.ready == 'true'
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_SEED_SA }}
+      - if: steps.guard.outputs.ready == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - if: steps.guard.outputs.ready == 'true'
+        run: npm ci
+      - name: Build & store sitemap shards
+        if: steps.guard.outputs.ready == 'true'
+        env:
+          FIREBASE_PROJECT_ID: gptwiki
+        run: npx tsx scripts/build-sitemap-shards.ts --apply

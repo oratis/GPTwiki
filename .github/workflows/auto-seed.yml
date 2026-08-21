@@ -1,0 +1,76 @@
+name: auto-seed
+
+# Seed-on-merge, keyless. When a drafts PR lands on main (the carrier changes),
+# publish it to Firestore (en+zh + one hero image per topic) and mark those
+# topics seeded in the backlog. Your MERGE of the drafts PR is the review gate —
+# this only automates the mechanical `seed` step.
+#
+# Auth is Workload Identity Federation: GitHub's OIDC token is exchanged for
+# short-lived GCP credentials for the seed service account — NO long-lived
+# Firebase private key is stored in GitHub. That SA needs Firestore write
+# (roles/datastore.user) + Storage write on gptwiki-images. Seedream uses the
+# ARK_API_KEY secret.
+#
+# One-time GCP setup (see the PR description / repo docs) sets these repo
+# variables; until GCP_WIF_PROVIDER is set the job self-skips (stays green):
+#   vars.GCP_WIF_PROVIDER  — projects/<num>/locations/global/workloadIdentityPools/<pool>/providers/<provider>
+#   vars.GCP_SEED_SA       — <sa>@gptwiki.iam.gserviceaccount.com
+on:
+  push:
+    branches: [main]
+    paths: ['content/auto-draft.en.ts']
+
+permissions:
+  contents: write   # push the backlog "mark seeded" commit
+  id-token: write   # mint the OIDC token for WIF
+
+concurrency: auto-seed   # never seed two merges at once
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Guard on WIF config
+        id: guard
+        run: |
+          if [ -n "${{ vars.GCP_WIF_PROVIDER }}" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::auto-seed skipped — set repo variables GCP_WIF_PROVIDER + GCP_SEED_SA (Workload Identity Federation)."
+          fi
+      - if: steps.guard.outputs.ready == 'true'
+        uses: actions/checkout@v4
+      - name: Authenticate to GCP (keyless, WIF)
+        if: steps.guard.outputs.ready == 'true'
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_SEED_SA }}
+      - if: steps.guard.outputs.ready == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - if: steps.guard.outputs.ready == 'true'
+        run: npm ci
+      - name: Seed en+zh + hero images
+        if: steps.guard.outputs.ready == 'true'
+        # No FIREBASE_CLIENT_EMAIL/PRIVATE_KEY: seed-editorial falls back to
+        # Application Default Credentials, which the WIF auth step provides.
+        env:
+          FIREBASE_PROJECT_ID: gptwiki
+          ARK_API_KEY: ${{ secrets.ARK_API_KEY }}
+        run: npx tsx scripts/seed-editorial.ts --batch=auto-draft --apply
+      - name: Mark seeded topics in backlog
+        if: steps.guard.outputs.ready == 'true'
+        run: |
+          npx tsx scripts/mark-seeded-from-carrier.ts
+          if git diff --quiet -- content/backlog.ts; then
+            echo "backlog unchanged"; exit 0
+          fi
+          git config user.name "gptwiki-bot"
+          git config user.email "bot@gptwiki.net"
+          # Only backlog.ts changes here, and that path isn't in the trigger's
+          # paths filter, so this push does NOT re-fire auto-seed (no loop).
+          git commit --no-verify -m "backlog: mark auto-seeded topics [skip ci]" -- content/backlog.ts
+          git push

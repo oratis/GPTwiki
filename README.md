@@ -86,8 +86,9 @@ Open [http://localhost:3000](http://localhost:3000).
 | `OPENAI_API_KEY` | Optional | OpenAI API key (GPT-4o) |
 | `GOOGLE_AI_API_KEY` | Optional | Google AI API key (Gemini) |
 | `FREE_DAILY_MESSAGES` | Optional | Free platform-keyed messages per user per day (default 0 = BYOK-only) |
-| `PLATFORM_OWNER_EMAIL` | Optional | Account exempt from the free-tier metering |
+| `PLATFORM_OWNER_EMAIL` | Optional | Account exempt from the free-tier metering. No default: when unset, nobody is exempt |
 | `TYPESENSE_HOST` / `TYPESENSE_API_KEY` | Optional | Self-hosted Typesense search backend (see `docs/typesense.md`); falls back to Firestore keyword search when unset |
+| `NEXT_PUBLIC_GA_ID` | Optional | Google Analytics 4 measurement id (`G-…`). **Build-time only** — Next inlines `NEXT_PUBLIC_*` during `next build`, so it must be passed as a Docker build arg (`--build-arg NEXT_PUBLIC_GA_ID=…`, or `--substitutions=_GA_ID=…` via `cloudbuild.yaml`); setting it on the running service has no effect. No default: when unset, Google Analytics is not loaded at all |
 | `NEXT_PUBLIC_PAYPAL_CLIENT_ID` | Optional | PayPal Client ID for donations |
 | `PAYPAL_CLIENT_SECRET` | Optional | PayPal Client Secret |
 

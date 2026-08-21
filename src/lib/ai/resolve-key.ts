@@ -1,8 +1,7 @@
 import type { AIModel, UserApiKeys } from '@/types';
 import { getUserApiKeys, getUserEmail } from '@/lib/search';
 import { consumeFreeQuota, freeDailyLimit } from './free-quota';
-
-const OWNER_EMAIL = process.env.PLATFORM_OWNER_EMAIL || 'wangharp@gmail.com';
+import { isPlatformOwner } from './platform-owner';
 
 export interface ResolvedKey {
   apiKey: string | null;
@@ -16,8 +15,9 @@ export interface ResolvedKey {
  * Resolves the API key for a given model and user.
  * Priority:
  * 1. User's own API key (unlimited)
- * 2. Platform env key — unlimited for the owner account, metered by the
- *    free daily quota (see free-quota.ts) for everyone else
+ * 2. Platform env key — unlimited for the owner account when
+ *    PLATFORM_OWNER_EMAIL is configured, metered by the free daily quota
+ *    (see free-quota.ts) for everyone else
  * 3. None — either needsConfig (no platform key for this model) or
  *    quotaExhausted (free tier used up for today)
  */
@@ -35,7 +35,7 @@ export async function resolveApiKeyForUser(
   const envKey = getEnvKeyForModel(model);
   if (envKey) {
     const email = await getUserEmail(userId);
-    if (email === OWNER_EMAIL) {
+    if (isPlatformOwner(email)) {
       return { apiKey: envKey, needsConfig: false, quotaExhausted: false };
     }
 

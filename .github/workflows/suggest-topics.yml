@@ -1,0 +1,46 @@
+name: suggest-topics
+
+# Keeps the backlog fed so the daily auto-author cron never idles. Tops up
+# content/backlog.ts to `target` pending topics with fresh, de-duplicated
+# AI-suggested questions, then commits to main. Runs 10 min before auto-author.
+# Self-capping: a no-op when the backlog is already at/above target.
+#
+# Topics are only QUEUED here — the human review gate is still the daily content
+# PR (auto-author) that a person merges before anything publishes.
+on:
+  schedule:
+    - cron: '7 3 * * *'   # 03:07 UTC daily, before auto-author (03:17)
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Top the backlog up to this many pending topics'
+        default: '12'
+
+permissions:
+  contents: write
+
+concurrency: suggest-topics
+
+jobs:
+  suggest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Suggest & append topics
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: npx tsx scripts/suggest-topics.ts --apply --target=${{ github.event.inputs.target || '12' }}
+      - name: Commit new topics
+        run: |
+          if git diff --quiet -- content/backlog.ts; then
+            echo "backlog unchanged — nothing to commit"; exit 0
+          fi
+          git config user.name "gptwiki-bot"
+          git config user.email "bot@gptwiki.net"
+          # Only backlog.ts changes; no workflow triggers on that path, so no loop.
+          git commit --no-verify -m "backlog: auto-suggest topics [skip ci]" -- content/backlog.ts
+          git push

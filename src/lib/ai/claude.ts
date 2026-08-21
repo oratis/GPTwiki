@@ -9,7 +9,7 @@ export function streamClaude(messages: Message[], apiKey?: string): ReadableStre
       try {
         const client = new Anthropic({ apiKey: apiKey || process.env.ANTHROPIC_API_KEY });
         const stream = client.messages.stream({
-          model: 'claude-sonnet-4-20250514',
+          model: 'claude-sonnet-4-6',
           max_tokens: 4096,
           system: 'You are a knowledgeable assistant helping users create wiki articles. Provide clear, well-structured, and accurate answers. Use Markdown formatting when appropriate.',
           messages: messages.map((m) => ({

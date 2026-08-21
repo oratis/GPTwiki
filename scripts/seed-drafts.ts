@@ -78,6 +78,9 @@ async function main() {
       updatedAt: now,
       source: 'editorial-draft',
       language: draft.language,
+      // Drafts ship without imagery; scripts/backfill-editorial-images.ts
+      // flips this when it attaches a hero (see src/lib/header-image.ts).
+      hasHeaderImage: false,
     };
 
     await db.collection('wikis').add(doc);

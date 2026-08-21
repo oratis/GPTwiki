@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from '@/components/LocaleLink';
 import { useSession, signOut } from 'next-auth/react';
-import { BookOpen, MessageSquarePlus, LogIn, LogOut, User, Folder, Heart } from 'lucide-react';
+import { BookOpen, MessageSquarePlus, LogIn, LogOut, User, Folder, Heart, Trophy } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
 import LanguageSwitcher from './LanguageSwitcher';
 
@@ -36,6 +36,16 @@ export default function Header() {
             <span className="flex items-center gap-1">
               <Folder className="h-3.5 w-3.5" />
               {t('header.categories')}
+            </span>
+          </Link>
+
+          <Link
+            href="/arena"
+            className="hidden text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors sm:block"
+          >
+            <span className="flex items-center gap-1">
+              <Trophy className="h-3.5 w-3.5" />
+              {t('header.arena')}
             </span>
           </Link>
 
