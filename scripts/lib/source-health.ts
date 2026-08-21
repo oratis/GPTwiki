@@ -40,15 +40,31 @@ export function classifyStatus(status: number): SourceHealth {
   return 'blocked';
 }
 
-/** Non-2xx-aware fetch of one URL. Network/DNS failure counts as `dead`. */
+/**
+ * Check one URL. `dead` only when the evidence is strong.
+ *
+ * HEAD is tried first because it is cheap, but its answer is only ever trusted
+ * when it is POSITIVE. Real servers lie on HEAD: cloud.google.com/learn/
+ * containers-vs-vms — cited by an article already live on production — answers
+ * 404 to HEAD and 200 with 40KB of content to GET. An earlier version of this
+ * function returned on the first HEAD verdict and would have deleted that
+ * citation. So a non-live HEAD proves nothing and always falls through to GET,
+ * which is authoritative.
+ *
+ * The reverse trap is just as real and is why this uses fetch rather than
+ * shelling out to curl: FDA's WAF serves a hard 404 to curl and a correct 200
+ * to a normal client, for the same URL and the same User-Agent.
+ *
+ * A thrown request is not proof of anything either, except when DNS says the
+ * host does not exist — that is the fabricated-domain case, which is worth
+ * catching. Timeouts, resets and TLS errors are transient and are kept.
+ */
 export async function checkUrl(
   url: string,
   fetchImpl: typeof fetch = fetch,
-  timeoutMs = 15_000
+  timeoutMs = 20_000
 ): Promise<SourceHealth> {
-  // HEAD first (cheap), then GET — a fair number of servers reject HEAD with
-  // 405 even though the page is fine, and some CDNs only 404 on a real GET.
-  for (const method of ['HEAD', 'GET'] as const) {
+  const attempt = async (method: 'HEAD' | 'GET'): Promise<SourceHealth | 'error'> => {
     try {
       const res = await fetchImpl(url, {
         method,
@@ -59,17 +75,24 @@ export async function checkUrl(
           // browser-shaped one; this reduces false `blocked` results.
           'user-agent':
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36',
+          accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         },
       });
-      const health = classifyStatus(res.status);
-      // A HEAD that comes back 405/501 tells us nothing — retry as GET.
-      if (method === 'HEAD' && (res.status === 405 || res.status === 501)) continue;
-      return health;
-    } catch {
-      if (method === 'GET') return 'dead'; // DNS failure, refused, or timeout on both verbs
+      return classifyStatus(res.status);
+    } catch (err) {
+      // A host that does not resolve is the fabricated-URL case.
+      const cause = (err as { cause?: { code?: string } }).cause;
+      if (cause?.code === 'ENOTFOUND') return 'dead';
+      return 'error';
     }
-  }
-  return 'dead';
+  };
+
+  // A positive HEAD is conclusive; anything else must be confirmed by GET.
+  if ((await attempt('HEAD')) === 'live') return 'live';
+
+  const get = await attempt('GET');
+  // Transient failure (timeout, reset, TLS) — not evidence the page is gone.
+  return get === 'error' ? 'blocked' : get;
 }
 
 export interface SourceReport {
