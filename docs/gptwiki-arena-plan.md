@@ -1,7 +1,7 @@
 # GPTwiki Arena 建设方案（二级页面）
 
 > 起草日期：2026-08-10 · 最后复核：2026-08-21 · 状态：Phase 0–3 代码全部落地；快照调度与冷启动未解决（见 §5 Phase 1.5 与 §9）
-> 调研依据见 [arena-research.md](./arena-research.md)
+> 调研依据见 [arena-research.md](./arena-research.md) · 外部榜单接入见 [arena-reference-boards.md](./arena-reference-boards.md)
 
 ## 0. 一句话方案
 
@@ -240,7 +240,7 @@ Phase 2/3 追加：
 - [x] 六个可索引 arena 路由进 `/api/sitemap?page=static`，alternates 收窄到 `ARENA_LOCALES`（en + zh），不把 13 个英文副本谎报成译文
 - [x] `/arena/hot` 在真实语料上产出**非空**列表（47 行，全部为站内原创；实测见 §5 Phase 3）
 - [ ] Pareto 视图有数据 — 阻塞于生产未设 `ARENA_MODEL_PRICING`
-- [ ] 榜单有数据 — 阻塞于零对战、零投票（见 §9）
+- [ ] 榜单有数据 — 阻塞于零对战、零投票（见 §9）。**空态期间已由外部参考榜占位**，见 [arena-reference-boards.md](./arena-reference-boards.md)：LMArena 的 CC-BY-4.0 榜单以独立文档 `arenaRatings/reference`、独立页面 `/arena/reference` 呈现，**不并入本榜**
 
 ---
 
@@ -265,6 +265,6 @@ Phase 2/3 追加：
 
 1. **自费开闸**：设 `ARENA_FREE_DAILY_BATTLES` 为正数。代价是推翻 2026-06 的 BYOK-only 产品决定，且成本随流量线性增长（每场 2× 生成）。
 2. **降低 `DEFAULT_MIN_VOTES`**。代价最大：`/arena/rules` 已公开承诺了这个门槛，降门槛等于公布统计上撑不起的数字——正是反方第 1 点说的「承诺了做不到的严谨」。
-3. **接受榜单长期 provisional**，把重心放在 `/arena/hot`、`/arena/rules`、`/arena/contributors` 这三个**不依赖投票**的面上。代价是模型榜作为产品长期不成立，但零成本、零失信。
+3. **接受榜单长期 provisional**，把重心放在 `/arena/hot`、`/arena/rules`、`/arena/contributors`、`/arena/reference` 这四个**不依赖投票**的面上。代价是模型榜作为产品长期不成立，但零成本、零失信。2026-08-21 已按这条路补上 `/arena/reference`——它让空态期间的页面有内容可读，但**不能**替代自有票量：外部榜排的是另一批模型（`gemini-2.0-flash` 根本不在上面），所以本条决策依然待裁。
 
 注意**不能**靠 owner 账号自己刷票：[battle-keys.ts:31](../src/lib/arena/battle-keys.ts#L31) 确实让 owner 免费使用平台 key，但一人投满 100 票恰恰是 `/arena/rules` 向读者承诺要防的事。那条路只适合验证链路通不通。

@@ -162,6 +162,33 @@ const translations: Record<Locale, Record<string, string>> = {
     'arena.nav.overview': 'Overview',
     'arena.nav.battle': 'Battle',
     'arena.nav.leaderboard': 'Model Leaderboard',
+    'arena.nav.reference': 'Reference Boards',
+    'arena.reference.title': 'Reference Boards',
+    'arena.reference.description':
+      'While this site gathers its own votes, here is a leaderboard someone else already has the votes for. ' +
+      'It is reproduced exactly as published, under its own licence, and it is not the GPTwiki board — different models, ' +
+      'different voters, a different methodology.',
+    'arena.reference.heading': '{source} leaderboard',
+    'arena.reference.notOurs':
+      'Published by {source} from their own votes. Reproduced here unchanged — no rescaling, no re-ranking.',
+    'arena.reference.org': 'Organisation',
+    'arena.reference.served': 'served here',
+    'arena.reference.seeAll': 'See all {count} models',
+    'arena.reference.unranked':
+      '{source} does not rank these models that GPTwiki serves: {models}. Their absence is the source\u2019s coverage, not an omission here.',
+    'arena.reference.credit': 'Data by',
+    'arena.reference.dataset': 'dataset',
+    'arena.reference.published': 'Published by source',
+    'arena.reference.retrieved': 'Retrieved',
+    'arena.reference.meanwhile': 'In the meantime, a board that does have votes',
+    'arena.reference.meanwhileBody':
+      'This is not the GPTwiki leaderboard and does not feed it. It is shown because an empty page helps nobody, ' +
+      'and because a board built on hundreds of thousands of votes is worth reading while ours has none.',
+    'arena.reference.disclaimer':
+      'Nothing on this page counts toward the GPTwiki leaderboard, and no rating here was computed by GPTwiki.',
+    'arena.reference.empty.title': 'No reference board has been fetched yet',
+    'arena.reference.empty.body':
+      'A batch job retrieves the published leaderboard and stores it with its attribution. Until it runs, nothing is shown.',
     'arena.nav.rules': 'Rules',
     'arena.nav.contributors': 'Contributors',
     'arena.leaderboard.title': 'Model Leaderboard',
@@ -469,6 +496,32 @@ const translations: Record<Locale, Record<string, string>> = {
     'arena.nav.overview': '概览',
     'arena.nav.battle': '对战',
     'arena.nav.leaderboard': '模型榜',
+    'arena.nav.reference': '外部参考榜',
+    'arena.reference.title': '外部参考榜',
+    'arena.reference.description':
+      '在本站攒够自己的票之前，先展示一张别人已经有足够票量的榜。它按原样复制，遵循其自有授权，' +
+      '并且它不是 GPTwiki 的榜——模型不同、投票人不同、方法论也不同。',
+    'arena.reference.heading': '{source} 榜单',
+    'arena.reference.notOurs':
+      '由 {source} 根据其自有投票发布。此处原样转载——不重标定、不重排序。',
+    'arena.reference.org': '机构',
+    'arena.reference.served': '本站也提供',
+    'arena.reference.seeAll': '查看全部 {count} 个模型',
+    'arena.reference.unranked':
+      '{source} 未将 GPTwiki 提供的以下模型纳入榜单：{models}。这是该榜单的覆盖范围所致，不是本页的遗漏。',
+    'arena.reference.credit': '数据来源',
+    'arena.reference.dataset': '数据集',
+    'arena.reference.published': '榜单发布日',
+    'arena.reference.retrieved': '本站抓取于',
+    'arena.reference.meanwhile': '在那之前，先看一张真有票的榜',
+    'arena.reference.meanwhileBody':
+      '这不是 GPTwiki 的榜单，也不会流入 GPTwiki 的榜单。展示它是因为空页面对谁都没用，' +
+      '而一张建立在几十万票之上的榜在我们还一票没有时值得一读。',
+    'arena.reference.disclaimer':
+      '本页任何内容都不计入 GPTwiki 榜单，且此处没有任何一个分数是由 GPTwiki 计算的。',
+    'arena.reference.empty.title': '尚未抓取外部榜单',
+    'arena.reference.empty.body':
+      '一个批处理任务会取回已发布的榜单并连同其署名一起存储。在它跑起来之前，什么都不显示。',
     'arena.nav.rules': '榜单规则',
     'arena.nav.contributors': '贡献者榜',
     'arena.leaderboard.title': '模型榜',

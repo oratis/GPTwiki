@@ -98,6 +98,18 @@ jobs:
             --limit=${{ inputs.hot_limit }} \
             ${{ inputs.apply && '--apply' || '' }}
 
+      # Reaches the public internet (Hugging Face datasets-server, keyless) to
+      # reproduce LMArena's CC-BY-4.0 board. Never merged into our own ratings —
+      # see docs/arena-reference-boards.md. Non-fatal: an upstream outage should
+      # not fail a run whose other two snapshots computed fine.
+      - name: Third-party reference board
+        if: steps.guard.outputs.ready == 'true' && !cancelled()
+        continue-on-error: true
+        env:
+          FIREBASE_PROJECT_ID: gptwiki
+        run: |
+          npx tsx scripts/compute-arena-reference.ts ${{ inputs.apply && '--apply' || '' }}
+
       # Runs even when the hot list found nothing to publish — the two snapshots
       # are independent, and a quiet corpus is not a reason to skip the board.
       - name: Model ratings

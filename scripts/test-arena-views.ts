@@ -65,6 +65,17 @@ test('unknown scopes fall back rather than reaching Firestore', () => {
   }
 });
 
+test('the third-party board is unreachable through ?scope=', () => {
+  // `arenaRatings/reference` holds someone else's numbers. It shares the
+  // collection with our own snapshots so every arena page stays a one-document
+  // read, which means the scope validator is what stops `?scope=reference` from
+  // serving external ratings through the leaderboard's own table — the table
+  // that /arena/rules promises is built from GPTwiki's anonymous votes.
+  for (const attempt of ['reference', 'category:reference', 'locale:reference']) {
+    assert.equal(normalizeScope(attempt), OVERALL_SCOPE, attempt);
+  }
+});
+
 test('the scope picker offers overall, the current locale, and every category', () => {
   const options = scopeOptions('zh');
   assert.equal(options[0].scope, OVERALL_SCOPE);

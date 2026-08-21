@@ -72,6 +72,64 @@ export interface ArenaModelRating {
 }
 
 /**
+ * One row of a third-party leaderboard, reproduced under its own licence.
+ *
+ * Deliberately a separate type from `ArenaModelRating` even though the fields
+ * line up almost one-to-one — that similarity is the hazard, not a reason to
+ * share a type. GPTwiki's board and an external board rank different models by
+ * different votes under different methodologies, and a shared type would let
+ * one be passed where the other is expected with no compiler complaint. See
+ * `docs/arena-reference-boards.md` §4.
+ */
+export interface ArenaReferenceRow {
+  rank: number;
+  modelName: string;
+  organization: string;
+  /** The model's own licence as the source labels it, e.g. "Proprietary". */
+  modelLicense: string;
+  rating: number;
+  ratingLow: number;
+  ratingHigh: number;
+  votes: number;
+  /**
+   * True when this row's model is exactly one GPTwiki serves. Exact match only:
+   * `gpt-4o` is not `gpt-4o-2024-05-13`, and guessing at version equivalence
+   * next to attributed data would put our inference in someone else's numbers.
+   */
+  served: boolean;
+}
+
+/**
+ * A third-party board stored at `arenaRatings/reference`.
+ *
+ * The attribution fields are required, not optional, because CC-BY compliance
+ * is a property of every rendering — making them part of the type means a
+ * component cannot display these rows without also having what it needs to
+ * credit them.
+ */
+export interface ArenaReferenceBoard {
+  sourceId: string;
+  sourceName: string;
+  sourceUrl: string;
+  datasetUrl: string;
+  license: string;
+  licenseUrl: string;
+  /** Which board this is, e.g. "text · overall". */
+  board: string;
+  /** The date the SOURCE published this ranking. Not our fetch time. */
+  publishedAt: string;
+  /** When we retrieved it. Kept separate from `publishedAt` on purpose. */
+  fetchedAt: number;
+  rows: ArenaReferenceRow[];
+  /**
+   * Models GPTwiki serves that this board does not rank at all. Surfaced rather
+   * than left blank — `gemini-2.0-flash` is absent from LMArena's board, and an
+   * unexplained gap reads as an oversight instead of a fact about the source.
+   */
+  unrankedServedModels: string[];
+}
+
+/**
  * Precomputed snapshot stored at `arenaRatings/{scope}`. Pages read exactly one
  * of these documents — the fit never runs in the request path.
  */

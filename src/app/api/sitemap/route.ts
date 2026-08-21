@@ -146,6 +146,7 @@ function staticUrls(): string {
     { path: '/arena', freq: 'daily', prio: 0.7, locales: ARENA_LOCALES },
     { path: '/arena/battle', freq: 'weekly', prio: 0.6, locales: ARENA_LOCALES },
     { path: '/arena/leaderboard', freq: 'daily', prio: 0.7, locales: ARENA_LOCALES },
+    { path: '/arena/reference', freq: 'daily', prio: 0.6, locales: ARENA_LOCALES },
     { path: '/arena/hot', freq: 'daily', prio: 0.6, locales: ARENA_LOCALES },
     { path: '/arena/rules', freq: 'monthly', prio: 0.5, locales: ARENA_LOCALES },
     { path: '/arena/contributors', freq: 'weekly', prio: 0.4, locales: ARENA_LOCALES },
