@@ -181,7 +181,11 @@ arenaRatings/{scope} 聚合快照：{ models: [{model, score, ciLow, ciHigh, vot
 - [x] **调度本身**。Phase 1/3 落地了两个 compute 脚本却**没有任何调用方**——`grep -rn "compute-arena"` 只命中它们自己的注释。`arenaRatings/*` 因此一个文档都没写过。已补 `.github/workflows/arena-snapshots.yml`（`workflow_dispatch` 起步，`schedule:` 段注释掉）。
 - [x] **WIF 仓库变量**。这是真正的阻塞点，而且是整套基建里**唯一**缺的一块：GCP 侧其实早就建齐了——pool `github-pool`、provider `github-provider`（attribute condition 限定 `assertion.repository=='oratis/GPTwiki'`）、SA `gptwiki-server@`（持 `roles/datastore.user`，且被授予 `roles/iam.workloadIdentityUser`）、`gs://gptwiki-images` 上的 `roles/storage.objectAdmin` 一应俱全。**只差 GitHub 那两个仓库变量没设**，于是三个 workflow 全部自跳过：`auto-seed` 从未运行过一次，`sitemap-shards` 每周「成功」实为空转。2026-08-21 设好 `GCP_WIF_PROVIDER` / `GCP_SEED_SA` 后实测：`arena-snapshots` 的 dry-run 与 `--apply` 两种模式都跑通，keyless 写入 `arenaRatings/hot` 与 `arenaRatings/reference` 成功。
 
-> 教训：**「基建没建」和「基建建好了但没接上」看起来完全一样**——都是 workflow 显示绿色、什么也没发生。自跳过守卫（`if vars.X == '' then skip`）让流水线永远不红，代价是它也永远不告诉你它没干活。`::warning::` 在 Actions 首页并不显眼。下次加这类守卫时，值得让它在**手动触发**时直接失败，只在 `schedule:` 触发时才安静跳过。
+> 教训：**「基建没建」和「基建建好了但没接上」看起来完全一样**——都是 workflow 显示绿色、什么也没发生。自跳过守卫（`if vars.X == '' then skip`）让流水线永远不红，代价是它也永远不告诉你它没干活。`::warning::` 在 Actions 首页并不显眼。
+>
+> 已按这条教训改掉 `arena-snapshots` 的守卫：**手动触发时配置缺失直接 `exit 1` 并报 `::error::`，只有 `schedule` 触发才安静跳过**。人来问它，它就出声说不行；每天报红才是真的没人看。
+
+**调度已开启**：2026-08-21 起 `arena-snapshots` 每天 05:41 UTC 自动运行并写盘（手动触发仍默认 dry-run，需勾选 `apply`）。每日而非每周的理由很具体——`/arena/reference` 会**把抓取日期显示给读者**，而 LMArena 每天重发榜单；一张从不刷新的外部榜不只是过时，它还**把自己有多过时明明白白写在页面上**，那比不放更糟。
 
 ### Phase 2 — 分类与视图 ✅ 已落地
 
