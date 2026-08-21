@@ -11,6 +11,8 @@ suggest-topics (daily 03:07 UTC) tops content/backlog.ts up to N pending topics
         │
         ▼  daily cron 03:17 UTC  (.github/workflows/auto-author.yml)
 auto-author.ts:  English draft → zh translation → image prompt  → opens a PR (en+zh)
+        │        …and marks those topics `drafted` STRAIGHT ON MAIN, so tomorrow's
+        │        run advances to the next ones instead of re-drafting these
         │
         ▼  YOU review + merge the PR         ← the only human gate
         ▼  merge fires  .github/workflows/auto-seed.yml  (keyless, WIF)
@@ -32,13 +34,13 @@ that you didn't merge. (You can still hand-add or prune topics in
 
 | File | Role |
 |------|------|
-| [`content/backlog.ts`](../content/backlog.ts) | Topic queue. `pending` → drafted → `seeded`. Cron drafts `pending` top-down. Refilled automatically. |
+| [`content/backlog.ts`](../content/backlog.ts) | Topic queue. `pending` → `drafted` → `seeded`. Cron drafts `pending` top-down. Refilled automatically. `setTopicStatus()` here is the single matcher both pointer-moving scripts use. |
 | [`scripts/suggest-topics.ts`](../scripts/suggest-topics.ts) | Tops the backlog up to a target of `pending` topics with fresh, de-duplicated AI-suggested questions. Self-capping (no-op when full). |
-| [`scripts/auto-author.ts`](../scripts/auto-author.ts) | Per topic: generate EN (reuses `generateWikiContent`), translate to zh, attach an editorial image prompt. Quality-gates weak generations. Writes the carrier. |
+| [`scripts/auto-author.ts`](../scripts/auto-author.ts) | Per topic: generate EN (reuses `generateWikiContent`), translate to zh, attach an editorial image prompt. Quality-gates weak generations. Writes the carrier **and advances the backlog** (`pending`→`drafted`) for the topics that passed. |
 | [`content/auto-draft.en.ts`](../content/auto-draft.en.ts) | Transient carrier — the `auto-draft` batch. Overwritten each run; holds en+zh. |
 | [`scripts/seed-editorial.ts`](../scripts/seed-editorial.ts) | Publisher. `--batch=auto-draft --apply` seeds en+zh + one hero image per `topicKey`. `(title, language)` de-dup; idempotent GCS image path `editorial/<topicKey>.jpg`. |
-| [`scripts/mark-seeded-from-carrier.ts`](../scripts/mark-seeded-from-carrier.ts) | Flips carrier topics `pending`→`seeded` in the backlog. Pure text edit. |
-| [`.github/workflows/auto-author.yml`](../.github/workflows/auto-author.yml) | Daily cron + manual `workflow_dispatch`. Generates drafts, opens a PR. |
+| [`scripts/mark-seeded-from-carrier.ts`](../scripts/mark-seeded-from-carrier.ts) | Flips carrier topics `pending`/`drafted`→`seeded` in the backlog. Pure text edit. |
+| [`.github/workflows/auto-author.yml`](../.github/workflows/auto-author.yml) | Daily cron + manual `workflow_dispatch`. Runs the gates, opens a PR, pushes the backlog advance to main. Self-skips above `MAX_OPEN_DRAFT_PRS` unmerged drafts PRs. |
 | [`.github/workflows/auto-seed.yml`](../.github/workflows/auto-seed.yml) | Seed-on-merge. Keyless (WIF). Self-skips until `GCP_WIF_PROVIDER` is set. |
 | [`.github/workflows/suggest-topics.yml`](../.github/workflows/suggest-topics.yml) | Daily 03:07 UTC (before auto-author). Tops up + commits the backlog. |
 
@@ -61,6 +63,14 @@ in repo settings: **Actions → General → Allow GitHub Actions to create and
 approve pull requests** (lets `auto-author` open its PR).
 
 ## One-time GCP setup (Workload Identity Federation)
+
+> **Done for `oratis/GPTwiki` on 2026-08-21.** Pool `github-pool`, provider
+> `github-provider`, SA `gptwiki-server@gptwiki.iam.gserviceaccount.com` (which
+> already held `roles/datastore.user` + bucket `roles/storage.objectAdmin`), and
+> both repo variables are set. The steps below are kept for forks and for
+> rebuilding it. Until 2026-08-21 this had never been run, so `auto-seed` and
+> `sitemap-shards` self-skipped on every invocation — green, and publishing
+> nothing.
 
 Run authed to the **gptwiki** project with IAM admin. Reuse the app's Firebase
 service account (your deployed `FIREBASE_CLIENT_EMAIL`) — it already has Firestore
@@ -105,9 +115,15 @@ gh variable set GCP_SEED_SA --repo $REPO --body "$SA"
 
 **Merge the daily content PR.** That's the whole recurring loop — the backlog
 refills itself (`suggest-topics`, 03:07 UTC), the drafter turns pending topics
-into an en+zh PR (`auto-author`, 03:17 UTC), and merging publishes + advances the
-queue. Review facts + sources before merging — that merge is the only gate before
-content goes live and into the sitemap.
+into an en+zh PR (`auto-author`, 03:17 UTC), and merging publishes it. Review
+facts + sources before merging — that merge is the only gate before content goes
+live and into the sitemap.
+
+**If you stop merging, the pipeline stops drafting.** Above
+`MAX_OPEN_DRAFT_PRS` (5) unmerged drafts PRs, `auto-author` skips the run with a
+warning before it makes a single model call. That's deliberate: a pile of
+unmerged PRs means nobody is publishing, and drafting into it only burns
+Anthropic credit. Merge or close them and the next run resumes.
 
 Optional curation, any time:
 - **Hand-add** a specific topic — append to the pending section:
@@ -141,6 +157,12 @@ Dry-run (omit `--apply`) previews without writing. `--only=slug1,slug2` scopes.
 - **De-dup**: `seed-editorial` skips any `(title, language)` already in Firestore.
 - **Cost cap**: `HARD_CAP=5` topics/run; scheduled cron uses 3. Each topic ≈ 2
   Claude calls (generate + translate) + 1 Seedream image (cached per `topicKey`).
+- **Backpressure**: the run self-skips above `MAX_OPEN_DRAFT_PRS` open drafts
+  PRs (workflow env). Without it, an unmerged pile costs a full batch a night
+  indefinitely — which is precisely what happened for six weeks.
+- **Queue advance**: `auto-author` marks what it drafted and pushes that to main
+  immediately, so a run never re-drafts the previous run's topics. Covered by
+  `scripts/test-backlog-pointer.ts`.
 - **Quality gate**: weak/garbage generations are skipped, never written. zh is
   best-effort — the English draft still ships if translation fails.
 - **SEO**: only merged content is seeded; the merge is the review. Don't
@@ -182,6 +204,9 @@ cloudbuild.yaml`.
 | `auto-seed` fails at the seed step | SA lacks Firestore (`roles/datastore.user`) or bucket (`roles/storage.objectAdmin`) access, or the WIF binding/`attribute-condition` doesn't match `oratis/GPTwiki`. |
 | Images missing on seeded docs | `ARK_API_KEY` unset/invalid, or SA can't write `gptwiki-images`. seed-editorial skips imageless drafts for a later retry. |
 | `auto-author` drafts 0 topics | Backlog has 0 `pending` — add topics. |
+| `auto-author` skipped with a backpressure warning | ≥ `MAX_OPEN_DRAFT_PRS` open `auto-draft/*` PRs. Merge or close them (`gh pr list --search 'head:auto-draft'`). |
+| Every drafts PR has the same topics | The queue pointer isn't moving. `auto-author` must push its `content/backlog.ts` change to **main**, not into the PR — the next run checks out main. Ran unnoticed 2026-07-11→08-21. |
+| Drafts PRs show no CI checks at all | Expected: GitHub suppresses workflows on PRs authored by `GITHUB_TOKEN` (runs land `action_required` and never execute). The gates therefore run inside `auto-author` itself, before the PR opens. To get real PR checks instead, create the PR with a PAT or GitHub App token. |
 | Cron re-drafts already-live topics | A topic stayed `pending` after seeding — `mark-seeded-from-carrier` (run by `auto-seed`) normally prevents this; mark it `seeded` by hand. |
 | Model 404 (`not_found_error`) | A retired model id in `src/lib/ai/*.ts`; update to a current one (see the `claude-api` reference). |
 | `auto-author` can't open a PR | Enable “Allow GitHub Actions to create and approve pull requests” in repo Actions settings. |

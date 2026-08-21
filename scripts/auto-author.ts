@@ -23,18 +23,23 @@
  * one shared hero image per topic. zh is best-effort: if translation fails, the
  * English draft still ships.
  *
+ * With --apply it writes TWO files: the carrier (reviewed via PR) and
+ * content/backlog.ts, flipping the topics it drafted `pending` → `drafted` so
+ * the next run advances instead of re-drafting the same head of the queue. See
+ * markDrafted() — the backlog mark must reach main immediately, not via the PR.
+ *
  * Usage:
- *   npx tsx scripts/auto-author.ts                 # dry-run (no file written)
- *   npx tsx scripts/auto-author.ts --apply         # write content/auto-draft.en.ts
+ *   npx tsx scripts/auto-author.ts                 # dry-run (writes nothing)
+ *   npx tsx scripts/auto-author.ts --apply         # write carrier + advance backlog
  *   npx tsx scripts/auto-author.ts --apply --limit=2
  */
 
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { config } from 'dotenv';
 import { generateWikiContent, getAIStream } from '../src/lib/ai/provider';
-import { pendingTopics, type BacklogTopic } from '../content/backlog';
+import { pendingTopics, setTopicStatus, type BacklogTopic } from '../content/backlog';
 import { EDITORIAL_STYLE as STYLE } from '../content/editorial-style';
 import type { DraftArticle } from '../content/types';
 import type { AIModel, Message } from '../src/types';
@@ -55,7 +60,9 @@ const HARD_CAP = 5;
 const LIMIT = Math.min(HARD_CAP, Math.max(1, Number(flag('limit') ?? 3) || 3));
 const MODEL = (flag('model') ?? 'claude') as AIModel;
 
-const OUT_PATH = join(dirname(dirname(fileURLToPath(import.meta.url))), 'content', 'auto-draft.en.ts');
+const ROOT = dirname(dirname(fileURLToPath(import.meta.url)));
+const OUT_PATH = join(ROOT, 'content', 'auto-draft.en.ts');
+const BACKLOG_PATH = join(ROOT, 'content', 'backlog.ts');
 
 // ─── Adapters (close the generateWikiContent → DraftArticle gap) ───────────
 /** Trim to ≤320 chars on a word boundary (validateDraft rejects longer). */
@@ -165,6 +172,37 @@ function serialize(drafts: DraftArticle[], iso: string): string {
   );
 }
 
+/**
+ * Advance the queue: flip the topics this run actually drafted from `pending`
+ * to `drafted` in content/backlog.ts, so the next run picks the NEXT topics.
+ *
+ * Without this the drafter re-drafts the same head-of-queue topics every day —
+ * pendingTopics() is `filter(status==='pending').slice(0, LIMIT)`, so nothing
+ * moves until something writes the status back. (That regression ran from
+ * 2026-07-11 to 2026-08-21: 42 identical daily PRs, all three same topics.)
+ *
+ * Only topics that PASSED the quality gate are marked; a topic whose generation
+ * failed or was skipped as weak stays `pending` and is retried tomorrow.
+ *
+ * The caller must push this to main straight away, NOT via the drafts PR — the
+ * next cron run checks out main, so a mark that waits for review advances
+ * nothing. `content/backlog.ts` is in no workflow's trigger paths, so that push
+ * starts no loop.
+ */
+function markDrafted(keys: string[]): number {
+  let src = readFileSync(BACKLOG_PATH, 'utf8');
+  let marked = 0;
+  for (const k of keys) {
+    const next = setTopicStatus(src, k, ['pending'], 'drafted');
+    if (next !== null) {
+      src = next;
+      marked++;
+    }
+  }
+  if (marked) writeFileSync(BACKLOG_PATH, src);
+  return marked;
+}
+
 // ─── Main ────────────────────────────────────────────────────────────────
 async function main(): Promise<void> {
   const topics = pendingTopics(LIMIT);
@@ -246,6 +284,15 @@ async function main(): Promise<void> {
 
   writeFileSync(OUT_PATH, serialize(drafts, new Date().toISOString()));
   console.log(`✓ wrote ${OUT_PATH}`);
+
+  // Advance the queue so tomorrow's run drafts the NEXT topics, not these again.
+  const drafted = [...new Set(drafts.map((d) => d.topicKey).filter((k): k is string => !!k))];
+  const marked = markDrafted(drafted);
+  console.log(`✓ marked ${marked}/${drafted.length} topic(s) drafted in ${BACKLOG_PATH}`);
+  if (marked < drafted.length) {
+    console.warn('  ! some topics did not match a `status: \'pending\'` line — check content/backlog.ts formatting');
+  }
+
   console.log('Next: open a PR, review, merge, then seed with');
   console.log('  npx tsx scripts/seed-editorial.ts --batch=auto-draft --apply');
 }

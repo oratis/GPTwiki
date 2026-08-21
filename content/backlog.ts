@@ -62,3 +62,31 @@ export const backlog: BacklogTopic[] = [
 export function pendingTopics(limit: number): BacklogTopic[] {
   return backlog.filter((t) => t.status === 'pending').slice(0, Math.max(0, limit));
 }
+
+/**
+ * Advance one topic's status in THIS FILE'S OWN SOURCE TEXT, returning the new
+ * source or `null` when no line matched. A text edit rather than a rewrite of
+ * the parsed array, so hand-written questions, comments and ordering survive.
+ *
+ * It lives here, next to the data it edits, because two scripts move the same
+ * pointer — `auto-author` (pending → drafted) and `mark-seeded-from-carrier`
+ * (pending|drafted → seeded) — and each used to carry its own copy of the
+ * regex. Those copies are what makes this fragile: the moment auto-author began
+ * writing `drafted`, a mark-seeded regex still anchored on `pending` would have
+ * matched nothing and reported success, stalling the queue a second time in a
+ * new place. One matcher, one format assumption, both callers.
+ *
+ * Assumes the single-line entry shape used throughout the array above:
+ *   `{ topicKey: '...', ..., status: '...' },`
+ * Callers must treat `null` as "check the file's formatting", never as success.
+ */
+export function setTopicStatus(
+  src: string,
+  topicKey: string,
+  from: readonly BacklogStatus[],
+  to: BacklogStatus
+): string | null {
+  const key = topicKey.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(`(\\{ topicKey: '${key}',[^\\n]*status: ')(?:${from.join('|')})(' \\},)`);
+  return re.test(src) ? src.replace(re, `$1${to}$2`) : null;
+}
