@@ -1,8 +1,8 @@
 # P0 — Feishu app secret: rotate + scrub from history
 
-**Status: BLOCKS LAUNCH.** Publishing the repo (Show HN) pushes it to the HN front
-page and dramatically widens the attack surface on a credential that is already
-public. Do this before any launch push.
+**Status: OPEN — the secret has been public since 2026-04-09 and has not been
+rotated.** Merging this runbook fixes nothing by itself; step 1 below is an owner
+action in the Feishu console and is the only step that neutralizes the leak.
 
 ## What leaked
 
@@ -17,9 +17,18 @@ scripts/write-feishu-execution.py scripts/write-feishu-new.py    scripts/write-p
 
 The files were later deleted from `main`, **but the secret is still recoverable**:
 
-- It lives in **2 commits in the git history** of `main` (anyone can `git log -p`).
-- It is still present in the **working tree of ~30+ open PR branches** (`pr/1`…`pr/42`)
-  and `claude/strange-villani-530b4a`. Deleting it from `main` did nothing for those.
+- It lives in the **history of `main`**: added in `00c5244` (v0.0.2, 2026-04-09),
+  untracked in `8524697` (2026-06-10). Anyone can `git log -p` it back.
+- It is still in the **tree of two remote branches** that forked from `main` at
+  `0dfb5ef` (2026-05-26), *before* the untrack commit, so they never lost the files:
+  `claude/strange-villani-530b4a` (PR #1, merged) and `wip/proxy-docs-recovery`
+  (PR #115, merged; pushed 2026-08-08). Both are stale and deletable once rotated.
+  The `pr/1`…`pr/42` branches this runbook originally named are gone.
+- `.gitignore:57` (`/scripts/write-*.py`) only stops *new* adds; it does not untrack
+  a file already in a branch's index, which is why those two branches still carry it.
+
+Re-verified 2026-08-21: repo is still public, `main`'s tree is clean, the two
+branches above are the only refs that still match. **Rotation has not happened.**
 
 With this secret + the public `APP_ID`, anyone can mint a `tenant_access_token` and
 read/write the Feishu docs the app can reach. **Treat it as compromised.**
@@ -66,12 +75,14 @@ The script aborts if it isn't installed or if `FEISHU_OLD_SECRET` is unset.
 
 ### 3. Close the exposed PR branches (owner)
 
-History rewriting `main` does **not** rewrite the ~30+ open PR branches that still
-carry the secret. For each, either:
+History rewriting `main` does **not** rewrite other branches that still carry the
+secret. As of 2026-08-21 that is exactly two, both with already-merged PRs:
 
-- **close + delete the branch** if it's stale (most `pr/1…42` likely are), or
-- if you need the PR, **rebase it onto the scrubbed `main` and force-push** so its
-  copy of the secret is dropped too.
+- `claude/strange-villani-530b4a` — **delete** (`git push origin --delete claude/strange-villani-530b4a`)
+- `wip/proxy-docs-recovery` — **delete** (`git push origin --delete wip/proxy-docs-recovery`)
+
+If a future branch you still need carries it, **rebase it onto the scrubbed `main`
+and force-push** instead of deleting.
 
 List the branches still carrying it after rotation:
 
