@@ -349,6 +349,9 @@ async function mirrorAndWrite(
 
   const updates: Record<string, unknown> = {
     imageUrl: mirroredThumb,
+    // The doc gains a header image here, so the popular-wikis flag moves
+    // with it (see src/lib/header-image.ts).
+    hasHeaderImage: true,
     updatedAt: Date.now(),
   };
   if (thumb.width) updates.imageWidth = thumb.width;

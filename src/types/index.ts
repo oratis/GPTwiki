@@ -61,6 +61,12 @@ export interface Wiki {
   imageWidth?: number;
   imageHeight?: number;
   originalImageUrl?: string;
+  /**
+   * `imageUrl` denormalised to a boolean so the popular-wikis query can
+   * filter on an index instead of scanning. Every writer keeps it in sync;
+   * see src/lib/header-image.ts.
+   */
+  hasHeaderImage?: boolean;
   /** ISO 639-1 code of the article's content language (e.g. "en", "zh"). */
   language?: string;
   /**

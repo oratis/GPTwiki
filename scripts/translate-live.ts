@@ -28,6 +28,7 @@ import {
 import { getFirestore, FieldValue, type Firestore } from 'firebase-admin/firestore';
 import { config } from 'dotenv';
 import { getAIStream } from '../src/lib/ai/provider';
+import { hasHeaderImage } from '../src/lib/header-image';
 import { buildSearchKeywords } from '../src/lib/search-keywords';
 import { isTypesenseEnabled, toTypesenseDoc, upsertWikiToTypesense } from '../src/lib/typesense';
 import type { Message } from '../src/types';
@@ -234,6 +235,9 @@ async function main(): Promise<void> {
       doc.imageWidth = en.imageWidth;
       doc.imageHeight = en.imageHeight;
     }
+    // Written either way so every wiki carries a value for the
+    // popular-wikis index (see src/lib/header-image.ts).
+    doc.hasHeaderImage = hasHeaderImage(doc);
 
     const zhRef = db.collection('wikis').doc();
     await zhRef.set(doc);

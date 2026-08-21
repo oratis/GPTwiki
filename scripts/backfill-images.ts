@@ -20,6 +20,7 @@ import { initializeApp, cert, type ServiceAccount } from 'firebase-admin/app';
 import { getFirestore, FieldValue } from 'firebase-admin/firestore';
 import { config } from 'dotenv';
 import { mirrorImageToGCS, isGcsUrl } from '../src/lib/gcs';
+import { hasHeaderImage } from '../src/lib/header-image';
 
 config({ path: '.env.local', override: true });
 
@@ -103,6 +104,13 @@ async function processDoc(
   }
 
   if (!touched) return { action: 'skip', clearedUrls: [] };
+
+  // imageUrl was either rewritten to a GCS URL or deleted above; the
+  // FieldValue.delete() sentinel isn't a string, so this reads false for a
+  // cleared image (see src/lib/header-image.ts).
+  if ('imageUrl' in updates) {
+    updates.hasHeaderImage = hasHeaderImage({ imageUrl: updates.imageUrl });
+  }
 
   if (content !== (data.content ?? '')) updates.content = content;
   updates.updatedAt = Date.now();

@@ -36,6 +36,7 @@ import {
 import { getFirestore, FieldValue, type Firestore } from 'firebase-admin/firestore';
 import { Storage } from '@google-cloud/storage';
 import { config } from 'dotenv';
+import { hasHeaderImage } from '../src/lib/header-image';
 import { buildSearchKeywords } from '../src/lib/search-keywords';
 import {
   isTypesenseEnabled,
@@ -339,6 +340,9 @@ async function main(): Promise<void> {
       doc.imageWidth = hero.width;
       doc.imageHeight = hero.height;
     }
+    // Written for image-less drafts too, so every wiki carries a value for
+    // the popular-wikis index (see src/lib/header-image.ts).
+    doc.hasHeaderImage = hasHeaderImage(doc);
     if (d.sources?.length) doc.sources = d.sources;
 
     if (!APPLY) {
