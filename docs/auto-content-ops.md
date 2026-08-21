@@ -194,14 +194,60 @@ scan timed out at this scale — a 50k-capped scan alone measured ~57s):
 Wikipedia-mirror long-tail (duplicate content; a 19M-URL sitemap is an
 anti-pattern, and it was serving nothing before).
 
-**Full long-tail (optional):** `scripts/build-sitemap-shards.ts` precomputes
-per-shard cursors into Firestore `_meta/sitemap_shards`; the index then also
-enumerates every doc via legacy `?page=<cursor>` pages. The `sitemap-shards`
-workflow runs it weekly (keyless — same WIF as auto-seed). Dormant until that
-job populates the meta doc. Caveat: the full ~19M stream can be slow off-region;
-if the workflow nears its timeout, move it to a Cloud Run Job in the Firestore
-region (`Dockerfile.backfill` is the existing pattern) triggered by Cloud
-Scheduler.
+**Full long-tail (optional, OFF, and never yet shipped):**
+`scripts/build-sitemap-shards.ts` precomputes per-shard cursors into Firestore
+`_meta/sitemap_shards`; the index then also enumerates every doc via legacy
+`?page=<cursor>` pages.
+
+As of 2026-08-21 **that document has never existed** — every earlier run of the
+`sitemap-shards` workflow self-skipped on the missing WIF config (green, six
+seconds), and the first real run, 32463577209, failed. So the live index has
+only ever been `static` + `editorial` + 60 `recent-*` buckets, and the mirror
+corpus has never been enumerated for any crawler.
+
+*Why it failed, and why the old advice here was wrong.* The previous note blamed
+the job timeout and prescribed a Cloud Run Job. The real limit is client-side:
+the Firestore SDK stamps one `startTime` per `.stream()` call and abandons the
+query once `total_timeout_millis` (600s for `runQuery`) elapses
+(`@google-cloud/firestore` `query-util.js` `_hasRetryTimedOut`), which is why the
+run died at 10.6 min holding 7.5M of 19M ids. That budget lives in the code, so
+the same unbounded stream would have died in a Cloud Run Job too. The script now
+walks the collection in bounded 100k-doc pages, each getting a fresh budget —
+verified against production: 250,000 docs in 3 pages, 82s off-region, and
+~13,700 ids/s on a GitHub runner, so a full pass is ~23 min.
+
+*Why it is off.* Arming it costs money twice. One run reads every document once
+(~19M reads, ~$11). Then the artifact itself is a read amplifier: 9,485 sub-pages
+x 2,000 docs means a crawler working through the whole index costs another full
+corpus of reads, repeatedly, forever. On a platform deliberately built to have no
+marginal cost that is an owner's call, so the workflow no-ops unless the repo
+variable `SITEMAP_SHARDS_ENABLED` is truthy, and the cron is monthly rather than
+weekly. Nothing about this is urgent — mirror ingest is frozen, and new content
+is already covered by the editorial and `recent-*` buckets, which are arithmetic
+and cost nothing.
+
+To arm it:
+
+```bash
+gh variable set SITEMAP_SHARDS_ENABLED --body true
+gh workflow run sitemap-shards.yml
+```
+
+To exercise the scan without paying for a full sweep or publishing anything:
+
+```bash
+FIREBASE_PROJECT_ID=gptwiki npx tsx scripts/build-sitemap-shards.ts --max=250000
+```
+
+`--apply` refuses to run alongside `--max=`, and a full run refuses to publish a
+list covering under 99% of the collection's `count()` — a short list would
+silently truncate the sitemap to the prefix it reached, which is worse than
+publishing nothing and would look like a success.
+
+Follow-up worth doing if this is ever armed: `checkpoints` is an unexempted array
+field, so the write costs ~1 Firestore index entry per element for a field
+nothing queries. A single-field index exemption on `_meta.checkpoints` removes
+that.
 
 Route changes need a **deploy** to take effect: `gcloud builds submit --config
 cloudbuild.yaml`.
@@ -222,5 +268,7 @@ cloudbuild.yaml`.
 | Cron re-drafts already-live topics | A topic stayed `pending` after seeding — `mark-seeded-from-carrier` (run by `auto-seed`) normally prevents this; mark it `seeded` by hand. |
 | Model 404 (`not_found_error`) | A retired model id in `src/lib/ai/*.ts`; update to a current one (see the `claude-api` reference). |
 | `auto-author` can't open a PR | Enable “Allow GitHub Actions to create and approve pull requests” in repo Actions settings. |
-| `/api/sitemap` slow / times out | Should be fixed (arithmetic index). If the optional `sitemap-shards` job is enabled and slow, that's the ~19M stream — move it to a Cloud Run Job. Remember route changes need a Cloud Build deploy. |
-| Sitemap missing the mirror long-tail | Expected by default. Enable it: set WIF, then `gh workflow run sitemap-shards.yml` to populate `_meta/sitemap_shards`. |
+| `/api/sitemap` slow / times out | Should be fixed (arithmetic index). Remember route changes need a Cloud Build deploy. |
+| `sitemap-shards` fails with `EXECUTION_DEADLINE_EXCEEDED` | The scan is paged now; if it returns, a single page is exceeding the SDK's 600s per-`.stream()` retry budget. Lower `PAGE_SIZE`, do not raise `timeout-minutes` — the limit is client-side, not the job's. |
+| `sitemap-shards` refuses to publish ("scan covered N of M") | Working as intended: it will not publish a truncated checkpoint list. Re-run; investigate if it persists. |
+| Sitemap missing the mirror long-tail | Expected — it is off by design and has never been on. Arming it costs ~$11/run plus a corpus of reads per crawl; see the long-tail section above. |
