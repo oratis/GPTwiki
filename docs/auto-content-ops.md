@@ -213,8 +213,11 @@ query once `total_timeout_millis` (600s for `runQuery`) elapses
 run died at 10.6 min holding 7.5M of 19M ids. That budget lives in the code, so
 the same unbounded stream would have died in a Cloud Run Job too. The script now
 walks the collection in bounded 100k-doc pages, each getting a fresh budget —
-verified against production: 250,000 docs in 3 pages, 82s off-region, and
-~13,700 ids/s on a GitHub runner, so a full pass is ~23 min.
+exercised against production with `--max=250000`: 250,000 docs in 3 pages, 82s
+from an off-region workstation (~3,000 ids/s). The paged code has not yet run on
+a GitHub runner. The *pre-fix* run on one sustained ~13,700 ids/s before its
+unbounded stream died; if that carries over, a full pass is ~23 min, which is
+what `timeout-minutes: 120` is sized against.
 
 *Why it is off.* Arming it costs money twice. One run reads every document once
 (~19M reads, ~$11). Then the artifact itself is a read amplifier: 9,485 sub-pages

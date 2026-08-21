@@ -53,6 +53,17 @@ const args = process.argv.slice(2);
 const APPLY = args.includes('--apply');
 const maxArg = args.find((a) => a.startsWith('--max='));
 const MAX_SCAN = maxArg ? Number(maxArg.slice('--max='.length)) : Infinity;
+if (maxArg && !(Number.isInteger(MAX_SCAN) && MAX_SCAN > 0)) {
+  // NaN would read as "no cap" at every `Number.isFinite(MAX_SCAN)` test below,
+  // including the one that refuses --apply alongside --max=. A typo, or a
+  // separator that is only legal in a JS literal (Number('250_000') is NaN),
+  // would then quietly run the full ~19M-read sweep and publish.
+  console.error(
+    `✗ --max= needs a positive integer in plain digits; got "${maxArg.slice('--max='.length)}". ` +
+      'Refusing rather than falling through to an uncapped scan.'
+  );
+  process.exit(1);
+}
 
 const META_PATH = '_meta/sitemap_shards';
 
@@ -195,9 +206,14 @@ async function main(): Promise<void> {
         `${pages} pages, ${Math.round(secs)}s (${Math.round(count / Math.max(secs, 0.001)).toLocaleString()}/s)`
     );
 
-    // A short page means the collection ended: the SDK tops up a resumed
-    // stream to the requested limit, so a full page is the only "more to come".
-    if (ids.length < limit) break;
+    // Deliberately NOT `if (ids.length < limit) break`. A short page does not
+    // mean the collection ended: when the SDK resumes a broken stream it asks
+    // for `limit - numDocumentsReceived` (query-util.js:232), and that counter
+    // increments on every non-NOOP response — including the document-less
+    // progress responses the wire protocol explicitly permits — so a resumed
+    // page can come back short while there is more to read. Ending the scan
+    // there would publish a truncated checkpoint list and exit 0. An empty page
+    // is the only sound terminator; the cost is one extra round trip in ~190.
   }
 
   const trimmed = trimTrailingCheckpoint(checkpoints, count);
@@ -225,11 +241,17 @@ async function main(): Promise<void> {
       );
       process.exit(1);
     }
+    // Internal invariant, NOT a second completeness check: both sides derive
+    // from `count`, so correct code can never trip it. It catches the
+    // incremental accumulation above drifting from the closed form in
+    // sitemap-shards.ts — a code bug, not a short scan. (Checking against
+    // `expectedTotal` instead would fire spuriously whenever the corpus grows
+    // by a batch mid-scan, which it legitimately does.)
     const expectedShards = expectedCheckpointCount(count);
     if (trimmed.length !== expectedShards) {
       console.error(
-        `✗ ${trimmed.length} checkpoints for ${count.toLocaleString()} docs, expected ${expectedShards}. ` +
-          'The checkpoint arithmetic disagrees with the scan — refusing to publish.'
+        `✗ invariant violated: ${trimmed.length} checkpoints for ${count.toLocaleString()} docs, ` +
+          `expected ${expectedShards}. The checkpoint arithmetic has drifted from the scan — refusing to publish.`
       );
       process.exit(1);
     }

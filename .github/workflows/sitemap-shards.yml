@@ -46,15 +46,22 @@ jobs:
     # for five and a half hours.
     timeout-minutes: 120
     steps:
+      # Values come in through env, not interpolated into the script text: a
+      # repo variable containing a quote would otherwise turn this guard into a
+      # syntax error, i.e. a hard failure where a clean self-skip was intended.
       - name: Guard on WIF config and the cost opt-in
         id: guard
+        env:
+          WIF_PROVIDER: ${{ vars.GCP_WIF_PROVIDER }}
+          SHARDS_ENABLED: ${{ vars.SITEMAP_SHARDS_ENABLED }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           ready=true
-          if [ -z "${{ vars.GCP_WIF_PROVIDER }}" ]; then
+          if [ -z "$WIF_PROVIDER" ]; then
             ready=false
             echo "::warning::sitemap-shards skipped — set repo variables GCP_WIF_PROVIDER + GCP_SEED_SA (Workload Identity Federation)."
           fi
-          case "$(echo "${{ vars.SITEMAP_SHARDS_ENABLED }}" | tr '[:upper:]' '[:lower:]')" in
+          case "$(echo "$SHARDS_ENABLED" | tr '[:upper:]' '[:lower:]')" in
             1|true|yes) ;;
             *)
               ready=false
@@ -62,6 +69,15 @@ jobs:
               ;;
           esac
           echo "ready=$ready" >> "$GITHUB_OUTPUT"
+          # A scheduled run self-skips green: a monthly red X for a job that is
+          # deliberately off is noise nobody would keep reading. A run someone
+          # ASKED for must not quietly do nothing — that is precisely how this
+          # workflow reported success for weeks while never once executing.
+          if [ "$ready" = "true" ] || [ "$EVENT_NAME" = "schedule" ]; then
+            exit 0
+          fi
+          echo "::error::sitemap-shards cannot run — see the warnings above. Set GCP_WIF_PROVIDER + GCP_SEED_SA, and SITEMAP_SHARDS_ENABLED=true to accept the ~19M-read cost."
+          exit 1
       - if: steps.guard.outputs.ready == 'true'
         uses: actions/checkout@v4
       - name: Authenticate to GCP (keyless, WIF)
