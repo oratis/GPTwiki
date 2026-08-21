@@ -1,0 +1,49 @@
+#cloud-config
+# Cloud-init for the GPTwiki Typesense search VM (project: gptwiki).
+#
+# Direct replacement for the deprecated `gcloud compute instances
+# create-with-container` flow, which set the `gce-container-declaration`
+# metadata key and relied on the Container Startup Agent that Google is
+# retiring on 2026-07-31. This config runs the same container via a
+# systemd-managed `docker run` on Container-Optimized OS instead — no
+# container agent involved.
+#
+# Data persists on the host boot disk at /var/typesense (stateful across
+# reboots), matching the previous host-path mount.
+#
+# The API-key placeholder on the `--api-key=` line below is substituted at
+# provision time (docs/typesense.md anchors the sed to that line so the key
+# lands nowhere else). Do NOT commit a real key here.
+
+write_files:
+- path: /etc/systemd/system/typesense.service
+  permissions: '0644'
+  owner: root
+  content: |
+    [Unit]
+    Description=Typesense search server (GPTwiki)
+    Wants=network-online.target
+    After=network-online.target
+
+    [Service]
+    Environment=HOME=/home/typesense
+    ExecStartPre=/bin/mkdir -p /var/typesense
+    ExecStartPre=-/usr/bin/docker rm -f typesense
+    ExecStartPre=-/usr/bin/docker pull typesense/typesense:27.1
+    ExecStart=/usr/bin/docker run --rm --name=typesense \
+      -p 8108:8108 \
+      -v /var/typesense:/data \
+      typesense/typesense:27.1 \
+      --data-dir=/data \
+      --api-key=__TYPESENSE_API_KEY__
+    ExecStop=/usr/bin/docker stop typesense
+    Restart=always
+    RestartSec=5
+
+    [Install]
+    WantedBy=multi-user.target
+
+runcmd:
+- systemctl daemon-reload
+- systemctl enable typesense.service
+- systemctl start typesense.service

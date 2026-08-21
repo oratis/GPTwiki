@@ -15,6 +15,31 @@
         { "fieldPath": "language", "order": "ASCENDING" },
         { "fieldPath": "createdAt", "order": "DESCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "arenaVotes",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "voterId", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "wikis",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "hasHeaderImage", "order": "ASCENDING" },
+        { "fieldPath": "views", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "wikis",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "language", "order": "ASCENDING" },
+        { "fieldPath": "hasHeaderImage", "order": "ASCENDING" },
+        { "fieldPath": "views", "order": "DESCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

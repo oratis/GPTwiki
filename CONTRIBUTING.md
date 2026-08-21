@@ -35,8 +35,12 @@ Run the same checks CI does:
 ```bash
 npm run typecheck     # tsc --noEmit
 npm run lint          # eslint
+npm test              # scripts/test-*.ts, auto-discovered by scripts/run-tests.ts
 npm run build         # next build (for non-trivial changes)
 ```
+
+Add a `scripts/test-<thing>.ts` next to the code you change when the behaviour
+is worth pinning; the runner picks it up without registration.
 
 A pre-commit hook (husky + lint-staged) runs `eslint --fix` on staged files.
 
@@ -46,7 +50,7 @@ A pre-commit hook (husky + lint-staged) runs `eslint --fix` on staged files.
 2. **Keep PRs focused** — one logical change per PR makes review faster.
 3. **Write a clear description** — what changed, why, and how you verified it.
    Link the issue it closes (`Closes #123`).
-4. Make sure `typecheck`, `lint`, and (for code) `build` pass.
+4. Make sure `typecheck`, `lint`, `test`, and (for code) `build` pass.
 5. Open the PR and fill in the template.
 
 ### Commit messages

@@ -1,8 +1,5 @@
 blank_issues_enabled: false
 contact_links:
-  - name: 💬 Questions & discussion
-    url: https://github.com/oratis/GPTwiki/discussions
-    about: Ask questions, share ideas, or show what you built. Not for bug reports.
   - name: 🔒 Security vulnerability
     url: https://github.com/oratis/GPTwiki/blob/main/CONTRIBUTING.md#security
     about: Please report security issues privately — do not open a public issue.

@@ -15,6 +15,14 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
+
+# Analytics measurement id. Next inlines NEXT_PUBLIC_* into the client bundle at
+# build time, so this cannot be supplied as a Cloud Run env var later — it has
+# to be present here or not at all. Empty by default: an image built without it
+# simply never loads gtag.
+ARG NEXT_PUBLIC_GA_ID=""
+ENV NEXT_PUBLIC_GA_ID=$NEXT_PUBLIC_GA_ID
+
 RUN npm run build
 
 # Production image

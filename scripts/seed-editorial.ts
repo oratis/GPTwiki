@@ -36,6 +36,7 @@ import {
 import { getFirestore, FieldValue, type Firestore } from 'firebase-admin/firestore';
 import { Storage } from '@google-cloud/storage';
 import { config } from 'dotenv';
+import { hasHeaderImage } from '../src/lib/header-image';
 import { buildSearchKeywords } from '../src/lib/search-keywords';
 import {
   isTypesenseEnabled,
@@ -89,6 +90,8 @@ const BATCHES: Record<string, () => Promise<DraftArticle[]>> = {
   'home-energy': () => import('../content/home-energy').then((m) => m.homeEnergy),
   'cooking-science': () => import('../content/cooking-science').then((m) => m.cookingScience),
   'travel-smart': () => import('../content/travel-smart').then((m) => m.travelSmart),
+  // Drafts emitted by scripts/auto-author.ts; seed with --no-images after review.
+  'auto-draft': () => import('../content/auto-draft.en').then((m) => m.autoDraftEn),
 };
 
 // ─── Init ────────────────────────────────────────────────────────────────
@@ -337,6 +340,9 @@ async function main(): Promise<void> {
       doc.imageWidth = hero.width;
       doc.imageHeight = hero.height;
     }
+    // Written for image-less drafts too, so every wiki carries a value for
+    // the popular-wikis index (see src/lib/header-image.ts).
+    doc.hasHeaderImage = hasHeaderImage(doc);
     if (d.sources?.length) doc.sources = d.sources;
 
     if (!APPLY) {

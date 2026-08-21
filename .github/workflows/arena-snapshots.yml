@@ -1,0 +1,140 @@
+name: arena-snapshots
+
+# Recompute the two Arena snapshots that every /arena page reads.
+#
+# This is the trigger `docs/gptwiki-arena-plan.md` §5 Phase 1.5 called for and
+# that nothing supplied: both scripts landed with Phase 1/3 and had ZERO callers,
+# so `arenaRatings/*` was never written and the leaderboard and hot list showed
+# their empty state permanently. The pages are correct — there was simply no job.
+#
+# Daily on a schedule since 2026-08-21, after clean dry-run and --apply runs.
+# A manual dispatch defaults to a DRY RUN so it can be used to inspect output
+# without touching Firestore; scheduled runs always write.
+#
+# Neither script calls a model. The ratings job fits Bradley-Terry over stored
+# votes; the hot job is arithmetic over stored article fields; the reference job
+# reproduces a published CC-BY board. Cost is a few thousand Firestore reads.
+#
+# Auth is Workload Identity Federation — the same keyless setup as auto-seed, so
+# no Firebase private key is stored in GitHub. Both scripts fall back to
+# Application Default Credentials when FIREBASE_CLIENT_EMAIL/PRIVATE_KEY are
+# unset, which is exactly what the auth step provides.
+#
+# To run the same work locally against ADC:
+#   npx tsx scripts/compute-arena-hot.ts --apply
+#   npx tsx scripts/compute-arena-reference.ts --apply
+#   npx tsx scripts/compute-arena-ratings.ts --apply
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: 'Write the snapshots (unchecked = dry run, prints only)'
+        type: boolean
+        default: false
+      hot_days:
+        description: 'Hot list: how many days back to consider'
+        default: '90'
+      hot_limit:
+        description: 'Hot list: how many rows to publish'
+        default: '30'
+  schedule:
+    # Enabled 2026-08-21 after clean dry-run and --apply runs through the keyless
+    # WIF path. The caution in the plan was aimed at the *ratings* job, which is
+    # statistics; that step is a no-op while there are no votes, and the other two
+    # are deterministic arithmetic over stored fields with no LLM in the path.
+    #
+    # Daily rather than weekly for one specific reason: /arena/reference shows the
+    # date it retrieved LMArena's board, and LMArena republishes daily. A board
+    # that is never refreshed does not merely go stale, it *displays* how stale it
+    # is, which is worse than not showing one.
+    - cron: '41 5 * * *'   # 05:41 UTC daily
+
+permissions:
+  contents: read
+  id-token: write   # mint the OIDC token for WIF
+
+concurrency: arena-snapshots   # never let two runs write the same documents
+
+jobs:
+  snapshots:
+    runs-on: ubuntu-latest
+    steps:
+      # Missing config FAILS a manual run and only self-skips a scheduled one.
+      #
+      # The all-skipping version of this guard is why nothing in this repo ran for
+      # weeks: `auto-seed` had never executed once and `sitemap-shards` reported a
+      # weekly success that was a self-skip, because the two repo variables were
+      # never set and a green check looks identical to working. A `::warning::` on
+      # the Actions summary is not a signal anyone sees. So when a human asks for
+      # this job, it says no out loud; the quiet skip is reserved for the cron,
+      # where a red X every day would be worse than useless.
+      - name: Guard on WIF config
+        id: guard
+        run: |
+          if [ -n "${{ vars.GCP_WIF_PROVIDER }}" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "ready=false" >> "$GITHUB_OUTPUT"
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            echo "::warning::arena-snapshots skipped — set repo variables GCP_WIF_PROVIDER + GCP_SEED_SA."
+            exit 0
+          fi
+          echo "::error::arena-snapshots cannot run — set repo variables GCP_WIF_PROVIDER + GCP_SEED_SA (Workload Identity Federation)."
+          exit 1
+
+      - if: steps.guard.outputs.ready == 'true'
+        uses: actions/checkout@v5
+
+      - name: Authenticate to GCP (keyless, WIF)
+        if: steps.guard.outputs.ready == 'true'
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_SEED_SA }}
+
+      - if: steps.guard.outputs.ready == 'true'
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - if: steps.guard.outputs.ready == 'true'
+        run: npm ci --ignore-scripts
+
+      # The statistics gate. These scripts return plausible-looking numbers when
+      # they are wrong, so the suite runs before anything reaches Firestore.
+      - name: Run the scoring tests before writing anything
+        if: steps.guard.outputs.ready == 'true'
+        run: npm test
+
+      - name: Article hot list
+        if: steps.guard.outputs.ready == 'true'
+        env:
+          FIREBASE_PROJECT_ID: gptwiki
+        run: |
+          npx tsx scripts/compute-arena-hot.ts \
+            --days=${{ inputs.hot_days || '90' }} \
+            --limit=${{ inputs.hot_limit || '30' }} \
+            ${{ (github.event_name == 'schedule' || inputs.apply) && '--apply' || '' }}
+
+      # Reaches the public internet (Hugging Face datasets-server, keyless) to
+      # reproduce LMArena's CC-BY-4.0 board. Never merged into our own ratings —
+      # see docs/arena-reference-boards.md. Non-fatal: an upstream outage should
+      # not fail a run whose other two snapshots computed fine.
+      - name: Third-party reference board
+        if: steps.guard.outputs.ready == 'true' && !cancelled()
+        continue-on-error: true
+        env:
+          FIREBASE_PROJECT_ID: gptwiki
+        run: |
+          npx tsx scripts/compute-arena-reference.ts ${{ (github.event_name == 'schedule' || inputs.apply) && '--apply' || '' }}
+
+      # Runs even when the hot list found nothing to publish — the two snapshots
+      # are independent, and a quiet corpus is not a reason to skip the board.
+      - name: Model ratings
+        if: steps.guard.outputs.ready == 'true' && !cancelled()
+        env:
+          FIREBASE_PROJECT_ID: gptwiki
+        run: |
+          npx tsx scripts/compute-arena-ratings.ts ${{ (github.event_name == 'schedule' || inputs.apply) && '--apply' || '' }}
