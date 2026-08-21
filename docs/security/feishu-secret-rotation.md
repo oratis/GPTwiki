@@ -97,8 +97,15 @@ done
 
 - **Operational scripts don't belong in the product repo.** Move `scripts/write-*.py`
   (Feishu doc automation) to a private ops repo. They are not part of GPTwiki.
-- Add a secret scanner to CI / pre-commit (e.g. `gitleaks`) so a hardcoded
-  credential fails the build instead of shipping.
+- **Done (2026-08-21):** `npm run check:secrets` runs in CI on every PR and on
+  `main` (`scripts/check-no-secrets.ts`). It fails the build if `scripts/write-*.py`
+  is tracked again, or if a credential-shaped literal is assigned to a
+  secret-named constant. Verified against the real historical file: both rules
+  fire on `scripts/write-feishu.py` as it exists on the branches below.
+  It scans `git ls-files`, not the working tree, because the recurrence path is
+  a file re-entering the index — not a file appearing on disk. It is a targeted
+  guard, not a general scanner: a wide entropy scan over a 15-language content
+  repo would produce false positives until someone turned it off.
 - Secrets only ever come from env / a secret manager — see `.env.example`.
 
 ## Done when
@@ -107,4 +114,4 @@ done
 - [ ] `git log -p` on the rewritten `main` contains no occurrence of the old secret.
 - [ ] No `EXPOSED:` lines from the branch scan above.
 - [ ] `scripts/write-*.py` removed from this repo (tracked here only as a pointer).
-- [ ] Secret scanner wired into CI / pre-commit.
+- [x] Secret scanner wired into CI / pre-commit — `npm run check:secrets`, 2026-08-21.
