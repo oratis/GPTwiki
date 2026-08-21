@@ -24,6 +24,7 @@ import {
   extractFaq,
   buildFaqJsonLd,
   buildBreadcrumbJsonLd,
+  serializeJsonLd,
 } from '@/lib/seo';
 
 export const revalidate = 3600;
@@ -78,7 +79,7 @@ export async function generateMetadata({
 
   // Emergency hedge: if the site gets flagged for scaled-content abuse, the
   // owner can noindex every Wikipedia mirror at once via an env flag, without
-  // touching content. Off by default (mirrors stay indexed per the GTM plan).
+  // touching content. Off by default (mirrors stay indexed).
   const robots =
     isWikipediaSourced(wiki) && mirrorPagesNoindexed()
       ? { index: false, follow: true }
@@ -187,27 +188,31 @@ export default async function WikiDetailPage({
 
   const t = getTranslations(locale);
   const jsonLd = buildJsonLd(wiki, locale, id);
-  // Structured-data hedge (GTM §5.1): give Google/answer-engines a richer,
-  // differentiated signal than the bare Article — FAQPage from the article's
-  // own FAQ section, plus a BreadcrumbList. extractFaq returns [] for mirrors
-  // and freeform articles, so FAQPage only appears where it's real.
-  const breadcrumbJsonLd = buildBreadcrumbJsonLd(locale, id, wiki.title);
+  // Structured data beyond the bare Article: a BreadcrumbList, and FAQPage
+  // from the article's own FAQ section (answer engines read it; Google has
+  // not shown FAQ rich results for sites like this one since Aug 2023).
+  // extractFaq returns [] for mirrors and freeform articles, so FAQPage only
+  // appears where it's real.
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd(locale, id, wiki.title, {
+    home: t('header.brandName'),
+    wiki: t('header.browseWiki'),
+  });
   const faqJsonLd = buildFaqJsonLd(extractFaq(wiki.content));
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd) }}
       />
       {faqJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqJsonLd) }}
         />
       )}
 
