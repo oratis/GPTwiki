@@ -1,0 +1,55 @@
+name: 🐛 Bug report
+description: Something isn't working as expected
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to file a bug! Please fill out the sections below.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug, and what you expected instead.
+      placeholder: When I publish an article in Arabic, the RTL layout…
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce it?
+      placeholder: |
+        1. Go to '...'
+        2. Click '...'
+        3. See error
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Chat / AI generation
+        - Wiki article / threads
+        - Search
+        - i18n / localization
+        - Auth / profile
+        - Self-hosting / deployment
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Hosted (gptwiki.net) or self-hosted? Browser, OS, and — if self-hosting — Node version and which AI model.
+      placeholder: gptwiki.net, Chrome 126 on macOS
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / screenshots
+      description: Console errors, server logs, or screenshots. **Redact any API keys or secrets.**
+    validations:
+      required: false
