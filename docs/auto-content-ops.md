@@ -165,6 +165,15 @@ Dry-run (omit `--apply`) previews without writing. `--only=slug1,slug2` scopes.
   `scripts/test-backlog-pointer.ts`.
 - **Quality gate**: weak/garbage generations are skipped, never written. zh is
   best-effort — the English draft still ships if translation fails.
+- **Citation gate**: every source URL is fetched before the draft ships. URLs a
+  server positively disclaims (404/410) are dropped; a draft left with fewer
+  than `MIN_LIVE_SOURCES` (2) is skipped entirely. Paywalls and bot-blocks
+  (401/402/403/429) and 5xx are KEPT — those are real pages refusing a script,
+  and treating them as dead would strip exactly the mainstream sources an
+  encyclopedia should cite. Added after PR #138 was found to carry 7 dead URLs
+  out of 14, one article having all four sources 404 while still reading as
+  cited. Note this checks that a citation RESOLVES, not that it supports the
+  claim — facts still need a human read.
 - **SEO**: only merged content is seeded; the merge is the review. Don't
   rubber-stamp. (Fully-unattended auto-publish is intentionally NOT built — it
   would need a sitemap `status`/`source` filter first; see the plan doc.)
@@ -202,6 +211,7 @@ cloudbuild.yaml`.
 |---------|-------------|
 | `auto-seed` run is green but did nothing | WIF not configured — set `GCP_WIF_PROVIDER` + `GCP_SEED_SA` (the guard self-skips otherwise). |
 | `auto-seed` fails at the seed step | SA lacks Firestore (`roles/datastore.user`) or bucket (`roles/storage.objectAdmin`) access, or the WIF binding/`attribute-condition` doesn't match `oratis/GPTwiki`. |
+| A drafts PR has fewer sources than usual, or a topic was skipped for sources | Working as intended — the citation gate dropped dead URLs. The run log lists each one. A topic skipped this way stays `pending` and is retried next run; if it keeps failing, the model cannot find real sources for that question and the topic is probably worth rewording or dropping. |
 | Images missing on seeded docs | `ARK_API_KEY` unset/invalid, or SA can't write `gptwiki-images`. seed-editorial skips imageless drafts for a later retry. |
 | `auto-author` drafts 0 topics | Backlog has 0 `pending` — add topics. |
 | `auto-author` skipped with a backpressure warning | ≥ `MAX_OPEN_DRAFT_PRS` open `auto-draft/*` PRs. Merge or close them (`gh pr list --search 'head:auto-draft'`). |
