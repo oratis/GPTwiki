@@ -1,6 +1,22 @@
+# _GA_ID: Google Analytics measurement id, empty by default so a plain
+# `gcloud builds submit --config cloudbuild.yaml` produces an image with no
+# analytics. Pass it explicitly to enable:
+#   gcloud builds submit --config cloudbuild.yaml --substitutions=_GA_ID=G-XXXXXXX
+# It is a build arg rather than a Cloud Run env var because Next inlines
+# NEXT_PUBLIC_* at build time; setting it on the service would do nothing.
+substitutions:
+  _GA_ID: ''
+
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '--no-cache', '-t', 'us-central1-docker.pkg.dev/gptwiki/gptwiki/gptwiki:latest', '.']
+    args:
+      - 'build'
+      - '--no-cache'
+      - '--build-arg'
+      - 'NEXT_PUBLIC_GA_ID=${_GA_ID}'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/gptwiki/gptwiki/gptwiki:latest'
+      - '.'
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/gptwiki/gptwiki/gptwiki:latest']
