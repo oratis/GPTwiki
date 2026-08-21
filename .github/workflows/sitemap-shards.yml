@@ -5,16 +5,31 @@ name: sitemap-shards
 # without an in-request scan. The route serves the long-tail only once this has
 # populated the meta doc; until then it stays static + editorial + recent.
 #
-# Weekly is plenty — the long-tail changes slowly. Keyless via Workload Identity
-# Federation (the same GCP_WIF_PROVIDER / GCP_SEED_SA as auto-seed; the SA needs
-# Firestore write). Self-skips (stays green) until WIF is configured.
+# Keyless via Workload Identity Federation (the same GCP_WIF_PROVIDER /
+# GCP_SEED_SA as auto-seed; the SA needs Firestore write).
 #
-# CAVEAT: streaming ~19M refs can be slow off-region. If this job approaches the
-# timeout, move it to a Cloud Run Job in the Firestore region (Dockerfile.backfill
-# is the existing pattern) and trigger it from Cloud Scheduler instead.
+# WHY IT DIED, AND WHY A CLOUD RUN JOB WAS NOT THE ANSWER. Run 32463577209
+# (2026-08-21) failed after 10.6 min having read 7.5M of 19M ids. The earlier
+# note here blamed the job timeout and prescribed a Cloud Run Job; both were
+# wrong. The limit is in the client: the Firestore SDK stamps one startTime per
+# .stream() call and abandons the query once total_timeout_millis (600s for
+# runQuery) has elapsed, surfacing the server's EXECUTION_DEADLINE_EXCEEDED as
+# fatal instead of resuming. That budget travels with the code, so the same
+# stream would have died in a Cloud Run Job too. The script now walks the
+# collection in bounded 100k-doc pages, each with a fresh budget.
+#
+# COST — this job is armed deliberately, not by default. One full run reads
+# every document once: ~19M reads, roughly $11. And the artifact it publishes is
+# itself a read amplifier, since 9,485 sub-pages x 2,000 docs means a crawler
+# working through the whole index costs another full corpus of reads. On a
+# project designed to have no marginal cost, that is an owner's decision, so the
+# job no-ops unless the repo variable SITEMAP_SHARDS_ENABLED is set to a truthy
+# value. Nothing about the long tail is urgent: ingest is frozen, and fresh
+# content is already covered by the editorial and 60 recent-* buckets, which are
+# arithmetic and cost nothing.
 on:
   schedule:
-    - cron: '23 4 * * 0'   # Sundays 04:23 UTC
+    - cron: '23 4 1 * *'   # 1st of the month, 04:23 UTC — see COST above
   workflow_dispatch:
 
 permissions:
@@ -26,17 +41,43 @@ concurrency: sitemap-shards
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 330
+    # ~23 min at the 13,700 ids/s measured on a GitHub runner; 120 leaves 5x
+    # headroom while stopping a wedged run from holding the concurrency group
+    # for five and a half hours.
+    timeout-minutes: 120
     steps:
-      - name: Guard on WIF config
+      # Values come in through env, not interpolated into the script text: a
+      # repo variable containing a quote would otherwise turn this guard into a
+      # syntax error, i.e. a hard failure where a clean self-skip was intended.
+      - name: Guard on WIF config and the cost opt-in
         id: guard
+        env:
+          WIF_PROVIDER: ${{ vars.GCP_WIF_PROVIDER }}
+          SHARDS_ENABLED: ${{ vars.SITEMAP_SHARDS_ENABLED }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
-          if [ -n "${{ vars.GCP_WIF_PROVIDER }}" ]; then
-            echo "ready=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "ready=false" >> "$GITHUB_OUTPUT"
+          ready=true
+          if [ -z "$WIF_PROVIDER" ]; then
+            ready=false
             echo "::warning::sitemap-shards skipped — set repo variables GCP_WIF_PROVIDER + GCP_SEED_SA (Workload Identity Federation)."
           fi
+          case "$(echo "$SHARDS_ENABLED" | tr '[:upper:]' '[:lower:]')" in
+            1|true|yes) ;;
+            *)
+              ready=false
+              echo "::warning::sitemap-shards skipped — long-tail sitemap not armed. A run reads every doc (~19M reads, ~\$11) and the published index makes each full crawl cost another corpus of reads. Set repo variable SITEMAP_SHARDS_ENABLED=true to accept that; see docs/auto-content-ops.md."
+              ;;
+          esac
+          echo "ready=$ready" >> "$GITHUB_OUTPUT"
+          # A scheduled run self-skips green: a monthly red X for a job that is
+          # deliberately off is noise nobody would keep reading. A run someone
+          # ASKED for must not quietly do nothing — that is precisely how this
+          # workflow reported success for weeks while never once executing.
+          if [ "$ready" = "true" ] || [ "$EVENT_NAME" = "schedule" ]; then
+            exit 0
+          fi
+          echo "::error::sitemap-shards cannot run — see the warnings above. Set GCP_WIF_PROVIDER + GCP_SEED_SA, and SITEMAP_SHARDS_ENABLED=true to accept the ~19M-read cost."
+          exit 1
       - if: steps.guard.outputs.ready == 'true'
         uses: actions/checkout@v4
       - name: Authenticate to GCP (keyless, WIF)

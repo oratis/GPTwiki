@@ -78,15 +78,26 @@ Verify: `gh variable list --repo oratis/GPTwiki` shows `GCP_WIF_PROVIDER` + `GCP
 
 ## 5. (Optional) Full sitemap long-tail
 
-Default sitemap = static + all original + last 60 days (fast, no scan). To also
-enumerate the full ~19M mirror corpus:
+Default sitemap = static + all original + last 60 days (fast, no scan). The
+~19M mirror long-tail is **off by design and has never been enabled**: one run
+reads every document (~19M reads, ~$11), and the index it publishes is itself a
+read amplifier — 9,485 sub-pages x 2,000 docs, so a crawler working through the
+whole thing costs another full corpus of reads. Arming it is a cost decision:
 
 ```bash
-gh workflow run sitemap-shards.yml     # populates _meta/sitemap_shards
+gh variable set SITEMAP_SHARDS_ENABLED --body true   # accept the cost; without it the job self-skips
+gh workflow run sitemap-shards.yml                   # populates _meta/sitemap_shards
 ```
-Caveat: the ~19M stream can take ~5h off-region; if the job nears its timeout,
-move it to a Cloud Run Job in the Firestore region (`Dockerfile.backfill`
-pattern) + Cloud Scheduler.
+
+A dispatch with the variable unset fails loudly rather than skipping green.
+
+The scan is paged into bounded 100k-doc queries and takes ~23 min on a GitHub
+runner at the throughput measured before the fix. Do **not** respond to a
+deadline error by raising `timeout-minutes` or by moving the job to a Cloud Run
+Job — earlier advice here said exactly that, and it was wrong. The 600s budget
+that killed the old unbounded scan is the Firestore SDK's own per-`.stream()`
+retry timeout, so it travels with the code; lower `PAGE_SIZE` instead. See
+`docs/auto-content-ops.md`.
 
 ---
 

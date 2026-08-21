@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
 import { supportedLocales, defaultLocale } from '@/lib/i18n/server';
 import { ARENA_LOCALES } from '@/lib/arena/locales';
+import { SITEMAP_BATCH_SIZE as BATCH_SIZE, MAX_INDEX_SHARDS } from '@/lib/sitemap-shards';
 
 const BASE_URL = 'https://gptwiki.net';
-const BATCH_SIZE = 2000;
 const DAY_MS = 24 * 60 * 60 * 1000;
 const RECENT_DAYS = 60;       // recent content is sharded into this many daily buckets
 const EDITORIAL_CAP = 20000;  // all original (source: 'editorial') docs in one shard
@@ -68,7 +68,17 @@ async function generateSitemapIndex() {
     if (meta.exists) {
       const cps = (meta.data()?.checkpoints as string[] | undefined) ?? [];
       shard('0');
-      for (const id of cps) shard(encodeURIComponent(id));
+      // Clamped, not trusted: sitemaps.org caps an index at 50,000 entries and
+      // an over-long index is rejected whole — taking static, editorial and the
+      // recent buckets down with the long tail. Losing the tail of the corpus
+      // beats losing the sitemap. The builder keeps itself well under this.
+      const capped = cps.length > MAX_INDEX_SHARDS ? cps.slice(0, MAX_INDEX_SHARDS) : cps;
+      if (capped.length < cps.length) {
+        console.warn(
+          `sitemap index: ${cps.length} checkpoints exceeds ${MAX_INDEX_SHARDS}; serving the first ${capped.length}.`
+        );
+      }
+      for (const id of capped) shard(encodeURIComponent(id));
     }
   } catch (err) {
     console.error('sitemap shards read failed:', (err as Error).message);
