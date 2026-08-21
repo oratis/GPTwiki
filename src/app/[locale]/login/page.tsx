@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { BookOpen, Mail, CheckCircle, Loader2 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
+import { safeCallbackUrl } from '@/lib/safe-redirect';
 
 export default function LoginPage() {
   return (
@@ -24,7 +25,17 @@ function LoginInner() {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const callbackUrl = `/${locale}/chat`;
+  // Honour where the user was actually headed. NextAuth appends
+  // `?callbackUrl=<original>` when it bounces an unauthenticated request to
+  // `pages.signIn` (auth.ts), and in-app prompts such as the profile follow
+  // button pass it explicitly. Reading only `check` here meant every one of
+  // those journeys ended on /chat instead of where it started — a visible
+  // navigation bug, not just a lost attribution.
+  //
+  // `safeCallbackUrl` keeps that from becoming an open redirect: the value is
+  // attacker-controllable via the query string, so only same-origin paths are
+  // accepted and everything else falls back to /chat.
+  const callbackUrl = safeCallbackUrl(searchParams.get('callbackUrl'), `/${locale}/chat`);
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { UserPlus, UserCheck, Loader2 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
@@ -21,6 +21,7 @@ export default function FollowButton({ userId, initialFollowersCount = 0 }: Prop
   const { data: session, status } = useSession();
   const { locale, t } = useI18n();
   const router = useRouter();
+  const pathname = usePathname();
   const [following, setFollowing] = useState<boolean | null>(null);
   const [count, setCount] = useState(initialFollowersCount);
   const [pending, setPending] = useState(false);
@@ -48,7 +49,12 @@ export default function FollowButton({ userId, initialFollowersCount = 0 }: Prop
 
   const toggle = async () => {
     if (status !== 'authenticated') {
-      router.push(localeHref(locale, '/login'));
+      // Come back to this profile after signing in, rather than landing on
+      // /chat — the user was in the middle of following someone.
+      const returnTo = `${pathname}${window.location.search}`;
+      router.push(
+        `${localeHref(locale, '/login')}?callbackUrl=${encodeURIComponent(returnTo)}`
+      );
       return;
     }
     if (following === null || pending) return;
