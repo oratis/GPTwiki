@@ -85,6 +85,42 @@ function ensureH1(content: string, title: string): string {
   return /^#\s/.test(t) ? t : `# ${title}\n\n${t}`;
 }
 
+/**
+ * Editorial directives appended to the topic question before generation.
+ *
+ * The model's knowledge has a cutoff, but the article does not say so, and the
+ * generator was writing time-sensitive numbers as though they were current: the
+ * published roth-vs-traditional-ira article gives 2024 IRA contribution limits
+ * with no year on them, and led-vs-incandescent-math quoted a DOE forecast that
+ * had already been superseded.
+ *
+ * The fix is NOT to tell the model today's date and hope for fresher numbers —
+ * it does not have them, and inviting it to produce current-year figures it
+ * never saw is asking for fabrication. It is to make the vintage explicit, so a
+ * reader (and the reviewer) can see how old a figure is and judge it. A
+ * labelled 2024 limit is useful; an unlabelled one silently rots.
+ */
+function editorialDirectives(today: string): string {
+  return [
+    `Editorial requirements for this article (today's date is ${today}):`,
+    '',
+    '1. Any figure that changes over time — prices, tax limits, rates, statistics,',
+    '   forecasts, product availability — MUST carry the year it applies to, in the',
+    '   sentence or the table header. Write "the 2024 limit was $7,000", never',
+    '   "the limit is $7,000".',
+    '2. Do NOT invent current-year figures. If your most recent reliable data is',
+    '   older than today, give that figure WITH its year and say it may have',
+    '   changed. A clearly-dated older number is correct; an undated guess is not.',
+    '3. Do not describe a product, standard or programme as current if you are not',
+    '   confident it still exists. Prefer naming the category over a brand that may',
+    '   have been discontinued.',
+    '4. Keep every number internally consistent. If you state a rate and then build',
+    '   a table from it, compute the table at that exact rate and say so.',
+    '5. Cite only URLs you are confident resolve today. A citation that 404s is',
+    '   worse than no citation. Prefer stable landing pages over deep links.',
+  ].join('\n');
+}
+
 /** Reject weak/garbage generations (incl. provider's raw-dump fallback path).
  *  Structural only — citation health is checked separately in main(), because
  *  it needs the network. */
@@ -226,7 +262,15 @@ async function main(): Promise<void> {
   const drafts: DraftArticle[] = [];
   let zhCount = 0;
   for (const topic of topics) {
-    const convo: Message[] = [{ id: 'q', role: 'user', content: topic.question, timestamp: Date.now() }];
+    const today = new Date().toISOString().slice(0, 10);
+    const convo: Message[] = [
+      { id: 'q', role: 'user', content: topic.question, timestamp: Date.now() },
+      // Appended as a second turn rather than folded into generateWikiContent's
+      // system prompt: that helper is shared with the user-facing chat-publish
+      // path, and this is editorial policy for the auto-content pipeline only.
+      // sanitizeGenerated()'s fallbacks read conversation[0], which is untouched.
+      { id: 'editorial', role: 'user', content: editorialDirectives(today), timestamp: Date.now() },
+    ];
     let g;
     try {
       g = await withRetry(`generate ${topic.topicKey}`, () => generateWikiContent(MODEL, convo));

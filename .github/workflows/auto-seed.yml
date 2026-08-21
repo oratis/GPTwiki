@@ -50,7 +50,7 @@ jobs:
       - if: steps.guard.outputs.ready == 'true'
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 22
       - if: steps.guard.outputs.ready == 'true'
         run: npm ci
       - name: Seed en+zh + hero images
