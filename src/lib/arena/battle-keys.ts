@@ -5,6 +5,7 @@ import {
   consumeArenaBattleQuota,
   refundArenaBattleQuota,
 } from '@/lib/ai/free-quota';
+import { isPlatformOwner } from '@/lib/ai/platform-owner';
 import type { ModelPair } from './pairing';
 
 /**
@@ -21,8 +22,6 @@ import type { ModelPair } from './pairing';
  * `free-quota.ts`: with `ARENA_FREE_DAILY_BATTLES` unset, a battle requires the
  * user to hold keys for both providers and the platform pays nothing.
  */
-
-const OWNER_EMAIL = process.env.PLATFORM_OWNER_EMAIL || 'wangharp@gmail.com';
 
 const ALL_MODELS: AIModel[] = ['claude', 'gpt', 'gemini'];
 
@@ -68,7 +67,7 @@ export async function getBattleAvailability(userId: string): Promise<BattleAvail
   const [userKeys, email] = await Promise.all([getUserApiKeys(userId), getUserEmail(userId)]);
 
   const ownKeyModels = ALL_MODELS.filter((m) => Boolean(userKeyFor(m, userKeys)));
-  const platformAllowed = email === OWNER_EMAIL || arenaDailyBattleLimit() > 0;
+  const platformAllowed = isPlatformOwner(email) || arenaDailyBattleLimit() > 0;
   const platformModels = platformAllowed
     ? ALL_MODELS.filter((m) => !ownKeyModels.includes(m) && Boolean(envKeyFor(m)))
     : [];
@@ -127,7 +126,12 @@ export async function resolveBattleKeys(
 
   // Charge once per battle, and only when the platform is footing a side. The
   // owner account is exempt, matching resolveApiKeyForUser.
-  const metered = platformFunded && arenaDailyBattleLimit() > 0 && email !== OWNER_EMAIL;
+  //
+  // `!isPlatformOwner(email)` rather than `email !== OWNER_EMAIL`: the bare
+  // comparison skipped metering whenever both sides were nullish, so on a
+  // deployment with no owner configured, a user with no email on file got
+  // platform-funded battles that were never charged to any meter.
+  const metered = platformFunded && arenaDailyBattleLimit() > 0 && !isPlatformOwner(email);
   if (metered) {
     const quota = await consumeArenaBattleQuota(userId);
     if (!quota.ok) return { ok: false, reason: 'QUOTA_EXHAUSTED' };

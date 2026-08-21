@@ -86,7 +86,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `OPENAI_API_KEY` | Optional | OpenAI API key (GPT-4o) |
 | `GOOGLE_AI_API_KEY` | Optional | Google AI API key (Gemini) |
 | `FREE_DAILY_MESSAGES` | Optional | Free platform-keyed messages per user per day (default 0 = BYOK-only) |
-| `PLATFORM_OWNER_EMAIL` | Optional | Account exempt from the free-tier metering |
+| `PLATFORM_OWNER_EMAIL` | Optional | Account exempt from the free-tier metering. No default: when unset, nobody is exempt |
 | `TYPESENSE_HOST` / `TYPESENSE_API_KEY` | Optional | Self-hosted Typesense search backend (see `docs/typesense.md`); falls back to Firestore keyword search when unset |
 | `NEXT_PUBLIC_PAYPAL_CLIENT_ID` | Optional | PayPal Client ID for donations |
 | `PAYPAL_CLIENT_SECRET` | Optional | PayPal Client Secret |
