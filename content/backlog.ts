@@ -28,9 +28,9 @@ export const backlog: BacklogTopic[] = [
   // Pending — ADD NEW TOPICS HERE as { ..., status: 'pending' }, priority first.
   // Currently empty (all seeded), so the daily cron idles until you add more.
   //
-  { topicKey: 'roth-vs-traditional-ira', question: "Should I choose a Roth IRA or a traditional IRA, and how do I know which is better for my situation?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
-  { topicKey: 'docker-vs-vm', question: "When should I use Docker containers instead of a virtual machine, and what is the real difference?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
-  { topicKey: 'sunscreen-spf-guide', question: "What SPF sunscreen do I actually need, and does a higher number meaningfully protect me more?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'roth-vs-traditional-ira', question: "Should I choose a Roth IRA or a traditional IRA, and how do I know which is better for my situation?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'seeded' },
+  { topicKey: 'docker-vs-vm', question: "When should I use Docker containers instead of a virtual machine, and what is the real difference?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'seeded' },
+  { topicKey: 'sunscreen-spf-guide', question: "What SPF sunscreen do I actually need, and does a higher number meaningfully protect me more?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'password-manager-worth-it', question: "Is a password manager actually safe to use, and which type should I choose?", cluster: 'digital-security', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'air-fryer-vs-convection-oven', question: "Is an air fryer just a small convection oven, or is there a real cooking difference worth paying for?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'led-vs-incandescent-math', question: "How much money do I actually save by switching all my bulbs to LED?", cluster: 'home-energy', locales: ['en', 'zh'], status: 'pending' },
