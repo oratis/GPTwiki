@@ -46,6 +46,8 @@ export const backlog: BacklogTopic[] = [
   { topicKey: 'solar-panel-payback', question: "How long does it actually take for home solar panels to pay for themselves?", cluster: 'home-energy', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'two-factor-authentication', question: "Which type of two-factor authentication is actually most secure, and is SMS 2FA good enough?", cluster: 'digital-security', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'organic-food-worth-it', question: "Is organic food actually healthier or safer than conventional, and is it worth the extra cost?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'renting-vs-buying-home', question: "Is it better to rent or buy a home, and how do I know which makes more financial sense for my situation?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'blanching-why-it-matters', question: "What does blanching actually do to vegetables, and when should I bother doing it?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
   // Seeded to production (auto-author skips anything not `pending`).
   { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
