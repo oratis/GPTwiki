@@ -50,6 +50,9 @@ export const backlog: BacklogTopic[] = [
   { topicKey: 'blanching-why-it-matters', question: "What does blanching actually do to vegetables, and when should I bother doing it?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'hsa-vs-fsa', question: "What is the difference between an HSA and an FSA, and which one should I choose if I have the option?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'rest-vs-graphql', question: "Should I build my API with REST or GraphQL, and when does each approach actually make sense?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'deductible-vs-premium-tradeoff', question: "Should I choose a health insurance plan with a lower premium or a lower deductible, and how do I calculate which saves me more money?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'static-vs-dynamic-typing', question: "Should I learn a statically typed or dynamically typed language first, and does the distinction matter for most projects?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'cardio-vs-strength-training', question: "Should I prioritize cardio or strength training, and what does the research actually say about which is better for long-term health?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
   // Seeded to production (auto-author skips anything not `pending`).
   { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
