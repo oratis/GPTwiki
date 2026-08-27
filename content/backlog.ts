@@ -53,6 +53,8 @@ export const backlog: BacklogTopic[] = [
   { topicKey: 'deductible-vs-premium-tradeoff', question: "Should I choose a health insurance plan with a lower premium or a lower deductible, and how do I calculate which saves me more money?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'static-vs-dynamic-typing', question: "Should I learn a statically typed or dynamically typed language first, and does the distinction matter for most projects?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'cardio-vs-strength-training', question: "Should I prioritize cardio or strength training, and what does the research actually say about which is better for long-term health?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'stock-options-vs-rsu', question: "Should I prefer stock options or RSUs in a job offer, and how do I compare their real value?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'emulsification-explained', question: "What is emulsification in cooking, and how do I use it to make sauces that don't break?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
   // Seeded to production (auto-author skips anything not `pending`).
   { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
