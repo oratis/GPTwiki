@@ -22,8 +22,24 @@
  * budget is client-side, so moving this to a Cloud Run Job would not have
  * helped. Bounded pages each get a fresh budget, which is the entire fix.
  *
+ * VERIFIED, and the number that matters is the wall clock, not the id count.
+ * A capped run against production on 2026-08-21 walked 300,000 ids in 640s
+ * across 3 page boundaries and exited 0:
+ *
+ *   … 100,000 scanned,  50 shards, 1 pages, 196s (511/s)
+ *   … 200,000 scanned, 100 shards, 2 pages, 418s (478/s)
+ *   … 300,000 scanned, 150 shards, 3 pages, 640s (469/s)
+ *
+ * 640s is past the 600s `total_timeout_millis` that killed the single-stream
+ * version, so this run is the regression test: the old code could not have
+ * reached the end of it at any throughput. Reproduce with `--max=300000` from
+ * anywhere slow enough to take ten minutes — a fast in-region runner finishes
+ * 300k well inside the budget and therefore proves nothing.
+ *
  * Throughput measured 2026-08-21: ~13,700 ids/s on a GitHub-hosted runner
- * (in-region), far less from a home connection. Run it somewhere low-latency.
+ * (in-region) against ~470-510 ids/s over a home connection — roughly 28x, so
+ * a full sweep is ~23 min in-region and ~11 h from a laptop. Run it somewhere
+ * low-latency.
  *
  * Usage:
  *   npx tsx scripts/build-sitemap-shards.ts                 # dry-run (no write)

@@ -25,8 +25,15 @@ export interface BacklogTopic {
 }
 
 export const backlog: BacklogTopic[] = [
-  // Pending — ADD NEW TOPICS HERE as { ..., status: 'pending' }, priority first.
-  // Currently empty (all seeded), so the daily cron idles until you add more.
+  // Pending — ADD NEW TOPICS HERE, priority first, with the status set to
+  // pending. auto-author drafts from the top of this section; suggest-topics
+  // tops it up to 12 a day, so the queue refills itself.
+  //
+  // Deliberately no count. This line read "currently empty (all seeded)" from
+  // 2026-07-05 — true for five days, then wrong for the six weeks after
+  // suggest-topics began filling the queue on 2026-07-10. It also spelled the
+  // status literal exactly the way a real entry does, so greps that count
+  // entries by that literal counted the comment as a topic too.
   //
   { topicKey: 'roth-vs-traditional-ira', question: "Should I choose a Roth IRA or a traditional IRA, and how do I know which is better for my situation?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'docker-vs-vm', question: "When should I use Docker containers instead of a virtual machine, and what is the real difference?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'seeded' },
