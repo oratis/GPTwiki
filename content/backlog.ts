@@ -62,6 +62,9 @@ export const backlog: BacklogTopic[] = [
   { topicKey: 'cardio-vs-strength-training', question: "Should I prioritize cardio or strength training, and what does the research actually say about which is better for long-term health?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'stock-options-vs-rsu', question: "Should I prefer stock options or RSUs in a job offer, and how do I compare their real value?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'emulsification-explained', question: "What is emulsification in cooking, and how do I use it to make sauces that don't break?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'tax-loss-harvesting', question: "What is tax-loss harvesting, and is it actually worth doing for an average investor?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'soaking-dried-beans', question: "Do I really need to soak dried beans before cooking, and what difference does it actually make?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'bootcamp-vs-cs-degree', question: "Should I do a coding bootcamp or get a computer science degree to break into tech?", cluster: 'careers-work', locales: ['en', 'zh'], status: 'pending' },
   // Seeded to production (auto-author skips anything not `pending`).
   { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
