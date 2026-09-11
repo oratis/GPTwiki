@@ -65,6 +65,9 @@ export const backlog: BacklogTopic[] = [
   { topicKey: 'tax-loss-harvesting', question: "What is tax-loss harvesting, and is it actually worth doing for an average investor?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'soaking-dried-beans', question: "Do I really need to soak dried beans before cooking, and what difference does it actually make?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'bootcamp-vs-cs-degree', question: "Should I do a coding bootcamp or get a computer science degree to break into tech?", cluster: 'careers-work', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'high-yield-savings-vs-cds', question: "Should I put my savings in a high-yield savings account or a CD, and how do I decide which makes more sense for my money?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'cooking-oil-smoke-points', question: "Which cooking oil should I use for high-heat cooking, and does exceeding an oil's smoke point actually make it dangerous?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'container-vs-cloud-functions', question: "Should I deploy my app using containers or serverless cloud functions, and how do I choose based on my actual use case?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
   // Seeded to production (auto-author skips anything not `pending`).
   { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
