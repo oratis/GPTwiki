@@ -68,6 +68,9 @@ export const backlog: BacklogTopic[] = [
   { topicKey: 'high-yield-savings-vs-cds', question: "Should I put my savings in a high-yield savings account or a CD, and how do I decide which makes more sense for my money?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'cooking-oil-smoke-points', question: "Which cooking oil should I use for high-heat cooking, and does exceeding an oil's smoke point actually make it dangerous?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'container-vs-cloud-functions', question: "Should I deploy my app using containers or serverless cloud functions, and how do I choose based on my actual use case?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'roth-401k-vs-traditional-401k', question: "Should I contribute to a Roth 401(k) or a traditional 401(k), and how do I decide which is better for my situation?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'how-fever-works', question: "What is a fever actually doing in your body, and when should you treat it versus let it run its course?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'monorepo-vs-polyrepo', question: "Should I organize my codebase as a monorepo or multiple separate repositories, and what are the real trade-offs?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
   // Seeded to production (auto-author skips anything not `pending`).
   { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
