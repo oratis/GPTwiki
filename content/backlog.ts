@@ -71,6 +71,9 @@ export const backlog: BacklogTopic[] = [
   { topicKey: 'roth-401k-vs-traditional-401k', question: "Should I contribute to a Roth 401(k) or a traditional 401(k), and how do I decide which is better for my situation?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'how-fever-works', question: "What is a fever actually doing in your body, and when should you treat it versus let it run its course?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'monorepo-vs-polyrepo', question: "Should I organize my codebase as a monorepo or multiple separate repositories, and what are the real trade-offs?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'intermittent-fasting-evidence', question: "Does intermittent fasting actually work for weight loss, and is it any better than simply eating less throughout the day?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'llc-vs-sole-proprietorship', question: "Should I form an LLC or operate as a sole proprietor for my small business or side income, and is the extra cost and paperwork worth it?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'sql-vs-nosql', question: "Should I use a SQL or NoSQL database for my project, and how do I choose the right one for my actual use case?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
   // Seeded to production (auto-author skips anything not `pending`).
   { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
