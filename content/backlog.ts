@@ -74,6 +74,9 @@ export const backlog: BacklogTopic[] = [
   { topicKey: 'intermittent-fasting-evidence', question: "Does intermittent fasting actually work for weight loss, and is it any better than simply eating less throughout the day?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'llc-vs-sole-proprietorship', question: "Should I form an LLC or operate as a sole proprietor for my small business or side income, and is the extra cost and paperwork worth it?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'sql-vs-nosql', question: "Should I use a SQL or NoSQL database for my project, and how do I choose the right one for my actual use case?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'bond-vs-stock-allocation', question: "How should I decide what percentage of my portfolio to put in bonds versus stocks, and does the old age-based rule still make sense?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'microbiome-gut-health-basics', question: "What is the gut microbiome actually doing for my health, and do probiotics and fermented foods genuinely make a difference?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'smart-thermostat-savings', question: "Does installing a smart thermostat actually save money on energy bills, and how long before it pays for itself?", cluster: 'home-energy', locales: ['en', 'zh'], status: 'pending' },
   // Seeded to production (auto-author skips anything not `pending`).
   { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
