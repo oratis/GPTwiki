@@ -37,7 +37,7 @@ steps:
       - '--port'
       - '3000'
       - '--memory'
-      - '512Mi'
+      - '1Gi'
       - '--cpu'
       - '1'
       - '--min-instances'
