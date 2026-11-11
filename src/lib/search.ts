@@ -252,8 +252,7 @@ export function getCitedPopularWikis(language: string, limit = 9): Promise<Wiki[
     // Read a bounded ranked window so a missing reference never promotes an
     // uncited article into a homepage recommendation.
     const snap = await db.collection('wikis')
-      .where('language', '==', language)
-      .where('source', '==', 'editorial')
+      .where('editorialLocale', '==', language)
       .orderBy('views', 'desc')
       .limit(limit * 3)
       .select('title', 'summary', 'question', 'tags', 'views', 'aiModel', 'createdAt',
