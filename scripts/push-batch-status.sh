@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Run in the disposable Actions checkout, while it still holds the reviewed carrier.
 set -euo pipefail
-state="${1:?expected drafted or seeded}"
+state="${1:?expected pending, drafted or seeded}"
 case "$state" in
+  pending) args=(--pending) ;;
   drafted) args=(--drafted) ;;
   seeded) args=() ;;
   *) exit 2 ;;

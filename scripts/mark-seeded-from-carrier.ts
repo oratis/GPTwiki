@@ -18,8 +18,12 @@ const backlogPath = join(root, 'content', 'backlog.ts');
 const carrierKeys = [...new Set(autoDraftEn.flatMap(d => d.topicKey ? [d.topicKey] : []))];
 const keysFile = process.env.BATCH_TOPIC_KEYS_FILE;
 const keys: string[] = keysFile ? JSON.parse(readFileSync(keysFile, 'utf8')) : carrierKeys;
-const status = process.argv.includes('--drafted') ? 'drafted' : 'seeded';
-const from: BacklogStatus[] = status === 'drafted' ? ['pending'] : ['pending', 'drafted'];
+const status: BacklogStatus = process.argv.includes('--pending') ? 'pending'
+  : process.argv.includes('--drafted') ? 'drafted' : 'seeded';
+const transitions: Record<BacklogStatus, BacklogStatus[]> = {
+  pending: ['drafted'], drafted: ['pending'], seeded: ['pending', 'drafted'],
+};
+const from = transitions[status];
 let src = readFileSync(backlogPath, 'utf8');
 let marked = 0;
 for (const key of keys) {

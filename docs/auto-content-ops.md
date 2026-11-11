@@ -1,6 +1,6 @@
 # Auto-content pipeline — operations runbook
 
-Each new drafts PR adds its own dated `content/releases/YYYYMMDD-HHMMSS.json`. Multiple reviewed batches can merge independently. The generator still uses `content/auto-draft.en.ts` as local staging; the publisher also accepts legacy PRs that change that file. A failed seed is retried by rerunning the original Actions run, which retains its push range.
+Each new drafts PR adds its own dated `content/releases/YYYYMMDD-HHMMSS.json`. Multiple reviewed batches can merge independently. Closing a dated draft without merging returns only its still-drafted topics to pending. The generator still uses `content/auto-draft.en.ts` as local staging; the publisher also accepts legacy PRs that change that file. A failed seed is retried by rerunning the original Actions run, which retains its push range.
 
 How the unattended bilingual content pipeline works, how to run it day-to-day,
 and how to set it up from scratch. For the rationale + the for/against review
