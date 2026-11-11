@@ -1,7 +1,6 @@
 # P0 — Feishu app secret: rotate + scrub from history
 
-**Status: OPEN — the secret has been public since 2026-04-09 and has not been
-rotated.** Merging this runbook fixes nothing by itself; step 1 below is an owner
+**Status: OPEN pending owner confirmation of rotation. The last recorded check was 2026-08-21.** Merging this runbook fixes nothing by itself; step 1 below is an owner
 action in the Feishu console and is the only step that neutralizes the leak.
 
 ## What leaked
@@ -102,7 +101,7 @@ done
   is tracked again, or if a credential-shaped literal is assigned to a
   secret-named constant. Verified against the real historical file: both rules
   fire on `scripts/write-feishu.py` as it exists on the branches below.
-  It scans `git ls-files`, not the working tree, because the recurrence path is
+  CI checks all tracked paths. The commit hook checks changed blobs in the Git index, including partially staged files. The recurrence path is
   a file re-entering the index — not a file appearing on disk. It is a targeted
   guard, not a general scanner: a wide entropy scan over a 15-language content
   repo would produce false positives until someone turned it off.

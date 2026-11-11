@@ -57,15 +57,21 @@ const EXEMPT_FROM_LITERALS = new Set([
 // Text-ish files only: a scan of binary assets finds nothing but noise.
 const SCANNED = /\.(ts|tsx|js|jsx|mjs|cjs|py|sh|bash|zsh|json|ya?ml|toml|env|md|txt|Dockerfile)$|(^|\/)(Dockerfile|\.env[^/]*)$/;
 
+const staged = process.argv.includes('--staged');
+
 function trackedFiles(): string[] {
-  return execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' })
+  const args = staged
+    ? ['diff', '--cached', '--name-only', '--no-renames', '--diff-filter=ACMT', '-z']
+    : ['ls-files', '-z'];
+  return execFileSync('git', args, { encoding: 'utf8' })
     .split('\0')
     .filter(Boolean);
 }
 
 const findings: string[] = [];
 
-for (const file of trackedFiles()) {
+const files = trackedFiles();
+for (const file of files) {
   for (const rule of BANNED_PATHS) {
     if (rule.test(file)) findings.push(`${file}: banned path — ${rule.why}`);
   }
@@ -74,9 +80,12 @@ for (const file of trackedFiles()) {
 
   let content: string;
   try {
-    content = readFileSync(file, 'utf8');
+    content = staged
+      ? execFileSync('git', ['show', `:${file}`], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 })
+      : readFileSync(file, 'utf8');
   } catch {
-    continue; // unreadable or binary — nothing to scan
+    findings.push(`${file}: could not read tracked content`);
+    continue;
   }
   if (content.includes('\0')) continue;
 
@@ -101,4 +110,4 @@ if (findings.length) {
   process.exit(1);
 }
 
-console.log(`✓ no banned paths or credential literals in ${trackedFiles().length} tracked files`);
+console.log(`✓ no banned paths or credential literals in ${files.length} ${staged ? 'staged' : 'tracked'} files`);
