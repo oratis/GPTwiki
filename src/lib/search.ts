@@ -12,9 +12,7 @@ import type {
 import { encryptSecret, decryptSecret } from './crypto';
 import { hasHeaderImage } from './header-image';
 import {
-  SEARCH_STOPWORDS,
-  tokenize,
-  scriptAwareTokens,
+  searchQueryTerms,
   buildSearchKeywords,
 } from './search-keywords';
 import { cachedForTTL } from './ttl-cache';
@@ -119,7 +117,7 @@ const RECENT_TTL_MS = 60_000;
  * and a recent-doc window, then get scored in memory.
  */
 export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
-  if (!query.trim()) return [];
+  if (!query.trim() || limit <= 0) return [];
   logSearchBackendOnce();
 
   // Primary path: Typesense (typo tolerance, whole-collection ranking).
@@ -152,28 +150,19 @@ export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
     }
   }
 
-  const tokens = tokenize(query).filter((w) => w.length > 1);
-  // Drop stopwords for signal; if the query is *only* stopwords, fall back to
-  // the raw tokens so we still return something rather than nothing.
-  let keywords = tokens.filter((w) => !SEARCH_STOPWORDS.has(w));
-  if (keywords.length === 0) keywords = tokens;
-  // Script-aware tokens (CJK/Thai bigrams + latin words) drive the indexed
-  // keyword lookup; the whitespace tokens above drive in-memory scoring.
-  const indexTokens = scriptAwareTokens(query);
-  if (keywords.length === 0 && indexTokens.length === 0) return [];
-  if (keywords.length === 0) keywords = indexTokens;
+  const { indexTokens, keywords } = searchQueryTerms(query);
+  if (!keywords.length) return [];
   const phrase = keywords.join(' ');
+  const queryTitle = query.trim().toLowerCase();
 
-  // Candidate set, de-duplicated by id:
-  // 1. keywords-index matches — whole-collection recall for any doc whose
-  //    indexed tokens overlap the query (docs written before the backfill
-  //    simply lack the field and fall through to the other two pools)
-  // 2. exact tag matches (high precision)
-  // 3. a recent-doc pool for title/question substring hits
+  // Combine exact titles, keyword matches, matching tags and recent articles.
+  // Older documents without keywords can still match through the other pools.
   const candidates = new Map<string, FirebaseFirestore.DocumentData>();
   const rankingFields = ['title', 'question', 'tags', 'views'];
   const wikis = db.collection('wikis');
-  const [indexed, tagged, recent] = await Promise.all([
+  const [exactTitles, indexed, tagged, recent] = await Promise.all([
+    // An older article can fall outside all three bounded candidate windows.
+    wikis.where('title', '==', query.trim()).select(...rankingFields).limit(limit).get(),
     indexTokens.length
       ? wikis.where('keywords', 'array-contains-any', indexTokens.slice(0, 10))
           .select(...rankingFields).limit(100).get().then(snap => snap.docs)
@@ -185,7 +174,7 @@ export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
       return snap.docs.map(doc => ({ id: doc.id, data: doc.data() }));
     }),
   ]);
-  for (const doc of [...indexed, ...tagged]) candidates.set(doc.id, doc.data());
+  for (const doc of [...exactTitles.docs, ...indexed, ...tagged]) candidates.set(doc.id, doc.data());
   for (const doc of recent) {
     if (!candidates.has(doc.id)) candidates.set(doc.id, doc.data);
   }
@@ -193,7 +182,7 @@ export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
   // Score each candidate: title hits weigh most, then exact tag, then partial
   // tag / question. Counting distinct keyword hits ranks focused matches above
   // ones that only share an incidental word.
-  const scored: { id: string; data: FirebaseFirestore.DocumentData; score: number }[] = [];
+  const scored: { id: string; data: FirebaseFirestore.DocumentData; score: number; exact: boolean }[] = [];
   for (const [id, data] of candidates) {
     const title = (data.title || '').toLowerCase();
     const question = (data.question || '').toLowerCase();
@@ -209,11 +198,12 @@ export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
     // Whole-phrase title match is the strongest signal.
     if (keywords.length > 1 && title.includes(phrase)) score += 4;
 
-    if (score > 0) scored.push({ id, data, score });
+    const exact = title === queryTitle;
+    if (exact || score > 0) scored.push({ id, data, score, exact });
   }
 
   scored.sort(
-    (a, b) => b.score - a.score || (b.data.views || 0) - (a.data.views || 0)
+    (a, b) => Number(b.exact) - Number(a.exact) || b.score - a.score || (b.data.views || 0) - (a.data.views || 0)
   );
 
   const winners = scored.slice(0, limit).map(({ id }) => wikis.doc(id));
