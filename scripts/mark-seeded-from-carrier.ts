@@ -10,22 +10,28 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { autoDraftEn } from '../content/auto-draft.en';
-import { setTopicStatus } from '../content/backlog';
+import { setTopicStatus, type BacklogStatus } from '../content/backlog';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const backlogPath = join(root, 'content', 'backlog.ts');
 
-const keys = [...new Set(autoDraftEn.map((d) => d.topicKey).filter((k): k is string => !!k))];
+const carrierKeys = [...new Set(autoDraftEn.flatMap(d => d.topicKey ? [d.topicKey] : []))];
+const keysFile = process.env.BATCH_TOPIC_KEYS_FILE;
+const keys: string[] = keysFile ? JSON.parse(readFileSync(keysFile, 'utf8')) : carrierKeys;
+const status: BacklogStatus = process.argv.includes('--pending') ? 'pending'
+  : process.argv.includes('--drafted') ? 'drafted' : 'seeded';
+const transitions: Record<BacklogStatus, BacklogStatus[]> = {
+  pending: ['drafted'], drafted: ['pending'], seeded: ['pending', 'drafted'],
+};
+const from = transitions[status];
 let src = readFileSync(backlogPath, 'utf8');
 let marked = 0;
-for (const k of keys) {
-  // `drafted` is the normal state here (auto-author sets it when it opens the
-  // PR); `pending` still matches topics seeded outside that flow.
-  const next = setTopicStatus(src, k, ['pending', 'drafted'], 'seeded');
+for (const key of keys) {
+  const next = setTopicStatus(src, key, from, status);
   if (next !== null) {
     src = next;
     marked++;
   }
 }
 writeFileSync(backlogPath, src);
-console.log(`marked ${marked}/${keys.length} topic(s) seeded: ${keys.join(', ')}`);
+console.log(`marked ${marked}/${keys.length} topic(s) ${status}: ${keys.join(', ')}`);

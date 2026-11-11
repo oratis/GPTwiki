@@ -34,8 +34,10 @@ import {
   type ServiceAccount,
 } from 'firebase-admin/app';
 import { getFirestore, FieldValue, type Firestore } from 'firebase-admin/firestore';
+import { createHash } from 'node:crypto';
 import { Storage } from '@google-cloud/storage';
 import { config } from 'dotenv';
+import { readRelease, validateDraft } from './lib/editorial-release';
 import { hasHeaderImage } from '../src/lib/header-image';
 import { buildSearchKeywords } from '../src/lib/search-keywords';
 import {
@@ -43,7 +45,7 @@ import {
   toTypesenseDoc,
   upsertWikiToTypesense,
 } from '../src/lib/typesense';
-import type { DraftArticle, DraftLanguage } from '../content/types';
+import type { DraftArticle } from '../content/types';
 
 config({ path: '.env.local', override: true });
 
@@ -71,10 +73,6 @@ const IMG_W = 2560;
 const IMG_H = 1440;
 
 const GCS_BUCKET = process.env.GCS_WIKI_IMAGES_BUCKET || 'gptwiki-images';
-
-const LANGS = new Set<DraftLanguage>([
-  'en', 'zh', 'ja', 'ko', 'es', 'fr', 'de', 'pt', 'ru', 'ar', 'hi', 'it', 'tr', 'vi', 'th',
-]);
 
 // Batches seedable by this script. Add new clusters here.
 const BATCHES: Record<string, () => Promise<DraftArticle[]>> = {
@@ -120,26 +118,6 @@ function initStorage(): Storage {
 }
 
 // ─── Validation ──────────────────────────────────────────────────────────
-function validateDraft(d: DraftArticle, i: number): string[] {
-  const errs: string[] = [];
-  const at = `[${i}] "${d.title ?? '?'}"`;
-  for (const f of ['title', 'question', 'content', 'summary'] as const) {
-    if (!d[f] || typeof d[f] !== 'string') errs.push(`${at}: missing ${f}`);
-  }
-  if (!Array.isArray(d.tags) || d.tags.length < 1 || d.tags.length > 8) {
-    errs.push(`${at}: tags must have 1–8 entries`);
-  }
-  if (!LANGS.has(d.language)) errs.push(`${at}: bad language "${d.language}"`);
-  if (d.content && !d.content.startsWith('# ')) errs.push(`${at}: content must start with "# Title"`);
-  if (d.summary && d.summary.length > 320) errs.push(`${at}: summary too long (${d.summary.length})`);
-  if (d.image && !d.topicKey) errs.push(`${at}: image requires topicKey`);
-  if (d.image && (!d.image.prompt || !d.image.alt)) errs.push(`${at}: image needs prompt + alt`);
-  for (const s of d.sources ?? []) {
-    if (!s.title || !/^https:\/\//.test(s.url)) errs.push(`${at}: bad source ${s.url}`);
-  }
-  return errs;
-}
-
 // ─── Seedream ────────────────────────────────────────────────────────────
 async function generateImage(prompt: string): Promise<string> {
   const res = await fetch(ARK_ENDPOINT, {
@@ -228,7 +206,8 @@ async function main(): Promise<void> {
     console.error(`Unknown batch "${BATCH}". Available: ${Object.keys(BATCHES).join(', ')}`);
     process.exit(1);
   }
-  let drafts = await loadBatch();
+  const release = flag('release');
+  let drafts = release ? readRelease(release) : await loadBatch();
   if (ONLY.size) drafts = drafts.filter((d) => d.topicKey && ONLY.has(d.topicKey));
 
   console.log(`▸ batch=${BATCH} drafts=${drafts.length}${APPLY ? '' : ' (DRY RUN)'}${NO_IMAGES ? ' no-images' : ''}`);
@@ -306,7 +285,7 @@ async function main(): Promise<void> {
       console.log(`  ⏭  ${d.language} "${d.title}" (image missing)`);
       continue;
     }
-    if (await withRetry(`dup-check "${d.title}"`, () => slotTaken(db, d))) {
+    if (!release && await withRetry(`dup-check "${d.title}"`, () => slotTaken(db, d))) {
       stats.skippedDup++;
       console.log(`  ⏭  ${d.language} "${d.title}" (already seeded)`);
       continue;
@@ -353,8 +332,30 @@ async function main(): Promise<void> {
       continue;
     }
 
-    const ref = db.collection('wikis').doc();
-    await withRetry(`write "${d.title}"`, () => ref.set(doc));
+    const wikis = db.collection('wikis');
+    const ref = release ? wikis.doc(`editorial-${d.topicKey}-${d.language}`) : wikis.doc();
+    if (release) {
+      const digest = createHash('sha256').update(JSON.stringify(d)).digest('hex');
+      const created = await withRetry(`publish "${d.title}"`, () => db.runTransaction(async tx => {
+        const existing = await tx.get(ref);
+        if (existing.exists) {
+          if (existing.get('releaseDigest') !== digest || existing.get('authorId') !== EDITORIAL_ID) {
+            throw new Error(`Existing edition differs from reviewed release: ${ref.id}`);
+          }
+          return false;
+        }
+        tx.create(ref, { ...doc, editorialRelease: release, releaseDigest: digest });
+        tx.update(db.collection('users').doc(EDITORIAL_ID), { wikisCount: FieldValue.increment(1) });
+        return true;
+      }));
+      if (!created) {
+        stats.skippedDup++;
+        console.log(`  ✓ previously published ${d.language} "${d.title}" → /wiki/${ref.id}`);
+        continue;
+      }
+    } else {
+      await withRetry(`write "${d.title}"`, () => ref.set(doc));
+    }
     stats.created++;
     console.log(`  ✓ created       ${d.language} "${d.title}" → /wiki/${ref.id}`);
 
@@ -369,7 +370,7 @@ async function main(): Promise<void> {
     }
   }
 
-  if (APPLY && stats.created > 0) {
+  if (!release && APPLY && stats.created > 0) {
     await withRetry('wikisCount update', () =>
       db
         .collection('users')
@@ -383,7 +384,9 @@ async function main(): Promise<void> {
       `skipped-dup=${stats.skippedDup} skipped-no-image=${stats.skippedNoImage} ` +
       `images=${heroes.size}/${topics.size}`
   );
-  process.exit(0);
+  if (APPLY && stats.skippedNoImage > 0) {
+    throw new Error('Batch incomplete. Retry this run to publish the skipped editions.');
+  }
 }
 
 main().catch((err) => {

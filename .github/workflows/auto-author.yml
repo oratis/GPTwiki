@@ -58,6 +58,9 @@ jobs:
             --json headRefName --jq '[.[]|select(.headRefName|startswith("auto-draft/"))]|length')
           echo "open drafts PRs: $OPEN (max ${MAX_OPEN_DRAFT_PRS})"
           if [ "$OPEN" -ge "$MAX_OPEN_DRAFT_PRS" ]; then
+            echo "## Awaiting editorial review" >> "$GITHUB_STEP_SUMMARY"
+            gh pr list --state open --limit 200 --json number,url,createdAt,headRefName \
+              --jq '.[] | select(.headRefName | startswith("auto-draft/")) | "- [PR #\(.number)](\(.url)) opened \(.createdAt)"' >> "$GITHUB_STEP_SUMMARY"
             echo "go=false" >> "$GITHUB_OUTPUT"
             echo "::warning::auto-author skipped — $OPEN open auto-draft PRs (>= $MAX_OPEN_DRAFT_PRS). Merge or close them; drafting more would only burn API credit."
           else
@@ -78,7 +81,6 @@ jobs:
           if git diff --quiet -- content/backlog.ts; then
             echo "advanced=false" >> "$GITHUB_ENV"
           else
-            cp content/backlog.ts "$RUNNER_TEMP/backlog.ts"
             echo "advanced=true" >> "$GITHUB_ENV"
           fi
           git checkout -- content/backlog.ts
@@ -108,11 +110,15 @@ jobs:
             echo "opened=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          BRANCH="auto-draft/$(date +%Y%m%d-%H%M%S)"
+          stamp="$(date -u +%Y%m%d-%H%M%S)"
+          BRANCH="auto-draft/$stamp"
+          export BATCH_TOPIC_KEYS_FILE="$RUNNER_TEMP/batch-keys.json"
+          npx tsx scripts/editorial-release.ts export "$stamp"
+          git restore content/auto-draft.en.ts
           git config user.name "gptwiki-bot"
           git config user.email "bot@gptwiki.net"
           git checkout -b "$BRANCH"
-          git add content/auto-draft.en.ts
+          git add "content/releases/$stamp.json"
           # --no-verify: skip the husky lint-staged hook rewriting generated data.
           git commit --no-verify -m "auto-author: draft batch (review before seeding)"
           git push -u origin "$BRANCH"
@@ -125,14 +131,4 @@ jobs:
       # to be retried tomorrow rather than silently consumed.
       - name: Advance the backlog on main
         if: steps.backpressure.outputs.go == 'true' && steps.pr.outputs.opened == 'true' && env.advanced == 'true'
-        run: |
-          git config user.name "gptwiki-bot"
-          git config user.email "bot@gptwiki.net"
-          git checkout main
-          git pull --rebase origin main
-          cp "$RUNNER_TEMP/backlog.ts" content/backlog.ts
-          if git diff --quiet -- content/backlog.ts; then
-            echo "backlog already advanced upstream — nothing to push."; exit 0
-          fi
-          git commit --no-verify -m "backlog: mark drafted topics [skip ci]" -- content/backlog.ts
-          git push origin main
+        run: bash scripts/push-batch-status.sh drafted

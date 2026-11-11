@@ -18,13 +18,15 @@ name: auto-seed
 on:
   push:
     branches: [main]
-    paths: ['content/auto-draft.en.ts']
+    paths: ['content/auto-draft.en.ts', 'content/releases/*.json']
 
 permissions:
   contents: write   # push the backlog "mark seeded" commit
   id-token: write   # mint the OIDC token for WIF
 
-concurrency: auto-seed   # never seed two merges at once
+concurrency:
+  group: auto-seed
+  queue: max
 
 jobs:
   seed:
@@ -37,10 +39,13 @@ jobs:
             echo "ready=true" >> "$GITHUB_OUTPUT"
           else
             echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::auto-seed skipped — set repo variables GCP_WIF_PROVIDER + GCP_SEED_SA (Workload Identity Federation)."
+            echo "::error::Cannot publish the merged batch without WIF configuration."
+            exit 1
           fi
       - if: steps.guard.outputs.ready == 'true'
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Authenticate to GCP (keyless, WIF)
         if: steps.guard.outputs.ready == 'true'
         uses: google-github-actions/auth@v2
@@ -60,17 +65,11 @@ jobs:
         env:
           FIREBASE_PROJECT_ID: gptwiki
           ARK_API_KEY: ${{ secrets.ARK_API_KEY }}
-        run: npx tsx scripts/seed-editorial.ts --batch=auto-draft --apply
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          export BATCH_TOPIC_KEYS_FILE="$RUNNER_TEMP/batch-keys.json"
+          npx tsx scripts/editorial-release.ts publish "$BEFORE" "$AFTER"
       - name: Mark seeded topics in backlog
         if: steps.guard.outputs.ready == 'true'
-        run: |
-          npx tsx scripts/mark-seeded-from-carrier.ts
-          if git diff --quiet -- content/backlog.ts; then
-            echo "backlog unchanged"; exit 0
-          fi
-          git config user.name "gptwiki-bot"
-          git config user.email "bot@gptwiki.net"
-          # Only backlog.ts changes here, and that path isn't in the trigger's
-          # paths filter, so this push does NOT re-fire auto-seed (no loop).
-          git commit --no-verify -m "backlog: mark auto-seeded topics [skip ci]" -- content/backlog.ts
-          git push
+        run: bash scripts/push-batch-status.sh seeded
