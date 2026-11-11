@@ -6,6 +6,10 @@
 # NEXT_PUBLIC_* at build time; setting it on the service would do nothing.
 substitutions:
   _GA_ID: ''
+  # The hosted pilot funds one question and one publish per signed-in user.
+  # The global counter also covers platform-funded Arena battles (two units each).
+  _FREE_DAILY_MESSAGES: '2'
+  _FREE_GLOBAL_DAILY_GENERATIONS: '50'
 
 steps:
   - name: 'gcr.io/cloud-builders/docker'
@@ -36,6 +40,8 @@ steps:
       - '--allow-unauthenticated'
       - '--port'
       - '3000'
+      - '--update-env-vars'
+      - 'FREE_DAILY_MESSAGES=${_FREE_DAILY_MESSAGES},FREE_GLOBAL_DAILY_GENERATIONS=${_FREE_GLOBAL_DAILY_GENERATIONS}'
       - '--memory'
       - '1Gi'
       - '--cpu'
