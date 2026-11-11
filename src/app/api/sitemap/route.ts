@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { findPilotEdition, pilotEditions } from '@/lib/discovery-pilot';
 import { db } from '@/lib/firebase';
 import { supportedLocales, defaultLocale } from '@/lib/i18n/server';
 import { ARENA_LOCALES } from '@/lib/arena/locales';
 import { SITEMAP_BATCH_SIZE as BATCH_SIZE, MAX_INDEX_SHARDS } from '@/lib/sitemap-shards';
+
+import { findPilotEdition, pilotEditions } from '@/lib/discovery-pilot';
 
 const BASE_URL = 'https://gptwiki.net';
 const DAY_MS = 24 * 60 * 60 * 1000;
