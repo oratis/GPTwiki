@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { MessageSquarePlus, Loader2, Send, ChevronDown } from 'lucide-react';
+import Link from 'next/link';
+import { localeHref } from '@/lib/i18n/links';
 import { useI18n } from '@/lib/i18n/context';
 import { useToast } from '@/components/ui/Toast';
 import ThreadReplyCard from './ThreadReplyCard';
@@ -18,9 +20,9 @@ interface ThreadReplyListProps {
 }
 
 export default function ThreadReplyList({ wikiId, threadCount = 0, wikiAuthorId }: ThreadReplyListProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const { toast } = useToast();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
   const [threads, setThreads] = useState<ThreadReply[]>([]);
   const [loading, setLoading] = useState(false);
@@ -142,7 +144,7 @@ export default function ThreadReplyList({ wikiId, threadCount = 0, wikiAuthorId 
   if (!hasLoaded) return null;
 
   return (
-    <div className="mt-8">
+    <div id="follow-up" className="mt-8 scroll-mt-20">
       {/* Section header */}
       <div className="mb-4 flex items-center justify-between">
         <h2 className="flex items-center gap-2 text-lg font-semibold text-gray-900">
@@ -155,6 +157,14 @@ export default function ThreadReplyList({ wikiId, threadCount = 0, wikiAuthorId 
           )}
         </h2>
 
+        {status === 'unauthenticated' && (
+          <Link
+            href={`${localeHref(locale, '/login')}?callbackUrl=${encodeURIComponent(localeHref(locale, `/wiki/${wikiId}#follow-up`))}`}
+            className="rounded-lg border border-blue-600 px-3 py-1.5 text-sm font-medium text-blue-700 hover:bg-blue-50"
+          >
+            {t('thread.askFollowup')} · {t('login.title')}
+          </Link>
+        )}
         {session && !showCompose && (
           <button
             onClick={() => setShowCompose(true)}
