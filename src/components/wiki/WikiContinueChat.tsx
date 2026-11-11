@@ -1,5 +1,7 @@
 'use client';
 
+import { requestChat, trackProductEvent } from '@/lib/product-events';
+
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Send, RefreshCw, FilePlus, Loader2 } from 'lucide-react';
@@ -45,6 +47,7 @@ export default function WikiContinueChat({
     const trimmed = input.trim();
     if (!trimmed || loading) return;
 
+    trackProductEvent('question_submitted', 'article');
     const userMsg: Message = {
       id: generateId(),
       role: 'user',
@@ -58,7 +61,7 @@ export default function WikiContinueChat({
     setLoading(true);
 
     try {
-      const res = await fetch('/api/chat', {
+      const res = await requestChat('article', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -86,6 +89,7 @@ export default function WikiContinueChat({
         assistantMsg.content += decoder.decode(value, { stream: true });
         setNewMessages([...updatedNew, { ...assistantMsg }]);
       }
+      if (assistantMsg.content.trim()) trackProductEvent('answer_received', 'article');
     } catch (error) {
       console.error('Continue chat error:', error);
       setNewMessages([
@@ -152,6 +156,7 @@ export default function WikiContinueChat({
         throw new Error('Create failed');
       }
       const data = await res.json();
+      trackProductEvent('wiki_published', 'article');
       router.push(localeHref(locale, `/wiki/${data.id}`));
     } catch (error) {
       console.error('Create wiki error:', error);

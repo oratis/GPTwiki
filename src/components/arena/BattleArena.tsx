@@ -1,5 +1,7 @@
 'use client';
 
+import { trackProductEvent } from '@/lib/product-events';
+
 import { useCallback, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -145,6 +147,7 @@ export default function BattleArena() {
           setError(data?.error || t('arena.battle.voteFailed'));
           return;
         }
+        trackProductEvent('battle_voted', 'arena');
         setReveal(data as Reveal);
         setPhase('voted');
       } catch (err) {
@@ -174,6 +177,7 @@ export default function BattleArena() {
         setPublishState('idle');
         return;
       }
+      if (!data.alreadyPublished) trackProductEvent('wiki_published', 'arena');
       setPublishedWikiId(data.wikiId as string);
       setPublishState('done');
     } catch (err) {

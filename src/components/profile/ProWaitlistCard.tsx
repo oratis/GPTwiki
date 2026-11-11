@@ -1,5 +1,7 @@
 'use client';
 
+import { trackProductEvent } from '@/lib/product-events';
+
 import { useEffect, useState } from 'react';
 import { Sparkles, Check, Loader2 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
@@ -39,6 +41,7 @@ export default function ProWaitlistCard() {
     try {
       const res = await fetch('/api/waitlist', { method: 'POST' });
       if (!res.ok) throw new Error('join failed');
+      trackProductEvent('waitlist_joined', 'profile');
       setJoined(true);
     } catch {
       toast(t('chat.error'));

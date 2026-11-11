@@ -46,6 +46,11 @@ const buildConfig = (): NextAuthConfig => ({
       from: process.env.AUTH_EMAIL_FROM || 'no-reply@gptwiki.net',
     }),
   ],
+  events: {
+    signIn({ isNewUser }) {
+      console.info(JSON.stringify({ msg: 'sign_in_completed', newAccount: isNewUser === true }));
+    },
+  },
   callbacks: {
     async signIn({ user }) {
       // Gate sign-in on having an email. The mirror to `users` lives in the
