@@ -247,6 +247,24 @@ export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
  * FAILED_PRECONDITION; we log it and fall back to the unfiltered query so
  * the page still renders.
  */
+export function getCitedPopularWikis(language: string, limit = 9): Promise<Wiki[]> {
+  return cachedForTTL(`cited-popular:${language}:${limit}`, SITEWIDE_TTL_MS, async () => {
+    // Read a bounded ranked window so a missing reference never promotes an
+    // uncited article into a homepage recommendation.
+    const snap = await db.collection('wikis')
+      .where('language', '==', language)
+      .where('source', '==', 'editorial')
+      .orderBy('views', 'desc')
+      .limit(limit * 3)
+      .select('title', 'summary', 'question', 'tags', 'views', 'aiModel', 'createdAt',
+        'authorName', 'imageUrl', 'threadCount', 'sources')
+      .get();
+    return snap.docs.map(doc => ({ id: doc.id, ...doc.data() } as Wiki))
+      .filter(wiki => wiki.sources?.some(source => /^https?:\/\//i.test(source.url)))
+      .slice(0, limit);
+  });
+}
+
 export async function getPopularWikis(limit = 12, language?: string): Promise<Wiki[]> {
   return cachedForTTL(`popular:${limit}:${language ?? '*'}`, SITEWIDE_TTL_MS, async () => {
     try {

@@ -5,7 +5,7 @@ import { MessageSquarePlus, TrendingUp, Clock } from 'lucide-react';
 import WikiCard from '@/components/wiki/WikiCard';
 import HomeSearchIsland from '@/components/wiki/HomeSearchIsland';
 import RecentWikisSection from '@/components/wiki/RecentWikisSection';
-import { getPopularWikis, getRecentWikis } from '@/lib/search';
+import { getCitedPopularWikis, getRecentWikis } from '@/lib/search';
 import {
   hasLocale,
   supportedLocales,
@@ -67,9 +67,9 @@ export default async function HomePage({
   // Failures fall back to empty arrays — the page renders without that
   // section rather than 500-ing on a transient Firestore error.
   // Filter by the current locale so /en shows English wikis, /zh Chinese,
-  // etc. (with fallback to unfiltered if the composite index is missing).
+  // etc. Featured recommendations require a cited editorial article.
   const [popular, recent] = await Promise.all([
-    getPopularWikis(9, locale).catch(() => []),
+    getCitedPopularWikis(locale).catch(() => []),
     getRecentWikis(12, locale).catch(() => []),
   ]);
 
