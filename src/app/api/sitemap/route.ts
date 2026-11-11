@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { articleLocale, articleUrl } from '@/lib/wiki-language';
 import { db } from '@/lib/firebase';
 import { supportedLocales, defaultLocale } from '@/lib/i18n/server';
 import { ARENA_LOCALES } from '@/lib/arena/locales';
@@ -101,7 +102,7 @@ async function generateSitemapPage(pageKey: string) {
         .collection('wikis')
         .where('source', '==', 'editorial')
         .limit(EDITORIAL_CAP)
-        .select('createdAt', 'updatedAt')
+        .select('createdAt', 'updatedAt', 'language', 'source')
         .get();
       xml += wikiUrls(snap);
     } else if (pageKey.startsWith('recent-')) {
@@ -115,14 +116,14 @@ async function generateSitemapPage(pageKey: string) {
         .where('createdAt', '<', start + DAY_MS)
         .orderBy('createdAt', 'desc')
         .limit(BATCH_SIZE)
-        .select('createdAt', 'updatedAt')
+        .select('createdAt', 'updatedAt', 'language', 'source')
         .get();
       xml += wikiUrls(snap);
     } else {
       // Legacy __name__-cursor page (keeps previously-submitted URLs working).
       let q = db.collection('wikis').orderBy('__name__');
       if (pageKey !== '0') q = q.startAfter(pageKey);
-      const snap = await q.limit(BATCH_SIZE).select('createdAt', 'updatedAt').get();
+      const snap = await q.limit(BATCH_SIZE).select('createdAt', 'updatedAt', 'language', 'source').get();
       xml += wikiUrls(snap);
     }
   } catch (err) {
@@ -179,10 +180,11 @@ function staticUrls(): string {
 function wikiUrls(snap: FirebaseFirestore.QuerySnapshot): string {
   let xml = '';
   for (const doc of snap.docs) {
-    const data = doc.data() as { createdAt?: number; updatedAt?: number };
+    const data = doc.data() as { createdAt?: number; updatedAt?: number; language?: string; source?: string };
     const ts = data.updatedAt ?? data.createdAt;
     const lastmod = ts ? new Date(ts).toISOString() : undefined;
-    xml += urlWithAlternates(`/wiki/${doc.id}`, 'weekly', 0.7, lastmod);
+    const loc = articleUrl(doc.id, articleLocale(data.language, data.source));
+    xml += `  <url><loc>${escapeXml(loc)}</loc>${lastmod ? '<lastmod>' + lastmod + '</lastmod>' : ''}</url>\n`;
   }
   return xml;
 }

@@ -321,6 +321,7 @@ async function main(): Promise<void> {
       summary: d.summary,
       tags: d.tags,
       language: d.language,
+      ...(d.topicKey ? { topicKey: d.topicKey } : {}),
       authorId: EDITORIAL_ID,
       authorName: EDITORIAL_NAME,
       authorImage: '',
