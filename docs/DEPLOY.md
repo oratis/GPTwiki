@@ -123,3 +123,10 @@ Topics auto-fill, drafts auto-generate (en+zh+image), merge auto-publishes.
 
 Workflows: `suggest-topics` (daily 03:07) · `auto-author` (daily 03:17) ·
 `auto-seed` (on merge) · `sitemap-shards` (Sun 04:23).
+
+
+## Hosted first-question trial
+
+The Cloud Build deployment applies a daily allowance of two platform-funded chat or article generations per signed-in account, sharing a 50-generation UTC daily ceiling with the Arena. One successful question followed by publishing normally uses both personal units. Existing accounts with their own provider keys keep their existing access. These limits count generations; provider choice and token usage determine the actual bill. The app default outside this deployment remains BYOK.
+
+For a rollout, keep the production GA measurement build argument and provider keys in place. Verify a fresh account can receive an answer, publish it, and see the quota message on the next attempt. Compare first answers, publications and seven-day returns against provider usage. Set `_FREE_DAILY_MESSAGES=0` in future builds to turn off the chat allowance. For an immediate rollback update `FREE_DAILY_MESSAGES=0` on the running service and keep the global Arena ceiling in place.
