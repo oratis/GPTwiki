@@ -70,7 +70,16 @@ export default function WikiContinueChat({
         }),
       });
 
-      if (!res.ok) throw new Error('Chat request failed');
+      if (!res.ok) {
+        const err = await res.json().catch(() => null);
+        if (err?.error === 'API_KEY_REQUIRED' || err?.error === 'QUOTA_EXHAUSTED') {
+          setNewMessages(newMessages);
+          setInput(trimmed);
+          toast(t(err.error === 'API_KEY_REQUIRED' ? 'apiKeys.required' : 'chat.quotaExhausted'));
+          return;
+        }
+        throw new Error('Chat request failed');
+      }
       const reader = res.body?.getReader();
       if (!reader) throw new Error('No response body');
 
@@ -92,10 +101,9 @@ export default function WikiContinueChat({
       if (assistantMsg.content.trim()) trackProductEvent('answer_received', 'article');
     } catch (error) {
       console.error('Continue chat error:', error);
-      setNewMessages([
-        ...updatedNew,
-        { id: generateId(), role: 'assistant', content: t('chat.error'), timestamp: Date.now() },
-      ]);
+      setNewMessages(newMessages);
+      setInput(trimmed);
+      toast(t('chat.error'));
     } finally {
       setLoading(false);
     }
@@ -114,6 +122,10 @@ export default function WikiContinueChat({
 
       if (!res.ok) {
         const err = await res.json().catch(() => null);
+        if (err?.error === 'API_KEY_REQUIRED') {
+          toast(t('apiKeys.required'));
+          return;
+        }
         if (err?.error === 'QUOTA_EXHAUSTED') {
           toast(t('chat.quotaExhausted'));
           return;
@@ -149,6 +161,10 @@ export default function WikiContinueChat({
 
       if (!res.ok) {
         const err = await res.json().catch(() => null);
+        if (err?.error === 'API_KEY_REQUIRED') {
+          toast(t('apiKeys.required'));
+          return;
+        }
         if (err?.error === 'QUOTA_EXHAUSTED') {
           toast(t('chat.quotaExhausted'));
           return;
