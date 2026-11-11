@@ -50,72 +50,87 @@ export default function DonatePage() {
   const activeAmount = customAmount || amount;
 
   useEffect(() => {
-    // Load PayPal SDK v6
-    if (document.querySelector('script[src*="paypal.com/web-sdk"]')) {
-      initPayPal();
-      return;
-    }
+    let cancelled = false;
+    async function initPayPal() {
+      try {
+        if (!window.paypal || cancelled) return;
 
-    const script = document.createElement('script');
-    script.src = 'https://www.paypal.com/web-sdk/v6/core';
-    script.async = true;
-    script.onload = () => initPayPal();
-    script.onerror = () => setError(t('errors.paypalLoad'));
-    document.body.appendChild(script);
-  }, []);
+        // Fetch client ID at runtime (NEXT_PUBLIC_ vars aren't available at Cloud Build time)
+        const configRes = await fetch('/api/paypal/config');
+        if (!configRes.ok) return;
+        const { clientId } = await configRes.json();
+        if (!clientId) return;
 
-  async function initPayPal() {
-    try {
-      if (!window.paypal) return;
-
-      // Fetch client ID at runtime (NEXT_PUBLIC_ vars aren't available at Cloud Build time)
-      const configRes = await fetch('/api/paypal/config');
-      if (!configRes.ok) return;
-      const { clientId } = await configRes.json();
-      if (!clientId) return;
-
-      const sdkInstance = await window.paypal.createInstance({
-        clientId,
-        components: ['paypal-payments'],
-      });
-
-      const methods = await sdkInstance.findEligibleMethods({ currencyCode: 'USD' });
-
-      if (methods.isEligible('paypal')) {
-        const paymentSession = await sdkInstance.createPayPalOneTimePaymentSession({
-          onApprove: async (data) => {
-            try {
-              const res = await fetch('/api/paypal/capture-order', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ orderId: data.orderId }),
-              });
-              if (!res.ok) throw new Error('Capture failed');
-              setSuccess(true);
-              setProcessing(false);
-            } catch {
-              setError(t('donate.error'));
-              setProcessing(false);
-            }
-          },
-          onCancel: () => {
-            setProcessing(false);
-          },
-          onError: (err) => {
-            console.error('PayPal error:', err);
-            setError(t('donate.error'));
-            setProcessing(false);
-          },
+        const sdkInstance = await window.paypal.createInstance({
+          clientId,
+          components: ['paypal-payments'],
         });
 
-        sessionRef.current = paymentSession;
-        setSdkReady(true);
+        const methods = await sdkInstance.findEligibleMethods({ currencyCode: 'USD' });
+
+        if (methods.isEligible('paypal')) {
+          const paymentSession = await sdkInstance.createPayPalOneTimePaymentSession({
+            onApprove: async (data) => {
+              try {
+                const res = await fetch('/api/paypal/capture-order', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ orderId: data.orderId }),
+                });
+                if (!res.ok) throw new Error('Capture failed');
+                setSuccess(true);
+                setProcessing(false);
+              } catch {
+                setError(t('donate.error'));
+                setProcessing(false);
+              }
+            },
+            onCancel: () => {
+              setProcessing(false);
+            },
+            onError: (err) => {
+              console.error('PayPal error:', err);
+              setError(t('donate.error'));
+              setProcessing(false);
+            },
+          });
+
+          if (cancelled) return;
+          sessionRef.current = paymentSession;
+          setSdkReady(true);
+        }
+      } catch (err) {
+        console.error('PayPal init error:', err);
+        if (!cancelled) setError(t('errors.paypalLoad'));
       }
-    } catch (err) {
-      console.error('PayPal init error:', err);
-      setError(t('errors.paypalLoad'));
     }
-  }
+
+    const src = 'https://www.paypal.com/web-sdk/v6/core';
+    const previous = document.querySelector<HTMLScriptElement>(`script[src="${src}"]`);
+    const script = previous ?? document.createElement('script');
+    const onLoad = () => { void initPayPal(); };
+    const onError = () => {
+      script.remove();
+      setError(t('errors.paypalLoad'));
+    };
+    if (window.paypal) {
+      onLoad();
+    } else {
+      script.addEventListener('load', onLoad);
+      script.addEventListener('error', onError);
+      if (!previous) {
+        script.src = src;
+        script.async = true;
+        document.body.appendChild(script);
+      }
+    }
+    return () => {
+      cancelled = true;
+      script.removeEventListener('load', onLoad);
+      script.removeEventListener('error', onError);
+      sessionRef.current = null;
+    };
+  }, [t]);
 
   async function handleDonate() {
     if (!sessionRef.current || processing) return;
