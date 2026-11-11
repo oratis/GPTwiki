@@ -18,6 +18,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { config } from 'dotenv';
 import { getAIStream } from '../src/lib/ai/provider';
+import { editorialTopicCatalog } from './lib/editorial-topic-catalog';
 import { backlog } from '../content/backlog';
 
 config({ path: '.env.local', override: true });
@@ -71,8 +72,10 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  const existing = new Set(backlog.map((t) => t.topicKey.toLowerCase()));
-  const existingList = backlog.map((t) => `- ${t.topicKey}: ${t.question}`).join('\n');
+  const catalog = await editorialTopicCatalog();
+  for (const topic of backlog) catalog.set(topic.topicKey, topic.question);
+  const existing = new Set(catalog.keys());
+  const existingList = [...catalog].map(([key, question]) => `- ${key}: ${question}`).join('\n');
 
   const prompt = `You curate topics for GPTwiki, a practical Q&A encyclopedia of evergreen "how-to / which-should-I-choose / is-X-worth-it" questions people actually search for. Suggest ${need} NEW topics across varied domains.
 
