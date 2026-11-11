@@ -45,6 +45,9 @@ const nextConfig: NextConfig = {
     // Dev-only escape hatch; production keeps the guard.
     dangerouslyAllowLocalIP: process.env.NODE_ENV === "development",
   },
+  async rewrites() {
+    return [{ source: '/sitemap.xml', destination: '/api/sitemap' }];
+  },
   async headers() {
     return [
       {

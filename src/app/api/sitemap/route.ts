@@ -5,6 +5,8 @@ import { supportedLocales, defaultLocale } from '@/lib/i18n/server';
 import { ARENA_LOCALES } from '@/lib/arena/locales';
 import { SITEMAP_BATCH_SIZE as BATCH_SIZE, MAX_INDEX_SHARDS } from '@/lib/sitemap-shards';
 
+import { findPilotEdition, pilotEditions } from '@/lib/discovery-pilot';
+
 const BASE_URL = 'https://gptwiki.net';
 const DAY_MS = 24 * 60 * 60 * 1000;
 const RECENT_DAYS = 60;       // recent content is sharded into this many daily buckets
@@ -51,10 +53,11 @@ async function generateSitemapIndex() {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
   const shard = (page: string) => {
-    xml += `  <sitemap><loc>${BASE_URL}/api/sitemap?page=${page}</loc></sitemap>\n`;
+    xml += `  <sitemap><loc>${BASE_URL}/sitemap.xml?page=${page}</loc></sitemap>\n`;
   };
   shard('static');
   shard('editorial');
+  shard('pilot');
   // One shard per recent UTC day, newest first.
   const todayStart = Math.floor(Date.now() / DAY_MS) * DAY_MS;
   for (let i = 0; i < RECENT_DAYS; i++) {
@@ -95,7 +98,16 @@ async function generateSitemapPage(pageKey: string) {
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n';
 
   try {
-    if (pageKey === 'static') {
+    if (pageKey === 'pilot') {
+      const docs = await db.getAll(...pilotEditions.map(e => db.collection('wikis').doc(e.id)),
+        { fieldMask: ['title', 'source', 'language'] });
+      for (const doc of docs) {
+        const edition = findPilotEdition({ ...doc.data(), id: doc.id });
+        if (doc.exists && edition) {
+          xml += urlNoLocale(`${BASE_URL}/${edition.language}/wiki/${edition.id}`, 'monthly', 0.7);
+        }
+      }
+    } else if (pageKey === 'static') {
       xml += staticUrls();
     } else if (pageKey === 'editorial') {
       const snap = await db

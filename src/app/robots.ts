@@ -35,7 +35,7 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: 'https://gptwiki.net/api/sitemap',
+    sitemap: 'https://gptwiki.net/sitemap.xml',
     host: 'https://gptwiki.net',
   };
 }

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { ArrowLeft, Eye, Bot, Clock, Tag, User, Users, BookOpen, ExternalLink, History } from 'lucide-react';
+import { findPilotEdition } from '@/lib/discovery-pilot';
 import WikiContent from '@/components/wiki/WikiContent';
 import ShareButtons from '@/components/wiki/ShareButtons';
 import EmbedCodeButton from '@/components/wiki/EmbedCodeButton';
@@ -191,6 +192,8 @@ export default async function WikiDetailPage({
   void incrementWikiViews(id);
 
   // Edit history — empty for never-edited wikis, so the query is cheap.
+  const pilotReference = findPilotEdition(wiki)?.reference;
+  const sources = wiki.sources?.length ? wiki.sources : pilotReference ? [pilotReference] : [];
   const revisions = await getWikiRevisions(id).catch(() => []);
 
   const t = getTranslations(locale);
@@ -312,14 +315,14 @@ export default async function WikiDetailPage({
           <WikiContent content={wiki.content} />
         </div>
 
-        {(wiki.sources?.length ?? 0) > 0 && (
+        {sources.length > 0 && (
           <section className="mt-8 border-t border-gray-100 pt-6">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-gray-900">
               <BookOpen className="h-5 w-5 text-gray-500" />
               {t('wiki.references')}
             </h2>
             <ol className="list-decimal space-y-1 pl-5 text-sm">
-              {wiki.sources!.map((src, i) => (
+              {sources.map((src, i) => (
                 <li key={i} className="text-gray-600">
                   <a
                     href={src.url}

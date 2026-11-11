@@ -116,6 +116,10 @@ retry timeout, so it travels with the code; lower `PAGE_SIZE` instead. See
 
 ---
 
+## Search discovery pilot
+
+After deployment, open `/sitemap.xml?page=pilot` and compare its canonical URLs with `src/lib/discovery-pilot.json`. Submit the root `/sitemap.xml` index in Search Console. Record the last read, discovered and indexed URLs, impressions and clicks for the pilot at launch and after 7 and 28 days. The former `/api/sitemap` entry point continues to work. Expand the legacy cohort by reviewing specific articles and their supporting sources.
+
 ## Steady state (after the above)
 
 Your only recurring action is **merging the daily content PR** (the review gate).
