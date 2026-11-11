@@ -171,33 +171,24 @@ export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
   // 2. exact tag matches (high precision)
   // 3. a recent-doc pool for title/question substring hits
   const candidates = new Map<string, FirebaseFirestore.DocumentData>();
-
-  if (indexTokens.length > 0) {
-    const kwSnap = await db
-      .collection('wikis')
-      .where('keywords', 'array-contains-any', indexTokens.slice(0, 10))
-      .limit(100)
-      .get();
-    kwSnap.docs.forEach((doc) => candidates.set(doc.id, doc.data()));
+  const rankingFields = ['title', 'question', 'tags', 'views'];
+  const wikis = db.collection('wikis');
+  const [indexed, tagged, recent] = await Promise.all([
+    indexTokens.length
+      ? wikis.where('keywords', 'array-contains-any', indexTokens.slice(0, 10))
+          .select(...rankingFields).limit(100).get().then(snap => snap.docs)
+      : [],
+    wikis.where('tags', 'array-contains-any', keywords.slice(0, 10))
+      .select(...rankingFields).limit(50).get().then(snap => snap.docs),
+    cachedForTTL('search:recent-candidates', RECENT_TTL_MS, async () => {
+      const snap = await wikis.orderBy('createdAt', 'desc').limit(150).select(...rankingFields).get();
+      return snap.docs.map(doc => ({ id: doc.id, data: doc.data() }));
+    }),
+  ]);
+  for (const doc of [...indexed, ...tagged]) candidates.set(doc.id, doc.data());
+  for (const doc of recent) {
+    if (!candidates.has(doc.id)) candidates.set(doc.id, doc.data);
   }
-
-  const tagSnap = await db
-    .collection('wikis')
-    .where('tags', 'array-contains-any', keywords.slice(0, 10))
-    .limit(50)
-    .get();
-  tagSnap.docs.forEach((doc) => {
-    if (!candidates.has(doc.id)) candidates.set(doc.id, doc.data());
-  });
-
-  const recentSnap = await db
-    .collection('wikis')
-    .orderBy('createdAt', 'desc')
-    .limit(150)
-    .get();
-  recentSnap.docs.forEach((doc) => {
-    if (!candidates.has(doc.id)) candidates.set(doc.id, doc.data());
-  });
 
   // Score each candidate: title hits weigh most, then exact tag, then partial
   // tag / question. Counting distinct keyword hits ranks focused matches above
@@ -225,7 +216,12 @@ export async function searchWikis(query: string, limit = 10): Promise<Wiki[]> {
     (a, b) => b.score - a.score || (b.data.views || 0) - (a.data.views || 0)
   );
 
-  return scored.slice(0, limit).map(({ id, data }) => ({ id, ...data } as Wiki));
+  const winners = scored.slice(0, limit).map(({ id }) => wikis.doc(id));
+  if (!winners.length) return [];
+  // Firestore getAll returns snapshots in reference order. Hydrate only the
+  // winners so existing consumers still receive the complete Wiki shape.
+  const docs = await db.getAll(...winners);
+  return docs.filter(doc => doc.exists).map(doc => ({ id: doc.id, ...doc.data() } as Wiki));
 }
 
 /**
