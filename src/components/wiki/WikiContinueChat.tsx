@@ -1,6 +1,6 @@
 'use client';
 
-import { trackProductEvent } from '@/lib/product-events';
+import { requestChat, trackProductEvent } from '@/lib/product-events';
 
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -61,7 +61,7 @@ export default function WikiContinueChat({
     setLoading(true);
 
     try {
-      const res = await fetch('/api/chat', {
+      const res = await requestChat('article', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -70,13 +70,7 @@ export default function WikiContinueChat({
         }),
       });
 
-      if (!res.ok) {
-        const err = await res.json().catch(() => null);
-        if (err?.error === 'API_KEY_REQUIRED' || err?.error === 'QUOTA_EXHAUSTED') {
-          trackProductEvent('question_denied', 'article', err.error);
-        }
-        throw new Error('Chat request failed');
-      }
+      if (!res.ok) throw new Error('Chat request failed');
       const reader = res.body?.getReader();
       if (!reader) throw new Error('No response body');
 

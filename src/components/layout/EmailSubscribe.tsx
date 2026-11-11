@@ -1,5 +1,7 @@
 'use client';
 
+import { trackProductEvent } from '@/lib/product-events';
+
 import { useState } from 'react';
 import { Mail, Check, Loader2 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
@@ -29,6 +31,7 @@ export default function EmailSubscribe() {
         setStatus('error');
         return;
       }
+      trackProductEvent('newsletter_submitted', 'footer');
       setStatus('done');
       setEmail('');
     } catch {

@@ -1,6 +1,6 @@
 'use client';
 
-import { trackProductEvent } from '@/lib/product-events';
+import { requestChat, trackProductEvent } from '@/lib/product-events';
 
 import { useState, useRef, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
@@ -54,7 +54,7 @@ export default function ChatInterface() {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/chat', {
+      const res = await requestChat('chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: newMessages, model }),
@@ -64,7 +64,6 @@ export default function ChatInterface() {
         if (res.status === 403) {
           const err = await res.json();
           if (err.error === 'API_KEY_REQUIRED' || err.error === 'QUOTA_EXHAUSTED') {
-            trackProductEvent('question_denied', 'chat', err.error);
             const profileUrl = session?.user?.id ? `/profile/${session.user.id}` : '/login';
             const text =
               err.error === 'QUOTA_EXHAUSTED' ? t('chat.quotaExhausted') : t('apiKeys.required');

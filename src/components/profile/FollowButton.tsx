@@ -1,5 +1,7 @@
 'use client';
 
+import { trackProductEvent } from '@/lib/product-events';
+
 import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
@@ -70,6 +72,7 @@ export default function FollowButton({ userId, initialFollowersCount = 0 }: Prop
         body: JSON.stringify({ followeeId: userId }),
       });
       if (!res.ok) throw new Error('Request failed');
+      if (next) trackProductEvent('author_followed', 'profile');
     } catch {
       // Roll back optimistic update.
       setFollowing(!next);
