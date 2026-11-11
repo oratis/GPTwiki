@@ -26,6 +26,8 @@ async function main() {
   }
   const snap = await db.collection('wikis').where('source', '==', 'editorial')
     .select('authorId', 'language', 'title', 'topicKey').get();
+  const writer = apply ? db.bulkWriter() : null;
+  const writes: Promise<unknown>[] = [];
   let matched = 0;
   let updated = 0;
   for (const doc of snap.docs) {
@@ -33,11 +35,15 @@ async function main() {
     const topics = byEdition.get(JSON.stringify([doc.get('language'), doc.get('title')]));
     if (topics?.size !== 1) continue;
     matched++;
-    if (apply) {
+    if (writer) {
       const [topicKey] = topics;
-      await doc.ref.update({ topicKey }, { lastUpdateTime: doc.updateTime });
-      updated++;
+      writes.push(writer.update(doc.ref, { topicKey }, { lastUpdateTime: doc.updateTime }).then(() => { updated++; }));
     }
+  }
+  const completed = Promise.allSettled(writes);
+  await writer?.close();
+  if ((await completed).some(result => result.status === 'rejected')) {
+    throw new Error(`Updated ${updated}/${matched}; rerun to resume after a conflicting edit or write failure.`);
   }
   console.log(`${projectId}: inspected ${snap.size}, matched ${matched}, updated ${updated}${apply ? '' : ' (dry run)'}`);
 }
