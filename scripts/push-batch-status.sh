@@ -8,7 +8,7 @@ case "$state" in
   *) exit 2 ;;
 esac
 export BATCH_TOPIC_KEYS_FILE="$RUNNER_TEMP/batch-keys.json"
-npx tsx scripts/mark-seeded-from-carrier.ts --print-keys > "$BATCH_TOPIC_KEYS_FILE"
+test -s "$BATCH_TOPIC_KEYS_FILE"
 git config user.name gptwiki-bot
 git config user.email bot@gptwiki.net
 for attempt in 1 2 3; do

@@ -18,7 +18,7 @@ name: auto-seed
 on:
   push:
     branches: [main]
-    paths: ['content/auto-draft.en.ts']
+    paths: ['content/auto-draft.en.ts', 'content/releases/*.json']
 
 permissions:
   contents: write   # push the backlog "mark seeded" commit
@@ -44,6 +44,8 @@ jobs:
           fi
       - if: steps.guard.outputs.ready == 'true'
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Authenticate to GCP (keyless, WIF)
         if: steps.guard.outputs.ready == 'true'
         uses: google-github-actions/auth@v2
@@ -63,7 +65,11 @@ jobs:
         env:
           FIREBASE_PROJECT_ID: gptwiki
           ARK_API_KEY: ${{ secrets.ARK_API_KEY }}
-        run: npx tsx scripts/seed-editorial.ts --batch=auto-draft --apply
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          export BATCH_TOPIC_KEYS_FILE="$RUNNER_TEMP/batch-keys.json"
+          npx tsx scripts/editorial-release.ts publish "$BEFORE" "$AFTER"
       - name: Mark seeded topics in backlog
         if: steps.guard.outputs.ready == 'true'
         run: bash scripts/push-batch-status.sh seeded

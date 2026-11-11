@@ -36,6 +36,7 @@ import {
 import { getFirestore, FieldValue, type Firestore } from 'firebase-admin/firestore';
 import { Storage } from '@google-cloud/storage';
 import { config } from 'dotenv';
+import { readRelease } from './lib/editorial-release';
 import { hasHeaderImage } from '../src/lib/header-image';
 import { buildSearchKeywords } from '../src/lib/search-keywords';
 import {
@@ -228,7 +229,8 @@ async function main(): Promise<void> {
     console.error(`Unknown batch "${BATCH}". Available: ${Object.keys(BATCHES).join(', ')}`);
     process.exit(1);
   }
-  let drafts = await loadBatch();
+  const release = flag('release');
+  let drafts = release ? readRelease(release) : await loadBatch();
   if (ONLY.size) drafts = drafts.filter((d) => d.topicKey && ONLY.has(d.topicKey));
 
   console.log(`▸ batch=${BATCH} drafts=${drafts.length}${APPLY ? '' : ' (DRY RUN)'}${NO_IMAGES ? ' no-images' : ''}`);
