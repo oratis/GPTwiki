@@ -17,6 +17,8 @@ import {
   getTranslations,
   type Locale,
 } from '@/lib/i18n/server';
+import { db } from '@/lib/firebase';
+import { articleLocale, articleUrl, editionLinks } from '@/lib/wiki-language';
 import { localeHref } from '@/lib/i18n/links';
 import {
   mirrorPagesNoindexed,
@@ -63,7 +65,8 @@ export async function generateMetadata({
 
   const description =
     wiki.summary || (wiki.content?.replace(/[#*`_[\]]/g, '').slice(0, 200) ?? '');
-  const canonical = `https://gptwiki.net/${locale}/wiki/${id}`;
+  const contentLocale = articleLocale(wiki.language, wiki.source);
+  const canonical = articleUrl(id, contentLocale);
 
   // The OG route runs on the edge and can't read Firestore, so pass the
   // title/subtitle directly instead of an id it would ignore (which made
@@ -72,10 +75,14 @@ export async function generateMetadata({
     description.slice(0, 120)
   )}`;
 
-  // hreflang alternates — same wiki ID across all locales
-  const languages: Record<string, string> = {};
-  for (const loc of supportedLocales) languages[loc] = `https://gptwiki.net/${loc}/wiki/${id}`;
-  languages['x-default'] = `https://gptwiki.net/en/wiki/${id}`;
+  const editions = wiki.source === 'editorial' && wiki.topicKey
+    ? await db.collection('wikis').where('topicKey', '==', wiki.topicKey)
+        .select('language', 'source').limit(supportedLocales.length + 1).get()
+        .then(snap => snap.docs.filter(doc => doc.get('source') === 'editorial')
+          .map(doc => ({ id: doc.id, language: doc.get('language') as string })))
+        .catch(() => [])
+    : [];
+  const languages = editionLinks(id, contentLocale, editions);
 
   // Emergency hedge: if the site gets flagged for scaled-content abuse, the
   // owner can noindex every Wikipedia mirror at once via an env flag, without
@@ -97,7 +104,7 @@ export async function generateMetadata({
       description,
       url: canonical,
       siteName: 'GPTwiki',
-      locale,
+      locale: contentLocale,
       publishedTime: new Date(wiki.createdAt).toISOString(),
       modifiedTime: new Date(wiki.updatedAt).toISOString(),
       authors: [wiki.authorName],
@@ -187,13 +194,14 @@ export default async function WikiDetailPage({
   const revisions = await getWikiRevisions(id).catch(() => []);
 
   const t = getTranslations(locale);
-  const jsonLd = buildJsonLd(wiki, locale, id);
+  const contentLocale = articleLocale(wiki.language, wiki.source);
+  const jsonLd = buildJsonLd(wiki, contentLocale, id);
   // Structured data beyond the bare Article: a BreadcrumbList, and FAQPage
   // from the article's own FAQ section (answer engines read it; Google has
   // not shown FAQ rich results for sites like this one since Aug 2023).
   // extractFaq returns [] for mirrors and freeform articles, so FAQPage only
   // appears where it's real.
-  const breadcrumbJsonLd = buildBreadcrumbJsonLd(locale, id, wiki.title, {
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd(contentLocale, id, wiki.title, {
     home: t('header.brandName'),
     wiki: t('header.browseWiki'),
   });
@@ -293,14 +301,16 @@ export default async function WikiDetailPage({
           <div className="flex items-center gap-2">
             <EmbedCodeButton wikiId={id} />
             <ShareButtons
-              url={`https://gptwiki.net/${locale}/wiki/${id}`}
+              url={articleUrl(id, contentLocale)}
               title={wiki.title}
               summary={wiki.summary || wiki.content?.substring(0, 200) || ''}
             />
           </div>
         </div>
 
-        <WikiContent content={wiki.content} />
+        <div lang={wiki.language || contentLocale}>
+          <WikiContent content={wiki.content} />
+        </div>
 
         {(wiki.sources?.length ?? 0) > 0 && (
           <section className="mt-8 border-t border-gray-100 pt-6">

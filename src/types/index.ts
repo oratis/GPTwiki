@@ -69,6 +69,7 @@ export interface Wiki {
   hasHeaderImage?: boolean;
   /** ISO 639-1 code of the article's content language (e.g. "en", "zh"). */
   language?: string;
+  topicKey?: string;
   /**
    * Where the article came from: "user" (default), "seed",
    * "editorial-draft", or "wikipedia-{lang}-dump" / "wikipedia-{lang}-rich"
