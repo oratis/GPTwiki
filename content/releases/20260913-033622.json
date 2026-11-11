@@ -1,0 +1,224 @@
+[
+  {
+    "topicKey": "tax-loss-harvesting",
+    "title": "Tax-Loss Harvesting: A Guide for Individual Investors",
+    "question": "What is tax-loss harvesting, and is it actually worth doing for an average investor?",
+    "summary": "Tax-loss harvesting is the practice of selling investments at a loss to offset capital gains (and, within limits, ordinary income), thereby reducing current-year taxes while staying invested through a comparable replacement security. It can add meaningful after-tax value for higher-income investors…",
+    "tags": [
+      "tax-loss harvesting",
+      "capital gains",
+      "personal finance",
+      "investing",
+      "taxation"
+    ],
+    "language": "en",
+    "content": "# Tax-Loss Harvesting: A Guide for Individual Investors\n\n## Overview\n\nTax-loss harvesting is an investment strategy in which an investor sells a security that has declined in value below its purchase price, realizing a capital loss. That loss can then be used to offset capital gains elsewhere in the portfolio — or, within limits, to offset ordinary income — thereby reducing the investor's tax bill in the current year. The position is typically replaced with a similar (though not identical) investment so that the investor maintains roughly the same market exposure.\n\nAlthough the strategy has been used by wealthy investors and professional money managers for decades, the rise of automated investment platforms in the 2010s brought tax-loss harvesting to a broader audience. Whether it is worth doing for the average investor depends on several factors, including account type, income level, portfolio size, and trading discipline.\n\n---\n\n## How Tax-Loss Harvesting Works\n\n### Step-by-Step Mechanics\n\n1. **Identify a losing position.** An investor holds a security whose current market value is below its cost basis (purchase price plus commissions).\n2. **Sell the security.** The sale crystallizes a capital loss on paper into a realized loss for tax purposes.\n3. **Replace the position.** To stay invested, the investor buys a comparable — but not \"substantially identical\" — security. This preserves market exposure without triggering the wash-sale rule (see below).\n4. **Apply the loss.** At tax time, the realized loss offsets realized capital gains. In the United States, if losses exceed gains, up to $3,000 of net capital loss per year (a figure set in the tax code and unchanged as of the most recent data available prior to September 2026) may be deducted against ordinary income. Any remaining loss carries forward to future tax years.\n\n### A Numeric Example\n\nThe following example uses illustrative figures to show the mechanics. All dollar amounts and the 20% long-term capital gains rate used below are **hypothetical for illustration only**; actual rates depend on the investor's income, filing status, and applicable tax year.\n\n| Scenario | Without Harvesting | With Harvesting |\n|---|---|---|\n| Capital gain realized | $10,000 | $10,000 |\n| Capital loss harvested | $0 | $4,000 |\n| Net taxable gain | $10,000 | $6,000 |\n| Tax owed (at illustrative 20% rate) | $2,000 | $1,200 |\n| **Tax saved** | — | **$800** |\n\n*Table computed at an illustrative 20% long-term capital gains rate. Your actual rate will differ.*\n\nImportantly, tax-loss harvesting **defers** taxes rather than eliminating them permanently. The replacement security is purchased at a lower cost basis, so future gains on that security will be larger. The benefit is the time value of money: you keep more invested today.\n\n---\n\n## The Wash-Sale Rule\n\nThe wash-sale rule is a U.S. Internal Revenue Service (IRS) rule that disallows a loss deduction if the investor purchases a \"substantially identical\" security within 30 days before or after the sale. The rule covers a 61-day window in total (30 days before + day of sale + 30 days after).\n\n**Practical implications:**\n- Selling a broad U.S. stock index fund and replacing it with a different broad U.S. stock index fund tracking a different index is generally considered acceptable, though investors should consult a tax professional.\n- Selling a fund and immediately repurchasing the same fund violates the rule.\n- The rule applies across all of an investor's accounts, including IRAs. A loss realized in a taxable brokerage account can be disallowed if the same security is purchased in an IRA within the window.\n\n*Note: The wash-sale rule as described applied under U.S. tax law as of the most recent data available before September 2026. Tax law may have changed; verify current rules with the IRS or a qualified tax advisor.*\n\n---\n\n## When Tax-Loss Harvesting Makes Sense\n\n### Favorable Conditions\n\n- **Taxable brokerage accounts.** Tax-loss harvesting only applies to taxable accounts. It provides no benefit inside tax-advantaged accounts such as traditional IRAs, Roth IRAs, or 401(k) plans, because gains and losses in those accounts generally have no current-year tax consequence.\n- **Higher income brackets.** Investors in higher ordinary income and capital gains tax brackets gain more from each dollar of loss harvested. As of 2024, U.S. long-term capital gains rates were 0%, 15%, or 20% depending on taxable income (plus a potential 3.8% Net Investment Income Tax for higher earners). These rates may have changed for 2025 and 2026; consult the IRS or a tax professional for current figures.\n- **Significant realized gains.** If you have already sold appreciated positions in the same tax year, losses harvested directly reduce that tax bill.\n- **Volatile markets.** More price swings create more harvesting opportunities.\n- **Large portfolios.** The absolute dollar savings scale with portfolio size, making the strategy more meaningful for larger accounts.\n\n### Unfavorable Conditions\n\n- **Low or zero capital gains tax rate.** Investors whose income places them in the 0% long-term capital gains bracket (as was the case for many lower-income filers under 2024 U.S. tax law) gain little or nothing from the strategy.\n- **Small portfolios.** Transaction costs, the complexity of tracking adjusted cost basis, and professional advisory fees can outweigh the tax benefit on small accounts.\n- **Short investment horizons.** If a portfolio will be liquidated soon, the deferred tax bill comes due quickly, shrinking the benefit.\n- **Tax-exempt accounts.** As noted above, retirement accounts receive no benefit.\n\n---\n\n## Costs and Risks\n\n| Risk or Cost | Description |\n|---|---|\n| Tracking error | The replacement security may perform differently from the one sold, altering portfolio returns. |\n| Transaction costs | Each trade may incur commissions or bid-ask spreads, though many brokerages offered commission-free equity trades as of 2024. |\n| Complexity | Investors must track adjusted cost bases, holding periods, and wash-sale windows across accounts. |\n| Deferred, not eliminated, taxes | Lower cost basis on the replacement security means higher future gains. |\n| State taxes | Some U.S. states do not allow the $3,000 ordinary income deduction or treat capital losses differently. |\n| Behavioral risk | Frequent trading may lead to poor decisions unrelated to tax efficiency. |\n\n---\n\n## Is It Worth It for the Average Investor?\n\nAcademic and practitioner research has generally found that the annual tax alpha (extra after-tax return) from systematic tax-loss harvesting ranges from roughly 0.5% to 1.5% per year for investors in higher tax brackets with diversified equity portfolios, though actual results vary considerably by market conditions and implementation. These estimates appeared in financial literature published through the mid-2020s; updated research may be available.\n\nFor a **typical middle-income investor** with a modest taxable account, the honest answer is: *the benefit is real but modest, and only materializes if the strategy is implemented correctly*. Key takeaways:\n\n1. **Do not let the tax tail wag the investment dog.** Harvesting a loss in a fundamentally sound long-term holding just to capture a short-term tax break may leave you worse off if the security rebounds while you are waiting out the wash-sale window.\n2. **Automation helps.** Some robo-advisor platforms offered automated tax-loss harvesting as of the mid-2020s, though availability and quality of implementation varied by provider. Verify whether any specific platform still offers this feature and on what terms before relying on it.\n3. **Consult a tax professional.** The interaction of federal and state tax rules, the wash-sale rule, alternative minimum tax, and Net Investment Income Tax makes this strategy more complex than it first appears.\n4. **Focus on the big picture.** For many investors, maximizing tax-advantaged account contributions (such as the 2024 IRA contribution limit of $7,000 for those under 50, or the 2024 401(k) limit of $23,000 — figures that may have changed for subsequent years) delivers more value than harvesting losses in a taxable account.\n\n---\n\n## Key Terms\n\n- **Cost basis:** The original purchase price of an asset, used to calculate capital gain or loss.\n- **Realized loss:** A loss that has been crystallized by selling the asset.\n- **Wash-sale rule:** IRS rule disallowing a loss if a substantially identical security is purchased within 30 days before or after the sale.\n- **Loss carryforward:** Capital losses that exceed the current-year limit and are carried into future tax years.\n- **Net Investment Income Tax (NIIT):** An additional 3.8% U.S. tax on investment income for higher-income taxpayers (applicable as of 2024; verify current status).\n\n---\n\n## Disclaimer\n\nThis article is for educational purposes only and does not constitute tax, legal, or financial advice. Tax laws change frequently. All figures cited with a specific year reflect the law or data as of that year and may not reflect current law. Consult a qualified tax professional or financial advisor before implementing any tax strategy.",
+    "image": {
+      "prompt": "A clean, conceptual editorial illustration for an encyclopedia article titled \"Tax-Loss Harvesting: A Guide for Individual Investors\". Minimalist isometric editorial illustration for a modern encyclopedia. Soft gradients, deep indigo and violet palette with cyan accents, clean very light background, subtle depth and shadows, no text, no letters, no numbers, no logos, no watermarks, modern, precise, calm.",
+      "alt": "Tax-Loss Harvesting: A Guide for Individual Investors"
+    },
+    "sources": [
+      {
+        "title": "IRS Publication 550: Investment Income and Expenses",
+        "url": "https://www.irs.gov/publications/p550"
+      },
+      {
+        "title": "IRS Topic No. 409: Capital Gains and Losses",
+        "url": "https://www.irs.gov/taxtopics/tc409"
+      },
+      {
+        "title": "IRS Wash Sales — Publication 550 (section)",
+        "url": "https://www.irs.gov/publications/p550#en_US_2023_publink100010601"
+      },
+      {
+        "title": "Investopedia: Tax-Loss Harvesting",
+        "url": "https://www.investopedia.com/terms/t/taxgainlossharvesting.asp"
+      },
+      {
+        "title": "IRS: Net Investment Income Tax",
+        "url": "https://www.irs.gov/individuals/net-investment-income-tax"
+      }
+    ]
+  },
+  {
+    "topicKey": "tax-loss-harvesting",
+    "title": "税损收割：个人投资者指南",
+    "question": "什么是税损收割？对于普通投资者而言，它真的值得操作吗？",
+    "summary": "税损收割是指通过出售亏损投资来抵消资本利得（在限额内也可抵消普通收入），从而降低当年税负，同时通过买入类似替代证券保持市场敞口的投资策略。对高收入投资者而言，该策略可带来可观的税后收益。",
+    "tags": [
+      "税损收割",
+      "资本利得",
+      "个人理财",
+      "投资",
+      "税务"
+    ],
+    "language": "zh",
+    "content": "# 税损收割：个人投资者指南\n\n## 概述\n\n税损收割是一种投资策略，投资者将价值跌破买入价的证券卖出，从而实现资本损失。该损失可用于抵消投资组合中其他地方的资本利得——或在限额内抵消普通收入——进而降低当年的应缴税额。通常，该持仓会被一种类似（但非完全相同）的投资所替代，使投资者保持大致相同的市场敞口。\n\n尽管这一策略数十年来一直被富裕投资者和专业基金经理所采用，但2010年代自动化投资平台的兴起，使税损收割触达了更广泛的受众。对于普通投资者而言，是否值得操作取决于多个因素，包括账户类型、收入水平、投资组合规模以及交易纪律。\n\n---\n\n## 税损收割的运作原理\n\n### 操作步骤\n\n1. **识别亏损持仓。** 投资者持有某证券，其当前市值低于成本基础（买入价加佣金）。\n2. **卖出证券。** 此次出售将账面资本损失转化为税务上的已实现损失。\n3. **替换持仓。** 为保持投资，投资者买入一种类似但非\"实质上相同\"的证券。这在不触发洗售规则（见下文）的情况下保留了市场敞口。\n4. **应用损失。** 报税时，已实现损失用于抵消已实现资本利得。在美国，若损失超过利得，每年最多可用3,000美元的净资本损失（该数额由税法设定，截至2026年9月前最新数据未变）抵扣普通收入。任何剩余损失可结转至未来纳税年度。\n\n### 数字示例\n\n以下示例使用说明性数据展示操作机制。所有美元金额及下文使用的20%长期资本利得税率均为**仅供说明的假设数据**；实际税率取决于投资者的收入、报税状态及适用纳税年度。\n\n| 情景 | 未进行收割 | 已进行收割 |\n|---|---|---|\n| 已实现资本利得 | $10,000 | $10,000 |\n| 已收割资本损失 | $0 | $4,000 |\n| 净应税利得 | $10,000 | $6,000 |\n| 应缴税额（按20%示例税率） | $2,000 | $1,200 |\n| **节省税额** | — | **$800** |\n\n*表格按20%长期资本利得税率的示例计算。您的实际税率将有所不同。*\n\n重要的是，税损收割**推迟**纳税，而非永久消除税负。替代证券以较低成本基础买入，因此该证券未来的利得将更大。其收益在于货币的时间价值：您今天保留了更多投资。\n\n---\n\n## 洗售规则\n\n洗售规则是美国国税局（IRS）的一项规定，若投资者在出售日前后30天内购买\"实质上相同\"的证券，则不允许扣除该损失。该规则共涵盖61天的窗口期（出售前30天 + 出售当日 + 出售后30天）。\n\n**实际影响：**\n- 卖出一只美国宽基股票指数基金，并将其替换为追踪不同指数的另一只美国宽基股票指数基金，通常被认为是可接受的，但投资者应咨询税务专业人士。\n- 卖出某基金后立即回购同一基金，则违反该规则。\n- 该规则适用于投资者的所有账户，包括IRA。若在窗口期内于IRA中购买了相同证券，在应税经纪账户中实现的损失可能会被否认。\n\n*注：上述洗售规则依据2026年9月前最新数据所适用的美国税法。税法可能已发生变化；请向IRS或合格税务顾问确认现行规则。*\n\n---\n\n## 税损收割适用场景\n\n### 有利条件\n\n- **应税经纪账户。** 税损收割仅适用于应税账户。在税收优惠账户（如传统IRA、Roth IRA或401(k)计划）中没有任何收益，因为这些账户中的利得和损失通常不产生当年税务影响。\n- **较高收入等级。** 处于较高普通收入和资本利得税率档次的投资者，每一美元的收割损失所获收益更大。截至2024年，美国长期资本利得税率根据应税收入分别为0%、15%或20%（高收入者还可能额外承担3.8%的净投资收入税）。这些税率在2025年和2026年可能已有变化；请向IRS或税务专业人士咨询最新数据。\n- **已有大量已实现利得。** 如果您在同一纳税年度已出售了升值持仓，收割的损失可直接减少该税单。\n- **市场波动较大。** 价格波动越大，收割机会越多。\n- **投资组合规模较大。** 绝对美元节省额与投资组合规模成正比，使该策略对较大账户更具意义。\n\n### 不利条件\n\n- **资本利得税率低或为零。** 收入处于0%长期资本利得税率档次的投资者（如2024年美国税法下的许多低收入申报者）从该策略中所获甚少甚至毫无收益。\n- **投资组合规模较小。** 交易成本、追踪调整后成本基础的复杂性以及专业顾问费用，可能超过小账户的税收收益。\n- **投资期限较短。** 若投资组合即将清盘，递延的税单很快到期，压缩了收益。\n- **免税账户。** 如上所述，退休账户不受益于此策略。\n\n---\n\n## 成本与风险\n\n| 风险或成本 | 说明 |\n|---|---|\n| 跟踪误差 | 替代证券的表现可能与已售出证券不同，从而改变投资组合回报。 |\n| 交易成本 | 每笔交易可能产生佣金或买卖价差，尽管截至2024年许多券商已提供免佣金股票交易。 |\n| 复杂性 | 投资者须跨账户追踪调整后成本基础、持有期及洗售窗口。 |\n| 递延而非消除税负 | 替代证券较低的成本基础意味着未来利得更高。 |\n| 州税 | 部分美国州不允许3,000美元的普通收入扣除，或对资本损失有不同处理方式。 |\n| 行为风险 | 频繁交易可能导致与税务效率无关的错误决策。 |\n\n---\n\n## 对普通投资者是否值得？\n\n学术界和从业者的研究普遍发现，对于持有多元化股票投资组合的高税率投资者而言，系统性税损收割每年带来的税务超额回报（税后额外收益）约为0.5%至1.5%，但实际结果因市场条件和实施方式而存在相当大差异。上述估计数据来自2020年代中期前发表的金融文献；更新的研究可能已有新结论。\n\n对于**典型中等收入投资者**而言，如其应税账户规模适中，诚实的答案是：*收益真实存在但较为有限，且只有在正确实施策略时才能实现*。主要结论如下：\n\n1. **不要让税务尾巴摇动投资狗。** 仅为获取短期税收优惠而收割基本面良好的长期持仓，若该证券在洗售窗口期内反弹，您可能得不偿失。\n2. **自动化有所助益。** 截至2020年代中期，部分智能投顾平台提供自动化税损收割服务，但各平台的可用性和实施质量不一。在依赖某一特定平台前，请核实其是否仍提供该功能及相关条款。\n3. **咨询税务专业人士。** 联邦与州税规则、洗售规则、替代最低税及净投资收入税之间的相互作用，使该策略比初看起来更为复杂。\n4. **着眼全局。** 对许多投资者而言，最大化税收优惠账户缴款（如2024年50岁以下者的IRA缴款上限为7,000美元，或2024年401(k)上限为23,000美元——这些数字在后续年度可能已有变化）所带来的价值，往往超过在应税账户中收割损失。\n\n---\n\n## 关键术语\n\n- **成本基础：** 资产的原始买入价，用于计算资本利得或损失。\n- **已实现损失：** 通过出售资产而确认的损失。\n- **洗售规则：** IRS规定，若在出售日前后30天内购买实质上相同的证券，则不允许扣除该损失。\n- **损失结转：** 超过当年限额的资本损失，结转至未来纳税年度。\n- **净投资收入税（NIIT）：** 对高收入纳税人的投资收入额外征收3.8%的美国税（截至2024年适用；请核实现行状态）。\n\n---\n\n## 免责声明\n\n本文仅供教育目的，不构成税务、法律或财务建议。税法频繁变动。所有注明具体年份的数据均反映该年度的法律或数据，可能不代表现行法律。在实施任何税务策略前，请咨询合格的税务专业人士或财务顾问。",
+    "image": {
+      "prompt": "A clean, conceptual editorial illustration for an encyclopedia article titled \"Tax-Loss Harvesting: A Guide for Individual Investors\". Minimalist isometric editorial illustration for a modern encyclopedia. Soft gradients, deep indigo and violet palette with cyan accents, clean very light background, subtle depth and shadows, no text, no letters, no numbers, no logos, no watermarks, modern, precise, calm.",
+      "alt": "税损收割：个人投资者指南"
+    },
+    "sources": [
+      {
+        "title": "IRS Publication 550: Investment Income and Expenses",
+        "url": "https://www.irs.gov/publications/p550"
+      },
+      {
+        "title": "IRS Topic No. 409: Capital Gains and Losses",
+        "url": "https://www.irs.gov/taxtopics/tc409"
+      },
+      {
+        "title": "IRS Wash Sales — Publication 550 (section)",
+        "url": "https://www.irs.gov/publications/p550#en_US_2023_publink100010601"
+      },
+      {
+        "title": "Investopedia: Tax-Loss Harvesting",
+        "url": "https://www.investopedia.com/terms/t/taxgainlossharvesting.asp"
+      },
+      {
+        "title": "IRS: Net Investment Income Tax",
+        "url": "https://www.irs.gov/individuals/net-investment-income-tax"
+      }
+    ]
+  },
+  {
+    "topicKey": "soaking-dried-beans",
+    "title": "Soaking Dried Beans: Methods, Effects, and When It Matters",
+    "question": "Do I really need to soak dried beans before cooking, and what difference does it actually make?",
+    "summary": "Soaking dried beans before cooking is optional but beneficial: it reduces cooking time, decreases gas-causing oligosaccharides, and may improve mineral bioavailability, though lentils and split peas need no soaking and pressure cookers reduce the time advantage considerably.",
+    "tags": [
+      "dried beans",
+      "cooking techniques",
+      "food science",
+      "legumes",
+      "digestibility"
+    ],
+    "language": "en",
+    "content": "# Soaking Dried Beans: Methods, Effects, and When It Matters\n\nDried beans are a staple ingredient in cuisines worldwide, prized for their affordability, nutritional density, and long shelf life. A common question among home cooks is whether soaking dried beans before cooking is truly necessary — and if so, what difference it actually makes. The short answer is that soaking is optional in most cases, but it does produce measurable effects on cooking time, texture, digestibility, and nutritional availability.\n\n## What Happens When You Soak Beans\n\nDried beans have had nearly all their moisture removed during processing. Soaking begins the process of rehydration, allowing water to penetrate the seed coat and start softening the interior starch granules. Several physical and chemical changes occur:\n\n- **Water absorption:** Beans typically double or nearly triple in volume as they absorb water.\n- **Oligosaccharide reduction:** Soaking leaches out some raffinose-family oligosaccharides (RFOs) — complex sugars the human digestive system cannot fully break down. These compounds are a primary contributor to gas and bloating associated with bean consumption.\n- **Phytic acid reduction:** Soaking can reduce phytic acid (an antinutrient that binds to minerals such as iron, zinc, and calcium, reducing their bioavailability), though the extent of reduction varies by bean type and soak duration.\n- **Seed coat softening:** The outer hull begins to soften, allowing more even cooking throughout the bean.\n\n## Soaking Methods\n\n### Long (Overnight) Soak\nPlace beans in a large bowl, cover with cold water by at least 5–8 cm (2–3 inches), and soak for 8–12 hours in the refrigerator. Drain and rinse thoroughly before cooking. This is the most common and effective method for oligosaccharide reduction.\n\n### Quick Soak\nPlace beans in a pot, cover with water, and bring to a boil for 2–3 minutes. Remove from heat, cover, and let sit for 1 hour. Drain and rinse before cooking. This method is faster but may be somewhat less effective at reducing gas-causing compounds than an overnight soak.\n\n### No-Soak Method\nBeans can be cooked directly from their dried state with no soaking at all. This is perfectly safe. The trade-offs are:\n- Significantly longer cooking time (often 50–100% longer, depending on bean variety and age)\n- Slightly less reduction of oligosaccharides\n- Potentially less even texture, as the exterior can overcook before the interior is fully tender in some older beans\n\n## Effect on Cooking Time\n\nSoaking produces a meaningful reduction in cooking time. The exact figures vary considerably by bean type, age, and altitude, but as a general illustration:\n\n| Bean Type | Approximate Soaked Cook Time | Approximate Unsoaked Cook Time |\n|---|---|---|\n| Black beans | 45–60 min | 60–90 min |\n| Chickpeas (garbanzo) | 60–90 min | 90–120 min |\n| Kidney beans | 45–60 min | 60–90 min |\n| Pinto beans | 45–60 min | 60–90 min |\n| Navy beans | 45–60 min | 60–90 min |\n\n*Note: Times assume stovetop cooking at sea level with beans of moderate age. Older beans may take considerably longer regardless of soaking. Pressure cookers dramatically reduce all these times.*\n\n## Digestibility and Gas Reduction\n\nThe link between beans and gastrointestinal discomfort is well established in nutritional science. The culprit is primarily raffinose, stachyose, and verbascose — oligosaccharides that pass undigested into the large intestine, where gut bacteria ferment them, producing gas.\n\nSoaking and discarding the soak water reduces these compounds, though research findings on the magnitude of reduction vary. A frequently cited range in food science literature is a 10–25% reduction in oligosaccharides through overnight soaking and rinsing, though some studies report higher reductions under specific conditions. Cooking itself (and especially pressure cooking) further reduces these compounds beyond what soaking alone achieves.\n\nFor individuals who are new to eating beans regularly, gradually increasing portion sizes over several weeks tends to allow gut microbiome adaptation, reducing discomfort over time regardless of soaking practice.\n\n## Nutritional Considerations\n\n- **Minerals:** Reducing phytic acid through soaking may modestly improve the bioavailability of iron, zinc, and calcium from beans, which is particularly relevant for people relying heavily on plant-based diets.\n- **Water-soluble vitamins:** Some B vitamins leach into the soak water, so discarding it results in a small loss of these nutrients. This is generally considered a minor trade-off given the digestibility benefits.\n- **Protein:** Soaking does not meaningfully alter total protein content.\n\n## When Soaking Matters Most\n\nSoaking tends to make the biggest practical difference in these situations:\n\n- **Large, dense beans** (chickpeas, large lima beans, fava beans): These benefit most from soaking due to their size and dense starch content.\n- **Very old dried beans:** Beans more than a year or two old may never fully soften regardless of cook time; soaking helps but may not fully compensate for age-related texture issues.\n- **Digestive sensitivity:** People who regularly experience discomfort after eating beans may find overnight soaking plus discarding the soak water noticeably helpful.\n- **Energy or time constraints:** Soaking can meaningfully cut fuel or electricity use during cooking.\n\n## When You Can Skip Soaking\n\n- **Lentils and split peas** do not require soaking and cook relatively quickly due to their small size and lack of intact seed coat.\n- **Pressure cookers and Instant Pot-style appliances** largely eliminate the time-saving advantage of soaking, as they dramatically reduce cook times for unsoaked beans as well.\n- **Slow cookers:** Use commercially canned red kidney beans for slow-cooker preparations. Health Canada advises against cooking dried red kidney beans in a slow cooker; soaking alone does not make them safe.\n\n## Food Safety Note: Kidney Beans\n\nRaw and undercooked kidney beans contain high levels of phytohaemagglutinin (PHA), a lectin that can cause nausea, vomiting, and diarrhoea. Full boiling (100 °C / 212 °F) for a sustained period deactivates PHA. Soaking alone does not render kidney beans safe to eat — they must be thoroughly cooked at boiling temperatures.\n\n## Summary\n\nSoaking dried beans is not strictly required for most varieties, but it offers real advantages: shorter cooking time, reduced gas-causing compounds, and potentially improved mineral bioavailability. The overnight soak method is most effective; the quick soak is a useful alternative. Lentils and split peas can be skipped entirely. For dense beans, older beans, or digestively sensitive individuals, soaking is worth the minimal planning effort.",
+    "image": {
+      "prompt": "A clean, conceptual editorial illustration for an encyclopedia article titled \"Soaking Dried Beans: Methods, Effects, and When It Matters\". Minimalist isometric editorial illustration for a modern encyclopedia. Soft gradients, deep indigo and violet palette with cyan accents, clean very light background, subtle depth and shadows, no text, no letters, no numbers, no logos, no watermarks, modern, precise, calm.",
+      "alt": "Soaking Dried Beans: Methods, Effects, and When It Matters"
+    },
+    "sources": [
+      {
+        "title": "Legumes: Health Benefits and Culinary Approaches to Increase Intake — Nutrients (MDPI)",
+        "url": "https://www.mdpi.com/2072-6643/7/6/4661"
+      },
+      {
+        "title": "Beans and Legumes — The Nutrition Source, Harvard T.H. Chan School of Public Health",
+        "url": "https://www.hsph.harvard.edu/nutritionsource/legumes-pulses/"
+      },
+      {
+        "title": "Health Canada — Lectins in Dry Legumes",
+        "url": "https://www.canada.ca/en/health-canada/services/food-nutrition/food-safety/chemical-contaminants/natural-toxins/lectins-legumes.html"
+      }
+    ]
+  },
+  {
+    "topicKey": "soaking-dried-beans",
+    "title": "干豆浸泡：方法、效果与适用场景",
+    "question": "烹饪前真的需要浸泡干豆吗？这样做究竟有什么区别？",
+    "summary": "烹饪前浸泡干豆并非必须，但益处明显：可缩短烹饪时间、减少导致胀气的寡糖，并可能提高矿物质的生物利用率。不过，扁豆和裂豌豆无需浸泡，高压锅的使用也大幅削减了浸泡在节省时间方面的优势。",
+    "tags": [
+      "干豆",
+      "烹饪技巧",
+      "食品科学",
+      "豆类",
+      "消化性"
+    ],
+    "language": "zh",
+    "content": "# 干豆浸泡：方法、效果与适用场景\n\n干豆是世界各地料理中的主食食材，以其价格实惠、营养丰富和长保质期而备受青睐。家庭厨师常有疑问：烹饪前浸泡干豆是否真的有必要？如果有，实际效果如何？简而言之，浸泡在大多数情况下是可选的，但它在烹饪时间、质地、消化性和营养利用率方面确实能产生可量化的影响。\n\n## 浸泡豆子时发生了什么\n\n干豆在加工过程中几乎去除了全部水分。浸泡开始了再水化的过程，使水分渗透种皮并开始软化内部的淀粉颗粒。浸泡过程中会发生以下物理和化学变化：\n\n- **吸水膨胀：** 豆子吸水后体积通常增加一倍甚至近三倍。\n- **寡糖减少：** 浸泡会溶出部分棉子糖族寡糖（RFOs）——一类人体消化系统无法完全分解的复杂糖类。这些化合物是食用豆类后产生胀气和腹胀的主要原因。\n- **植酸减少：** 浸泡可降低植酸含量（植酸是一种抗营养素，会与铁、锌、钙等矿物质结合，降低其生物利用率），但减少程度因豆类品种和浸泡时长而异。\n- **种皮软化：** 外层豆皮开始软化，使豆子在烹饪时受热更均匀。\n\n## 浸泡方法\n\n### 长时间浸泡（隔夜浸泡）\n将豆子放入大碗，加冷水至高出豆面至少 5–8 厘米（2–3 英寸），冷藏浸泡 8–12 小时。烹饪前充分沥干并冲洗。这是最常见、也最有效的减少寡糖的方法。\n\n### 快速浸泡\n将豆子放入锅中，加水煮沸 2–3 分钟，离火后盖上锅盖静置 1 小时，再沥干冲洗后烹饪。此方法较快，但在减少胀气化合物方面可能不如隔夜浸泡有效。\n\n### 不浸泡直接烹饪\n豆子也可以不经浸泡直接以干燥状态烹饪，这完全安全。但需注意以下权衡：\n- 烹饪时间明显更长（通常增加 50–100%，视豆类品种和存放时间而定）\n- 寡糖减少效果略差\n- 质地可能不够均匀，对于一些存放较久的豆子，外层可能在内部完全变软前已过熟\n\n## 对烹饪时间的影响\n\n浸泡能显著缩短烹饪时间。具体数据因豆类品种、存放时间和海拔高度差异较大，以下为一般参考：\n\n| 豆类品种 | 浸泡后烹饪时间（约） | 未浸泡烹饪时间（约） |\n|---|---|---|\n| 黑豆 | 45–60 分钟 | 60–90 分钟 |\n| 鹰嘴豆 | 60–90 分钟 | 90–120 分钟 |\n| 红腰豆 | 45–60 分钟 | 60–90 分钟 |\n| 花豆 | 45–60 分钟 | 60–90 分钟 |\n| 海军豆 | 45–60 分钟 | 60–90 分钟 |\n\n*注：以上时间适用于海平面高度、豆龄适中的豆类在炉灶上烹饪的情况。存放较久的豆子无论是否浸泡都可能需要更长时间。使用压力锅可大幅缩短上述所有时间。*\n\n## 消化性与减少胀气\n\n豆类与胃肠道不适之间的关联在营养科学中已有充分论证。主要原因是棉子糖、水苏糖和毛蕊花糖——这些寡糖无法被消化，进入大肠后被肠道细菌发酵，从而产生气体。\n\n浸泡并倒掉浸泡水可以减少这些化合物，但食品科学研究对减少幅度的报告不尽相同。食品科学文献中常引用的数据是：通过隔夜浸泡和冲洗，寡糖可减少 10–25%，但某些特定条件下的研究报告了更高的减少率。烹饪本身（尤其是高压烹饪）对这些化合物的减少效果还能进一步超过单纯浸泡。\n\n对于刚开始定期食用豆类的人，在数周内逐渐增加食用量，有助于肠道微生物群逐步适应，从而无论是否浸泡都能减少不适感。\n\n## 营养方面的注意事项\n\n- **矿物质：** 浸泡降低植酸可能适度提高豆类中铁、锌和钙的生物利用率，这对高度依赖植物性饮食的人尤为重要。\n- **水溶性维生素：** 部分 B 族维生素会溶入浸泡水中，倒掉浸泡水会造成少量营养素流失。考虑到消化性方面的收益，这通常被认为是可接受的权衡。\n- **蛋白质：** 浸泡不会对蛋白质总含量产生实质性影响。\n\n## 浸泡最有意义的场景\n\n以下情况下，浸泡的实际效果最为显著：\n\n- **体积大、质地密实的豆类**（鹰嘴豆、大利马豆、蚕豆）：由于体积较大且淀粉含量丰富，这类豆子从浸泡中获益最多。\n- **存放时间很长的干豆：** 存放超过一两年的豆子无论烹饪多久可能都无法完全软化；浸泡有所帮助，但可能无法完全弥补因存放时间过长导致的质地问题。\n- **消化系统敏感：** 经常在食用豆类后感到不适的人，可能会发现隔夜浸泡加倒掉浸泡水的方法有明显帮助。\n- **节能或时间有限：** 浸泡可显著减少烹饪过程中的燃料或电力消耗。\n\n## 可以跳过浸泡的场景\n\n- **扁豆和裂豌豆**无需浸泡，由于体积小且没有完整种皮，烹饪时间相对较短。\n- **压力锅和 Instant Pot 类电器**基本消除了浸泡在节省时间上的优势，因为它们也能大幅缩短未浸泡豆子的烹饪时间。\n- **慢炖锅：** 红腰豆慢炖菜可以使用市售熟制罐装红腰豆。加拿大卫生部建议避免用慢炖锅烹制干红腰豆，仅浸泡不能使干豆达到安全食用条件。\n\n## 食品安全提示：红腰豆\n\n生的和未完全煮熟的红腰豆含有高浓度植物血凝素（PHA），这是一种凝集素，可引起恶心、呕吐和腹泻。在持续沸腾状态（100 °C / 212 °F）下充分烹煮可使 PHA 失活。仅靠浸泡并不能使红腰豆安全食用——必须在沸腾温度下彻底煮熟。\n\n## 小结\n\n对大多数豆类来说，浸泡干豆并非严格必要，但它确实带来实实在在的好处：缩短烹饪时间、减少导致胀气的化合物，以及可能改善矿物质的生物利用率。隔夜浸泡效果最佳，快速浸泡是实用的替代方案。扁豆和裂豌豆则完全可以跳过浸泡步骤。对于体积大的豆类、存放较久的豆类或消化系统敏感的人，浸泡所需的少量提前规划是值得的。",
+    "image": {
+      "prompt": "A clean, conceptual editorial illustration for an encyclopedia article titled \"Soaking Dried Beans: Methods, Effects, and When It Matters\". Minimalist isometric editorial illustration for a modern encyclopedia. Soft gradients, deep indigo and violet palette with cyan accents, clean very light background, subtle depth and shadows, no text, no letters, no numbers, no logos, no watermarks, modern, precise, calm.",
+      "alt": "干豆浸泡：方法、效果与适用场景"
+    },
+    "sources": [
+      {
+        "title": "Legumes: Health Benefits and Culinary Approaches to Increase Intake — Nutrients (MDPI)",
+        "url": "https://www.mdpi.com/2072-6643/7/6/4661"
+      },
+      {
+        "title": "Beans and Legumes — The Nutrition Source, Harvard T.H. Chan School of Public Health",
+        "url": "https://www.hsph.harvard.edu/nutritionsource/legumes-pulses/"
+      },
+      {
+        "title": "Health Canada — Lectins in Dry Legumes",
+        "url": "https://www.canada.ca/en/health-canada/services/food-nutrition/food-safety/chemical-contaminants/natural-toxins/lectins-legumes.html"
+      }
+    ]
+  },
+  {
+    "topicKey": "bootcamp-vs-cs-degree",
+    "title": "Coding Bootcamp vs. Computer Science Degree: Breaking Into Tech",
+    "question": "Should I do a coding bootcamp or get a computer science degree to break into tech?",
+    "summary": "This article compares coding bootcamps and computer science degrees as pathways into the technology industry, outlining differences in cost, duration, curriculum depth, and career outcomes to help prospective students make an informed choice.",
+    "tags": [
+      "coding bootcamp",
+      "computer science degree",
+      "tech careers",
+      "software development",
+      "career advice"
+    ],
+    "language": "en",
+    "content": "# Coding Bootcamp vs. Computer Science Degree: Breaking Into Tech\n\n## Overview\n\nTwo of the most common pathways into the technology industry are **coding bootcamps** and **computer science (CS) degrees**. Each path carries distinct trade-offs in cost, time investment, depth of knowledge, and career outcomes. The right choice depends heavily on an individual's goals, financial situation, prior experience, and target role.\n\n---\n\n## What Is a Coding Bootcamp?\n\nA coding bootcamp is an intensive, short-term training program — typically 12 to 26 weeks — focused on practical, job-ready skills. Programs commonly cover web development, data science, UX design, or cybersecurity. Bootcamps are offered by private companies, community colleges, and some universities, and are available in-person, online, or in hybrid formats.\n\n### Typical Characteristics\n- **Duration:** 3–6 months full-time (part-time options often extend to 12 months)\n- **Cost:** Tuition varied widely; as of 2023, full-time bootcamps in the United States commonly ranged from approximately $10,000 to $20,000, though this figure may have changed by 2026\n- **Curriculum focus:** Hands-on projects, current frameworks and languages (e.g., JavaScript, Python, React), and portfolio building\n- **Credential awarded:** Certificate of completion (not an accredited academic degree)\n\n### Financing Options\n- Upfront payment or payment plans\n- Income Share Agreements (ISAs), in which students pay a percentage of future income after employment — note that ISA terms and availability varied considerably by provider as of 2023 and regulatory scrutiny has increased since then\n- Employer sponsorship or workforce development grants\n\n---\n\n## What Is a Computer Science Degree?\n\nA Bachelor of Science in Computer Science is a four-year undergraduate degree offered by accredited universities. Some students also pursue two-year associate degrees or graduate-level programs (Master's or PhD) in CS or related fields.\n\n### Typical Characteristics\n- **Duration:** 4 years (bachelor's); 2–3 years (master's)\n- **Cost:** Varied significantly by institution type; in the 2023–2024 academic year, average annual tuition at US public four-year universities was reported by the College Board at approximately $11,260 for in-state students, and at private non-profit four-year universities at approximately $41,540 — these figures may have changed by 2026\n- **Curriculum focus:** Theory, algorithms, data structures, operating systems, mathematics, and systems programming alongside applied coursework\n- **Credential awarded:** Accredited academic degree (B.S., M.S., or Ph.D.)\n\n---\n\n## Side-by-Side Comparison\n\nThe table below uses approximate 2023 figures, which may have changed by 2026. All cost ranges should be verified with current institutional sources.\n\n| Factor | Coding Bootcamp | CS Degree (Bachelor's) |\n|---|---|---|\n| **Typical duration** | 3–6 months | 4 years |\n| **Approx. cost (US, 2023)** | $10,000–$20,000 | $45,000–$166,000+ (total) |\n| **Credential** | Certificate | Accredited degree |\n| **Theoretical depth** | Low–Moderate | High |\n| **Job-ready speed** | Fast | Slower |\n| **Employer recognition** | Growing, but variable | Broadly recognized |\n| **Eligibility for grad school** | Generally not direct | Yes |\n| **Financial aid availability** | Limited (ISAs, private loans) | Federal loans, grants, scholarships |\n\n*Note: CS degree total cost estimated by multiplying 2023–2024 average annual tuition figures by four years. Actual totals vary substantially by institution, residency status, living expenses, and financial aid.*\n\n---\n\n## Career Outcomes\n\n### Roles Commonly Accessible After a Bootcamp\n- Front-end or full-stack web developer\n- Junior software engineer\n- UX/UI designer (design-focused bootcamps)\n- Data analyst (data-focused bootcamps)\n\n### Roles That Typically Require or Strongly Prefer a CS Degree\n- Machine learning engineer or AI researcher\n- Systems or embedded software engineer\n- Compiler or operating systems engineer\n- Graduate-level research positions\n- Many roles at large technology companies that screen for degrees (screening practices vary and have been evolving — some major employers publicly removed degree requirements for certain roles as of 2022–2023)\n\n### Salary Data\nThe US Bureau of Labor Statistics (BLS) reported a median annual wage for software developers, quality assurance analysts, and testers of **$132,270 in 2023**. This figure applies to the profession broadly and does not isolate bootcamp vs. degree graduates specifically. Individual outcomes vary by role, location, employer, and experience level.\n\n---\n\n## Factors to Consider When Choosing\n\n### 1. Time and Opportunity Cost\nA CS degree requires four years during which the student could otherwise be earning income. A bootcamp can potentially enable employment within six months. However, a degree may yield higher starting salaries and broader long-term optionality.\n\n### 2. Financial Resources\nCS degrees at many institutions may qualify for federally backed financial aid, including Pell Grants and subsidized student loans. Most bootcamps are not eligible for federal student aid (as of 2023), though some community college coding programs may qualify. Verify current eligibility directly with institutions.\n\n### 3. Learning Style\nBootcamps are fast-paced and project-driven. CS degree programs include sustained abstract and theoretical coursework. Students who struggle with rapid context-switching or who want deep mathematical foundations may find a degree environment more suitable.\n\n### 4. Target Role and Industry\nCertain industries — defense contracting, academic research, fintech, and some large technology companies — may place a strong preference on accredited degrees. Startups and agencies have historically been more open to bootcamp graduates with strong portfolios.\n\n### 5. Prior Background\nPeople changing careers who already hold a bachelor's degree in another field sometimes find bootcamps sufficient, since the degree requirement is already met. Those entering the workforce for the first time may benefit more from the credential and networks a university provides.\n\n---\n\n## Alternative and Hybrid Paths\n\n- **Self-study:** Free and low-cost resources (online courses, open courseware) can supplement either path or serve as a standalone approach for highly self-directed learners.\n- **Associate degrees in IT or CS:** A two-year accredited credential that costs less than a four-year degree and may transfer credits toward a bachelor's.\n- **Employer tuition assistance:** Some employers offer tuition reimbursement programs that can subsidize a part-time degree while working.\n- **Apprenticeships:** Registered tech apprenticeships have been growing as an alternative pathway in several countries, including the United States and United Kingdom.\n\n---\n\n## Key Takeaways\n\n- **Choose a bootcamp if** you need to enter the workforce quickly, have limited time for a multi-year program, are targeting front-end or full-stack web development roles, or already hold a degree in another field.\n- **Choose a CS degree if** you want broad theoretical foundations, are targeting research or systems-level roles, plan to pursue graduate study, or want the widest possible employer recognition over a long career.\n- **Neither path guarantees employment.** Portfolio quality, networking, and continuous learning matter in both cases.\n- All cost and salary figures cited in this article use the most recently available data (2023–2024) and may have changed by the time of reading in 2026.\n\n---\n\n*This article was compiled in September 2026. Readers should verify tuition costs, salary data, and program availability directly with institutions and authoritative sources, as these figures are subject to change.*",
+    "image": {
+      "prompt": "A clean, conceptual editorial illustration for an encyclopedia article titled \"Coding Bootcamp vs. Computer Science Degree: Breaking Into Tech\". Minimalist isometric editorial illustration for a modern encyclopedia. Soft gradients, deep indigo and violet palette with cyan accents, clean very light background, subtle depth and shadows, no text, no letters, no numbers, no logos, no watermarks, modern, precise, calm.",
+      "alt": "Coding Bootcamp vs. Computer Science Degree: Breaking Into Tech"
+    },
+    "sources": [
+      {
+        "title": "U.S. Bureau of Labor Statistics: Software Developers, Quality Assurance Analysts, and Testers — Occupational Outlook Handbook",
+        "url": "https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm"
+      },
+      {
+        "title": "College Board: Trends in College Pricing",
+        "url": "https://research.collegeboard.org/trends/college-pricing"
+      },
+      {
+        "title": "National Center for Education Statistics: Tuition Costs of Colleges and Universities",
+        "url": "https://nces.ed.gov/fastfacts/display.asp?id=76"
+      },
+      {
+        "title": "U.S. Department of Labor: Registered Apprenticeship",
+        "url": "https://www.apprenticeship.gov"
+      }
+    ]
+  },
+  {
+    "topicKey": "bootcamp-vs-cs-degree",
+    "title": "编程训练营 vs. 计算机科学学位：如何进入科技行业",
+    "question": "我应该参加编程训练营还是攻读计算机科学学位来进入科技行业？",
+    "summary": "本文比较了编程训练营与计算机科学学位这两条进入科技行业的路径，从费用、学习周期、课程深度及职业发展结果等方面进行分析，帮助有意向的学生做出明智选择。",
+    "tags": [
+      "编程训练营",
+      "计算机科学学位",
+      "科技职业",
+      "软件开发",
+      "职业建议"
+    ],
+    "language": "zh",
+    "content": "# 编程训练营 vs. 计算机科学学位：如何进入科技行业\n\n## 概述\n\n进入科技行业最常见的两条路径是**编程训练营**和**计算机科学（CS）学位**。两条路径在费用、时间投入、知识深度和职业发展结果上各有明显差异。正确的选择在很大程度上取决于个人目标、经济状况、既有经验以及目标岗位。\n\n---\n\n## 什么是编程训练营？\n\n编程训练营是一种密集型短期培训项目，通常持续12至26周，专注于实用的、可直接上岗的技能。常见课程涵盖网页开发、数据科学、UX设计或网络安全。训练营由私营公司、社区学院及部分高校开办，提供线下、线上或混合授课形式。\n\n### 典型特点\n- **学习周期：** 全日制3至6个月（兼职选项通常延长至12个月）\n- **费用：** 学费差异较大；截至2023年，美国全日制训练营学费通常约在10,000至20,000美元之间，该数字到2026年可能已有变化\n- **课程重点：** 实战项目、当前主流框架与语言（如JavaScript、Python、React）以及作品集构建\n- **颁发证书：** 结业证书（非经认证的学术学位）\n\n### 资金选项\n- 全额预付或分期付款\n- 收入分成协议（ISA），即学员在就业后支付一定比例的未来收入——截至2023年，ISA条款和可用性因提供方差异较大，此后监管审查也有所加强\n- 雇主赞助或劳动力发展补助金\n\n---\n\n## 什么是计算机科学学位？\n\n计算机科学理学学士学位是由经认证大学提供的四年制本科学位。部分学生也会攻读两年制副学士学位，或CS及相关领域的研究生课程（硕士或博士）。\n\n### 典型特点\n- **学习周期：** 4年（本科）；2至3年（硕士）\n- **费用：** 因院校类型差异显著；据College Board报告，在2023至2024学年，美国公立四年制大学州内生平均年学费约为11,260美元，私立非营利四年制大学约为41,540美元——这些数据到2026年可能已有变化\n- **课程重点：** 理论、算法、数据结构、操作系统、数学及系统编程，同时兼顾应用课程\n- **颁发证书：** 经认证的学术学位（B.S.、M.S.或Ph.D.）\n\n---\n\n## 对比一览\n\n下表使用2023年左右的近似数据，到2026年可能已有变化。所有费用区间应以机构最新公布数据为准。\n\n| 对比因素 | 编程训练营 | CS学位（本科） |\n|---|---|---|\n| **典型学习周期** | 3至6个月 | 4年 |\n| **大致费用（美国，2023年）** | 10,000至20,000美元 | 45,000至166,000美元以上（总计） |\n| **颁发证书** | 结业证书 | 经认证学位 |\n| **理论深度** | 低至中等 | 高 |\n| **就业准备速度** | 快 | 较慢 |\n| **雇主认可度** | 日益增长，但参差不齐 | 普遍认可 |\n| **攻读研究生资格** | 通常不可直接申请 | 可以 |\n| **助学金可用性** | 有限（ISA、私人贷款） | 联邦贷款、助学金、奖学金 |\n\n*注：CS学位总费用以2023至2024学年平均年学费乘以四年估算。实际总额因院校、居住地状态、生活费用及助学金情况差异显著。*\n\n---\n\n## 职业发展结果\n\n### 完成训练营后通常可获得的岗位\n- 前端或全栈网页开发工程师\n- 初级软件工程师\n- UX/UI设计师（设计方向训练营）\n- 数据分析师（数据方向训练营）\n\n### 通常需要或强烈倾向于CS学位的岗位\n- 机器学习工程师或AI研究员\n- 系统或嵌入式软件工程师\n- 编译器或操作系统工程师\n- 研究生级别研究岗位\n- 许多大型科技公司中以学历筛选候选人的职位（筛选标准因公司而异并持续演变——截至2022至2023年，部分主要雇主已公开取消特定岗位的学历要求）\n\n### 薪资数据\n美国劳工统计局（BLS）报告显示，2023年软件开发工程师、质量保证分析师及测试工程师的年薪中位数为**132,270美元**。该数据反映的是整体职业水平，并未单独区分训练营毕业生与学位毕业生。个人薪资因岗位、地区、雇主及经验水平不同而存在差异。\n\n---\n\n## 选择时应考虑的因素\n\n### 1. 时间与机会成本\n攻读CS学位需要四年时间，期间学生本可获得工作收入。训练营则有可能使学员在六个月内实现就业。然而，学位可能带来更高的起薪和更广泛的长期发展空间。\n\n### 2. 经济资源\n许多院校的CS学位可申请联邦政府支持的助学金，包括佩尔助学金（Pell Grant）和补贴学生贷款。截至2023年，大多数训练营不符合联邦学生援助的申请资格，但部分社区学院的编程课程可能符合条件。请直接向相关机构核实最新资格要求。\n\n### 3. 学习方式\n训练营节奏快、以项目为导向。CS学位课程包含持续的抽象理论学习。不适应快速切换学习内容、或希望打好数学理论基础的学生，可能更适合学位课程环境。\n\n### 4. 目标岗位与行业\n某些行业——如国防承包、学术研究、金融科技以及部分大型科技公司——可能对经认证学位有较强偏好。初创公司和代理机构历来对拥有优质作品集的训练营毕业生更为开放。\n\n### 5. 既有背景\n从其他行业转行、已持有其他领域本科学位的人，有时会发现训练营已足够，因为学历要求已通过此前的学位满足。首次进入职场的人则可能更能从大学提供的学历证书和人脉网络中获益。\n\n---\n\n## 替代路径与混合路径\n\n- **自学：** 免费或低价资源（在线课程、开放课件）可作为两条路径的补充，也可作为高度自律学习者的独立学习方案。\n- **IT或CS副学士学位：** 两年制经认证学历，费用低于四年制学位，且学分可能可转入本科课程。\n- **雇主学费补助：** 部分雇主提供学费报销计划，可在职攻读兼职学位时给予补贴。\n- **学徒制：** 注册技术学徒制在多个国家（包括美国和英国）作为替代路径正日益增多。\n\n---\n\n## 核心要点\n\n- **选择训练营，如果**你需要快速进入职场、无法投入多年学习、目标岗位为前端或全栈网页开发，或已持有其他领域的学位。\n- **选择CS学位，如果**你希望建立宽厚的理论基础、目标岗位为研究或系统级工程、计划攻读研究生，或希望在长期职业生涯中获得最广泛的雇主认可。\n- **两条路径均不保证就业。** 作品集质量、人脉拓展和持续学习在两种情况下同样重要。\n- 本文所引用的所有费用和薪资数据均使用最新可获得数据（2023至2024年），到读者阅读本文的2026年可能已有变化。\n\n---\n\n*本文编写于2026年9月。学费、薪资数据及课程情况请直接向相关机构和权威来源核实，因上述数据可能随时变动。*",
+    "image": {
+      "prompt": "A clean, conceptual editorial illustration for an encyclopedia article titled \"Coding Bootcamp vs. Computer Science Degree: Breaking Into Tech\". Minimalist isometric editorial illustration for a modern encyclopedia. Soft gradients, deep indigo and violet palette with cyan accents, clean very light background, subtle depth and shadows, no text, no letters, no numbers, no logos, no watermarks, modern, precise, calm.",
+      "alt": "编程训练营 vs. 计算机科学学位：如何进入科技行业"
+    },
+    "sources": [
+      {
+        "title": "U.S. Bureau of Labor Statistics: Software Developers, Quality Assurance Analysts, and Testers — Occupational Outlook Handbook",
+        "url": "https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm"
+      },
+      {
+        "title": "College Board: Trends in College Pricing",
+        "url": "https://research.collegeboard.org/trends/college-pricing"
+      },
+      {
+        "title": "National Center for Education Statistics: Tuition Costs of Colleges and Universities",
+        "url": "https://nces.ed.gov/fastfacts/display.asp?id=76"
+      },
+      {
+        "title": "U.S. Department of Labor: Registered Apprenticeship",
+        "url": "https://www.apprenticeship.gov"
+      }
+    ]
+  }
+]
