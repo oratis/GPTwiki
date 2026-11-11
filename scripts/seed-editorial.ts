@@ -34,6 +34,7 @@ import {
   type ServiceAccount,
 } from 'firebase-admin/app';
 import { getFirestore, FieldValue, type Firestore } from 'firebase-admin/firestore';
+import { createHash } from 'node:crypto';
 import { Storage } from '@google-cloud/storage';
 import { config } from 'dotenv';
 import { readRelease, validateDraft } from './lib/editorial-release';
@@ -284,7 +285,7 @@ async function main(): Promise<void> {
       console.log(`  ⏭  ${d.language} "${d.title}" (image missing)`);
       continue;
     }
-    if (await withRetry(`dup-check "${d.title}"`, () => slotTaken(db, d))) {
+    if (!release && await withRetry(`dup-check "${d.title}"`, () => slotTaken(db, d))) {
       stats.skippedDup++;
       console.log(`  ⏭  ${d.language} "${d.title}" (already seeded)`);
       continue;
@@ -329,8 +330,30 @@ async function main(): Promise<void> {
       continue;
     }
 
-    const ref = db.collection('wikis').doc();
-    await withRetry(`write "${d.title}"`, () => ref.set(doc));
+    const wikis = db.collection('wikis');
+    const ref = release ? wikis.doc(`editorial-${d.topicKey}-${d.language}`) : wikis.doc();
+    if (release) {
+      const digest = createHash('sha256').update(JSON.stringify(d)).digest('hex');
+      const created = await withRetry(`publish "${d.title}"`, () => db.runTransaction(async tx => {
+        const existing = await tx.get(ref);
+        if (existing.exists) {
+          if (existing.get('releaseDigest') !== digest || existing.get('authorId') !== EDITORIAL_ID) {
+            throw new Error(`Existing edition differs from reviewed release: ${ref.id}`);
+          }
+          return false;
+        }
+        tx.create(ref, { ...doc, editorialRelease: release, releaseDigest: digest });
+        tx.update(db.collection('users').doc(EDITORIAL_ID), { wikisCount: FieldValue.increment(1) });
+        return true;
+      }));
+      if (!created) {
+        stats.skippedDup++;
+        console.log(`  ✓ previously published ${d.language} "${d.title}" → /wiki/${ref.id}`);
+        continue;
+      }
+    } else {
+      await withRetry(`write "${d.title}"`, () => ref.set(doc));
+    }
     stats.created++;
     console.log(`  ✓ created       ${d.language} "${d.title}" → /wiki/${ref.id}`);
 
@@ -345,7 +368,7 @@ async function main(): Promise<void> {
     }
   }
 
-  if (APPLY && stats.created > 0) {
+  if (!release && APPLY && stats.created > 0) {
     await withRetry('wikisCount update', () =>
       db
         .collection('users')
