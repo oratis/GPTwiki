@@ -6,6 +6,10 @@ Site search runs on a self-hosted [Typesense](https://typesense.org/) instance
 `TYPESENSE_*` env vars are unset, the server is down, or a query errors,
 `searchWikis()` silently degrades to the Firestore flow.
 
+## Check the deployment before changing the VM
+
+Run `bash scripts/check-search-deployment.sh` to see the service traffic split, latest template backend and VM state. For a split rollout, check the `search_backend` structured log for each serving revision. A running VM alone does not establish that search uses it. Check batch indexers and other VM clients before retiring it. To enable Typesense, verify the intended index has documents and a representative query returns useful hits, then configure the service endpoint and a secret reference. Use private networking or TLS for the credential-bearing connection. Keep the Firestore path available for rollback.
+
 ## Current deployment
 
 - GCE VM `typesense-1` (e2-small, us-central1-a, project `gptwiki`),
