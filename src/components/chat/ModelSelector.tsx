@@ -1,11 +1,12 @@
 'use client';
 
+import { SERVED_MODELS } from '@/lib/models';
 import type { AIModel } from '@/types';
 
-const models: { value: AIModel; label: string; color: string }[] = [
-  { value: 'claude', label: 'Claude', color: 'bg-orange-100 text-orange-700 border-orange-200' },
-  { value: 'gpt', label: 'GPT-4', color: 'bg-green-100 text-green-700 border-green-200' },
-  { value: 'gemini', label: 'Gemini', color: 'bg-blue-100 text-blue-700 border-blue-200' },
+const models: { value: AIModel; color: string }[] = [
+  { value: 'claude', color: 'bg-orange-100 text-orange-700 border-orange-200' },
+  { value: 'gpt', color: 'bg-green-100 text-green-700 border-green-200' },
+  { value: 'gemini', color: 'bg-blue-100 text-blue-700 border-blue-200' },
 ];
 
 interface ModelSelectorProps {
@@ -28,7 +29,7 @@ export default function ModelSelector({ value, onChange, disabled }: ModelSelect
               : 'border-gray-200 bg-gray-50 text-gray-500 hover:bg-gray-100'
           } disabled:opacity-50`}
         >
-          {model.label}
+          {SERVED_MODELS[model.value].displayName}
         </button>
       ))}
     </div>

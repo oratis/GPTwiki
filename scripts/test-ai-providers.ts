@@ -19,6 +19,7 @@
  * if a future SDK version starts (or stops) normalising in a given place, this
  * fails and someone reads the comment instead of shipping a silently dead model.
  */
+import { getModelDisplayName, getServedModelId } from '../src/lib/models';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -53,11 +54,16 @@ function chatSystemInstruction(chat: unknown): unknown {
   return (chat as { params?: { systemInstruction?: unknown } }).params?.systemInstruction;
 }
 
+test('current Gemini routing and historical attribution', () => {
+  assert.equal(getServedModelId('gemini'), 'gemini-3.6-flash');
+  assert.equal(getModelDisplayName('gemini'), 'Gemini');
+});
+
 console.log('\nai providers: gemini system instruction');
 
 test('a string on getGenerativeModel is normalised into a Content', () => {
   const model = client.getGenerativeModel({
-    model: 'gemini-2.0-flash',
+    model: getServedModelId('gemini'),
     systemInstruction: INSTRUCTION,
   });
   assert.deepEqual(model.systemInstruction, {
@@ -69,7 +75,7 @@ test('a string on getGenerativeModel is normalised into a Content', () => {
 test('that normalised value survives into the chat session', () => {
   // This is the request the API actually receives.
   const model = client.getGenerativeModel({
-    model: 'gemini-2.0-flash',
+    model: getServedModelId('gemini'),
     systemInstruction: INSTRUCTION,
   });
   const chat = model.startChat({ history: [] });
@@ -82,7 +88,7 @@ test('that normalised value survives into the chat session', () => {
 test('a string on startChat is NOT normalised — the bug this file exists for', () => {
   // Documented as a fact about the SDK, so that if a future version fixes it
   // this test fails loudly rather than leaving the workaround unexplained.
-  const model = client.getGenerativeModel({ model: 'gemini-2.0-flash' });
+  const model = client.getGenerativeModel({ model: getServedModelId('gemini') });
   const chat = model.startChat({ history: [], systemInstruction: INSTRUCTION });
   assert.equal(
     chatSystemInstruction(chat),

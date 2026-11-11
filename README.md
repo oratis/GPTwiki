@@ -15,7 +15,7 @@ Read a worked example about choosing between REST and GraphQL. The English and C
 
 ## Features
 
-- **Multi-Model AI** - Choose between Claude (Anthropic), GPT-4o (OpenAI), or Gemini 2.0 Flash (Google)
+- **Multi-Model AI** - Choose between Claude (Anthropic), GPT-4o (OpenAI), or Gemini 3.6 Flash (Google)
 - **Bring Your Own Key** - Add your own API keys in your profile; they're encrypted at rest (AES-256-GCM)
 - **Optional Free Tier** - Self-hosters can grant users free platform-keyed messages per day (`FREE_DAILY_MESSAGES`, off by default)
 - **Citations** - AI-generated articles include a References section with supporting sources
@@ -39,7 +39,7 @@ Read a worked example about choosing between REST and GraphQL. The English and C
 | Styling | Tailwind CSS |
 | Database | Google Cloud Firestore |
 | Auth | NextAuth.js (Google + GitHub OAuth) |
-| AI | Anthropic Claude, OpenAI GPT-4o, Google Gemini 2.0 Flash |
+| AI | Anthropic Claude, OpenAI GPT-4o, Google Gemini 3.6 Flash |
 | Deployment | Google Cloud Run (Docker) |
 | CI/CD | Google Cloud Build |
 | Analytics | Google Analytics 4 |
