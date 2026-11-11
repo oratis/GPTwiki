@@ -17,6 +17,11 @@
  * Run with `npm test`.
  */
 import assert from 'node:assert/strict';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import PublishDialog from '../src/components/chat/PublishDialog';
+import { ToastProvider } from '../src/components/ui/Toast';
+import { I18nProvider } from '../src/lib/i18n/context';
 import { wikiCreateSchema } from '../src/lib/validation';
 
 let failures = 0;
@@ -94,8 +99,6 @@ test('an omitted title is allowed and defaults to the empty string', () => {
 });
 
 test("PublishDialog's body — a user-supplied title — still round-trips", () => {
-  // The other caller. PublishDialog guards with `if (!title.trim()) return;`
-  // and posts the trimmed title, so it must keep working unchanged.
   const parsed = wikiCreateSchema.parse({
     conversation: [message('user', 'q'), message('assistant', 'a')],
     aiModel: 'claude',
@@ -106,6 +109,22 @@ test("PublishDialog's body — a user-supplied title — still round-trips", () 
   });
 
   assert.equal(parsed.title, 'How tides work');
+});
+
+test('the publish dialog allows an automatic title when it has a question', () => {
+  for (const question of ['Why does ice float?', '  ']) {
+    const dialog = createElement(PublishDialog, {
+      open: true, onClose() {}, model: 'gemini',
+      messages: [message('user', question), message('assistant', 'Ice is less dense.')],
+    });
+    const markup = renderToStaticMarkup(createElement(I18nProvider, null,
+      createElement(ToastProvider, null, dialog)));
+    const submit = [...markup.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/g)]
+      .find(([, , body]) => body.includes('Publish Wiki'));
+    assert.ok(submit);
+    assert.equal(/\sdisabled=/.test(submit[1]), !question.trim());
+    assert.doesNotMatch(markup, /<input\b[^>]*\brequired\b/);
+  }
 });
 
 test('the title is still bounded — 201 characters is rejected', () => {
