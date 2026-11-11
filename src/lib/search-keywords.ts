@@ -41,6 +41,14 @@ export function scriptAwareTokens(s: string): string[] {
   return [...words, ...grams];
 }
 
+/** Rank the same terms that the index can retrieve, including CJK and Thai
+ * bigrams. Queries made up entirely of stopwords retain the text fallback. */
+export function searchQueryTerms(query: string) {
+  const indexTokens = [...new Set(scriptAwareTokens(query))];
+  const keywords = indexTokens.length ? indexTokens : tokenize(query).filter(word => word.length > 1);
+  return { indexTokens, keywords };
+}
+
 const MAX_INDEXED_KEYWORDS = 30;
 
 /**
