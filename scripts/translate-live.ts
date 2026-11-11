@@ -228,6 +228,7 @@ async function main(): Promise<void> {
       createdAt: now,
       updatedAt: now,
       source: 'editorial',
+      editorialLocale: 'zh',
       keywords: buildSearchKeywords([zh.title, zh.question, zh.tags.join(' '), zh.summary]),
     };
     if (en.imageUrl) {

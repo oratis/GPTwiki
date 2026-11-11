@@ -39,6 +39,14 @@ rerun to resume. Allow the page cache to revalidate before checking hreflang.
 | Repo secret `ARK_API_KEY` (Seedream images) | ✅ set |
 | Actions → General → "Allow GitHub Actions to create and approve pull requests" | ✅ enabled |
 
+## Homepage editorial index
+
+Deploy the `(editorialLocale, views DESC)` index in `firestore.indexes.json` and wait for Ready.
+Only editorial documents receive `editorialLocale`; mirrors incur no entries for this index.
+With Application Default Credentials, run `FIREBASE_PROJECT_ID=gptwiki npx tsx scripts/backfill-editorial-locale.ts`.
+Repeat with `--apply` to populate eligible existing records before deploying the homepage.
+Future editorial seeds carry the field automatically.
+
 ## 3. One-time WIF  ← activates auto-seed + sitemap-shards (keyless)
 
 Run authed to **gptwiki** with IAM admin. Reuse the app's Firebase service

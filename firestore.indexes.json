@@ -4,6 +4,14 @@
       "collectionGroup": "wikis",
       "queryScope": "COLLECTION",
       "fields": [
+        { "fieldPath": "editorialLocale", "order": "ASCENDING" },
+        { "fieldPath": "views", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "wikis",
+      "queryScope": "COLLECTION",
+      "fields": [
         { "fieldPath": "language", "order": "ASCENDING" },
         { "fieldPath": "views", "order": "DESCENDING" }
       ]

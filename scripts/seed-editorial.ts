@@ -334,6 +334,7 @@ async function main(): Promise<void> {
       createdAt: now,
       updatedAt: now,
       source: SOURCE,
+      editorialLocale: d.language,
       keywords: buildSearchKeywords([d.title, d.question, d.tags.join(' '), d.summary]),
     };
     if (hero) {
