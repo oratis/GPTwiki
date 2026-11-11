@@ -19,7 +19,7 @@
     "*.{js,jsx,json,md,css}": []
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.80.0",
+    "@anthropic-ai/sdk": "^0.91.1",
     "@auth/firebase-adapter": "^2.11.2",
     "@google-cloud/storage": "^7.19.0",
     "@google/generative-ai": "^0.24.1",
@@ -55,5 +55,19 @@
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@tailwindcss/typography": {
+      "postcss-selector-parser": "6.1.5"
+    },
+    "gaxios@6": {
+      "uuid": "11.1.1"
+    },
+    "google-gax@4": {
+      "uuid": "11.1.1"
+    },
+    "teeny-request@9": {
+      "uuid": "11.1.1"
+    }
   }
 }
