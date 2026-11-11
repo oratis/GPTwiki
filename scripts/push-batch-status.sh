@@ -3,9 +3,7 @@
 set -euo pipefail
 state="${1:?expected pending, drafted or seeded}"
 case "$state" in
-  pending) args=(--pending) ;;
-  drafted) args=(--drafted) ;;
-  seeded) args=() ;;
+  pending|drafted|seeded) ;;
   *) exit 2 ;;
 esac
 export BATCH_TOPIC_KEYS_FILE="$RUNNER_TEMP/batch-keys.json"
@@ -15,7 +13,7 @@ git config user.email bot@gptwiki.net
 for attempt in 1 2 3; do
   git fetch origin main
   git checkout --detach FETCH_HEAD
-  npx tsx scripts/mark-seeded-from-carrier.ts "${args[@]}"
+  npx tsx scripts/mark-seeded-from-carrier.ts "--$state"
   if git diff --quiet -- content/backlog.ts; then exit 0; fi
   git add content/backlog.ts
   git commit --no-verify -m "backlog: mark $state topics [skip ci]"
