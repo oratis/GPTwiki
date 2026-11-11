@@ -1,0 +1,210 @@
+[
+  {
+    "reference": {
+      "title": "GPS.gov — GPS",
+      "url": "https://www.gps.gov/gps"
+    },
+    "editions": [
+      {
+        "id": "2ByrCJ5xwNj2sRUNvGWZ",
+        "title": "How GPS Works",
+        "language": "en",
+        "source": "editorial-draft"
+      },
+      {
+        "id": "K3oZRY4bZQzXDtrJfpWV",
+        "title": "Cómo funciona el GPS",
+        "language": "es",
+        "source": "editorial-draft"
+      }
+    ]
+  },
+  {
+    "reference": {
+      "title": "U.S. Department of Energy — Solar Photovoltaic Cell Basics",
+      "url": "https://www.energy.gov/cmei/systems/solar-photovoltaic-cell-basics"
+    },
+    "editions": [
+      {
+        "id": "DnfjFF6k30IJn1cOEVwA",
+        "title": "How Solar Panels Work",
+        "language": "en",
+        "source": "editorial-draft"
+      },
+      {
+        "id": "2D4bdQak3ZhWJJYMEyOB",
+        "title": "Cómo funcionan los paneles solares",
+        "language": "es",
+        "source": "editorial-draft"
+      }
+    ]
+  },
+  {
+    "reference": {
+      "title": "U.S. Department of Energy — Heat Pump Systems",
+      "url": "https://www.energy.gov/energysaver/heat-pump-systems"
+    },
+    "editions": [
+      {
+        "id": "If9A5sTwiegylxUqaUSY",
+        "title": "How Refrigeration Works",
+        "language": "en",
+        "source": "editorial-draft"
+      },
+      {
+        "id": "DkzC3YSUc9MfO3I3Ssq5",
+        "title": "Cómo funciona la refrigeración",
+        "language": "es",
+        "source": "editorial-draft"
+      }
+    ]
+  },
+  {
+    "reference": {
+      "title": "NASA Space Place — What Is an Aurora?",
+      "url": "https://spaceplace.nasa.gov/aurora/en/"
+    },
+    "editions": [
+      {
+        "id": "O1Yivkt9MovP7x0nNmfl",
+        "title": "Auroras",
+        "language": "en",
+        "source": "editorial-draft"
+      },
+      {
+        "id": "x1MLTZwLO7XNUvhyUuHP",
+        "title": "Las auroras",
+        "language": "es",
+        "source": "editorial-draft"
+      }
+    ]
+  },
+  {
+    "reference": {
+      "title": "NASA Space Place — Why Is the Sky Blue?",
+      "url": "https://spaceplace.nasa.gov/blue-sky/en/"
+    },
+    "editions": [
+      {
+        "id": "e5aimPPjl9RDloEJVZjl",
+        "title": "Why the Sky Is Blue",
+        "language": "en",
+        "source": "editorial-draft"
+      },
+      {
+        "id": "XxXqLuH0JRhC6lWepwVE",
+        "title": "Por qué el cielo es azul",
+        "language": "es",
+        "source": "editorial-draft"
+      }
+    ]
+  },
+  {
+    "reference": {
+      "title": "FDA — Microwave Ovens",
+      "url": "https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-ovens"
+    },
+    "editions": [
+      {
+        "id": "fIW6XrlmDdMrnOBenG3f",
+        "title": "How Microwave Ovens Heat Food",
+        "language": "en",
+        "source": "editorial-draft"
+      },
+      {
+        "id": "514SLNTBgalmVdscIESb",
+        "title": "Cómo calienta la comida un microondas",
+        "language": "es",
+        "source": "editorial-draft"
+      }
+    ]
+  },
+  {
+    "reference": {
+      "title": "NASA Science — Moon Phases",
+      "url": "https://science.nasa.gov/moon/moon-phases/"
+    },
+    "editions": [
+      {
+        "id": "gfO0ZC8eMU48AtiajXTK",
+        "title": "The Phases of the Moon",
+        "language": "en",
+        "source": "editorial-draft"
+      },
+      {
+        "id": "0q4l4KofSApA0aEVnkNK",
+        "title": "Las fases de la Luna",
+        "language": "es",
+        "source": "editorial-draft"
+      }
+    ]
+  },
+  {
+    "reference": {
+      "title": "NASA Space Place — What Is a Light-Year?",
+      "url": "https://spaceplace.nasa.gov/light-year/en/"
+    },
+    "editions": [
+      {
+        "id": "icIsQ4d78Abod2pHqm5h",
+        "title": "Light-Years and Cosmic Distance",
+        "language": "en",
+        "source": "editorial-draft"
+      },
+      {
+        "id": "zJmpGcdLX7YowRWMJ4Fc",
+        "title": "Años luz y la distancia cósmica",
+        "language": "es",
+        "source": "editorial-draft"
+      }
+    ]
+  },
+  {
+    "reference": {
+      "title": "NASA Science — Stars",
+      "url": "https://science.nasa.gov/universe/stars/"
+    },
+    "editions": [
+      {
+        "id": "tzLzQWfxYpimLpVp4pjI",
+        "title": "The Life Cycle of a Star",
+        "language": "en",
+        "source": "editorial-draft"
+      },
+      {
+        "id": "EXo3njTbjmGmYRrbwDLF",
+        "title": "El ciclo de vida de una estrella",
+        "language": "es",
+        "source": "editorial-draft"
+      }
+    ]
+  },
+  {
+    "reference": {
+      "title": "Penn State Extension — Periodical Cicada",
+      "url": "https://extension.psu.edu/periodical-cicada"
+    },
+    "editions": [
+      {
+        "id": "0I7qwG8sCaIE9tDTxqj0",
+        "title": "Periodical Cicadas",
+        "language": "en",
+        "source": "hand-authored"
+      }
+    ]
+  },
+  {
+    "reference": {
+      "title": "ASME — Bessemer Conversion Engine",
+      "url": "https://www.asme.org/about-asme/engineering-history/landmarks/196-bessemer-conversion-engine"
+    },
+    "editions": [
+      {
+        "id": "04cyBmyIe2eMjNZ9rv9O",
+        "title": "The Bessemer Process",
+        "language": "en",
+        "source": "hand-authored"
+      }
+    ]
+  }
+]
