@@ -15,10 +15,13 @@ import type { AIModel } from '@/types';
 export const SERVED_MODELS: Record<AIModel, { id: string; displayName: string }> = {
   claude: { id: 'claude-sonnet-4-6', displayName: 'Claude Sonnet 4.6' },
   gpt: { id: 'gpt-4o', displayName: 'GPT-4o' },
-  gemini: { id: 'gemini-2.0-flash', displayName: 'Gemini 2.0 Flash' },
+  gemini: { id: 'gemini-3.6-flash', displayName: 'Gemini 3.6 Flash' },
 };
 
 export function getModelDisplayName(model: AIModel): string {
+  // Persisted articles and battles contain only the provider alias. Past Gemini
+  // responses may have used 2.0 Flash, so do not label them with the new version.
+  if (model === 'gemini') return 'Gemini';
   return SERVED_MODELS[model]?.displayName ?? model;
 }
 

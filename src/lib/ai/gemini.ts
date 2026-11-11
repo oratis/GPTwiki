@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { getServedModelId } from '../models';
 import type { Message } from '@/types';
 
 /** Kept verbatim from the other providers so the models are given the same brief. */
@@ -31,7 +32,7 @@ export function streamGemini(messages: Message[], apiKey?: string): ReadableStre
         // because no one had completed a battle and the other surfaces default
         // to a different model.
         const model = client.getGenerativeModel({
-          model: 'gemini-2.0-flash',
+          model: getServedModelId('gemini'),
           systemInstruction: SYSTEM_INSTRUCTION,
         });
 
