@@ -29,6 +29,9 @@ jobs:
       # `prepare`, which has no job in CI.
       - run: npm ci --ignore-scripts
 
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
       - name: Typecheck
         run: npm run typecheck
 
