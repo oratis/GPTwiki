@@ -117,9 +117,8 @@ test('the publish dialog allows an automatic title when it has a question', () =
       open: true, onClose() {}, model: 'gemini',
       messages: [message('user', question), message('assistant', 'Ice is less dense.')],
     });
-    const markup = renderToStaticMarkup(createElement(I18nProvider, {
-      children: createElement(ToastProvider, { children: dialog }),
-    }));
+    const markup = renderToStaticMarkup(createElement(I18nProvider, null,
+      createElement(ToastProvider, null, dialog)));
     const submit = [...markup.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/g)]
       .find(([, , body]) => body.includes('Publish Wiki'));
     assert.ok(submit);
