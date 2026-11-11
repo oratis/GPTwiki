@@ -16,11 +16,6 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const backlogPath = join(root, 'content', 'backlog.ts');
 
 const carrierKeys = [...new Set(autoDraftEn.flatMap(d => d.topicKey ? [d.topicKey] : []))];
-if (process.argv.includes('--print-keys')) {
-  console.log(JSON.stringify(carrierKeys));
-  process.exit(0);
-}
-
 const keysFile = process.env.BATCH_TOPIC_KEYS_FILE;
 const keys: string[] = keysFile ? JSON.parse(readFileSync(keysFile, 'utf8')) : carrierKeys;
 const status = process.argv.includes('--drafted') ? 'drafted' : 'seeded';

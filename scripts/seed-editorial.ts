@@ -36,7 +36,7 @@ import {
 import { getFirestore, FieldValue, type Firestore } from 'firebase-admin/firestore';
 import { Storage } from '@google-cloud/storage';
 import { config } from 'dotenv';
-import { readRelease } from './lib/editorial-release';
+import { readRelease, validateDraft } from './lib/editorial-release';
 import { hasHeaderImage } from '../src/lib/header-image';
 import { buildSearchKeywords } from '../src/lib/search-keywords';
 import {
@@ -44,7 +44,7 @@ import {
   toTypesenseDoc,
   upsertWikiToTypesense,
 } from '../src/lib/typesense';
-import type { DraftArticle, DraftLanguage } from '../content/types';
+import type { DraftArticle } from '../content/types';
 
 config({ path: '.env.local', override: true });
 
@@ -72,10 +72,6 @@ const IMG_W = 2560;
 const IMG_H = 1440;
 
 const GCS_BUCKET = process.env.GCS_WIKI_IMAGES_BUCKET || 'gptwiki-images';
-
-const LANGS = new Set<DraftLanguage>([
-  'en', 'zh', 'ja', 'ko', 'es', 'fr', 'de', 'pt', 'ru', 'ar', 'hi', 'it', 'tr', 'vi', 'th',
-]);
 
 // Batches seedable by this script. Add new clusters here.
 const BATCHES: Record<string, () => Promise<DraftArticle[]>> = {
@@ -121,26 +117,6 @@ function initStorage(): Storage {
 }
 
 // ─── Validation ──────────────────────────────────────────────────────────
-function validateDraft(d: DraftArticle, i: number): string[] {
-  const errs: string[] = [];
-  const at = `[${i}] "${d.title ?? '?'}"`;
-  for (const f of ['title', 'question', 'content', 'summary'] as const) {
-    if (!d[f] || typeof d[f] !== 'string') errs.push(`${at}: missing ${f}`);
-  }
-  if (!Array.isArray(d.tags) || d.tags.length < 1 || d.tags.length > 8) {
-    errs.push(`${at}: tags must have 1–8 entries`);
-  }
-  if (!LANGS.has(d.language)) errs.push(`${at}: bad language "${d.language}"`);
-  if (d.content && !d.content.startsWith('# ')) errs.push(`${at}: content must start with "# Title"`);
-  if (d.summary && d.summary.length > 320) errs.push(`${at}: summary too long (${d.summary.length})`);
-  if (d.image && !d.topicKey) errs.push(`${at}: image requires topicKey`);
-  if (d.image && (!d.image.prompt || !d.image.alt)) errs.push(`${at}: image needs prompt + alt`);
-  for (const s of d.sources ?? []) {
-    if (!s.title || !/^https:\/\//.test(s.url)) errs.push(`${at}: bad source ${s.url}`);
-  }
-  return errs;
-}
-
 // ─── Seedream ────────────────────────────────────────────────────────────
 async function generateImage(prompt: string): Promise<string> {
   const res = await fetch(ARK_ENDPOINT, {

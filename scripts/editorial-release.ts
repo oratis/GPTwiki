@@ -1,13 +1,15 @@
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { autoDraftEn } from '../content/auto-draft.en';
-import { readRelease, releaseKeys } from './lib/editorial-release';
+import { readRelease, releaseKeys, validateDraft } from './lib/editorial-release';
 
 const [operation, ...args] = process.argv.slice(2);
 const keys = new Set<string>();
 if (operation === 'export') {
   const [stamp] = args;
   if (!/^\d{8}-\d{6}$/.test(stamp)) throw new Error('Invalid release timestamp');
+  const errors = autoDraftEn.flatMap(validateDraft);
+  if (errors.length) throw new Error(errors.join('\n'));
   for (const key of releaseKeys(autoDraftEn)) keys.add(key);
   mkdirSync('content/releases', { recursive: true });
   writeFileSync(`content/releases/${stamp}.json`, JSON.stringify(autoDraftEn, null, 2) + '\n', { flag: 'wx' });
