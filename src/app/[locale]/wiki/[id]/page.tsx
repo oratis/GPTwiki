@@ -312,7 +312,7 @@ export default async function WikiDetailPage({
         </div>
 
         <div lang={wiki.language || contentLocale}>
-          <WikiContent content={wiki.content} />
+          <WikiContent title={wiki.title} content={wiki.content} />
         </div>
 
         {sources.length > 0 && (
