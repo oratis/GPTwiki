@@ -37,11 +37,11 @@ export default function PublishDialog({ open, onClose, messages, model }: Publis
 
   if (!open) return null;
 
+  const question = messages.find((message) => message.role === 'user')?.content.trim() || '';
   const handlePublish = async () => {
-    if (!title.trim()) return;
+    if (publishing || !question) return;
     setPublishing(true);
     try {
-      const question = messages.find((m) => m.role === 'user')?.content || '';
       const res = await fetch('/api/wiki', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -129,7 +129,7 @@ export default function PublishDialog({ open, onClose, messages, model }: Publis
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder={t('publish.titlePlaceholder')}
-                required
+                maxLength={200}
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
             </div>
@@ -162,7 +162,7 @@ export default function PublishDialog({ open, onClose, messages, model }: Publis
               </button>
               <button
                 onClick={handlePublish}
-                disabled={publishing || !title.trim()}
+                disabled={publishing || !question}
                 className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
               >
                 {publishing ? (
