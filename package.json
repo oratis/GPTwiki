@@ -53,7 +53,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "tailwindcss": "^4",
-    "tsx": "^4.21.0",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   },
   "overrides": {
@@ -68,6 +68,9 @@
     },
     "teeny-request@9": {
       "uuid": "11.1.1"
+    },
+    "@typescript-eslint/typescript-estree@8": {
+      "minimatch": "11.0.1"
     }
   }
 }
