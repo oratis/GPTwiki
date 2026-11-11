@@ -1,5 +1,13 @@
 # GPTwiki 打点建设方案（2026-08-21）
 
+## 已接入的 GA4 漏斗
+
+在 GA4「探索 → 漏斗探索」使用同一日期范围，按用户查看 `session_start`、`question_submitted`、`answer_received`、`wiki_published`。按 `surface` 和默认渠道组拆分，另看 `question_denied` 的 `reason`、`followup_published` 和 `battle_voted`。在管理后台注册事件范围的自定义维度 `surface` 和 `reason`，将 `wiki_published` 标为关键事件。首次成功提问者的第 7 天留存可用同类群组探索查看。发布后先在 DebugView 走通一次完整流程。
+
+成功事件由浏览器在收到非空完整回复或成功写入后发送，浏览器拦截会造成漏记。与 Firestore 新增记录按日对账。流量排查按着陆页和来源比较有互动会话与上述操作，Direct 或零秒会话单独使用都无法识别机器人。仅发送固定事件、入口和拒绝原因；问题正文、答案、密钥、邮箱和用户标识均不作为自定义参数。
+
+
+
 > **来源**：方法论来自 `analytics-blueprint.md`（从 Luddi 生产事故提炼的可移植手册）。
 > 本文不是那份蓝图的改名版——GPTwiki 与 Luddi 在三个根本维度上不同（**匿名读者占绝对
 > 多数、19M 文档里 95%+ 是镜像语料、零边际成本的 BYOK 单人项目**），因此蓝图里有整整

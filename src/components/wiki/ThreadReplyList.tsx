@@ -1,5 +1,7 @@
 'use client';
 
+import { trackProductEvent } from '@/lib/product-events';
+
 import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -91,6 +93,7 @@ export default function ThreadReplyList({ wikiId, threadCount = 0, wikiAuthorId 
       }
 
       const data = await res.json();
+      trackProductEvent('followup_published', 'article');
       setThreads((prev) => [...prev, data.thread]);
       setQuestion('');
       setShowCompose(false);

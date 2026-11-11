@@ -1,5 +1,7 @@
 'use client';
 
+import { trackProductEvent } from '@/lib/product-events';
+
 import { useState, useRef, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { Send, BookPlus, Loader2 } from 'lucide-react';
@@ -31,6 +33,8 @@ export default function ChatInterface() {
     const trimmed = input.trim();
     if (!trimmed || loading) return;
 
+    trackProductEvent('question_submitted', 'chat');
+
     // Show suggestions on first message
     if (messages.length === 0) {
       setSearchQuery(trimmed);
@@ -60,6 +64,7 @@ export default function ChatInterface() {
         if (res.status === 403) {
           const err = await res.json();
           if (err.error === 'API_KEY_REQUIRED' || err.error === 'QUOTA_EXHAUSTED') {
+            trackProductEvent('question_denied', 'chat', err.error);
             const profileUrl = session?.user?.id ? `/profile/${session.user.id}` : '/login';
             const text =
               err.error === 'QUOTA_EXHAUSTED' ? t('chat.quotaExhausted') : t('apiKeys.required');
@@ -98,6 +103,7 @@ export default function ChatInterface() {
         setMessages([...newMessages, { ...assistantMsg }]);
       }
 
+      if (assistantMsg.content.trim()) trackProductEvent('answer_received', 'chat');
     } catch (error) {
       console.error('Chat error:', error);
       const errorMsg: Message = {

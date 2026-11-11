@@ -1,5 +1,7 @@
 'use client';
 
+import { trackProductEvent } from '@/lib/product-events';
+
 import { useState, useEffect } from 'react';
 import { X, BookPlus, Loader2 } from 'lucide-react';
 import type { Message, AIModel } from '@/types';
@@ -67,6 +69,7 @@ export default function PublishDialog({ open, onClose, messages, model }: Publis
         throw new Error('Failed to publish');
       }
       const data = await res.json();
+      trackProductEvent('wiki_published', 'chat');
       setWikiId(data.id);
       setPublished(true);
     } catch (error) {
