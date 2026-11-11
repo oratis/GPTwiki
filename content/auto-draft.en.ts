@@ -174,7 +174,7 @@ export const autoDraftEn: DraftArticle[] = [
     "sources": [
       {
         "title": "On Food and Cooking: The Science and Lore of the Kitchen – Harold McGee",
-        "url": "https://www.penguinrandomhouse.com/books/111753/on-food-and-cooking-by-harold-mcgee/"
+        "url": "https://www.simonandschuster.com/books/On-Food-and-Cooking/Harold-McGee/9780684800011"
       },
       {
         "title": "Britannica: Emulsion (chemistry)",
@@ -215,7 +215,7 @@ export const autoDraftEn: DraftArticle[] = [
     "sources": [
       {
         "title": "On Food and Cooking: The Science and Lore of the Kitchen – Harold McGee",
-        "url": "https://www.penguinrandomhouse.com/books/111753/on-food-and-cooking-by-harold-mcgee/"
+        "url": "https://www.simonandschuster.com/books/On-Food-and-Cooking/Harold-McGee/9780684800011"
       },
       {
         "title": "Britannica: Emulsion (chemistry)",
