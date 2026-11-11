@@ -5,18 +5,13 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
 [![Google Cloud](https://img.shields.io/badge/Google%20Cloud-Run-4285F4)](https://cloud.google.com/run)
 
-**The living Q&A encyclopedia.** Every good AI conversation becomes a persistent, searchable article that the next person can find — and keep asking. Built on conversations with Claude, GPT-4o, and Gemini, in 15 languages.
+GPTwiki turns AI conversations into public articles. A reader can inspect an answer and its sources, ask a follow-up, and publish what they learned. Article authors can merge useful replies into the text and keep an edit history.
 
-**[gptwiki.net](https://gptwiki.net)**
+Read a worked example about choosing between REST and GraphQL. The English and Chinese editions have separate article URLs and can be shared directly. [English edition](https://gptwiki.net/en/wiki/rUv7kEjhIVeGvMG4Bghc) · [中文版本](https://gptwiki.net/zh/wiki/O4IfXD0pIhjXgZzFUJPM)
 
-## Why GPTwiki?
-
-Wikipedia can't answer your question — it requires expert editors and only covers what's already written. ChatGPT can answer, but the answer vanishes when the session ends. GPTwiki closes the loop: **ask AI a question, get an article that persists, and let anyone pick up the conversation where you left off**.
-
-- **Ask** a question in any of 15 languages — the AI answers with citations
-- **Publish** the conversation as a structured wiki article
-- **Grow** — every article carries its conversation; anyone can ask a follow-up thread, and good follow-ups become part of the article
-- Knowledge compounds over time instead of disappearing
+- Ask your own question after signing in. A deployment can fund a daily allowance or let you use your own provider key. [Start a conversation](https://gptwiki.net/en/chat)
+- Compare two anonymous model answers and vote before seeing the model names. The Arena explains which votes qualify for its rankings. [Try the Arena](https://gptwiki.net/en/arena/battle) · [Voting rules](https://gptwiki.net/en/arena/rules)
+- Contribute a correction, a source or a translation. Editorial batches receive human review before publication. [Contribution guide](CONTRIBUTING.md) · [Open editorial reviews](https://github.com/oratis/GPTwiki/pulls?q=is%3Apr+is%3Aopen+head%3Aauto-draft%2F)
 
 ## Features
 
@@ -28,8 +23,8 @@ Wikipedia can't answer your question — it requires expert editors and only cov
 - **Wikipedia Attribution** - Mirrored Wikipedia content carries CC BY-SA attribution and links to the original
 - **Conversation to Wiki** - Publish AI conversations as structured, searchable wiki articles
 - **15 Languages** - Built-in i18n with auto browser detection: EN, ZH, JA, KO, ES, FR, DE, PT, RU, AR, HI, IT, TR, VI, TH
-- **100K+ Articles** - Pre-seeded with Wikipedia content across all supported languages
-- **Smart Search** - Full-text search across all published wiki articles by keywords and tags
+- **Content sources** - The hosted corpus consists mainly of attributed Wikipedia imports, alongside editorial editions and user-published conversations. An article can be read through any interface locale.
+- **Search** - Optional Typesense full-text indexing with a Firestore keyword and tag fallback.
 - **Category Browse** - Explore articles organized by topic: science, history, technology, arts, and more
 - **Contributor Leaderboard** - Track top contributors and their impact
 - **OAuth Login** - Sign in with Google or GitHub
