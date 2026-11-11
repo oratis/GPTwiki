@@ -318,14 +318,12 @@ async function main(): Promise<void> {
       image: { prompt, alt: g.title },
       ...(sources.length ? { sources } : {}),
     };
-    drafts.push(en);
-
-    // zh is best-effort — the English draft still ships if translation fails.
+    // Advance a bilingual topic only after both editions are ready.
     try {
       const zh = await withRetry(`translate ${topic.topicKey}`, () =>
         translateToZh({ title: en.title, question: en.question, summary: en.summary, content: en.content, tags: en.tags })
       );
-      drafts.push({
+      drafts.push(en, {
         topicKey: topic.topicKey,
         title: zh.title,
         question: zh.question,
@@ -339,7 +337,7 @@ async function main(): Promise<void> {
       zhCount++;
       console.log(`  ✓ ${topic.topicKey}: "${g.title}" (+zh, ${sources.length} live sources)`);
     } catch (err) {
-      console.log(`  ✓ ${topic.topicKey}: "${g.title}" (en only — zh failed: ${(err as Error).message?.slice(0, 60)})`);
+      console.log(`  ⏭  ${topic.topicKey}: translation failed, keeping topic pending ( ${(err as Error).message?.slice(0, 60)})`);
     }
   }
 

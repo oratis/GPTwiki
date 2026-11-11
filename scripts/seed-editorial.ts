@@ -381,7 +381,9 @@ async function main(): Promise<void> {
       `skipped-dup=${stats.skippedDup} skipped-no-image=${stats.skippedNoImage} ` +
       `images=${heroes.size}/${topics.size}`
   );
-  process.exit(0);
+  if (APPLY && stats.skippedNoImage > 0) {
+    throw new Error('Batch incomplete. Retry this run to publish the skipped editions.');
+  }
 }
 
 main().catch((err) => {
