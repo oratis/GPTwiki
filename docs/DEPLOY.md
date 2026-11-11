@@ -24,6 +24,13 @@ curl -sI https://gptwiki.net/api/sitemap                     # 200, fast (was 25
 curl -s "https://gptwiki.net/api/sitemap?page=editorial" | grep -c "<url>"   # ~1,685 original docs
 ```
 
+To connect existing translations after deploying article-language canonicals, run
+`FIREBASE_PROJECT_ID=gptwiki npx tsx scripts/backfill-editorial-topics.ts` with
+Application Default Credentials. The dry run counts exact title/language matches
+from checked-in editions. Review the count, then add `--apply` to fill missing
+topic keys. Existing keys are preserved and concurrent edits fail the precondition;
+rerun to resume. Allow the page cache to revalidate before checking hreflang.
+
 ## 2. Secrets & repo settings  (mostly done)
 
 | Item | Status |
