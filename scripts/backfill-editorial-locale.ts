@@ -9,13 +9,19 @@ async function main() {
   const db = getFirestore(initializeApp({ projectId, credential: applicationDefault() }));
   const docs = await db.collection('wikis').where('source', '==', 'editorial')
     .select('language', 'editorialLocale').get();
+  const writer = apply ? db.bulkWriter() : null;
+  const writes: Promise<unknown>[] = [];
   let pending = 0;
   for (const doc of docs.docs) {
     const language = doc.get('language');
     if (!Object.hasOwn(locales, language) || doc.get('editorialLocale') === language) continue;
     pending++;
-    if (apply) await doc.ref.update({ editorialLocale: language }, { lastUpdateTime: doc.updateTime });
+    if (writer) writes.push(writer.update(doc.ref, { editorialLocale: language }, { lastUpdateTime: doc.updateTime }));
   }
+  const completed = Promise.allSettled(writes);
+  await writer?.close();
+  const failed = (await completed).filter(result => result.status === 'rejected').length;
+  if (failed) throw new Error(`${failed}/${pending} updates failed; rerun to resume.`);
   console.log(`${projectId}: inspected ${docs.size}, ${apply ? 'updated' : 'would update'} ${pending}`);
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });
