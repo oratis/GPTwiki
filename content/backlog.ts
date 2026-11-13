@@ -77,6 +77,9 @@ export const backlog: BacklogTopic[] = [
   { topicKey: 'bond-vs-stock-allocation', question: "How should I decide what percentage of my portfolio to put in bonds versus stocks, and does the old age-based rule still make sense?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'microbiome-gut-health-basics', question: "What is the gut microbiome actually doing for my health, and do probiotics and fermented foods genuinely make a difference?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'smart-thermostat-savings', question: "Does installing a smart thermostat actually save money on energy bills, and how long before it pays for itself?", cluster: 'home-energy', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'knife-sharpening-basics', question: "How do I know when my kitchen knife needs sharpening, and what is the easiest reliable way to sharpen it at home?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: '401k-employer-match', question: "How does a 401(k) employer match actually work, and am I leaving money on the table if I don't maximize it?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'microservices-vs-monolith', question: "Should I build my application as a monolith or break it into microservices, and how do I know which is right for my stage and team size?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
   // Seeded to production (auto-author skips anything not `pending`).
   { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
