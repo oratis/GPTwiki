@@ -4,3 +4,5 @@ node_modules
 .env
 .env.local
 *.md
+# Keep local review tools out; public/editorial contains the deployed diagrams.
+content/data-literacy/

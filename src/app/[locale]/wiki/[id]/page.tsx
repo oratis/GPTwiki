@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { ArrowLeft, Eye, Bot, Clock, Tag, User, Users, BookOpen, ExternalLink, History } from 'lucide-react';
 import { findPilotEdition } from '@/lib/discovery-pilot';
 import WikiContent from '@/components/wiki/WikiContent';
+import { tagBadgeClassName } from '@/components/wiki/TagBadge';
 import ShareButtons from '@/components/wiki/ShareButtons';
 import EmbedCodeButton from '@/components/wiki/EmbedCodeButton';
 import ThreadReplyList from '@/components/wiki/ThreadReplyList';
@@ -279,14 +280,15 @@ export default async function WikiDetailPage({
 
         {wiki.tags?.length > 0 && (
           <div className="mb-6 flex flex-wrap gap-2">
-            {wiki.tags.map((tag) => (
+            {[...new Set(wiki.tags)].map((tag) => (
               <Link
                 key={tag}
-                href={localeHref(locale, `/browse?tag=${encodeURIComponent(tag)}`)}
-                className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 hover:bg-blue-100 transition-colors"
+                href={localeHref(locale, `/tags/${encodeURIComponent(tag)}`)}
+                title={tag}
+                className={`${tagBadgeClassName} transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 focus-visible:outline-2 focus-visible:outline-blue-600`}
               >
-                <Tag className="h-3 w-3" />
-                {tag}
+                <Tag aria-hidden="true" className="h-3 w-3 shrink-0" />
+                <span className="truncate">{tag}</span>
               </Link>
             ))}
           </div>

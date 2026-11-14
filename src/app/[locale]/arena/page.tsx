@@ -43,7 +43,15 @@ export default async function ArenaHubPage({
       <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
         <ArenaNav locale={locale} active="hub" />
 
-        <p className="max-w-2xl text-base leading-relaxed text-gray-700">{t('arena.subtitle')}</p>
+        <div className="rounded-2xl border border-blue-100 bg-blue-50/60 p-6 sm:p-8">
+          <p className="max-w-2xl text-lg font-medium leading-relaxed text-gray-800">{t('arena.subtitle')}</p>
+          <div className="mt-5 flex flex-wrap items-center gap-3">
+            <Link href={localeHref(locale, '/arena/battle')} className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700">
+              <Swords className="h-4 w-4" />{t('arena.battle.start')}<ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link href={localeHref(locale, '/arena/rules')} className="rounded-xl px-4 py-3 text-sm font-medium text-blue-700 hover:bg-blue-100">{t('arena.nav.rules')}</Link>
+          </div>
+        </div>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Card

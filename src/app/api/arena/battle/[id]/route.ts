@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { anonVoterId, readAnonToken } from '@/lib/arena/anon';
-import { countVotes, getBattle } from '@/lib/arena/store';
+import { countVotes, getBattle, getVote } from '@/lib/arena/store';
 
 /**
  * Fetch a battle.
@@ -16,6 +16,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
+    if (!/^[A-Za-z0-9_-]{1,128}$/.test(id)) return NextResponse.json({ error: 'Invalid battle' }, { status: 400 });
     const battle = await getBattle(id);
     if (!battle) {
       return NextResponse.json({ error: 'Battle not found' }, { status: 404 });
@@ -31,6 +32,7 @@ export async function GET(
       (session?.user?.id && session.user.id === battle.creatorId) ||
         (anonToken && anonVoterId(anonToken) === battle.creatorId)
     );
+    const ownVote = isCreator && battle.creatorId ? await getVote(id, battle.creatorId) : null;
 
     return NextResponse.json({
       id: battle.id,
@@ -42,8 +44,9 @@ export async function GET(
       createdAt: battle.createdAt,
       revealed,
       isCreator,
+      ...(ownVote ? { vote: { outcome: ownVote.outcome, counted: ownVote.weight === 1, flags: ownVote.flags }, publishedWikiId: ownVote.publishedWikiId } : {}),
       ...(revealed ? { modelA: battle.modelA, modelB: battle.modelB } : {}),
-    });
+    }, { headers: { 'Cache-Control': 'private, no-store' } });
   } catch (error) {
     console.error('Arena battle fetch error:', error);
     return NextResponse.json({ error: 'Failed to fetch battle' }, { status: 500 });

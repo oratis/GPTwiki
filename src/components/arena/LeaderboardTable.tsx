@@ -29,10 +29,10 @@ export default function LeaderboardTable({
         <p className="mb-2 text-lg font-medium text-gray-900">{t('arena.empty.title')}</p>
         <p className="mx-auto max-w-xl text-sm text-gray-500">{t('arena.empty.body')}</p>
         <Link
-          href={localeHref(locale, '/arena/rules')}
-          className="mt-4 inline-block text-sm font-medium text-blue-600 hover:text-blue-700"
+          href={localeHref(locale, '/arena/battle')}
+          className="mt-5 inline-flex items-center rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-700"
         >
-          {t('arena.nav.rules')} →
+          {t('arena.battle.start')} →
         </Link>
       </div>
     );
@@ -53,7 +53,7 @@ export default function LeaderboardTable({
       )}
 
       <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white">
-        <table className="w-full text-sm">
+        <table className="w-full min-w-[620px] text-sm tabular-nums">
           <thead>
             <tr className="border-b border-gray-200 bg-gray-50 text-left text-xs uppercase tracking-wider text-gray-500">
               <th scope="col" className="px-4 py-3 font-semibold">{t('arena.table.rank')}</th>
@@ -77,7 +77,7 @@ export default function LeaderboardTable({
                 <td className="px-4 py-3 font-medium text-gray-900">
                   {getModelDisplayName(m.model as AIModel)}
                   {m.provisional && (
-                    <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-normal text-amber-800">
+                    <span className="ms-2 inline-flex whitespace-nowrap rounded-md border border-amber-200 bg-amber-50 px-2 py-0.5 text-xs font-normal text-amber-800">
                       {t('arena.provisional')}
                     </span>
                   )}

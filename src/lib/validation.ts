@@ -44,7 +44,7 @@ export const arenaBattleSchema = z.object({
 });
 
 export const arenaVoteSchema = z.object({
-  battleId: z.string().trim().min(1).max(128),
+  battleId: z.string().trim().regex(/^[A-Za-z0-9_-]{1,128}$/),
   // `answersReadyAt` is deliberately NOT accepted from the client: the
   // reading-time check would be trivially forgeable. The battle document
   // carries a server-set timestamp instead.
@@ -52,7 +52,7 @@ export const arenaVoteSchema = z.object({
 });
 
 export const arenaPublishSchema = z.object({
-  battleId: z.string().trim().min(1).max(128),
+  battleId: z.string().trim().regex(/^[A-Za-z0-9_-]{1,128}$/),
 });
 
 export const threadCreateSchema = z.object({

@@ -1,3 +1,6 @@
+import { FieldValue, type Firestore } from 'firebase-admin/firestore';
+import { buildWikiPayload } from '@/lib/search';
+import type { Wiki } from '@/types';
 import { db } from '@/lib/firebase';
 import type { ArenaBattle, ArenaOutcome, ArenaVote, ArenaVoteFlag } from '@/types/arena';
 import { DEDUP_WINDOW_MS } from './vote-filters';
@@ -97,34 +100,39 @@ export async function writeVote(input: VoteWriteInput): Promise<boolean> {
   }
 }
 
-/**
- * Claim the right to publish a battle, or report who already did.
- *
- * The claim lives on the vote document because that is exactly the thing that
- * is one-per-battle-per-voter, and it is written in a transaction so two
- * concurrent publishes (a double-click, or a retry racing its own response)
- * cannot both decide they are first. Returns the existing wiki id when the
- * battle was already published, so the caller can hand back the original
- * article rather than minting a duplicate.
- */
-export async function claimPublish(
+/** Article, publication pointer and author count commit together or not at all. */
+export async function publishBattleArticle(
   battleId: string,
   voterId: string,
-  wikiId: string
-): Promise<{ claimed: true } | { claimed: false; existingWikiId: string }> {
-  const ref = db.collection(VOTES).doc(`${battleId}_${voterId}`);
-  return db.runTransaction(async (tx) => {
-    const snap = await tx.get(ref);
-    const existing = snap.get('publishedWikiId') as string | undefined;
-    if (existing) return { claimed: false as const, existingWikiId: existing };
-    tx.set(ref, { publishedWikiId: wikiId, publishedAt: Date.now() }, { merge: true });
-    return { claimed: true as const };
+  data: Omit<Wiki, 'id' | 'views' | 'createdAt' | 'updatedAt'>,
+  database: Pick<Firestore, 'collection' | 'runTransaction'> = db
+): Promise<{ wikiId: string; alreadyPublished: boolean }> {
+  const voteRef = database.collection(VOTES).doc(`${battleId}_${voterId}`);
+  const reservedId = database.collection('wikis').doc().id;
+  return database.runTransaction(async (tx) => {
+    const vote = await tx.get(voteRef);
+    if (!vote.exists) throw new Error('Vote is required');
+    const previousId = vote.get('publishedWikiId') as string | undefined;
+    const wikiId = previousId || reservedId;
+    const wikiRef = database.collection('wikis').doc(wikiId);
+    const [wiki, author] = await Promise.all([tx.get(wikiRef), tx.get(database.collection('users').doc(data.authorId))]);
+    if (wiki.exists) return { wikiId, alreadyPublished: true };
+    // Also repairs claims left behind by the old two-step publish path.
+    tx.create(wikiRef, buildWikiPayload(data));
+    tx.update(voteRef, { publishedWikiId: wikiId, publishedAt: Date.now() });
+    if (author.exists) tx.update(author.ref, { wikisCount: FieldValue.increment(1) });
+    return { wikiId, alreadyPublished: false };
   });
 }
 
 export async function hasVote(battleId: string, voterId: string): Promise<boolean> {
   const snap = await db.collection(VOTES).doc(`${battleId}_${voterId}`).get();
   return snap.exists;
+}
+
+export async function getVote(battleId: string, voterId: string): Promise<(ArenaVote & { publishedWikiId?: string }) | null> {
+  const snap = await db.collection(VOTES).doc(`${battleId}_${voterId}`).get();
+  return snap.exists ? { id: snap.id, ...snap.data() } as ArenaVote & { publishedWikiId?: string } : null;
 }
 
 /** Every vote on a battle, used to decide whether identities may be revealed. */

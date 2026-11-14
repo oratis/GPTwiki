@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Eye, Tag } from 'lucide-react';
+import { Eye } from 'lucide-react';
+import TagBadge from './TagBadge';
 import { getWikisByTag } from '@/lib/search';
 import { localeHref } from '@/lib/i18n/links';
 import { defaultLocale, type Locale } from '@/lib/i18n/locales';
@@ -45,7 +46,7 @@ export default async function RelatedWikis({ currentWikiId, tags, locale = defau
           <Link
             key={w.id}
             href={localeHref(locale, `/wiki/${w.id}`)}
-            className="group block rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
+            className="group block min-w-0 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
           >
             <h3 className="mb-2 line-clamp-2 text-base font-semibold text-gray-900 group-hover:text-blue-600">
               {w.title}
@@ -58,11 +59,8 @@ export default async function RelatedWikis({ currentWikiId, tags, locale = defau
                 <Eye className="h-3 w-3" />
                 {w.views}
               </span>
-              {w.tags?.slice(0, 2).map((tag) => (
-                <span key={tag} className="inline-flex items-center gap-1">
-                  <Tag className="h-3 w-3" />
-                  {tag}
-                </span>
+              {[...new Set(w.tags)].slice(0, 2).map((tag) => (
+                <TagBadge key={tag}>{tag}</TagBadge>
               ))}
             </div>
           </Link>

@@ -4,8 +4,18 @@ import { useState, useEffect, useRef } from 'react';
 import Link from '@/components/LocaleLink';
 import { Heart, Coffee, DollarSign, CheckCircle, Loader2 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/context';
+import { donationAmount } from '@/lib/paypal/amount';
+import { loadPayPalSdk, paymentErrorKey } from '@/lib/paypal/browser';
 
 const PRESET_AMOUNTS = [5, 10, 25, 50, 100];
+const PENDING_PAYMENT_KEY = 'gptwiki:paypal-pending';
+
+function rememberPayment(orderId: string | null) {
+  try {
+    if (orderId) sessionStorage.setItem(PENDING_PAYMENT_KEY, orderId);
+    else sessionStorage.removeItem(PENDING_PAYMENT_KEY);
+  } catch { /* Private browsing can disable storage; in-memory recovery still works. */ }
+}
 
 declare global {
   interface Window {
@@ -37,6 +47,10 @@ export default function DonatePage() {
   const [amount, setAmount] = useState('10');
   const [customAmount, setCustomAmount] = useState('');
   const [sdkReady, setSdkReady] = useState(false);
+  const [sdkFailed, setSdkFailed] = useState(false);
+  const [retry, setRetry] = useState(0);
+  const [pendingOrder, setPendingOrder] = useState<string | null>(null);
+  const busyRef = useRef(false);
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -49,120 +63,103 @@ export default function DonatePage() {
 
   const activeAmount = customAmount || amount;
 
+  async function captureOrder(orderId: string) {
+    setPendingOrder(orderId);
+    rememberPayment(orderId);
+    try {
+      const res = await fetch('/api/paypal/capture-order', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId }),
+        signal: AbortSignal.timeout(45000),
+      });
+      const result = await res.json();
+      if (!res.ok || result.status !== 'COMPLETED') {
+        if (result.error === 'INSTRUMENT_DECLINED') { setPendingOrder(null); rememberPayment(null); }
+        throw new Error(result.error || 'PAYMENT_NOT_COMPLETED');
+      }
+      setSuccess(true);
+      setPendingOrder(null);
+      rememberPayment(null);
+    } catch (error) {
+      setError(t(paymentErrorKey((error as Error).message)));
+    } finally {
+      busyRef.current = false;
+      setProcessing(false);
+    }
+  }
+  const captureRef = useRef(captureOrder);
+  useEffect(() => { captureRef.current = captureOrder; });
+
   useEffect(() => {
     let cancelled = false;
+    const controller = new AbortController();
     async function initPayPal() {
+      setSdkReady(false);
+      setSdkFailed(false);
+      setError('');
       try {
-        if (!window.paypal || cancelled) return;
-
-        // Fetch client ID at runtime (NEXT_PUBLIC_ vars aren't available at Cloud Build time)
-        const configRes = await fetch('/api/paypal/config');
-        if (!configRes.ok) return;
-        const { clientId } = await configRes.json();
-        if (!clientId) return;
-
-        const sdkInstance = await window.paypal.createInstance({
-          clientId,
-          components: ['paypal-payments'],
-        });
-
+        const pending = sessionStorage.getItem(PENDING_PAYMENT_KEY);
+        if (pending && /^[A-Z0-9]{10,32}$/.test(pending)) setPendingOrder(pending);
+      } catch { /* Storage is optional. */ }
+      try {
+        const configRes = await fetch('/api/paypal/config', { signal: AbortSignal.any([controller.signal, AbortSignal.timeout(20000)]) });
+        const config = await configRes.json();
+        if (!configRes.ok || !config.clientId) throw new Error('PAYPAL_UNAVAILABLE');
+        await loadPayPalSdk(config.sdkUrl);
+        if (cancelled) return;
+        if (!window.paypal) throw new Error('SDK_UNAVAILABLE');
+        const sdkInstance = await window.paypal.createInstance({ clientId: config.clientId, components: ['paypal-payments'] });
         const methods = await sdkInstance.findEligibleMethods({ currencyCode: 'USD' });
-
-        if (methods.isEligible('paypal')) {
-          const paymentSession = await sdkInstance.createPayPalOneTimePaymentSession({
-            onApprove: async (data) => {
-              try {
-                const res = await fetch('/api/paypal/capture-order', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ orderId: data.orderId }),
-                });
-                if (!res.ok) throw new Error('Capture failed');
-                setSuccess(true);
-                setProcessing(false);
-              } catch {
-                setError(t('donate.error'));
-                setProcessing(false);
-              }
-            },
-            onCancel: () => {
-              setProcessing(false);
-            },
-            onError: (err) => {
-              console.error('PayPal error:', err);
-              setError(t('donate.error'));
-              setProcessing(false);
-            },
-          });
-
-          if (cancelled) return;
-          sessionRef.current = paymentSession;
-          setSdkReady(true);
+        if (!methods.isEligible('paypal')) throw new Error('PAYPAL_UNAVAILABLE');
+        const paymentSession = await sdkInstance.createPayPalOneTimePaymentSession({
+          onApprove: async ({ orderId }) => { if (!cancelled) await captureRef.current(orderId); },
+          onCancel: () => { if (!cancelled) { busyRef.current = false; setProcessing(false); } },
+          onError: () => {
+            if (!cancelled) { setError(t('donate.error')); busyRef.current = false; setProcessing(false); }
+          },
+        });
+        if (!cancelled) { sessionRef.current = paymentSession; setSdkReady(true); }
+      } catch (error) {
+        if (!cancelled) {
+          setSdkFailed(true);
+          setError(t((error as Error).message === 'PAYPAL_UNAVAILABLE' ? 'donate.unavailable' : 'errors.paypalLoad'));
         }
-      } catch (err) {
-        console.error('PayPal init error:', err);
-        if (!cancelled) setError(t('errors.paypalLoad'));
       }
     }
-
-    const src = 'https://www.paypal.com/web-sdk/v6/core';
-    const previous = document.querySelector<HTMLScriptElement>(`script[src="${src}"]`);
-    const script = previous ?? document.createElement('script');
-    const onLoad = () => { void initPayPal(); };
-    const onError = () => {
-      script.remove();
-      setError(t('errors.paypalLoad'));
-    };
-    if (window.paypal) {
-      onLoad();
-    } else {
-      script.addEventListener('load', onLoad);
-      script.addEventListener('error', onError);
-      if (!previous) {
-        script.src = src;
-        script.async = true;
-        document.body.appendChild(script);
-      }
-    }
-    return () => {
-      cancelled = true;
-      script.removeEventListener('load', onLoad);
-      script.removeEventListener('error', onError);
-      sessionRef.current = null;
-    };
-  }, [t]);
+    void initPayPal();
+    return () => { cancelled = true; controller.abort(); sessionRef.current = null; };
+  }, [t, retry]);
 
   async function handleDonate() {
-    if (!sessionRef.current || processing) return;
-
-    const donateAmount = parseFloat(activeAmount);
-    if (!donateAmount || donateAmount < 1) {
-      setError(t('donate.minAmount'));
+    if (busyRef.current) return;
+    if (pendingOrder) {
+      busyRef.current = true;
+      setProcessing(true);
+      setError('');
+      await captureOrder(pendingOrder);
       return;
     }
-
+    if (!sessionRef.current) return;
+    const value = donationAmount(activeAmount);
+    if (!value) { setError(t('donate.invalidAmount')); return; }
+    busyRef.current = true;
     setProcessing(true);
     setError('');
-
     try {
       const orderPromise = fetch('/api/paypal/create-order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: donateAmount.toFixed(2) }),
-      })
-        .then((res) => {
-          if (!res.ok) throw new Error('Failed to create order');
-          return res.json();
-        })
-        .then((data) => ({ orderId: data.id }));
-
-      await sessionRef.current.start(
-        { presentationMode: 'auto' },
-        orderPromise
-      );
-    } catch (err) {
-      console.error('Donate error:', err);
-      setError(t('donate.error'));
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: value }), signal: AbortSignal.timeout(45000),
+      }).then(async (res) => {
+        const data = await res.json();
+        if (!res.ok || !data.id) throw new Error(data.error || 'PAYPAL_REQUEST_FAILED');
+        return { orderId: data.id as string };
+      });
+      // Attach a rejection handler immediately even if SDK.start fails synchronously.
+      void orderPromise.catch((error: Error) => setError(t(paymentErrorKey(error.message))));
+      await sessionRef.current.start({ presentationMode: 'auto' }, orderPromise);
+    } catch (error) {
+      setError(t(paymentErrorKey((error as Error).message)));
+      busyRef.current = false;
       setProcessing(false);
     }
   }
@@ -210,6 +207,8 @@ export default function DonatePage() {
               {PRESET_AMOUNTS.map((preset) => (
                 <button
                   key={preset}
+                  disabled={processing || Boolean(pendingOrder)}
+                  aria-pressed={activeAmount === String(preset) && !customAmount}
                   onClick={() => {
                     setAmount(String(preset));
                     setCustomAmount('');
@@ -228,12 +227,14 @@ export default function DonatePage() {
 
           {/* Custom amount */}
           <div className="mb-6">
-            <label className="mb-2 block text-sm font-medium text-gray-700">
+            <label htmlFor="donation-amount" className="mb-2 block text-sm font-medium text-gray-700">
               {t('donate.customAmount')}
             </label>
             <div className="relative">
               <DollarSign className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
               <input
+                id="donation-amount"
+                disabled={processing || Boolean(pendingOrder)}
                 type="number"
                 min="1"
                 max="10000"
@@ -248,15 +249,20 @@ export default function DonatePage() {
 
           {/* Error message */}
           {error && (
-            <div className="mb-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
+            <div role="alert" className="mb-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
               {error}
             </div>
           )}
 
+          {sdkFailed && !pendingOrder && (
+            <button onClick={() => setRetry((value) => value + 1)} className="mb-4 w-full rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700">
+              {t('donate.retry')}
+            </button>
+          )}
           {/* Donate button */}
           <button
             onClick={handleDonate}
-            disabled={!sdkReady || processing || !activeAmount}
+            disabled={processing || (!pendingOrder && (!sdkReady || !activeAmount))}
             className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 py-4 text-lg font-semibold text-white shadow-lg hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50 transition-all"
           >
             {processing ? (
@@ -264,6 +270,10 @@ export default function DonatePage() {
                 <Loader2 className="h-5 w-5 animate-spin" />
                 {t('donate.processing')}
               </>
+            ) : pendingOrder ? (
+              t('donate.confirmPayment')
+            ) : sdkFailed ? (
+              t('donate.unavailableShort')
             ) : !sdkReady ? (
               <>
                 <Loader2 className="h-5 w-5 animate-spin" />

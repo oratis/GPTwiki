@@ -226,6 +226,34 @@ async function main() {
     assert.equal(persisted, false, 'a blank answer cannot be voted on');
   });
 
+  await test('a persistence failure never enables voting and refunds exactly once', async () => {
+    let refunds = 0;
+    const events = await drain(mergeBattleStreams({
+      battleId: 'db-failed',
+      a: modelStream('a', 1, { cancelled: false }),
+      b: modelStream('b', 1, { cancelled: false }),
+      onComplete: () => { throw new Error('Firestore unavailable'); },
+      onAbandon: () => { refunds++; },
+    }));
+    assert.deepEqual(events.at(-1), { event: 'done', data: { ok: false } });
+    assert.equal(refunds, 1);
+  });
+
+  await test('a hung provider is cancelled, refunded and terminates the response', async () => {
+    let cancelled = false;
+    let refunded = false;
+    const events = await drain(mergeBattleStreams({
+      battleId: 'timeout', timeoutMs: 25,
+      a: new ReadableStream({ cancel() { cancelled = true; } }),
+      b: modelStream('b', 1, { cancelled: false }),
+      onComplete: () => { assert.fail('A timed out battle cannot persist'); },
+      onAbandon: () => { refunded = true; },
+    }));
+    assert.equal(cancelled, true);
+    assert.equal(refunded, true);
+    assert.deepEqual(events.at(-1), { event: 'done', data: { ok: false } });
+  });
+
   await test('multi-byte characters survive a chunk boundary', async () => {
     // A naive per-chunk decode corrupts CJK, which matters on a site serving
     // Chinese. Split "热榜" across two reads at the byte level.
