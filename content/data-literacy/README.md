@@ -1,6 +1,19 @@
 # 读懂数据：原创双语图文内容包
 
-状态：**内容与图片已完成，本地验证通过，尚未发布。** 核验日期：2026-11-14。
+状态：**8 篇文章已正式上线，16 张正文图表与 4 张共享封面已通过在线验收。** 核验日期：2026-11-14。
+
+已按「先部署图表资产、再发布内容」的顺序完成发布：生产版本
+`gptwiki-release-d91a29df55b0` 承载全部流量；[PR #188](https://github.com/oratis/GPTwiki/pull/188)
+合并后，[auto-seed](https://github.com/oratis/GPTwiki/actions/runs/43564821502)
+于 2026-11-14 14:10（Asia/Shanghai）成功完成，`created=8`、`images=4/4`，无跳过项。
+逐项 HTTP 与资源哈希结果见 [publication.json](publication.json)。
+
+| 主题 | 中文 | English |
+| --- | --- | --- |
+| 坐标轴与尺度 | [中文文章](https://gptwiki.net/zh/wiki/editorial-reading-chart-scales-zh) | [English article](https://gptwiki.net/en/wiki/editorial-reading-chart-scales-en) |
+| 均值与中位数 | [中文文章](https://gptwiki.net/zh/wiki/editorial-mean-median-outliers-zh) | [English article](https://gptwiki.net/en/wiki/editorial-mean-median-outliers-en) |
+| 准确率与基准率 | [中文文章](https://gptwiki.net/zh/wiki/editorial-classifier-base-rates-zh) | [English article](https://gptwiki.net/en/wiki/editorial-classifier-base-rates-en) |
+| 问卷与抽样偏差 | [中文文章](https://gptwiki.net/zh/wiki/editorial-sampling-bias-large-surveys-zh) | [English article](https://gptwiki.net/en/wiki/editorial-sampling-bias-large-surveys-en) |
 
 本批次有 4 个主题、8 篇完整文章、16 张原创 SVG 图表。英文每篇约
 900–1,000 个空白分隔词项（包含图注和表格），中文每篇约 2,300–2,900
@@ -38,9 +51,9 @@
 - SVG 保留文字、`title` 和 `desc`；没有脚本、外部资源或嵌入 HTML。
   关键区别同时用数字和文字表达，不只依赖颜色。
 - [preview.png](preview.png) 是第一张中文图的便览，不是额外的数据来源。
-- `image.prompt` / `image.alt` 保留现有编辑 schema 的封面规范。**本次完成的是
-  16 张正文教学图；没有调用 Seedream，也没有声称已经生成其概念封面。**
-  正常发布流程可按每个 `topicKey` 再生成一张共享封面；中英共享 prompt，图注本地化。
+- `image.prompt` / `image.alt` 遵循现有编辑 schema 的封面规范。正式发布流程已通过
+  Seedream 按每个 `topicKey` 生成一张共享概念封面，共 4 张；中英共享 prompt，图注本地化。
+  这些概念插画不承载算例数据，16 张正文教学图仍为本地原创 SVG。
 
 ## 来源核验与适用范围
 
@@ -86,6 +99,11 @@
 - 16 张 SVG 均完成栅格渲染目检；浏览器中的完整审阅页能显示中文、表格、图注和图片。
   预览不存在残留的 Markdown 加粗分隔符或页面级水平溢出。
 - 现有 seeder 的无写入演练输出 `would create=8`，没有数据库写入或付费图像调用。
+- 正式发布后，8 个文章 URL 均返回 HTTP 200，标题、语言、canonical、作者、
+  两张正文图和全部参考来源均匹配发布稿；无残留 Markdown 加粗分隔符。
+- 16 张生产 SVG 均返回 HTTP 200，内容与本地审阅文件逐字节相同；4 张封面的
+  Next.js 图片地址均返回 HTTP 200。浏览器逐篇检查 1280 × 720 桌面视口，
+  正文、表格、图注、图表和封面正常显示，无页面级水平溢出。
 
 从仓库根目录复现本地打包检查：
 
@@ -98,18 +116,17 @@ npx tsc --noEmit --incremental false
 ```
 
 `prepare.ts` 只做本地验证和审阅页生成。`--write-release` 只允许新建快照，
-或验证现有快照完全一致；不会悄悄覆盖已审阅数据。本批还未发布，编辑修改后应显式
-重新导出对应快照并重新审阅；已发布快照不要改写。
+或验证现有快照完全一致；不会悄悄覆盖已审阅数据。本批快照已正式发布，不要改写。
 
 ## 发布衔接
 
-本次交付停在可审阅内容，没有运行 `--apply`、提交、切换分支或部署。
+以下为本批已执行的发布顺序；应用与静态资源部署由主会话完成，内容由既有 auto-seed 入库。
 
 1. 先部署包含 `public/editorial/data-literacy/` 的应用版本，确认文中图表 URL
    可访问。**内容入库和静态资源部署是两件独立的事。**
 2. 按既有审阅流程发布 `content/releases/20261114-120000.json`。
    该文件合入 `main` 会触发既有 `auto-seed`；它不会替你部署 `public/`。
-3. 发布器会按 topicKey 为 en/zh 生成共享概念封面，并注入正文；原有两张教学图仍保留。
+3. 发布器按 topicKey 为 en/zh 生成共享概念封面，并注入正文；原有两张教学图仍保留。
    若选择 `--no-images`，它只跳过生成封面，正文里的 16 张已完成图表仍需部署。
 
 本地无写入演练（已执行）：
@@ -118,7 +135,7 @@ npx tsc --noEmit --incremental false
 npx tsx scripts/seed-editorial.ts --release=content/releases/20261114-120000.json --no-images
 ```
 
-经既有流程批准、且图表资源已部署后的完整发布命令（**本次未执行**）：
+既有流程使用的完整发布命令（本次由 auto-seed 执行，无须再次手动发布）：
 
 ```bash
 npx tsx scripts/seed-editorial.ts --release=content/releases/20261114-120000.json --apply

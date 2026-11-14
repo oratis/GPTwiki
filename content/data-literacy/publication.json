@@ -1,0 +1,272 @@
+{
+  "checkedOn": "2026-11-14",
+  "release": "content/releases/20261114-120000.json",
+  "assets": [
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/classifier-base-rates-alerts.en.svg",
+      "status": 200,
+      "sha256": "c960d72c1efc17dc94e910e51379f30ea8ea4ebce317fde4a95bf3403ca8e9a3",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/classifier-base-rates-alerts.zh.svg",
+      "status": 200,
+      "sha256": "f486b5b1eb9077e215194553e594e16dfa1846c88d09dd59bb4c1fcb3e3a4171",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/classifier-base-rates-matrix.en.svg",
+      "status": 200,
+      "sha256": "633af0cc7b0249355bc0c14d7f4670b9e3c3ffbcafc7a9d59d09c5b03252aa05",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/classifier-base-rates-matrix.zh.svg",
+      "status": 200,
+      "sha256": "ad8653a4b4ed2a51b58a03290aa2199fd73f839960e810439d1fe65231a7369c",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/mean-median-outliers-shift.en.svg",
+      "status": 200,
+      "sha256": "bd4ea1667afaee480829bf3487a71381d9a85ce998502a53e9e1bcd62caf66cd",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/mean-median-outliers-shift.zh.svg",
+      "status": 200,
+      "sha256": "06851fe7a0e2bec518f7adfe6c8c47e96c5c632375eef7cd83127a9f4dcad53d",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/mean-median-outliers-spread.en.svg",
+      "status": 200,
+      "sha256": "acb651b1b522fb5daebe092ce27f2ac504c79d9b38877d6f18e1ab472ac0f205",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/mean-median-outliers-spread.zh.svg",
+      "status": 200,
+      "sha256": "49263bc08f263c2f9ab30df40a0cfb3126afbe83874d78748fe12e6bbe54d883",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/reading-chart-scales-baselines.en.svg",
+      "status": 200,
+      "sha256": "350f249ad2415a2537d7d6ef8fa9d2e41477cbb6b166935f3f898e45792b5055",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/reading-chart-scales-baselines.zh.svg",
+      "status": 200,
+      "sha256": "efaf3b87a52e7791a334b57acf7e994cb49064619cc7deb8c2d4dd22a1abbfe2",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/reading-chart-scales-growth.en.svg",
+      "status": 200,
+      "sha256": "821474b486ac8c820d8c906b63998de9305ce2c7e13e834db02d5ebebc485813",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/reading-chart-scales-growth.zh.svg",
+      "status": 200,
+      "sha256": "fa138b68145798f245c077f83193544442b90dffc876673a1fa88f8589ef7e2a",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/sampling-bias-large-surveys-composition.en.svg",
+      "status": 200,
+      "sha256": "231e60022153401d78c112418eb92c95207020f05d01ec7e4d064e9fb6917e5d",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/sampling-bias-large-surveys-composition.zh.svg",
+      "status": 200,
+      "sha256": "684d0486ae184d16c69475566313767e7d0ca67e2bb76210a68d3b1295554cc9",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/sampling-bias-large-surveys-weights.en.svg",
+      "status": 200,
+      "sha256": "ea004251ed54bea47781fd844c9fe0c4e27fd9491fabe376af72f5cbb147d6cf",
+      "matchesLocal": true
+    },
+    {
+      "url": "https://gptwiki.net/editorial/data-literacy/sampling-bias-large-surveys-weights.zh.svg",
+      "status": 200,
+      "sha256": "2a5eb3555323c6aae45e4d01cb9d76304f5a49fae8e4f91faa9c9158e26be815",
+      "matchesLocal": true
+    }
+  ],
+  "articles": [
+    {
+      "id": "editorial-reading-chart-scales-en",
+      "url": "https://gptwiki.net/en/wiki/editorial-reading-chart-scales-en",
+      "status": 200,
+      "titleMatches": true,
+      "canonical": "https://gptwiki.net/en/wiki/editorial-reading-chart-scales-en",
+      "documentLanguage": "en",
+      "inlineFigures": 2,
+      "missingFigures": [],
+      "missingReferences": [],
+      "heroSources": [
+        "/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgptwiki-images%2Feditorial%2Freading-chart-scales.jpg&w=1920&q=75"
+      ],
+      "hasEditorialByline": true,
+      "rawBoldMarkers": false
+    },
+    {
+      "id": "editorial-mean-median-outliers-en",
+      "url": "https://gptwiki.net/en/wiki/editorial-mean-median-outliers-en",
+      "status": 200,
+      "titleMatches": true,
+      "canonical": "https://gptwiki.net/en/wiki/editorial-mean-median-outliers-en",
+      "documentLanguage": "en",
+      "inlineFigures": 2,
+      "missingFigures": [],
+      "missingReferences": [],
+      "heroSources": [
+        "/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgptwiki-images%2Feditorial%2Fmean-median-outliers.jpg&w=1920&q=75"
+      ],
+      "hasEditorialByline": true,
+      "rawBoldMarkers": false
+    },
+    {
+      "id": "editorial-classifier-base-rates-en",
+      "url": "https://gptwiki.net/en/wiki/editorial-classifier-base-rates-en",
+      "status": 200,
+      "titleMatches": true,
+      "canonical": "https://gptwiki.net/en/wiki/editorial-classifier-base-rates-en",
+      "documentLanguage": "en",
+      "inlineFigures": 2,
+      "missingFigures": [],
+      "missingReferences": [],
+      "heroSources": [
+        "/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgptwiki-images%2Feditorial%2Fclassifier-base-rates.jpg&w=1920&q=75"
+      ],
+      "hasEditorialByline": true,
+      "rawBoldMarkers": false
+    },
+    {
+      "id": "editorial-sampling-bias-large-surveys-en",
+      "url": "https://gptwiki.net/en/wiki/editorial-sampling-bias-large-surveys-en",
+      "status": 200,
+      "titleMatches": true,
+      "canonical": "https://gptwiki.net/en/wiki/editorial-sampling-bias-large-surveys-en",
+      "documentLanguage": "en",
+      "inlineFigures": 2,
+      "missingFigures": [],
+      "missingReferences": [],
+      "heroSources": [
+        "/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgptwiki-images%2Feditorial%2Fsampling-bias-large-surveys.jpg&w=1920&q=75"
+      ],
+      "hasEditorialByline": true,
+      "rawBoldMarkers": false
+    },
+    {
+      "id": "editorial-reading-chart-scales-zh",
+      "url": "https://gptwiki.net/zh/wiki/editorial-reading-chart-scales-zh",
+      "status": 200,
+      "titleMatches": true,
+      "canonical": "https://gptwiki.net/zh/wiki/editorial-reading-chart-scales-zh",
+      "documentLanguage": "zh",
+      "inlineFigures": 2,
+      "missingFigures": [],
+      "missingReferences": [],
+      "heroSources": [
+        "/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgptwiki-images%2Feditorial%2Freading-chart-scales.jpg&w=1920&q=75"
+      ],
+      "hasEditorialByline": true,
+      "rawBoldMarkers": false
+    },
+    {
+      "id": "editorial-mean-median-outliers-zh",
+      "url": "https://gptwiki.net/zh/wiki/editorial-mean-median-outliers-zh",
+      "status": 200,
+      "titleMatches": true,
+      "canonical": "https://gptwiki.net/zh/wiki/editorial-mean-median-outliers-zh",
+      "documentLanguage": "zh",
+      "inlineFigures": 2,
+      "missingFigures": [],
+      "missingReferences": [],
+      "heroSources": [
+        "/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgptwiki-images%2Feditorial%2Fmean-median-outliers.jpg&w=1920&q=75"
+      ],
+      "hasEditorialByline": true,
+      "rawBoldMarkers": false
+    },
+    {
+      "id": "editorial-classifier-base-rates-zh",
+      "url": "https://gptwiki.net/zh/wiki/editorial-classifier-base-rates-zh",
+      "status": 200,
+      "titleMatches": true,
+      "canonical": "https://gptwiki.net/zh/wiki/editorial-classifier-base-rates-zh",
+      "documentLanguage": "zh",
+      "inlineFigures": 2,
+      "missingFigures": [],
+      "missingReferences": [],
+      "heroSources": [
+        "/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgptwiki-images%2Feditorial%2Fclassifier-base-rates.jpg&w=1920&q=75"
+      ],
+      "hasEditorialByline": true,
+      "rawBoldMarkers": false
+    },
+    {
+      "id": "editorial-sampling-bias-large-surveys-zh",
+      "url": "https://gptwiki.net/zh/wiki/editorial-sampling-bias-large-surveys-zh",
+      "status": 200,
+      "titleMatches": true,
+      "canonical": "https://gptwiki.net/zh/wiki/editorial-sampling-bias-large-surveys-zh",
+      "documentLanguage": "zh",
+      "inlineFigures": 2,
+      "missingFigures": [],
+      "missingReferences": [],
+      "heroSources": [
+        "/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgptwiki-images%2Feditorial%2Fsampling-bias-large-surveys.jpg&w=1920&q=75"
+      ],
+      "hasEditorialByline": true,
+      "rawBoldMarkers": false
+    }
+  ],
+  "heroResponses": [
+    {
+      "url": "https://gptwiki.net/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgptwiki-images%2Feditorial%2Fclassifier-base-rates.jpg&w=1920&q=75",
+      "status": 200
+    },
+    {
+      "url": "https://gptwiki.net/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgptwiki-images%2Feditorial%2Fmean-median-outliers.jpg&w=1920&q=75",
+      "status": 200
+    },
+    {
+      "url": "https://gptwiki.net/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgptwiki-images%2Feditorial%2Freading-chart-scales.jpg&w=1920&q=75",
+      "status": 200
+    },
+    {
+      "url": "https://gptwiki.net/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgptwiki-images%2Feditorial%2Fsampling-bias-large-surveys.jpg&w=1920&q=75",
+      "status": 200
+    }
+  ],
+  "deployment": {
+    "revision": "gptwiki-release-d91a29df55b0",
+    "productionTrafficPercent": 100,
+    "pullRequest": "https://github.com/oratis/GPTwiki/pull/188",
+    "mergeCommit": "62704e477d91feecca9173f6c9d6e75eb1a43ac5",
+    "publicationRun": "https://github.com/oratis/GPTwiki/actions/runs/43564821502",
+    "publicationCompletedAt": "2026-11-14T06:10:34Z",
+    "created": 8,
+    "skippedDuplicate": 0,
+    "skippedNoImage": 0,
+    "generatedHeroes": 4
+  },
+  "browserVerification": {
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "articlesChecked": 8,
+    "loadedImagesPerArticle": 3,
+    "pageHorizontalOverflow": false,
+    "visualReview": "Article text, tables, captions, original figures, and shared covers display correctly."
+  }
+}
