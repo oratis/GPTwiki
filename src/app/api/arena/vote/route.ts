@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import { getBattle, getRecentPromptHashes, writeVote } from '@/lib/arena/store';
+import { getBattle, getVote, getRecentPromptHashes, writeVote } from '@/lib/arena/store';
 import { evaluateVote } from '@/lib/arena/vote-filters';
 import { anonVoterId, readAnonToken } from '@/lib/arena/anon';
+import { battleVoterId } from '@/lib/arena/access';
 import { checkRateLimit, getClientId, rateLimited } from '@/lib/rate-limit';
 import { arenaVoteSchema, parseJsonBody } from '@/lib/validation';
 
@@ -26,8 +27,8 @@ export async function POST(req: NextRequest) {
   // No token means no battle was ever started from this browser, so there is
   // nothing to attribute a vote to. Not minted here: issuing an identity on the
   // vote path would let a fresh cookie vote on someone else's battle.
-  const anonToken = signedInId ? null : readAnonToken(req);
-  const voterId = signedInId ?? (anonToken ? anonVoterId(anonToken) : null);
+  const anonToken = readAnonToken(req);
+  let voterId = signedInId ?? (anonToken ? anonVoterId(anonToken) : null);
   if (!voterId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -48,6 +49,19 @@ export async function POST(req: NextRequest) {
     if (!battle) {
       return NextResponse.json({ error: 'Battle not found' }, { status: 404 });
     }
+    // Only the reader who requested these anonymous answers can rate them.
+    // Public, already-revealed permalinks must not accept additional blind votes.
+    const creator = battleVoterId(battle.creatorId, signedInId, anonToken ? anonVoterId(anonToken) : null);
+    if (!creator) {
+      return NextResponse.json({ error: 'NOT_BATTLE_CREATOR' }, { status: 403 });
+    }
+    voterId = creator;
+    const reveal = (vote: { outcome: typeof outcome; weight: number; flags: string[] }) => NextResponse.json({
+      modelA: battle.modelA, modelB: battle.modelB, outcome: vote.outcome,
+      counted: vote.weight === 1, flags: vote.flags,
+    });
+    const previousVote = await getVote(battleId, voterId);
+    if (previousVote) return reveal(previousVote);
     // A battle is only written once both answers landed, so this should not
     // happen — but voting on half a battle would corrupt the fit, so check.
     if (!battle.answerA?.trim() || !battle.answerB?.trim()) {
@@ -58,7 +72,7 @@ export async function POST(req: NextRequest) {
     const recentPromptHashes = await getRecentPromptHashes(voterId, now);
 
     const { weight, flags } = evaluateVote({
-      signedIn: Boolean(signedInId),
+      signedIn: Boolean(signedInId && voterId === signedInId),
       promptHash: battle.promptHash,
       recentPromptHashes,
       // Server-set, so the reading-time check cannot be forged by a client.
@@ -77,7 +91,9 @@ export async function POST(req: NextRequest) {
       flags,
     });
     if (!recorded) {
-      return NextResponse.json({ error: 'Already voted on this battle' }, { status: 409 });
+      const existing = await getVote(battleId, voterId);
+      if (existing) return reveal(existing);
+      return NextResponse.json({ error: 'Vote not available' }, { status: 409 });
     }
 
     return NextResponse.json({

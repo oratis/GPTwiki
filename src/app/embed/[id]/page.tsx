@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import TagBadge from '@/components/wiki/TagBadge';
 import { notFound } from 'next/navigation';
 import { BookOpen, Eye, Bot } from 'lucide-react';
 import { getWikiById, getPopularWikiIds } from '@/lib/search';
@@ -61,7 +62,7 @@ export default async function EmbedPage({
           />
         </div>
       )}
-      <div className="flex flex-1 flex-col justify-between p-4">
+      <div className="flex min-w-0 flex-1 flex-col justify-between p-4">
         <div>
           <div className="mb-1 flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-blue-600">
             <BookOpen className="h-3 w-3" />
@@ -72,19 +73,17 @@ export default async function EmbedPage({
           </h3>
           <p className="mb-3 line-clamp-2 text-sm text-gray-600">{description}</p>
         </div>
-        <div className="flex items-center gap-3 text-xs text-gray-500">
-          <span className="flex items-center gap-1">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-gray-500">
+          <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap">
             <Eye className="h-3 w-3" />
             {wiki.views.toLocaleString()}
           </span>
-          <span className="flex items-center gap-1">
-            <Bot className="h-3 w-3" />
-            {getModelDisplayName(wiki.aiModel)}
+          <span className="inline-flex min-w-0 items-center gap-1">
+            <Bot className="h-3 w-3 shrink-0" />
+            <span className="truncate">{getModelDisplayName(wiki.aiModel)}</span>
           </span>
-          {wiki.tags?.slice(0, 2).map((tag) => (
-            <span key={tag} className="rounded-full bg-gray-100 px-2 py-0.5">
-              {tag}
-            </span>
+          {[...new Set(wiki.tags)].slice(0, 2).map((tag) => (
+            <TagBadge key={tag}>{tag}</TagBadge>
           ))}
         </div>
       </div>

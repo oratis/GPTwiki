@@ -373,20 +373,11 @@ export async function incrementWikiViews(id: string): Promise<void> {
   }
 }
 
-export async function createWiki(
+export function buildWikiPayload(
   data: Omit<Wiki, 'id' | 'views' | 'createdAt' | 'updatedAt'>,
-  /**
-   * Write at a caller-chosen id instead of letting Firestore pick one.
-   *
-   * Used where the id has to exist before the document does — the arena's
-   * publish flow reserves an id, records it as the battle's published article
-   * in a transaction, and only then writes here, so a concurrent second
-   * publish finds the claim already taken rather than minting a duplicate.
-   */
-  id?: string
-): Promise<string> {
-  const createdAt = Date.now();
-  const payload = {
+  createdAt = Date.now()
+) {
+  return {
     ...data,
     keywords: buildSearchKeywords([data.title, data.question, data.tags?.join(' '), data.summary]),
     // Derived after the spread so a caller can't hand us a flag that
@@ -396,6 +387,14 @@ export async function createWiki(
     createdAt,
     updatedAt: createdAt,
   };
+}
+
+export async function createWiki(
+  data: Omit<Wiki, 'id' | 'views' | 'createdAt' | 'updatedAt'>,
+  id?: string
+): Promise<string> {
+  const payload = buildWikiPayload(data);
+  const { createdAt } = payload;
   const ref = id ? db.collection('wikis').doc(id) : db.collection('wikis').doc();
   await ref.set(payload);
 
@@ -547,7 +546,8 @@ export async function getAllTags(
           : base.orderBy('createdAt', 'desc')
       ).limit(500);
 
-      const snapshot = await query.get();
+      // Category counts need tags only, not 500 full articles and conversations.
+      const snapshot = await query.select('tags').get();
 
       const tagCounts: Record<string, number> = {};
       snapshot.docs.forEach((doc) => {

@@ -91,28 +91,30 @@ export default async function BrowsePage({
         </div>
 
         <div className="flex flex-col md:flex-row gap-6">
-          <div className="md:w-1/4 flex-shrink-0">
+          <aside className="min-w-0 md:w-52 lg:w-56 md:shrink-0">
             <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2">
               <Tag className="w-4 h-4" />
               {t('browse.allCategories')}
             </h2>
 
-            <div className="flex md:flex-col gap-2 overflow-x-auto md:overflow-x-visible pb-2 md:pb-0">
+            <nav aria-label={t('browse.allCategories')} className="flex gap-2 overflow-x-auto pb-2 md:max-h-[70vh] md:flex-col md:overflow-y-auto md:pe-2">
               {tags.map((tg) => {
                 const active = selectedTag === tg.name;
                 return (
                   <Link
                     key={tg.name}
                     href={localeHref(locale, `/browse?tag=${encodeURIComponent(tg.name)}`)}
-                    className={`flex items-center justify-between gap-2 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors border ${
+                    aria-current={active ? 'page' : undefined}
+                    title={tg.name}
+                    className={`flex min-w-0 shrink-0 items-center justify-between gap-3 rounded-xl border px-3 py-2.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-blue-600 ${
                       active
                         ? 'bg-blue-50 text-blue-700 border-blue-200'
                         : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-100'
                     }`}
                   >
-                    <span>{tg.name}</span>
+                    <span className="truncate">{tg.name}</span>
                     <span
-                      className={`text-xs px-2 py-0.5 rounded-full ${
+                      className={`shrink-0 rounded-md px-2 py-0.5 text-xs tabular-nums ${
                         active ? 'bg-blue-200 text-blue-800' : 'bg-gray-100 text-gray-500'
                       }`}
                     >
@@ -121,10 +123,10 @@ export default async function BrowsePage({
                   </Link>
                 );
               })}
-            </div>
-          </div>
+            </nav>
+          </aside>
 
-          <div className="flex-1">
+          <div className="min-w-0 flex-1">
             {!selectedTag ? (
               <div className="flex flex-col items-center justify-center py-20 text-gray-400">
                 <Folder className="w-12 h-12 mb-4" />
@@ -135,7 +137,7 @@ export default async function BrowsePage({
                 <p className="text-lg">{t('browse.noWikis')}</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
                 {wikis.map((wiki) => (
                   <WikiCard key={wiki.id} wiki={wiki} />
                 ))}

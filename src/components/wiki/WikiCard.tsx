@@ -7,6 +7,7 @@ import type { Wiki } from '@/types';
 import { timeAgo, truncate } from '@/lib/utils';
 import { getModelDisplayName } from '@/lib/models';
 import { useI18n } from '@/lib/i18n/context';
+import TagBadge from './TagBadge';
 
 interface WikiCardProps {
   wiki: Wiki;
@@ -18,10 +19,10 @@ export default function WikiCard({ wiki }: WikiCardProps) {
   return (
     <Link
       href={`/wiki/${wiki.id}`}
-      className="group block overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:border-blue-200 hover:shadow-md"
+      className="group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all hover:border-blue-200 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600"
     >
       {wiki.imageUrl && (
-        <div className="relative h-40 w-full overflow-hidden bg-gray-100">
+        <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden bg-gray-100">
           <Image
             src={wiki.imageUrl}
             alt={wiki.title}
@@ -32,45 +33,44 @@ export default function WikiCard({ wiki }: WikiCardProps) {
           />
         </div>
       )}
-      <div className="p-5">
+      <div className="flex min-w-0 flex-1 flex-col p-5">
       <h3 className="mb-2 text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
         {wiki.title}
       </h3>
       <p className="mb-3 text-sm text-gray-600 line-clamp-2">
         {truncate(wiki.summary || wiki.question, 150)}
       </p>
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {wiki.tags?.slice(0, 4).map((tag) => (
-          <span
-            key={tag}
-            className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs text-gray-600"
-          >
-            {tag}
-          </span>
+      <div className="mb-4 flex flex-wrap gap-1.5">
+        {[...new Set(wiki.tags?.filter(Boolean))].slice(0, 4).map((tag) => (
+          <TagBadge key={tag}>{tag}</TagBadge>
         ))}
       </div>
-      <div className="flex items-center gap-4 text-xs text-gray-400">
-        <span className="flex items-center gap-1">
-          <Eye className="h-3.5 w-3.5" />
-          {wiki.views}
+      <div className="mt-auto space-y-2 border-t border-gray-100 pt-3 text-xs leading-5 text-gray-500">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap tabular-nums">
+          <Eye aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
+          {new Intl.NumberFormat(locale, { notation: 'compact', maximumFractionDigits: 1 }).format(wiki.views)}
         </span>
-        <span className="flex items-center gap-1">
-          <Bot className="h-3.5 w-3.5" />
-          {getModelDisplayName(wiki.aiModel)}
-        </span>
-        <span className="flex items-center gap-1">
-          <Clock className="h-3.5 w-3.5" />
+        <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap">
+          <Clock aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
           {timeAgo(wiki.createdAt, locale)}
         </span>
         {(wiki.threadCount ?? 0) > 0 && (
-          <span className="flex items-center gap-1 text-blue-500">
-            <MessageSquare className="h-3.5 w-3.5" />
+          <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap text-blue-600">
+            <MessageSquare aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
             {wiki.threadCount}
           </span>
         )}
-        <span className="ml-auto text-gray-500">
+        </div>
+        <div className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1">
+        <span className="inline-flex min-w-0 items-center gap-1" title={getModelDisplayName(wiki.aiModel)}>
+          <Bot aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
+          <span className="truncate">{getModelDisplayName(wiki.aiModel)}</span>
+        </span>
+        <span className="min-w-0 truncate" title={`${t('wiki.by')} ${wiki.authorName}`}>
           {t('wiki.by')} {wiki.authorName}
         </span>
+        </div>
       </div>
       </div>
     </Link>

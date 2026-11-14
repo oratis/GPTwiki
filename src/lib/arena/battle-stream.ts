@@ -4,11 +4,13 @@ export interface BattleStreamSources {
   battleId: string;
   a: ReadableStream<Uint8Array>;
   b: ReadableStream<Uint8Array>;
+  /** Bound hung providers; refunded just like other incomplete battles. */
+  timeoutMs?: number;
   /**
    * Called once, after both sides finish, with the accumulated answers. Only
    * invoked when both succeeded — a half-finished battle must never become
-   * votable. Errors thrown here are logged, not surfaced to the client, since
-   * the answers have already been delivered.
+   * votable. A persistence failure is an incomplete battle, even when the
+   * answers have already been delivered.
    */
   onComplete: (answers: Record<BattleSlot, string>) => Promise<void> | void;
   /**
@@ -84,6 +86,13 @@ export function mergeBattleStreams(sources: BattleStreamSources): ReadableStream
 
       const answers: Record<BattleSlot, string> = { a: '', b: '' };
       const failed: BattleSlot[] = [];
+      const timeout = setTimeout(() => {
+        for (const slot of ['a', 'b'] as const) {
+          failed.push(slot);
+          send('fail', { slot });
+        }
+        for (const reader of readers) void reader.cancel('Battle timed out').catch(() => {});
+      }, sources.timeoutMs ?? 120000);
 
       const pump = async (slot: BattleSlot, stream: ReadableStream<Uint8Array>) => {
         const reader = stream.getReader();
@@ -122,21 +131,28 @@ export function mergeBattleStreams(sources: BattleStreamSources): ReadableStream
       // Both sides run concurrently; one failing must not stop the other, so
       // neither pump rejects.
       await Promise.all([pump('a', sources.a), pump('b', sources.b)]);
+      clearTimeout(timeout);
 
       const bothUsable =
         !clientGone && failed.length === 0 && answers.a.trim() !== '' && answers.b.trim() !== '';
 
+      let persisted = false;
       try {
         if (bothUsable) {
           await sources.onComplete(answers);
-        } else {
-          await sources.onAbandon?.(clientGone ? 'disconnected' : 'failed');
+          persisted = true;
         }
       } catch (err) {
         console.error(`[arena] finalising battle ${sources.battleId} failed:`, err);
       }
-
-      send('done', { ok: bothUsable });
+      if (!persisted) {
+        try {
+          await sources.onAbandon?.(clientGone ? 'disconnected' : 'failed');
+        } catch (err) {
+          console.error(`[arena] refund for battle ${sources.battleId} failed:`, err);
+        }
+      }
+      send('done', { ok: persisted });
       if (!clientGone) controller.close();
     },
 

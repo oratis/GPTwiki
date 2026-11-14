@@ -134,3 +134,30 @@ Workflows: `suggest-topics` (daily 03:07) · `auto-author` (daily 03:17) ·
 The Cloud Build deployment applies a daily allowance of two platform-funded chat or article generations per signed-in account, sharing a 50-generation UTC daily ceiling with the Arena. One successful question followed by publishing normally uses both personal units. Existing accounts with their own provider keys keep their existing access. These limits count generations; provider choice and token usage determine the actual bill. The app default outside this deployment remains BYOK.
 
 For a rollout, keep the production GA measurement build argument and provider keys in place. Verify a fresh account can receive an answer, publish it, and see the quota message on the next attempt. Compare first answers, publications and seven-day returns against provider usage. Set `_FREE_DAILY_MESSAGES=0` in future builds to turn off the chat allowance. For an immediate rollback update `FREE_DAILY_MESSAGES=0` on the running service and keep the global Arena ceiling in place.
+
+## PayPal donation checks
+
+Set `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, and `PAYPAL_ENVIRONMENT=live`
+for the live merchant app. The legacy `NEXT_PUBLIC_PAYPAL_CLIENT_ID` name is
+accepted at runtime, but the server-only name avoids build-time substitution.
+For a sandbox deployment, explicitly use `PAYPAL_ENVIRONMENT=sandbox` and a
+matching sandbox credential pair, even when running `next start`.
+`GET /api/paypal/config` supplies the matching browser SDK URL and returns 503
+when configuration is missing. It never returns the client secret or access token.
+
+On 2026-11-14, the live credentials authenticated successfully, but the deployed
+create-order endpoint returned HTTP 500. Cloud Run logs identified
+`PAYEE_ACCOUNT_RESTRICTED`. This is a receiving-account restriction; changing
+SDK versions or client secrets does not remove it. The merchant must resolve
+the restriction with PayPal support, as described in the
+[PayPal error guide](https://developer.paypal.com/api/errors/overview/).
+The updated endpoint preserves the upstream error code and debug ID so the UI
+can explain unavailability and support can trace the failed request.
+
+After the account is restored, verify creation, buyer approval, capture, and the
+`donations/{orderId}` ledger in sandbox before a merchant-approved live check.
+A successful OAuth response alone does not prove that the merchant can receive
+money. Captures use an order-specific idempotency key; pending or interrupted
+confirmations retry the same order, including after a page reload. The ledger
+stores the actual completed capture ID and amount. No real payment was captured
+during the 2026-11-14 investigation.

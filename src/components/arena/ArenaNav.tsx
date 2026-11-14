@@ -42,7 +42,7 @@ export default function ArenaNav({
         <h1 className="text-3xl font-bold text-gray-900">{t('arena.title')}</h1>
       </div>
 
-      <nav className="flex gap-2 overflow-x-auto pb-1">
+      <nav aria-label={t('arena.title')} className="flex gap-1.5 overflow-x-auto rounded-2xl border border-gray-200 bg-white p-1.5 shadow-sm">
         {tabs.map((tab) => {
           const isActive = tab.key === active;
           return (
@@ -50,10 +50,10 @@ export default function ArenaNav({
               key={tab.key}
               href={localeHref(locale, tab.path)}
               aria-current={isActive ? 'page' : undefined}
-              className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+              className={`shrink-0 whitespace-nowrap rounded-xl border px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-blue-600 ${
                 isActive
-                  ? 'border-blue-200 bg-blue-50 text-blue-700'
-                  : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-100'
+                  ? 'border-blue-600 bg-blue-600 text-white'
+                  : 'border-transparent text-gray-600 hover:bg-gray-50'
               }`}
             >
               {tab.label}

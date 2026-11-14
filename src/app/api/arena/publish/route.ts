@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { after, NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
-import { claimPublish, getBattle, reserveWikiId } from '@/lib/arena/store';
+import { getBattle, publishBattleArticle } from '@/lib/arena/store';
+import { isTypesenseEnabled, toTypesenseDoc, upsertWikiToTypesense } from '@/lib/typesense';
 import { db } from '@/lib/firebase';
-import { createWiki, getUserProfile } from '@/lib/search';
+import { getUserProfile } from '@/lib/search';
 import { anonVoterId, readAnonToken } from '@/lib/arena/anon';
 import { checkRateLimit, getClientId, rateLimited } from '@/lib/rate-limit';
 import { arenaPublishSchema, parseJsonBody, wikiCreateSchema } from '@/lib/validation';
@@ -150,36 +151,24 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Could not build a valid article' }, { status: 422 });
     }
 
-    // Reserve the id, then claim it against this vote in a transaction. Two
-    // concurrent publishes — a double-click, or a retry racing its own
-    // response — cannot both win, so a repeat returns the original article
-    // instead of minting a duplicate into the corpus and the sitemap.
-    const reservedId = reserveWikiId();
-    // Claimed against whichever vote authorised this publish, so the
-    // one-article-per-battle guard still lives on the document it guards.
-    const claim = await claimPublish(battleId, voterId, reservedId);
-    if (!claim.claimed) {
-      return NextResponse.json({
-        wikiId: claim.existingWikiId,
-        model: winner.model,
-        alreadyPublished: true,
+    const authorImage = profile?.image ?? session.user?.image;
+    const article = {
+      ...validated.data,
+      authorId: userId,
+      authorName: profile?.name ?? session.user?.name ?? 'Anonymous',
+      ...(authorImage ? { authorImage } : {}),
+      language: battle.locale,
+      source: 'arena',
+    };
+    const published = await publishBattleArticle(battleId, voterId, article);
+    if (!published.alreadyPublished && isTypesenseEnabled()) {
+      after(async () => {
+        try {
+          await upsertWikiToTypesense(toTypesenseDoc(published.wikiId, { ...article, views: 0, createdAt: Date.now() }));
+        } catch (error) { console.error('Arena search indexing failed:', error); }
       });
     }
-
-    const wikiId = await createWiki(
-      {
-        ...validated.data,
-        authorId: userId,
-        authorName: profile?.name ?? session.user?.name ?? 'Anonymous',
-        authorImage: profile?.image ?? session.user?.image ?? undefined,
-        language: battle.locale,
-        // Traceable provenance, and the hot list ranks it as community content.
-        source: 'arena',
-      },
-      reservedId
-    );
-
-    return NextResponse.json({ wikiId, model: winner.model });
+    return NextResponse.json({ ...published, model: winner.model });
   } catch (error) {
     console.error('Arena publish error:', error);
     return NextResponse.json({ error: 'Failed to publish' }, { status: 500 });

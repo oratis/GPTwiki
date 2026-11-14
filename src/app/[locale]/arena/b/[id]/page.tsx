@@ -65,7 +65,7 @@ export default async function ArenaBattlePermalink({
       <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
         <ArenaNav locale={locale} active="battle" />
 
-        <h2 className="text-xl font-semibold text-gray-900">{battle.prompt}</h2>
+        <h2 className="break-words text-xl font-semibold text-gray-900">{battle.prompt}</h2>
         <p className="mt-1 mb-6 flex items-center gap-2 text-xs text-gray-400">
           <EyeOff className="h-3.5 w-3.5" />
           {t('arena.permalink.noindexNote')}
@@ -73,13 +73,13 @@ export default async function ArenaBattlePermalink({
 
         <div className="grid gap-4 md:grid-cols-2">
           {columns.map((col) => (
-            <div key={col.slot} className="rounded-lg border border-gray-200 bg-white p-4">
+            <div key={col.slot} className="min-w-0 overflow-hidden rounded-2xl border border-gray-200 bg-white p-5">
               <span className="mb-3 block text-xs font-semibold uppercase tracking-wider text-gray-500">
                 {col.model
                   ? getModelDisplayName(col.model as AIModel)
                   : t(col.slot === 'a' ? 'arena.battle.modelA' : 'arena.battle.modelB')}
               </span>
-              <div className="prose prose-sm max-w-none prose-p:my-1.5 prose-headings:my-2 prose-pre:bg-gray-800 prose-pre:text-gray-100">
+              <div className="prose prose-sm max-w-none break-words [overflow-wrap:anywhere] prose-table:block prose-table:overflow-x-auto prose-p:my-1.5 prose-headings:my-2 prose-pre:bg-gray-800 prose-pre:text-gray-100">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>{col.text}</ReactMarkdown>
               </div>
             </div>

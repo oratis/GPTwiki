@@ -40,7 +40,7 @@ export default function ScopePicker({
               key={option.scope}
               href={href({ scope: option.scope })}
               aria-current={active ? 'true' : undefined}
-              className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
+              className={`inline-flex items-center whitespace-nowrap rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-blue-600 ${
                 active
                   ? 'border-blue-200 bg-blue-50 text-blue-700'
                   : 'border-gray-200 bg-white text-gray-600 hover:bg-gray-50'
