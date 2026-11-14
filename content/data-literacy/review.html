@@ -1,0 +1,268 @@
+<!doctype html><html lang="zh"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GPTwiki · 读懂数据 · 双语审阅稿</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f5f7fc;color:#18284b;font:18px/1.85 system-ui,-apple-system,"PingFang SC",sans-serif}header,article{max-width:1040px;margin:32px auto;padding:48px 60px;background:white;border:1px solid #dbe3ef;border-radius:20px}h1{font-size:36px;line-height:1.3;letter-spacing:-.025em;margin:12px 0 28px}h2{font-size:26px;line-height:1.45;margin:48px 0 16px}a{color:#3730a3;text-underline-offset:3px}p{margin:18px 0}table{display:block;overflow-x:auto;border-collapse:collapse;font-size:16px;margin:24px 0;width:100%}th,td{border:1px solid #dbe3ef;padding:10px 14px;text-align:left}th{background:#edf2ff}li{margin:8px 0}.eyebrow{font-size:13px;letter-spacing:.04em;color:#52617a}.figure{display:block;margin:30px 0}.figure img{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:12px}.caption{display:block;font-size:14px;color:#52617a;line-height:1.6;margin:12px 0}aside{border-top:1px solid #dbe3ef;margin-top:36px}aside h2{margin-top:28px}.intro{color:#52617a}.index{display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;list-style:none;padding:0}.index li{border-left:3px solid #3730a3;padding-left:16px}strong{color:#18284b}@media(max-width:700px){header,article{padding:24px 20px;margin:16px 10px;border-radius:14px}body{font-size:16px}h1{font-size:28px}h2{font-size:23px}.index{grid-template-columns:1fr}th,td{padding:8px;font-size:14px}}@media print{body{background:white}header,article{border:0;margin:0;padding:24px;break-before:page}.figure{break-inside:avoid}}
+</style><header id="index"><div class="eyebrow">GPTwiki Editorial · 2026-11-14</div><h1>读懂数据：四个主题，八篇图文文章</h1><p class="intro">中英文完整审阅稿。每篇含两张原创教学图表，点击图片可查看矢量原图。算例均为假设数据；方法来源见文内链接和文末参考资料。本地内容包，尚未发布。</p><ul class="index"><li><a href="#reading-chart-scales-zh">读图先看坐标轴：别让尺度替你下结论</a></li><li><a href="#reading-chart-scales-en">How to Read Chart Scales Without Being Misled</a></li><li><a href="#mean-median-outliers-zh">均值与中位数：一个“平均数”藏起了什么</a></li><li><a href="#mean-median-outliers-en">Mean vs Median: What an Average Leaves Out</a></li><li><a href="#classifier-base-rates-zh">99% 准确率为什么还可能漏掉所有问题</a></li><li><a href="#classifier-base-rates-en">Why 99% Accuracy Can Hide a Useless Classifier</a></li><li><a href="#sampling-bias-large-surveys-zh">问卷收得越多，为什么答案仍可能越偏</a></li><li><a href="#sampling-bias-large-surveys-en">Why a Bigger Survey Can Still Give the Wrong Answer</a></li></ul></header><article id="reading-chart-scales-en" lang="en">
+<div class="eyebrow">ENGLISH · reading-chart-scales · <a href="#index">目录 / Index</a></div>
+<h1>How to Read Chart Scales Without Being Misled</h1>
+<p>A chart can contain accurate numbers and still encourage an exaggerated impression. Before interpreting a rising line or a towering bar, read the units, the starting value, and the spacing of the tick marks. These determine what distances on the page mean.</p>
+<p>This article uses <strong>invented teaching data</strong>, not a survey or a product benchmark. The aim is to make each visual claim checkable with a few calculations.</p>
+<h2>The same change can look modest or enormous</h2>
+<p>Imagine a service reporting satisfaction of 48% in period A and 52% in period B. With an axis starting at zero, the bars have heights proportional to 48 and 52. With an axis starting at 45%, the visible heights represent only 3 and 7 percentage points above that baseline.</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/reading-chart-scales-baselines.en.svg"><img src="../../public/editorial/data-literacy/reading-chart-scales-baselines.en.svg" alt="Figure 1. The same 48% and 52% values on two bar charts: a zero baseline preserves their ratio, while a 45% baseline makes the visible bars measure 3 and 7 points. Original GPTwiki diagram; invented data." width="1440" height="810" loading="lazy"/></a><span class="caption">Figure 1. The same 48% and 52% values on two bar charts: a zero baseline preserves their ratio, while a 45% baseline makes the visible bars measure 3 and 7 points. Original GPTwiki diagram; invented data.</span></span></p>
+<p>On the cropped chart, the second visible bar is 7 ÷ 3 ≈ 2.33 times as tall as the first. But the actual satisfaction rate is 52 ÷ 48 ≈ 1.083 times the earlier rate. The rate did not more than double. The picture magnified the difference by removing the common portion of both bars.</p>
+<p>Bars invite us to compare lengths measured from a baseline. That is why the <a href="https://service-manual.ons.gov.uk/data-visualisation/chart-types/bar-charts">ONS bar-chart guidance</a> calls for a zero starting point. The cropped version here is deliberately shown as a reading exercise, not as a recommended design.</p>
+<p>There are also two valid numerical descriptions of this change:</p>
+<table><thead><tr><th>Question</th><th>Calculation</th><th>Answer</th></tr></thead><tbody><tr><td>How far apart are the percentages?</td><td>52% − 48%</td><td>4 percentage points</td></tr><tr><td>How large is the change relative to the starting rate?</td><td>(52 − 48) ÷ 48 × 100%</td><td>About 8.3%</td></tr></tbody></table>
+<p>A percentage-point change subtracts rates; a percentage change divides the change by a stated starting value. The distinction is explained in the <a href="https://service-manual.ons.gov.uk/content/numbers/percentages">ONS style guide</a>. Writing “satisfaction rose by 4%” would not accurately describe this example.</p>
+<h2>A nonzero axis is sometimes useful</h2>
+<p>A line chart encodes values through positions and their connections, rather than through filled lengths extending from a baseline. A clearly labelled narrow vertical range can reveal variation that a zero-based scale would obscure. Showing a room’s temperature between 19 and 23°C, for example, can help someone inspect small fluctuations.</p>
+<p>Read a zoomed line chart as a close-up: inspect the ticks before judging how large a change is. For comparisons across several panels, check that their scales match. The <a href="https://service-manual.ons.gov.uk/data-visualisation/guidance/axes-and-gridlines">ONS guidance on axes</a> distinguishes this use of cropped line or scatter plots from cropping bars. Whether a change matters still depends on the subject, not on its height in pixels.</p>
+<h2>Linear and logarithmic scales answer different questions</h2>
+<p>Now consider an invented sequence of counts: 10, 20, 40, and 80 at four equally spaced times. Each step doubles the count. Yet the increases in raw units grow: +10, then +20, then +40.</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/reading-chart-scales-growth.en.svg"><img src="../../public/editorial/data-literacy/reading-chart-scales-growth.en.svg" alt="Figure 2. Counts of 10, 20, 40, and 80 bend upward on a linear scale but form a straight line on a base-2 logarithmic scale. Equal vertical steps on the right mean doubling. Original GPTwiki diagram; invented data." width="1440" height="810" loading="lazy"/></a><span class="caption">Figure 2. Counts of 10, 20, 40, and 80 bend upward on a linear scale but form a straight line on a base-2 logarithmic scale. Equal vertical steps on the right mean doubling. Original GPTwiki diagram; invented data.</span></span></p>
+<p>On a <strong>linear scale</strong>, equal vertical distances mean equal additions. Moving from 10 to 20 covers half the distance of moving from 20 to 40. This view is useful when the question is how many additional units arrived.</p>
+<p>On the <strong>logarithmic scale</strong> shown here, equal distances mean equal ratios. The tick labels are 10, 20, 40, and 80, spaced evenly because each is twice the previous one. The straight line represents a constant multiplicative growth rate, not a constant number of additional units. Other log charts may use ticks such as 1, 10, 100, and 1,000; the principle is the same.</p>
+<p>Ordinary logarithmic axes cannot represent zero or negative values. Do not silently replace zero with a small positive number: that changes the visual meaning. If a chart uses another transformation, its description should say so. A logarithmic view also compresses large absolute differences; the underlying counts remain essential context.</p>
+<h2>A practical reading routine</h2>
+<ol>
+<li><strong>Identify the quantity.</strong> Is this a count, rate, index, or change? A chart of total complaints answers a different question from complaints per 1,000 orders.</li>
+<li><strong>Read the scale.</strong> Where does it begin, and do equal spaces mean equal additions or equal ratios?</li>
+<li><strong>Check the comparison.</strong> Are the dates equally spaced? Do panels use the same units and limits?</li>
+<li><strong>Calculate one change yourself.</strong> Record both the absolute difference and its denominator before interpreting a dramatic shape.</li>
+</ol>
+<p><strong>Try it:</strong> a rate rises from 20% to 25%. That is 5 percentage points and a 25% increase relative to 20%. Neither calculation tells you why it changed or whether sampling uncertainty could explain the difference. A well-read chart describes a pattern; establishing its cause requires other evidence.</p>
+<p><strong>Does a steep line prove rapid growth?</strong> No. Its apparent angle also depends on the axis limits and the chart’s width and height. Compare labelled values over a specified interval instead.</p>
+<p><strong>Are logarithmic charts deceptive?</strong> They can be useful when ratios are the question. The problem is an unexplained scale or a conclusion that confuses ratios with raw changes, not the mere presence of logarithms.</p>
+<aside><h2>References</h2><ul><li><a href="https://service-manual.ons.gov.uk/data-visualisation/guidance/axes-and-gridlines">ONS — Axes and gridlines</a></li><li><a href="https://service-manual.ons.gov.uk/content/numbers/percentages">ONS — Percentages and percentage points</a></li><li><a href="https://service-manual.ons.gov.uk/data-visualisation/chart-types/bar-charts">ONS — Bar charts</a></li></ul></aside></article>
+<article id="mean-median-outliers-en" lang="en">
+<div class="eyebrow">ENGLISH · mean-median-outliers · <a href="#index">目录 / Index</a></div>
+<h1>Mean vs Median: What an Average Leaves Out</h1>
+<p>“The average delivery takes 28 minutes” sounds like a description of an ordinary order. It might instead describe eight quick deliveries and one very late one. A single number cannot show both the center and the shape of a dataset.</p>
+<p>The <strong>arithmetic mean</strong> is the sum divided by the number of observations. The <strong>median</strong> is the middle value after sorting; for an even number of observations, the usual sample median is the mean of the two middle values. These definitions are set out in the <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm">NIST statistical handbook</a>. They answer different questions, so choosing between them starts with what you need to know.</p>
+<h2>One delayed delivery changes the mean</h2>
+<p>Consider nine invented delivery times, in minutes:</p>
+<table><thead><tr><th>Sorted observation</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th></tr></thead><tbody><tr><td>Time</td><td>18</td><td>19</td><td>20</td><td>20</td><td>21</td><td>22</td><td>22</td><td>23</td><td>90</td></tr></tbody></table>
+<p>The total is 255 minutes, so the mean is 255 ÷ 9 ≈ <strong>28.3 minutes</strong>. The fifth observation is <strong>21 minutes</strong>, so that is the median. Eight of the nine deliveries are below the mean. No order in this dataset took anything close to 28.3 minutes.</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/mean-median-outliers-shift.en.svg"><img src="../../public/editorial/data-literacy/mean-median-outliers-shift.en.svg" alt="Figure 1. Replacing a 24-minute delivery with a 90-minute delivery raises the mean from 21 to about 28.3 minutes, while the median stays at 21. Each dot is one delivery; repeated values are stacked. Original GPTwiki diagram; invented data." width="1440" height="810" loading="lazy"/></a><span class="caption">Figure 1. Replacing a 24-minute delivery with a 90-minute delivery raises the mean from 21 to about 28.3 minutes, while the median stays at 21. Each dot is one delivery; repeated values are stacked. Original GPTwiki diagram; invented data.</span></span></p>
+<p>For comparison, replace the 90 with 24 and leave every other observation unchanged. The new total is 189 and the mean is 21. The median remains 21 because the middle position has not changed. This is the arithmetic behind the mean’s sensitivity to an extreme value: adding 66 minutes to one observation adds 66 ÷ 9 ≈ 7.3 minutes to the mean.</p>
+<p>The median is resistant to a change at the far end of this list. It is not immune to all changes, and it does not describe how bad the longest wait was.</p>
+<h2>Choose a summary to match the question</h2>
+<p>For a customer asking about the middle experience, the median is useful. For a planner accounting for the total delivery time across orders, the mean is useful: mean × number of orders recovers the total. Neither alone measures the risk of a very late delivery.</p>
+<table><thead><tr><th>Decision</th><th>Useful information</th></tr></thead><tbody><tr><td>Describe the central delivery time</td><td>Median, alongside the distribution</td></tr><tr><td>Account for total minutes across orders</td><td>Mean and order count</td></tr><tr><td>Check a 30-minute service promise</td><td>Number and proportion of orders exceeding 30 minutes</td></tr><tr><td>Investigate long waits</td><td>Tail observations, timestamps, and causes</td></tr></tbody></table>
+<p>In our nine-order example, exactly one order exceeds 30 minutes, so the observed late-order share is 1 ÷ 9 ≈ 11.1%. That is a description of these orders, not a reliable estimate for every future day. Nine observations provide little evidence about rare delays.</p>
+<h2>Even the mean and median together can hide variation</h2>
+<p>Compare two more invented sets, each containing five deliveries:</p>
+<ul>
+<li>Set A: 19, 20, 20, 20, 21 minutes.</li>
+<li>Set B: 2, 3, 20, 37, 38 minutes.</li>
+</ul>
+<p>Both have a mean of 20 and a median of 20. A customer’s experience is nevertheless much less consistent in set B.</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/mean-median-outliers-spread.en.svg"><img src="../../public/editorial/data-literacy/mean-median-outliers-spread.en.svg" alt="Figure 2. Two datasets have the same mean and median of 20 minutes. Set A ranges from 19 to 21; set B ranges from 2 to 38. Equal averages do not imply equal consistency. Original GPTwiki diagram; invented data." width="1440" height="810" loading="lazy"/></a><span class="caption">Figure 2. Two datasets have the same mean and median of 20 minutes. Set A ranges from 19 to 21; set B ranges from 2 to 38. Equal averages do not imply equal consistency. Original GPTwiki diagram; invented data.</span></span></p>
+<p>The range is 2 minutes in A and 36 in B. Range is easy to understand but depends entirely on the two extremes. Other summaries include standard deviation and the interquartile range, which describes the width of the middle half of the data. The <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda356.htm">NIST discussion of spread</a> explains why these measures respond differently to the center and tails. A dot plot is particularly informative when the dataset is small enough to display every observation.</p>
+<h2>Do not average group averages without their sizes</h2>
+<p>Suppose one shop has two orders with a mean of 10 minutes, and another has eight orders with a mean of 20 minutes. Averaging the two shop means gives 15 minutes, which treats the shops equally. It does not treat the ten orders equally.</p>
+<p>The overall order mean is (2 × 10 + 8 × 20) ÷ (2 + 8) = <strong>18 minutes</strong>. It is a weighted mean, with order counts as weights. The unweighted figure can answer a question about the average shop, but it answers a different question from the average order. Group medians cannot generally be combined this way to recover a pooled median.</p>
+<h2>What to ask when someone quotes an average</h2>
+<p>Ask which average was calculated, what each observation represents, how many there were, and over what period. Then ask for a plot or a measure of spread. If the question concerns reliability, request the relevant late-event rate as well.</p>
+<p><strong>Should the 90-minute delivery be deleted?</strong> Only a documented reason can justify excluding it, such as a confirmed measurement error or an observation outside the defined scope. A real delay is evidence about the service. A useful report can show all observations and explain what changes under a clearly labelled exclusion.</p>
+<p><strong>Try it:</strong> changing the 90-minute observation to 180 raises the mean by 90 ÷ 9 = 10 minutes, to about 38.3. The median stays at 21. If the business reports only the median, that serious worsening at the tail disappears from the headline.</p>
+<aside><h2>References</h2><ul><li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm">NIST/SEMATECH — Measures of Location</a></li><li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda356.htm">NIST/SEMATECH — Measures of Scale</a></li></ul></aside></article>
+<article id="classifier-base-rates-en" lang="en">
+<div class="eyebrow">ENGLISH · classifier-base-rates · <a href="#index">目录 / Index</a></div>
+<h1>Why 99% Accuracy Can Hide a Useless Classifier</h1>
+<p>Suppose a factory inspects 10,000 parts, of which 100 are defective. A system that labels <strong>every part acceptable</strong> is correct on 9,900 parts: 99% accuracy. It also misses every defect. The impressive score reflects how common acceptable parts are, rather than a useful ability to find defects.</p>
+<p>This is an <strong>invented teaching example</strong>, not a claim about a deployed model. Defects are the “positive” class; acceptable parts are the “negative” class. Positive names the condition being detected, not something desirable.</p>
+<h2>Count the four possible outcomes</h2>
+<p>Now imagine a detector that catches 90 of the 100 defects and wrongly flags 198 of the 9,900 acceptable parts. Its results form a confusion matrix:</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/classifier-base-rates-matrix.en.svg"><img src="../../public/editorial/data-literacy/classifier-base-rates-matrix.en.svg" alt="Figure 1. Of 10,000 invented parts, the detector flags 90 real defects and 198 acceptable parts, misses 10 defects, and correctly passes 9,702 acceptable parts. Rows are actual condition; columns are the detector’s decision. Original GPTwiki diagram." width="1440" height="810" loading="lazy"/></a><span class="caption">Figure 1. Of 10,000 invented parts, the detector flags 90 real defects and 198 acceptable parts, misses 10 defects, and correctly passes 9,702 acceptable parts. Rows are actual condition; columns are the detector’s decision. Original GPTwiki diagram.</span></span></p>
+<table><thead><tr><th>Actual condition</th><th>Flagged for review</th><th>Passed</th><th>Total</th></tr></thead><tbody><tr><td>Defective</td><td>90 true positives</td><td>10 false negatives</td><td>100</td></tr><tr><td>Acceptable</td><td>198 false positives</td><td>9,702 true negatives</td><td>9,900</td></tr><tr><td>Total</td><td>288</td><td>9,712</td><td>10,000</td></tr></tbody></table>
+<p>The four labels keep the denominators straight. <a href="https://developers.google.com/machine-learning/crash-course/classification/thresholding">Google’s introduction to the confusion matrix</a> explains this way of organizing binary decisions.</p>
+<h2>Four metrics, four different questions</h2>
+<p>For this detector, the calculations are:</p>
+<table><thead><tr><th>Metric</th><th>Question</th><th>Calculation</th></tr></thead><tbody><tr><td>Accuracy</td><td>What share of all decisions were correct?</td><td>(90 + 9,702) ÷ 10,000 = <strong>97.92%</strong></td></tr><tr><td>Recall</td><td>What share of actual defects were caught?</td><td>90 ÷ 100 = <strong>90%</strong></td></tr><tr><td>Precision</td><td>What share of flagged parts really were defective?</td><td>90 ÷ 288 = <strong>31.25%</strong></td></tr><tr><td>False-positive rate</td><td>What share of acceptable parts were wrongly flagged?</td><td>198 ÷ 9,900 = <strong>2%</strong></td></tr></tbody></table>
+<p>These are distinct conditional proportions, as defined in <a href="https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall">Google’s metric guide</a>. A 2% false-positive rate does <strong>not</strong> mean that only 2% of alerts are wrong. Here, 198 ÷ 288 = 68.75% of the alerts are false alarms. The first percentage uses acceptable parts as its denominator; the second uses flagged parts.</p>
+<p>Notice that this detector has lower accuracy than the “pass everything” rule. It can still be more useful if catching defects is valuable and human review is affordable. Deciding that requires the costs of missed defects and unnecessary review, not just one metric.</p>
+<h2>The base rate changes what an alert means</h2>
+<p>The <strong>base rate</strong> is the fraction of actual defects among all inspected parts. In the first example it is 1%. Now suppose the detector is used on a different batch with 1,000 defects and 9,000 acceptable parts: a 10% base rate.</p>
+<p>For illustration, assume recall stays at 90% and the false-positive rate stays at 2%. Then it catches 900 defects and wrongly flags 180 acceptable parts. Precision becomes 900 ÷ (900 + 180) ≈ <strong>83.3%</strong>.</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/classifier-base-rates-alerts.en.svg"><img src="../../public/editorial/data-literacy/classifier-base-rates-alerts.en.svg" alt="Figure 2. With recall fixed at 90% and the false-positive rate fixed at 2%, defects make up 31.25% of alerts at a 1% base rate and about 83.3% at a 10% base rate. Each bar represents 100% of alerts, not equal numbers of parts. Original GPTwiki diagram; hypothetical conditions." width="1440" height="810" loading="lazy"/></a><span class="caption">Figure 2. With recall fixed at 90% and the false-positive rate fixed at 2%, defects make up 31.25% of alerts at a 1% base rate and about 83.3% at a 10% base rate. Each bar represents 100% of alerts, not equal numbers of parts. Original GPTwiki diagram; hypothetical conditions.</span></span></p>
+<p>The model has not become better at distinguishing the two classes under these assumptions. Its alerts contain more genuine cases because the incoming batch contains more defects. The relevant arithmetic is:</p>
+<p><strong>Precision = (recall × base rate) ÷ [(recall × base rate) + (false-positive rate × (1 − base rate))].</strong></p>
+<p>Use proportions such as 0.90 and 0.01 in this formula. It is simply the count calculation above expressed per inspected part. <a href="https://developers.google.com/machine-learning/glossary/metrics">Google’s metrics glossary</a> provides the underlying definitions; the two factory batches and calculations here are original worked examples.</p>
+<p>In practice, changing batches may also change lighting, defect types, equipment, or model performance. Holding the two rates constant isolates the base-rate effect; it is not a promise that a detector transfers unchanged to a new setting.</p>
+<h2>A threshold is an operating choice</h2>
+<p>Many classifiers produce a score and flag cases above a selected threshold. Lowering it generally flags more cases, including both additional true positives and additional false positives. Raising it generally does the reverse. The actual balance must be measured on representative labelled data; a score is not automatically a well-calibrated probability.</p>
+<p>An inspection team might compare thresholds by the number of reviews it can perform and the number of defects it can tolerate missing. A detector used only to prioritize human review has a different operating context from one that automatically discards parts. Reporting the threshold and the resulting counts makes those choices inspectable.</p>
+<h2>How to read a model performance claim</h2>
+<p>Request the evaluation sample size, the class proportions, the four outcome counts, and the decision threshold. Ask whether evaluation data were kept separate from training and whether their conditions resemble deployment; <a href="https://developers.google.com/machine-learning/crash-course/overfitting/dividing-datasets">Google’s dataset-splitting guidance</a> explains why a separate, representative test set matters. Also inspect relevant subgroups: a pooled score can hide poor performance on one kind of part.</p>
+<p><strong>Try it:</strong> with 10,000 parts, a 5% defect rate, 90% recall, and a 2% false-positive rate, there are 450 true alerts and 190 false alerts. Precision is 450 ÷ 640 ≈ 70.3%. The denominator is all alerts, not all defects.</p>
+<p><strong>Is accuracy ever useful?</strong> Yes, as one overall description when class balance and error costs are understood. It becomes misleading when it substitutes for those details.</p>
+<p><strong>Does high recall guarantee trustworthy alerts?</strong> No. Recall describes finding actual cases. Precision describes the contents of the review queue. A responsible evaluation reports both when both matter.</p>
+<aside><h2>References</h2><ul><li><a href="https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall">Google Machine Learning Crash Course — Accuracy, recall, precision, and related metrics</a></li><li><a href="https://developers.google.com/machine-learning/crash-course/classification/thresholding">Google Machine Learning Crash Course — Thresholds and the confusion matrix</a></li><li><a href="https://developers.google.com/machine-learning/glossary/metrics">Google Machine Learning Glossary — Metrics</a></li><li><a href="https://developers.google.com/machine-learning/crash-course/overfitting/dividing-datasets">Google Machine Learning Crash Course — Dividing the original dataset</a></li></ul></aside></article>
+<article id="sampling-bias-large-surveys-en" lang="en">
+<div class="eyebrow">ENGLISH · sampling-bias-large-surveys · <a href="#index">目录 / Index</a></div>
+<h1>Why a Bigger Survey Can Still Give the Wrong Answer</h1>
+<p>A survey with thousands of responses can describe its respondents very precisely while describing the intended population poorly. The first question is not just “How many answered?” It is “Who had a chance to answer, and who actually did?”</p>
+<p><strong>Sampling variation</strong> is the variation caused by which observations happen to be selected. <strong>Selection bias</strong> arises when the process systematically favors observations that produce a different answer from the population of interest. Increasing sample size can reduce random variation under a suitable design; it does not automatically remove a systematic mismatch. <a href="https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/sample-echantillon/5214900-eng.htm">Statistics Canada’s introduction to sample selection</a> explains why design and sample size both matter.</p>
+<h2>An invented campus survey</h2>
+<p>Imagine a campus with 1,000 students: 800 commute and 200 live on campus. In this teaching example, we know everyone’s preference about extending an evening shuttle service:</p>
+<table><thead><tr><th>Group</th><th>Students</th><th>Support within group</th><th>Supporters</th></tr></thead><tbody><tr><td>Commuters</td><td>800</td><td>20%</td><td>160</td></tr><tr><td>Campus residents</td><td>200</td><td>80%</td><td>160</td></tr><tr><td>All students</td><td>1,000</td><td><strong>32%</strong></td><td><strong>320</strong></td></tr></tbody></table>
+<p>Now suppose an opt-in survey receives 100 commuter responses and 100 resident responses. Assume, for the moment, that respondents within each group have exactly their group’s support rate. There are 20 commuter supporters and 80 resident supporters, so the survey reports <strong>100 ÷ 200 = 50%</strong> support.</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/sampling-bias-large-surveys-composition.en.svg"><img src="../../public/editorial/data-literacy/sampling-bias-large-surveys-composition.en.svg" alt="Figure 1. Commuters make up 80% of the invented campus population but only 50% of survey respondents. Residents are 20% of the population and 50% of respondents. Different group proportions change the combined result. Original GPTwiki diagram." width="1440" height="810" loading="lazy"/></a><span class="caption">Figure 1. Commuters make up 80% of the invented campus population but only 50% of survey respondents. Residents are 20% of the population and 50% of respondents. Different group proportions change the combined result. Original GPTwiki diagram.</span></span></p>
+<p>The 50% is an accurate description of those 200 answers. It is a poor estimate of the campus-wide 32% because the group with higher support is overrepresented. If the survey obtained twice as many answers with the same group proportions and the same within-group rates, it would still report 50%. More of the same selection process has not solved the problem.</p>
+<p>These numbers were constructed to isolate one mechanism. They do not imply that residents or commuters have these preferences in any real institution.</p>
+<h2>What weighting can fix</h2>
+<p>If we know the population shares and the respondents represent their own groups, we can weight the two group rates by the correct proportions:</p>
+<p><strong>0.80 × 20% + 0.20 × 80% = 32%.</strong></p>
+<p>Equivalently, each commuter response can represent eight students and each resident response two. That reconstructs 800 commuters and 200 residents, with 160 supporters in each group.</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/sampling-bias-large-surveys-weights.en.svg"><img src="../../public/editorial/data-literacy/sampling-bias-large-surveys-weights.en.svg" alt="Figure 2. Giving the two respondent groups equal weight produces 50% support. Using population weights of 80% commuters and 20% residents gives 32%, matching the invented population only because the within-group response rates are assumed representative. Original GPTwiki diagram." width="1440" height="810" loading="lazy"/></a><span class="caption">Figure 2. Giving the two respondent groups equal weight produces 50% support. Using population weights of 80% commuters and 20% residents gives 32%, matching the invented population only because the within-group response rates are assumed representative. Original GPTwiki diagram.</span></span></p>
+<p>But imagine that keen shuttle supporters are especially likely to answer within <strong>both</strong> groups. Suppose commuter respondents show 40% support and resident respondents 90%, while the real group rates remain 20% and 80%. Correcting the group proportions now gives 0.80 × 40% + 0.20 × 90% = <strong>50%</strong>, still far above the true 32%.</p>
+<p>Weighting fixed the commuter–resident mix; it did not fix differences between responders and nonresponders within those groups. The <a href="https://www.census.gov/programs-surveys/sipp/methodology/nonsampling-error.html">U.S. Census Bureau’s discussion of nonsampling error</a> describes both weighting adjustments and their limits. Matching a few demographic totals is therefore useful evidence about composition, not proof that all important differences have disappeared.</p>
+<h2>Three places a survey can go wrong</h2>
+<ul>
+<li><strong>Coverage:</strong> a survey frame or invitation misses part of the target population. A QR code displayed only inside a residence hall is unlikely to reach all commuters.</li>
+<li><strong>Nonresponse:</strong> selected people do not respond, and their answers would differ from those who do. A low response rate alone does not quantify the resulting bias; the missing people’s views matter.</li>
+<li><strong>Measurement:</strong> the wording or response choices alter the answer. “Do you support a safer shuttle?” and “Do you support paying more for later service?” do not ask the same question.</li>
+</ul>
+<p>An open online poll also lets people select themselves into the sample. <a href="https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/nonprob/5214898-eng.htm">Statistics Canada’s guide to non-probability sampling</a> explains why such samples need additional assumptions before their results can be generalized. They can still be useful for collecting suggestions or finding problems; their limits depend on the claim being made.</p>
+<h2>A margin of error has a limited job</h2>
+<p>For an ideal simple random sample from a large population, the approximate 95% margin of error for a proportion near 50% is <strong>1.96 × √(0.25 ÷ n)</strong>, using the normal approximation described in <a href="https://online.stat.psu.edu/stat100/Lesson09">Penn State’s confidence-interval lesson</a>. At 400 responses this is about 4.9 percentage points; at 1,600 it is about 2.45. Four times the observations roughly halves this random-error margin under the stated assumptions.</p>
+<p>Those calculations are a separate large-population illustration, not a margin of error for our 1,000-student opt-in survey. Complex designs, finite populations, clustering, and weighting require appropriate variance calculations. Most importantly, a conventional sampling margin does not cover every coverage, nonresponse, or wording problem. Attaching the simple formula to any online poll does not make it valid.</p>
+<p><a href="https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/prob/5214899-eng.htm">Probability sampling</a> uses random selection with calculable inclusion probabilities. These probabilities need not all be equal. It gives a basis for statistical inference, while still requiring careful coverage, follow-up, and measurement.</p>
+<h2>Read the methods before the headline</h2>
+<p>Look for the target population, recruitment method, fieldwork dates, question wording, respondent count, weighting variables, and treatment of uncertainty. Ask whether the reported number describes respondents or estimates a wider population.</p>
+<p><strong>Try it:</strong> if the population were 60% commuters and 40% residents, with support still 20% and 80% within groups, overall support would be 0.60 × 20% + 0.40 × 80% = <strong>44%</strong>. The correct weight comes from the population you want to describe, not the group balance that happens to arrive in your inbox.</p>
+<aside><h2>References</h2><ul><li><a href="https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/sample-echantillon/5214900-eng.htm">Statistics Canada — Selection of a sample</a></li><li><a href="https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/prob/5214899-eng.htm">Statistics Canada — Probability sampling</a></li><li><a href="https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/nonprob/5214898-eng.htm">Statistics Canada — Non-probability sampling</a></li><li><a href="https://www.census.gov/programs-surveys/sipp/methodology/nonsampling-error.html">U.S. Census Bureau — Nonsampling Error</a></li><li><a href="https://online.stat.psu.edu/stat100/Lesson09">Penn State STAT 100 — Confidence Intervals</a></li></ul></aside></article>
+<article id="reading-chart-scales-zh" lang="zh">
+<div class="eyebrow">中文 · reading-chart-scales · <a href="#index">目录 / Index</a></div>
+<h1>读图先看坐标轴：别让尺度替你下结论</h1>
+<p>图表里的数字可能都是真的，给人的第一印象却可能被放大。一根柱子高出一大截，不一定意味着数值翻倍；一条线突然变陡，也不一定意味着增长机制发生了变化。读图时，先看单位、起点和刻度间距，再判断变化有多大。</p>
+<p>下文所有数值都是<strong>为解释原理设计的教学数据</strong>，不代表真实调查、产品测试或行业水平。你可以用表中的数字自行复算每一个结论。</p>
+<h2>从零开始和从 45% 开始，差别在哪里？</h2>
+<p>假设某项服务的满意率从 A 期的 48% 上升到 B 期的 52%。纵轴从零开始时，两根柱子的长度分别对应 48 和 52。若把纵轴起点改为 45%，露出来的长度就分别只对应 3 和 7 个百分点。</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/reading-chart-scales-baselines.zh.svg"><img src="../../public/editorial/data-literacy/reading-chart-scales-baselines.zh.svg" alt="图 1：同样的 48% 与 52%，零基线保留了数值比例；从 45% 起画时，可见柱长只剩 3 与 7 个百分点。GPTwiki 原创图；数据为教学示例。" width="1440" height="810" loading="lazy"/></a><span class="caption">图 1：同样的 48% 与 52%，零基线保留了数值比例；从 45% 起画时，可见柱长只剩 3 与 7 个百分点。GPTwiki 原创图；数据为教学示例。</span></span></p>
+<p>右图第二根柱子的可见长度约是第一根的 7 ÷ 3 ≈ 2.33 倍。但真实满意率之比是 52 ÷ 48 ≈ 1.083，远没有翻倍。截掉两根柱子相同的底部，会让剩余部分的比例显得格外悬殊。</p>
+<p>柱状图让人通过“从基线延伸的长度”比较大小，因此<a href="https://service-manual.ons.gov.uk/data-visualisation/chart-types/bar-charts">英国国家统计局的柱状图指南</a>要求坐标轴从零开始。这里特意画出截断版本，是为了演示误读机制，不是推荐这种设计。</p>
+<p>同一次变化还有两种不同的数值表达：</p>
+<table><thead><tr><th>想回答的问题</th><th>算法</th><th>结果</th></tr></thead><tbody><tr><td>两个比例相差多少？</td><td>52% − 48%</td><td>上升 4 个百分点</td></tr><tr><td>相对原来的比例增长了多少？</td><td>(52 − 48) ÷ 48 × 100%</td><td>约增长 8.3%</td></tr></tbody></table>
+<p>“百分点”直接相减，“百分比变化”还需要除以原来的数值。<a href="https://service-manual.ons.gov.uk/content/numbers/percentages">ONS 的百分比写作说明</a>明确区分两者。把这里的变化写成“满意率增长 4%”，就把两种口径混在了一起。</p>
+<h2>并不是所有图都必须从零开始</h2>
+<p>折线图通过点的位置和点之间的连线表达数值，并不依靠从基线向上填满的柱长。比如检查室内温度的细微波动，把纵轴设置在 19—23°C 之间可以更容易看清变化。</p>
+<p>这样的图应该当作“放大观察”来读：放大了画面，实际温差并没有变大。多张图并列比较时，还要检查它们是否用了相同的范围和单位。<a href="https://service-manual.ons.gov.uk/data-visualisation/guidance/axes-and-gridlines">ONS 的坐标轴指南</a>也区分了折线图、散点图与柱状图的基线需求。变化是否重要，最终由实际问题决定，而不是由屏幕上的像素高度决定。</p>
+<h2>线性刻度看增加量，对数刻度看倍数</h2>
+<p>再看一组假设计数：在等间隔的四个时点，数值依次为 10、20、40、80。每一步都翻倍，但增加的数量分别是 10、20、40，越来越多。</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/reading-chart-scales-growth.zh.svg"><img src="../../public/editorial/data-literacy/reading-chart-scales-growth.zh.svg" alt="图 2：10、20、40、80 在线性坐标中向上弯曲，在以 2 为底的对数坐标中形成直线。右图相同的竖直距离表示同样的倍数变化。GPTwiki 原创图；数据为教学示例。" width="1440" height="810" loading="lazy"/></a><span class="caption">图 2：10、20、40、80 在线性坐标中向上弯曲，在以 2 为底的对数坐标中形成直线。右图相同的竖直距离表示同样的倍数变化。GPTwiki 原创图；数据为教学示例。</span></span></p>
+<p><strong>线性刻度</strong>中，相同距离表示相同的增加量。从 10 到 20 的距离，是从 20 到 40 的一半。如果你关心“又增加了多少件”，这种视图比较直接。</p>
+<p><strong>对数刻度</strong>中，相同距离表示相同的倍数。图中的 10、20、40、80 等距排列，因为相邻数值之比都是 2。此时直线说明每个等长时间段都按相同比例增长，不是每段时间增加同样多的数量。另一些对数图会标出 1、10、100、1,000，读法相同，只是相邻标记的倍数不同。</p>
+<p>普通对数坐标无法表示零和负数。不能为了把零画进去，悄悄换成一个很小的正数；这会改变图意。若使用其他变换，也应说明具体做法。对数图会压缩较大的绝对差距，所以原始数量仍然是理解图表所需的信息。</p>
+<h2>看图时依次检查这四件事</h2>
+<ol>
+<li><strong>量的是什么。</strong> 是人数、比例、指数，还是变化量？“投诉总数”和“每千笔订单的投诉数”回答的是不同问题。</li>
+<li><strong>刻度怎样走。</strong> 从哪里开始？相同间距是相同差值，还是相同倍数？</li>
+<li><strong>比较是否一致。</strong> 时间间隔是否等长？不同面板是否使用相同单位和范围？</li>
+<li><strong>自己算一次。</strong> 找出起点和终点，写清绝对差与相对变化的分母，再判断形状是否夸张。</li>
+</ol>
+<p><strong>练习</strong>：某个比例从 20% 升至 25%，变化是 5 个百分点，相对于原值增长 25%。这两种描述都正确，但都不能单独解释变化的原因，也不能判断抽样不确定性是否足以解释差异。读懂趋势只是描述数据的一步。</p>
+<p><strong>线越陡，增长就越快吗？</strong> 不能只看角度。同一条线的视觉斜率会随纵横轴范围、图的宽高而变。应比较指定时间段里的实际数值。</p>
+<p><strong>看到对数坐标就该怀疑吗？</strong> 不必。如果问题关注倍数和比例，它很有用。真正需要查清的是：有没有说明刻度，以及结论有没有把比例变化误说成数量变化。</p>
+<aside><h2>参考资料</h2><ul><li><a href="https://service-manual.ons.gov.uk/data-visualisation/guidance/axes-and-gridlines">ONS — Axes and gridlines</a></li><li><a href="https://service-manual.ons.gov.uk/content/numbers/percentages">ONS — Percentages and percentage points</a></li><li><a href="https://service-manual.ons.gov.uk/data-visualisation/chart-types/bar-charts">ONS — Bar charts</a></li></ul></aside></article>
+<article id="mean-median-outliers-zh" lang="zh">
+<div class="eyebrow">中文 · mean-median-outliers · <a href="#index">目录 / Index</a></div>
+<h1>均值与中位数：一个“平均数”藏起了什么</h1>
+<p>“平均配送时间是 28 分钟”，很容易被理解成一笔普通订单大约就要等这么久。但这组订单也可能是八笔很快送达，另有一笔严重延迟。一个数既要概括中心，又要交代分布形状，通常做不到。</p>
+<p><strong>算术均值</strong>是所有数值相加，再除以观测数量。<strong>中位数</strong>则先排序，再取中间位置；如果数量为偶数，通常取中间两个值的均值。<a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm">NIST 统计手册</a>给出了这些定义。选哪一种，取决于你真正想了解什么。</p>
+<h2>一笔迟到订单，怎样拉高均值？</h2>
+<p>以下是九笔假设订单的配送时间，单位为分钟：</p>
+<table><thead><tr><th>排序后的位置</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th></tr></thead><tbody><tr><td>配送时间</td><td>18</td><td>19</td><td>20</td><td>20</td><td>21</td><td>22</td><td>22</td><td>23</td><td>90</td></tr></tbody></table>
+<p>总计 255 分钟，均值是 255 ÷ 9 ≈ <strong>28.3 分钟</strong>。第五个数位于正中间，因此中位数为 <strong>21 分钟</strong>。九笔订单中有八笔低于均值，而且没有一笔订单的实际时间接近 28.3 分钟。</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/mean-median-outliers-shift.zh.svg"><img src="../../public/editorial/data-literacy/mean-median-outliers-shift.zh.svg" alt="图 1：把一笔 24 分钟的订单改成 90 分钟，均值从 21 分钟升至约 28.3 分钟，中位数仍为 21 分钟。每个点代表一笔订单，相同数值的点向上堆叠。GPTwiki 原创图；数据为教学示例。" width="1440" height="810" loading="lazy"/></a><span class="caption">图 1：把一笔 24 分钟的订单改成 90 分钟，均值从 21 分钟升至约 28.3 分钟，中位数仍为 21 分钟。每个点代表一笔订单，相同数值的点向上堆叠。GPTwiki 原创图；数据为教学示例。</span></span></p>
+<p>如果把 90 分钟换成 24 分钟，其他八笔保持不变，总计就成了 189 分钟，均值降到 21 分钟，中位数仍是 21 分钟。反过来说，一笔订单增加 66 分钟，会让均值增加 66 ÷ 9 ≈ 7.3 分钟。</p>
+<p>这解释了均值为什么对极端值敏感：每一个数都会进入总和。中位数在这个例子里没有改变，是因为排序后中间的位置不变；它并不是在任何数据变化下都不变，也无法告诉你最迟的一笔究竟有多糟。</p>
+<h2>不同问题，需要不同的概括方式</h2>
+<p>如果顾客想了解位于中间的等待体验，中位数有帮助。如果调度人员要核算所有订单消耗的总分钟数，均值更直接，因为“均值 × 订单数”可以还原总量。如果要检查严重延迟，两者都不够。</p>
+<table><thead><tr><th>想做的判断</th><th>更需要的信息</th></tr></thead><tbody><tr><td>描述配送时间的中心位置</td><td>中位数，以及分布形状</td></tr><tr><td>核算订单累计耗时</td><td>均值与订单数</td></tr><tr><td>检查是否达到 30 分钟承诺</td><td>超过 30 分钟的笔数和比例</td></tr><tr><td>查找严重延迟的原因</td><td>尾部订单、时间记录与具体原因</td></tr></tbody></table>
+<p>在上面的九笔订单中，超过 30 分钟的有一笔，观测到的超时比例是 1 ÷ 9 ≈ 11.1%。这个数字只描述这九笔订单，并不意味着未来每一天都约有 11.1% 的订单超时。九个观测值不足以稳健判断少见延迟的长期概率。</p>
+<h2>均值和中位数都一样，也可能很不一样</h2>
+<p>再比较两组教学数据，每组各有五笔订单：</p>
+<ul>
+<li>A 组：19、20、20、20、21 分钟。</li>
+<li>B 组：2、3、20、37、38 分钟。</li>
+</ul>
+<p>两组的均值都是 20，中位数也都是 20。但是，A 组的体验很集中，B 组的体验差异很大。</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/mean-median-outliers-spread.zh.svg"><img src="../../public/editorial/data-literacy/mean-median-outliers-spread.zh.svg" alt="图 2：两组数据的均值和中位数都为 20 分钟；A 组范围为 19—21 分钟，B 组为 2—38 分钟。中心相同不代表稳定性相同。GPTwiki 原创图；数据为教学示例。" width="1440" height="810" loading="lazy"/></a><span class="caption">图 2：两组数据的均值和中位数都为 20 分钟；A 组范围为 19—21 分钟，B 组为 2—38 分钟。中心相同不代表稳定性相同。GPTwiki 原创图；数据为教学示例。</span></span></p>
+<p>A 组最大值减最小值得到的<strong>极差</strong>为 2 分钟，B 组为 36 分钟。极差容易理解，但只由两端决定。还可以用标准差，或描述中间一半数据跨度的四分位距。<a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda356.htm">NIST 关于离散程度的说明</a>解释了这些指标为何对中心和尾部有不同的敏感程度。数据量较小时，直接画出所有观测值，往往比继续压缩成单个数字更清楚。</p>
+<h2>两个组的均值，不能随手再平均</h2>
+<p>假设甲店只有 2 笔订单，平均配送 10 分钟；乙店有 8 笔订单，平均配送 20 分钟。把 10 和 20 相加除以 2，会得到 15 分钟。这是在给两家店相同权重，而不是给十笔订单相同权重。</p>
+<p>全部订单的均值应为：(2 × 10 + 8 × 20) ÷ (2 + 8) = <strong>18 分钟</strong>。这里用订单数作权重。15 分钟可以描述“平均一家店的均值”，18 分钟描述的是“平均一笔订单的耗时”，两者对象不同。</p>
+<p>分组中位数通常不能照这个方法合并。仅凭各组中位数与人数，一般无法还原把所有观测值放在一起后的中位数。</p>
+<h2>看到“平均”时，可以接着问什么？</h2>
+<p>先问用了哪一种平均数，每个观测值代表什么，有多少个，覆盖什么时间段。然后看分布图或离散指标。如果关心可靠性，还应要求与目标直接相关的超时比例。</p>
+<p><strong>那笔 90 分钟的订单应该删掉吗？</strong> 不能仅因为它影响均值就删除。确认的录入错误、明确不属于统计范围的记录，可以按事先说明的规则处理；真实发生的严重延迟则是服务表现的一部分。必要时同时报告完整结果与明确标注的排除结果。</p>
+<p><strong>练习</strong>：若把 90 分钟改成 180 分钟，均值会再增加 90 ÷ 9 = 10 分钟，变为约 38.3 分钟，中位数仍是 21。此时只宣传中位数，就会把尾部体验的严重恶化藏在标题之外。</p>
+<aside><h2>参考资料</h2><ul><li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda351.htm">NIST/SEMATECH — Measures of Location</a></li><li><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda356.htm">NIST/SEMATECH — Measures of Scale</a></li></ul></aside></article>
+<article id="classifier-base-rates-zh" lang="zh">
+<div class="eyebrow">中文 · classifier-base-rates · <a href="#index">目录 / Index</a></div>
+<h1>99% 准确率为什么还可能漏掉所有问题</h1>
+<p>假设一批产品有 10,000 件，其中 100 件存在缺陷。一个什么都不会、只会说“全部合格”的系统，会对其中 9,900 件判断正确，准确率达到 99%。但它同时漏掉了全部缺陷。</p>
+<p>这不是某款真实模型的测试成绩，而是一组<strong>教学数据</strong>。例子中把“有缺陷”定义为正类，“合格”定义为负类。正类只是被检测的目标，不代表结果是好的。</p>
+<h2>先把四种结果数清楚</h2>
+<p>再假设另一个检测器找出了 100 件缺陷中的 90 件，同时把 9,900 件合格品中的 198 件错报成了疑似缺陷。可以用混淆矩阵整理结果：</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/classifier-base-rates-matrix.zh.svg"><img src="../../public/editorial/data-literacy/classifier-base-rates-matrix.zh.svg" alt="图 1：10,000 件假设产品中，90 件缺陷被检出，10 件缺陷漏检；198 件合格品被误报，9,702 件合格品被正确放行。行表示真实状态，列表示检测决定。GPTwiki 原创图。" width="1440" height="810" loading="lazy"/></a><span class="caption">图 1：10,000 件假设产品中，90 件缺陷被检出，10 件缺陷漏检；198 件合格品被误报，9,702 件合格品被正确放行。行表示真实状态，列表示检测决定。GPTwiki 原创图。</span></span></p>
+<table><thead><tr><th>真实状态</th><th>标记为需要复核</th><th>放行</th><th>合计</th></tr></thead><tbody><tr><td>有缺陷</td><td>90，真正例 TP</td><td>10，假负例 FN</td><td>100</td></tr><tr><td>合格</td><td>198，假正例 FP</td><td>9,702，真负例 TN</td><td>9,900</td></tr><tr><td>合计</td><td>288</td><td>9,712</td><td>10,000</td></tr></tbody></table>
+<p>这些名字的价值，是帮助我们明确分子与分母。<a href="https://developers.google.com/machine-learning/crash-course/classification/thresholding">Google 的混淆矩阵教程</a>用这一框架整理二分类决定。</p>
+<h2>四个指标，问的是四件事</h2>
+<table><thead><tr><th>指标</th><th>实际问题</th><th>本例计算</th></tr></thead><tbody><tr><td>准确率 accuracy</td><td>所有判断中，有多少判断正确？</td><td>(90 + 9,702) ÷ 10,000 = <strong>97.92%</strong></td></tr><tr><td>召回率 recall</td><td>真正有缺陷的产品中，找出了多少？</td><td>90 ÷ 100 = <strong>90%</strong></td></tr><tr><td>精确率 precision</td><td>被标记的产品中，有多少真的有缺陷？</td><td>90 ÷ 288 = <strong>31.25%</strong></td></tr><tr><td>假正例率 false-positive rate</td><td>真正合格的产品中，有多少被错报？</td><td>198 ÷ 9,900 = <strong>2%</strong></td></tr></tbody></table>
+<p>这些定义可在 <a href="https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall">Google 的分类指标说明</a>中核对。中文日常表达常把“准确”和“精确”混用，读模型报告时最好直接看公式。</p>
+<p>尤其要注意：“假正例率只有 2%”，<strong>不等于</strong>“告警中只有 2% 是错的”。本例中告警有 288 件，198 件属于误报，所以告警中的错误比例是 198 ÷ 288 = 68.75%。两个百分比的分母分别是“全部合格品”和“全部告警”，当然会不同。</p>
+<p>这个检测器的准确率甚至低于“全部放行”的 99%。但如果检出缺陷很有价值、人工复核成本可以承担，它仍可能更有用。需要比较漏检与复核的实际代价，不能只看谁的准确率更高。</p>
+<h2>基准率改变了告警意味着什么</h2>
+<p><strong>基准率</strong>是待检产品中真实缺陷所占的比例。第一批是 1%。现在换成另一批 10,000 件产品：1,000 件有缺陷，9,000 件合格，基准率变成 10%。</p>
+<p>为了只观察基准率的影响，暂时假设召回率仍为 90%，假正例率仍为 2%。那么真正例有 900 件，假正例有 180 件。精确率变为 900 ÷ (900 + 180) ≈ <strong>83.3%</strong>。</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/classifier-base-rates-alerts.zh.svg"><img src="../../public/editorial/data-literacy/classifier-base-rates-alerts.zh.svg" alt="图 2：固定召回率为 90%、假正例率为 2% 时，缺陷基准率从 1% 变为 10%，告警中真实缺陷的比例从 31.25% 变为约 83.3%。每根条都代表本组全部告警，不代表相同产品数量。GPTwiki 原创图；条件为教学假设。" width="1440" height="810" loading="lazy"/></a><span class="caption">图 2：固定召回率为 90%、假正例率为 2% 时，缺陷基准率从 1% 变为 10%，告警中真实缺陷的比例从 31.25% 变为约 83.3%。每根条都代表本组全部告警，不代表相同产品数量。GPTwiki 原创图；条件为教学假设。</span></span></p>
+<p>在这组假设下，检测器区分两类产品的能力并没有改变；进入系统的真实问题变多了，告警自然更容易指向真实问题。把上面的计数缩放到每件产品，可以写成：</p>
+<p><strong>精确率 = (召回率 × 基准率) ÷ [召回率 × 基准率 + 假正例率 × (1 − 基准率)]。</strong></p>
+<p>代入时使用 0.90、0.01 这样的比例。它只是前面计数关系的另一种写法。基础术语可参照 <a href="https://developers.google.com/machine-learning/glossary/metrics">Google 的指标词汇表</a>；工厂场景与两批产品的数值均为本文原创算例。</p>
+<p>现实中，换一批产品还可能同时改变光照、设备、缺陷类型和模型表现。因此，“两个条件率保持不变”是为了隔离机制的假设，不是模型可以直接迁移的保证。</p>
+<h2>阈值是一项业务选择</h2>
+<p>许多分类器先给出一个分数，再按阈值决定是否标记。降低阈值通常会带来更多告警，包括更多真正例，也包括更多假正例；提高阈值通常相反。实际取舍必须用有可靠标签、接近使用场景的数据测量。模型分数也不天然等于校准良好的概率。</p>
+<p>如果人工每天最多复核一定数量的产品，就可以比较不同阈值对应的复核量和漏检量。只用来排序、辅助人工检查的系统，与直接决定报废产品的系统，面对的成本结构并不相同。把阈值和四类计数一起报告，才能让读者看清这项选择。</p>
+<h2>读模型成绩时，先找这些信息</h2>
+<p>需要知道测试样本量、各类占比、四种结果的数量，以及使用了什么阈值。还应检查测试数据是否独立于训练过程，是否接近实际部署条件；<a href="https://developers.google.com/machine-learning/crash-course/overfitting/dividing-datasets">Google 的数据集划分说明</a>介绍了独立且有代表性的测试集为何重要。还要检查某类产品的差表现是否被总体平均数盖住。</p>
+<p><strong>练习</strong>：如果仍检查 10,000 件，缺陷占比为 5%，召回率为 90%，假正例率为 2%，那么真正例是 450 件，假正例是 190 件。精确率为 450 ÷ 640 ≈ 70.3%。分母是全部告警，而不是全部缺陷。</p>
+<p><strong>准确率是不是完全没用？</strong> 不是。理解类别比例和错误代价后，它可以作为总体描述之一。问题在于让它代替其他必要信息。</p>
+<p><strong>召回率很高，就说明告警值得相信吗？</strong> 不一定。召回率回答“实际问题找回多少”，精确率回答“复核队列里有多少是真问题”。两种问题都重要时，就应该一起报告。</p>
+<aside><h2>参考资料</h2><ul><li><a href="https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall">Google Machine Learning Crash Course — Accuracy, recall, precision, and related metrics</a></li><li><a href="https://developers.google.com/machine-learning/crash-course/classification/thresholding">Google Machine Learning Crash Course — Thresholds and the confusion matrix</a></li><li><a href="https://developers.google.com/machine-learning/glossary/metrics">Google Machine Learning Glossary — Metrics</a></li><li><a href="https://developers.google.com/machine-learning/crash-course/overfitting/dividing-datasets">Google Machine Learning Crash Course — Dividing the original dataset</a></li></ul></aside></article>
+<article id="sampling-bias-large-surveys-zh" lang="zh">
+<div class="eyebrow">中文 · sampling-bias-large-surveys · <a href="#index">目录 / Index</a></div>
+<h1>问卷收得越多，为什么答案仍可能越偏</h1>
+<p>一份问卷收到了成千上万条回答，可以很精确地描述这批回答者，却仍然无法准确描述你关心的全部人群。除了“有多少人答了”，还要问：“谁有机会回答，最后又是谁真的回答了？”</p>
+<p><strong>抽样波动</strong>来自这一次恰好抽中了哪些人。<strong>选择偏差</strong>则来自调查过程系统性地偏向某些人，而这些人的答案与目标总体不同。在合适的设计下，增加样本可以减少随机波动，但不会自动消除系统性差异。<a href="https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/sample-echantillon/5214900-eng.htm">加拿大统计局的样本选择说明</a>讨论了样本量与调查设计各自的作用。</p>
+<h2>一份假设校园问卷</h2>
+<p>假设某校有 1,000 名学生，其中 800 人通勤、200 人住校。为了说明原理，我们设定每个人对“延长晚间接驳车服务”的态度都已知：</p>
+<table><thead><tr><th>群体</th><th>总人数</th><th>组内支持率</th><th>支持人数</th></tr></thead><tbody><tr><td>通勤学生</td><td>800</td><td>20%</td><td>160</td></tr><tr><td>住校学生</td><td>200</td><td>80%</td><td>160</td></tr><tr><td>全部学生</td><td>1,000</td><td><strong>32%</strong></td><td><strong>320</strong></td></tr></tbody></table>
+<p>现在发出一份自愿填写的问卷，最后收到了 100 位通勤学生和 100 位住校学生的回答。暂时假设各组回答者的支持率恰好与各组真实支持率一致：通勤组有 20 人支持，住校组有 80 人支持。问卷就会报告 <strong>100 ÷ 200 = 50%</strong> 的支持率。</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/sampling-bias-large-surveys-composition.zh.svg"><img src="../../public/editorial/data-literacy/sampling-bias-large-surveys-composition.zh.svg" alt="图 1：假设校园中，通勤学生占总体的 80%，却只占问卷回答者的 50%；住校学生占总体的 20%，却占回答者的 50%。组别比例不同，会改变汇总结果。GPTwiki 原创图。" width="1440" height="810" loading="lazy"/></a><span class="caption">图 1：假设校园中，通勤学生占总体的 80%，却只占问卷回答者的 50%；住校学生占总体的 20%，却占回答者的 50%。组别比例不同，会改变汇总结果。GPTwiki 原创图。</span></span></p>
+<p>50% 并没有算错，它准确描述了这 200 份答案。问题在于，把支持率较高的住校群体赋予了过多比重，就无法代表全校的 32%。如果保持同样的群体比例和组内支持率，把回答数量翻倍，结果还是 50%。</p>
+<p>这里的偏好和人数完全是教学设定，用来隔离一种机制，不代表现实中通勤学生或住校学生通常持有怎样的意见。</p>
+<h2>加权可以修复什么？</h2>
+<p>如果已知总体构成，并且回答者能代表各自所在群体，可以按真实群体占比重新组合支持率：</p>
+<p><strong>0.80 × 20% + 0.20 × 80% = 32%。</strong></p>
+<p>也可以把每位通勤回答者看作代表 8 名学生，每位住校回答者代表 2 名学生。这样重建出来的是 800 位通勤学生与 200 位住校学生，两组支持人数各为 160。</p>
+<p><span class="figure"><a href="../../public/editorial/data-literacy/sampling-bias-large-surveys-weights.zh.svg"><img src="../../public/editorial/data-literacy/sampling-bias-large-surveys-weights.zh.svg" alt="图 2：两组回答者各占一半时，汇总支持率为 50%；改用总体中 80% 通勤、20% 住校的权重后，得到 32%。能修复的前提是各组回答者代表了各自群体。GPTwiki 原创图；数据为教学示例。" width="1440" height="810" loading="lazy"/></a><span class="caption">图 2：两组回答者各占一半时，汇总支持率为 50%；改用总体中 80% 通勤、20% 住校的权重后，得到 32%。能修复的前提是各组回答者代表了各自群体。GPTwiki 原创图；数据为教学示例。</span></span></p>
+<p>但如果两个群体内部都是积极支持接驳车的人更愿意答题，会怎样？设通勤回答者支持率为 40%，住校回答者为 90%，真实组内支持率仍分别是 20% 和 80%。即使使用正确的群体权重，结果也会变成 0.80 × 40% + 0.20 × 90% = <strong>50%</strong>，仍高于真实的 32%。</p>
+<p>加权修复了通勤与住校的比例，却没有修复每一组内部“回答者和没回答的人不一样”的问题。<a href="https://www.census.gov/programs-surveys/sipp/methodology/nonsampling-error.html">美国人口普查局关于非抽样误差的说明</a>介绍了加权调整及其局限。因此，样本在少数人口特征上与总体一致，是有用的构成信息，但不是全部偏差已经消失的证明。</p>
+<h2>问卷可能在哪些环节出问题？</h2>
+<ul>
+<li><strong>覆盖不足</strong>：邀请或名单遗漏目标人群的一部分。只把二维码贴在宿舍楼里，难以接触到所有通勤学生。</li>
+<li><strong>无应答</strong>：被选中的人没有回答，且他们的意见可能与回答者不同。应答率低本身并不能量化偏差，还要看缺席者可能怎样回答。</li>
+<li><strong>测量问题</strong>：题目措辞或选项改变了被测量的内容。“是否支持更安全的接驳服务”和“是否愿意为延长服务付更高费用”，不是同一个问题。</li>
+</ul>
+<p>公开网络投票还允许人们自行选择是否进入样本。<a href="https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/nonprob/5214898-eng.htm">加拿大统计局关于非概率抽样的说明</a>解释了，为什么这种结果推广到总体时需要额外假设。它仍可用于收集建议、发现问题，但可支持的结论必须与用途匹配。</p>
+<h2>“误差正负几个点”没有包办所有问题</h2>
+<p>对来自较大总体、设计理想的简单随机样本，如果比例接近 50%，近似 95% 误差范围的半宽可写成 <strong>1.96 × √(0.25 ÷ n)</strong>，所用正态近似见<a href="https://online.stat.psu.edu/stat100/Lesson09">宾州州立大学的置信区间课程</a>。样本为 400 时约为 4.9 个百分点，1,600 时约为 2.45 个百分点。在这些假设下，样本量增加到四倍，随机误差范围大约缩小一半。</p>
+<p>这是一组独立的大总体计算示例，<strong>不是</strong>给前面 1,000 人校园中的自愿问卷套上误差范围。有限总体、聚类抽样、权重和其他复杂设计，需要相应的方差计算。传统抽样误差范围也不能覆盖所有遗漏、无应答和措辞问题。任何网络问卷都能把数字代进公式，但这不会让推断自动成立。</p>
+<p><a href="https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/prob/5214899-eng.htm">概率抽样</a>使用随机选择，并能计算各单位被选中的概率；这些概率不一定相等。它提供了统计推断的基础，但仍需要做好覆盖、追访和题目设计。</p>
+<h2>先读方法，再读醒目的百分比</h2>
+<p>查看目标总体、招募方式、调查日期、完整题目、回答人数、加权变量以及不确定性的处理方法。尤其要弄清楚，报告描述的是回答者，还是在估计更广泛人群。</p>
+<p><strong>练习</strong>：若目标总体改成 60% 通勤学生、40% 住校学生，组内支持率仍为 20% 和 80%，总体支持率就是 0.60 × 20% + 0.40 × 80% = <strong>44%</strong>。权重应来自你想描述的总体，而不是来自刚好收到的回答比例。</p>
+<aside><h2>参考资料</h2><ul><li><a href="https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/sample-echantillon/5214900-eng.htm">Statistics Canada — Selection of a sample</a></li><li><a href="https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/prob/5214899-eng.htm">Statistics Canada — Probability sampling</a></li><li><a href="https://www150.statcan.gc.ca/n1/edu/power-pouvoir/ch13/nonprob/5214898-eng.htm">Statistics Canada — Non-probability sampling</a></li><li><a href="https://www.census.gov/programs-surveys/sipp/methodology/nonsampling-error.html">U.S. Census Bureau — Nonsampling Error</a></li><li><a href="https://online.stat.psu.edu/stat100/Lesson09">Penn State STAT 100 — Confidence Intervals</a></li></ul></aside></article></html>

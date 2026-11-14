@@ -96,6 +96,27 @@ the dedicated **`gptwiki-editorial`** identity (`authorName: 'GPTwiki
 Editorial'`), `source: 'editorial'`, with `imageUrl/imageWidth/imageHeight`
 set and the hero injected into the markdown after the title.
 
+## Illustrated, hand-authored releases
+
+| Release | Theme | Topics | Editions | Completed diagrams |
+| --- | --- | --- | --- | --- |
+| [`20261114-120000.json`](releases/20261114-120000.json) | Data literacy: chart scales, averages, classifier base rates, survey bias | 4 | 8 (en + zh) | 16 localized SVGs |
+
+The source articles are `data-literacy.en.ts` and `data-literacy.zh.ts`, with
+`data-literacy.ts` as the barrel. The English array is automatically discovered
+by `editorialTopicCatalog()` for future topic deduplication. These articles are
+not added to legacy `allDrafts` and need no new entry in the seeder's `BATCHES` map.
+
+Open [`data-literacy/review.html`](data-literacy/review.html) for the complete
+illustrated review copy. See [`data-literacy/README.md`](data-literacy/README.md)
+for source checks, diagram provenance, validation, and the release command.
+
+**Deploy `public/editorial/data-literacy/` before publishing this release.**
+The articles contain finished explanatory diagrams served by the app, in
+addition to optional Seedream hero prompts. Adding the dated JSON to `main`
+triggers the existing `auto-seed` workflow; merging content alone does not deploy
+the static image assets.
+
 ## Publishing them (legacy batches)
 
 A ready-to-run seeder lives at `scripts/seed-drafts.ts`. It de-dupes by title (skips any title already in `wikis`).
