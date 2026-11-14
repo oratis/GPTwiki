@@ -80,6 +80,9 @@ export const backlog: BacklogTopic[] = [
   { topicKey: 'knife-sharpening-basics', question: "How do I know when my kitchen knife needs sharpening, and what is the easiest reliable way to sharpen it at home?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: '401k-employer-match', question: "How does a 401(k) employer match actually work, and am I leaving money on the table if I don't maximize it?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'microservices-vs-monolith', question: "Should I build my application as a monolith or break it into microservices, and how do I know which is right for my stage and team size?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'gluten-free-worth-it', question: "Is a gluten-free diet actually healthier for people without celiac disease, or is it just a trend?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'ci-cd-explained', question: "What is CI/CD, how does it work, and when should a small team bother setting it up?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: '401k-vs-ira-priority', question: "Should I max out my 401(k) or fund an IRA first, and in what order should I prioritize them?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
   // Seeded to production (auto-author skips anything not `pending`).
   { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
