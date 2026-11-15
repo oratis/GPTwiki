@@ -83,6 +83,9 @@ export const backlog: BacklogTopic[] = [
   { topicKey: 'gluten-free-worth-it', question: "Is a gluten-free diet actually healthier for people without celiac disease, or is it just a trend?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'ci-cd-explained', question: "What is CI/CD, how does it work, and when should a small team bother setting it up?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: '401k-vs-ira-priority', question: "Should I max out my 401(k) or fund an IRA first, and in what order should I prioritize them?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'dry-heat-vs-moist-heat-cooking', question: "What is the difference between dry-heat and moist-heat cooking methods, and when should I use each?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'umbrella-insurance-worth-it', question: "What is umbrella insurance, who actually needs it, and is it worth the cost?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'api-rate-limiting', question: "What is API rate limiting, how does it work, and how should I design my app to handle it gracefully?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
   // Seeded to production (auto-author skips anything not `pending`).
   { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
