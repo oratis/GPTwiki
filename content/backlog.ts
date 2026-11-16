@@ -86,6 +86,8 @@ export const backlog: BacklogTopic[] = [
   { topicKey: 'dry-heat-vs-moist-heat-cooking', question: "What is the difference between dry-heat and moist-heat cooking methods, and when should I use each?", cluster: 'cooking-science', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'umbrella-insurance-worth-it', question: "What is umbrella insurance, who actually needs it, and is it worth the cost?", cluster: 'personal-finance', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'api-rate-limiting', question: "What is API rate limiting, how does it work, and how should I design my app to handle it gracefully?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'weighted-blanket-benefits', question: "Do weighted blankets actually help with sleep or anxiety, or is the evidence too weak to justify the cost?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'trunk-based-vs-gitflow', question: "Should my team use trunk-based development or Gitflow, and how do I choose the right branching strategy?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
   // Seeded to production (auto-author skips anything not `pending`).
   { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
