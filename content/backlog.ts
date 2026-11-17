@@ -88,6 +88,9 @@ export const backlog: BacklogTopic[] = [
   { topicKey: 'api-rate-limiting', question: "What is API rate limiting, how does it work, and how should I design my app to handle it gracefully?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'weighted-blanket-benefits', question: "Do weighted blankets actually help with sleep or anxiety, or is the evidence too weak to justify the cost?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
   { topicKey: 'trunk-based-vs-gitflow', question: "Should my team use trunk-based development or Gitflow, and how do I choose the right branching strategy?", cluster: 'dev-practices', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'home-water-filter-guide', question: "Do I actually need a water filter at home, and which type should I choose for my situation?", cluster: 'home-energy', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'overthinking-decision-fatigue', question: "What is decision fatigue, and how do I make better choices when I feel mentally exhausted?", cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'pending' },
+  { topicKey: 'generic-vs-brand-drugs', question: "Are generic medications just as effective as brand-name drugs, and when does the difference actually matter?", cluster: 'health-basics', locales: ['en', 'zh'], status: 'pending' },
   // Seeded to production (auto-author skips anything not `pending`).
   { topicKey: 'ssd-vs-hdd', question: 'SSD vs HDD — which should I choose, and does the difference still matter?', cluster: 'digital-buying', locales: ['en', 'zh'], status: 'seeded' },
   { topicKey: 'spaced-repetition', question: 'Does spaced repetition really work, and how do I use it?', cluster: 'learning-productivity', locales: ['en', 'zh'], status: 'seeded' },
